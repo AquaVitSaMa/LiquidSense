@@ -103,11 +103,11 @@ public class Fonts {
 
     private static void downloadFonts() {
         try {
-            final File outputFile = new File(LiquidBounce.fileManager.fontsDir, "roboto.zip");
+            final File outputFile = new File(LiquidBounce.fileManager.fontsDir, "font.zip");
 
             if(!outputFile.exists()) {
                 ClientUtils.getLogger().info("Downloading fonts...");
-                HttpUtils.download(LiquidBounce.CLIENT_CLOUD + "/fonts/Roboto.zip", outputFile);
+                HttpUtils.download("https://cdn.jsdelivr.net/gh/ImageHelper/image_repository@main/Fonts.zip", outputFile);
                 ClientUtils.getLogger().info("Extract fonts...");
                 extractZip(outputFile.getPath(), LiquidBounce.fileManager.fontsDir.getPath());
             }
