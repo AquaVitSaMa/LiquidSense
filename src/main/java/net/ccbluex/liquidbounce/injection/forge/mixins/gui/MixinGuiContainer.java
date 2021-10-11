@@ -1,7 +1,6 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import com.google.common.collect.Sets;
-import javafx.scene.transform.Translate;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.SlientStealerEvent;
 import net.ccbluex.liquidbounce.event.UpdateModelEvent;
