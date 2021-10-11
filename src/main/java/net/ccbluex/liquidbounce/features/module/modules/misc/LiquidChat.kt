@@ -34,7 +34,7 @@ import kotlin.concurrent.thread
 @ModuleInfo(name = "LiquidChat", description = "Allows you to chat with other LiquidBounce users.", category = ModuleCategory.MISC)
 class LiquidChat : Module() {
     init {
-        state = true
+        state = false
         array = false
     }
 
