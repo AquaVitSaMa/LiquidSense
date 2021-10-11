@@ -74,7 +74,7 @@ public abstract class MixinGuiInGame extends Gui {
             GlStateManager.disableBlend();
             ChatUtil.drawNotifications();
             LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
-            callbackInfo.cancel();
+//            callbackInfo.cancel();
         }
     }
 
