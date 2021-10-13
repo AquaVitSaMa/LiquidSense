@@ -136,8 +136,6 @@ class PushOutEvent : CancellableEvent()
  */
 class Render2DEvent(val partialTicks: Float) : Event()
 
-class RenderHUDEvent(val partialTicks: Float) : Event()
-
 class EventRespawn(): CancellableEvent()
 /**
  * shabi

@@ -5,9 +5,9 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
+import me.AquaVit.liquidSense.utils.BlurBuffer;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
-import net.ccbluex.liquidbounce.event.RenderHUDEvent;
 import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
 import net.ccbluex.liquidbounce.features.module.modules.render.NoScoreboard;
@@ -19,12 +19,16 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
+import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.lwjgl.opengl.Display;
 import org.spongepowered.asm.mixin.Mixin;
+import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -35,7 +39,29 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class MixinGuiInGame extends Gui {
 
     @Shadow
-    protected abstract void renderHotbarItem(int index, int xPos, int yPos, float partialTicks, EntityPlayer player);
+    protected RenderItem itemRenderer;
+
+    @Overwrite
+    protected void renderHotbarItem(int index, int xPos, int yPos, float partialTicks, EntityPlayer player){
+        ItemStack itemStack = player.inventory.mainInventory[index];
+        if (itemStack != null) {
+            float lvt_7_1_ = (float)itemStack.animationsToGo - partialTicks;
+            if (lvt_7_1_ > 0.0F) {
+                GlStateManager.pushMatrix();
+                float lvt_8_1_ = 1.0F + lvt_7_1_ / 5.0F;
+                GlStateManager.translate((float)(xPos + 8), (float)(yPos + 12), 0.0F);
+                GlStateManager.scale(1.0F / lvt_8_1_, (lvt_8_1_ + 1.0F) / 2.0F, 1.0F);
+                GlStateManager.translate((float)(-(xPos + 8)), (float)(-(yPos + 12)), 0.0F);
+            }
+
+            this.itemRenderer.renderItemAndEffectIntoGUI(itemStack, xPos, yPos);
+            if (lvt_7_1_ > 0.0F) {
+                GlStateManager.popMatrix();
+            }
+
+            this.itemRenderer.renderItemOverlays(Minecraft.getMinecraft().fontRendererObj, itemStack, xPos, yPos);
+        }
+    }
 
 
     @Inject(method = "renderScoreboard", at = @At("HEAD"), cancellable = true)
@@ -48,6 +74,9 @@ public abstract class MixinGuiInGame extends Gui {
     @Inject(method = "renderTooltip", at = @At("HEAD"), cancellable = true)
     private void renderTooltip(ScaledResolution sr, float partialTicks, CallbackInfo callbackInfo) {
         final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+
+        if (OpenGlHelper.shadersSupported && Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer)
+           BlurBuffer.updateBlurBuffer(30f,true);
 
         if(Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer && hud.getState() && hud.blackHotbarValue.get()) {
             EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().getRenderViewEntity();
@@ -72,22 +101,16 @@ public abstract class MixinGuiInGame extends Gui {
             RenderHelper.disableStandardItemLighting();
             GlStateManager.disableRescaleNormal();
             GlStateManager.disableBlend();
-            ChatUtil.drawNotifications();
             LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
-//            callbackInfo.cancel();
+            callbackInfo.cancel();
         }
     }
 
     @Inject(method = "renderTooltip", at = @At("RETURN"))
-    private void renderHUD(ScaledResolution sr, float partialTicks, CallbackInfo callbackInfo) {
-        LiquidBounce.eventManager.callEvent(new RenderHUDEvent(partialTicks));
-    }
-
-    @Inject(method = "renderTooltip", at = @At("RETURN"))
     private void renderTooltipPost(ScaledResolution sr, float partialTicks, CallbackInfo callbackInfo) {
-        if (!ClassUtils.hasClass("net.labymod.api.LabyModAPI"))
-            ChatUtil.drawNotifications();
-        LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
+        if (!ClassUtils.hasClass("net.labymod.api.LabyModAPI")) {
+            LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
+        }
     }
 
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)

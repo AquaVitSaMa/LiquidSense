@@ -49,7 +49,7 @@ public class RearView extends Element {
     private final Minecraft mc = Minecraft.getMinecraft();
 
     @Override
-    public void Render2DElement() {
+    public void updateElement() {
         update();
     }
 

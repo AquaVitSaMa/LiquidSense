@@ -106,11 +106,6 @@ abstract class Element(var x: Double = 2.0, var y: Double = 2.0, scale: Float = 
      */
     open fun updateElement() {}
 
-    /**
-     * 2D element
-     */
-    open fun Render2DElement() {}
-
 
     /**
      * Check if [x] and [y] is in element border

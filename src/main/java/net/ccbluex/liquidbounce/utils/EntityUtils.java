@@ -37,6 +37,39 @@ public final class EntityUtils extends MinecraftInstance {
     public static boolean targetAnimals = false;
     public static boolean targetDead = false;
 
+    public static boolean isSelectedMe(final Entity entity, final boolean canAttackCheck) {
+        if(entity instanceof EntityLivingBase && (targetDead || entity.isEntityAlive())) {
+            if(targetInvisible || !entity.isInvisible()) {
+                if(targetPlayer && entity instanceof EntityPlayer) {
+                    final EntityPlayer entityPlayer = (EntityPlayer) entity;
+
+                    if(canAttackCheck) {
+                        if(AntiBot.isBot(entityPlayer))
+                            return false;
+
+                        if(NoHurt.isBot(entityPlayer))
+                            return false;
+
+                        if (isFriend(entityPlayer) && !LiquidBounce.moduleManager.getModule(NoFriends.class).getState())
+                            return false;
+
+                        if(entityPlayer.isSpectator())
+                            return false;
+
+                        final Teams teams = (Teams) LiquidBounce.moduleManager.getModule(Teams.class);
+                        return !teams.getState() || !teams.isInYourTeam(entityPlayer);
+                    }
+
+                    return true;
+                }
+
+                return targetMobs && isMob(entity) || targetAnimals && isAnimal(entity);
+
+            }
+        }
+        return false;
+    }
+
     public static boolean isSelected(final Entity entity, final boolean canAttackCheck) {
         if(entity instanceof EntityLivingBase && (targetDead || entity.isEntityAlive()) && entity != mc.thePlayer) {
             if(targetInvisible || !entity.isInvisible()) {

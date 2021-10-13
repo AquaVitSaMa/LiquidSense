@@ -15,8 +15,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(GuiIngameForge.class)
 @SideOnly(Side.CLIENT)
 public class MixinGuiInGameForge extends MixinGuiInGame {
-    protected void renderHotbarItem(int index, int xPos, int yPos, float partialTicks, EntityPlayer player) {
-    }
 
     @Inject(method = "renderHealth", at = @At("HEAD"), cancellable = true, remap = false)
     public void renderPlayerStats(CallbackInfo callbackInfo) {

@@ -27,11 +27,6 @@ public class PlayerList extends Element {
 
     private BoolValue fadeSpeed = new BoolValue("Teams", false);
 
-    @Override
-    public void Render2DElement() {
-
-    }
-
     @Nullable
     @Override
     public Border drawElement() {

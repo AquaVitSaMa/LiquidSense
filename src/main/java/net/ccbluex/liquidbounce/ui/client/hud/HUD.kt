@@ -82,7 +82,7 @@ open class HUD : MinecraftInstance() {
 
                         if (designer)
                             it.border?.draw()
-                        BlurBuffer.updateBlurBuffer(30f, true)
+
                     } catch (ex: Exception) {
                         ClientUtils.getLogger()
                                 .error("Something went wrong while drawing ${it.name} element in HUD.", ex)
@@ -99,11 +99,6 @@ open class HUD : MinecraftInstance() {
         for (element in elements)
             element.updateElement()
 
-    }
-
-    fun Render2D(){
-        for (element in elements)
-            element.Render2DElement()
     }
 
     /**

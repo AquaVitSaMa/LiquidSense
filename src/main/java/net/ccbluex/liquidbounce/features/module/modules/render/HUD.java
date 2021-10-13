@@ -53,11 +53,6 @@ public class HUD extends Module {
     }
 
     @EventTarget
-    public void Render2DEvent(final UpdateEvent event) {
-        LiquidBounce.hud.Render2D();
-    }
-
-    @EventTarget
     public void onKey(final KeyEvent event) {
         LiquidBounce.hud.handleKey('a', event.getKey());
     }
@@ -69,7 +64,7 @@ public class HUD extends Module {
 
         if (getState() && blurValue.get() && !mc.entityRenderer.isShaderActive() && event.getGuiScreen() != null &&
                 !(event.getGuiScreen() instanceof GuiChat || event.getGuiScreen() instanceof GuiHudDesigner))
-            mc.entityRenderer.loadShader(new ResourceLocation(LiquidBounce.CLIENT_NAME.toLowerCase() + "/blur.json"));
+            mc.entityRenderer.loadShader(new ResourceLocation("liquidbounce/blur.json"));
         else if (mc.entityRenderer.getShaderGroup() != null &&
                 mc.entityRenderer.getShaderGroup().getShaderGroupName().contains("liquidbounce/blur.json"))
             mc.entityRenderer.stopUseShader();

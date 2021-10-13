@@ -119,6 +119,42 @@ public final class RenderUtils extends MinecraftInstance {
 
      */
 
+    public static void drawCircleD(float x, float y, float radius, int color) {
+        float alpha = (float) (color >> 24 & 255) / 255.0f;
+        float red = (float) (color >> 16 & 255) / 255.0f;
+        float green = (float) (color >> 8 & 255) / 255.0f;
+        float blue = (float) (color & 255) / 255.0f;
+        boolean blend = GL11.glIsEnabled((int) 3042);
+        boolean line = GL11.glIsEnabled((int) 2848);
+        boolean texture = GL11.glIsEnabled((int) 3553);
+        if (!blend) {
+            GL11.glEnable((int) 3042);
+        }
+        if (!line) {
+            GL11.glEnable((int) 2848);
+        }
+        if (texture) {
+            GL11.glDisable((int) 3553);
+        }
+        GL11.glBlendFunc((int) 770, (int) 771);
+        GL11.glColor4f((float) red, (float) green, (float) blue, (float) alpha);
+        GL11.glBegin((int) 9);
+        int i = 0;
+        while (i <= 360) {
+            GL11.glVertex2d((double) ((double) x + Math.sin((double) i * 3.141526 / 180.0) * (double) radius), (double) ((double) y + Math.cos((double) i * 3.141526 / 180.0) * (double) radius));
+            ++i;
+        }
+        GL11.glEnd();
+        if (texture) {
+            GL11.glEnable((int) 3553);
+        }
+        if (!line) {
+            GL11.glDisable((int) 2848);
+        }
+        if (!blend) {
+            GL11.glDisable((int) 3042);
+        }
+    }
 
 
     public static void drawArc(float n, float n2, double n3, final int n4, int n5, final double n6, final int n7) {
@@ -1139,6 +1175,31 @@ public final class RenderUtils extends MinecraftInstance {
         glPopMatrix();
     }
 
+    public static void drawFullCircle(float x, float y ,float radius, float Bord , final Color color) {
+        drawNCircle(x , y , radius + 0.15f, color);
+        drawCircleD(x , y , radius, color.getRGB());
+    }
+
+
+    public static void drawNCircle(float x, float y ,float radius, final Color color) {
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+        glColor(Color.WHITE);
+
+        glEnable(GL_LINE_SMOOTH);
+        glLineWidth(1);
+        glBegin(GL_LINE_STRIP);
+        for (float i = 180; i >= -180; i -= (360 / 90)) {
+            glColor4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
+            glVertex2f((float) (x + (cos(i * PI / 180) * (radius * 1.001F))), (float) (y + (sin(i * PI / 180) * (radius * 1.001F))));
+        }
+        glEnd();
+        glDisable(GL_LINE_SMOOTH);
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
 
 
 
