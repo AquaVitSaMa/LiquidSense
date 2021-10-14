@@ -26,16 +26,16 @@ import java.util.zip.ZipInputStream;
 @SideOnly(Side.CLIENT)
 public class Fonts {
 
-    @FontDetails(fontName = "Roboto Medium", fontSize = 25)
+    @FontDetails(fontName = "Product Sans", fontSize = 25)
     public static GameFontRenderer font25;
 
-    @FontDetails(fontName = "Roboto Medium", fontSize = 30)
+    @FontDetails(fontName = "Product Sans", fontSize = 30)
     public static GameFontRenderer font30;
 
-    @FontDetails(fontName = "Roboto Medium", fontSize = 35)
+    @FontDetails(fontName = "Product Sans", fontSize = 35)
     public static GameFontRenderer font35;
 
-    @FontDetails(fontName = "Roboto Medium", fontSize = 40)
+    @FontDetails(fontName = "Product Sans", fontSize = 40)
     public static GameFontRenderer font40;
 
     @FontDetails(fontName = "Roboto Bold", fontSize = 90)
@@ -58,12 +58,12 @@ public class Fonts {
         ClientUtils.getLogger().info("Loading Fonts.");
 
         downloadFonts();
-        font25 = new GameFontRenderer(getFont("Roboto-Medium.ttf", 14));
-        font30 = new GameFontRenderer(getFont("Roboto-Medium.ttf", 16));
+        font25 = new GameFontRenderer(getFont("Product-Sans.ttf", 14));
+        font30 = new GameFontRenderer(getFont("Product-Sans.ttf", 16));
         csgo40 = new GameFontRenderer(getFont("LiquidSense.ttf", 20));
-        font35 = new GameFontRenderer(getFont("Roboto-Medium.ttf", 18));
+        font35 = new GameFontRenderer(getFont("Product-Sans.ttf", 18));
         csgo35 = new GameFontRenderer(getFont("LiquidSense.ttf", 18));
-        font40 = new GameFontRenderer(getFont("Roboto-Medium.ttf", 20));
+        font40 = new GameFontRenderer(getFont("Product-Sans.ttf", 20));
         fontBold180 = new GameFontRenderer(getFont("Roboto-Bold.ttf", 60));
 
         try {
@@ -107,7 +107,7 @@ public class Fonts {
 
             if(!outputFile.exists()) {
                 ClientUtils.getLogger().info("Downloading fonts...");
-                HttpUtils.download("https://cdn.jsdelivr.net/gh/ImageHelper/image_repository@main/Fonts.zip", outputFile);
+                HttpUtils.download("https://cdn.jsdelivr.net/gh/ImageHelper/image_repository@main/Font.zip", outputFile);
                 ClientUtils.getLogger().info("Extract fonts...");
                 extractZip(outputFile.getPath(), LiquidBounce.fileManager.fontsDir.getPath());
             }

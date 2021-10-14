@@ -76,9 +76,12 @@ public class Radar extends Element {
             RenderUtils.drawRect(0F, 0F, size, size, new Color(14, 14,
                     14, 200).getRGB());
         }
-        RenderUtils.drawBorderedRect(0F, -7.2F - Fonts.csgo40.FONT_HEIGHT, size, 0, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
+
+        RenderUtils.drawRoundedRect(-0.5F, -7F - Fonts.csgo40.FONT_HEIGHT, size + 0.5F, 7F + Fonts.csgo40.FONT_HEIGHT,1.5F,
+                new Color(16, 25, 32, 200).getRGB(), 1F,new Color(16, 25, 32, 200).getRGB());
+        //RenderUtils.drawBorderedRect(0F, -7.2F - Fonts.csgo40.FONT_HEIGHT, size, 0, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
         Fonts.csgo40.drawString("P", 3.8F, -(Fonts.csgo40.FONT_HEIGHT + 1.7F), new Color(0, 131, 193).getRGB(), false);
-        Fonts.font40.drawString("Radar", Fonts.csgo40.getStringWidth("P") + 7.5F, -(Fonts.csgo40.FONT_HEIGHT + 2.1F), Color.WHITE.getRGB(), false);
+        Fonts.font40.drawString("Radar", Fonts.csgo40.getStringWidth("P") + 9.5F, -(Fonts.csgo40.FONT_HEIGHT + 2.1F), Color.WHITE.getRGB(), false);
         float viewDistance = viewDistanceValue.get() * 16.0F;
 
         float maxDisplayableDistanceSquare = ((viewDistance + fovSizeValue.get()) *
@@ -185,11 +188,7 @@ public class Radar extends Element {
                     glScalef(sc, sc, sc);
 
 
-                    if (modeValue.get().equalsIgnoreCase("MiniMap")){
-                        glColor4f(1.0f, 1.0f, 1.0f,  0.75f);
-                    } else {
-                        glColor4f(1.0f, 1.0f, 1.0f,  0.25f);
-                    }
+                    glColor4f(1.0f, 1.0f, 1.0f,  0.75f);
 
 
                     VertexBuffer vbo = fovMarkerVertexBuffer;

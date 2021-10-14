@@ -83,7 +83,7 @@ object LiquidBounce {
     fun startClient() {
         isStarting = true
 
-        ClientUtils.getLogger().info("Starting $CLIENT_NAME b$CLIENT_VERSION, by $CLIENT_CREATOR")
+        ClientUtils.getLogger().info("Starting $CLIENT_NAME $CLIENT_VERSION, by $CLIENT_CREATOR")
 
         liquidSense = LiquidSense(this)
         liquidSense.onStarting()

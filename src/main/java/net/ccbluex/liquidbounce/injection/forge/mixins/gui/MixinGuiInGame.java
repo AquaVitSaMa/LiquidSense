@@ -76,7 +76,7 @@ public abstract class MixinGuiInGame extends Gui {
         final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
 
         if (OpenGlHelper.shadersSupported && Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer)
-           BlurBuffer.updateBlurBuffer(30f,true);
+           BlurBuffer.updateBlurBuffer(20f,true);
 
         if(Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer && hud.getState() && hud.blackHotbarValue.get()) {
             EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().getRenderViewEntity();
