@@ -92,13 +92,7 @@ public abstract class MixinGuiScreen extends Gui {
             if (hud.bkvalue.get().equalsIgnoreCase("None")){
                 this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
             } else {
-                if (hud.ap.get() >= 51){
-                    this.drawGradientRect(0, 0, this.width, this.height, new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), hud.ap.get()).getRGB(),new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), (hud.ap.get() - 50)).getRGB());
-
-                } else {
-                    this.drawGradientRect(0, 0, this.width, this.height, new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), hud.ap.get()).getRGB(),new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), 0).getRGB());
-
-                }
+                this.drawGradientRect(0, 0, this.width, this.height, new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), hud.ap.get()).getRGB(),new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), 0).getRGB());
             }
         } else {
             this.drawBackground(p_drawWorldBackground_1_);
