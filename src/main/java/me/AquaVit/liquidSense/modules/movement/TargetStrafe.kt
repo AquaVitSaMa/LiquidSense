@@ -36,7 +36,6 @@ class TargetStrafe : Module() {
     private val shape = IntegerValue("DrawShape", 14,3,32)
     private val killAura = LiquidBounce.moduleManager.getModule(Aura::class.java) as Aura
     private val speed = LiquidBounce.moduleManager.getModule(Speed::class.java) as Speed
-    private val LastetHypixelSpeed = LiquidBounce.moduleManager.getModule(LastestHypixelSpeed::class.java) as LastestHypixelSpeed
     private val fly = LiquidBounce.moduleManager.getModule(Fly::class.java) as Fly
     private val flight = LiquidBounce.moduleManager.getModule(Flight::class.java) as Flight
 
@@ -102,7 +101,7 @@ class TargetStrafe : Module() {
         }
 
     val canStrafe: Boolean
-        get() = (killAura.state && (LastetHypixelSpeed.state || speed.state || fly.state || flight.state) && killAura.target != null && !mc.thePlayer.isSneaking
+        get() = (killAura.state && (speed.state || fly.state || flight.state) && killAura.target != null && !mc.thePlayer.isSneaking
                 && keyMode)
 
     val cansize : Float

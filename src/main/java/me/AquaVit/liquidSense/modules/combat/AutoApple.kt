@@ -1,11 +1,7 @@
 package me.AquaVit.liquidSense.modules.combat
 
-import me.AquaVit.liquidSense.modules.movement.HYTFly
-import me.AquaVit.liquidSense.modules.movement.HYTSpeed
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventState
 import net.ccbluex.liquidbounce.event.EventTarget
-import net.ccbluex.liquidbounce.event.MotionEvent
 import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
@@ -57,8 +53,8 @@ class AutoApple : Module() {
         if(modeValue.get().equals("hyt" , true)) {
             if (!timer.hasTimePassed(delayValue.get().toLong()))
                 return
-            if(LiquidBounce.moduleManager.getModule(HYTFly::class.java)!!.state || LiquidBounce.moduleManager.getModule(HYTSpeed::class.java)!!.state)
-                return
+            //if(LiquidBounce.moduleManager.getModule(HYTFly::class.java)!!.state || LiquidBounce.moduleManager.getModule(HYTSpeed::class.java)!!.state)
+                //return
             if(mc.thePlayer.onGround)
                 return
             val thePlayer = mc.thePlayer ?: return

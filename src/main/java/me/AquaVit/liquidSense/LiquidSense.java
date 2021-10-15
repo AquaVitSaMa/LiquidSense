@@ -35,7 +35,6 @@ public class LiquidSense {
     private void loadModules(){
         this.liquidSenseModules = new ArrayList<>();
         liquidSenseModules.add(HYTBypass.class);
-        liquidSenseModules.add(HYTLongJump.class);
         liquidSenseModules.add(Particle.class);
         liquidSenseModules.add(AutoJump.class);
         liquidSenseModules.add(EveryThingBlock.class);
@@ -45,37 +44,26 @@ public class LiquidSense {
         liquidSenseModules.add(Ambience.class);
         liquidSenseModules.add(PlayerFace.class);
         liquidSenseModules.add(EnchantEffect.class);
-        liquidSenseModules.add(HYTHighJump.class);
         liquidSenseModules.add(Animations.class);
         liquidSenseModules.add(ItemRotate.class);
         liquidSenseModules.add(LagBack.class);
         liquidSenseModules.add(MemoryFixer.class);
         liquidSenseModules.add(PointerESP.class);
         liquidSenseModules.add(Disabler.class);
-        liquidSenseModules.add(LastestHypixelSpeed.class);
-        liquidSenseModules.add(HYTRun.class);
         liquidSenseModules.add(Flight.class);
         liquidSenseModules.add(Skeltal.class);
         liquidSenseModules.add(LightningCheck.class);
-        liquidSenseModules.add(LookTp.class);
         liquidSenseModules.add(Tp.class);
         liquidSenseModules.add(TargetStrafe.class);
         liquidSenseModules.add(Stair.class);
         liquidSenseModules.add(UHCXray.class);
         liquidSenseModules.add(AutoADL.class);
         liquidSenseModules.add(CameraView.class);
-        liquidSenseModules.add(FakeBody.class);
         liquidSenseModules.add(KillESP.class);
-        liquidSenseModules.add(PlayerList.class);
         liquidSenseModules.add(Jesus.class);
         liquidSenseModules.add(Cape.class);
-        liquidSenseModules.add(HYTSpeed.class);
-        liquidSenseModules.add(HYTFly.class);
-        liquidSenseModules.add(HYTCriticals.class);
-        liquidSenseModules.add(HYTNoFall.class);
         liquidSenseModules.add(AutoApple.class);
         liquidSenseModules.add(LastestHypixelFly.class);
-        liquidSenseModules.add(Flight1.class);
         liquidSenseModules.add(NoHurt.class);
     }
 
