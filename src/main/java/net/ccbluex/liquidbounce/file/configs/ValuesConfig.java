@@ -11,7 +11,6 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.features.module.modules.misc.LiquidChat;
 import net.ccbluex.liquidbounce.features.special.AntiForge;
 import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof;
 import net.ccbluex.liquidbounce.file.FileConfig;
@@ -88,11 +87,6 @@ public class ValuesConfig extends FileConfig {
 
                 if (jsonValue.has("API-Key"))
                     GuiTheAltening.Companion.setApiKey(jsonValue.get("API-Key").getAsString());
-            } else if (entry.getKey().equalsIgnoreCase("liquidchat")) {
-                JsonObject jsonValue = (JsonObject) entry.getValue();
-
-                if (jsonValue.has("token"))
-                    LiquidChat.Companion.setJwtToken(jsonValue.get("token").getAsString());
             } else if (entry.getKey().equalsIgnoreCase("DonatorCape")) {
                 JsonObject jsonValue = (JsonObject) entry.getValue();
 
@@ -155,10 +149,6 @@ public class ValuesConfig extends FileConfig {
         final JsonObject theAlteningObject = new JsonObject();
         theAlteningObject.addProperty("API-Key", GuiTheAltening.Companion.getApiKey());
         jsonObject.add("thealtening", theAlteningObject);
-
-        final JsonObject liquidChatObject = new JsonObject();
-        liquidChatObject.addProperty("token", LiquidChat.Companion.getJwtToken());
-        jsonObject.add("liquidchat", liquidChatObject);
 
         final JsonObject capeObject = new JsonObject();
         capeObject.addProperty("TransferCode", GuiDonatorCape.Companion.getTransferCode());
