@@ -19,7 +19,6 @@ import org.spongepowered.asm.mixin.Shadow;
 @SideOnly(Side.CLIENT)
 @Mixin(C00Handshake.class)
 public class MixinC00Handshake {
-
     @Shadow
     private int protocolVersion;
 
@@ -35,20 +34,10 @@ public class MixinC00Handshake {
     /**
      * @author CCBlueX
      */
-    /*
     @Overwrite
     public void writePacketData(PacketBuffer buf) {
         buf.writeVarIntToBuffer(this.protocolVersion);
-        buf.writeString(this.ip + (AntiForge.enabled && !Minecraft.getMinecraft().isIntegratedServerRunning() ? "" : "\0FML\0"));
-        buf.writeShort(this.port);
-        buf.writeVarIntToBuffer(this.requestedState.getId());
-    }
-
-     */
-    @Overwrite
-    public void writePacketData(final PacketBuffer buf) {
-        buf.writeVarIntToBuffer(this.protocolVersion);
-        buf.writeString(this.ip + "");
+        buf.writeString(this.ip + (AntiForge.enabled && AntiForge.blockFML && !Minecraft.getMinecraft().isIntegratedServerRunning() ? "" : "\0FML\0"));
         buf.writeShort(this.port);
         buf.writeVarIntToBuffer(this.requestedState.getId());
     }
