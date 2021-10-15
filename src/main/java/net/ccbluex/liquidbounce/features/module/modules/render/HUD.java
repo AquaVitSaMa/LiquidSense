@@ -27,7 +27,6 @@ public class HUD extends Module {
     public final BoolValue blackHotbarValue = new BoolValue("BlackHotbar", true);
     public final BoolValue inventoryParticle = new BoolValue("InventoryParticle", false);
     private final BoolValue blurValue = new BoolValue("Blur", false);
-    public final BoolValue fontChatValue = new BoolValue("FontChat", false);
     public final IntegerValue rd = new IntegerValue("Red", 0, 0, 255);
     public final IntegerValue bl = new IntegerValue("Blue", 255, 0, 255);
     public final IntegerValue gn = new IntegerValue("Green", 0, 0, 255);
