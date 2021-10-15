@@ -11,7 +11,6 @@ import com.google.gson.JsonParser
 import me.AquaVit.liquidSense.LiquidSense
 import net.ccbluex.liquidbounce.Gui.cfont.FontLoaders
 import net.ccbluex.liquidbounce.cape.CapeAPI.registerCapeService
-import net.ccbluex.liquidbounce.discord.ClientRichPresence
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent
 import net.ccbluex.liquidbounce.event.EventManager
 import net.ccbluex.liquidbounce.features.module.ModuleManager
@@ -73,9 +72,6 @@ object LiquidBounce {
 
     // Menu Background
     var background: ResourceLocation? = null
-
-    // Discord RPC
-    private lateinit var clientRichPresence: ClientRichPresence
 
     /**
      * Execute if client will be started
