@@ -6,7 +6,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
 import me.AquaVit.liquidSense.modules.movement.Stair;
-import net.ccbluex.liquidbounce.Gui.Notifications.Notificationsn;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -18,9 +17,6 @@ import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMod
 //import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.other.*;
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.aquavit.*;
 //import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.spartan.*;
-import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
-import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
-import net.ccbluex.liquidbounce.utils.ChatUtil;
 import net.ccbluex.liquidbounce.utils.MovementUtils;
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
@@ -246,14 +242,10 @@ public class Speed extends Module {
         mc.timer.timerSpeed = 1F;
 
         Stair sp = (Stair) LiquidBounce.moduleManager.getModule("Stair");
-        HUD hd = (HUD)LiquidBounce.moduleManager.getModule("HUD");
 
         if(sp.getState()){
             yn = true;
             LiquidBounce.moduleManager.getModule("Stair").setState(false);
-            if(hd.no.get()) {
-                ChatUtil.sendClientMessage("Debug Disable Stair", Notificationsn.Type.INFO);
-            }
         }
 
         final SpeedMode speedMode = getMode();
@@ -264,7 +256,6 @@ public class Speed extends Module {
 
     @Override
     public void onDisable() {
-        HUD hd = (HUD)LiquidBounce.moduleManager.getModule("HUD");
         if(mc.thePlayer == null)
             return;
 
@@ -272,9 +263,6 @@ public class Speed extends Module {
 
         if(yn){
             LiquidBounce.moduleManager.getModule("Stair").setState(true);
-            if(hd.no.get()) {
-                ChatUtil.sendClientMessage("Debug Enable Stair", Notificationsn.Type.INFO);
-            }
             yn = false;
         }
 

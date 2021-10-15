@@ -9,7 +9,6 @@ import CommandManager
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import me.AquaVit.liquidSense.LiquidSense
-import net.ccbluex.liquidbounce.Gui.cfont.FontLoaders
 import net.ccbluex.liquidbounce.cape.CapeAPI.registerCapeService
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent
 import net.ccbluex.liquidbounce.event.EventManager
@@ -29,7 +28,6 @@ import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
 import net.ccbluex.liquidbounce.ui.client.hud.HUD
 import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.createDefault
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.ChatUtil
 import net.ccbluex.liquidbounce.utils.ClassUtils.hasForge
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.InventoryUtils
@@ -102,9 +100,6 @@ object LiquidBounce {
 
         // Load client fonts
         Fonts.loadFonts()
-        FontLoaders.ETB14
-        FontLoaders.ETB16
-        FontLoaders.ETB18
 
         // Setup module manager and register modules
         moduleManager = ModuleManager()
@@ -182,7 +177,7 @@ object LiquidBounce {
         GuiAltManager.loadGenerators()
 
         //Inject ChatAnimation
-//        MinecraftForge.EVENT_BUS.register(InjectHandler())
+        MinecraftForge.EVENT_BUS.register(InjectHandler())
 
         fileManager.loadConfigs(fileManager.setnameConfig)
 

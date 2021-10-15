@@ -12,7 +12,6 @@ import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
 import net.ccbluex.liquidbounce.features.module.modules.render.NoScoreboard;
 import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer;
-import net.ccbluex.liquidbounce.utils.ChatUtil;
 import net.ccbluex.liquidbounce.utils.ClassUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

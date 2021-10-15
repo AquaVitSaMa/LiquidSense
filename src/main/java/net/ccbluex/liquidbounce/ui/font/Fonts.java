@@ -6,7 +6,6 @@
 package net.ccbluex.liquidbounce.ui.font;
 
 import com.google.gson.*;
-import net.ccbluex.liquidbounce.Gui.cfont.CFontRenderer;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
