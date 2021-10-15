@@ -1356,10 +1356,19 @@ public final class RenderUtils extends MinecraftInstance {
 
 
     public static void drawNCircle(float x, float y ,float radius, final Color color) {
-        GlStateManager.enableBlend();
-        GlStateManager.disableTexture2D();
-        GlStateManager.tryBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-        glColor(Color.WHITE);
+        boolean blend = GL11.glIsEnabled((int) 3042);
+        boolean line = GL11.glIsEnabled((int) 2848);
+        boolean texture = GL11.glIsEnabled((int) 3553);
+        if (!blend) {
+            GL11.glEnable((int) 3042);
+        }
+        if (!line) {
+            GL11.glEnable((int) 2848);
+        }
+        if (texture) {
+            GL11.glDisable((int) 3553);
+        }
+        RenderUtils.glColor(Color.WHITE);
 
         glEnable(GL_LINE_SMOOTH);
         glLineWidth(1);
@@ -1369,10 +1378,15 @@ public final class RenderUtils extends MinecraftInstance {
             glVertex2f((float) (x + (cos(i * PI / 180) * (radius * 1.001F))), (float) (y + (sin(i * PI / 180) * (radius * 1.001F))));
         }
         glEnd();
-        glDisable(GL_LINE_SMOOTH);
-
-        GlStateManager.enableTexture2D();
-        GlStateManager.disableBlend();
+        if (texture) {
+            GL11.glEnable((int) 3553);
+        }
+        if (!line) {
+            GL11.glDisable((int) 2848);
+        }
+        if (!blend) {
+            GL11.glDisable((int) 3042);
+        }
     }
 
 
