@@ -22,7 +22,6 @@ import net.ccbluex.liquidbounce.script.remapper.Remapper.loadSrg
 import net.ccbluex.liquidbounce.tabs.BlocksTab
 import net.ccbluex.liquidbounce.tabs.ExploitsTab
 import net.ccbluex.liquidbounce.tabs.HeadsTab
-import net.ccbluex.liquidbounce.ui.betterchat.handlers.InjectHandler
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
 import net.ccbluex.liquidbounce.ui.client.hud.HUD
@@ -175,9 +174,6 @@ object LiquidBounce {
 
         // Load generators
         GuiAltManager.loadGenerators()
-
-        //Inject ChatAnimation
-        MinecraftForge.EVENT_BUS.register(InjectHandler())
 
         fileManager.loadConfigs(fileManager.setnameConfig)
 
