@@ -77,7 +77,6 @@ public class LiquidSense {
         liquidSenseModules.add(LastestHypixelFly.class);
         liquidSenseModules.add(Flight1.class);
         liquidSenseModules.add(NoHurt.class);
-        liquidSenseModules.add(HeadLogo.class);
     }
 
     public List<Object> getLiquidSenseModules() {
