@@ -23,8 +23,9 @@ public class HeadLogo extends Element {
 
     private ResourceLocation rl;
 
+    @Nullable
     @Override
-    public boolean createElement() {
+    public Border drawElement() {
         if (rl == null) {
             rl = new ResourceLocation("liquidbounce" + "/playerface/head.png");
             IImageBuffer iib = new IImageBuffer() {
@@ -43,12 +44,6 @@ public class HeadLogo extends Element {
             mc.getTextureManager().loadTexture(rl, tex);
         }
 
-        return true;
-    }
-
-    @Nullable
-    @Override
-    public Border drawElement() {
         int picture = 48;
         //头像
         RenderUtils.drawImage(rl, 0, 0, picture, picture);
