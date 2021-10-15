@@ -149,7 +149,6 @@ class ModuleManager : Listenable {
                 AntiObsidian::class.java
         )
 
-        registerModule(NoScoreboard)
         registerModule(Fucker)
         registerModule(ChestAura)
 
