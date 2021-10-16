@@ -65,6 +65,7 @@ public class LiquidSense {
         liquidSenseModules.add(AutoApple.class);
         liquidSenseModules.add(LastestHypixelFly.class);
         liquidSenseModules.add(NoHurt.class);
+        liquidSenseModules.add(AntiSpam.class);
     }
 
     public List<Object> getLiquidSenseModules() {

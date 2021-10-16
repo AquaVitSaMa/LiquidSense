@@ -8,6 +8,7 @@ package net.ccbluex.liquidbounce.event
 import net.minecraft.block.Block
 import net.minecraft.block.state.IBlockState
 import net.minecraft.client.Minecraft
+import net.minecraft.client.gui.ChatLine
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.client.model.ModelPlayer
 import net.minecraft.client.multiplayer.WorldClient
@@ -17,6 +18,7 @@ import net.minecraft.network.Packet
 import net.minecraft.util.AxisAlignedBB
 import net.minecraft.util.BlockPos
 import net.minecraft.util.EnumFacing
+import net.minecraft.util.IChatComponent
 import net.minecraft.world.IBlockAccess
 
 /**
@@ -29,6 +31,8 @@ import net.minecraft.world.IBlockAccess
 class EventLivingUpdate(val entity: Entity) : CancellableEvent()
 
 class AttackEvent(val targetEntity: Entity?) : Event()
+
+class ChatComponentEvent(val component: IChatComponent,var chatLineId: List<ChatLine>) : CancellableEvent()
 
 /**
  * Called when minecraft get bounding box of block

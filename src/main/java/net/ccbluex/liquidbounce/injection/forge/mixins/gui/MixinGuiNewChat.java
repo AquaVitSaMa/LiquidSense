@@ -7,6 +7,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import com.google.common.collect.Lists;
 import net.ccbluex.liquidbounce.LiquidBounce;
+import net.ccbluex.liquidbounce.event.ChatComponentEvent;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.minecraft.client.Minecraft;
@@ -175,9 +176,16 @@ public abstract class MixinGuiNewChat extends Gui{
         }
     }
 
-    @Inject(method = "printChatMessageWithOptionalDeletion", at = @At("HEAD"), cancellable = true)
-    public void printChatMessageWithOptionalDeletion(CallbackInfo callbackInfo) {
+    @Overwrite
+    public void printChatMessageWithOptionalDeletion(IChatComponent chatComponent, int chatLineId) {
+        ChatComponentEvent event = new ChatComponentEvent(chatComponent, this.drawnChatLines);
+        LiquidBounce.eventManager.callEvent(event);
+        if (event.isCancelled()) {
+            return;
+        }
         percentComplete = 0.0F;
+        this.setChatLine(chatComponent, chatLineId, this.mc.ingameGUI.getUpdateCounter(), false);
+        LogManager.getLogger("[LiquidSense-CHAT] " + chatComponent.getUnformattedText());
     }
 
     @Overwrite
