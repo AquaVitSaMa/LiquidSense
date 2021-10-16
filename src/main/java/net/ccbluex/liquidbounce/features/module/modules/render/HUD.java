@@ -12,8 +12,10 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner;
 import net.ccbluex.liquidbounce.value.BoolValue;
+import net.ccbluex.liquidbounce.value.FontValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
 import net.ccbluex.liquidbounce.value.ListValue;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -27,6 +29,12 @@ public class HUD extends Module {
     public final BoolValue blackHotbarValue = new BoolValue("BlackHotbar", true);
     public final BoolValue inventoryParticle = new BoolValue("InventoryParticle", false);
     private final BoolValue blurValue = new BoolValue("Blur", false);
+    public final FontValue chatFont = new FontValue("ChatFont", mc.fontRendererObj) {
+        @Override
+        protected void onChanged(FontRenderer oldValue, FontRenderer newValue) {
+            mc.ingameGUI.getChatGUI().refreshChat();
+        }
+    };
     public final IntegerValue rd = new IntegerValue("Red", 0, 0, 255);
     public final IntegerValue bl = new IntegerValue("Blue", 255, 0, 255);
     public final IntegerValue gn = new IntegerValue("Green", 0, 0, 255);

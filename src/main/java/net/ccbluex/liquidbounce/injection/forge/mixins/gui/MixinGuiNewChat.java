@@ -85,6 +85,8 @@ public abstract class MixinGuiNewChat extends Gui{
 
     @Overwrite
     public void drawChat(int updateCounter) {
+        final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+        final FontRenderer fontRenderer = hud.getState() ? hud.chatFont.get() : mc.fontRendererObj;
         if (configuring) return;
         if (prevMillis == -1) {
             prevMillis = System.currentTimeMillis();
@@ -140,13 +142,13 @@ public abstract class MixinGuiNewChat extends Gui{
                             if (l1 > 3) {
                                 int i2 = 0;
                                 int j2 = -i1 * 9;
+                                //drawRect(i2, j2 - 9, i2 + k + 4, j2, l1 / 2 << 24); 聊天框颜色
                                 String s = chatline.getChatComponent().getFormattedText();
                                 GlStateManager.enableBlend();
                                 if (i1 <= newLines) {
-                                    this.mc.fontRendererObj.drawStringWithShadow(s, 0.0F, (j2 - 8), 16777215 + ((int) (l1 * percent) << 24));
-
+                                    fontRenderer.drawStringWithShadow(s, 0.0F, (j2 - 8), 16777215 + ((int) (l1 * percent) << 24));
                                 } else {
-                                    this.mc.fontRendererObj.drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
+                                    fontRenderer.drawStringWithShadow(s, (float) i2, (float) (j2 - 8), 16777215 + (l1 << 24));
                                 }
                                 GlStateManager.disableAlpha();
                                 GlStateManager.disableBlend();
@@ -156,7 +158,7 @@ public abstract class MixinGuiNewChat extends Gui{
                 }
 
                 if (flag) {
-                    int k2 = this.mc.fontRendererObj.FONT_HEIGHT;
+                    int k2 = fontRenderer.FONT_HEIGHT;
                     GlStateManager.translate(-3.0F, 0.0F, 0.0F);
                     int l2 = j * k2 + j;
                     int i3 = l * k2 + l;
@@ -185,17 +187,20 @@ public abstract class MixinGuiNewChat extends Gui{
         }
         percentComplete = 0.0F;
         this.setChatLine(chatComponent, chatLineId, this.mc.ingameGUI.getUpdateCounter(), false);
-        LogManager.getLogger("[LiquidSense-CHAT] " + chatComponent.getUnformattedText());
+        LogManager.getLogger().info("[LiquidSense-CHAT] " + chatComponent.getUnformattedText());
     }
 
     @Overwrite
     private void setChatLine(IChatComponent chatComponent, int chatLineId, int updateCounter, boolean displayOnly) {
+        final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+
+        final FontRenderer fontRenderer = hud.getState() ? hud.chatFont.get() : mc.fontRendererObj;
         if (chatLineId != 0) {
             this.deleteChatLine(chatLineId);
         }
 
         int i = MathHelper.floor_float((float) this.getChatWidth() / this.getChatScale());
-        List<IChatComponent> list = GuiUtilRenderComponents.splitText(chatComponent, i, this.mc.fontRendererObj, false, false);
+        List<IChatComponent> list = GuiUtilRenderComponents.splitText(chatComponent, i, fontRenderer, false, false);
         boolean flag = this.getChatOpen();
         newLines = list.size() - 1;
 
@@ -217,6 +222,50 @@ public abstract class MixinGuiNewChat extends Gui{
 
             while (this.chatLines.size() > 100) {
                 this.chatLines.remove(this.chatLines.size() - 1);
+            }
+        }
+    }
+
+    @Overwrite
+    public IChatComponent getChatComponent(int p_getChatComponent_1_, int p_getChatComponent_2_) {
+        final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+        final FontRenderer fontRenderer = hud.getState() ? hud.chatFont.get() : mc.fontRendererObj;
+        if (!this.getChatOpen()) {
+            return null;
+        } else {
+            ScaledResolution lvt_3_1_ = new ScaledResolution(this.mc);
+            int lvt_4_1_ = lvt_3_1_.getScaleFactor();
+            float lvt_5_1_ = this.getChatScale();
+            int lvt_6_1_ = p_getChatComponent_1_ / lvt_4_1_ - 3;
+            int lvt_7_1_ = p_getChatComponent_2_ / lvt_4_1_ - 27;
+            lvt_6_1_ = MathHelper.floor_float((float) lvt_6_1_ / lvt_5_1_);
+            lvt_7_1_ = MathHelper.floor_float((float) lvt_7_1_ / lvt_5_1_);
+            if (lvt_6_1_ >= 0 && lvt_7_1_ >= 0) {
+                int lvt_8_1_ = Math.min(this.getLineCount(), this.drawnChatLines.size());
+                if (lvt_6_1_ <= MathHelper.floor_float((float) this.getChatWidth() / this.getChatScale()) && lvt_7_1_ < fontRenderer.FONT_HEIGHT * lvt_8_1_ + lvt_8_1_) {
+                    int lvt_9_1_ = lvt_7_1_ / fontRenderer.FONT_HEIGHT + this.scrollPos;
+                    if (lvt_9_1_ >= 0 && lvt_9_1_ < this.drawnChatLines.size()) {
+                        ChatLine lvt_10_1_ = (ChatLine) this.drawnChatLines.get(lvt_9_1_);
+                        int lvt_11_1_ = 0;
+                        Iterator lvt_12_1_ = lvt_10_1_.getChatComponent().iterator();
+
+                        while (lvt_12_1_.hasNext()) {
+                            IChatComponent lvt_13_1_ = (IChatComponent) lvt_12_1_.next();
+                            if (lvt_13_1_ instanceof ChatComponentText) {
+                                lvt_11_1_ += fontRenderer.getStringWidth(GuiUtilRenderComponents.func_178909_a(((ChatComponentText) lvt_13_1_).getChatComponentText_TextValue(), false));
+                                if (lvt_11_1_ > lvt_6_1_) {
+                                    return lvt_13_1_;
+                                }
+                            }
+                        }
+                    }
+
+                    return null;
+                } else {
+                    return null;
+                }
+            } else {
+                return null;
             }
         }
     }

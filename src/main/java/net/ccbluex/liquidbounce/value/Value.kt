@@ -112,7 +112,7 @@ open class TextValue(name: String, value: String) : Value<String>(name, value) {
 /**
  * Font value represents a value with a font
  */
-class FontValue(valueName: String, value: FontRenderer) : Value<FontRenderer>(valueName, value) {
+open class FontValue(valueName: String, value: FontRenderer) : Value<FontRenderer>(valueName, value) {
 
     override fun toJson(): JsonElement? {
         val fontDetails = Fonts.getFontDetails(value) ?: return null
