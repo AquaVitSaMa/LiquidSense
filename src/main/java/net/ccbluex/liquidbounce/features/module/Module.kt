@@ -5,14 +5,12 @@
  */
 package net.ccbluex.liquidbounce.features.module
 
-import net.ccbluex.liquidbounce.Gui.Notifications.Notificationsn
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.Listenable
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD
 import net.ccbluex.liquidbounce.features.module.modules.world.Fucker.tag
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notifications
-import net.ccbluex.liquidbounce.utils.ChatUtil
 import net.ccbluex.liquidbounce.utils.MinecraftInstance
 import net.ccbluex.liquidbounce.utils.render.ColorUtils.stripColor
 import net.ccbluex.liquidbounce.value.Value
@@ -59,8 +57,6 @@ open class Module() : MinecraftInstance(), Listenable {
 
             // Play sound and add notification
             if (!LiquidBounce.isStarting) {
-                val hd = LiquidBounce.moduleManager.getModule(HUD::class.java) as HUD?
-                if(hd!!.no.get()) ChatUtil.sendClientMessage(if (value) "$name Enabled" else "$name Disabled", if (value) Notificationsn.Type.SUCCESS else Notificationsn.Type.ERROR)
                 mc.soundHandler.playSound(PositionedSoundRecord.create(ResourceLocation("random.click"),
                         1F))
                 LiquidBounce.hud.addNotification(Notification("${if (value) "Enabled " else "Disabled "}$name"," §o("+description+")"))

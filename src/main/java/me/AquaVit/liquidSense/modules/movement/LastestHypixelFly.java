@@ -2,7 +2,6 @@ package me.AquaVit.liquidSense.modules.movement;
 
 import com.google.gson.JsonObject;
 import io.netty.buffer.Unpooled;
-import net.ccbluex.liquidbounce.Gui.Notifications.Notificationsn;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.MoveEvent;
@@ -11,9 +10,6 @@ import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.features.module.modules.movement.Speed;
-import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
-import net.ccbluex.liquidbounce.utils.ChatUtil;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.timer.MSTimer;
 import net.ccbluex.liquidbounce.value.FloatValue;
@@ -31,7 +27,6 @@ public class LastestHypixelFly extends Module {
     boolean tp;
     private final FloatValue motionSpeedValue = new FloatValue("Speed", 5F, 0F, 5F);
     private final MSTimer s08 = new MSTimer();
-    HUD hd = (HUD)LiquidBounce.moduleManager.getModule("HUD");
     @Override
     public void onEnable() {
         if (mc.thePlayer == null)
@@ -39,9 +34,6 @@ public class LastestHypixelFly extends Module {
         tp = false;
         s08.reset();
         mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" + LiquidBounce.CLIENT_NAME+ "§8] §3"+ "Now Disabler!"));
-        if(hd.no.get()){
-            ChatUtil.sendClientMessage("Now disabler!", Notificationsn.Type.INFO);
-        }
 
         PlayerCapabilities playerCapabilities = new PlayerCapabilities();
         playerCapabilities.isFlying = true;
@@ -126,9 +118,6 @@ public class LastestHypixelFly extends Module {
                 s08.reset();
                 this.tp = true;
                 mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" + LiquidBounce.CLIENT_NAME+ "§8] §3"+ "Fly Now!"));
-                if(hd.no.get()) {
-                    ChatUtil.sendClientMessage("Now u can fly!", Notificationsn.Type.SUCCESS);
-                }
             }
         }
         if (this.tp){

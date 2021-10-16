@@ -9,9 +9,7 @@ import CommandManager
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import me.AquaVit.liquidSense.LiquidSense
-import net.ccbluex.liquidbounce.Gui.cfont.FontLoaders
 import net.ccbluex.liquidbounce.cape.CapeAPI.registerCapeService
-import net.ccbluex.liquidbounce.discord.ClientRichPresence
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent
 import net.ccbluex.liquidbounce.event.EventManager
 import net.ccbluex.liquidbounce.features.module.ModuleManager
@@ -24,13 +22,11 @@ import net.ccbluex.liquidbounce.script.remapper.Remapper.loadSrg
 import net.ccbluex.liquidbounce.tabs.BlocksTab
 import net.ccbluex.liquidbounce.tabs.ExploitsTab
 import net.ccbluex.liquidbounce.tabs.HeadsTab
-import net.ccbluex.liquidbounce.ui.betterchat.handlers.InjectHandler
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
 import net.ccbluex.liquidbounce.ui.client.hud.HUD
 import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.createDefault
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.ChatUtil
 import net.ccbluex.liquidbounce.utils.ClassUtils.hasForge
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.InventoryUtils
@@ -74,9 +70,6 @@ object LiquidBounce {
     // Menu Background
     var background: ResourceLocation? = null
 
-    // Discord RPC
-    private lateinit var clientRichPresence: ClientRichPresence
-
     /**
      * Execute if client will be started
      */
@@ -106,9 +99,6 @@ object LiquidBounce {
 
         // Load client fonts
         Fonts.loadFonts()
-        FontLoaders.ETB14
-        FontLoaders.ETB16
-        FontLoaders.ETB18
 
         // Setup module manager and register modules
         moduleManager = ModuleManager()
@@ -184,9 +174,6 @@ object LiquidBounce {
 
         // Load generators
         GuiAltManager.loadGenerators()
-
-        //Inject ChatAnimation
-//        MinecraftForge.EVENT_BUS.register(InjectHandler())
 
         fileManager.loadConfigs(fileManager.setnameConfig)
 

@@ -3,7 +3,6 @@ package net.ccbluex.liquidbounce.features.command.commands;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.AquaVit.liquidSense.modules.world.LightningCheck;
-import me.AquaVit.liquidSense.modules.world.LookTp;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.MotionEvent;

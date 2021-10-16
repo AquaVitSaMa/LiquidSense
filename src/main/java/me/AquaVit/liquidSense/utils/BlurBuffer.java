@@ -1,8 +1,5 @@
 package me.AquaVit.liquidSense.utils;
 
-import net.ccbluex.liquidbounce.Gui.Notifications.Utils.TimeHelper;
-import net.ccbluex.liquidbounce.injection.implementations.IItemStack;
-import net.ccbluex.liquidbounce.injection.implementations.IShaderGroup;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.utils.timer.MSTimer;
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils;

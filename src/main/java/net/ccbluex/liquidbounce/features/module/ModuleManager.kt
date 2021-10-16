@@ -119,7 +119,6 @@ class ModuleManager : Listenable {
                 Derp::class.java,
                 InventoryCleaner::class.java,
                 TrueSight::class.java,
-                LiquidChat::class.java,
                 AntiBlind::class.java,
                 NoSwing::class.java,
                 PotionSaver::class.java,
@@ -150,7 +149,6 @@ class ModuleManager : Listenable {
                 AntiObsidian::class.java
         )
 
-        registerModule(NoScoreboard)
         registerModule(Fucker)
         registerModule(ChestAura)
 
