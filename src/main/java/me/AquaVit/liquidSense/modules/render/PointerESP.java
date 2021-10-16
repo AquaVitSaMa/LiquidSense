@@ -1,7 +1,9 @@
 package me.AquaVit.liquidSense.modules.render;
 
+import com.google.common.collect.Maps;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
+import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
@@ -18,114 +20,132 @@ import net.ccbluex.liquidbounce.value.ListValue;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityItem;
 import net.minecraft.entity.monster.EntityMob;
 import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.Vec3;
+import org.lwjgl.opengl.Display;
+import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 @ModuleInfo(name = "PointerESP", description = "PointerESP", category = ModuleCategory.RENDER)
 public class PointerESP extends Module {
-
-    private final BoolValue player = new BoolValue("Players", true);
-    private final BoolValue mobs = new BoolValue("Mobs", false);
-    private final BoolValue yourself = new BoolValue("Yourself", false);
-    private final BoolValue invis = new BoolValue("Invisibles", false);
-    private final BoolValue animals = new BoolValue("Animals", false);
-    private final FloatValue width = new FloatValue("Width", 0.5F, 0.0F, 5.0F);
-    private final IntegerValue colorRedValue = new IntegerValue("R", 0, 0, 255);
-    private final IntegerValue colorGreenValue = new IntegerValue("G", 160, 0, 255);
-    private final IntegerValue colorBlueValue = new IntegerValue("B", 255, 0, 255);
-    private final BoolValue rainbow = new BoolValue("RainBow", false);
-    private final BoolValue bb = new BoolValue("Solid", true);
-    private final BoolValue aa = new BoolValue("Line", false);
-
-    public BoolValue getplayer() {
-        return player;
+    private final ListValue modeValue = new ListValue("Mode", new String[]{"CanSeen","Normal"},"CanSeen");
+    private final IntegerValue size = new IntegerValue("Size", 10, 5, 25);
+    private final IntegerValue radius = new IntegerValue("Radius", 45, 10, 200);
+    private int alpha;
+    private boolean plus_or_minus;
+    private final EntityListener entityListener = new EntityListener();
+    @Override
+    public void onEnable() {
+        alpha = 0;
+        plus_or_minus = false;
     }
-
-    public boolean isValid(EntityLivingBase entity) {
-        if (!player.get() && entity instanceof EntityPlayer) {
-            return false;
-        }
-        if (!mobs.get() && (entity instanceof EntityMob || entity instanceof EntitySlime)) {
-            return false;
-        }
-        if (!animals.get() && (entity instanceof EntityAnimal || entity instanceof EntitySquid)) {
-            return false;
-        }
-        if (entity.isInvisible() && !invis.get()) {
-            return false;
-        }
-        if (entity == mc.thePlayer && !yourself.get()) {
-            return false;
-        }
-        if (!entity.isEntityAlive()) {
-            return false;
-        }
-        return true;
-    }
-
-
 
     @EventTarget
-    public void onRender2D(Render2DEvent e) {
-        ScaledResolution sr = new ScaledResolution(this.mc);
-        GlStateManager.pushMatrix();
-        int size = 50;
-        float xOffset = sr.getScaledWidth() / 2 - 24.5f;
-        float yOffset = sr.getScaledHeight() / 2 - 25.2f;
-        float playerOffsetX = (float) mc.thePlayer.posX;
-        float playerOffSetZ = (float) mc.thePlayer.posZ;
-        for (Object o : mc.theWorld.getLoadedEntityList()) {
-            if (o instanceof EntityLivingBase) {
-                EntityLivingBase ent = (EntityLivingBase) o;
-                if (this.isValid(ent)) {
-                    float loaddist = 0.2F;
-                    float pTicks = mc.timer.renderPartialTicks;
-                    float posX = (float) (((ent.posX + (ent.posX - ent.lastTickPosX) * pTicks) - playerOffsetX)
-                            * loaddist);
-                    float posZ = (float) (((ent.posZ + (ent.posZ - ent.lastTickPosZ) * pTicks) - playerOffSetZ)
-                            * loaddist);
-                    Color color = rainbow.get() ? ColorUtils.rainbow() : new Color(colorRedValue.get(), colorGreenValue.get(), colorBlueValue.get());
+    public void onRender3D(Render3DEvent event) {
+        entityListener.render3d(event);
+    }
 
-                    float cos = (float) Math.cos(mc.thePlayer.rotationYaw * (Math.PI * 2 / 360));
-                    float sin = (float) Math.sin(mc.thePlayer.rotationYaw * (Math.PI * 2 / 360));
-                    float rotY = -(posZ * cos - posX * sin);
-                    float rotX = -(posX * cos + posZ * sin);
-                    float var7 = 0 - rotX;
-                    float var9 = 0 - rotY;
-                    if (MathHelper.sqrt_double(var7 * var7 + var9 * var9) < size / 2 - 4) {
-                        float angle = (float) (Math.atan2(rotY - 0, rotX - 0) * 180 / Math.PI);
-                        float x = (float) ((size / 2) * Math.cos(Math.toRadians(angle))) + xOffset + size / 2;
-                        float y = (float) ((size / 2) * Math.sin(Math.toRadians(angle))) + yOffset + size / 2;
-                        GlStateManager.pushMatrix();
-                        GlStateManager.translate(x, y, 0);
-                        GlStateManager.rotate(angle, 0, 0, 1);
-                        GlStateManager.scale(1.5f, 1.0, 1.0);
-                        if (aa.get()){
-                            RenderUtils.NdrawCircle(0, 0, 2.2f,3, width.get(),color.getRGB());
-                            RenderUtils.NdrawCircle(0, 0, 1.5f, 3,width.get() ,color.getRGB());
-                            RenderUtils.NdrawCircle(0, 0, 1f, 3, width.get(),color.getRGB());
-                            RenderUtils.NdrawCircle(0, 0, 0.5f, 3, width.get(),color.getRGB());
-                        }
-                        if (bb.get()){
-                            RenderUtils.drawESPCircle(0, 0, 2.2f, 3, color.getRGB());
-                            RenderUtils.drawESPCircle(0, 0, 1.5f, 3, color.getRGB());
-                            RenderUtils.drawESPCircle(0, 0, 1f, 3, color.getRGB());
-                            RenderUtils.drawESPCircle(0, 0, 0.5f, 3, color.getRGB());
+    @EventTarget
+    public void onRender2D(Render2DEvent event) {
 
-                        }
-                        GlStateManager.popMatrix();
+        mc.theWorld.loadedEntityList.forEach(o -> {
+            if (o instanceof EntityLivingBase && EntityUtils.isSelected(o, true)) {
+                EntityLivingBase entity = (EntityLivingBase) o;
+                Vec3 pos = entityListener.getEntityLowerBounds().get(entity);
+                int maxBottom = Integer.MIN_VALUE;
+                if (pos != null) {
+                    if (!isOnScreen(pos)) {
+                        int x = (Display.getWidth() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
+                        int y = (Display.getHeight() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
+                        float yaw = getRotations(entity) - mc.thePlayer.rotationYaw;
+                        GL11.glTranslatef(x, y, 0);
+                        GL11.glRotatef(yaw, 0, 0, 1);
+                        GL11.glTranslatef(-x, -y, 0);
+                        RenderUtils.drawTracerPointer(x, y - radius.get(), size.get(), 2, 1, getColor(entity, 255).getRGB());
+                        GL11.glTranslatef(x, y, 0);
+                        GL11.glRotatef(-yaw, 0, 0, 1);
+                        GL11.glTranslatef(-x, -y, 0);
+                    } else {
+                        //int x = (Display.getWidth() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
+                        //int y = (int) Math.max(pos.yCoord, maxBottom);
+                        //RenderUtils.drawTracerPointer((float) x, (float)y, size.get(), 2, 1, getColor(entity, 255).getRGB());
                     }
+
+                }
+            }
+        });
+    }
+
+    private boolean isOnScreen(Vec3 pos) {
+        if (pos.xCoord > -1 && pos.zCoord < 1)
+            return pos.xCoord / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale) >= 0 && pos.xCoord / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale) <= Display.getWidth() && pos.yCoord / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale) >= 0 && pos.yCoord / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale) <= Display.getHeight();
+
+        return false;
+    }
+
+    private float getRotations(EntityLivingBase ent) {
+        final double x = ent.posX - mc.thePlayer.posX;
+        final double z = ent.posZ - mc.thePlayer.posZ;
+        final float yaw = (float) (-(Math.atan2(x, z) * 57.29577951308232));
+        return yaw;
+    }
+
+    private Color getColor(EntityLivingBase player, int alpha) {
+        float f = mc.thePlayer.getDistanceToEntity(player);
+        float f1 = 40;
+        float f2 = Math.max(0.0F, Math.min(f, f1) / f1);
+        final Color clr = new Color(Color.HSBtoRGB(f2 / 3.0F, 1.0F, 1.0F) | 0xFF000000);
+        return new Color(clr.getRed(), clr.getGreen(), clr.getBlue(), alpha);
+    }
+
+    public static class EntityListener {
+        private final Map<Entity, Vec3> entityUpperBounds = Maps.newHashMap();
+        private final Map<Entity, Vec3> entityLowerBounds = Maps.newHashMap();
+
+        private void render3d(Render3DEvent event) {
+            if (!entityUpperBounds.isEmpty()) {
+                entityUpperBounds.clear();
+            }
+            if (!entityLowerBounds.isEmpty()) {
+                entityLowerBounds.clear();
+            }
+            for (Entity e : mc.theWorld.loadedEntityList) {
+                Vec3 bound = getEntityRenderPosition(e);
+                bound.add(new Vec3(0, e.height + 0.2, 0));
+                Vec3 upperBounds = RenderUtils.to2D(bound.xCoord, bound.yCoord, bound.zCoord), lowerBounds = RenderUtils.to2D(bound.xCoord, bound.yCoord - 2, bound.zCoord);
+                if (upperBounds != null && lowerBounds != null) {
+                    entityUpperBounds.put(e, upperBounds);
+                    entityLowerBounds.put(e, lowerBounds);
                 }
             }
         }
-        GlStateManager.popMatrix();
+
+        private Vec3 getEntityRenderPosition(Entity entity) {
+            double partial = mc.timer.renderPartialTicks;
+
+            double x = entity.lastTickPosX + ((entity.posX - entity.lastTickPosX) * partial) - mc.getRenderManager().viewerPosX;
+            double y = entity.lastTickPosY + ((entity.posY - entity.lastTickPosY) * partial) - mc.getRenderManager().viewerPosY;
+            double z = entity.lastTickPosZ + ((entity.posZ - entity.lastTickPosZ) * partial) - mc.getRenderManager().viewerPosZ;
+
+            return new Vec3(x, y, z);
+        }
+
+        public Map<Entity, Vec3> getEntityLowerBounds() {
+            return entityLowerBounds;
+        }
     }
 
 }

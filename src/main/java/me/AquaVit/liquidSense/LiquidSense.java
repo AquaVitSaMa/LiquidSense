@@ -36,7 +36,6 @@ public class LiquidSense {
         this.liquidSenseModules = new ArrayList<>();
         liquidSenseModules.add(HYTBypass.class);
         liquidSenseModules.add(Particle.class);
-        liquidSenseModules.add(AutoJump.class);
         liquidSenseModules.add(EveryThingBlock.class);
         liquidSenseModules.add(SpeedMine.class);
         liquidSenseModules.add(Health.class);

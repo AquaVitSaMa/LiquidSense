@@ -817,39 +817,6 @@ public final class RenderUtils extends MinecraftInstance {
         GL11.glPopMatrix();
     }
 
-    public static void NdrawCircle(float cx, float cy, float r, int num_segments  , float width , int color) {
-        GL11.glPushMatrix();
-        cx *= 2.0F;
-        cy *= 2.0F;
-        float theta = (float) (6.2831852D / num_segments);
-        float p = (float) Math.cos(theta);
-        float s = (float) Math.sin(theta);
-        float x = r *= 2.0F;
-        float y = 0.0F;
-        enableGL2D();
-        GL11.glScalef(0.5F, 0.5F, 0.5F);
-        GlStateManager.color(0 , 0, 0);
-        glLineWidth(width);
-
-        GlStateManager.resetColor();
-        glColor(color);
-        GL11.glBegin(2);
-        int ii = 0;
-        while (ii < num_segments) {
-            GL11.glVertex2f(x + cx, y + cy);
-            float t = x;
-            x = p * x - s * y;
-            y = s * t + p * y;
-            ii++;
-        }
-        glColor(color);
-        GL11.glEnd();
-        GL11.glScalef(2.0F, 2.0F, 2.0F);
-        disableGL2D();
-        GlStateManager.color(1, 1, 1, 1);
-        GL11.glPopMatrix();
-    }
-
     public static void startDrawing() {
         GL11.glEnable(3042);
         GL11.glEnable(3042);
@@ -868,14 +835,69 @@ public final class RenderUtils extends MinecraftInstance {
         GL11.glEnable(2929);
     }
 
-    public static void drawESPCircle(float cx, float cy, float r, int num_segments,  int color) {
+    // Pointer
+    public static void drawTracerPointer(float x, float y, float size, float widthDiv, float heightDiv, int color) {
+        boolean blend = GL11.glIsEnabled(GL11.GL_BLEND);
+        GL11.glEnable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+
         GL11.glPushMatrix();
-        cx *= 2.0F;
-        cy *= 2.0F;
-        float theta = (float) (6.2831852D / num_segments);
+        hexColor(color);
+        GL11.glBegin(GL11.GL_QUADS);
+        GL11.glVertex2d(x, y);
+        GL11.glVertex2d(x - size / widthDiv, y + size);
+        GL11.glVertex2d(x, y + size / heightDiv);
+        GL11.glVertex2d(x + size / widthDiv, y + size);
+        GL11.glVertex2d(x, y);
+        GL11.glEnd();
+        GL11.glColor4f(0, 0, 0, 0.8f);
+        GL11.glBegin(GL11.GL_LINE_LOOP);
+        GL11.glVertex2d(x, y);
+        GL11.glVertex2d(x - size / widthDiv, y + size);
+        GL11.glVertex2d(x, y + size / heightDiv);
+        GL11.glVertex2d(x + size / widthDiv, y + size);
+        GL11.glVertex2d(x, y);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        if (!blend)
+            GL11.glDisable(GL11.GL_BLEND);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+    }
+    public static void hexColor(int hexColor) {
+        float red = (hexColor >> 16 & 0xFF) / 255.0F;
+        float green = (hexColor >> 8 & 0xFF) / 255.0F;
+        float blue = (hexColor & 0xFF) / 255.0F;
+        float alpha = (hexColor >> 24 & 0xFF) / 255.0F;
+        GL11.glColor4f(red, green, blue, alpha);
+    }
+    public static Vec3 to2D(double x, double y, double z) {
+        FloatBuffer screenCoords = BufferUtils.createFloatBuffer(3);
+        IntBuffer viewport = BufferUtils.createIntBuffer(16);
+        FloatBuffer modelView = BufferUtils.createFloatBuffer(16);
+        FloatBuffer projection = BufferUtils.createFloatBuffer(16);
+
+        GL11.glGetFloat(GL11.GL_MODELVIEW_MATRIX, modelView);
+        GL11.glGetFloat(GL11.GL_PROJECTION_MATRIX, projection);
+        GL11.glGetInteger(GL11.GL_VIEWPORT, viewport);
+
+        boolean result = GLU.gluProject((float) x, (float) y, (float) z, modelView, projection, viewport, screenCoords);
+        if (result) {
+            return new Vec3(screenCoords.get(0), Display.getHeight() - screenCoords.get(1), screenCoords.get(2));
+        }
+        return null;
+    }
+
+
+    public static void drawESPCircle(float cx, float cy, float size,  int color) {
+        GL11.glPushMatrix();
+        float theta = (float) (6.2831852D / 3);
         float p = (float) Math.cos(theta);
         float s = (float) Math.sin(theta);
-        float x = r *= 2.0F;
+        float x = size *= 2.0F;
         float y = 0.0F;
         enableGL2D();
         GL11.glScalef(0.5F, 0.5F, 0.5F);
@@ -883,17 +905,19 @@ public final class RenderUtils extends MinecraftInstance {
 
         GlStateManager.resetColor();
         glColor(color);
-        GL11.glBegin(2);
-        int ii = 0;
-        while (ii < num_segments) {
+
+        glEnable(GL_LINE_SMOOTH);
+        glBegin(2);
+        for (int i = 0; i < 3;i++){
             GL11.glVertex2f(x + cx, y + cy);
             float t = x;
             x = p * x - s * y;
             y = s * t + p * y;
-            ii++;
         }
         Colors.getColor(-1);
-        GL11.glEnd();
+        glEnd();
+        glDisable(GL_LINE_SMOOTH);
+
         GL11.glScalef(2.0F, 2.0F, 2.0F);
         disableGL2D();
         GlStateManager.color(1, 1, 1, 1);
