@@ -59,6 +59,9 @@ public abstract class MixinRenderEntityItem extends MixinRender{
     @Shadow
     public abstract boolean shouldBob();
 
+    /**
+     * @author AquaVit QQ:2924270322
+     */
     @Overwrite
     private int func_177077_a(EntityItem p_177077_1_, double p_177077_2_, double p_177077_4_, double p_177077_6_, float p_177077_8_, IBakedModel p_177077_9_){
         ItemStack itemstack = p_177077_1_.getEntityItem();
@@ -91,6 +94,9 @@ public abstract class MixinRenderEntityItem extends MixinRender{
     }
 
 
+    /**
+     * @author AquaVit QQ:2924270322
+     */
     @Overwrite
     public void doRender(EntityItem entity, double x, double y, double z, float entityYaw, float partialTicks) {
         final Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
