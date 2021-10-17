@@ -38,7 +38,7 @@ public class LiquidSense {
         liquidSenseModules.add(Particle.class);
         liquidSenseModules.add(EveryThingBlock.class);
         liquidSenseModules.add(SpeedMine.class);
-        liquidSenseModules.add(Health.class);
+        liquidSenseModules.add(ItemPhysic.class);
         liquidSenseModules.add(AutoSword.class);
         liquidSenseModules.add(Ambience.class);
         liquidSenseModules.add(PlayerFace.class);
