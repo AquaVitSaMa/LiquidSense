@@ -28,6 +28,7 @@ import net.minecraft.entity.monster.EntitySlime;
 import net.minecraft.entity.passive.EntityAnimal;
 import net.minecraft.entity.passive.EntitySquid;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.network.Packet;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.MathHelper;
 import net.minecraft.util.Vec3;
@@ -36,6 +37,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -65,9 +67,8 @@ public class PointerESP extends Module {
             if (o instanceof EntityLivingBase && EntityUtils.isSelected(o, true)) {
                 EntityLivingBase entity = (EntityLivingBase) o;
                 Vec3 pos = entityListener.getEntityLowerBounds().get(entity);
-                int maxBottom = Integer.MIN_VALUE;
                 if (pos != null) {
-                    if (!isOnScreen(pos)) {
+                    if (!mc.thePlayer.canEntityBeSeen(entity) || modeValue.get().equalsIgnoreCase("Normal")) {
                         int x = (Display.getWidth() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
                         int y = (Display.getHeight() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
                         float yaw = getRotations(entity) - mc.thePlayer.rotationYaw;
@@ -78,10 +79,24 @@ public class PointerESP extends Module {
                         GL11.glTranslatef(x, y, 0);
                         GL11.glRotatef(-yaw, 0, 0, 1);
                         GL11.glTranslatef(-x, -y, 0);
-                    } else {
-                        //int x = (Display.getWidth() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
-                        //int y = (int) Math.max(pos.yCoord, maxBottom);
-                        //RenderUtils.drawTracerPointer((float) x, (float)y, size.get(), 2, 1, getColor(entity, 255).getRGB());
+                    }
+                    if (mc.thePlayer.canEntityBeSeen(entity) && modeValue.get().equalsIgnoreCase("CanSeen")) {
+                        GlStateManager.pushMatrix();
+                        GL11.glDisable(GL11.GL_DEPTH_TEST);
+                        ScaledResolution sr = new ScaledResolution(this.mc);
+                        double twoDscale = sr.getScaleFactor() / Math.pow(sr.getScaleFactor(), 2);
+                        GlStateManager.scale(twoDscale, twoDscale, twoDscale);
+                        for (Map.Entry<Entity, Vec3> entry : entityListener.entityUpperBounds.entrySet()) {
+
+                            if (entry.getKey() == entity){
+                                double x = entry.getValue().xCoord;
+                                double y = entry.getValue().yCoord;
+                                RenderUtils.drawTracerPointer((float) x, (float)y, size.get(), 2, 1, getColor(entity, 255).getRGB());
+                            }
+
+                        }
+                        GL11.glEnable(GL11.GL_DEPTH_TEST);
+                        GlStateManager.popMatrix();
                     }
 
                 }
