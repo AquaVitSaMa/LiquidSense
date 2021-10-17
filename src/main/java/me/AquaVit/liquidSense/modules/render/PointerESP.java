@@ -68,19 +68,7 @@ public class PointerESP extends Module {
                 EntityLivingBase entity = (EntityLivingBase) o;
                 Vec3 pos = entityListener.getEntityLowerBounds().get(entity);
                 if (pos != null) {
-                    if (!mc.thePlayer.canEntityBeSeen(entity) || modeValue.get().equalsIgnoreCase("Normal")) {
-                        int x = (Display.getWidth() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
-                        int y = (Display.getHeight() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
-                        float yaw = getRotations(entity) - mc.thePlayer.rotationYaw;
-                        GL11.glTranslatef(x, y, 0);
-                        GL11.glRotatef(yaw, 0, 0, 1);
-                        GL11.glTranslatef(-x, -y, 0);
-                        RenderUtils.drawTracerPointer(x, y - radius.get(), size.get(), 2, 1, getColor(entity, 255).getRGB());
-                        GL11.glTranslatef(x, y, 0);
-                        GL11.glRotatef(-yaw, 0, 0, 1);
-                        GL11.glTranslatef(-x, -y, 0);
-                    }
-                    if (mc.thePlayer.canEntityBeSeen(entity) && modeValue.get().equalsIgnoreCase("CanSeen")) {
+                    if (mc.thePlayer.canEntityBeSeen(entity) && modeValue.get().equalsIgnoreCase("CanSeen") && isOnScreen(pos)) {
                         GlStateManager.pushMatrix();
                         GL11.glDisable(GL11.GL_DEPTH_TEST);
                         ScaledResolution sr = new ScaledResolution(this.mc);
@@ -97,6 +85,17 @@ public class PointerESP extends Module {
                         }
                         GL11.glEnable(GL11.GL_DEPTH_TEST);
                         GlStateManager.popMatrix();
+                    }else{
+                        int x = (Display.getWidth() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
+                        int y = (Display.getHeight() / 2) / (mc.gameSettings.guiScale == 0 ? 1 : mc.gameSettings.guiScale);
+                        float yaw = getRotations(entity) - mc.thePlayer.rotationYaw;
+                        GL11.glTranslatef(x, y, 0);
+                        GL11.glRotatef(yaw, 0, 0, 1);
+                        GL11.glTranslatef(-x, -y, 0);
+                        RenderUtils.drawTracerPointer(x, y - radius.get(), size.get(), 2, 1, getColor(entity, 255).getRGB());
+                        GL11.glTranslatef(x, y, 0);
+                        GL11.glRotatef(-yaw, 0, 0, 1);
+                        GL11.glTranslatef(-x, -y, 0);
                     }
 
                 }
