@@ -1,4 +1,4 @@
-package me.AquaVit.liquidSense.utils;
+package me.AquaVit.liquidSense.utils.item;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -16,7 +16,7 @@ import org.lwjgl.opengl.GL11;
 
 import java.util.Random;
 
-public class ItemUtil {
+public class ItemPhysicUtil {
     public static Random random = new Random();
     public static Minecraft mc = Minecraft.getMinecraft();
     public static RenderItem renderItem = mc.getRenderItem();
@@ -32,15 +32,15 @@ public class ItemUtil {
         EntityItem item;
         ItemStack itemstack;
         rotation = (double)(System.nanoTime() - tick) / 3000000.0 * 1.0;
-        if (!ItemUtil.mc.inGameHasFocus) {
+        if (!ItemPhysicUtil.mc.inGameHasFocus) {
             rotation = 0.0;
         }
         if ((itemstack = (item = (EntityItem)par1Entity).getEntityItem()).getItem() != null) {
             random.setSeed(187L);
             boolean flag = false;
             if (TextureMap.locationBlocksTexture != null) {
-                ItemUtil.mc.getRenderManager().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
-                ItemUtil.mc.getRenderManager().renderEngine.getTexture(TextureMap.locationBlocksTexture).setBlurMipmap(false, false);
+                ItemPhysicUtil.mc.getRenderManager().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
+                ItemPhysicUtil.mc.getRenderManager().renderEngine.getTexture(TextureMap.locationBlocksTexture).setBlurMipmap(false, false);
                 flag = true;
             }
             GlStateManager.enableRescaleNormal();
@@ -49,7 +49,7 @@ public class ItemUtil {
             GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
             GlStateManager.pushMatrix();
             IBakedModel ibakedmodel = renderItem.getItemModelMesher().getItemModel(itemstack);
-            int i = ItemUtil.func_177077_a(item, x, y, z, par9, ibakedmodel);
+            int i = ItemPhysicUtil.func_177077_a(item, x, y, z, par9, ibakedmodel);
             BlockPos pos = new BlockPos(item);
             if (item.rotationPitch > 360.0f) {
                 item.rotationPitch = 0.0f;
@@ -57,10 +57,10 @@ public class ItemUtil {
             if (!(item == null || Double.isNaN(item.getAge()) || Double.isNaN(item.getAir()) || Double.isNaN(item.getEntityId()) || item.getPosition() == null)) {
                 if (item.onGround) {
                     if (item.rotationPitch != 0.0f && item.rotationPitch != 90.0f && item.rotationPitch != 180.0f && item.rotationPitch != 270.0f) {
-                        double Abstand0 = ItemUtil.formPositiv(item.rotationPitch);
-                        double Abstand90 = ItemUtil.formPositiv(item.rotationPitch - 90.0f);
-                        double Abstand180 = ItemUtil.formPositiv(item.rotationPitch - 180.0f);
-                        double Abstand270 = ItemUtil.formPositiv(item.rotationPitch - 270.0f);
+                        double Abstand0 = ItemPhysicUtil.formPositiv(item.rotationPitch);
+                        double Abstand90 = ItemPhysicUtil.formPositiv(item.rotationPitch - 90.0f);
+                        double Abstand180 = ItemPhysicUtil.formPositiv(item.rotationPitch - 180.0f);
+                        double Abstand270 = ItemPhysicUtil.formPositiv(item.rotationPitch - 270.0f);
                         if (Abstand0 <= Abstand90 && Abstand0 <= Abstand180 && Abstand0 <= Abstand270) {
                             if (item.rotationPitch < 0.0f) {
                                 EntityItem e1 = item;
@@ -125,11 +125,11 @@ public class ItemUtil {
                     GlStateManager.popMatrix();
                 } else {
                     GlStateManager.pushMatrix();
-                    if (j > 0 && ItemUtil.shouldSpreadItems()) {
+                    if (j > 0 && ItemPhysicUtil.shouldSpreadItems()) {
                         GlStateManager.translate(0.0f, 0.0f, 0.046875f * (float)j);
                     }
                     renderItem.renderItem(itemstack, ibakedmodel);
-                    if (!ItemUtil.shouldSpreadItems()) {
+                    if (!ItemPhysicUtil.shouldSpreadItems()) {
                         GlStateManager.translate(0.0f, 0.0f, 0.046875f);
                     }
                     GlStateManager.popMatrix();
@@ -139,9 +139,9 @@ public class ItemUtil {
             GlStateManager.popMatrix();
             GlStateManager.disableRescaleNormal();
             GlStateManager.disableBlend();
-            ItemUtil.mc.getRenderManager().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
+            ItemPhysicUtil.mc.getRenderManager().renderEngine.bindTexture(TextureMap.locationBlocksTexture);
             if (flag) {
-                ItemUtil.mc.getRenderManager().renderEngine.getTexture(TextureMap.locationBlocksTexture).restoreLastBlurMipmap();
+                ItemPhysicUtil.mc.getRenderManager().renderEngine.getTexture(TextureMap.locationBlocksTexture).restoreLastBlurMipmap();
             }
         }
     }
@@ -153,12 +153,12 @@ public class ItemUtil {
             return 0;
         }
         boolean flag = p_177077_9_.isAmbientOcclusion();
-        int i = ItemUtil.func_177078_a(itemstack);
+        int i = ItemPhysicUtil.func_177078_a(itemstack);
         float f1 = 0.25f;
         float f2 = 0.0f;
         GlStateManager.translate((float)x, (float)y + f2 + 0.25f, (float)z);
         float f3 = 0.0f;
-        if (flag || ItemUtil.mc.getRenderManager().renderEngine != null && ItemUtil.mc.gameSettings.fancyGraphics) {
+        if (flag || ItemPhysicUtil.mc.getRenderManager().renderEngine != null && ItemPhysicUtil.mc.gameSettings.fancyGraphics) {
             GlStateManager.rotate(f3, 0.0f, 1.0f, 0.0f);
         }
         if (!flag) {

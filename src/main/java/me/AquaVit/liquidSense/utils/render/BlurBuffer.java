@@ -1,11 +1,8 @@
-package me.AquaVit.liquidSense.utils;
+package me.AquaVit.liquidSense.utils.render;
 
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.utils.timer.MSTimer;
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils;
-import net.ccbluex.liquidbounce.utils.timer.TimerUtil;
 import net.minecraft.client.shader.Shader;
-import net.minecraft.item.ItemStack;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
@@ -16,7 +13,6 @@ import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.util.ResourceLocation;
 
-import java.io.IOException;
 import java.util.List;
 
 public class BlurBuffer{

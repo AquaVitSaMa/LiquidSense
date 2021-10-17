@@ -1,6 +1,5 @@
 package me.AquaVit.liquidSense.modules.misc;
 
-import me.AquaVit.liquidSense.modules.movement.Flight;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.PacketEvent;
@@ -31,7 +30,6 @@ public class LagBack extends Module {
         Speed speed = (Speed) LiquidBounce.moduleManager.getModule(Speed.class);
         LongJump longjump = (LongJump) LiquidBounce.moduleManager.getModule(LongJump.class);
         Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
-        Flight flight = (Flight) LiquidBounce.moduleManager.getModule(Flight.class);
         Step step = (Step) LiquidBounce.moduleManager.getModule(Step.class);
 
         if (event.getPacket() instanceof S08PacketPlayerPosLook && this.deactivationDelay.delay(2000F)) {
@@ -52,10 +50,9 @@ public class LagBack extends Module {
                 }
             }
             if(flylag.get()){
-                if(fly.getState() || flight.getState()) {
+                if(fly.getState()) {
                     if (mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown()) {
                         LiquidBounce.moduleManager.getModule(Fly.class).setState(false);
-                        LiquidBounce.moduleManager.getModule(Flight.class).setState(false);
                         mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" +LiquidBounce.CLIENT_NAME+ "§8] §3"+ "FlyLagBack"));
                     }
                 }

@@ -5,7 +5,6 @@
  */
 package net.ccbluex.liquidbounce.ui.client.hud
 
-import me.AquaVit.liquidSense.utils.BlurBuffer
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.*

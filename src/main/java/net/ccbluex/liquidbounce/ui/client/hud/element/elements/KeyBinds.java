@@ -1,9 +1,8 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
-import me.AquaVit.liquidSense.utils.BlurBuffer;
+import me.AquaVit.liquidSense.utils.render.BlurBuffer;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.script.api.global.Chat;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;

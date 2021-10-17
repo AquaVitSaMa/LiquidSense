@@ -2,9 +2,8 @@ package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import kotlin.jvm.internal.Intrinsics;
 import kotlin.ranges.RangesKt;
-import me.AquaVit.liquidSense.utils.BlurBuffer;
+import me.AquaVit.liquidSense.utils.render.BlurBuffer;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
@@ -24,9 +23,7 @@ import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 

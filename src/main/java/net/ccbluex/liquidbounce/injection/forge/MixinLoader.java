@@ -5,7 +5,6 @@
  */
 package net.ccbluex.liquidbounce.injection.forge;
 
-import me.AquaVit.liquidSense.utils.HttpUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;

@@ -5,7 +5,6 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.player;
 
-import me.AquaVit.liquidSense.modules.movement.Flight;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -57,7 +56,6 @@ public class NoFall extends Module {
     private boolean fakelag = false;
     public double fallDist = 0;
     private boolean packetmodify = false;
-    Flight flight = (Flight) LiquidBounce.moduleManager.getModule(Flight.class);
     Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
 
     private final BoolValue noSound = new BoolValue("NoSound", true);

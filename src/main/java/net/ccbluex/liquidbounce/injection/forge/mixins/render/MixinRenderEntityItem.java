@@ -6,20 +6,14 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
 import me.AquaVit.liquidSense.modules.render.ItemPhysic;
-import me.AquaVit.liquidSense.utils.ItemUtil;
+import me.AquaVit.liquidSense.utils.item.ItemPhysicUtil;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.render.Chams;
-import net.ccbluex.liquidbounce.injection.forge.mixins.entity.MixinEntity;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
-import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
 import net.minecraft.client.renderer.entity.RenderItem;
-import net.minecraft.client.renderer.entity.RenderManager;
-import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.resources.model.IBakedModel;
-import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -31,9 +25,6 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.Random;
 
@@ -115,7 +106,7 @@ public abstract class MixinRenderEntityItem extends MixinRender{
         }
 
         if (LiquidBounce.moduleManager.getModule(ItemPhysic.class).getState()){
-            ItemUtil.doRenderItemPhysic(entity, x, y, z, entityYaw, partialTicks);
+            ItemPhysicUtil.doRenderItemPhysic(entity, x, y, z, entityYaw, partialTicks);
             if (chams.getState() && chams.getItemsValue().get()) {
                 GL11.glPolygonOffset(1.0F, 1000000F);
                 GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);

@@ -1,4 +1,4 @@
-package me.AquaVit.liquidSense.utils;
+package me.AquaVit.liquidSense.utils.misc;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;

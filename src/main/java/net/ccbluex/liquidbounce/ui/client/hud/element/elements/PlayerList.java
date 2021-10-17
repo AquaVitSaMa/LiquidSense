@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
-import me.AquaVit.liquidSense.utils.BlurBuffer;
+import me.AquaVit.liquidSense.utils.render.BlurBuffer;
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;

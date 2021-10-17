@@ -49,7 +49,6 @@ public class LiquidSense {
         liquidSenseModules.add(MemoryFixer.class);
         liquidSenseModules.add(PointerESP.class);
         liquidSenseModules.add(Disabler.class);
-        liquidSenseModules.add(Flight.class);
         liquidSenseModules.add(Skeltal.class);
         liquidSenseModules.add(LightningCheck.class);
         liquidSenseModules.add(Tp.class);
