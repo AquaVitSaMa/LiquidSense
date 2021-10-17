@@ -12,7 +12,6 @@ import me.AquaVit.liquidSense.LiquidSense
 import me.AquaVit.liquidSense.utils.forge.BlocksTab
 import me.AquaVit.liquidSense.utils.forge.ExploitsTab
 import me.AquaVit.liquidSense.utils.forge.HeadsTab
-import net.ccbluex.liquidbounce.cape.CapeAPI.registerCapeService
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent
 import net.ccbluex.liquidbounce.event.EventManager
 import net.ccbluex.liquidbounce.features.module.ModuleManager
@@ -35,8 +34,6 @@ import net.ccbluex.liquidbounce.utils.RotationUtils
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils
 import net.ccbluex.liquidbounce.value.Value
 import net.minecraft.util.ResourceLocation
-import net.minecraftforge.common.MinecraftForge
-import java.awt.Font
 
 object LiquidBounce {
 

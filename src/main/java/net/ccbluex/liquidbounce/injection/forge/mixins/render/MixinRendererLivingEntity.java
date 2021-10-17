@@ -95,8 +95,6 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
     protected abstract <T extends EntityLivingBase> boolean setBrightness(T p_setBrightness_1_, float p_setBrightness_2_, boolean p_setBrightness_3_);
 
 
-
-
     @Overwrite
     public <T extends EntityLivingBase> void renderLayers(T p_renderLayers_1_, float p_renderLayers_2_, float p_renderLayers_3_, float p_renderLayers_4_, float p_renderLayers_5_, float p_renderLayers_6_, float p_renderLayers_7_, float p_renderLayers_8_) {
         Iterator var9 = this.layerRenderers.iterator();
