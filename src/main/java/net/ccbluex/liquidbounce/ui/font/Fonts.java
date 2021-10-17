@@ -22,6 +22,8 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
+import static net.ccbluex.liquidbounce.LiquidBounce.CLIENT_RESOURCE;
+
 @SideOnly(Side.CLIENT)
 public class Fonts {
 
@@ -106,7 +108,7 @@ public class Fonts {
 
             if(!outputFile.exists()) {
                 ClientUtils.getLogger().info("Downloading fonts...");
-                HttpUtils.download("https://cdn.jsdelivr.net/gh/ImageHelper/image_repository@main/Font.zip", outputFile);
+                HttpUtils.download(CLIENT_RESOURCE+"Font.zip", outputFile);
                 ClientUtils.getLogger().info("Extract fonts...");
                 extractZip(outputFile.getPath(), LiquidBounce.fileManager.fontsDir.getPath());
             }

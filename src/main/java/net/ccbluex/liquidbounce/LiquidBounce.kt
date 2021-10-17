@@ -9,6 +9,9 @@ import CommandManager
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import me.AquaVit.liquidSense.LiquidSense
+import me.AquaVit.liquidSense.utils.forge.BlocksTab
+import me.AquaVit.liquidSense.utils.forge.ExploitsTab
+import me.AquaVit.liquidSense.utils.forge.HeadsTab
 import net.ccbluex.liquidbounce.cape.CapeAPI.registerCapeService
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent
 import net.ccbluex.liquidbounce.event.EventManager
@@ -19,9 +22,7 @@ import net.ccbluex.liquidbounce.features.special.DonatorCape
 import net.ccbluex.liquidbounce.file.FileManager
 import net.ccbluex.liquidbounce.script.ScriptManager
 import net.ccbluex.liquidbounce.script.remapper.Remapper.loadSrg
-import net.ccbluex.liquidbounce.tabs.BlocksTab
-import net.ccbluex.liquidbounce.tabs.ExploitsTab
-import net.ccbluex.liquidbounce.tabs.HeadsTab
+
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
 import net.ccbluex.liquidbounce.ui.client.hud.HUD
@@ -47,6 +48,7 @@ object LiquidBounce {
     const val CLIENT_CREATOR = "CCBlueX"
     const val MINECRAFT_VERSION = "1.8.9"
     const val CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce"
+    const val CLIENT_RESOURCE = "https://cdn.jsdelivr.net/gh/BlogResourceRepositories/ClientResource@main/"
 
 
 
