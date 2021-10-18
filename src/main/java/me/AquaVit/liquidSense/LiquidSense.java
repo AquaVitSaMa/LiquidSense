@@ -37,7 +37,7 @@ public class LiquidSense {
         liquidSenseModules.add(HYTBypass.class);
         liquidSenseModules.add(Particle.class);
         liquidSenseModules.add(EveryThingBlock.class);
-        liquidSenseModules.add(SpeedMine.class);
+        liquidSenseModules.add(FastBreak.class);
         liquidSenseModules.add(ItemPhysic.class);
         liquidSenseModules.add(AutoSword.class);
         liquidSenseModules.add(Ambience.class);
