@@ -1,4 +1,6 @@
-package me.AquaVit.liquidSense.API;
+package me.AquaVit.liquidSense.utils.module;
+
+import me.AquaVit.liquidSense.utils.module.Location;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

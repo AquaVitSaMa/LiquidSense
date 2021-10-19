@@ -1,19 +1,16 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement.speeds.aquavit;
 
-import me.AquaVit.liquidSense.API.Particles.roundToPlace
+import me.AquaVit.liquidSense.utils.module.Particles.roundToPlace
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventState
 import net.ccbluex.liquidbounce.event.JumpEvent
 import net.ccbluex.liquidbounce.event.MotionEvent
 import net.ccbluex.liquidbounce.event.MoveEvent
-import net.ccbluex.liquidbounce.features.module.modules.combat.AutoPot
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMode
 import net.ccbluex.liquidbounce.utils.MovementUtils.*
-import org.lwjgl.input.Keyboard
 import java.lang.Math.max
 import java.lang.Math.sqrt
-import java.util.*
 
 
 class Hypixel : SpeedMode("Hypixel") {

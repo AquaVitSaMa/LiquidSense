@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.render
 
-import me.AquaVit.liquidSense.API.Particles.roundToPlace
+import me.AquaVit.liquidSense.utils.module.Particles.roundToPlace
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.Render2DEvent

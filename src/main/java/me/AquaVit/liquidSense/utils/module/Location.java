@@ -1,4 +1,4 @@
-package me.AquaVit.liquidSense.API;
+package me.AquaVit.liquidSense.utils.module;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
