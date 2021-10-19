@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
-import co.uk.hexeption.utils.OutlineUtils;
+import me.AquaVit.liquidSense.utils.render.OutlineUtils;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
 import net.ccbluex.liquidbounce.event.Render3DEvent;

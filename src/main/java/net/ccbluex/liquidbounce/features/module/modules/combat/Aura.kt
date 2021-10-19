@@ -1,6 +1,5 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
-import me.AquaVit.liquidSense.modules.misc.NoHurt
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
@@ -534,7 +533,7 @@ class Aura : Module() {
                 return false
 
             if (EntityUtils.targetPlayer && entity is EntityPlayer) {
-                if (entity.isSpectator || AntiBot.isBot(entity) || NoHurt.isBot(entity))
+                if (entity.isSpectator || AntiBot.isBot(entity))
                     return false
 
                 if (EntityUtils.isFriend(entity) && !LiquidBounce.moduleManager[NoFriends::class.java]!!.state)

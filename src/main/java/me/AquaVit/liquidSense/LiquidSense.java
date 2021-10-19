@@ -60,7 +60,6 @@ public class LiquidSense {
         liquidSenseModules.add(Cape.class);
         liquidSenseModules.add(AutoApple.class);
         liquidSenseModules.add(LastestHypixelFly.class);
-        liquidSenseModules.add(NoHurt.class);
         liquidSenseModules.add(AntiSpam.class);
     }
 

@@ -1,4 +1,4 @@
-package co.uk.hexeption.utils;
+package me.AquaVit.liquidSense.utils.render;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.OpenGlHelper;
@@ -11,11 +11,6 @@ import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.*;
 
-/**
- * Outline ESP
- *
- * @author Hexeption
- */
 @SideOnly(Side.CLIENT)
 public class OutlineUtils {
 

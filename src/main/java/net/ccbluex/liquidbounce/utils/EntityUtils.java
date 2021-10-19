@@ -5,7 +5,6 @@
  */
 package net.ccbluex.liquidbounce.utils;
 
-import me.AquaVit.liquidSense.modules.misc.NoHurt;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.combat.NoFriends;
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot;
@@ -47,9 +46,6 @@ public final class EntityUtils extends MinecraftInstance {
                         if(AntiBot.isBot(entityPlayer))
                             return false;
 
-                        if(NoHurt.isBot(entityPlayer))
-                            return false;
-
                         if (isFriend(entityPlayer) && !LiquidBounce.moduleManager.getModule(NoFriends.class).getState())
                             return false;
 
@@ -78,9 +74,6 @@ public final class EntityUtils extends MinecraftInstance {
 
                     if(canAttackCheck) {
                         if(AntiBot.isBot(entityPlayer))
-                            return false;
-
-                        if(NoHurt.isBot(entityPlayer))
                             return false;
 
                         if (isFriend(entityPlayer) && !LiquidBounce.moduleManager.getModule(NoFriends.class).getState())
