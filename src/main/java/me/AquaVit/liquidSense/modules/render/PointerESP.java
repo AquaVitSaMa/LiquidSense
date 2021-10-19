@@ -80,6 +80,7 @@ public class PointerESP extends Module {
                                 double x = entry.getValue().xCoord;
                                 double y = entry.getValue().yCoord;
                                 RenderUtils.drawTracerPointer((float) x, (float)y, size.get(), 2, 1, getColor(entity, 255).getRGB());
+                                GlStateManager.resetColor();
                             }
 
                         }
@@ -93,6 +94,7 @@ public class PointerESP extends Module {
                         GL11.glRotatef(yaw, 0, 0, 1);
                         GL11.glTranslatef(-x, -y, 0);
                         RenderUtils.drawTracerPointer(x, y - radius.get(), size.get(), 2, 1, getColor(entity, 255).getRGB());
+                        GlStateManager.resetColor();
                         GL11.glTranslatef(x, y, 0);
                         GL11.glRotatef(-yaw, 0, 0, 1);
                         GL11.glTranslatef(-x, -y, 0);
