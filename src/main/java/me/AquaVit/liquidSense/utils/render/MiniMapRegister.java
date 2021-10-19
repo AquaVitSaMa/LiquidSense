@@ -45,9 +45,9 @@ public final class MiniMapRegister extends MinecraftInstance {
                 synchronized (queuedChunkDeletions) {
 
                     for (ChunkLocation it : queuedChunkDeletions) {
-                        MiniMapTexture var10000 = chunkTextureMap.remove(it);
-                        if (var10000 != null) {
-                            var10000.delete();
+                        MiniMapTexture miniMapTexture = chunkTextureMap.remove(it);
+                        if (miniMapTexture != null) {
+                            miniMapTexture.delete();
                         }
                     }
 
@@ -92,8 +92,8 @@ public final class MiniMapRegister extends MinecraftInstance {
             return this.deleted;
         }
 
-        public void setDeleted(boolean var1) {
-            this.deleted = var1;
+        public void setDeleted(boolean deleted) {
+            this.deleted = deleted;
         }
 
         public void updateChunkData(Chunk chunk) {
@@ -147,11 +147,11 @@ public final class MiniMapRegister extends MinecraftInstance {
             return Integer.hashCode(this.x) * 31 + Integer.hashCode(this.z);
         }
 
-        public boolean equals(Object var1) {
-            if (this != var1) {
-                if (var1 instanceof ChunkLocation) {
-                    ChunkLocation var2 = (ChunkLocation) var1;
-                    return this.x == var2.x && this.z == var2.z;
+        public boolean equals(Object object) {
+            if (this != object) {
+                if (object instanceof ChunkLocation) {
+                    ChunkLocation chunkLocation = (ChunkLocation) object;
+                    return this.x == chunkLocation.x && this.z == chunkLocation.z;
                 }
 
                 return false;
