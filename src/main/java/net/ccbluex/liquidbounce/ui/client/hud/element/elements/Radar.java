@@ -49,7 +49,8 @@ public class Radar extends Element {
     @Nullable
     @Override
     public Border drawElement() {
-        MiniMapRegister.INSTANCE.updateChunks();
+        MiniMapRegister.updateChunks();
+
 
         float fovAngle = fovAngleValue.get();
 
@@ -111,7 +112,7 @@ public class Radar extends Element {
 
             for (float x = -chunksToRender; x <= chunksToRender; ++x) {
                 for (float z = -chunksToRender; z <= chunksToRender; ++z) {
-                    MiniMapRegister.MiniMapTexture currChunk = MiniMapRegister.INSTANCE.getChunkTextureAt((int) (floor(currX) + x), (int) (floor(currZ) + z));
+                    MiniMapRegister.MiniMapTexture currChunk = MiniMapRegister.getChunkTextureAt((int) (floor(currX) + x), (int) (floor(currZ) + z));
 
                     if (currChunk != null) {
                         double sc = chunkSizeOnScreen;
