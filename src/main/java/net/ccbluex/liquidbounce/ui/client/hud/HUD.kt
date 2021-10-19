@@ -22,7 +22,7 @@ import kotlin.math.min
 open class HUD : MinecraftInstance() {
 
     val elements = mutableListOf<Element>()
-    val notifications = mutableListOf<Notification>()
+    var notifications = mutableListOf<Notification>()
 
     companion object {
 
