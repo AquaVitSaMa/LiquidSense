@@ -7,7 +7,6 @@
     "entity.MixinAbstractClientPlayer",
     "block.MixinBlock",
     "block.MixinBlockLadder",
-    "block.MixinBlockLiquid",
     "block.MixinBlockModelRenderer",
     "block.MixinBlockSoulSand",
     "packets.MixinC00Handshake",
