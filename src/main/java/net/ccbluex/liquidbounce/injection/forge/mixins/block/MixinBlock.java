@@ -1,15 +1,8 @@
-/*
- * LiquidBounce Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/CCBlueX/LiquidBounce/
- */
 package net.ccbluex.liquidbounce.injection.forge.mixins.block;
 
-import me.AquaVit.liquidSense.modules.render.UHCXray;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.BlockBBEvent;
 import net.ccbluex.liquidbounce.event.BlockRenderSideEvent;
-import net.ccbluex.liquidbounce.event.UpdateModelEvent;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals;
 import net.ccbluex.liquidbounce.features.module.modules.exploit.GhostHand;
 import net.ccbluex.liquidbounce.features.module.modules.player.NoFall;
@@ -84,45 +77,15 @@ public abstract class MixinBlock {
             list.add(axisalignedbb);
 
     }
-    /*
-    @Overwrite
-    public boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side,CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        final XRay xray = (XRay) LiquidBounce.moduleManager.getModule(XRay.class);
-        final UHCXray XRay2 = (UHCXray) LiquidBounce.moduleManager.getModule(UHCXray.class);
 
-        return side == EnumFacing.DOWN && this.minY > 0.0D ? true : (side == EnumFacing.UP && this.maxY < 1.0D ? true : (side == EnumFacing.NORTH && this.minZ > 0.0D ? true : (side == EnumFacing.SOUTH && this.maxZ < 1.0D ? true : (side == EnumFacing.WEST && this.minX > 0.0D ? true : (side == EnumFacing.EAST && this.maxX < 1.0D ? true : !worldIn.getBlockState(pos).getBlock().doesSideBlockRendering(worldIn, pos, side))))));
-    }
-
-     */
     @Inject(method = "shouldSideBeRendered", at = @At("HEAD"), cancellable = true)
-    private boolean shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
+    private void shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         final XRay xray = (XRay) LiquidBounce.moduleManager.getModule(XRay.class);
-        final UHCXray XRay2 = (UHCXray) LiquidBounce.moduleManager.getModule(UHCXray.class);
 
         LiquidBounce.eventManager.callEvent(new BlockRenderSideEvent(worldIn, pos, side, maxX, minX, maxY, minY, maxZ, minZ));
 
         if(xray.getState())
             callbackInfoReturnable.setReturnValue(xray.getXrayBlocks().contains(this));
-
-        if (XRay2.getState()) {
-            if (XRay2.CAVEFINDER.get()) {
-                callbackInfoReturnable.setReturnValue(xray.getCavefinder().contains(this));
-                if (XRay2.containsID(getIdFromBlock((Block)(Object)this))) {
-                    return true;
-                }
-                return false;
-            } else {
-                if (XRay2.containsID(getIdFromBlock((Block)(Object)this))) {
-                    return true;
-                }
-                return false;
-            }
-        } else {
-            return (side == EnumFacing.DOWN && this.minY > 0.0) || (side == EnumFacing.UP && this.maxY < 1.0)
-                    || (side == EnumFacing.NORTH && this.minZ > 0.0) || (side == EnumFacing.SOUTH && this.maxZ < 1.0)
-                    || (side == EnumFacing.WEST && this.minX > 0.0) || (side == EnumFacing.EAST && this.maxX < 1.0)
-                    || !worldIn.getBlockState(pos).getBlock().isOpaqueCube();
-        }
 
     }
 

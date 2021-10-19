@@ -39,7 +39,6 @@ public class LiquidSense {
         liquidSenseModules.add(EveryThingBlock.class);
         liquidSenseModules.add(FastBreak.class);
         liquidSenseModules.add(ItemPhysic.class);
-        liquidSenseModules.add(AutoSword.class);
         liquidSenseModules.add(Ambience.class);
         liquidSenseModules.add(PlayerFace.class);
         liquidSenseModules.add(EnchantEffect.class);
@@ -54,7 +53,6 @@ public class LiquidSense {
         liquidSenseModules.add(Tp.class);
         liquidSenseModules.add(TargetStrafe.class);
         liquidSenseModules.add(Stair.class);
-        liquidSenseModules.add(UHCXray.class);
         liquidSenseModules.add(AutoADL.class);
         liquidSenseModules.add(CameraView.class);
         liquidSenseModules.add(KillESP.class);
