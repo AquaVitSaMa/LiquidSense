@@ -52,6 +52,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import static me.AquaVit.liquidSense.utils.render.AnimationUtils.getHealthColor;
+
 @ModuleInfo(name = "ESP", description = "Allows you to see targets through walls.", category = ModuleCategory.RENDER)
 public class ESP extends Module {
 
@@ -84,36 +86,14 @@ public class ESP extends Module {
     @EventTarget
     public void onRender3D(Render3DEvent event) {
         final String mode = modeValue.get();
-
-        if (mode.equalsIgnoreCase("newbox")) {
-            Iterator<Entity> iterator = this.mc.theWorld.loadedEntityList.iterator();
-            while (iterator.hasNext()) {
-                Entity entity = iterator.next();
-                if (entity instanceof EntityItem || (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false))) {
-                    RenderUtils.updateView();
-                }
-            }
-        }
-        if (mode.equalsIgnoreCase("new2d")) {
-            Iterator<Entity> iterator = this.mc.theWorld.loadedEntityList.iterator();
-            while (iterator.hasNext()) {
-                Entity entity = iterator.next();
-                if (entity instanceof EntityItem || (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false))) {
-                    RenderUtils.updateView();
-                }
-            }
-        }
         for(final Entity entity : mc.theWorld.loadedEntityList) {
             if(entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false)) {
-                ScaledResolution sr = new ScaledResolution(this.mc);
-                double twoDscale = sr.getScaleFactor() / Math.pow(sr.getScaleFactor(), 2);
                 final EntityLivingBase entityLiving = (EntityLivingBase) entity;
                 final RenderManager renderManager = mc.getRenderManager();
                 final Timer timer = mc.timer;
                 final double posX = entityLiving.lastTickPosX + (entityLiving.posX - entityLiving.lastTickPosX) * timer.renderPartialTicks - renderManager.renderPosX;
                 final double posY = entityLiving.lastTickPosY + (entityLiving.posY - entityLiving.lastTickPosY) * timer.renderPartialTicks - renderManager.renderPosY;
                 final double posZ = entityLiving.lastTickPosZ + (entityLiving.posZ - entityLiving.lastTickPosZ) * timer.renderPartialTicks - renderManager.renderPosZ;
-                Iterator<Vec3> iterator2 = this.positions.iterator();
 
                 switch(mode.toLowerCase()) {
                     case "box":
@@ -126,6 +106,10 @@ public class ESP extends Module {
                     case "shadow":
                         RenderUtils.shadow(entityLiving, (double) posX, (double) posY, posZ, range.get(), 64,shadowgetColor(entityLiving).getRGB());
                         RenderUtils.cylinder(entityLiving, (double) posX, (double) posY, posZ, range.get(), 64,getColor(entityLiving).getRGB());
+                        break;
+                    case "new2d":
+                    case "newbox":
+                        RenderUtils.updateView();
                         break;
                 }
             }
@@ -189,9 +173,8 @@ public class ESP extends Module {
             ScaledResolution sr = new ScaledResolution(this.mc);
             double twoDscale = sr.getScaleFactor() / Math.pow(sr.getScaleFactor(), 2);
             GlStateManager.scale(twoDscale, twoDscale, twoDscale);
-            Iterator<Entity> iterator = this.mc.theWorld.loadedEntityList.iterator();
-            while (iterator.hasNext()) {
-                Entity entity = iterator.next();
+
+            for (Entity entity : mc.theWorld.loadedEntityList){
                 if (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false)) {
                     this.updatePositions(entity);
                     int maxLeft = Integer.MAX_VALUE;
@@ -226,8 +209,6 @@ public class ESP extends Module {
                     if (rect.get()){
                         this.drawnew(entity, maxLeft, maxTop, maxRight, maxBottom);
                     }
-
-
                 }
             }
             GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -238,9 +219,7 @@ public class ESP extends Module {
             ScaledResolution sr = new ScaledResolution(this.mc);
             double twoDscale = sr.getScaleFactor() / Math.pow(sr.getScaleFactor(), 2);
             GlStateManager.scale(twoDscale, twoDscale, twoDscale);
-            Iterator<Entity> iterator = this.mc.theWorld.loadedEntityList.iterator();
-            while (iterator.hasNext()) {
-                Entity entity = iterator.next();
+            for (Entity entity:mc.theWorld.loadedEntityList){
                 if (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false)) {
                     this.updatePositions(entity);
                     int maxLeft = Integer.MAX_VALUE;
@@ -269,13 +248,12 @@ public class ESP extends Module {
                     if (health.get()) {
                         this.drawHealth((EntityLivingBase) entity, maxLeft, maxTop, maxRight, maxBottom);
                     }
-                    if (armr.get()){
+                    if (armr.get()) {
                         this.drawArmor((EntityLivingBase) entity, maxLeft, maxTop, maxRight, maxBottom);
                     }
-                    if (rect.get()){
+                    if (rect.get()) {
                         this.drawnew(entity, maxLeft, maxTop, maxRight, maxBottom);
                     }
-
                 }
             }
             GL11.glEnable(GL11.GL_DEPTH_TEST);
@@ -481,7 +459,7 @@ public class ESP extends Module {
 
         RenderUtils.drawnewrect(left - 3.0f - MOVE, bottom, left - 1.0f - MOVE, top - 1f, new Color(25,25,25,150).getRGB());
 
-        RenderUtils.drawnewrect(left - 3.0f - MOVE, bottom, left - 1.0f - MOVE, top + height * (1.0f - healthPercent) - 1F, getHealthColor(entityLivingBase.getHealth(), entityLivingBase.getMaxHealth()));
+        RenderUtils.drawnewrect(left - 3.0f - MOVE, bottom, left - 1.0f - MOVE, top + height * (1.0f - healthPercent) - 1F, getHealthColor(entityLivingBase.getHealth(), entityLivingBase.getMaxHealth()).getRGB());
         //Right
         RenderUtils.drawnewrect(left - 3.0f - MOVE, bottom + 1f, left - 3.0f - MOVE - line, top - 2f, new Color(0,0,0,255).getRGB());
         //Left
@@ -496,16 +474,5 @@ public class ESP extends Module {
             	double h = (bottom - top) / 8;
             	Gui.drawRect(left - 3.0f - MOVE, top - 1f + i * h, left - 1.0f - MOVE, top - 2f + i * h, new Color(0,0,0,255).getRGB());
             }*/
-    }
-
-    public static int getHealthColor(float health, float maxHealth) {
-        float percentage = health / maxHealth;
-        if (percentage >= 0.75F) {
-            return new Color(0, 255, 0).getRGB();
-        } else if (percentage < 0.75 && percentage >= 0.25) {
-            return new Color(255, 255, 0).getRGB();
-        } else {
-            return new Color(255, 0, 0).getRGB();
-        }
     }
 }
