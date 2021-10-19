@@ -181,10 +181,10 @@ public class ESP extends Module {
                     int maxRight = Integer.MIN_VALUE;
                     int maxBottom = Integer.MIN_VALUE;
                     int maxTop = Integer.MAX_VALUE;
-                    Iterator<Vec3> iterator2 = this.positions.iterator();
+
                     boolean canEntityBeSeen = false;
-                    while (iterator2.hasNext()) {
-                        Vec3 screenPosition = RenderUtils.WorldToScreen(iterator2.next());
+                    for (Vec3 position : positions) {
+                        Vec3 screenPosition = RenderUtils.WorldToScreen(position);
                         if (screenPosition != null) {
                             if (screenPosition.zCoord >= 0.0 && screenPosition.zCoord < 1.0) {
                                 maxLeft = (int) Math.min(screenPosition.xCoord, maxLeft);
@@ -226,10 +226,10 @@ public class ESP extends Module {
                     int maxRight = Integer.MIN_VALUE;
                     int maxBottom = Integer.MIN_VALUE;
                     int maxTop = Integer.MAX_VALUE;
-                    Iterator<Vec3> iterator2 = this.positions.iterator();
+
                     boolean canEntityBeSeen = false;
-                    while (iterator2.hasNext()) {
-                        Vec3 screenPosition = RenderUtils.WorldToScreen(iterator2.next());
+                    for (Vec3 position : positions) {
+                        Vec3 screenPosition = RenderUtils.WorldToScreen(position);
                         if (screenPosition != null) {
                             if (screenPosition.zCoord >= 0.0 && screenPosition.zCoord < 1.0) {
                                 maxLeft = (int) Math.min(screenPosition.xCoord, maxLeft);
