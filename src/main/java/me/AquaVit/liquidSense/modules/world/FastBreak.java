@@ -20,7 +20,7 @@ import net.minecraft.util.EnumFacing;
 @ModuleInfo(name = "FastBreak", description = "Allows you to break blocks faster.", category = ModuleCategory.WORLD)
 public class FastBreak extends Module {
     private final ListValue modeValue = new ListValue("Mode", new String[]{"Normal", "SpeedMine"}, "SpeedMine");
-    private FloatValue breakSpeed = new FloatValue("BreakSpeed", 1.4F, 0.1F, 2F);
+    private FloatValue breakSpeed = new FloatValue("BreakSpeed", 1.4F, 1F, 2F);
 
     private boolean bzs = false;
     private float bzx = 0.0f;
@@ -55,8 +55,9 @@ public class FastBreak extends Module {
         }
         switch (modeValue.get()){
             case "Normal": {
-                if (mc.playerController.curBlockDamageMP > breakSpeed.get())
-                    mc.playerController.curBlockDamageMP = 1F;
+                float breakdamage = 2.1f - breakSpeed.get();
+                if (mc.playerController.curBlockDamageMP > breakdamage)
+                    mc.playerController.curBlockDamageMP = 1f;
                 /*
                 if (Fucker.currentDamage > breakDamage.get())
                     Fucker.currentDamage = 1F
