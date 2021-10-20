@@ -7,14 +7,11 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
 import me.AquaVit.liquidSense.modules.misc.Animations;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.Render3DEvent;
-import net.ccbluex.liquidbounce.event.UpdateModelEvent;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
 import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;
 import net.ccbluex.liquidbounce.utils.RotationUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
-import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -25,7 +22,6 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import net.ccbluex.liquidbounce.event.UpdateModelEvent;
 
 import java.util.UUID;
 

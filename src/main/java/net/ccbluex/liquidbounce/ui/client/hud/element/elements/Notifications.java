@@ -1,8 +1,5 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
-import kotlin.collections.CollectionsKt;
-import kotlin.jvm.internal.Intrinsics;
-import me.AquaVit.liquidSense.utils.render.Translate;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
@@ -11,10 +8,6 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
