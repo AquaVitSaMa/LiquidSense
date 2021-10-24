@@ -23,6 +23,7 @@ open class HUD : MinecraftInstance() {
 
     val elements = mutableListOf<Element>()
     var notifications = mutableListOf<Notification>()
+    var prints = mutableListOf<Print>()
 
     companion object {
 
@@ -44,7 +45,8 @@ open class HUD : MinecraftInstance() {
                 PlayerList::class.java,
                 SpeedGraph::class.java,
                 HeadLogo::class.java,
-                KeyBinds::class.java
+                KeyBinds::class.java,
+                Prints::class.java
         )
 
         /**
@@ -220,4 +222,13 @@ open class HUD : MinecraftInstance() {
      */
     fun removeNotification(notification: Notification) = notifications.remove(notification)
 
+    /**
+     * Add [Print]
+     */
+    fun addPrint(print: Print) = elements.any { it is Prints } && prints.add(print)
+
+    /**
+     * Remove [Print]
+     */
+    fun removePrint(print: Print) = prints.remove(print)
 }
