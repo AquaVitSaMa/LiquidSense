@@ -22,6 +22,8 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
 
+import static me.AquaVit.liquidSense.utils.module.Particles.roundToPlace;
+
 @ModuleInfo(name = "Particle", description = "Particle", category = ModuleCategory.RENDER)
 public class Particle extends Module {
     private HashMap<EntityLivingBase, Float> healthMap = new HashMap<EntityLivingBase, Float>();
@@ -111,13 +113,6 @@ public class Particle extends Module {
         GL11.glDisable(2848);
         GL11.glHint(3154, 4352);
         GL11.glHint(3155, 4352);
-    }
-
-    public static double roundToPlace(double p_roundToPlace_0_, int p_roundToPlace_2_) {
-        if (p_roundToPlace_2_ < 0) {
-            throw new IllegalArgumentException();
-        }
-        return new BigDecimal(p_roundToPlace_0_).setScale(p_roundToPlace_2_, RoundingMode.HALF_UP).doubleValue();
     }
 
     @EventTarget

@@ -39,7 +39,7 @@ public class Radar extends Element {
     private FloatValue viewDistanceValue = new FloatValue("View Distance", 4F, 0.5F, 32F);
     private ListValue modeValue = new ListValue("Mode",new String[]{"Normal", "MiniMap"}, "MiniMap");
 
-    private FloatValue playerSizeValue = new FloatValue("Player Size", 2.0F, 0.5f, 20F);
+    private FloatValue playerSizeValue = new FloatValue("Player Size", 8.0F, 0.5f, 20F);
     private FloatValue fovSizeValue = new FloatValue("FOV Size", 10F, 0F, 50F);
     private FloatValue fovAngleValue = new FloatValue("FOV Angle", 70F, 30F, 160F);
 
