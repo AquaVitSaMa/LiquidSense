@@ -122,7 +122,8 @@ public class Particle extends Module {
 
     @EventTarget
     public void onUpdate(UpdateEvent event) {
-        this.particles.forEach(this::update);
+        ArrayList<Particles> copiedList = new ArrayList<>(this.particles);
+        copiedList.forEach(this::update);
     }
 
     private void update(Particles update) {
