@@ -102,6 +102,11 @@ open class HUD : MinecraftInstance() {
 
     }
 
+    fun livingupdate(){
+        for (element in elements)
+            element.livingupdateElement()
+    }
+
     /**
      * Handle mouse click
      */

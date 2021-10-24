@@ -13,8 +13,11 @@ import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.ChatComponentText;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static me.AquaVit.liquidSense.utils.module.Particles.roundToPlace;
 
 @ElementInfo(name = "Print")
 public class Prints extends Element {
@@ -26,6 +29,7 @@ public class Prints extends Element {
     }
 
     public Stream<Print> print;
+    private HashMap<EntityLivingBase, Float> healthMap = new HashMap<EntityLivingBase, Float>();
 
     @Nullable
     @Override
@@ -51,9 +55,30 @@ public class Prints extends Element {
             }
             exampleNotification.fadeState = Print.FadeState.STAY;
             exampleNotification.x = ((float) this.exampleNotification.textLength + 8.0F);
-            return new Border(-exampleNotification.x + 12 + exampleNotification.textLength, -29, -exampleNotification.x - 35, 11F * LiquidBounce.INSTANCE.getHud().getNotifications().size());
+            return new Border(-exampleNotification.x + 12 + exampleNotification.textLength, 0, -exampleNotification.x - 35, 20 + 11F * LiquidBounce.INSTANCE.getHud().getNotifications().size());
         }
         return new Border(0f , 0f , 0f , 0f);
+    }
+
+    @Override
+    public void livingupdateElement(){
+        Aura a = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+        EntityLivingBase entity = a.getTarget();
+        if (entity != null && entity != mc.thePlayer) {
+            if (!this.healthMap.containsKey(entity)) {
+                this.healthMap.put(entity, entity.getHealth());
+            }
+            float floatValue = this.healthMap.get(entity);
+            float health = entity.getHealth();
+            String name = entity.getName();
+            if (floatValue != health) {
+                int remaining = health - (floatValue - health) < 0 ? 0 : (int) Math.floor(health - (floatValue - health));
+                String text = "Hurt " + name + " for " + roundToPlace(floatValue - health, 1) + " hp " + "(" + remaining + " remaining).";
+                LiquidBounce.hud.addPrint(new Print(text,3000, Print.Type.success));
+                this.healthMap.remove(entity);
+                this.healthMap.put(entity, entity.getHealth());
+            }
+        }
     }
 }
 

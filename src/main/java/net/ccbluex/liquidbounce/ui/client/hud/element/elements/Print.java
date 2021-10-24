@@ -67,11 +67,11 @@ public class Print {
                 switch (type){
                     case info:
                         Fonts.csgo40.drawString(typemsg, -width - 29, y - 12f, new Color(0, 131, 193, (150 - (int) removeingtranslate.getX())).getRGB());
-                        Fonts.font40.drawString(message, -width - 29 + (Fonts.csgo40.getStringWidth(typemsg) * 2), y - 13f, new Color(255, 255, 255, (150 - (int) removeingtranslate.getX())).getRGB());
+                        Fonts.font30.drawString(message, -width - 29 + (Fonts.csgo40.getStringWidth(typemsg) * 2), y - 13f, new Color(255, 255, 255, (150 - (int) removeingtranslate.getX())).getRGB());
                         break;
                     case error:
                     case success:
-                        Fonts.csgo40.drawString(typemsg, -width - 32, y - 12f, new Color(0, 131, 193, (150 - (int) removeingtranslate.getX())).getRGB());
+                        Fonts.csgo40.drawString(typemsg, -width - 32, y - 13f, new Color(0, 131, 193, (150 - (int) removeingtranslate.getX())).getRGB());
                         Fonts.font40.drawString(message, -width - 32 + Fonts.csgo40.getStringWidth(typemsg), y - 13f, new Color(255, 255, 255, (150 - (int) removeingtranslate.getX())).getRGB());
                         break;
                     case state:

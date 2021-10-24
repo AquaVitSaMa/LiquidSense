@@ -59,6 +59,11 @@ public class HUD extends Module {
     }
 
     @EventTarget
+    public void onLivingUpdate(final EventLivingUpdate event){
+        LiquidBounce.hud.livingupdate();
+    }
+
+    @EventTarget
     public void onKey(final KeyEvent event) {
         LiquidBounce.hud.handleKey('a', event.getKey());
     }

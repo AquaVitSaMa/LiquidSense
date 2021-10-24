@@ -106,6 +106,10 @@ abstract class Element(var x: Double = 2.0, var y: Double = 2.0, scale: Float = 
      */
     open fun updateElement() {}
 
+    /**
+     * LivingUpdate element
+     */
+    open fun livingupdateElement(){}
 
     /**
      * Check if [x] and [y] is in element border
