@@ -105,7 +105,7 @@ public class ScoreboardElement extends Element {
                 Gui.drawRect(l1 - 2, -2, 5, maxHeight + fontRenderer.FONT_HEIGHT + fontRenderer.FONT_HEIGHT /2, backColor.getRGB());
             }
 
-            RenderUtils.drawRoundedRect(l1 - 1.7F, -6.5F - Fonts.csgo40.FONT_HEIGHT - (float)fontRenderer.FONT_HEIGHT /2, (maxWidth + 10) *getScale(), 1.5F + (float)fontRenderer.FONT_HEIGHT /2 + Fonts.csgo40.FONT_HEIGHT ,1.5F,
+            RenderUtils.drawRoundedRect(l1 - 1.7F, -6.5F - Fonts.csgo40.FONT_HEIGHT - (float)fontRenderer.FONT_HEIGHT /2, (maxWidth + 10), 1.5F + (float)fontRenderer.FONT_HEIGHT /2 + Fonts.csgo40.FONT_HEIGHT ,1.5F,
                     new Color(16, 25, 32, 200).getRGB(), 1F,new Color(16, 25, 32, 200).getRGB());
             //RenderUtils.drawBorderedRect(l1 - 2, -10F - Fonts.csgo40.FONT_HEIGHT, 5, -2, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
             Fonts.csgo40.drawString("N", l1 + 2F, -(Fonts.csgo40.FONT_HEIGHT + 2.5F + (float)fontRenderer.FONT_HEIGHT /2), new Color(0, 131, 193).getRGB(), false);
