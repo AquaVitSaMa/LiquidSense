@@ -1,20 +1,10 @@
 package me.aquavitt.liquidssense;
 
-import me.AquaVit.liquidSense.modules.misc.*;
-import me.AquaVit.liquidSense.modules.movement.*;
-import me.AquaVit.liquidSense.modules.combat.*;
-import me.AquaVit.liquidSense.modules.render.*;
-import me.AquaVit.liquidSense.modules.world.*;
-import me.aquavitt.liquidssense.modules.combat.AutoApple;
 import me.aquavitt.liquidssense.modules.misc.*;
-import me.aquavitt.liquidssense.modules.movement.Jesus;
-import me.aquavitt.liquidssense.modules.movement.LastestHypixelFly;
-import me.aquavitt.liquidssense.modules.movement.Stair;
-import me.aquavitt.liquidssense.modules.movement.TargetStrafe;
+import me.aquavitt.liquidssense.modules.movement.*;
+import me.aquavitt.liquidssense.modules.combat.*;
 import me.aquavitt.liquidssense.modules.render.*;
-import me.aquavitt.liquidssense.modules.world.FastBreak;
-import me.aquavitt.liquidssense.modules.world.LightningCheck;
-import me.aquavitt.liquidssense.modules.world.Tp;
+import me.aquavitt.liquidssense.modules.world.*;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import org.lwjgl.opengl.Display;

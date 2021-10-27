@@ -14,7 +14,7 @@ import net.ccbluex.liquidbounce.utils.OtherRotationUtils
 import net.ccbluex.liquidbounce.utils.RaycastUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
 import me.aquavitt.liquidssense.utils.misc.RandomUtils
-import me.AquaVit.liquidSense.utils.extensions.PlayerExtensionUtils
+import me.aquavitt.liquidssense.utils.extensions.PlayerExtensionUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils
 import net.ccbluex.liquidbounce.value.BoolValue
