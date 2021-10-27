@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.item;
 
-import me.aquavitt.liquidssense.modules.render.EveryThingBlock;
+import me.aquavit.liquidsense.modules.render.EveryThingBlock;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
 import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
@@ -31,13 +31,13 @@ import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import me.aquavitt.liquidssense.modules.misc.Animations;
+import me.aquavit.liquidsense.modules.misc.Animations;
 import org.lwjgl.opengl.GL11;
 import net.ccbluex.liquidbounce.utils.timer.MSTimer;
-import me.aquavitt.liquidssense.modules.render.ItemRotate;
+import me.aquavit.liquidsense.modules.render.ItemRotate;
 
-import static me.aquavitt.liquidssense.modules.render.ItemRotate.ItemRenderRotate;
-import static me.aquavitt.liquidssense.modules.misc.Animations.ItemRenderRotation;
+import static me.aquavit.liquidsense.modules.render.ItemRotate.ItemRenderRotate;
+import static me.aquavit.liquidsense.modules.misc.Animations.ItemRenderRotation;
 
 @Mixin(ItemRenderer.class)
 @SideOnly(Side.CLIENT)

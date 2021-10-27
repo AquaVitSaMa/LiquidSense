@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement.speeds.aquavit;
 
-import me.aquavitt.liquidssense.utils.module.Particles.roundToPlace
+import me.aquavit.liquidsense.utils.module.Particles.roundToPlace
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventState
 import net.ccbluex.liquidbounce.event.JumpEvent
@@ -8,7 +8,7 @@ import net.ccbluex.liquidbounce.event.MotionEvent
 import net.ccbluex.liquidbounce.event.MoveEvent
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMode
-import me.aquavitt.liquidssense.utils.entity.MovementUtils.*
+import me.aquavit.liquidsense.utils.entity.MovementUtils.*
 import java.lang.Math.max
 import java.lang.Math.sqrt
 

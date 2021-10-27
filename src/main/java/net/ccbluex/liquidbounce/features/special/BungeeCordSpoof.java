@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.features.special;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.event.PacketEvent;
-import me.aquavitt.liquidssense.utils.mc.MinecraftInstance;
+import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.minecraft.network.EnumConnectionState;
 import net.minecraft.network.Packet;
 import net.minecraft.network.handshake.client.C00Handshake;

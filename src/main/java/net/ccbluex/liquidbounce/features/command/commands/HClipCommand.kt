@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.features.command.commands
 
 import net.ccbluex.liquidbounce.features.command.Command
-import me.aquavitt.liquidssense.utils.entity.MovementUtils
+import me.aquavit.liquidsense.utils.entity.MovementUtils
 
 class HClipCommand : Command("hclip") {
     /**

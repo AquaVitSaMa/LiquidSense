@@ -18,7 +18,7 @@ import net.ccbluex.liquidbounce.file.FileManager;
 import net.ccbluex.liquidbounce.ui.client.GuiBackground;
 import net.ccbluex.liquidbounce.ui.client.altmanager.sub.GuiDonatorCape;
 import net.ccbluex.liquidbounce.ui.client.altmanager.sub.altgenerator.GuiTheAltening;
-import me.aquavitt.liquidssense.utils.entity.EntityUtils;
+import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import net.ccbluex.liquidbounce.value.Value;
 
 import java.io.*;

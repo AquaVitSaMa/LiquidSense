@@ -1,16 +1,16 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
-import me.aquavitt.liquidssense.utils.render.BlurBuffer;
+import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.misc.Teams;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import me.aquavitt.liquidssense.utils.entity.EntityUtils;
-import me.aquavitt.liquidssense.utils.render.MiniMapRegister;
+import me.aquavit.liquidsense.utils.entity.EntityUtils;
+import me.aquavit.liquidsense.utils.render.MiniMapRegister;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
-import me.aquavitt.liquidssense.utils.render.SafeVertexBuffer;
+import me.aquavit.liquidsense.utils.render.SafeVertexBuffer;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.ListValue;
 import net.minecraft.client.Minecraft;

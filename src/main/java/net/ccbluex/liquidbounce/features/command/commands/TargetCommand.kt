@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.features.command.commands
 
 import net.ccbluex.liquidbounce.features.command.Command
-import me.aquavitt.liquidssense.utils.entity.EntityUtils
+import me.aquavit.liquidsense.utils.entity.EntityUtils
 
 class TargetCommand : Command("target") {
     /**

@@ -5,16 +5,16 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
-import me.aquavitt.liquidssense.utils.misc.RandomUtils
+import me.aquavit.liquidsense.utils.misc.RandomUtils
 import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.StrafeEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import me.aquavitt.liquidssense.utils.entity.EntityUtils
+import me.aquavit.liquidsense.utils.entity.EntityUtils
 import net.ccbluex.liquidbounce.utils.Rotation
 import net.ccbluex.liquidbounce.utils.RotationUtils
-import me.aquavitt.liquidssense.utils.extensions.PlayerExtensionUtils
+import me.aquavit.liquidsense.utils.extensions.PlayerExtensionUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue

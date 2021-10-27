@@ -5,8 +5,8 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
-import me.aquavitt.liquidssense.modules.render.ItemPhysic;
-import me.aquavitt.liquidssense.utils.item.ItemPhysicUtil;
+import me.aquavit.liquidsense.modules.render.ItemPhysic;
+import me.aquavit.liquidsense.utils.item.ItemPhysicUtil;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.render.Chams;
 import net.minecraft.client.renderer.GlStateManager;

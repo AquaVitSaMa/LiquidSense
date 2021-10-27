@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.ui.client.clickgui.style;
 import net.ccbluex.liquidbounce.ui.client.clickgui.Panel;
 import net.ccbluex.liquidbounce.ui.client.clickgui.elements.ButtonElement;
 import net.ccbluex.liquidbounce.ui.client.clickgui.elements.ModuleElement;
-import me.aquavitt.liquidssense.utils.mc.MinecraftInstance;
+import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 
 public abstract class Style extends MinecraftInstance {
 

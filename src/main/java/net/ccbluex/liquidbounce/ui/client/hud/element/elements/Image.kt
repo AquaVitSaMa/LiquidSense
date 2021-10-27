@@ -9,8 +9,8 @@ import com.google.gson.JsonElement
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
-import me.aquavitt.liquidssense.utils.misc.MiscUtils
-import me.aquavitt.liquidssense.utils.misc.RandomUtils
+import me.aquavit.liquidsense.utils.misc.MiscUtils
+import me.aquavit.liquidsense.utils.misc.RandomUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.TextValue
 import net.minecraft.client.renderer.texture.DynamicTexture

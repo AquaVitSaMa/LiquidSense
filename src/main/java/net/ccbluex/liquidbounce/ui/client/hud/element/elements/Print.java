@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
-import me.aquavitt.liquidssense.utils.render.Translate;
+import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.renderer.GlStateManager;

@@ -9,7 +9,7 @@ import net.ccbluex.liquidbounce.event.JumpEvent;
 import net.ccbluex.liquidbounce.event.MotionEvent;
 import net.ccbluex.liquidbounce.event.MoveEvent;
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMode;
-import me.aquavitt.liquidssense.utils.misc.RandomUtils;
+import me.aquavit.liquidsense.utils.misc.RandomUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.potion.Potion;
 

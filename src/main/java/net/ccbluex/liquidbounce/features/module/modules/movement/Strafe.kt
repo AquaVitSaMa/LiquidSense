@@ -11,7 +11,7 @@ import net.ccbluex.liquidbounce.event.MotionEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import me.aquavitt.liquidssense.utils.entity.MovementUtils
+import me.aquavit.liquidsense.utils.entity.MovementUtils
 
 @ModuleInfo(name = "Strafe", description = "Allows you to freely move in mid air.", category = ModuleCategory.MOVEMENT)
 class Strafe : Module() {

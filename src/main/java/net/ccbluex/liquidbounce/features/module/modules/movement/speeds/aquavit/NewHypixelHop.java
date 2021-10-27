@@ -4,7 +4,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed;
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMode;
-import me.aquavitt.liquidssense.utils.entity.MovementUtils;
+import me.aquavit.liquidsense.utils.entity.MovementUtils;
 
 import java.util.List;
 

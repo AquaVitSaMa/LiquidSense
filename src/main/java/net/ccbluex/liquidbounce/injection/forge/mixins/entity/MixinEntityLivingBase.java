@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
-import me.aquavitt.liquidssense.modules.misc.Animations;
+import me.aquavit.liquidsense.modules.misc.Animations;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventLivingUpdate;
 import net.ccbluex.liquidbounce.event.JumpEvent;

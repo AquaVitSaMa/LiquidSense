@@ -14,7 +14,7 @@ import java.util.HashMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import static me.aquavitt.liquidssense.utils.module.Particles.roundToPlace;
+import static me.aquavit.liquidsense.utils.module.Particles.roundToPlace;
 
 @ElementInfo(name = "Print")
 public class Prints extends Element {
@@ -27,7 +27,6 @@ public class Prints extends Element {
 
     public Stream<Print> print;
     private HashMap<EntityLivingBase, Float> healthMap = new HashMap<EntityLivingBase, Float>();
-
     @Nullable
     @Override
     public Border drawElement() {
@@ -69,7 +68,7 @@ public class Prints extends Element {
             float health = entity.getHealth();
             String name = entity.getName();
             if (floatValue != health) {
-                int remaining = health - (floatValue - health) < 0 ? 0 : (int) Math.floor(health - (floatValue - health));
+                int remaining = floatValue - (floatValue - health) < 0 ? 0 : (int) Math.floor(floatValue - (floatValue - health));
                 String text = "Hurt " + name + " for " + roundToPlace(floatValue - health, 1) + " hp " + "(" + remaining + " remaining).";
                 LiquidBounce.hud.addPrint(new Print(text,3000, Print.Type.success));
                 this.healthMap.remove(entity);

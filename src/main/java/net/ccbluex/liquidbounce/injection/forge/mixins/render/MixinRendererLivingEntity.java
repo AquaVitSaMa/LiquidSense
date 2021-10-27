@@ -5,8 +5,8 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
-import me.aquavitt.liquidssense.utils.entity.EntityUtils;
-import me.aquavitt.liquidssense.utils.render.OutlineUtils;
+import me.aquavit.liquidsense.utils.entity.EntityUtils;
+import me.aquavit.liquidsense.utils.render.OutlineUtils;
 import com.google.common.collect.Lists;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.SommtheEvent;

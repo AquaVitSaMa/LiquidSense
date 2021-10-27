@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.command.commands
 
-import me.aquavitt.liquidssense.modules.world.Tp
+import me.aquavit.liquidsense.modules.world.Tp
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.features.command.Command
 import java.lang.Float

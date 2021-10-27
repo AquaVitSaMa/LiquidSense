@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.utils;
 
-import me.aquavitt.liquidssense.utils.mc.MinecraftInstance;
+import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.minecraft.util.MathHelper;
 
 import javax.vecmath.Vector3d;
