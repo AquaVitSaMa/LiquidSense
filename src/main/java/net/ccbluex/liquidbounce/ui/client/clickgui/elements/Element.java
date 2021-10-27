@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.ui.client.clickgui.elements;
 
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance;
+import me.aquavitt.liquidssense.utils.mc.MinecraftInstance;
 
 public class Element extends MinecraftInstance {
 

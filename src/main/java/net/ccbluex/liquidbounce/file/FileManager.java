@@ -10,7 +10,7 @@ import com.google.gson.GsonBuilder;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.file.configs.*;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance;
+import me.aquavitt.liquidssense.utils.mc.MinecraftInstance;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;

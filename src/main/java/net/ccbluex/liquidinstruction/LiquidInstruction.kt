@@ -8,7 +8,7 @@ import javax.swing.WindowConstants
 
 fun main() {
     // Setup instruction frame
-    val frame = JFrame("LiquidSense | Install Instruction.")
+    val frame = JFrame("LiquidSense | Instruction.")
     frame.defaultCloseOperation = WindowConstants.EXIT_ON_CLOSE
     frame.layout = BorderLayout()
     frame.isResizable = false

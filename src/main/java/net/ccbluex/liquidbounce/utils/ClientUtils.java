@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.utils;
 
 import com.google.gson.JsonObject;
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance;
+import me.aquavitt.liquidssense.utils.mc.MinecraftInstance;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.network.NetworkManager;
 import net.minecraft.network.login.client.C01PacketEncryptionResponse;

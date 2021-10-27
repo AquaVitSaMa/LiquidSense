@@ -8,10 +8,10 @@ package net.ccbluex.liquidbounce
 import CommandManager
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
-import me.AquaVit.liquidSense.LiquidSense
-import me.AquaVit.liquidSense.utils.forge.BlocksTab
-import me.AquaVit.liquidSense.utils.forge.ExploitsTab
-import me.AquaVit.liquidSense.utils.forge.HeadsTab
+import me.aquavitt.liquidssense.LiquidSense
+import me.aquavitt.liquidssense.utils.forge.BlocksTab
+import me.aquavitt.liquidssense.utils.forge.ExploitsTab
+import me.aquavitt.liquidssense.utils.forge.HeadsTab
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent
 import net.ccbluex.liquidbounce.event.EventManager
 import net.ccbluex.liquidbounce.features.module.ModuleManager

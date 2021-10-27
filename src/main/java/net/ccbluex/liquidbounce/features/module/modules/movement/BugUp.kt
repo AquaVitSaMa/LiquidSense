@@ -11,9 +11,9 @@ import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import me.AquaVit.liquidSense.utils.entity.MovementUtils
+import me.aquavitt.liquidssense.utils.entity.MovementUtils
 import net.ccbluex.liquidbounce.utils.block.BlockUtils
-import me.AquaVit.liquidSense.utils.entity.FallingPlayer
+import me.aquavitt.liquidssense.utils.entity.FallingPlayer
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue

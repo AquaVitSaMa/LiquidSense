@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.utils;
 
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance;
+import me.aquavitt.liquidssense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.Listenable;

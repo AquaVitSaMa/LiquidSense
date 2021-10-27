@@ -9,12 +9,12 @@ import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot
 import net.ccbluex.liquidbounce.features.module.modules.misc.Teams
 import net.ccbluex.liquidbounce.features.module.modules.player.Blink
 import net.ccbluex.liquidbounce.features.module.modules.render.FreeCam
-import me.AquaVit.liquidSense.utils.entity.EntityUtils
+import me.aquavitt.liquidssense.utils.entity.EntityUtils
 import net.ccbluex.liquidbounce.utils.OtherRotationUtils
 import net.ccbluex.liquidbounce.utils.RaycastUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
-import me.AquaVit.liquidSense.utils.misc.RandomUtils
-import net.ccbluex.liquidbounce.utils.extensions.PlayerExtensionUtils
+import me.aquavitt.liquidssense.utils.misc.RandomUtils
+import me.AquaVit.liquidSense.utils.extensions.PlayerExtensionUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils
 import net.ccbluex.liquidbounce.value.BoolValue

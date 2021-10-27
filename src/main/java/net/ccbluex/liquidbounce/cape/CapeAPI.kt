@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.cape
 import com.google.gson.JsonParser
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.utils.ClientUtils
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance
+import me.aquavitt.liquidssense.utils.mc.MinecraftInstance
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils
 import net.minecraft.client.renderer.IImageBuffer
 import net.minecraft.client.renderer.ThreadDownloadImageData

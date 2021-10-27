@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.utils;
 
 import com.google.common.base.Predicates;
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance;
+import me.aquavitt.liquidssense.utils.mc.MinecraftInstance;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.*;
 import net.minecraft.util.Vec3;

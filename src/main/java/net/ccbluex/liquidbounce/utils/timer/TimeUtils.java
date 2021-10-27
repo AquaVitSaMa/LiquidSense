@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.utils.timer;
 
-import me.AquaVit.liquidSense.utils.misc.RandomUtils;
+import me.aquavitt.liquidssense.utils.misc.RandomUtils;
 
 public final class TimeUtils {
     private long lastMS;

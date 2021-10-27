@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.utils
 
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance
+import me.aquavitt.liquidssense.utils.mc.MinecraftInstance
 import net.ccbluex.liquidbounce.event.StrafeEvent
 import net.ccbluex.liquidbounce.utils.block.PlaceInfo
 import net.minecraft.entity.player.EntityPlayer

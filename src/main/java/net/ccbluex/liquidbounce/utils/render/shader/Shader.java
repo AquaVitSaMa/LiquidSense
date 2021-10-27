@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.utils.render.shader;
 
 import net.ccbluex.liquidbounce.utils.ClientUtils;
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance;
+import me.aquavitt.liquidssense.utils.mc.MinecraftInstance;
 import org.apache.commons.io.IOUtils;
 import org.lwjgl.opengl.*;
 

@@ -3,7 +3,7 @@ package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import kotlin.ranges.RangesKt;
-import me.AquaVit.liquidSense.utils.render.BlurBuffer;
+import me.aquavitt.liquidssense.utils.render.BlurBuffer;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;

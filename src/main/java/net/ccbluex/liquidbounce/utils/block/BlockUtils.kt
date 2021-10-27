@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.utils.block
 
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance
+import me.aquavitt.liquidssense.utils.mc.MinecraftInstance
 import net.minecraft.block.Block
 import net.minecraft.block.material.Material
 import net.minecraft.block.state.IBlockState
