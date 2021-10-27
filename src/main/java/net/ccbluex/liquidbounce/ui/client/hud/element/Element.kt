@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.ui.client.hud.element
 
-import net.ccbluex.liquidbounce.utils.MinecraftInstance
+import me.AquaVit.liquidSense.utils.mc.MinecraftInstance
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.Value
 import net.minecraft.client.gui.ScaledResolution

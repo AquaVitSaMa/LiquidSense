@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.utils
 
+import me.AquaVit.liquidSense.utils.mc.MinecraftInstance
 import net.ccbluex.liquidbounce.event.StrafeEvent
 import net.ccbluex.liquidbounce.utils.block.PlaceInfo
 import net.minecraft.entity.player.EntityPlayer
@@ -14,7 +15,7 @@ import net.minecraft.util.Vec3
 /**
  * Rotations
  */
-data class Rotation(var yaw: Float, var pitch: Float) {
+data class Rotation(var yaw: Float, var pitch: Float) : MinecraftInstance() {
 
     /**
      * Set rotations to [player]
@@ -23,7 +24,7 @@ data class Rotation(var yaw: Float, var pitch: Float) {
         if (yaw.isNaN() || pitch.isNaN())
             return
 
-        fixedSensitivity(MinecraftInstance.mc.gameSettings.mouseSensitivity)
+        fixedSensitivity(mc.gameSettings.mouseSensitivity)
 
         player.rotationYaw = yaw
         player.rotationPitch = pitch
@@ -54,7 +55,7 @@ data class Rotation(var yaw: Float, var pitch: Float) {
 
 
     fun applyStrafeToPlayer(event: StrafeEvent) {
-        val player = MinecraftInstance.mc.thePlayer
+        val player = mc.thePlayer
         val dif = ((MathHelper.wrapAngleTo180_float(player.rotationYaw - this.yaw
                 - 23.5f - 135)
                 + 180) / 45).toInt()

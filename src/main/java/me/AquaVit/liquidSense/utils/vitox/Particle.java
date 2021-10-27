@@ -1,12 +1,13 @@
-package net.vitox;
+package me.AquaVit.liquidSense.utils.vitox;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.vitox.particle.util.RenderUtils;
 
 import java.util.Random;
+
+import static me.AquaVit.liquidSense.utils.render.ParticleUtils.connectPoints;
 
 /**
  * Particle API
@@ -42,7 +43,7 @@ class Particle {
     }
 
     void connect(float x, float y) {
-        RenderUtils.connectPoints(getX(), getY(), x, y);
+        connectPoints(getX(), getY(), x, y);
     }
 
     public int getHeight() {

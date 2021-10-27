@@ -7,7 +7,7 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.ccbluex.liquidbounce.utils.EntityUtils;
+import me.AquaVit.liquidSense.utils.entity.EntityUtils;
 import me.AquaVit.liquidSense.utils.render.MiniMapRegister;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import me.AquaVit.liquidSense.utils.render.SafeVertexBuffer;

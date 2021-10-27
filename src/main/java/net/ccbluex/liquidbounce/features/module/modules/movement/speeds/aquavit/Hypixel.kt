@@ -8,7 +8,7 @@ import net.ccbluex.liquidbounce.event.MotionEvent
 import net.ccbluex.liquidbounce.event.MoveEvent
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMode
-import net.ccbluex.liquidbounce.utils.MovementUtils.*
+import me.AquaVit.liquidSense.utils.entity.MovementUtils.*
 import java.lang.Math.max
 import java.lang.Math.sqrt
 
@@ -82,7 +82,7 @@ class Hypixel : SpeedMode("Hypixel") {
                     }
                 }
                 speed = max(speed, getBaseMoveSpeed())
-                setMotion(e, speed, 1.0)
+                setMotion(e, speed)
 
                 if (isMoving()) {
                     ++stage
@@ -99,7 +99,7 @@ class Hypixel : SpeedMode("Hypixel") {
                 } else stage = 0
 
                 val speed = (getHypixelSpeed(stage) + 0.0331) * roundToPlace(speedModule.movementSpeedValue.get(), 2) * 0.98
-                setMotion(e, speed, 1.0)
+                setMotion(e, speed)
             }
         }
     }

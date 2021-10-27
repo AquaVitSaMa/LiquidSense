@@ -19,7 +19,7 @@ import net.minecraft.network.play.client.C0FPacketConfirmTransaction;
 import net.minecraft.network.play.client.C13PacketPlayerAbilities;
 import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 
-import static net.ccbluex.liquidbounce.utils.MovementUtils.getMaxFallDist;
+import static me.AquaVit.liquidSense.utils.entity.MovementUtils.getMaxFallDist;
 
 @ModuleInfo(name = "Tp",description = "Allows you to teleport around.", category = ModuleCategory.WORLD,array = false)
 public class Tp extends Module {

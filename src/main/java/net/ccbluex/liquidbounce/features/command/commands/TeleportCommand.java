@@ -9,7 +9,7 @@ import net.ccbluex.liquidbounce.features.command.Command;
 import net.ccbluex.liquidbounce.utils.AStarCustomPathFinder;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.CustomVec3;
-import net.ccbluex.liquidbounce.utils.MovementUtils;
+import me.AquaVit.liquidSense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

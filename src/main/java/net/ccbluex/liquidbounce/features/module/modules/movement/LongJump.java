@@ -1,22 +1,16 @@
-/*
- * LiquidBounce Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/CCBlueX/LiquidBounce/
- */
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.utils.MovementUtils;
+import me.AquaVit.liquidSense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.utils.timer.MSTimer;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
 import net.ccbluex.liquidbounce.value.ListValue;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.EnumFacing;
 
 @ModuleInfo(name = "LongJump", description = "Allows you to jump further.", category = ModuleCategory.MOVEMENT)
@@ -78,7 +72,7 @@ public class LongJump extends Module {
         if (modeValue.get().equalsIgnoreCase("watchdog")){
             mc.timer.timerSpeed = 0.6F;
             delayTimer.reset();
-            speed = MovementUtils.LongJumpMoveSpeed();
+            speed = MovementUtils.getBaseMoveSpeed();
             downTicks = 0;
         }
 
@@ -196,16 +190,16 @@ public class LongJump extends Module {
 
                 if (stage == 1 && MovementUtils.isMoving()) {
                     stage = 2;
-                    speed = (1.38 * MovementUtils.LongJumpMoveSpeed() - 0.01) / 1.6;
+                    speed = (1.38 * MovementUtils.getBaseMoveSpeed() - 0.01) / 1.6;
                 } else if (stage == 2 && mc.thePlayer.onGround && mc.thePlayer.isCollidedVertically) {
                     stage = 3;
                     event.setX(0);
                     event.setZ(0);
-                    event.setY(mc.thePlayer.motionY = (0.423 + MovementUtils.LongJumpEffect() * 0.09));
+                    event.setY(mc.thePlayer.motionY = (0.423 + MovementUtils.getJumpEffect() * 0.09));
                     speed *= 2.149;
                 } else if (stage == 3) {
                     stage = 4;
-                    final double difference = 0.64 * (lastDist - MovementUtils.LongJumpMoveSpeed());
+                    final double difference = 0.64 * (lastDist - MovementUtils.getBaseMoveSpeed());
                     speed = (lastDist - difference) * 1.92;
                 } else {
                     if (mc.thePlayer.motionY < 0 && mc.thePlayer.fallDistance <= 1.2) {
@@ -214,11 +208,11 @@ public class LongJump extends Module {
                     }
                     speed = lastDist - lastDist / 159.0;
                 }
-                speed = Math.max(speed, MovementUtils.LongJumpMoveSpeed());
+                speed = Math.max(speed, MovementUtils.getBaseMoveSpeed());
                 if (speed > 0.7) {
                     speed = 0.7 - Math.random() / 50;
                 }
-                MovementUtils.setMoveSpeed(event, speed * 0.1 * dns.get());
+                MovementUtils.setMotion(event, speed * 0.1 * dns.get());
             }
         }
     }

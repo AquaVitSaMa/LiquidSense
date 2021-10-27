@@ -9,7 +9,7 @@ import com.google.gson.JsonElement
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
-import net.ccbluex.liquidbounce.utils.misc.MiscUtils
+import me.AquaVit.liquidSense.utils.misc.MiscUtils
 import me.AquaVit.liquidSense.utils.misc.RandomUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.TextValue
