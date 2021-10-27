@@ -40,7 +40,6 @@ public class LiquidSense {
         liquidSenseModules.add(FastBreak.class);
         liquidSenseModules.add(ItemPhysic.class);
         liquidSenseModules.add(Ambience.class);
-        liquidSenseModules.add(PlayerFace.class);
         liquidSenseModules.add(EnchantEffect.class);
         liquidSenseModules.add(Animations.class);
         liquidSenseModules.add(ItemRotate.class);
