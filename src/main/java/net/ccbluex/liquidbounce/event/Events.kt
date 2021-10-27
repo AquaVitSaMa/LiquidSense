@@ -126,9 +126,7 @@ class SlientStealerEvent() : CancellableEvent()
 /**
  * Called when receive or send a packet
  */
-class PacketEvent(val packet: Packet<*>) : CancellableEvent()
-
-class EventPacketReceive(val packet: Packet<*>) : CancellableEvent()
+class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableEvent()
 
 /**
  * Called when a block tries to push you
