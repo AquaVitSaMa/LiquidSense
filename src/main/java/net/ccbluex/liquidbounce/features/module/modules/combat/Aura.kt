@@ -13,8 +13,8 @@ import me.AquaVit.liquidSense.utils.entity.EntityUtils
 import net.ccbluex.liquidbounce.utils.OtherRotationUtils
 import net.ccbluex.liquidbounce.utils.RaycastUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
-import net.ccbluex.liquidbounce.utils.extensions.getDistanceToEntityBox
 import me.AquaVit.liquidSense.utils.misc.RandomUtils
+import net.ccbluex.liquidbounce.utils.extensions.PlayerExtensionUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils
 import net.ccbluex.liquidbounce.value.BoolValue
@@ -439,7 +439,7 @@ class Aura : Module() {
                 var targets = 0
 
                 for (entity in mc.theWorld.loadedEntityList) {
-                    val distance = mc.thePlayer.getDistanceToEntityBox(entity)
+                    val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
 
                     if (entity is EntityLivingBase && isEnemy(entity) && distance <= getRange(entity)) {
                         attackEntity(entity)
@@ -489,7 +489,7 @@ class Aura : Module() {
             if (entity !is EntityLivingBase || !isEnemy(entity) || (switchMode && prevTargetEntities.contains(entity.entityId)))
                 continue
 
-            val distance = mc.thePlayer.getDistanceToEntityBox(entity)
+            val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
             val entityFov = RotationUtils.getRotationDifference(entity)
 
             if (distance <= maxRange && (fov == 180F || entityFov <= fov) && entity.hurtTime <= hurtTime)
@@ -498,7 +498,7 @@ class Aura : Module() {
 
         // Sort targets by priority
         when (priorityValue.get().toLowerCase()) {
-            "distance" -> targets.sortBy { mc.thePlayer.getDistanceToEntityBox(it) } // Sort by distance
+            "distance" -> targets.sortBy { PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, it) } // Sort by distance
             "health" -> targets.sortBy { it.health } // Sort by health
             "direction" -> targets.sortBy { RotationUtils.getRotationDifference(it) } // Sort by FOV
             "livingtime" -> targets.sortBy { -it.ticksExisted } // Sort by existence
@@ -601,7 +601,7 @@ class Aura : Module() {
 
                 blockingStatus = false
             }
-            val distance = mc.thePlayer.getDistanceToEntityBox(entity)
+            val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
 
             if (hitable && distance < rangeValue.get()) {
                 // Call attack event
@@ -676,14 +676,14 @@ class Aura : Module() {
                     outborderValue.get() && !attackTimer.hasTimePassed(attackDelay / 2),
                     randomCenterValue.get(),
                     predictValue.get(),
-                    mc.thePlayer.getDistanceToEntityBox(entity) < throughwallValue.get(),
+                    PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) < throughwallValue.get(),
                     maxRange
             ) ?: return false
 
             val limitedRotation = RotationUtils.limitAngleChange(RotationUtils.serverRotation, rotation,
                     (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat())
 
-            val distance = mc.thePlayer.getDistanceToEntityBox(entity)
+            val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
 
             if (distance < rangeValue.get()) {
                 if (silentRotationValue.get())
@@ -705,7 +705,7 @@ class Aura : Module() {
 
             val limitedRotation = RotationUtils.limitAngleChange(RotationUtils.serverRotation,
                     RotationUtils.OtherRotation(boundingBox,RotationUtils.getCenter(entity.entityBoundingBox), predictValue.get(),
-                            mc.thePlayer.getDistanceToEntityBox(entity) < throughwallValue.get(),maxRange), (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat())
+                            PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) < throughwallValue.get(),maxRange), (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat())
 
             if (silentRotationValue.get()) {
                 RotationUtils.setTargetRotation(limitedRotation, if (aacValue.get()) 15 else 0)
@@ -721,7 +721,7 @@ class Aura : Module() {
                     outborderValue.get() && !attackTimer.hasTimePassed(attackDelay / 2),
                     randomCenterValue.get(),
                     predictValue.get(),
-                    mc.thePlayer.getDistanceToEntityBox(entity) < throughwallValue.get(),
+                    PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) < throughwallValue.get(),
                     maxRange
             ) ?: return false
 
@@ -759,7 +759,7 @@ class Aura : Module() {
             return
         }
 
-        val reach = min(maxRange.toDouble(), mc.thePlayer.getDistanceToEntityBox(target!!)) + 1.4
+        val reach = min(maxRange.toDouble(), PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, target!!)) + 1.4
 
         if (raycastValue.get()) {
             val raycastedEntity = RaycastUtils.raycastEntity(reach) {
@@ -892,7 +892,7 @@ class Aura : Module() {
         get() = max(rangeValue.get(), BlockRangeValue.get())
 
     private fun getRange(entity: Entity) =
-            (if (mc.thePlayer.getDistanceToEntityBox(entity) >= BlockRangeValue.get()) rangeValue.get() else rangeValue.get()) - if (mc.thePlayer.isSprinting) rangeSprintReducementValue.get() else 0F
+            (if (PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) >= BlockRangeValue.get()) rangeValue.get() else rangeValue.get()) - if (mc.thePlayer.isSprinting) rangeSprintReducementValue.get() else 0F
 
     /**
      * HUD Tag

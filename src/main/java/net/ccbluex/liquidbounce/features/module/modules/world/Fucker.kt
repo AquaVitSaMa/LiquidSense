@@ -20,7 +20,7 @@ import net.ccbluex.liquidbounce.utils.block.BlockUtils.getBlockName
 import net.ccbluex.liquidbounce.utils.block.BlockUtils.getCenterDistance
 import net.ccbluex.liquidbounce.utils.block.BlockUtils.isFullBlock
 import net.ccbluex.liquidbounce.utils.block.BlockUtils.searchBlocks
-import net.ccbluex.liquidbounce.utils.extensions.getBlock
+import net.ccbluex.liquidbounce.utils.extensions.BlockExtensionUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.value.*
@@ -93,7 +93,7 @@ object Fucker : Module() {
             val blockPos = mc.theWorld.rayTraceBlocks(eyes, rotations.vec, false,
                     false, true).blockPos
 
-            if (blockPos != null && blockPos.getBlock() !is BlockAir) {
+            if (blockPos != null && BlockExtensionUtils.getBlock(blockPos) !is BlockAir) {
                 if (currentPos.x != blockPos.x || currentPos.y != blockPos.y || currentPos.z != blockPos.z)
                     surroundings = true
 
@@ -154,7 +154,7 @@ object Fucker : Module() {
 
 
                 // Minecraft block breaking
-                val block = currentPos.getBlock() ?: return
+                val block = BlockExtensionUtils.getBlock(currentPos) ?: return
 
                 if (currentDamage == 0F) {
                     mc.netHandler.addToSendQueue(C07PacketPlayerDigging(C07PacketPlayerDigging.Action.START_DESTROY_BLOCK,
