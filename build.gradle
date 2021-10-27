@@ -114,7 +114,7 @@ jar {
             "FMLCorePlugin": "net.ccbluex.liquidbounce.injection.forge.TransformerLoader",
             "FMLAT": "liquidbounce_at.cfg",
             "Manifest-Version": 1.0,
-            "Main-Class": "net.ccbluex.liquidinstruction.LiquidInstructionKt"
+            "Main-Class": "me.aquavit.Instruction"
     )
 }
 
