@@ -14,8 +14,7 @@ import net.ccbluex.liquidbounce.utils.OtherRotationUtils
 import net.ccbluex.liquidbounce.utils.RaycastUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
 import net.ccbluex.liquidbounce.utils.extensions.getDistanceToEntityBox
-import net.ccbluex.liquidbounce.utils.misc.RandomUtils
-import net.ccbluex.liquidbounce.utils.render.RenderUtils
+import me.AquaVit.liquidSense.utils.misc.RandomUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils
 import net.ccbluex.liquidbounce.value.BoolValue
@@ -39,7 +38,6 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.MathHelper
 import net.minecraft.world.WorldSettings
 import org.lwjgl.input.Keyboard
-import java.awt.Color
 import java.util.*
 import kotlin.math.max
 import kotlin.math.min

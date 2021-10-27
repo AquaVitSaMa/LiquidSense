@@ -20,7 +20,7 @@ import net.ccbluex.liquidbounce.utils.ClientUtils;
 import me.AquaVit.liquidSense.utils.misc.ServerUtils;
 import net.ccbluex.liquidbounce.utils.login.LoginUtils;
 import net.ccbluex.liquidbounce.utils.login.MinecraftAccount;
-import net.ccbluex.liquidbounce.utils.misc.RandomUtils;
+import me.AquaVit.liquidSense.utils.misc.RandomUtils;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiDisconnected;
 import net.minecraft.util.Session;
