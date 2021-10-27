@@ -35,14 +35,6 @@ public class AStarCustomPathFinder {
         this.endCustomVec3 = endCustomVec3.addVector(0.0, 0.0, 0.0).floor();
     }
 
-  //  public static boolean checkPositionValidity(CustomVec3 vec3) {
-      //  BlockPos pos = new BlockPos(vec3);
-      //  if (AStarCustomPathFinder.isBlockSolid(pos) || AStarCustomPathFinder.isBlockSolid(pos.add(0, 1, 0))) {
-      //      return false;
-      //  }
-      //  return AStarCustomPathFinder.isSafeToWalkOn(pos.add(0, -1, 0));
- //   }
-
     public static boolean checkPositionValidity(CustomVec3 loc, boolean checkGround) {
         return checkPositionValidity((int) loc.getX(), (int) loc.getY(), (int) loc.getZ(), checkGround);
     }

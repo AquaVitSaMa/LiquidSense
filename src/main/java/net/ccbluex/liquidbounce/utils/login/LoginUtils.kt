@@ -13,7 +13,7 @@ import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.SessionEvent
-import net.ccbluex.liquidbounce.utils.MinecraftInstance
+import me.AquaVit.liquidSense.utils.mc.MinecraftInstance
 import net.ccbluex.liquidbounce.utils.login.UserUtils.getUUID
 import net.minecraft.util.Session
 import java.net.Proxy

@@ -17,9 +17,8 @@ import net.ccbluex.liquidbounce.script.api.global.Chat
 import net.ccbluex.liquidbounce.script.api.global.Item
 import net.ccbluex.liquidbounce.script.api.global.Setting
 import net.ccbluex.liquidbounce.utils.ClientUtils
-import net.ccbluex.liquidbounce.utils.MinecraftInstance
+import me.AquaVit.liquidSense.utils.mc.MinecraftInstance
 import java.io.File
-import java.util.*
 import java.util.function.Function
 import javax.script.ScriptEngine
 import kotlin.collections.HashMap

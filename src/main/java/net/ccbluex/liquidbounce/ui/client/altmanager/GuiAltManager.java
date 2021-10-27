@@ -19,7 +19,7 @@ import net.ccbluex.liquidbounce.utils.login.LoginUtils;
 import net.ccbluex.liquidbounce.utils.login.MinecraftAccount;
 import net.ccbluex.liquidbounce.utils.login.UserUtils;
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
-import net.ccbluex.liquidbounce.utils.misc.MiscUtils;
+import me.AquaVit.liquidSense.utils.misc.MiscUtils;
 import net.mcleaks.MCLeaks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

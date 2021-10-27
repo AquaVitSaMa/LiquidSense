@@ -3,7 +3,7 @@
  * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
  * https://github.com/CCBlueX/LiquidBounce/
  */
-package net.ccbluex.liquidbounce.utils;
+package me.AquaVit.liquidSense.utils.entity;
 
 import me.AquaVit.liquidSense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.event.MoveEvent;

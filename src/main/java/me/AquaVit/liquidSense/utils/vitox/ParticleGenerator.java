@@ -1,13 +1,14 @@
-package net.vitox;
+package me.AquaVit.liquidSense.utils.vitox;
 
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import net.vitox.particle.util.RenderUtils;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
+
+import static me.AquaVit.liquidSense.utils.render.ParticleUtils.drawCircle;
 
 /**
  * Particle API This Api is free2use But u have to mention me.
@@ -53,7 +54,7 @@ public class ParticleGenerator {
                         .forEach(connectable -> particle.connect(connectable.getX(), connectable.getY()));
             }
 
-            RenderUtils.drawCircle(particle.getX(), particle.getY(), particle.size, 0xffFFFFFF);
+            drawCircle(particle.getX(), particle.getY(), particle.size, 0xffFFFFFF);
         }
     }
 

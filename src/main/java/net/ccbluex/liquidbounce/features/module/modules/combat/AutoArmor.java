@@ -12,7 +12,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.injection.implementations.IItemStack;
 import net.ccbluex.liquidbounce.utils.InventoryUtils;
-import net.ccbluex.liquidbounce.utils.MovementUtils;
+import me.AquaVit.liquidSense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.utils.item.ArmorComparator;
 import net.ccbluex.liquidbounce.utils.item.ArmorPiece;
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils;

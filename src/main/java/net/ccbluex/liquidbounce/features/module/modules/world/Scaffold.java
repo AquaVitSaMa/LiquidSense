@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.world;
 
+import me.AquaVit.liquidSense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -41,7 +42,6 @@ import net.minecraft.util.Timer;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
-import java.util.Arrays;
 
 @ModuleInfo(name = "Scaffold", description = "Automatically places blocks beneath your feet.", category = ModuleCategory.WORLD, keyBind = Keyboard.KEY_I)
 public class Scaffold extends Module {

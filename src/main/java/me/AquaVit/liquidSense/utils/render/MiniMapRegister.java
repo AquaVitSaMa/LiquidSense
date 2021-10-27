@@ -1,7 +1,7 @@
 package me.AquaVit.liquidSense.utils.render;
 
 import kotlin.jvm.internal.Intrinsics;
-import net.ccbluex.liquidbounce.utils.MinecraftInstance;
+import me.AquaVit.liquidSense.utils.mc.MinecraftInstance;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.BlockPos;

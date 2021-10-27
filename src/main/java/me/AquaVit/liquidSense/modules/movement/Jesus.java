@@ -6,7 +6,7 @@ import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 
-import static net.ccbluex.liquidbounce.utils.MovementUtils.isInLiquid;
+import static me.AquaVit.liquidSense.utils.entity.MovementUtils.isInLiquid;
 
 @ModuleInfo(name = "Jesus", description = ":/", category = ModuleCategory.MOVEMENT)
 public class Jesus extends Module {

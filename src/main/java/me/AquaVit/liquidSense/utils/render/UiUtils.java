@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.utils.render;
+package me.AquaVit.liquidSense.utils.render;
 
 import java.awt.Color;
 
