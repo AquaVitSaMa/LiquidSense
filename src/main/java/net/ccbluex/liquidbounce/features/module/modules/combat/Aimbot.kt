@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
+import me.AquaVit.liquidSense.utils.misc.RandomUtils
 import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.StrafeEvent
 import net.ccbluex.liquidbounce.features.module.Module
@@ -13,8 +14,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.utils.EntityUtils
 import net.ccbluex.liquidbounce.utils.Rotation
 import net.ccbluex.liquidbounce.utils.RotationUtils
-import net.ccbluex.liquidbounce.utils.extensions.getDistanceToEntityBox
-import me.AquaVit.liquidSense.utils.misc.RandomUtils
+import net.ccbluex.liquidbounce.utils.extensions.PlayerExtensionUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
@@ -47,7 +47,7 @@ class Aimbot : Module() {
         val entity = mc.theWorld!!.loadedEntityList
                 .filter {
                     EntityUtils.isSelected(it, true) && thePlayer.canEntityBeSeen(it) &&
-                            thePlayer.getDistanceToEntityBox(it) <= range && RotationUtils.getRotationDifference(it) <= fovValue.get()
+                            PlayerExtensionUtils.getDistanceToEntityBox(thePlayer, it) <= range && RotationUtils.getRotationDifference(it) <= fovValue.get()
                 }
                 .minBy { RotationUtils.getRotationDifference(it) } ?: return
 

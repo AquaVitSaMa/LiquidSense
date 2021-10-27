@@ -12,7 +12,7 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Border
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.extensions.getDistanceToEntityBox
+import net.ccbluex.liquidbounce.utils.extensions.PlayerExtensionUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.FloatValue
 import net.minecraft.client.gui.Gui
@@ -72,7 +72,7 @@ class Target : Element() {
             easingHealth += ((target.health - easingHealth) / 2.0F.pow(10.0F - fadeSpeed.get())) * RenderUtils.deltaTime
 
             Fonts.font40.drawString(target.name, 36, 3, 0xffffff)
-            Fonts.font35.drawString("Distance: ${decimalFormat.format(mc.thePlayer.getDistanceToEntityBox(target))}", 36, 15, 0xffffff)
+            Fonts.font35.drawString("Distance: ${decimalFormat.format(PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, target))}", 36, 15, 0xffffff)
 
             // Draw info
             val playerInfo = mc.netHandler.getPlayerInfo(target.uniqueID)
