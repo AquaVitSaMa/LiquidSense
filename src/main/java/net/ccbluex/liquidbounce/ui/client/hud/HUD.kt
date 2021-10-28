@@ -34,7 +34,6 @@ open class HUD : MinecraftInstance() {
                 Image::class.java,
                 Model::class.java,
                 Notifications::class.java,
-                TabGUI::class.java,
                 Text::class.java,
                 ScoreboardElement::class.java,
                 Target::class.java,
@@ -55,7 +54,6 @@ open class HUD : MinecraftInstance() {
         @JvmStatic
         fun createDefault() = HUD()
                 .addElement(Text.defaultClient())
-                .addElement(TabGUI())
                 .addElement(Arraylist())
                 .addElement(ScoreboardElement())
                 .addElement(Armor())
