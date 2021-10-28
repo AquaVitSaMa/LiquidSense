@@ -330,10 +330,6 @@ public class NoFall extends Module {
         }
     }
 
-    public static int getJumpEffect() {
-        return mc.thePlayer.isPotionActive(Potion.jump)?mc.thePlayer.getActivePotionEffect(Potion.jump).getAmplifier() + 1:0;
-    }
-
     @EventTarget
     public void onPacket(PacketEvent event) {
         final Packet<?> packet = event.getPacket();

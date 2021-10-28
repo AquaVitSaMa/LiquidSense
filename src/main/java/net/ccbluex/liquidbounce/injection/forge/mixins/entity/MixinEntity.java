@@ -5,9 +5,9 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
+import me.aquavit.liquidsense.modules.combat.HitBox;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.StrafeEvent;
-import net.ccbluex.liquidbounce.features.module.modules.combat.HitBox;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -183,10 +183,8 @@ public abstract class MixinEntity {
 
     @Inject(method = "getCollisionBorderSize", at = @At("HEAD"), cancellable = true)
     private void getCollisionBorderSize(final CallbackInfoReturnable<Float> callbackInfoReturnable) {
-        final HitBox hitBox = (HitBox) LiquidBounce.moduleManager.getModule(HitBox.class);
-
-        if (hitBox.getState())
-            callbackInfoReturnable.setReturnValue(0.1F + hitBox.getSizeValue().get());
+        if (LiquidBounce.moduleManager.getModule(HitBox.class).getState())
+            callbackInfoReturnable.setReturnValue(0.1F + HitBox.sizeValue.get());
     }
 
     @Inject(method = "setAngles", at = @At("HEAD"), cancellable = true)

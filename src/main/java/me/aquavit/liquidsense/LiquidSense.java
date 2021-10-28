@@ -3,6 +3,7 @@ package me.aquavit.liquidsense;
 import me.aquavit.liquidsense.modules.misc.*;
 import me.aquavit.liquidsense.modules.movement.*;
 import me.aquavit.liquidsense.modules.combat.*;
+import me.aquavit.liquidsense.modules.player.*;
 import me.aquavit.liquidsense.modules.render.*;
 import me.aquavit.liquidsense.modules.world.*;
 import net.ccbluex.liquidbounce.LiquidBounce;
@@ -41,6 +42,14 @@ public class LiquidSense {
         liquidSenseModules.add(ItemPhysic.class);
         liquidSenseModules.add(Ambience.class);
         liquidSenseModules.add(EnchantEffect.class);
+        liquidSenseModules.add(AutoFish.class);
+        liquidSenseModules.add(AutoWalk.class);
+        liquidSenseModules.add(Eagle.class);
+        liquidSenseModules.add(AutoSpawn.class);
+        liquidSenseModules.add(HitBox.class);
+        liquidSenseModules.add(Freeze.class);
+        liquidSenseModules.add(Strafe.class);
+        liquidSenseModules.add(NoFriends.class);
         liquidSenseModules.add(Animations.class);
         liquidSenseModules.add(ItemRotate.class);
         liquidSenseModules.add(LagBack.class);
@@ -60,6 +69,7 @@ public class LiquidSense {
         liquidSenseModules.add(AutoApple.class);
         liquidSenseModules.add(LastestHypixelFly.class);
         liquidSenseModules.add(AntiSpam.class);
+        liquidSenseModules.add(AutoTool.class);
     }
 
     public List<Object> getLiquidSenseModules() {
