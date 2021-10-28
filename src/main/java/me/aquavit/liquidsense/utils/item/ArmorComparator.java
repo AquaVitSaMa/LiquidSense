@@ -1,9 +1,4 @@
-/*
- * LiquidBounce Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/CCBlueX/LiquidBounce/
- */
-package net.ccbluex.liquidbounce.utils.item;
+package me.aquavit.liquidsense.utils.item;
 
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.item.ItemArmor;
@@ -13,7 +8,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Comparator;
 
-import static net.ccbluex.liquidbounce.utils.item.ItemUtils.getEnchantmentCount;
+import static me.aquavit.liquidsense.utils.item.ItemUtils.getEnchantmentCount;
 
 public class ArmorComparator implements Comparator<ArmorPiece> {
     private static final Enchantment[] DAMAGE_REDUCTION_ENCHANTMENTS = {Enchantment.protection, Enchantment.projectileProtection, Enchantment.fireProtection, Enchantment.blastProtection};

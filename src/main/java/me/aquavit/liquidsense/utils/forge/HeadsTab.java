@@ -6,7 +6,7 @@ import com.google.gson.JsonParser;
 import kotlin.jvm.internal.Intrinsics;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
-import net.ccbluex.liquidbounce.utils.item.ItemUtils;
+import me.aquavit.liquidsense.utils.item.ItemUtils;
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
@@ -14,11 +14,8 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.*;
-
-import static net.ccbluex.liquidbounce.LiquidBounce.CLIENT_RESOURCE;
 
 @SideOnly(Side.CLIENT)
 public class HeadsTab extends CreativeTabs {

@@ -12,7 +12,7 @@ import net.ccbluex.liquidbounce.event.PacketEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import net.ccbluex.liquidbounce.utils.item.ItemUtils
+import me.aquavit.liquidsense.utils.item.ItemUtils
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.minecraft.enchantment.Enchantment
 import net.minecraft.item.ItemSword
