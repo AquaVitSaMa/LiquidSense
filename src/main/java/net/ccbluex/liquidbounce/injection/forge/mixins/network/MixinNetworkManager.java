@@ -1,8 +1,3 @@
-/*
- * LiquidBounce Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/CCBlueX/LiquidBounce/
- */
 package net.ccbluex.liquidbounce.injection.forge.mixins.network;
 
 import com.google.common.collect.Queues;
@@ -17,6 +12,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventRespawn;
 import net.ccbluex.liquidbounce.event.EventType;
 import net.ccbluex.liquidbounce.event.PacketEvent;
+import net.ccbluex.liquidbounce.injection.implementations.INetworkManager;
 import net.minecraft.network.*;
 import net.minecraft.network.play.server.S07PacketRespawn;
 import net.minecraftforge.fml.common.network.internal.FMLProxyPacket;
@@ -33,9 +29,18 @@ import java.util.Queue;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 @Mixin(NetworkManager.class)
-public abstract class MixinNetworkManager {
+public abstract class MixinNetworkManager implements INetworkManager {
     @Shadow
     private Channel channel;
+
+    @Shadow
+    private Queue outboundPacketsQueue;
+
+    @Shadow
+    protected abstract void dispatchPacket(Packet a, GenericFutureListener[] a2);
+
+    @Shadow
+    protected abstract void flushOutboundQueue();
 
     @Inject(method = "channelRead0", at = @At(value = "INVOKE", target = "Lnet/minecraft/network/Packet;processPacket(Lnet/minecraft/network/INetHandler;)V", shift = At.Shift.BEFORE), cancellable = true)
     private void readpacket(ChannelHandlerContext context, Packet<?> packet, CallbackInfo callback) {
@@ -61,5 +66,26 @@ public abstract class MixinNetworkManager {
 
         if(event.isCancelled())
             callback.cancel();
+    }
+
+    public void sendPacketNoEvent(final Packet<?> a) {
+        if (this.channel != null && this.channel.isOpen()) {
+            final GenericFutureListener[] a2 = null;
+            this.flushOutboundQueue();
+            this.dispatchPacket(a, a2);
+            return;
+        }
+        this.outboundPacketsQueue.add(new InboundHandlerTuplePacketListener(a, (GenericFutureListener<? extends Future<? super Void>>[])null));
+    }
+
+    static class InboundHandlerTuplePacketListener
+    {
+        private final Packet packet;
+        private final GenericFutureListener<? extends Future<? super Void>>[] futureListeners;
+
+        public InboundHandlerTuplePacketListener(final Packet inPacket, final GenericFutureListener<? extends Future<? super Void>>... inFutureListeners) {
+            this.packet = inPacket;
+            this.futureListeners = inFutureListeners;
+        }
     }
 }
