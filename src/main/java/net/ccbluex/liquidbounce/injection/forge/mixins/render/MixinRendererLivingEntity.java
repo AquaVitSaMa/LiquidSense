@@ -5,13 +5,17 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.modules.render.TrueSight;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.utils.render.OutlineUtils;
 import com.google.common.collect.Lists;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.SommtheEvent;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
-import net.ccbluex.liquidbounce.features.module.modules.render.*;
+import net.ccbluex.liquidbounce.features.module.modules.render.Chams;
+import net.ccbluex.liquidbounce.features.module.modules.render.ESP;
+import net.ccbluex.liquidbounce.features.module.modules.render.NameTags;
+import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;
 import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
 import net.ccbluex.liquidbounce.utils.*;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
@@ -267,8 +271,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
     @Overwrite
     protected <T extends EntityLivingBase> void renderModel(T entitylivingbaseIn, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float scaleFactor) {
         boolean visible = !entitylivingbaseIn.isInvisible();
-        final TrueSight trueSight = (TrueSight) LiquidBounce.moduleManager.getModule(TrueSight.class);
-        boolean semiVisible = !visible && (!entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer) || (trueSight.getState() && trueSight.getEntitiesValue().get()));
+        boolean semiVisible = !visible && (!entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer) || (LiquidBounce.moduleManager.getModule(TrueSight.class).getState() && TrueSight.entitiesValue.get()));
         Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
         Rotations ra = (Rotations) LiquidBounce.moduleManager.getModule(Rotations.class);
         Aura killAura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);

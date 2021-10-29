@@ -5,10 +5,10 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.item;
 
+import me.aquavit.liquidsense.modules.render.AntiBlind;
 import me.aquavit.liquidsense.modules.render.EveryThingBlock;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
-import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
 import net.ccbluex.liquidbounce.features.module.modules.render.SwingAnimation;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -533,8 +533,6 @@ public abstract class MixinItemRenderer {
 
     @Inject(method = "renderFireInFirstPerson", at = @At("HEAD"), cancellable = true)
     private void renderFireInFirstPerson(final CallbackInfo callbackInfo) {
-        final AntiBlind antiBlind = (AntiBlind) LiquidBounce.moduleManager.getModule(AntiBlind.class);
-
-        if(antiBlind.getState() && antiBlind.getFireEffect().get()) callbackInfo.cancel();
+        if(LiquidBounce.moduleManager.getModule(AntiBlind.class).getState() && AntiBlind.fireEffect.get()) callbackInfo.cancel();
     }
 }

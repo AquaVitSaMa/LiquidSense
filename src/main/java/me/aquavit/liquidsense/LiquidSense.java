@@ -36,6 +36,21 @@ public class LiquidSense {
     private void loadModules(){
         this.liquidSenseModules = new ArrayList<>();
         liquidSenseModules.add(HYTBypass.class);
+        liquidSenseModules.add(AntiAFK.class);
+        liquidSenseModules.add(Reach.class);
+        liquidSenseModules.add(NoClip.class);
+        liquidSenseModules.add(NoJumpDelay.class);
+        liquidSenseModules.add(NoWeb.class);
+        liquidSenseModules.add(SafeWalk.class);
+        liquidSenseModules.add(NoRotateSet.class);
+        liquidSenseModules.add(ComponentOnHover.class);
+        liquidSenseModules.add(AutoWeapon.class);
+        liquidSenseModules.add(AntiBlind.class);
+        liquidSenseModules.add(NoBob.class);
+        liquidSenseModules.add(NoFOV.class);
+        liquidSenseModules.add(NoHurtCam.class);
+        liquidSenseModules.add(NoSwing.class);
+        liquidSenseModules.add(TrueSight.class);
         liquidSenseModules.add(Particle.class);
         liquidSenseModules.add(EveryThingBlock.class);
         liquidSenseModules.add(FastBreak.class);

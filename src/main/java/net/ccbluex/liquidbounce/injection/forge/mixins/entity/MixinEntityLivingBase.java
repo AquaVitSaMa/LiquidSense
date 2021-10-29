@@ -6,12 +6,12 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
 import me.aquavit.liquidsense.modules.misc.Animations;
+import me.aquavit.liquidsense.modules.movement.NoJumpDelay;
+import me.aquavit.liquidsense.modules.render.AntiBlind;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventLivingUpdate;
 import net.ccbluex.liquidbounce.event.JumpEvent;
 import net.ccbluex.liquidbounce.features.module.modules.movement.LiquidWalk;
-import net.ccbluex.liquidbounce.features.module.modules.movement.NoJumpDelay;
-import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.EntityLivingBase;
@@ -118,9 +118,8 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
 
     @Inject(method = "isPotionActive(Lnet/minecraft/potion/Potion;)Z", at = @At("HEAD"), cancellable = true)
     private void isPotionActive(Potion p_isPotionActive_1_, final CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        final AntiBlind antiBlind = (AntiBlind) LiquidBounce.moduleManager.getModule(AntiBlind.class);
-
-        if((p_isPotionActive_1_ == Potion.confusion || p_isPotionActive_1_ == Potion.blindness) && antiBlind.getState() && antiBlind.getConfusionEffect().get())
+        if((p_isPotionActive_1_ == Potion.confusion || p_isPotionActive_1_ == Potion.blindness) && LiquidBounce.moduleManager.getModule(AntiBlind.class).getState()
+                && AntiBlind.confusionEffect.get())
             callbackInfoReturnable.setReturnValue(false);
     }
 
