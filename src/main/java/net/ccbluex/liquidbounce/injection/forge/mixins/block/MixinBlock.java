@@ -1,10 +1,10 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.block;
 
+import me.aquavit.liquidsense.modules.exploit.GhostHand;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.BlockBBEvent;
 import net.ccbluex.liquidbounce.event.BlockRenderSideEvent;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals;
-import net.ccbluex.liquidbounce.features.module.modules.exploit.GhostHand;
 import net.ccbluex.liquidbounce.features.module.modules.player.NoFall;
 import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
 import net.minecraft.block.Block;
@@ -91,9 +91,7 @@ public abstract class MixinBlock {
 
     @Inject(method = "isCollidable", at = @At("HEAD"), cancellable = true)
     private void isCollidable(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        final GhostHand ghostHand = (GhostHand) LiquidBounce.moduleManager.getModule(GhostHand.class);
-
-        if (ghostHand.getState() && !(ghostHand.getBlockValue().get() == getIdFromBlock((Block) (Object) this)))
+        if (LiquidBounce.moduleManager.getModule(GhostHand.class).getState() && !(GhostHand.blockValue.get() == getIdFromBlock((Block) (Object) this)))
             callbackInfoReturnable.setReturnValue(false);
     }
 

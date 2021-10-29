@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense;
 
+import me.aquavit.liquidsense.modules.exploit.*;
 import me.aquavit.liquidsense.modules.misc.*;
 import me.aquavit.liquidsense.modules.movement.*;
 import me.aquavit.liquidsense.modules.combat.*;
@@ -35,6 +36,11 @@ public class LiquidSense {
 
     private void loadModules(){
         this.liquidSenseModules = new ArrayList<>();
+        liquidSenseModules.add(AbortBreaking.class);
+        liquidSenseModules.add(Clip.class);
+        liquidSenseModules.add(Ghost.class);
+        liquidSenseModules.add(GhostHand.class);
+        liquidSenseModules.add(Kick.class);
         liquidSenseModules.add(HYTBypass.class);
         liquidSenseModules.add(AntiAFK.class);
         liquidSenseModules.add(Reach.class);

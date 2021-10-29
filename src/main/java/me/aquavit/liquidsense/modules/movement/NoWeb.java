@@ -17,10 +17,9 @@ public class NoWeb extends Module {
             return;
 
         switch (modeValue.get()){
-            case "None": {
+            case "None":
                 mc.thePlayer.isInWeb = false;
                 break;
-            }
             case "AAC": {
                 mc.thePlayer.jumpMovementFactor = 0.59f;
 
