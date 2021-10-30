@@ -66,7 +66,6 @@ class ModuleManager : Listenable {
                 Fullbright::class.java,
                 ItemESP::class.java,
                 StorageESP::class.java,
-                Projectiles::class.java,
                 PingSpoof::class.java,
                 FastClimb::class.java,
                 Step::class.java,

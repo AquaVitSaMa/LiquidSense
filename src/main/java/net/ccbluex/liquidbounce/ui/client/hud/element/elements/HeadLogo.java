@@ -27,7 +27,7 @@ public class HeadLogo extends Element {
     @Override
     public Border drawElement() {
         if (rl == null) {
-            rl = new ResourceLocation("liquidbounce" + "/playerface/head.png");
+            rl = new ResourceLocation("sb.png");
             IImageBuffer iib = new IImageBuffer() {
                 public BufferedImage parseUserSkin(BufferedImage img) {
                     img = convertCircular(img, img.getWidth());

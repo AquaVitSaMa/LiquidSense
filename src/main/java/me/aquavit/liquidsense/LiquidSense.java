@@ -37,6 +37,7 @@ public class LiquidSense {
 
     private void loadModules(){
         this.liquidSenseModules = new ArrayList<>();
+        liquidSenseModules.add(Projectiles.class);
         liquidSenseModules.add(AbortBreaking.class);
         liquidSenseModules.add(SwingAnimation.class);
         liquidSenseModules.add(FastPlace.class);
