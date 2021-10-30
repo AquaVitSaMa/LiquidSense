@@ -119,7 +119,7 @@ public abstract class MixinEntityRenderer {
                     MovingObjectPosition movingobjectposition = this.mc.theWorld.rayTraceBlocks(new Vec3(d0 + (double) f3, d1 + (double) f4, d2 + (double) f5), new Vec3(d0 - d4 + (double) f3 + (double) f5, d1 - d6 + (double) f4, d2 - d5 + (double) f5));
                     if (movingobjectposition != null) {
                         double d7 = movingobjectposition.hitVec.distanceTo(new Vec3(d0, d1, d2));
-                        if (d7 < d3 && !CameraView.clipValue.get()) {
+                        if (d7 < d3 && (!ca.getState() || (ca.getState() && !CameraView.clipValue.get()))) {
                             d3 = d7;
                         }
                     }
