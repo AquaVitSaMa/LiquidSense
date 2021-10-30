@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.render
 
+import me.aquavit.liquidsense.modules.misc.Teams
 import me.aquavit.liquidsense.utils.module.Particles.roundToPlace
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventTarget
@@ -14,7 +15,6 @@ import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot
-import net.ccbluex.liquidbounce.features.module.modules.misc.Teams
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import me.aquavit.liquidsense.utils.entity.EntityUtils
 import net.ccbluex.liquidbounce.utils.render.ColorUtils
@@ -220,7 +220,7 @@ class NameTags : Module() {
                         "§7"
                     } else if (ent is EntityPlayer && EntityUtils.isFriend(ent)) {
                         "§9"
-                    } else if (teams.isInYourTeam(ent)) {
+                    } else if (Teams.isInYourTeam(ent)) {
                         "§a"
                     } else if (ent.isSneaking) {
                         "§c"
@@ -338,8 +338,8 @@ class NameTags : Module() {
             ""
         }
         var team: String
-        val Teams = LiquidBounce.moduleManager.getModule("Teams") as Teams?
-        team = if (Teams!!.isInYourTeam(entity) && Teams.state) {
+        val teams = LiquidBounce.moduleManager.getModule("Teams") as Teams
+        team = if (Teams.isInYourTeam(entity) && teams.state) {
             "\u00a7b[TEAM]"
         } else {
             ""

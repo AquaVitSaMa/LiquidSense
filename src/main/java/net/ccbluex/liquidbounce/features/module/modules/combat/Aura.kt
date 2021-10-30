@@ -1,13 +1,13 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
 import me.aquavit.liquidsense.modules.combat.NoFriends
+import me.aquavit.liquidsense.modules.misc.Teams
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot
-import net.ccbluex.liquidbounce.features.module.modules.misc.Teams
 import net.ccbluex.liquidbounce.features.module.modules.player.Blink
 import net.ccbluex.liquidbounce.features.module.modules.render.FreeCam
 import me.aquavit.liquidsense.utils.entity.EntityUtils
@@ -540,7 +540,7 @@ class Aura : Module() {
 
                 val teams = LiquidBounce.moduleManager[Teams::class.java] as Teams
 
-                return !teams.state || !teams.isInYourTeam(entity)
+                return !teams.state || !Teams.isInYourTeam(entity)
             }
 
             return EntityUtils.targetMobs && EntityUtils.isMob(entity) || EntityUtils.targetAnimals &&
