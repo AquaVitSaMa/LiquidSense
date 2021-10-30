@@ -7,6 +7,7 @@ import me.aquavit.liquidsense.modules.combat.*;
 import me.aquavit.liquidsense.modules.player.*;
 import me.aquavit.liquidsense.modules.render.*;
 import me.aquavit.liquidsense.modules.world.*;
+import me.aquavit.liquidsense.modules.fun.*;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import org.lwjgl.opengl.Display;
@@ -37,6 +38,16 @@ public class LiquidSense {
     private void loadModules(){
         this.liquidSenseModules = new ArrayList<>();
         liquidSenseModules.add(AbortBreaking.class);
+        liquidSenseModules.add(SwingAnimation.class);
+        liquidSenseModules.add(FastPlace.class);
+        liquidSenseModules.add(Zoot.class);
+        liquidSenseModules.add(Regen.class);
+        liquidSenseModules.add(ConsoleSpammer.class);
+        liquidSenseModules.add(Damage.class);
+        liquidSenseModules.add(SkinDerp.class);
+        liquidSenseModules.add(Derp.class);
+        liquidSenseModules.add(Timer.class);
+        liquidSenseModules.add(BlockOverlay.class);
         liquidSenseModules.add(Clip.class);
         liquidSenseModules.add(Ghost.class);
         liquidSenseModules.add(GhostHand.class);

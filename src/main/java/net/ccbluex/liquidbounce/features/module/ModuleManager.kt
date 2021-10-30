@@ -9,8 +9,6 @@ import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.KeyEvent
 import net.ccbluex.liquidbounce.event.Listenable
-import net.ccbluex.liquidbounce.features.module.modules.`fun`.Derp
-import net.ccbluex.liquidbounce.features.module.modules.`fun`.SkinDerp
 import net.ccbluex.liquidbounce.features.module.modules.combat.*
 import net.ccbluex.liquidbounce.features.module.modules.exploit.*
 import net.ccbluex.liquidbounce.features.module.modules.misc.*
@@ -18,7 +16,6 @@ import net.ccbluex.liquidbounce.features.module.modules.movement.*
 import net.ccbluex.liquidbounce.features.module.modules.player.*
 import net.ccbluex.liquidbounce.features.module.modules.render.*
 import net.ccbluex.liquidbounce.features.module.modules.world.*
-import net.ccbluex.liquidbounce.features.module.modules.world.Timer
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import java.util.*
 
@@ -60,7 +57,6 @@ class ModuleManager : Listenable {
                 ChestStealer::class.java,
                 Scaffold::class.java,
                 Tower::class.java,
-                FastPlace::class.java,
                 ESP::class.java,
                 Speed::class.java,
                 Tracers::class.java,
@@ -76,18 +72,13 @@ class ModuleManager : Listenable {
                 Step::class.java,
                 Spammer::class.java,
                 IceSpeed::class.java,
-                Zoot::class.java,
-                Regen::class.java,
                 NoFall::class.java,
                 Blink::class.java,
                 NameProtect::class.java,
                 MidClick::class.java,
                 XRay::class.java,
-                Timer::class.java,
-                SkinDerp::class.java,
                 FreeCam::class.java,
                 Plugins::class.java,
-                ConsoleSpammer::class.java,
                 LongJump::class.java,
                 FastBow::class.java,
                 AutoClicker::class.java,
@@ -95,8 +86,6 @@ class ModuleManager : Listenable {
                 Chams::class.java,
                 ServerCrasher::class.java,
                 FastStairs::class.java,
-                SwingAnimation::class.java,
-                Derp::class.java,
                 InventoryCleaner::class.java,
                 BufferSpeed::class.java,
                 SuperKnockback::class.java,
@@ -104,9 +93,7 @@ class ModuleManager : Listenable {
                 KeepContainer::class.java,
                 HUD::class.java,
                 TNTESP::class.java,
-                BlockOverlay::class.java,
                 Rotations::class.java,
-                Damage::class.java,
                 BugUp::class.java,
                 AntiObsidian::class.java
         )
