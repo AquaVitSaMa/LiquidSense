@@ -7,7 +7,7 @@ package net.ccbluex.liquidbounce.features.command
 
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.utils.ClientUtils
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance
+import me.aquavit.liquidsense.utils.mc.MinecraftInstance
 import net.minecraft.client.audio.PositionedSoundRecord
 import net.minecraft.util.ResourceLocation
 

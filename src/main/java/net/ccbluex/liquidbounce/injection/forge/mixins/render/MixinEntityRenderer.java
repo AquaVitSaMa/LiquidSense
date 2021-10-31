@@ -6,11 +6,11 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
 import com.google.common.base.Predicates;
-import me.AquaVit.liquidSense.modules.render.CameraView;
+import me.aquavit.liquidsense.modules.player.Reach;
+import me.aquavit.liquidsense.modules.render.CameraView;
+import me.aquavit.liquidsense.modules.render.NoHurtCam;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
-import net.ccbluex.liquidbounce.features.module.modules.player.Reach;
-import net.ccbluex.liquidbounce.features.module.modules.render.NoHurtCam;
 import net.ccbluex.liquidbounce.features.module.modules.render.Tracers;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
@@ -119,7 +119,7 @@ public abstract class MixinEntityRenderer {
                     MovingObjectPosition movingobjectposition = this.mc.theWorld.rayTraceBlocks(new Vec3(d0 + (double) f3, d1 + (double) f4, d2 + (double) f5), new Vec3(d0 - d4 + (double) f3 + (double) f5, d1 - d6 + (double) f4, d2 - d5 + (double) f5));
                     if (movingobjectposition != null) {
                         double d7 = movingobjectposition.hitVec.distanceTo(new Vec3(d0, d1, d2));
-                        if (d7 < d3 && !CameraView.clipValue.get()) {
+                        if (d7 < d3 && (!ca.getState() || (ca.getState() && !CameraView.clipValue.get()))) {
                             d3 = d7;
                         }
                     }
@@ -258,7 +258,7 @@ public abstract class MixinEntityRenderer {
             final Reach reach = (Reach) LiquidBounce.moduleManager.getModule(Reach.class);
 
             double d0 = reach.getState() ? reach.getMaxRange() : (double) this.mc.playerController.getBlockReachDistance();
-            this.mc.objectMouseOver = entity.rayTrace(reach.getState() ? reach.getBuildReachValue().get() : d0, p_getMouseOver_1_);
+            this.mc.objectMouseOver = entity.rayTrace(reach.getState() ? Reach.buildReachValue.get() : d0, p_getMouseOver_1_);
             double d1 = d0;
             Vec3 vec3 = entity.getPositionEyes(p_getMouseOver_1_);
             boolean flag = false;
@@ -274,7 +274,7 @@ public abstract class MixinEntityRenderer {
             }
 
             if (reach.getState()) {
-                d1 = reach.getCombatReachValue().get();
+                d1 = Reach.combatReachValue.get();
 
                 final MovingObjectPosition movingObjectPosition = entity.rayTrace(d1, p_getMouseOver_1_);
 
@@ -317,7 +317,7 @@ public abstract class MixinEntityRenderer {
                 }
             }
 
-            if (this.pointedEntity != null && flag && vec3.distanceTo(vec33) > (reach.getState() ? reach.getCombatReachValue().get() : 3.0D)) {
+            if (this.pointedEntity != null && flag && vec3.distanceTo(vec33) > (reach.getState() ? Reach.combatReachValue.get() : 3.0D)) {
                 this.pointedEntity = null;
                 this.mc.objectMouseOver = new MovingObjectPosition(MovingObjectPosition.MovingObjectType.MISS, vec33, (EnumFacing) null, new BlockPos(vec33));
             }

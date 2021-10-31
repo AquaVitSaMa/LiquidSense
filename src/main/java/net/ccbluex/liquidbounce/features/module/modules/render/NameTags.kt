@@ -5,7 +5,8 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.render
 
-import me.AquaVit.liquidSense.utils.module.Particles.roundToPlace
+import me.aquavit.liquidsense.modules.misc.Teams
+import me.aquavit.liquidsense.utils.module.Particles.roundToPlace
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.Render2DEvent
@@ -14,12 +15,11 @@ import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot
-import net.ccbluex.liquidbounce.features.module.modules.misc.Teams
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import me.AquaVit.liquidSense.utils.entity.EntityUtils
+import me.aquavit.liquidsense.utils.entity.EntityUtils
 import net.ccbluex.liquidbounce.utils.render.ColorUtils
 import net.ccbluex.liquidbounce.utils.render.ColorUtils.rainbow
-import me.AquaVit.liquidSense.utils.render.GLUtils
+import me.aquavit.liquidsense.utils.render.GLUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils.*
 import net.ccbluex.liquidbounce.value.*
@@ -60,7 +60,6 @@ class NameTags : Module() {
     private val tm = BoolValue("TeamColor", true)
 
     private val positions: MutableList<Vec3> = ArrayList()
-    val teams = LiquidBounce.moduleManager[Teams::class.java] as Teams
 
 
     @EventTarget
@@ -220,7 +219,7 @@ class NameTags : Module() {
                         "§7"
                     } else if (ent is EntityPlayer && EntityUtils.isFriend(ent)) {
                         "§9"
-                    } else if (teams.isInYourTeam(ent)) {
+                    } else if (Teams.isInYourTeam(ent)) {
                         "§a"
                     } else if (ent.isSneaking) {
                         "§c"
@@ -338,12 +337,7 @@ class NameTags : Module() {
             ""
         }
         var team: String
-        val Teams = LiquidBounce.moduleManager.getModule("Teams") as Teams?
-        team = if (Teams!!.isInYourTeam(entity) && Teams.state) {
-            "\u00a7b[TEAM]"
-        } else {
-            ""
-        }
+        team = if (Teams.isInYourTeam(entity) && LiquidBounce.moduleManager.getModule(Teams::class.java)!!.state) "\u00a7b[TEAM]" else ""
         val RenderManager = mc.renderManager
         if (team + bot == "") team = "\u00a7a"
         val lol = team + bot + tag

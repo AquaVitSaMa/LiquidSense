@@ -10,7 +10,7 @@ import net.ccbluex.liquidbounce.event.Listenable
 import net.ccbluex.liquidbounce.event.SessionEvent
 import net.ccbluex.liquidbounce.ui.client.altmanager.sub.GuiDonatorCape
 import net.ccbluex.liquidbounce.utils.ClientUtils
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance
+import me.aquavit.liquidsense.utils.mc.MinecraftInstance
 import net.ccbluex.liquidbounce.utils.login.UserUtils
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly

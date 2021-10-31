@@ -1,20 +1,21 @@
 package net.ccbluex.liquidbounce.features.module.modules.combat
 
+import me.aquavit.liquidsense.modules.combat.NoFriends
+import me.aquavit.liquidsense.modules.misc.Teams
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot
-import net.ccbluex.liquidbounce.features.module.modules.misc.Teams
 import net.ccbluex.liquidbounce.features.module.modules.player.Blink
 import net.ccbluex.liquidbounce.features.module.modules.render.FreeCam
-import me.AquaVit.liquidSense.utils.entity.EntityUtils
+import me.aquavit.liquidsense.utils.entity.EntityUtils
 import net.ccbluex.liquidbounce.utils.OtherRotationUtils
 import net.ccbluex.liquidbounce.utils.RaycastUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
-import me.AquaVit.liquidSense.utils.misc.RandomUtils
-import net.ccbluex.liquidbounce.utils.extensions.PlayerExtensionUtils
+import me.aquavit.liquidsense.utils.misc.RandomUtils
+import me.aquavit.liquidsense.utils.extensions.PlayerExtensionUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils
 import net.ccbluex.liquidbounce.value.BoolValue
@@ -539,7 +540,7 @@ class Aura : Module() {
 
                 val teams = LiquidBounce.moduleManager[Teams::class.java] as Teams
 
-                return !teams.state || !teams.isInYourTeam(entity)
+                return !teams.state || !Teams.isInYourTeam(entity)
             }
 
             return EntityUtils.targetMobs && EntityUtils.isMob(entity) || EntityUtils.targetAnimals &&

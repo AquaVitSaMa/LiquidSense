@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.script.api.global
 
-import net.ccbluex.liquidbounce.utils.item.ItemUtils
+import me.aquavit.liquidsense.utils.item.ItemUtils
 import net.minecraft.item.ItemStack
 
 /**

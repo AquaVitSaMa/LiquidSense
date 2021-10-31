@@ -13,7 +13,7 @@ import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
-import me.AquaVit.liquidSense.utils.entity.EntityUtils;
+import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.utils.render.shader.FramebufferShader;
@@ -39,7 +39,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import static me.AquaVit.liquidSense.utils.render.AnimationUtils.getHealthColor;
+import static me.aquavit.liquidsense.utils.render.AnimationUtils.getHealthColor;
 
 @ModuleInfo(name = "ESP", description = "Allows you to see targets through walls.", category = ModuleCategory.RENDER)
 public class ESP extends Module {

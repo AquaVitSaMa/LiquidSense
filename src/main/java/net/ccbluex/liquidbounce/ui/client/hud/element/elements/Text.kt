@@ -13,11 +13,11 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.CPSCounter
-import me.AquaVit.liquidSense.utils.entity.EntityUtils
-import me.AquaVit.liquidSense.utils.misc.ServerUtils
+import me.aquavit.liquidsense.utils.entity.EntityUtils
+import me.aquavit.liquidsense.utils.misc.ServerUtils
 import net.ccbluex.liquidbounce.utils.render.ColorUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
-import me.AquaVit.liquidSense.utils.render.UiUtils
+import me.aquavit.liquidsense.utils.render.UiUtils
 import net.ccbluex.liquidbounce.utils.render.shader.shaders.RainbowFontShader
 import net.ccbluex.liquidbounce.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.value.*

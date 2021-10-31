@@ -12,11 +12,11 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Fly;
 import net.ccbluex.liquidbounce.features.module.modules.render.FreeCam;
-import me.AquaVit.liquidSense.utils.entity.MovementUtils;
+import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.utils.RotationUtils;
 import net.ccbluex.liquidbounce.utils.VecRotation;
 import net.ccbluex.liquidbounce.utils.block.BlockUtils;
-import me.AquaVit.liquidSense.utils.entity.FallingPlayer;
+import me.aquavit.liquidsense.utils.entity.FallingPlayer;
 import net.ccbluex.liquidbounce.utils.timer.TickTimer;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
@@ -328,10 +328,6 @@ public class NoFall extends Module {
                 off += 2;
             }
         }
-    }
-
-    public static int getJumpEffect() {
-        return mc.thePlayer.isPotionActive(Potion.jump)?mc.thePlayer.getActivePotionEffect(Potion.jump).getAmplifier() + 1:0;
     }
 
     @EventTarget

@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.command.commands;
 
-import me.AquaVit.liquidSense.modules.world.LightningCheck;
+import me.aquavit.liquidsense.modules.world.LightningCheck;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.MotionEvent;
 import net.ccbluex.liquidbounce.event.MoveEvent;
@@ -9,7 +9,7 @@ import net.ccbluex.liquidbounce.features.command.Command;
 import net.ccbluex.liquidbounce.utils.AStarCustomPathFinder;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.CustomVec3;
-import me.AquaVit.liquidSense.utils.entity.MovementUtils;
+import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.utils.timer.TimeUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.item;
 
-import me.AquaVit.liquidSense.modules.render.EnchantEffect;
+import me.aquavit.liquidsense.modules.render.EnchantEffect;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.minecraft.client.Minecraft;

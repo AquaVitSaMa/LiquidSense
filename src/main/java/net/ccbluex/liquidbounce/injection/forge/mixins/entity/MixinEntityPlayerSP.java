@@ -5,14 +5,14 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
+import me.aquavit.liquidsense.modules.fun.Derp;
+import me.aquavit.liquidsense.modules.render.NoSwing;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
-import net.ccbluex.liquidbounce.features.module.modules.fun.Derp;
 import net.ccbluex.liquidbounce.features.module.modules.movement.InventoryMove;
 import net.ccbluex.liquidbounce.features.module.modules.movement.NoSlow;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Sprint;
-import net.ccbluex.liquidbounce.features.module.modules.render.NoSwing;
 import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;
 import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
 import net.ccbluex.liquidbounce.utils.Rotation;
@@ -158,9 +158,8 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
                 float lastReportedYaw = RotationUtils.serverRotation.getYaw();
                 float lastReportedPitch = RotationUtils.serverRotation.getPitch();
 
-                final Derp derp = (Derp) LiquidBounce.moduleManager.getModule(Derp.class);
-                if (derp.getState()) {
-                    float[] rot = derp.getRotation();
+                if (LiquidBounce.moduleManager.getModule(Derp.class).getState()) {
+                    float[] rot = Derp.getRotation();
                     yaw = rot[0];
                     pitch = rot[1];
                 }
@@ -219,12 +218,10 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
 
     @Inject(method = "swingItem", at = @At("HEAD"), cancellable = true)
     private void swingItem(CallbackInfo callbackInfo) {
-        final NoSwing noSwing = (NoSwing) LiquidBounce.moduleManager.getModule(NoSwing.class);
-
-        if (noSwing.getState()) {
+        if (LiquidBounce.moduleManager.getModule(NoSwing.class).getState()) {
             callbackInfo.cancel();
 
-            if (!noSwing.getServerSideValue().get())
+            if (!NoSwing.serverSideValue.get())
                 this.sendQueue.addToSendQueue(new C0APacketAnimation());
         }
     }

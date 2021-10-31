@@ -5,10 +5,10 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
-import me.AquaVit.liquidSense.utils.render.BlurBuffer;
+import me.aquavit.liquidsense.modules.render.AntiBlind;
+import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
-import net.ccbluex.liquidbounce.features.module.modules.render.AntiBlind;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
 import net.ccbluex.liquidbounce.utils.ClassUtils;
 import net.minecraft.client.Minecraft;
@@ -111,9 +111,7 @@ public abstract class MixinGuiInGame extends Gui {
 
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     private void renderPumpkinOverlay(final CallbackInfo callbackInfo) {
-        final AntiBlind antiBlind = (AntiBlind) LiquidBounce.moduleManager.getModule(AntiBlind.class);
-
-        if (antiBlind.getState() && antiBlind.getPumpkinEffect().get())
+        if (LiquidBounce.moduleManager.getModule(AntiBlind.class).getState() && AntiBlind.pumpkinEffect.get())
             callbackInfo.cancel();
     }
 }

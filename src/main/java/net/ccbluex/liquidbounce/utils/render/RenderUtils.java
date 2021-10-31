@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.utils.render;
 
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import me.AquaVit.liquidSense.utils.mc.MinecraftInstance;
+import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.utils.block.BlockUtils;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -82,6 +82,55 @@ public final class RenderUtils extends MinecraftInstance {
         g2.dispose();
  */
         return bi2;
+    }
+
+    public static void drawEntityOnScreen(float yaw, float pitch, EntityLivingBase entityLivingBase) {
+        GlStateManager.resetColor();
+        GL11.glColor4f(1F, 1F, 1F, 1F);
+        GlStateManager.enableColorMaterial();
+        GlStateManager.pushMatrix();
+        GlStateManager.translate(0F, 0F, 50F);
+        GlStateManager.scale(-50F, 50F, 50F);
+        GlStateManager.rotate(180F, 0F, 0F, 1F);
+
+        float renderYawOffset = entityLivingBase.renderYawOffset;
+        float rotationYaw = entityLivingBase.rotationYaw;
+        float rotationPitch = entityLivingBase.rotationPitch;
+        float prevRotationYawHead = entityLivingBase.prevRotationYawHead;
+        float rotationYawHead = entityLivingBase.rotationYawHead;
+
+        GlStateManager.rotate(135F, 0F, 1F, 0F);
+        RenderHelper.enableStandardItemLighting();
+        GlStateManager.rotate(-135F, 0F, 1F, 0F);
+        GlStateManager.rotate((float) (-Math.atan(pitch / 40F) * 20.0F), 1F, 0F, 0F);
+
+        entityLivingBase.renderYawOffset = (float) (Math.atan(yaw / 40F) * 20F);
+        entityLivingBase.rotationYaw = (float) (Math.atan(yaw / 40F) * 40F);
+        entityLivingBase.rotationPitch = (float) (-Math.atan(pitch / 40F) * 20F);
+        entityLivingBase.rotationYawHead = entityLivingBase.rotationYaw;
+        entityLivingBase.prevRotationYawHead = entityLivingBase.rotationYaw;
+
+        GlStateManager.translate(0F, 0F, 0F);
+
+        RenderManager renderManager = mc.getRenderManager();
+        renderManager.setPlayerViewY(180F);
+        renderManager.setRenderShadow(false);
+        renderManager.renderEntityWithPosYaw(entityLivingBase, 0.0, 0.0, 0.0, 0F, 1F);
+        renderManager.setRenderShadow(true);
+
+        entityLivingBase.renderYawOffset = renderYawOffset;
+        entityLivingBase.rotationYaw = rotationYaw;
+        entityLivingBase.rotationPitch = rotationPitch;
+        entityLivingBase.prevRotationYawHead = prevRotationYawHead;
+        entityLivingBase.rotationYawHead = rotationYawHead;
+
+        GlStateManager.popMatrix();
+        RenderHelper.disableStandardItemLighting();
+        GlStateManager.disableRescaleNormal();
+        GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
+        GlStateManager.disableTexture2D();
+        GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
+        GlStateManager.resetColor();
     }
 
     public static boolean isInViewFrustrum(Entity entity) {

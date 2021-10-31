@@ -5,12 +5,10 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
-import me.AquaVit.liquidSense.modules.render.Cape;
+import me.aquavit.liquidsense.modules.render.Cape;
+import me.aquavit.liquidsense.modules.render.NoFOV;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.cape.CapeAPI;
-import net.ccbluex.liquidbounce.cape.CapeInfo;
 import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
-import net.ccbluex.liquidbounce.features.module.modules.render.NoFOV;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.resources.DefaultPlayerSkin;
@@ -29,8 +27,6 @@ import java.util.Objects;
 @SideOnly(Side.CLIENT)
 public abstract class MixinAbstractClientPlayer extends MixinEntityPlayer {
 
-    private CapeInfo capeInfo;
-
     @Inject(method = "getLocationCape", at = @At("HEAD"), cancellable = true)
     private void getCape(CallbackInfoReturnable<ResourceLocation> callbackInfoReturnable) {
         final Cape ca = (Cape) LiquidBounce.moduleManager.getModule(Cape.class);
@@ -40,24 +36,14 @@ public abstract class MixinAbstractClientPlayer extends MixinEntityPlayer {
             if(getUniqueID().equals(Minecraft.getMinecraft().thePlayer.getUniqueID())){
                 callbackInfoReturnable.setReturnValue(cape);
             }
-        } else {
-            if(!CapeAPI.INSTANCE.hasCapeService())
-                return;
-
-            if (capeInfo == null)
-                capeInfo = CapeAPI.INSTANCE.loadCape(getUniqueID());
-
-            if(capeInfo != null && capeInfo.isCapeAvailable())
-                callbackInfoReturnable.setReturnValue(capeInfo.getResourceLocation());
         }
     }
 
     @Inject(method = "getFovModifier", at = @At("HEAD"), cancellable = true)
     private void getFovModifier(CallbackInfoReturnable<Float> callbackInfoReturnable) {
-        final NoFOV fovModule = (NoFOV) LiquidBounce.moduleManager.getModule(NoFOV.class);
 
-        if(fovModule.getState()) {
-            float newFOV = fovModule.getFovValue().get();
+        if(LiquidBounce.moduleManager.getModule(NoFOV.class).getState()) {
+            float newFOV = NoFOV.fovValue.get();
 
             if(!this.isUsingItem()) {
                 callbackInfoReturnable.setReturnValue(newFOV);

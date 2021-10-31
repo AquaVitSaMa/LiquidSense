@@ -17,7 +17,7 @@ import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import net.ccbluex.liquidbounce.ui.elements.GuiPasswordField
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.ClientUtils
-import me.AquaVit.liquidSense.utils.misc.MiscUtils
+import me.aquavit.liquidsense.utils.misc.MiscUtils
 import net.mcleaks.MCLeaks
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.GuiButton

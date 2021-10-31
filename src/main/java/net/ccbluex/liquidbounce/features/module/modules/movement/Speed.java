@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import me.AquaVit.liquidSense.modules.movement.Stair;
+import me.aquavit.liquidsense.modules.movement.Stair;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -17,7 +17,7 @@ import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMod
 //import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.other.*;
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.aquavit.*;
 //import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.spartan.*;
-import me.AquaVit.liquidSense.utils.entity.MovementUtils;
+import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
