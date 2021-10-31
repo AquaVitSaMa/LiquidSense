@@ -37,6 +37,7 @@ public class LiquidSense {
 
     private void loadModules(){
         this.liquidSenseModules = new ArrayList<>();
+        liquidSenseModules.add(PlayerCamera.class);
         liquidSenseModules.add(SuperKnockback.class);
         liquidSenseModules.add(Teams.class);
         liquidSenseModules.add(Projectiles.class);

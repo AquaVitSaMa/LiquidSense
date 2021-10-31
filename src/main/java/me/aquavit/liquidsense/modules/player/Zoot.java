@@ -24,7 +24,7 @@ public class Zoot extends Module {
         if (badEffectsValue.get())
             for (PotionEffect potion : mc.thePlayer.getActivePotionEffects())
                 if (potion != null && hasBadEffect()) // TODO: Check current potion
-                    for (int i=0; i< potion.getDuration() / 20; i++)
+                    for (int i=0; i< potion.getDuration() / 20; ++i)
                         mc.getNetHandler().addToSendQueue(new C03PacketPlayer());
 
         if (fireValue.get())
