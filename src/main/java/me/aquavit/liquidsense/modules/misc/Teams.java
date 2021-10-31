@@ -32,9 +32,8 @@ public class Teams extends Module {
                 ItemStack entityHead = entityPlayer.inventory.armorInventory[3];
                 ItemArmor entityItemArmor = (ItemArmor)myHead.getItem();
 
-                if(myItemArmor.getColor(myHead) == entityItemArmor.getColor(entityHead)){
+                if(myItemArmor.getColor(myHead) == entityItemArmor.getColor(entityHead))
                     return true;
-                }
             }
         }
 

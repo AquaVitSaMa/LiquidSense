@@ -60,7 +60,6 @@ class NameTags : Module() {
     private val tm = BoolValue("TeamColor", true)
 
     private val positions: MutableList<Vec3> = ArrayList()
-    val teams = LiquidBounce.moduleManager[Teams::class.java] as Teams
 
 
     @EventTarget
@@ -338,12 +337,7 @@ class NameTags : Module() {
             ""
         }
         var team: String
-        val teams = LiquidBounce.moduleManager.getModule("Teams") as Teams
-        team = if (Teams.isInYourTeam(entity) && teams.state) {
-            "\u00a7b[TEAM]"
-        } else {
-            ""
-        }
+        team = if (Teams.isInYourTeam(entity) && LiquidBounce.moduleManager.getModule(Teams::class.java)!!.state) "\u00a7b[TEAM]" else ""
         val RenderManager = mc.renderManager
         if (team + bot == "") team = "\u00a7a"
         val lol = team + bot + tag
