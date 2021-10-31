@@ -30,7 +30,7 @@ public class ForgeNetworkTransformer implements IClassTransformer {
     public byte[] transform(String name, String transformedName, byte[] basicClass) {
         if(name.equals("net.minecraftforge.fml.common.network.handshake.NetworkDispatcher")) {
             try {
-                final ClassNode classNode = ClassUtils.INSTANCE.toClassNode(basicClass);
+                final ClassNode classNode = ClassUtils.toClassNode(basicClass);
 
                 classNode.methods.stream().filter(methodNode -> methodNode.name.equals("handleVanilla")).forEach(methodNode -> {
                     final LabelNode labelNode = new LabelNode();
@@ -44,7 +44,7 @@ public class ForgeNetworkTransformer implements IClassTransformer {
                     ));
                 });
 
-                return ClassUtils.INSTANCE.toBytes(classNode);
+                return ClassUtils.toBytes(classNode);
             }catch(final Throwable throwable) {
                 throwable.printStackTrace();
             }
@@ -52,7 +52,7 @@ public class ForgeNetworkTransformer implements IClassTransformer {
 
         if(name.equals("net.minecraftforge.fml.common.network.handshake.HandshakeMessageHandler")) {
             try {
-                final ClassNode classNode = ClassUtils.INSTANCE.toClassNode(basicClass);
+                final ClassNode classNode = ClassUtils.toClassNode(basicClass);
 
                 classNode.methods.stream().filter(method -> method.name.equals("channelRead0")).forEach(methodNode -> {
                     final LabelNode labelNode = new LabelNode();
@@ -68,7 +68,7 @@ public class ForgeNetworkTransformer implements IClassTransformer {
                     ));
                 });
 
-                return ClassUtils.INSTANCE.toBytes(classNode);
+                return ClassUtils.toBytes(classNode);
             }catch(final Throwable throwable) {
                 throwable.printStackTrace();
             }
