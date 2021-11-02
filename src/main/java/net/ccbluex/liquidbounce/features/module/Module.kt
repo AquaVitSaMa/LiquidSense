@@ -10,6 +10,7 @@ import net.ccbluex.liquidbounce.event.Listenable
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Print
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.NotifyType
 import net.ccbluex.liquidbounce.utils.render.ColorUtils.stripColor
 import net.ccbluex.liquidbounce.value.Value
 import net.minecraft.client.audio.PositionedSoundRecord
@@ -58,7 +59,7 @@ open class Module() : MinecraftInstance(), Listenable {
                 LiquidBounce.hud.addPrint(Print(" $name${if (value) " Enabled" else " Disabled"}",3000f, Print.Type.state))
                 mc.soundHandler.playSound(PositionedSoundRecord.create(ResourceLocation("random.click"),
                         1F))
-                LiquidBounce.hud.addNotification(Notification("${if (value) "Enabled " else "Disabled "}$name"," §o("+description+")",3000f, Notification.Type.None))
+                LiquidBounce.hud.addNotification(Notification("${if (value) "Enabled " else "Disabled "}$name","Toggled", NotifyType.SUCCESS))
             }
 
             // Call on enabled or disabled

@@ -61,6 +61,30 @@ public final class RenderUtils extends MinecraftInstance {
         return (new Color(r, g, b, alpha)).getRGB();
     }
 
+    // Notification
+    public static void drawShader(float x, float y, float width, float height) {
+        ScaledResolution sr = new ScaledResolution(mc);
+        drawTexturedRect(x - 9.0f, y - 9.0f, 9.0f, 9.0f, "paneltopleft", sr);
+        drawTexturedRect(x - 9.0f, y + height, 9.0f, 9.0f, "panelbottomleft", sr);
+        drawTexturedRect(x + width, y + height, 9.0f, 9.0f, "panelbottomright", sr);
+        drawTexturedRect(x + width, y - 9.0f, 9.0f, 9.0f, "paneltopright", sr);
+        drawTexturedRect(x - 9.0f, y, 9.0f, height, "panelleft", sr);
+        drawTexturedRect(x + width, y, 9.0f, height, "panelright", sr);
+        drawTexturedRect(x, y - 9.0f, width, 9.0f, "paneltop", sr);
+        drawTexturedRect(x, y + height, width, 9.0f, "panelbottom", sr);
+    }
+    public static void drawTexturedRect(float x, float y, float width, float height, String image, ScaledResolution sr) {
+        GL11.glPushMatrix();
+        GlStateManager.enableBlend();
+        GlStateManager.disableAlpha();
+        mc.getTextureManager().bindTexture(new ResourceLocation("liquidbounce/shader/" + image + ".png"));
+        GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
+        Gui.drawModalRectWithCustomSizedTexture((int)x, (int)y, 0.0f, 0.0f, (int)width, (int)height, (int)width, (int)height);
+        GlStateManager.disableBlend();
+        GlStateManager.enableAlpha();
+        GL11.glPopMatrix();
+    }
+
     public static BufferedImage convertCircular(BufferedImage bi1, int min) {
         BufferedImage bi2 = new BufferedImage(min, min, BufferedImage.TYPE_4BYTE_ABGR);
         Ellipse2D.Double shape = new Ellipse2D.Double(0, 0, min, min);
