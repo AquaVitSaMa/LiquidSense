@@ -11,6 +11,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
 import net.ccbluex.liquidbounce.utils.ClassUtils;
+import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;
@@ -30,12 +31,18 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
+import java.awt.*;
+
 @Mixin(GuiIngame.class)
 @SideOnly(Side.CLIENT)
 public abstract class MixinGuiInGame extends Gui {
 
     @Shadow
     protected RenderItem itemRenderer;
+
+    private double slot = 0.0D;
+    double speed = 1.0D;
+    int lastSlot = 0;
 
     @Overwrite
     protected void renderHotbarItem(int index, int xPos, int yPos, float partialTicks, EntityPlayer player){
@@ -59,17 +66,16 @@ public abstract class MixinGuiInGame extends Gui {
         }
     }
 
-
     @Inject(method = "renderScoreboard", at = @At("HEAD"), cancellable = true)
     private void renderScoreboard(CallbackInfo callbackInfo) {
         if (LiquidBounce.moduleManager.getModule(HUD.class).getState())
             callbackInfo.cancel();
     }
 
-
     @Inject(method = "renderTooltip", at = @At("HEAD"), cancellable = true)
     private void renderTooltip(ScaledResolution sr, float partialTicks, CallbackInfo callbackInfo) {
         final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+        int ScrollSpeed = hud.hotbarSpeed.get() - 1;
 
         if (OpenGlHelper.shadersSupported && Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer)
            BlurBuffer.updateBlurBuffer(20f,true);
@@ -77,11 +83,60 @@ public abstract class MixinGuiInGame extends Gui {
         if(Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer && hud.getState() && hud.blackHotbarValue.get()) {
             EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().getRenderViewEntity();
 
+            double currentItem = entityPlayer.inventory.currentItem;
+
+            if (hud.moreinventory.get()){
+                GlStateManager.pushMatrix();
+                GlStateManager.translate(width()/2-90,height()-25,0);
+                RenderUtils.drawBorderedRect(0,1,180,-58,1,new Color(0,0,0,255).getRGB(),new Color(0,0,0,130).getRGB());
+                RenderHelper.enableGUIStandardItemLighting();
+                //renderArmor();
+                int x2=1,x3=1,x4=1;
+                int i1,i3,i4;
+                for (i1 = 27; i1 < 36; ++i1){
+                    renderItem(i1, 1+x2, -16, Minecraft.getMinecraft().thePlayer);
+                    x2+=20;
+                }
+                for (i3 = 18; i3 < 27; ++i3){
+                    renderItem(i3, 1+x3, -36, Minecraft.getMinecraft().thePlayer);
+                    x3+=20;
+                }
+                for (i4 = 9; i4 < 18; ++i4){
+                    renderItem(i4, 1+x4, -56, Minecraft.getMinecraft().thePlayer);
+                    x4+=20;
+                }
+                RenderHelper.disableStandardItemLighting();
+                GlStateManager.popMatrix();
+            }
+
+            this.speed = (Math.abs(this.slot + 1.0D - (currentItem + 1.0D)) / (100 - ScrollSpeed));
+
+            if (Math.abs(entityPlayer.inventory.currentItem - this.slot) < this.speed) {
+                currentItem = entityPlayer.inventory.currentItem;
+            } else {
+                double motion;
+
+                if (entityPlayer.inventory.currentItem - this.slot > 0.0D) {
+                    motion = this.speed;
+                } else {
+                    motion = -this.speed;
+                }
+
+                currentItem = this.slot + motion;
+            }
+
+            this.slot = currentItem;
+            this.lastSlot = entityPlayer.inventory.currentItem;
+
             int middleScreen = sr.getScaledWidth() / 2;
 
             GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-            GuiIngame.drawRect(middleScreen - 91, sr.getScaledHeight() - 24, middleScreen + 90, sr.getScaledHeight(), Integer.MIN_VALUE);
-            GuiIngame.drawRect(middleScreen - 91 - 1 + entityPlayer.inventory.currentItem * 20 + 1, sr.getScaledHeight() - 24, middleScreen - 91 - 1 + entityPlayer.inventory.currentItem * 20 + 22, sr.getScaledHeight() - 22 - 1 + 24, Integer.MAX_VALUE);
+            GuiIngame.drawRect(middleScreen - 90, sr.getScaledHeight() - 24, middleScreen + 90, sr.getScaledHeight(), Integer.MIN_VALUE);
+            GuiIngame.drawRect((int) (middleScreen - 90 + this.slot * 20), sr.getScaledHeight() - 24, (int) (middleScreen - 94 + this.slot * 20 + 24), sr.getScaledHeight() - 22 - 1 + 24, Integer.MAX_VALUE);
+
+            if (Math.abs(this.slot - this.lastSlot) <= 0.05D) {
+                this.slot = this.lastSlot;
+            }
 
             GlStateManager.enableRescaleNormal();
             GlStateManager.enableBlend();
@@ -113,5 +168,21 @@ public abstract class MixinGuiInGame extends Gui {
     private void renderPumpkinOverlay(final CallbackInfo callbackInfo) {
         if (LiquidBounce.moduleManager.getModule(AntiBlind.class).getState() && AntiBlind.pumpkinEffect.get())
             callbackInfo.cancel();
+    }
+
+    private int width() {
+        return new ScaledResolution(Minecraft.getMinecraft()).getScaledWidth();
+    }
+
+    private int height() {
+        return new ScaledResolution(Minecraft.getMinecraft()).getScaledHeight();
+    }
+
+    private void renderItem(int i, int x, int y , EntityPlayer player) {
+        ItemStack itemstack = player.inventory.mainInventory[i];
+        if (itemstack != null) {
+            Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(itemstack, x, y);
+            Minecraft.getMinecraft().getRenderItem().renderItemOverlays(Minecraft.getMinecraft().fontRendererObj, itemstack, x-1, y-1);
+        }
     }
 }
