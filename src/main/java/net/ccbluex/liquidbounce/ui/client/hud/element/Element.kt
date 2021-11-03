@@ -84,7 +84,7 @@ abstract class Element(var x: Double = 2.0, var y: Double = 2.0, scale: Float = 
         get() = javaClass.declaredFields.map { valueField ->
             valueField.isAccessible = true
             valueField[this]
-        }.filterIsInstance<Value<*>>().filter { it.isSupported }
+        }.filterIsInstance<Value<*>>()
 
     /**
      * Called when element created

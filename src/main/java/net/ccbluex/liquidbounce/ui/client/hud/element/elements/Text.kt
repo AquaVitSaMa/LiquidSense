@@ -75,23 +75,13 @@ class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
     private val animationDelay = FloatValue("AnimationDelay", 1F, 0.1F, 5F)
     private val shadow = BoolValue("Shadow", false)
     private val outline = BoolValue("Outline",false)
-    private val rectMode =
-            object : ListValue("RectMode", arrayOf("Custom", "OneTap", "Skeet","OnlyWhite","NeverLose"), "Skeet"){
-                override fun changeElement() {
-                    username.isSupported = (get() == "NeverLose").also {
-                        ping.isSupported = it;fps.isSupported = it;ip.isSupported = it;time.isSupported = it;
-                    }
-                    redValue.isSupported = (get() != "NeverLose").also {
-                        greenValue.isSupported = it;blueValue.isSupported = it;rainbow.isSupported = it;rainbowX.isSupported = it;rainbowY.isSupported = it;animation.isSupported = it;animationDelay.isSupported = it;outline.isSupported = it;shadow.isSupported = it;
-                    }
-                }
-            }
+    private val rectMode = ListValue("RectMode", arrayOf("Custom", "OneTap", "Skeet","OnlyWhite","NeverLose"), "Skeet")
     private var fontValue = FontValue("Font", Fonts.font40)
-    private var username = BoolValue("Username",false)
-    private var ping = BoolValue("Ping",false)
-    private var fps = BoolValue("FPS",false)
-    private var ip = BoolValue("IP",false)
-    private var time = BoolValue("Time",false)
+    private var username = BoolValue("Username",false).displayable{rectMode.get() == "NeverLose"}
+    private var ping = BoolValue("Ping",false).displayable{rectMode.get() == "NeverLose"}
+    private var fps = BoolValue("FPS",false).displayable{rectMode.get() == "NeverLose"}
+    private var ip = BoolValue("IP",false).displayable{rectMode.get() == "NeverLose"}
+    private var time = BoolValue("Time",false).displayable{rectMode.get() == "NeverLose"}
 
 
     private var editMode = false

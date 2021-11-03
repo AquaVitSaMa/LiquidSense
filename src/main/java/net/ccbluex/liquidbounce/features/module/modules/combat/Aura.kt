@@ -82,16 +82,7 @@ class Aura : Module() {
     private val priorityValue = ListValue("Priority", arrayOf("Health", "Distance", "Direction", "LivingTime"), "Distance")
     private val targetModeValue = ListValue("TargetMode", arrayOf("Single", "Switch", "Multi"), "Switch")
     private val rotations = ListValue("RotationMode", arrayOf("Vanilla", "Other", "BackTrack"), "BackTrack")
-    private val AutoBlockValue =
-            object : ListValue("AutoBlockMode",
-                    arrayOf("Off", "Vanilla", "Both", "Pos", "Click", "AAC"), "Vanilla") {
-                override fun changeElement() {
-                    BlockRangeValue.isSupported = (get() == "Off").also {
-                        delayedBlockValue.isSupported = it;blockRate.isSupported = it;interactAutoBlockValue.isSupported = it
-                    }
-                }
-
-            }
+    private val AutoBlockValue = ListValue("AutoBlockMode", arrayOf("Off", "Vanilla", "Both", "Pos", "Click", "AAC"), "Vanilla")
     // Bypass
     private val swingValue = BoolValue("Swing", true)
     private val keepSprintValue = BoolValue("KeepSprint", true)

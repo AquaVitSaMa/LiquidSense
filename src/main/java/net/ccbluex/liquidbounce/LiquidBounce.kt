@@ -188,14 +188,6 @@ object LiquidBounce {
      */
     fun stopClient() {
 
-        for ( module in moduleManager.modules) {
-            val moduleValues: List<Value<*>> = module.values
-            for( value in moduleValues) {
-                value.isSupported = true
-            }
-        }
-
-
         // Call client shutdown
         eventManager.callEvent(ClientShutdownEvent())
 

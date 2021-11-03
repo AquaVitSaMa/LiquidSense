@@ -45,30 +45,29 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
     private val randow2BlueValue = IntegerValue("MotionRainbow-B", 120, 0, 120)
     private val rainbowX = FloatValue("Rainbow-X", -1000F, -2000F, 2000F)
     private val rainbowY = FloatValue("Rainbow-Y", -1000F, -2000F, 2000F)
-    private val colorModeValue =
-            object : ListValue("Text-Color", arrayOf("Custom", "Random", "Rainbow","OtherRainbow","ALLRainbow","Bainbow","TwoRainbow","OriginalRainbow"), "OtherRainbow"){
-                override fun changeElement() {
-                    colorRedValue.isSupported = (get() == "Custom").also {
-                        colorGreenValue.isSupported = it;colorBlueValue.isSupported = it;
-                    }
-                }
-            }
-    private val colorRedValue = IntegerValue("Text-R", 0, 0, 255)
-    private val colorGreenValue = IntegerValue("Text-G", 111, 0, 255)
-    private val colorBlueValue = IntegerValue("Text-B", 255, 0, 255)
-    private val rectColorModeValue =
-            object : ListValue("Rect-Color", arrayOf("Custom", "Random", "Rainbow","OtherRainbow","ALLRainbow","Bainbow","TwoRainbow","OriginalRainbow"), "OtherRainbow"){
-                override fun changeElement() {
-                    rectColorRedValue.isSupported = (get() == "Custom").also {
-                        rectColorGreenValue.isSupported = it;rectColorBlueValue.isSupported = it;rectColorBlueAlpha.isSupported =
-                            it
-                    }
-                }
-            }
-    private val rectColorRedValue = IntegerValue("Rect-R", 255, 0, 255)
-    private val rectColorGreenValue = IntegerValue("Rect-G", 255, 0, 255)
-    private val rectColorBlueValue = IntegerValue("Rect-B", 255, 0, 255)
-    private val rectColorBlueAlpha = IntegerValue("Rect-Alpha", 255, 0, 255)
+    private val colorModeValue = ListValue("Text-Color", arrayOf("Custom", "Random", "Rainbow","OtherRainbow","ALLRainbow","Bainbow","TwoRainbow","OriginalRainbow"), "OtherRainbow")
+    private val colorRedValue = IntegerValue("Text-R", 0, 0, 255).displayable{
+        colorModeValue.get() == "Custom"
+    }
+    private val colorGreenValue = IntegerValue("Text-G", 111, 0, 255).displayable{
+        colorModeValue.get() == "Custom"
+    }
+    private val colorBlueValue = IntegerValue("Text-B", 255, 0, 255).displayable{
+        colorModeValue.get() == "Custom"
+    }
+    private val rectColorModeValue = ListValue("Rect-Color", arrayOf("Custom", "Random", "Rainbow","OtherRainbow","ALLRainbow","Bainbow","TwoRainbow","OriginalRainbow"), "OtherRainbow")
+    private val rectColorRedValue = IntegerValue("Rect-R", 255, 0, 255).displayable{
+        rectColorModeValue.get() == "Custom"
+    }
+    private val rectColorGreenValue = IntegerValue("Rect-G", 255, 0, 255).displayable{
+        rectColorModeValue.get() == "Custom"
+    }
+    private val rectColorBlueValue = IntegerValue("Rect-B", 255, 0, 255).displayable{
+        rectColorModeValue.get() == "Custom"
+    }
+    private val rectColorBlueAlpha = IntegerValue("Rect-Alpha", 255, 0, 255).displayable{
+        rectColorModeValue.get() == "Custom"
+    }
     private val saturationValue = FloatValue("Random-Saturation", 0.9f, 0f, 1f)
     private val brightnessValue = FloatValue("Random-Brightness", 1f, 0f, 1f)
     private val TwoRainbow = FloatValue("TwoRainbow", 1f, 0f, 1f)
@@ -98,20 +97,12 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
         return out
     }
     private val shadow = BoolValue("ShadowText", true)
-    private val backgroundColorModeValue =
-            object : ListValue("Background-Color", arrayOf("Custom", "Random", "Rainbow","OtherRainbow","ALLRainbow","Bainbow","TwoRainbow","OriginalRainbow"), "Custom"){
-                override fun changeElement() {
-                    backgroundColorRedValue.isSupported = (get() == "Custom").also {
-                        backgroundColorGreenValue.isSupported = it;backgroundColorBlueValue.isSupported = it;backgroundColorAlphaValue.isSupported =
-                            it
-                    }
-                }
-            }
+    private val backgroundColorModeValue = ListValue("Background-Color", arrayOf("Custom", "Random", "Rainbow","OtherRainbow","ALLRainbow","Bainbow","TwoRainbow","OriginalRainbow"), "Custom")
 
-    private val backgroundColorRedValue = IntegerValue("Background-R", 0, 0, 255)
-    private val backgroundColorGreenValue = IntegerValue("Background-G", 0, 0, 255)
-    private val backgroundColorBlueValue = IntegerValue("Background-B", 0, 0, 255)
-    private val backgroundColorAlphaValue = IntegerValue("Background-Alpha", 0, 0, 255)
+    private val backgroundColorRedValue = IntegerValue("Background-R", 0, 0, 255).displayable { backgroundColorModeValue.get() == "Custom" }
+    private val backgroundColorGreenValue = IntegerValue("Background-G", 0, 0, 255).displayable { backgroundColorModeValue.get() == "Custom" }
+    private val backgroundColorBlueValue = IntegerValue("Background-B", 0, 0, 255).displayable { backgroundColorModeValue.get() == "Custom" }
+    private val backgroundColorAlphaValue = IntegerValue("Background-Alpha", 0, 0, 255).displayable { backgroundColorModeValue.get() == "Custom" }
     private val rectValue = ListValue("Rect", arrayOf("None", "Left", "Right" , "RLeft"), "RLeft")
     private val rlefttop = BoolValue("RLeftTop", false)
     private val rleftright = BoolValue("RLeftRight", true)
