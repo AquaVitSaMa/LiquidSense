@@ -13,13 +13,13 @@ import java.io.*;
 import java.util.Iterator;
 import java.util.Map;
 
-public class setNameConfig  extends FileConfig {
+public class SetNameConfig extends FileConfig {
     /**
      * Constructor of config
      *
      * @param file of config
      */
-    public setNameConfig(File file) {
+    public SetNameConfig(File file) {
         super(file);
     }
 
