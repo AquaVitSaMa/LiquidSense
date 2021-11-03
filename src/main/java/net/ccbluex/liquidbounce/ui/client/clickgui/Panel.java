@@ -9,7 +9,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.render.ClickGUI;
 import net.ccbluex.liquidbounce.ui.client.clickgui.elements.Element;
 import net.ccbluex.liquidbounce.ui.client.clickgui.style.Style;
-import net.ccbluex.liquidbounce.ui.client.clickgui.style.styles.LiquidSenseStyle1;
+import net.ccbluex.liquidbounce.ui.client.clickgui.style.styles.Lnk;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;
@@ -93,14 +93,8 @@ public abstract class Panel extends MinecraftInstance {
             if (++count > scroll && count < scroll + (maxElements + 1) && scroll < elements.size() && elementsHeight < getElementsHeight() + y2) {
                 element.setLocation(x, y);
                 element.setWidth(getWidth());
-                if (y <= getY() + fade + y2) {
+                if (y <= getY() + fade + y2)
                     element.drawScreen(mouseX, mouseY, button);
-                    final Style style = LiquidBounce.clickGui.style;
-                    if (style instanceof LiquidSenseStyle1) {
-                        y += ((LiquidSenseStyle1) style).settingHeight;
-                        y2 += ((LiquidSenseStyle1) style).settingHeight;
-                    }
-                }
 
                 y += element.getHeight() + 1;
                 elementsHeight = y + 2 - (this.y + height);
@@ -141,7 +135,7 @@ public abstract class Panel extends MinecraftInstance {
 
     public boolean handleScroll(int mouseX, int mouseY, int wheel) {
         final int maxElements = ((ClickGUI) Objects.requireNonNull(LiquidBounce.moduleManager.getModule(ClickGUI.class))).maxElementsValue.get();
-        final boolean liquidsense = LiquidBounce.clickGui.style instanceof LiquidSenseStyle1;
+        final boolean liquidsense = LiquidBounce.clickGui.style instanceof Lnk;
         if (mouseX >= getX() && mouseX <= getX() + 100 && mouseY >= getY() && mouseY <= getY() + 19 + elementsHeight) {
             if (wheel < 0 && scroll < (liquidsense ? elements.size() + add : elements.size()) - maxElements) {
                 ++scroll;
