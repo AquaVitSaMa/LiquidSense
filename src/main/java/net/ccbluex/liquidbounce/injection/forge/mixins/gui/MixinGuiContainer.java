@@ -1,11 +1,14 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import com.google.common.collect.Sets;
+import me.aquavit.liquidsense.modules.combat.KillAura;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.SlientStealerEvent;
 import net.ccbluex.liquidbounce.event.UpdateModelEvent;
+import net.ccbluex.liquidbounce.features.module.modules.player.InventoryCleaner;
 import net.ccbluex.liquidbounce.features.module.modules.world.ChestStealer;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiChest;
@@ -29,6 +32,9 @@ import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 import java.util.ArrayList;
 import java.util.Set;
@@ -99,6 +105,32 @@ public abstract class MixinGuiContainer extends GuiScreen{
 
     @Shadow
     protected int ySize = 166;
+
+    @Inject(method = "initGui", at = @At("RETURN"))
+    private void initGui(CallbackInfo callbackInfo) {
+        if(!mc.isIntegratedServerRunning())
+            buttonList.add(new GuiButton(11110, 5, 10, 100, 20, "Disable KillAura"));
+
+        buttonList.add(new GuiButton(11120,5, 34, 100, 20,"Disable InvCleaner"));
+        buttonList.add(new GuiButton(11130, 5, 58, 100, 20, "Disable ChestStealer"));
+        super.initGui();
+    }
+
+    @Inject(method = "mouseClicked", at = @At("RETURN"))
+    private void mouseClicked(int mouseX, int mouseY, int mouseButton, CallbackInfo callbackInfo) {
+        for (Object aButtonList : this.buttonList) {
+            GuiButton toggleButton = (GuiButton) aButtonList;
+            if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11110) {
+                LiquidBounce.moduleManager.getModule(KillAura.class).setState(false);
+            }
+            if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11120) {
+                LiquidBounce.moduleManager.getModule(InventoryCleaner.class).setState(false);
+            }
+            if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11130) {
+                LiquidBounce.moduleManager.getModule(ChestStealer.class).setState(false);
+            }
+        }
+    }
 
     @Overwrite
     public void drawScreen(int p_drawScreen_1_, int p_drawScreen_2_, float p_drawScreen_3_) {
