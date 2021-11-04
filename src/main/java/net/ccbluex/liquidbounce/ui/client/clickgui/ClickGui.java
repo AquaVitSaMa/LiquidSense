@@ -217,7 +217,7 @@ public class ClickGui extends GuiScreen {
         drawDefaultBackground();
 
         ClickGUI ck = (ClickGUI) LiquidBounce.moduleManager.getModule(ClickGUI.class);
-        if(ck.getModeValue().get() == "LiquidSense" ||ck.getModeValue().get() == "LiquidSense1"|| ck.getModeValue().get() == "Black"){
+        if(ck.getModeValue().get() == "LiquidSense"){
             RenderUtils.drawFilledCircle(25, height - 25, 16, new Color(30, 30, 30));
         } else {
             RenderUtils.drawFilledCircle(25, height - 25, 16, new Color(37, 126, 255));

@@ -10,7 +10,7 @@ import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
-import net.ccbluex.liquidbounce.utils.ClassUtils;
+import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;

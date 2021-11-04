@@ -15,9 +15,9 @@ import net.ccbluex.liquidbounce.ui.client.altmanager.sub.altgenerator.GuiMCLeaks
 import net.ccbluex.liquidbounce.ui.client.altmanager.sub.altgenerator.GuiTheAltening;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
-import net.ccbluex.liquidbounce.utils.login.LoginUtils;
-import net.ccbluex.liquidbounce.utils.login.MinecraftAccount;
-import net.ccbluex.liquidbounce.utils.login.UserUtils;
+import me.aquavit.liquidsense.utils.login.LoginUtils;
+import me.aquavit.liquidsense.utils.login.MinecraftAccount;
+import me.aquavit.liquidsense.utils.login.UserUtils;
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
 import net.mcleaks.MCLeaks;
@@ -168,7 +168,7 @@ public class GuiAltManager extends GuiScreen {
         Fonts.font35.drawCenteredString(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts", width / 2, 18, 0xffffff);
         Fonts.font35.drawCenteredString(status, width / 2, 32, 0xffffff);
         Fonts.font35.drawStringWithShadow("§7User: §a" + (MCLeaks.isAltActive() ? MCLeaks.getSession().getUsername() : mc.getSession().getUsername()), 6, 6, 0xffffff);
-        Fonts.font35.drawStringWithShadow("§7Type: §a" + (altService.getCurrentService() == AltService.EnumAltService.THEALTENING ? "TheAltening" : MCLeaks.isAltActive() ? "MCLeaks" : UserUtils.INSTANCE.isValidTokenOffline(mc.getSession().getToken()) ? "Premium" : "Cracked"), 6, 15, 0xffffff);
+        Fonts.font35.drawStringWithShadow("§7Type: §a" + (altService.getCurrentService() == AltService.EnumAltService.THEALTENING ? "TheAltening" : MCLeaks.isAltActive() ? "MCLeaks" : UserUtils.isValidTokenOffline(mc.getSession().getToken()) ? "Premium" : "Cracked"), 6, 15, 0xffffff);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }

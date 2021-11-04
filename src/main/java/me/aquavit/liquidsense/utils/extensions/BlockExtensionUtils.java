@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.utils.extensions;
 
-import net.ccbluex.liquidbounce.utils.block.BlockUtils;
+import me.aquavit.liquidsense.utils.block.BlockUtils;
 import net.minecraft.block.Block;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.Vec3;

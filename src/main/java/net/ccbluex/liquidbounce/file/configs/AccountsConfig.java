@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.file.configs;
 import com.google.gson.Gson;
 import net.ccbluex.liquidbounce.file.FileConfig;
 import net.ccbluex.liquidbounce.file.FileManager;
-import net.ccbluex.liquidbounce.utils.login.MinecraftAccount;
+import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 
 import java.io.*;
 import java.util.ArrayList;

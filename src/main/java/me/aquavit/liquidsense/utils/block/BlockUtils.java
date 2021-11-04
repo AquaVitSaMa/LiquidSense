@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.utils.block;
+package me.aquavit.liquidsense.utils.block;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.minecraft.block.Block;

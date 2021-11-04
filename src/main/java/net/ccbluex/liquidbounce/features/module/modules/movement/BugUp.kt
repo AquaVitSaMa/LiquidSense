@@ -12,7 +12,7 @@ import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import me.aquavit.liquidsense.utils.entity.MovementUtils
-import net.ccbluex.liquidbounce.utils.block.BlockUtils
+import me.aquavit.liquidsense.utils.block.BlockUtils
 import me.aquavit.liquidsense.utils.entity.FallingPlayer
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.BoolValue

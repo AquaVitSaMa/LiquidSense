@@ -15,7 +15,7 @@ import net.ccbluex.liquidbounce.features.module.modules.render.FreeCam;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.utils.RotationUtils;
 import net.ccbluex.liquidbounce.utils.VecRotation;
-import net.ccbluex.liquidbounce.utils.block.BlockUtils;
+import me.aquavit.liquidsense.utils.block.BlockUtils;
 import me.aquavit.liquidsense.utils.entity.FallingPlayer;
 import net.ccbluex.liquidbounce.utils.timer.TickTimer;
 import net.ccbluex.liquidbounce.value.BoolValue;
@@ -31,7 +31,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.client.C09PacketHeldItemChange;
-import net.minecraft.potion.Potion;
 import net.minecraft.util.*;
 
 import java.util.ArrayList;

@@ -11,7 +11,7 @@ import net.ccbluex.liquidbounce.ui.client.clickgui.elements.ModuleElement;
 import net.ccbluex.liquidbounce.ui.client.clickgui.style.Style;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.ui.font.GameFontRenderer;
-import net.ccbluex.liquidbounce.utils.block.BlockUtils;
+import me.aquavit.liquidsense.utils.block.BlockUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.*;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -84,6 +84,8 @@ public class LiquidSenseStyle extends Style {
                 if(moduleElement.isShowSettings()) {
                     int yPos = moduleElement.getY() + 4;
                     for(final Value value : moduleValues) {
+                        if(!value.getDisplayable())
+                            continue;
                         if(value instanceof BoolValue) {
                             final String text = value.getName();
                             final float textWidth = Fonts.font35.getStringWidth(text);

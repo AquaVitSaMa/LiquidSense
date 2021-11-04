@@ -1,34 +1,26 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import com.google.common.collect.Sets;
-import me.aquavit.liquidsense.modules.combat.KillAura;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.SlientStealerEvent;
-import net.ccbluex.liquidbounce.event.UpdateModelEvent;
+import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
 import net.ccbluex.liquidbounce.features.module.modules.player.InventoryCleaner;
 import net.ccbluex.liquidbounce.features.module.modules.world.ChestStealer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.gui.inventory.GuiChest;
 import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.settings.KeyBinding;
-import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
-import net.minecraft.util.MouseHelper;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -36,7 +28,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.util.ArrayList;
 import java.util.Set;
 
 @Mixin(GuiContainer.class)
@@ -121,7 +112,7 @@ public abstract class MixinGuiContainer extends GuiScreen{
         for (Object aButtonList : this.buttonList) {
             GuiButton toggleButton = (GuiButton) aButtonList;
             if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11110) {
-                LiquidBounce.moduleManager.getModule(KillAura.class).setState(false);
+                LiquidBounce.moduleManager.getModule(Aura.class).setState(false);
             }
             if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11120) {
                 LiquidBounce.moduleManager.getModule(InventoryCleaner.class).setState(false);

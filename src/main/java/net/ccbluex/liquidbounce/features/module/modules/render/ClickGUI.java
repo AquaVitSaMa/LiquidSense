@@ -21,7 +21,7 @@ import java.awt.*;
 
 @ModuleInfo(name = "ClickGUI", description = "Opens the ClickGUI.", category = ModuleCategory.RENDER, keyBind = Keyboard.KEY_INSERT, canEnable = false)
 public class ClickGUI extends Module {
-    private final ListValue styleValue = new ListValue("Style", new String[] {"LiquidSense","Lnk","LiquidBounce", "Null", "Slowly", "Black"}, "Slowly") {
+    private final ListValue styleValue = new ListValue("Style", new String[] {"LiquidSense","Lnk","Null", "Slowly"}, "Slowly") {
         @Override
         protected void onChanged(final String oldValue, final String newValue) {
             updateStyle();
@@ -59,17 +59,11 @@ public class ClickGUI extends Module {
             case "lnk":
                 LiquidBounce.clickGui.style = new Lnk();
                 break;
-            case "liquidbounce":
-                LiquidBounce.clickGui.style = new LiquidBounceStyle();
-                break;
             case "null":
                 LiquidBounce.clickGui.style = new NullStyle();
                 break;
             case "slowly":
                 LiquidBounce.clickGui.style = new SlowlyStyle();
-                break;
-            case "black":
-                LiquidBounce.clickGui.style = new BlackStyle();
                 break;
         }
     }

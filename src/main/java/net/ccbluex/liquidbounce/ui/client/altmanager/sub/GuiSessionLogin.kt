@@ -7,7 +7,7 @@ package net.ccbluex.liquidbounce.ui.client.altmanager.sub
 
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.login.LoginUtils
+import me.aquavit.liquidsense.utils.login.LoginUtils
 import net.minecraft.client.gui.Gui
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiScreen

@@ -15,11 +15,11 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.combat.Aura
 import net.ccbluex.liquidbounce.utils.RotationUtils
-import net.ccbluex.liquidbounce.utils.block.BlockUtils.getBlock
-import net.ccbluex.liquidbounce.utils.block.BlockUtils.getBlockName
-import net.ccbluex.liquidbounce.utils.block.BlockUtils.getCenterDistance
-import net.ccbluex.liquidbounce.utils.block.BlockUtils.isFullBlock
-import net.ccbluex.liquidbounce.utils.block.BlockUtils.searchBlocks
+import me.aquavit.liquidsense.utils.block.BlockUtils.getBlock
+import me.aquavit.liquidsense.utils.block.BlockUtils.getBlockName
+import me.aquavit.liquidsense.utils.block.BlockUtils.getCenterDistance
+import me.aquavit.liquidsense.utils.block.BlockUtils.isFullBlock
+import me.aquavit.liquidsense.utils.block.BlockUtils.searchBlocks
 import me.aquavit.liquidsense.utils.extensions.BlockExtensionUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.utils.timer.MSTimer

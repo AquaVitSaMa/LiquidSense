@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.features.command.commands
 import net.ccbluex.liquidbounce.features.command.Command
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import me.aquavit.liquidsense.utils.misc.ServerUtils
-import net.ccbluex.liquidbounce.utils.login.MinecraftAccount
+import me.aquavit.liquidsense.utils.login.MinecraftAccount
 
 class LoginCommand : Command("login") {
     /**

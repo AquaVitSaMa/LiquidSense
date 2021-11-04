@@ -10,7 +10,7 @@ import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.utils.block.BlockUtils;
+import me.aquavit.liquidsense.utils.block.BlockUtils;
 import net.ccbluex.liquidbounce.value.ListValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
