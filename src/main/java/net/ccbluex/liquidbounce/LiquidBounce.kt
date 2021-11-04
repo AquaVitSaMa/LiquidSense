@@ -27,12 +27,11 @@ import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
 import net.ccbluex.liquidbounce.ui.client.hud.HUD
 import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.createDefault
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.ClassUtils.hasForge
+import me.aquavit.liquidsense.utils.mc.ClassUtils
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.InventoryUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils
-import net.ccbluex.liquidbounce.value.Value
 import net.minecraft.util.ResourceLocation
 
 object LiquidBounce {
@@ -127,7 +126,7 @@ object LiquidBounce {
         fileManager.loadConfig(fileManager.clickGuiConfig)
 
         // Tabs (Only for Forge!)
-        if (hasForge()) {
+        if (ClassUtils.hasForge()) {
             BlocksTab()
             ExploitsTab()
             HeadsTab()
