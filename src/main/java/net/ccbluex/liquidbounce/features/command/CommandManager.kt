@@ -23,8 +23,6 @@ class CommandManager {
      */
     fun registerCommands() {
         registerCommand(BindCommand())
-        registerCommand(VClipCommand())
-        registerCommand(HClipCommand())
         registerCommand(HelpCommand())
         registerCommand(SayCommand())
         registerCommand(FriendCommand())
@@ -32,12 +30,10 @@ class CommandManager {
         registerCommand(LocalAutoSettingsCommand())
         registerCommand(ServerInfoCommand())
         registerCommand(ToggleCommand())
-        registerCommand(HurtCommand())
         registerCommand(GiveCommand())
         registerCommand(UsernameCommand())
         registerCommand(TargetCommand())
         registerCommand(BindsCommand())
-        registerCommand(HoloStandCommand())
         registerCommand(PanicCommand())
         registerCommand(PingCommand())
         registerCommand(RenameCommand())
@@ -49,7 +45,6 @@ class CommandManager {
         registerCommand(PrefixCommand())
         registerCommand(ShortcutCommand())
         registerCommand(HideCommand())
-        registerCommand(TpCommand())
         registerCommand(SetNameCommand())
     }
 
