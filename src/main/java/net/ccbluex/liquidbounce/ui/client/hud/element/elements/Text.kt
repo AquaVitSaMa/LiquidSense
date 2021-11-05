@@ -114,7 +114,7 @@ class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
                 "zdp" -> return mc.thePlayer.posZ.toString()
                 "velocity" -> return DECIMAL_FORMAT.format(sqrt(mc.thePlayer.motionX * mc.thePlayer.motionX + mc.thePlayer.motionZ * mc.thePlayer.motionZ))
                 "ping" -> return EntityUtils.getPing(mc.thePlayer).toString()
-                "speed" -> return String.format("%.2f", displaySpeed) + "\u00a77b/s\u00a7r"
+                "speed" -> return String.format("%.2f", displaySpeed) + "§7b/s§r"
                 "0" -> return "§0"
                 "1" -> return "§1"
                 "2" -> return "§2"

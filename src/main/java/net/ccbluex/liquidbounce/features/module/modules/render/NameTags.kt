@@ -332,16 +332,16 @@ class NameTags : Module() {
         tag = entity.displayName.unformattedText
         var bot = ""
         bot = if (AntiBot.isBot(entity) && LiquidBounce.moduleManager.getModule(AntiBot::class.java)!!.state) {
-            "\u00a79[BOT]"
+            "§9[BOT]"
         } else {
             ""
         }
         var team: String
-        team = if (Teams.isInYourTeam(entity) && LiquidBounce.moduleManager.getModule(Teams::class.java)!!.state) "\u00a7b[TEAM]" else ""
+        team = if (Teams.isInYourTeam(entity) && LiquidBounce.moduleManager.getModule(Teams::class.java)!!.state) "§b[TEAM]" else ""
         val RenderManager = mc.renderManager
-        if (team + bot == "") team = "\u00a7a"
+        if (team + bot == "") team = "§a"
         val lol = team + bot + tag
-        val hp = "\u00a77HP:" + entity.health.toInt()
+        val hp = "§7HP:" + entity.health.toInt()
         glPushMatrix()
         glTranslatef(pX.toFloat(), pY.toFloat() + 1.4f, pZ.toFloat())
         glNormal3f(0.0f, 1.0f, 0.0f)
