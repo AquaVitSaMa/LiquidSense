@@ -13,6 +13,7 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.NotifyType
 import net.ccbluex.liquidbounce.utils.SettingsUtils
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils
+import net.ccbluex.liquidbounce.utils.misc.StringUtils
 import kotlin.concurrent.thread
 
 class AutoSettingsCommand : Command("autosettings", "setting", "settings", "config", "autosetting") {
@@ -51,7 +52,7 @@ class AutoSettingsCommand : Command("autosettings", "setting", "settings", "conf
                         val settings = HttpUtils.get(url)
 
                         chat("Applying settings...")
-                        SettingsUtils.executeScript(settings)
+                        SettingsUtils.executeScript(StringUtils.toLines(settings))
                         chat("§6Settings applied successfully")
                         LiquidBounce.hud.addNotification(Notification("Updated Settings", "Setting was updated.", NotifyType.SUCCESS))
                         playEdit()

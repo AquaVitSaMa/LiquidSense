@@ -31,7 +31,7 @@ class LocalAutoSettingsCommand : Command("localautosettings", "localsetting", "l
                                 chat("§9Loading settings...")
                                 val settings = scriptFile.readText()
                                 chat("§9Set settings...")
-                                SettingsUtils.executeScript(settings)
+                                SettingsUtils.executeScript(StringUtils.toLines(settings))
                                 chat("§6Settings applied successfully.")
                                 LiquidBounce.hud.addNotification(Notification("Updated Settings", "Setting was updated.", NotifyType.SUCCESS))
                                 playEdit()
