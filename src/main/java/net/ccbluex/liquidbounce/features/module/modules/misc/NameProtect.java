@@ -12,7 +12,7 @@ import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.file.configs.FriendsConfig;
-import net.ccbluex.liquidbounce.utils.misc.StringUtils;
+import me.aquavit.liquidsense.utils.misc.StringUtils;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.TextValue;

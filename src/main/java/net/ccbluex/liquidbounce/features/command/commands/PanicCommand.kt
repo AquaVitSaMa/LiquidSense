@@ -34,9 +34,10 @@ class PanicCommand : Command("panic") {
                         return
                     }
 
+
                     val category = categories[0]
                     modules = modules.filter { it.category == category }
-                    msg = "all ${category.displayName}"
+                    msg = "all ${category.displayName.single()}"
                 }
             }
         } else {

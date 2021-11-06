@@ -11,9 +11,9 @@ import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.features.command.Command
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.NotifyType
-import net.ccbluex.liquidbounce.utils.SettingsUtils
+import me.aquavit.liquidsense.utils.module.SettingsUtils
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils
-import net.ccbluex.liquidbounce.utils.misc.StringUtils
+import me.aquavit.liquidsense.utils.misc.StringUtils
 import kotlin.concurrent.thread
 
 class AutoSettingsCommand : Command("autosettings", "setting", "settings", "config", "autosetting") {

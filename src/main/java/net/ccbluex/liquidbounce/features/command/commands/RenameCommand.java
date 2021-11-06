@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.command.commands;
 
 import net.ccbluex.liquidbounce.features.command.Command;
-import net.ccbluex.liquidbounce.utils.misc.StringUtils;
+import me.aquavit.liquidsense.utils.misc.StringUtils;
 import net.minecraft.item.ItemStack;
 
 import static net.ccbluex.liquidbounce.utils.render.ColorUtils.translateAlternateColorCodes;
