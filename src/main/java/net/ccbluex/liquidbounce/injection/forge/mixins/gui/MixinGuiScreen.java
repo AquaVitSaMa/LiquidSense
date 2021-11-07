@@ -84,20 +84,6 @@ public abstract class MixinGuiScreen extends Gui {
         }
     }
 
-    @Overwrite
-    public void drawWorldBackground(int p_drawWorldBackground_1_) {
-        HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
-        if (this.mc.theWorld != null) {
-            if (hud.bkvalue.get().equalsIgnoreCase("None")){
-                this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
-            } else {
-                this.drawGradientRect(0, 0, this.width, this.height, new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), hud.ap.get()).getRGB(),new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), 0).getRGB());
-            }
-        } else {
-            this.drawBackground(p_drawWorldBackground_1_);
-        }
-    }
-
     /**
      * @author CCBlueX
      */
