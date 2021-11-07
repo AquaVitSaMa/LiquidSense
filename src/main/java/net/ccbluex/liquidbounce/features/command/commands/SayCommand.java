@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.features.command.commands;
 
 import net.ccbluex.liquidbounce.features.command.Command;
-import net.ccbluex.liquidbounce.utils.misc.StringUtils;
+import me.aquavit.liquidsense.utils.misc.StringUtils;
 
 public class SayCommand extends Command
 {

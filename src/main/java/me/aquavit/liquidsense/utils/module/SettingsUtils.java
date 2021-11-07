@@ -1,21 +1,20 @@
-package net.ccbluex.liquidbounce.utils;
+package me.aquavit.liquidsense.utils.module;
 
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import net.ccbluex.liquidbounce.features.module.modules.misc.Spammer;
 import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
 import net.ccbluex.liquidbounce.features.module.Module;
-import java.util.Iterator;
 import net.ccbluex.liquidbounce.LiquidBounce;
+import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.value.*;
 import org.lwjgl.input.Keyboard;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
-import net.ccbluex.liquidbounce.features.module.ModuleManager;
-import java.io.Reader;
+
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
-import net.ccbluex.liquidbounce.utils.misc.StringUtils;
+import me.aquavit.liquidsense.utils.misc.StringUtils;
 import java.util.List;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
