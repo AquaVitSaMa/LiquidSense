@@ -42,6 +42,9 @@ public class Fonts {
     @FontDetails(fontName = "Roboto Bold", fontSize = 90)
     public static GameFontRenderer fontBold180;
 
+    @FontDetails(fontName = "Logo", fontSize = 90)
+    public static GameFontRenderer logo;
+
     @FontDetails(fontName = "Cs Go", fontSize = 40)
     public static GameFontRenderer csgo40;
 
@@ -66,6 +69,7 @@ public class Fonts {
         csgo35 = new GameFontRenderer(getFont("LiquidSense.ttf", 18));
         font40 = new GameFontRenderer(getFont("Museo-Sans.ttf", 20));
         fontBold180 = new GameFontRenderer(getFont("Roboto-Bold.ttf", 60));
+        logo = new GameFontRenderer(getFont("Facon.ttf",60));
 
         try {
             CUSTOM_FONT_RENDERERS.clear();

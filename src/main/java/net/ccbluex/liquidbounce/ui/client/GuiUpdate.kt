@@ -8,6 +8,7 @@ package net.ccbluex.liquidbounce.ui.client
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import me.aquavit.liquidsense.utils.misc.MiscUtils
+import net.ccbluex.liquidbounce.ui.client.gui.GuiMainMenu
 import net.minecraft.client.gui.GuiButton
 import net.minecraft.client.gui.GuiScreen
 import org.lwjgl.input.Keyboard
