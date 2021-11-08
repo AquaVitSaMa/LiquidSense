@@ -136,11 +136,12 @@ class NoSlow : Module() {
         return mc.thePlayer.isBlocking || aura.blockingStatus
     }
 
-    override val tag: String?
-        get() = when {
+    override fun getTag(): String {
+        return when {
             packet.get() -> "Packet"
             Hyt32.get() -> "HytPacket"
             A4.get() -> "AAC4"
             else -> "Vanilla"
         }
+    }
 }

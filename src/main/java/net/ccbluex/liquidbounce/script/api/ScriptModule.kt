@@ -46,16 +46,17 @@ class ScriptModule(private val moduleObject: JSObject) : Module() {
             _tag = moduleObject.getMember("tag") as String
     }
 
-    override val values: List<Value<*>>
-        get() {
-            return _values.values.toList()
-        }
+    override fun getValues(): List<Value<*>> {
+        return _values.values.toList()
+    }
 
-    override var tag: String?
-        get() = _tag
-        set(value) {
-            _tag = value
-        }
+    override fun getTag(): String? {
+        return _tag
+    }
+
+    fun setTag(value: String) {
+        _tag = value
+    }
 
     /**
      * Called from inside the script to register a new event handler.

@@ -93,12 +93,12 @@ class ChestStealer : Module() {
 
     private var contentReceived = 0
 
-    override val tag: String?
-        get() = when {
+    override fun getTag(): String {
+        return when {
             slientstealer.get() -> "SlientStealer"
             else -> "Vanilla"
         }
-
+    }
 
     @EventTarget
     fun onRender3D(event: Render3DEvent?) {
