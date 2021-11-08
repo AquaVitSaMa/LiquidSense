@@ -89,7 +89,6 @@ class ModuleManager : Listenable {
                 ProphuntESP::class.java,
                 KeepContainer::class.java,
                 HUD::class.java,
-                TNTESP::class.java,
                 Rotations::class.java,
                 BugUp::class.java,
                 AntiObsidian::class.java
