@@ -11,6 +11,7 @@ import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileInputStream;
@@ -89,7 +90,7 @@ public class GuiBackground extends GuiScreen {
 
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         this.drawBackground(0);
-        Fonts.logo.drawCenteredString("Background", (float)this.width / 2.0f, (float)this.height / 8.0f + 5.0f, 4673984, true);
+        Fonts.logo.drawCenteredString("Background", (float)this.width / 2.0f, (float)this.height / 8.0f + 5.0f, new Color(255, 255, 255, 255).getRGB(), true);
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
