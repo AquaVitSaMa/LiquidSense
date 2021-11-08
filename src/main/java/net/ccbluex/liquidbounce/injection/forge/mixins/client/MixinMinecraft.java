@@ -11,8 +11,6 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.modules.combat.AutoClicker;
 import net.ccbluex.liquidbounce.features.module.modules.world.ChestStealer;
-import net.ccbluex.liquidbounce.ui.client.GuiUpdate;
-import net.ccbluex.liquidbounce.ui.client.GuiWelcome;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiMainMenu;
 import net.ccbluex.liquidbounce.utils.CPSCounter;
 import net.ccbluex.liquidbounce.utils.render.IconUtils;
