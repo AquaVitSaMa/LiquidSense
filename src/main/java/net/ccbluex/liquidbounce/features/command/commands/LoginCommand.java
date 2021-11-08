@@ -3,7 +3,7 @@ package net.ccbluex.liquidbounce.features.command.commands;
 import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.misc.ServerUtils;
 import net.ccbluex.liquidbounce.features.command.Command;
-import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager;
+import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
 
 public class LoginCommand extends Command
 {

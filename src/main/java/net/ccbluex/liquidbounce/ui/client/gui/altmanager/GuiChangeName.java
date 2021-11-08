@@ -3,11 +3,11 @@
  * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
  * https://github.com/CCBlueX/LiquidBounce/
  */
-package net.ccbluex.liquidbounce.ui.client.altmanager.sub;
+package net.ccbluex.liquidbounce.ui.client.gui.altmanager;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.SessionEvent;
-import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager;
+import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;

@@ -3,7 +3,7 @@
  * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
  * https://github.com/CCBlueX/LiquidBounce/
  */
-package net.ccbluex.liquidbounce.ui.client.altmanager.sub;
+package net.ccbluex.liquidbounce.ui.client.gui.altmanager;
 
 import com.mojang.authlib.Agent;
 import com.mojang.authlib.exceptions.AuthenticationException;
@@ -11,13 +11,13 @@ import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.AltService;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager;
+import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
+import net.ccbluex.liquidbounce.ui.client.gui.GuiNewButton;
 import net.ccbluex.liquidbounce.ui.elements.GuiPasswordField;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.utils.TabUtils;
 import me.aquavit.liquidsense.utils.login.MinecraftAccount;
-import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -46,9 +46,9 @@ public class GuiAdd extends GuiScreen {
 
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
-        buttonList.add(addButton = new GuiButton(1, width / 2 - 100, height / 4 + 72, "Add"));
-        buttonList.add(clipboardButton = new GuiButton(2, width / 2 - 100, height / 4 + 96, "Clipboard"));
-        buttonList.add(new GuiButton(0, width / 2 - 100, height / 4 + 120, "Back"));
+        buttonList.add(addButton = new GuiNewButton(1, width / 2 - 100, height / 4 + 72, 200, 20,"Add"));
+        buttonList.add(clipboardButton = new GuiNewButton(2, width / 2 - 100, height / 4 + 96, 200, 20,"Clipboard"));
+        buttonList.add(new GuiNewButton(0, width / 2 - 100, height / 4 + 120,200, 20, "Back"));
         username = new GuiTextField(2, Fonts.font40, width / 2 - 100, 60, 200, 20);
         username.setFocused(true);
         username.setMaxStringLength(Integer.MAX_VALUE);
@@ -59,7 +59,6 @@ public class GuiAdd extends GuiScreen {
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         drawBackground(0);
-        Gui.drawRect(30, 30, width - 30, height - 30, Integer.MIN_VALUE);
 
         drawCenteredString(Fonts.font40, "Add Account", width / 2, 34, 0xffffff);
         drawCenteredString(Fonts.font35, status == null ? "" : status, width / 2, height / 4 + 60, 0xffffff);

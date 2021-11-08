@@ -16,7 +16,7 @@ import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof;
 import net.ccbluex.liquidbounce.file.FileConfig;
 import net.ccbluex.liquidbounce.file.FileManager;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiBackground;
-import net.ccbluex.liquidbounce.ui.client.altmanager.sub.altgenerator.GuiTheAltening;
+import net.ccbluex.liquidbounce.ui.client.gui.altmanager.altgenerator.GuiTheAltening;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import net.ccbluex.liquidbounce.value.Value;
 
