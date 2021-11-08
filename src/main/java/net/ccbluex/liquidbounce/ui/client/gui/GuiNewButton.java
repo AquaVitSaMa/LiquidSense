@@ -9,9 +9,9 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class GuiMenuButton extends GuiButton {
+public class GuiNewButton extends GuiButton {
 
-    public GuiMenuButton(final int buttonId, final int x, final int y, final int width, final int height, final String buttonText) {
+    public GuiNewButton(final int buttonId, final int x, final int y, final int width, final int height, final String buttonText) {
         super(buttonId, x, y, width, height, buttonText);
     }
 
