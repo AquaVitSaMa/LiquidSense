@@ -25,7 +25,7 @@ public class HUD extends Module {
     public final BoolValue blackHotbarValue = new BoolValue("BlackHotbar", true);
     public final IntegerValue hotbarSpeed = new IntegerValue("HotbarSpeed",95,0,100);
     public final BoolValue inventoryParticle = new BoolValue("InventoryParticle", false);
-    public final BoolValue moreinventory = new BoolValue("MoreInventory",true);
+    public final BoolValue moreinventory = new BoolValue("MoreInventory",false);
     private final BoolValue blurValue = new BoolValue("Blur", false);
     public final FontValue chatFont = new FontValue("ChatFont", mc.fontRendererObj) {
         @Override
