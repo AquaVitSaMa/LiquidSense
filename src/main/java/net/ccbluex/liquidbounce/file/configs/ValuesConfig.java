@@ -15,8 +15,7 @@ import net.ccbluex.liquidbounce.features.special.AntiForge;
 import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof;
 import net.ccbluex.liquidbounce.file.FileConfig;
 import net.ccbluex.liquidbounce.file.FileManager;
-import net.ccbluex.liquidbounce.ui.client.GuiBackground;
-import net.ccbluex.liquidbounce.ui.client.altmanager.sub.GuiDonatorCape;
+import net.ccbluex.liquidbounce.ui.client.gui.GuiBackground;
 import net.ccbluex.liquidbounce.ui.client.altmanager.sub.altgenerator.GuiTheAltening;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import net.ccbluex.liquidbounce.value.Value;
@@ -87,14 +86,6 @@ public class ValuesConfig extends FileConfig {
 
                 if (jsonValue.has("API-Key"))
                     GuiTheAltening.Companion.setApiKey(jsonValue.get("API-Key").getAsString());
-            } else if (entry.getKey().equalsIgnoreCase("DonatorCape")) {
-                JsonObject jsonValue = (JsonObject) entry.getValue();
-
-                if (jsonValue.has("TransferCode"))
-                    GuiDonatorCape.Companion.setTransferCode(jsonValue.get("TransferCode").getAsString());
-
-                if (jsonValue.has("CapeEnabled"))
-                    GuiDonatorCape.Companion.setCapeEnabled(jsonValue.get("CapeEnabled").getAsBoolean());
             } else if (entry.getKey().equalsIgnoreCase("Background")) {
                 JsonObject jsonValue = (JsonObject) entry.getValue();
 
@@ -149,11 +140,6 @@ public class ValuesConfig extends FileConfig {
         final JsonObject theAlteningObject = new JsonObject();
         theAlteningObject.addProperty("API-Key", GuiTheAltening.Companion.getApiKey());
         jsonObject.add("thealtening", theAlteningObject);
-
-        final JsonObject capeObject = new JsonObject();
-        capeObject.addProperty("TransferCode", GuiDonatorCape.Companion.getTransferCode());
-        capeObject.addProperty("CapeEnabled", GuiDonatorCape.Companion.getCapeEnabled());
-        jsonObject.add("DonatorCape", capeObject);
 
         final JsonObject backgroundObject = new JsonObject();
         backgroundObject.addProperty("Enabled", GuiBackground.Companion.getEnabled());
