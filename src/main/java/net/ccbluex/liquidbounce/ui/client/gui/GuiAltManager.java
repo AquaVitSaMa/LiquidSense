@@ -12,7 +12,6 @@ import com.thealtening.AltService;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.ui.client.gui.altmanager.*;
 import net.ccbluex.liquidbounce.ui.client.gui.altmanager.altgenerator.GuiMCLeaks;
-import net.ccbluex.liquidbounce.ui.client.gui.altmanager.altgenerator.GuiTheAltening;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import me.aquavit.liquidsense.utils.login.LoginUtils;
@@ -147,13 +146,10 @@ public class GuiAltManager extends GuiScreen {
         this.buttonList.add(randomButton = new GuiButton(4, 5, j + 24 * 2, 90, 20, "Random"));
         this.buttonList.add(new GuiButton(6, 5, j + 24 * 3, 90, 20, "Direct Login"));
         this.buttonList.add(new GuiButton(88, 5, j + 24 * 4, 90, 20, "Change Name"));
+        this.buttonList.add(new GuiButton(10, 5, j + 24 * 5 + 5, 90, 20, "Session Login"));
 
         if (GENERATORS.getOrDefault("mcleaks", true))
-            this.buttonList.add(new GuiButton(5, 5, j + 24 * 5 + 5, 90, 20, "MCLeaks"));
-        if (GENERATORS.getOrDefault("thealtening", true))
-            this.buttonList.add(new GuiButton(9, 5, j + 24 * 6 + 5, 90, 20, "TheAltening"));
-
-        this.buttonList.add(new GuiButton(10, 5, j + 24 * 7 + 5, 90, 20, "Session Login"));
+            this.buttonList.add(new GuiButton(5, 5, j + 24 * 6 + 5, 90, 20, "MCLeaks"));
 
     }
 
@@ -283,9 +279,6 @@ public class GuiAltManager extends GuiScreen {
                 break;
             case 88:
                 mc.displayGuiScreen(new GuiChangeName(this));
-                break;
-            case 9:
-                mc.displayGuiScreen(new GuiTheAltening(this));
                 break;
             case 10:
                 mc.displayGuiScreen(new GuiSessionLogin(this));
