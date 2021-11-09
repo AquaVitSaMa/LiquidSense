@@ -5,6 +5,7 @@
  */
 
 
+import me.aquavit.liquidsense.data.Pair
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.features.command.Command
 import net.ccbluex.liquidbounce.features.command.commands.*
