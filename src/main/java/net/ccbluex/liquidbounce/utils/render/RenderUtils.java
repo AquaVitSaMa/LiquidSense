@@ -1321,6 +1321,51 @@ public final class RenderUtils extends MinecraftInstance {
         GlStateManager.disableBlend();
     }
 
+    public static void drawRoundedRect(double x, double y, double width, double height, double radius, int color) {
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        double x1 = width;
+        double y1 = height;
+        float f = (color >> 24 & 0xFF) / 255.0F;
+        float f1 = (color >> 16 & 0xFF) / 255.0F;
+        float f2 = (color >> 8 & 0xFF) / 255.0F;
+        float f3 = (color & 0xFF) / 255.0F;
+        GL11.glPushAttrib(0);
+        GL11.glScaled(0.5, 0.5, 0.5);
+
+        x *= 2;
+        y *= 2;
+        x1 *= 2;
+        y1 *= 2;
+
+        GL11.glDisable(GL11.GL_TEXTURE_2D);
+        GL11.glColor4f(f1, f2, f3, f);
+        GL11.glEnable(GL11.GL_LINE_SMOOTH);
+        GL11.glBegin(GL11.GL_POLYGON);
+        for (int i = 0; i <= 90; i += 3) {
+            GL11.glVertex2d(x + radius + +(Math.sin((i * Math.PI / 180)) * (radius * -1)), y + radius + (Math.cos((i * Math.PI / 180)) * (radius * -1)));
+        }
+        for (int i = 90; i <= 180; i += 3) {
+            GL11.glVertex2d(x + radius + (Math.sin((i * Math.PI / 180)) * (radius * -1)), y1 - radius + (Math.cos((i * Math.PI / 180)) * (radius * -1)));
+        }
+        for (int i = 0; i <= 90; i += 3) {
+            GL11.glVertex2d(x1 - radius + (Math.sin((i * Math.PI / 180)) * radius), y1 - radius + (Math.cos((i * Math.PI / 180)) * radius));
+        }
+        for (int i = 90; i <= 180; i += 3) {
+            GL11.glVertex2d(x1 - radius + (Math.sin((i * Math.PI / 180)) * radius), y + radius + (Math.cos((i * Math.PI / 180)) * radius));
+        }
+        GL11.glEnd();
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glDisable(GL11.GL_LINE_SMOOTH);
+        GL11.glEnable(GL11.GL_TEXTURE_2D);
+        GL11.glScaled(2, 2, 2);
+        GL11.glPopAttrib();
+        GL11.glColor4f(1, 1, 1, 1);
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
 
     public static void drawRoundedRect(float x, float y, float width, float height, float edgeRadius, int color, float borderWidth, int borderColor) {
         if (color == 16777215) color = Colors.WHITE.c;
@@ -1652,18 +1697,6 @@ public final class RenderUtils extends MinecraftInstance {
         glEnable(GL_DEPTH_TEST);
     }
 
-    public static void drawCImage(ResourceLocation image, int x, int y, int width, int height) {
-        glDisable(GL_DEPTH_TEST);
-        glEnable(GL_BLEND);
-        glDepthMask(false);
-        OpenGlHelper.glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-        glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.getTextureManager().bindTexture(image);
-        Gui.drawModalRectWithCustomSizedTexture(x, y, 0, 0, width, height, width, height);
-        glDepthMask(true);
-        glDisable(GL_BLEND);
-        glEnable(GL_DEPTH_TEST);
-    }
     public static void drawHead(ResourceLocation skin, int x, int y, int width, int height) {
         glDisable(GL_DEPTH_TEST);
         glEnable(GL_BLEND);

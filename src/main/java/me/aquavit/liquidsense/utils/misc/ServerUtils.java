@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.utils.misc;
 
-import net.ccbluex.liquidbounce.ui.client.GuiMainMenu;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
+import net.ccbluex.liquidbounce.ui.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiMultiplayer;
 import net.minecraft.client.multiplayer.GuiConnecting;
 import net.minecraft.client.multiplayer.ServerData;

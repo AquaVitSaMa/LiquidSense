@@ -1,6 +1,5 @@
 package me.aquavit.liquidsense.utils.render;
 
-import kotlin.jvm.internal.Intrinsics;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.texture.DynamicTexture;
@@ -97,7 +96,6 @@ public final class MiniMapRegister extends MinecraftInstance {
         }
 
         public void updateChunkData(Chunk chunk) {
-            Intrinsics.checkNotNullParameter(chunk, "chunk");
             int[] rgbValues = this.texture.getTextureData();
             for (int x = 0; x < 16; x++) {
                 for (int z = 0; z < 16; z++) {

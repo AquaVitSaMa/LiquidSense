@@ -294,6 +294,8 @@ class Step : Module() {
                 .isEmpty()
     }
 
-    override val tag: String
-        get() = modeValue.get()
+    override fun getTag(): String {
+        return modeValue.get()
+    }
+
 }

@@ -3,83 +3,115 @@
 uniform float iTime;
 uniform vec2 iResolution;
 
-float field(in vec3 p,float s) {
-	float strength = 7. + .03 * log(1.e-6 + fract(sin(iTime) * 4373.11));
-	float accum = s/4.;
-	float prev = 0.;
-	float tw = 0.;
-	for (int i = 0; i < 26; ++i) {
-		float mag = dot(p, p);
-		p = abs(p) / mag + vec3(-.5, -.4, -1.5);
-		float w = exp(-float(i) / 7.);
-		accum += w * exp(-strength * pow(abs(mag - prev), 2.2));
-		tw += w;
-		prev = mag;
+const float cloudscale = 1.1;
+const float speed = 0.03;
+const float clouddark = 0.5;
+const float cloudlight = 0.3;
+const float cloudcover = 0.2;
+const float cloudalpha = 8.0;
+const float skytint = 0.5;
+const vec3 skycolour1 = vec3(0.2, 0.4, 0.6);
+const vec3 skycolour2 = vec3(0.4, 0.7, 1.0);
+
+const mat2 m = mat2( 1.6,  1.2, -1.2,  1.6 );
+
+vec2 hash( vec2 p ) {
+	p = vec2(dot(p,vec2(127.1,311.7)), dot(p,vec2(269.5,183.3)));
+	return -1.0 + 2.0*fract(sin(p)*43758.5453123);
+}
+
+float noise( in vec2 p ) {
+    const float K1 = 0.366025404; // (sqrt(3)-1)/2;
+    const float K2 = 0.211324865; // (3-sqrt(3))/6;
+	vec2 i = floor(p + (p.x+p.y)*K1);
+    vec2 a = p - i + (i.x+i.y)*K2;
+    vec2 o = (a.x>a.y) ? vec2(1.0,0.0) : vec2(0.0,1.0); //vec2 of = 0.5 + 0.5*vec2(sign(a.x-a.y), sign(a.y-a.x));
+    vec2 b = a - o + K2;
+	vec2 c = a - 1.0 + 2.0*K2;
+    vec3 h = max(0.5-vec3(dot(a,a), dot(b,b), dot(c,c) ), 0.0 );
+	vec3 n = h*h*h*h*vec3( dot(a,hash(i+0.0)), dot(b,hash(i+o)), dot(c,hash(i+1.0)));
+    return dot(n, vec3(70.0));
+}
+
+float fbm(vec2 n) {
+	float total = 0.0, amplitude = 0.1;
+	for (int i = 0; i < 7; i++) {
+		total += noise(n) * amplitude;
+		n = m * n;
+		amplitude *= 0.4;
 	}
-	return max(0., 5. * accum / tw - .7);
+	return total;
 }
 
-float field2(in vec3 p, float s) {
-	float strength = 7. + .03 * log(1.e-6 + fract(sin(iTime) * 4373.11));
-	float accum = s/4.;
-	float prev = 0.;
-	float tw = 0.;
-	for (int i = 0; i < 18; ++i) {
-		float mag = dot(p, p);
-		p = abs(p) / mag + vec3(-.5, -.4, -1.5);
-		float w = exp(-float(i) / 7.);
-		accum += w * exp(-strength * pow(abs(mag - prev), 2.2));
-		tw += w;
-		prev = mag;
-	}
-	return max(0., 5. * accum / tw - .7);
-}
-
-vec3 nrand3( vec2 co ) {
-	vec3 a = fract( cos( co.x*8.3e-3 + co.y )*vec3(1.3e5, 4.7e5, 2.9e5) );
-	vec3 b = fract( sin( co.x*0.3e-3 + co.y )*vec3(8.1e5, 1.0e5, 0.1e5) );
-	vec3 c = mix(a, b, 0.5);
-	return c;
-}
-
+// -----------------------------------------------
 
 void mainImage( out vec4 fragColor, in vec2 fragCoord ) {
-	vec2 uv = 2. * fragCoord.xy / iResolution.xy - 1.;
-	vec2 uvs = uv * iResolution.xy / max(iResolution.x, iResolution.y);
-	vec3 p = vec3(uvs / 4., 0) + vec3(1., -1.3, 0.);
-	p += .2 * vec3(sin(iTime / 16.), sin(iTime / 12.),  sin(iTime / 128.));
+    vec2 p = fragCoord.xy / iResolution.xy;
+	vec2 uv = p*vec2(iResolution.x/iResolution.y,1.0);
+    float time = iTime * speed;
+    float q = fbm(uv * cloudscale * 0.5);
 
-	float freqs[4];
-	// TODO: Add music support for liquidbounce
-	// https://github.com/CCBlueX/LiquidBounce-Issues/issues/3932
-	freqs[0] = 0.02;
-	freqs[1] = 0.07;
-	freqs[2] = 0.15;
-	freqs[3] = 0.30;
+    //ridged noise shape
+	float r = 0.0;
+	uv *= cloudscale;
+    uv -= q - time;
+    float weight = 0.8;
+    for (int i=0; i<8; i++){
+		r += abs(weight*noise( uv ));
+        uv = m*uv + time;
+		weight *= 0.7;
+    }
 
-	float t = field(p,freqs[2]);
-	float v = (1. - exp((abs(uv.x) - 1.) * 6.)) * (1. - exp((abs(uv.y) - 1.) * 6.));
+    //noise shape
+	float f = 0.0;
+    uv = p*vec2(iResolution.x/iResolution.y,1.0);
+	uv *= cloudscale;
+    uv -= q - time;
+    weight = 0.7;
+    for (int i=0; i<8; i++){
+		f += weight*noise( uv );
+        uv = m*uv + time;
+		weight *= 0.6;
+    }
 
-	//Second Layer
-	vec3 p2 = vec3(uvs / (4.+sin(iTime*0.11)*0.2+0.2+sin(iTime*0.15)*0.3+0.4), 1.5) + vec3(2., -1.3, -1.);
-	p2 += 0.25 * vec3(sin(iTime / 16.), sin(iTime / 12.),  sin(iTime / 128.));
-	float t2 = field2(p2,freqs[3]);
-	vec4 c2 = mix(.4, 0.5, v) * vec4(0.8 * t2 * t2 * t2 , 1.5 * t2 * t2 , 1.5 * t2, t2);
+    f *= r + f;
 
+    //noise colour
+    float c = 0.0;
+    time = iTime * speed * 2.0;
+    uv = p*vec2(iResolution.x/iResolution.y,1.0);
+	uv *= cloudscale*2.0;
+    uv -= q - time;
+    weight = 0.4;
+    for (int i=0; i<7; i++){
+		c += weight*noise( uv );
+        uv = m*uv + time;
+		weight *= 0.6;
+    }
 
-	//Let's add some stars
-	vec2 seed = p.xy * 2.0;
-	seed = floor(seed * iResolution.x);
-	vec3 rnd = nrand3( seed );
-	vec4 starcolor = vec4(pow(rnd.y,40.0));
+    //noise ridge colour
+    float c1 = 0.0;
+    time = iTime * speed * 3.0;
+    uv = p*vec2(iResolution.x/iResolution.y,1.0);
+	uv *= cloudscale*3.0;
+    uv -= q - time;
+    weight = 0.4;
+    for (int i=0; i<7; i++){
+		c1 += abs(weight*noise( uv ));
+        uv = m*uv + time;
+		weight *= 0.6;
+    }
 
-	//Second Layer
-	vec2 seed2 = p2.xy * 2.0;
-	seed2 = floor(seed2 * iResolution.x);
-	vec3 rnd2 = nrand3( seed2 );
-	starcolor += vec4(pow(rnd2.y,40.0));
+    c += c1;
 
-	fragColor = mix(freqs[3]-.3, 1., v) * vec4(1.5*freqs[2] * t * t* t , 1.2*freqs[1] * t * t, freqs[3]*t, 1.0)+c2+starcolor;
+    vec3 skycolour = mix(skycolour2, skycolour1, p.y);
+    vec3 cloudcolour = vec3(1.1, 1.1, 0.9) * clamp((clouddark + cloudlight*c), 0.0, 1.0);
+
+    f = cloudcover + cloudalpha*f*r;
+
+    vec3 result = mix(skycolour, clamp(skytint * skycolour + cloudcolour, 0.0, 1.0), clamp(f + c, 0.0, 1.0));
+
+	fragColor = vec4( result, 1.0 );
 }
 
 void main() {

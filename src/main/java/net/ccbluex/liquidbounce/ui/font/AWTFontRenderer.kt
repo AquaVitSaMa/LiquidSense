@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.ui.font
 
+import net.ccbluex.liquidbounce.features.module.modules.render.HUD
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.client.renderer.texture.TextureUtil
@@ -124,7 +125,7 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
 
                 // Ugly solution, because floating point numbers, but I think that shouldn't be that much of a problem
                 GlStateManager.scale(reverse, reverse, reverse)
-                Minecraft.getMinecraft().fontRendererObj.drawString("$char", currX.toFloat() * scale.toFloat() + 2, 2f, color, false)
+                Minecraft.getMinecraft().fontRendererObj.drawString("$char", currX.toFloat() * scale.toFloat() + 1, 2f, color, false)
                 currX += Minecraft.getMinecraft().fontRendererObj.getStringWidth("$char") * reverse
 
                 GlStateManager.scale(scale, scale, scale)
@@ -136,7 +137,7 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
                 val fontChar = charLocations[char.toInt()] ?: continue
 
                 drawChar(fontChar, currX.toFloat(), 0f)
-                currX += fontChar.width - 8.0
+                currX += fontChar.width.toFloat() - HUD.fontWidth.get()
             }
         }
 
@@ -223,8 +224,7 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
                 graphics2D.drawImage(fontImages[targetChar], charLocations[targetChar]!!.x, charLocations[targetChar]!!.y,
                         null)
 
-        textureID = TextureUtil.uploadTextureImageAllocate(TextureUtil.glGenTextures(), bufferedImage, true,
-                true)
+        textureID = TextureUtil.uploadTextureImageAllocate(TextureUtil.glGenTextures(), bufferedImage, true, true)
     }
 
     /**
@@ -265,37 +265,18 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
      * @param text for width calculation
      * @return the width of the text
      */
-//    fun getStringWidth(text: String): Int {
-//        var width = 0
-//
-//        for (c in text.toCharArray()) {
-//            val fontChar = charLocations[
-//                    if (c.toInt() < charLocations.size)
-//                        c.toInt()
-//                    else
-//                        '\u0003'.toInt()
-//            ] ?: continue
-//
-//            width += fontChar.width - 8
-//        }
-//
-//        return width / 2
-//    }
-
-    /**
-     * @author: As丶One
-     * @create: 2020/12/21 14:29
-     **/
     fun getStringWidth(text: String): Int {
         var width = 0
 
         for (c in text.toCharArray()) {
-            width += if (c.toInt() >= charLocations.size) {
-                Minecraft.getMinecraft().fontRendererObj.getCharWidth(c) * 2
-            } else {
-                val fontChar = charLocations[c.toInt()] ?: continue
-                fontChar.width - 8
-            }
+            val fontChar = charLocations[
+                    if (c.toInt() < charLocations.size)
+                        c.toInt()
+                    else
+                        '\u0003'.toInt()
+            ] ?: continue
+
+            width += fontChar.width - HUD.fontWidth.get()
         }
 
         return width / 2

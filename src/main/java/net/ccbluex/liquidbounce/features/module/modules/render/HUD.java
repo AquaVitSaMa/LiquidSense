@@ -22,11 +22,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class HUD extends Module {
 
-    public final ListValue bkvalue = new ListValue("BackGroundColor", new String[] {"None","Color"}, "None");
     public final BoolValue blackHotbarValue = new BoolValue("BlackHotbar", true);
     public final IntegerValue hotbarSpeed = new IntegerValue("HotbarSpeed",95,0,100);
     public final BoolValue inventoryParticle = new BoolValue("InventoryParticle", false);
-    public final BoolValue moreinventory = new BoolValue("MoreInventory",true);
+    public final BoolValue moreinventory = new BoolValue("MoreInventory",false);
     private final BoolValue blurValue = new BoolValue("Blur", false);
     public final FontValue chatFont = new FontValue("ChatFont", mc.fontRendererObj) {
         @Override
@@ -34,10 +33,15 @@ public class HUD extends Module {
             mc.ingameGUI.getChatGUI().refreshChat();
         }
     };
-    public final IntegerValue rd = new IntegerValue("Red", 0, 0, 255);
-    public final IntegerValue bl = new IntegerValue("Blue", 255, 0, 255);
-    public final IntegerValue gn = new IntegerValue("Green", 0, 0, 255);
-    public final IntegerValue ap = new IntegerValue("Alpha", 150, 0, 255);
+    public static final ListValue fontShadow = new ListValue("FontShadow", new String[] {
+            "Shadow",
+            "Outline",
+            "None"
+    }, "Shadow");
+    public static final IntegerValue fontWidth = new IntegerValue("FontWidth", 8, 5, 10);
+    public static final FloatValue shadowX = new FloatValue("ShadowX", 0.5f, 0.25f, 1f);
+    public static final FloatValue shadowY = new FloatValue("ShadowY", 0.5f, 0.25f, 1f);
+    public static final IntegerValue shadowAlpha = new IntegerValue("ShadowAlpha", 150, 50, 255);
 
     public HUD() {
         setState(true);

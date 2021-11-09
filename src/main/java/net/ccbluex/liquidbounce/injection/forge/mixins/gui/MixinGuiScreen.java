@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 import me.aquavit.liquidsense.modules.misc.ComponentOnHover;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
-import net.ccbluex.liquidbounce.ui.client.GuiBackground;
+import net.ccbluex.liquidbounce.ui.client.gui.GuiBackground;
 import me.aquavit.liquidsense.utils.render.ParticleUtils;
 import net.ccbluex.liquidbounce.utils.render.shader.shaders.BackgroundShader;
 import net.minecraft.client.Minecraft;
@@ -32,7 +32,6 @@ import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 import java.util.List;
@@ -81,20 +80,6 @@ public abstract class MixinGuiScreen extends Gui {
             final int width = scaledResolution.getScaledWidth();
             final int height = scaledResolution.getScaledHeight();
             ParticleUtils.drawParticles(Mouse.getX() * width / mc.displayWidth, height - Mouse.getY() * height / mc.displayHeight - 1);
-        }
-    }
-
-    @Overwrite
-    public void drawWorldBackground(int p_drawWorldBackground_1_) {
-        HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
-        if (this.mc.theWorld != null) {
-            if (hud.bkvalue.get().equalsIgnoreCase("None")){
-                this.drawGradientRect(0, 0, this.width, this.height, -1072689136, -804253680);
-            } else {
-                this.drawGradientRect(0, 0, this.width, this.height, new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), hud.ap.get()).getRGB(),new Color(hud.rd.get(), hud.gn.get(), hud.bl.get(), 0).getRGB());
-            }
-        } else {
-            this.drawBackground(p_drawWorldBackground_1_);
         }
     }
 

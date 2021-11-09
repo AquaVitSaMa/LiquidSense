@@ -23,7 +23,7 @@ public final class IconUtils {
             return new ByteBuffer[] {readImageToBuffer(IconUtils.class.getResourceAsStream("/assets/minecraft/" + "liquidbounce" + "/icon_16x16.png")),
                     readImageToBuffer(IconUtils.class.getResourceAsStream("/assets/minecraft/" + "liquidbounce" + "/icon_32x32.png"))};
         }catch(IOException e) {
-
+            e.printStackTrace();
         }
         return null;
     }

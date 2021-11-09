@@ -59,8 +59,9 @@ class Velocity : Module() {
     // AACPush
     private var jump = false
 
-    override val tag: String
-        get() = modeValue.get()
+    override fun getTag(): String {
+        return modeValue.get()
+    }
 
     override fun onDisable() {
         mc.thePlayer?.speedInAir = 0.02F

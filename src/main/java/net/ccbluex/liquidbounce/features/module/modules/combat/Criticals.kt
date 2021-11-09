@@ -170,8 +170,8 @@ class Criticals : Module() {
 
     }
 
-     override val tag: String?
-        get() = modeValue.get()
-
+    override fun getTag(): String {
+        return modeValue.get()
+    }
 
 }

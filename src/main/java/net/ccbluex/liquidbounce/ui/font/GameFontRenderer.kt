@@ -8,6 +8,8 @@ package net.ccbluex.liquidbounce.ui.font
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.TextEvent
 import me.aquavit.liquidsense.utils.mc.ClassUtils
+import me.aquavit.liquidsense.utils.render.BlurBuffer
+import net.ccbluex.liquidbounce.features.module.modules.render.HUD
 import net.ccbluex.liquidbounce.utils.render.ColorUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.utils.render.shader.shaders.RainbowFontShader
@@ -21,8 +23,9 @@ import org.lwjgl.opengl.GL20.glUseProgram
 import java.awt.Color
 import java.awt.Font
 
-class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameSettings,
-        ResourceLocation("textures/font/ascii.png"), if (ClassUtils.hasForge()) null else Minecraft.getMinecraft().textureManager, false) {
+open class GameFontRenderer(font: Font) : FontRenderer(
+        Minecraft.getMinecraft().gameSettings, ResourceLocation("liquidbounce/font/ascii.png"),
+        if (ClassUtils.hasForge()) null else Minecraft.getMinecraft().textureManager, false) {
 
     var defaultFont = AWTFontRenderer(font)
     private var boldFont = AWTFontRenderer(font.deriveFont(Font.BOLD))
@@ -59,9 +62,17 @@ class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameS
         val rainbow = RainbowFontShader.INSTANCE.isInUse
 
         if (shadow) {
-            glUseProgram(0)
-
-            drawText(currentText, x + 0.5f, currY + 0.5f, Color(0, 0, 0, 120).rgb, true)
+            when {
+                HUD.fontShadow.get() == "Shadow" -> {
+                    drawText(currentText, x + HUD.shadowX.get(), currY + HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
+                }
+                HUD.fontShadow.get() == "Outline" -> {
+                    drawText(currentText, x + HUD.shadowX.get(), currY + HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
+                    drawText(currentText, x - HUD.shadowX.get(), currY - HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
+                    drawText(currentText, x + HUD.shadowX.get(), currY - HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
+                    drawText(currentText, x - HUD.shadowX.get(), currY + HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
+                }
+            }
         }
 
         return drawText(currentText, x, currY, color, false, rainbow)
@@ -191,8 +202,7 @@ class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameS
         return (x + getStringWidth(text)).toInt()
     }
 
-    override fun getColorCode(charCode: Char) =
-            ColorUtils.hexColors[getColorIndex(charCode)]
+    override fun getColorCode(charCode: Char) = ColorUtils.hexColors[getColorIndex(charCode)]
 
     override fun getStringWidth(text: String): Int {
         var currentText = text
@@ -245,9 +255,9 @@ class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameS
                 }
             }
 
-            width
+            width / 1
         } else
-            defaultFont.getStringWidth(currentText)
+            defaultFont.getStringWidth(currentText) / 1
     }
 
     override fun getCharWidth(character: Char) = getStringWidth(character.toString())

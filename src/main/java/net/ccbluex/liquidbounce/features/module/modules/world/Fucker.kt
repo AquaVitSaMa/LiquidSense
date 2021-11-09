@@ -237,6 +237,7 @@ object Fucker : Module() {
         }
     }
 
-    override val tag: String
-        get() = getBlockName(blockValue.get())
+    override fun getTag(): String {
+        return getBlockName(blockValue.get())
+    }
 }

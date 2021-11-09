@@ -88,7 +88,6 @@ object LiquidBounce {
         eventManager.registerListener(RotationUtils())
         eventManager.registerListener(AntiForge())
         eventManager.registerListener(BungeeCordSpoof())
-        eventManager.registerListener(DonatorCape())
         eventManager.registerListener(InventoryUtils())
 
         // Create command manager

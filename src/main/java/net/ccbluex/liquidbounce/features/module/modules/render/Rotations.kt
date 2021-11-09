@@ -90,6 +90,7 @@ class Rotations : Module() {
                 getState(ChestAura::class.java)
     }
 
-    override val tag: String?
-        get() = modeValue.get()
+    override fun getTag(): String {
+        return modeValue.get()
+    }
 }

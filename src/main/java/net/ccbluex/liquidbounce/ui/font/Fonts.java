@@ -27,20 +27,23 @@ import static net.ccbluex.liquidbounce.LiquidBounce.CLIENT_RESOURCE;
 @SideOnly(Side.CLIENT)
 public class Fonts {
 
-    @FontDetails(fontName = "Product Sans", fontSize = 25)
+    @FontDetails(fontName = "Museo-Sans", fontSize = 25)
     public static GameFontRenderer font25;
 
-    @FontDetails(fontName = "Product Sans", fontSize = 30)
+    @FontDetails(fontName = "Museo-Sans", fontSize = 30)
     public static GameFontRenderer font30;
 
-    @FontDetails(fontName = "Product Sans", fontSize = 35)
+    @FontDetails(fontName = "Museo-Sans", fontSize = 35)
     public static GameFontRenderer font35;
 
-    @FontDetails(fontName = "Product Sans", fontSize = 40)
+    @FontDetails(fontName = "Museo-Sans", fontSize = 40)
     public static GameFontRenderer font40;
 
     @FontDetails(fontName = "Roboto Bold", fontSize = 90)
     public static GameFontRenderer fontBold180;
+
+    @FontDetails(fontName = "Logo", fontSize = 90)
+    public static GameFontRenderer logo;
 
     @FontDetails(fontName = "Cs Go", fontSize = 40)
     public static GameFontRenderer csgo40;
@@ -59,13 +62,14 @@ public class Fonts {
         ClientUtils.getLogger().info("Loading Fonts.");
 
         downloadFonts();
-        font25 = new GameFontRenderer(getFont("Product-Sans.ttf", 14));
-        font30 = new GameFontRenderer(getFont("Product-Sans.ttf", 16));
+        font25 = new GameFontRenderer(getFont("Museo-Sans.ttf", 14));
+        font30 = new GameFontRenderer(getFont("Museo-Sans.ttf", 16));
         csgo40 = new GameFontRenderer(getFont("LiquidSense.ttf", 20));
-        font35 = new GameFontRenderer(getFont("Product-Sans.ttf", 18));
+        font35 = new GameFontRenderer(getFont("Museo-Sans.ttf", 18));
         csgo35 = new GameFontRenderer(getFont("LiquidSense.ttf", 18));
-        font40 = new GameFontRenderer(getFont("Product-Sans.ttf", 20));
+        font40 = new GameFontRenderer(getFont("Museo-Sans.ttf", 20));
         fontBold180 = new GameFontRenderer(getFont("Roboto-Bold.ttf", 60));
+        logo = new GameFontRenderer(getFont("Facon.ttf",60));
 
         try {
             CUSTOM_FONT_RENDERERS.clear();

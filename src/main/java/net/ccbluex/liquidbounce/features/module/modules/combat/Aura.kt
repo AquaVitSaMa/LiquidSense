@@ -889,6 +889,7 @@ class Aura : Module() {
     /**
      * HUD Tag
      */
-    override val tag: String?
-        get() = targetModeValue.get()
+    override fun getTag(): String {
+        return targetModeValue.get()
+    }
 }

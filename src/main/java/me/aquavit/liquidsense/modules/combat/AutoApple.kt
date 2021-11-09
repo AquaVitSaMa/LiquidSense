@@ -38,10 +38,9 @@ class AutoApple : Module() {
 
     private var delay = 0L
 
-
-    override val tag: String
-        get() = maxHealth.get().toString()
-
+    override fun getTag(): String {
+        return maxHealth.get().toString()
+    }
 
     @EventTarget
     fun onUpdate(event: UpdateEvent) {

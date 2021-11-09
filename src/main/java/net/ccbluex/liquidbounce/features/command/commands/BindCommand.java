@@ -30,7 +30,7 @@ public class BindCommand extends Command {
         final int key = Keyboard.getKeyIndex(args[2].toUpperCase());
         module.setKeyBind(key);
         this.chat("Bound module §a§l" + module.getName() + "§3 to key §a§l" + Keyboard.getKeyName(key) + "§3.");
-        LiquidBounce.hud.addNotification(new Notification("Bound " + module.getName() + " to " + Keyboard.getKeyName(key),"",NotifyType.SUCCESS,0,0));
+        LiquidBounce.hud.addNotification(new Notification("Bound " + module.getName() + " to " + Keyboard.getKeyName(key),"",NotifyType.SUCCESS,1500,500));
         playEdit();
     }
 

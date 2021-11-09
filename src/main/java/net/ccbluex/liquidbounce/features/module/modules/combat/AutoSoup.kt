@@ -31,8 +31,9 @@ class AutoSoup : Module() {
 
     private val timer = MSTimer()
 
-    override val tag: String
-        get() = healthValue.get().toString()
+    override fun getTag(): String {
+        return healthValue.get().toString()
+    }
 
     @EventTarget
     fun onUpdate(event: UpdateEvent?) {
