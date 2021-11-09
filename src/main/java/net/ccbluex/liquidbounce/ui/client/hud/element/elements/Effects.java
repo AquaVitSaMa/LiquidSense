@@ -17,7 +17,7 @@ import org.jetbrains.annotations.Nullable;
 @ElementInfo(name = "Effects")
 public class Effects extends Element {
 
-    private FontValue fontValue = new FontValue("Font", Fonts.font35);
+    private FontValue fontValue = new FontValue("Font", Fonts.font18);
     private BoolValue shadow = new BoolValue("Shadow", true);
 
     public Effects(){

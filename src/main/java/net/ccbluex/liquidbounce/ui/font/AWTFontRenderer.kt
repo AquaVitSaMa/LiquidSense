@@ -21,8 +21,7 @@ import java.awt.image.BufferedImage
 /**
  * Generate new bitmap based font renderer
  */
-@SideOnly(Side.CLIENT)
-class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
+@SideOnly(Side.CLIENT) class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
 
     companion object {
         var assumeNonVolatile: Boolean = false
@@ -120,25 +119,9 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
         GL11.glBegin(GL11.GL_QUADS)
 
         for (char in text.toCharArray()) {
-            if (char.toInt() >= charLocations.size) {
-                GL11.glEnd()
-
-                // Ugly solution, because floating point numbers, but I think that shouldn't be that much of a problem
-                GlStateManager.scale(reverse, reverse, reverse)
-                Minecraft.getMinecraft().fontRendererObj.drawString("$char", currX.toFloat() * scale.toFloat() + 1, 2f, color, false)
-                currX += Minecraft.getMinecraft().fontRendererObj.getStringWidth("$char") * reverse
-
-                GlStateManager.scale(scale, scale, scale)
-                GlStateManager.bindTexture(textureID)
-                GlStateManager.color(red, green, blue, alpha)
-
-                GL11.glBegin(GL11.GL_QUADS)
-            } else {
-                val fontChar = charLocations[char.toInt()] ?: continue
-
-                drawChar(fontChar, currX.toFloat(), 0f)
-                currX += fontChar.width.toFloat() - HUD.fontWidth.get()
-            }
+            val fontChar = charLocations[char.toInt()] ?: continue
+            drawChar(fontChar, currX.toFloat(), 0f)
+            currX += fontChar.width.toFloat() - HUD.fontWidth.get()
         }
 
         GL11.glEnd()
@@ -168,6 +151,7 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
         val renderWidth = width / textureWidth
         val renderHeight = height / textureHeight
 
+
         GL11.glTexCoord2f(renderX, renderY)
         GL11.glVertex2f(x, y)
         GL11.glTexCoord2f(renderX, renderY + renderHeight)
@@ -191,10 +175,8 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
             val fontImage = drawCharToImage(targetChar.toChar())
             val fontChar = CharLocation(charX, charY, fontImage.width, fontImage.height)
 
-            if (fontChar.height > fontHeight)
-                fontHeight = fontChar.height
-            if (fontChar.height > rowHeight)
-                rowHeight = fontChar.height
+            if (fontChar.height > fontHeight) fontHeight = fontChar.height
+            if (fontChar.height > rowHeight) rowHeight = fontChar.height
 
             charLocations[targetChar] = fontChar
             fontImages[targetChar] = fontImage
@@ -202,8 +184,7 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
             charX += fontChar.width
 
             if (charX > 2048) {
-                if (charX > textureWidth)
-                    textureWidth = charX
+                if (charX > textureWidth) textureWidth = charX
 
                 charX = 0
                 charY += rowHeight
@@ -219,12 +200,10 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
         graphics2D.fillRect(0, 0, textureWidth, textureHeight)
         graphics2D.color = Color.white
 
-        for (targetChar in startChar until stopChar)
-            if (fontImages[targetChar] != null && charLocations[targetChar] != null)
-                graphics2D.drawImage(fontImages[targetChar], charLocations[targetChar]!!.x, charLocations[targetChar]!!.y,
-                        null)
+        for (targetChar in startChar until stopChar) if (fontImages[targetChar] != null && charLocations[targetChar] != null)
+            graphics2D.drawImage(fontImages[targetChar], charLocations[targetChar]!!.x, charLocations[targetChar]!!.y, null)
 
-        textureID = TextureUtil.uploadTextureImageAllocate(TextureUtil.glGenTextures(), bufferedImage, true, true)
+        textureID = TextureUtil.uploadTextureImageAllocate(TextureUtil.glGenTextures(), bufferedImage, false, true)
     }
 
     /**
@@ -235,27 +214,28 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
      */
     private fun drawCharToImage(ch: Char): BufferedImage {
         val graphics2D = BufferedImage(1, 1, BufferedImage.TYPE_INT_ARGB).graphics as Graphics2D
-
-        graphics2D.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
         graphics2D.font = font
 
         val fontMetrics = graphics2D.fontMetrics
 
         var charWidth = fontMetrics.charWidth(ch) + 8
-        if (charWidth <= 0)
-            charWidth = 7
+        if (charWidth <= 0) charWidth = 7
 
         var charHeight = fontMetrics.height + 3
-        if (charHeight <= 0)
-            charHeight = font.size
+        if (charHeight <= 0) charHeight = font.size
 
         val fontImage = BufferedImage(charWidth, charHeight, BufferedImage.TYPE_INT_ARGB)
         val graphics = fontImage.graphics as Graphics2D
-        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON)
+
+        graphics.setRenderingHint(RenderingHints.KEY_FRACTIONALMETRICS, RenderingHints.VALUE_FRACTIONALMETRICS_ON)
+        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_GASP)
+        graphics.setRenderingHint(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_LCD_HRGB)
+        graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON)
+
+
         graphics.font = font
         graphics.color = Color.WHITE
         graphics.drawString(ch.toString(), 3, 1 + fontMetrics.ascent)
-
         return fontImage
     }
 
@@ -269,12 +249,8 @@ class AWTFontRenderer(val font: Font, startChar: Int = 0, stopChar: Int = 255) {
         var width = 0
 
         for (c in text.toCharArray()) {
-            val fontChar = charLocations[
-                    if (c.toInt() < charLocations.size)
-                        c.toInt()
-                    else
-                        '\u0003'.toInt()
-            ] ?: continue
+            val fontChar = charLocations[if (c.toInt() < charLocations.size) c.toInt()
+            else '\u0003'.toInt()] ?: continue
 
             width += fontChar.width - HUD.fontWidth.get()
         }

@@ -88,7 +88,7 @@ public class ScoreboardElement extends Element {
 
             for (Score score : scoreCollection) {
                 ScorePlayerTeam scorePlayerTeam = scoreboard.getPlayersTeam(score.getPlayerName());
-                String width = ScorePlayerTeam.formatPlayerName((Team)scorePlayerTeam, score.getPlayerName()) + ": " + EnumChatFormatting.RED + score.getScorePoints();
+                String width = ScorePlayerTeam.formatPlayerName(scorePlayerTeam, score.getPlayerName()) + ": " + EnumChatFormatting.RED + score.getScorePoints();
                 maxWidth = RangesKt.coerceAtLeast(maxWidth, fontRenderer.getStringWidth(width));
             }
 
@@ -109,7 +109,7 @@ public class ScoreboardElement extends Element {
                     new Color(16, 25, 32, 200).getRGB(), 1F,new Color(16, 25, 32, 200).getRGB());
             //RenderUtils.drawBorderedRect(l1 - 2, -10F - Fonts.csgo40.FONT_HEIGHT, 5, -2, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
             Fonts.csgo40.drawString("N", l1 + 2F, -(Fonts.csgo40.FONT_HEIGHT + 2.5F + (float)fontRenderer.FONT_HEIGHT /2), new Color(0, 131, 193).getRGB(), false);
-            Fonts.font40.drawString("ScoreBoard", l1 + Fonts.csgo40.getStringWidth("N") + 7.5F, -(Fonts.csgo40.FONT_HEIGHT + 2.1F + (float)fontRenderer.FONT_HEIGHT /2), Color.WHITE.getRGB(), false);
+            Fonts.font20.drawString("ScoreBoard", l1 + Fonts.csgo40.getStringWidth("N") + 7.5F, -(Fonts.csgo40.FONT_HEIGHT + 2.1F + (float)fontRenderer.FONT_HEIGHT /2), Color.WHITE.getRGB(), false);
 
             int index = 0;
             for (Score score : scoreCollection){

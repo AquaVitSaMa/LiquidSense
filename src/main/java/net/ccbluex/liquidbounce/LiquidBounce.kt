@@ -27,6 +27,8 @@ import net.ccbluex.liquidbounce.ui.client.hud.HUD
 import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.createDefault
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import me.aquavit.liquidsense.utils.mc.ClassUtils
+import net.ccbluex.liquidbounce.ui.client.miscible.Miscible
+import net.ccbluex.liquidbounce.ui.client.neverlose.Main
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.InventoryUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
@@ -60,6 +62,8 @@ object LiquidBounce {
     lateinit var hud: HUD
 
     lateinit var clickGui: ClickGui
+    lateinit var miscible: Miscible
+    lateinit var neverlose : Main
 
     // Update information
     var latestVersion = 0
@@ -121,6 +125,8 @@ object LiquidBounce {
 
         // ClickGUI
         clickGui = ClickGui()
+        miscible = Miscible()
+        neverlose = Main()
         fileManager.loadConfig(fileManager.clickGuiConfig)
 
         // Tabs (Only for Forge!)
@@ -129,23 +135,6 @@ object LiquidBounce {
             ExploitsTab()
             HeadsTab()
         }
-
-        /*
-        // Register capes service
-        try {
-            registerCapeService()
-        } catch (throwable: Throwable) {
-            ClientUtils.getLogger().error("Failed to register cape service", throwable)
-        }
-         */
-
-        // Setup Discord RPC
-//        try {
-//            clientRichPresence = ClientRichPresence()
-//            clientRichPresence.setup()
-//        } catch (throwable: Throwable) {
-//            ClientUtils.getLogger().error("Failed to setup Discord RPC.", throwable)
-//        }
 
         // Set HUD
         hud = createDefault()

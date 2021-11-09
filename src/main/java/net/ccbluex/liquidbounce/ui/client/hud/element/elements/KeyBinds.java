@@ -32,7 +32,7 @@ public class KeyBinds extends Element {
         }
         BlurBuffer.blurArea((int) ((-4.5F + this.getRenderX()) * this.getScale()),
                 (int) ((this.getRenderY() + Fonts.csgo40.FONT_HEIGHT - 2) * this.getScale()),
-                (Fonts.csgo40.getStringWidth("F") + Fonts.font40.getStringWidth("Binds") + 67) * this.getScale(),
+                (Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 67) * this.getScale(),
                 (8 + index * 14) * this.getScale(),
                 true);
 
@@ -49,20 +49,20 @@ public class KeyBinds extends Element {
 
             //RenderUtils.drawRect(0f, 10f + ypos , 150f, 10f + ypos + 12, new Color(35, 35, 35, 255).getRGB());
             if (module.getState()){
-                Fonts.font40.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
-                Fonts.font40.drawString("on" , Fonts.csgo40.getStringWidth("F") + Fonts.font40.getStringWidth("Binds") + 46F , y + 17, Color.WHITE.getRGB());
+                Fonts.font20.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
+                Fonts.font20.drawString("on" , Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F , y + 17, Color.WHITE.getRGB());
             } else {
-                Fonts.font40.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
-                Fonts.font40.drawString("off", Fonts.csgo40.getStringWidth("F") + Fonts.font40.getStringWidth("Binds") + 45 , y + 17, Color.WHITE.getRGB());
+                Fonts.font20.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
+                Fonts.font20.drawString("off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 45 , y + 17, Color.WHITE.getRGB());
 
             }
             y += 14;
         }
-        RenderUtils.drawRoundedRect(-5.2F, -5.5F, Fonts.csgo40.getStringWidth("K") + Fonts.font40.getStringWidth("Binds") + 65, Fonts.csgo40.FONT_HEIGHT + 6F,1.5F,
+        RenderUtils.drawRoundedRect(-5.2F, -5.5F, Fonts.csgo40.getStringWidth("K") + Fonts.font20.getStringWidth("Binds") + 65, Fonts.csgo40.FONT_HEIGHT + 6F,1.5F,
                 new Color(16, 25, 32, 200).getRGB(), 1F,new Color(16, 25, 32, 200).getRGB());
-        //RenderUtils.drawBorderedRect(-5.5F, -5.5F, Fonts.csgo40.getStringWidth("K") + Fonts.font40.getStringWidth("Binds") + 60, Fonts.csgo40.FONT_HEIGHT + 0.5F, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
+        //RenderUtils.drawBorderedRect(-5.5F, -5.5F, Fonts.csgo40.getStringWidth("K") + Fonts.font20.getStringWidth("Binds") + 60, Fonts.csgo40.FONT_HEIGHT + 0.5F, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
         Fonts.csgo40.drawString("K", -1.5F, -1.5F, new Color(0, 131, 193).getRGB(), false);
-        Fonts.font40.drawString("Binds", Fonts.csgo40.getStringWidth("K") + 1.8F, -1F, Color.WHITE.getRGB(), false);
+        Fonts.font20.drawString("Binds", Fonts.csgo40.getStringWidth("K") + 1.8F, -1F, Color.WHITE.getRGB(), false);
         return new Border(20, 20, 120, 80);
     }
 }

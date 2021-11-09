@@ -50,7 +50,7 @@ class NameTags : Module() {
     private val distanceValue = BoolValue("Distance", false)
     private val armorValue = BoolValue("Armor", true)
     private val clearNamesValue = BoolValue("ClearNames", false)
-    private val fontValue = FontValue("Font", Fonts.font40)
+    private val fontValue = FontValue("Font", Fonts.font20)
     private val borderValue = BoolValue("Border", true)
     private val scaleValue = FloatValue("Scale", 1F, 1F, 4F)
     private val colorRedValue = IntegerValue("R", 255, 0, 255)
@@ -112,7 +112,7 @@ class NameTags : Module() {
         mc.renderItem.zLevel = -150.0f
         whatTheFuckOpenGLThisFixesItemGlint()
         mc.renderItem.renderItemAndEffectIntoGUI(stack, x, y)
-        mc.renderItem.renderItemOverlays(Fonts.font35, stack, x, y)
+        mc.renderItem.renderItemOverlays(Fonts.font18, stack, x, y)
         mc.renderItem.zLevel = 0.0f
         RenderHelper.disableStandardItemLighting()
         disableCull()
@@ -321,7 +321,7 @@ class NameTags : Module() {
     private fun NameTag(entity: EntityLivingBase, tag: String, pX: Double, pY: Double, pZ: Double) {
         var tag = tag
         var pY = pY
-        val fr: FontRenderer = Fonts.font40
+        val fr: FontRenderer = Fonts.font20
         var size = mc.thePlayer.getDistanceToEntity(entity) / 6.0f
         if (size < 0.8f) {
             size = 0.8f
@@ -350,14 +350,14 @@ class NameTags : Module() {
         glScalef(-scale, -scale, scale)
         GLUtils.setGLCap(2896, false)
         GLUtils.setGLCap(2929, false)
-        val width = Fonts.font35.getStringWidth(lol) / 2
+        val width = Fonts.font18.getStringWidth(lol) / 2
         GLUtils.setGLCap(3042, true)
         glBlendFunc(770, 771)
-        drawBorderedRectNameTag(-width - 2.toFloat(), -(Fonts.font40.FONT_HEIGHT + 9).toFloat(), width + 6.toFloat(), 2.0f, 1.0f,
+        drawBorderedRectNameTag(-width - 2.toFloat(), -(Fonts.font20.FONT_HEIGHT + 9).toFloat(), width + 6.toFloat(), 2.0f, 1.0f,
                 RenderUtils.reAlpha(Color.BLACK.rgb, 0.3f), RenderUtils.reAlpha(Color.BLACK.rgb, 0.3f))
         glColor3f(1f, 1f, 1f)
-        fr.drawString(lol, -width, -(Fonts.font40.FONT_HEIGHT + 8), -1)
-        fr.drawString(hp, -Fonts.font40.getStringWidth(hp) / 2, -(Fonts.font40.FONT_HEIGHT - 2), -1)
+        fr.drawString(lol, -width, -(Fonts.font20.FONT_HEIGHT + 8), -1)
+        fr.drawString(hp, -Fonts.font20.getStringWidth(hp) / 2, -(Fonts.font20.FONT_HEIGHT - 2), -1)
         var COLOR = getColor(entity)
         val nowhealth = Math.ceil(entity.health + entity.absorptionAmount.toDouble()).toFloat()
         val health = nowhealth / (entity.maxHealth + entity.absorptionAmount)

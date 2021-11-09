@@ -1,0 +1,1 @@
+package net.ccbluex.liquidbounce.ui.client.neverloseobject Impl {    var selectedCategory = "Combat"    var theType = Type.CLIENT    enum class Type{        CLIENT ,        Manager }    var coordinateX = 100f    var coordinateY = 100f    var lwheel = 0f    var rwheel = 0f    var configname = "Global"}

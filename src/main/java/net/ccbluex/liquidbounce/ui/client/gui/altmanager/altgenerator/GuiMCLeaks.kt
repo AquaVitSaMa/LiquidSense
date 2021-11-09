@@ -36,7 +36,7 @@ class GuiMCLeaks(private val prevGui: GuiAltManager) : GuiScreen() {
         buttonList.add(GuiButton(3, width / 2 + 2, height - 54, 98, 20, "Back"))
 
         // Token text field
-        tokenField = GuiTextField(0, Fonts.font40, width / 2 - 100, height / 4 + 40, 200, 20)
+        tokenField = GuiTextField(0, Fonts.font20, width / 2 - 100, height / 4 + 40, 200, 20)
         tokenField.isFocused = true
         tokenField.maxStringLength = 16
     }
@@ -107,11 +107,11 @@ class GuiMCLeaks(private val prevGui: GuiAltManager) : GuiScreen() {
         Gui.drawRect(30, 30, width - 30, height - 30, Int.MIN_VALUE)
 
         // Draw text
-        drawCenteredString(Fonts.font40, "MCLeaks", width / 2, 6, 0xffffff)
-        drawString(Fonts.font40, "Token:", width / 2 - 100, height / 4 + 30, 10526880)
+        drawCenteredString(Fonts.font20, "MCLeaks", width / 2, 6, 0xffffff)
+        drawString(Fonts.font20, "Token:", width / 2 - 100, height / 4 + 30, 10526880)
 
         // Draw status
-        if (status != null) drawCenteredString(Fonts.font40, status, width / 2, 18, 0xffffff)
+        if (status != null) drawCenteredString(Fonts.font20, status, width / 2, 18, 0xffffff)
 
         tokenField.drawTextBox()
         super.drawScreen(mouseX, mouseY, partialTicks)

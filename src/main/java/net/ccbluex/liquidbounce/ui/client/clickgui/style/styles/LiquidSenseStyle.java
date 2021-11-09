@@ -43,17 +43,17 @@ public class LiquidSenseStyle extends Style {
             RenderUtils.drawBorderedRect((float) panel.getX(), panel.getY() + 17 + panel.getFade(), (float) panel.getX() + panel.getWidth(), panel.getY() + 19 + panel.getFade() + 5, 3, new Color(20, 20, 20).getRGB(), new Color(20, 20, 20).getRGB());
         }
         GlStateManager.resetColor();
-        float textWidth = Fonts.font35.getStringWidth("§f" + StringUtils.stripControlCodes(panel.getName()));
-        Fonts.font35.drawString(panel.getName(), (int) (panel.getX() - (textWidth - 100.0F) / 2F), panel.getY() + 7 - 3, Color.WHITE.getRGB());
+        float textWidth = Fonts.font18.getStringWidth("§f" + StringUtils.stripControlCodes(panel.getName()));
+        Fonts.font18.drawString(panel.getName(), (int) (panel.getX() - (textWidth - 100.0F) / 2F), panel.getY() + 7 - 3, Color.WHITE.getRGB());
     }
 
     @Override
     public void drawDescription(int mouseX, int mouseY, String text) {
-        int textWidth = Fonts.font35.getStringWidth(text);
+        int textWidth = Fonts.font18.getStringWidth(text);
 
-        RenderUtils.drawBorderedRect(mouseX + 9, mouseY, mouseX + textWidth + 14, mouseY + Fonts.font35.FONT_HEIGHT + 3, 3F, new Color(35, 35, 35).getRGB(), new Color(35, 35, 35).getRGB());
+        RenderUtils.drawBorderedRect(mouseX + 9, mouseY, mouseX + textWidth + 14, mouseY + Fonts.font18.FONT_HEIGHT + 3, 3F, new Color(35, 35, 35).getRGB(), new Color(35, 35, 35).getRGB());
         GlStateManager.resetColor();
-        Fonts.font35.drawString(text, mouseX + 12, mouseY + (Fonts.font35.FONT_HEIGHT / 2), Color.WHITE.getRGB());
+        Fonts.font18.drawString(text, mouseX + 12, mouseY + (Fonts.font18.FONT_HEIGHT / 2), Color.WHITE.getRGB());
     }
 
     @Override
@@ -62,7 +62,7 @@ public class LiquidSenseStyle extends Style {
 
         GlStateManager.resetColor();
 
-        Fonts.font35.drawString(buttonElement.getDisplayName(), buttonElement.getX() + 5, buttonElement.getY() + 5, Color.WHITE.getRGB());
+        Fonts.font18.drawString(buttonElement.getDisplayName(), buttonElement.getX() + 5, buttonElement.getY() + 5, Color.WHITE.getRGB());
     }
 
     @Override
@@ -71,15 +71,15 @@ public class LiquidSenseStyle extends Style {
         Gui.drawRect(moduleElement.getX() - 1, moduleElement.getY() - 1, moduleElement.getX() + moduleElement.getWidth() + 1, moduleElement.getY() + moduleElement.getHeight() + 1, hoverColor(new Color(30, 30, 30,moduleElement.slowlyFade), moduleElement.hoverTime).getRGB());
         Gui.drawRect(moduleElement.getX() + moduleElement.getWidth() - 1 / 2, moduleElement.getY() - 1, moduleElement.getX() + moduleElement.getWidth() + 1, moduleElement.getY() + moduleElement.getHeight() + 1, hoverColo(new Color(30, 30, 30,0), moduleElement.hoverTime).getRGB());
         GlStateManager.resetColor();
-        float textWidth1 = Fonts.font35.getStringWidth("§f" + StringUtils.stripControlCodes(moduleElement.getDisplayName()));
-        Fonts.font35.drawString(moduleElement.getDisplayName(), (int) (moduleElement.getX() - (textWidth1 - 100.0F) / 2F), moduleElement.getY() + 5, Color.WHITE.getRGB());
+        float textWidth1 = Fonts.font18.getStringWidth("§f" + StringUtils.stripControlCodes(moduleElement.getDisplayName()));
+        Fonts.font18.drawString(moduleElement.getDisplayName(), (int) (moduleElement.getX() - (textWidth1 - 100.0F) / 2F), moduleElement.getY() + 5, Color.WHITE.getRGB());
 
         // Draw settings
         final List<Value<?>> moduleValues = moduleElement.getModule().getValues();
 
         if(!moduleValues.isEmpty()) {
             if(moduleElement.isShowSettings()) {
-                Fonts.font35.drawString("v", moduleElement.getX() + moduleElement.getWidth() - 8, moduleElement.getY() + 5, Color.WHITE.getRGB());
+                Fonts.font18.drawString("v", moduleElement.getX() + moduleElement.getWidth() - 8, moduleElement.getY() + 5, Color.WHITE.getRGB());
 
                 if(moduleElement.isShowSettings()) {
                     int yPos = moduleElement.getY() + 4;
@@ -88,7 +88,7 @@ public class LiquidSenseStyle extends Style {
                             continue;
                         if(value instanceof BoolValue) {
                             final String text = value.getName();
-                            final float textWidth = Fonts.font35.getStringWidth(text);
+                            final float textWidth = Fonts.font18.getStringWidth(text);
 
                             if(moduleElement.getSettingsWidth() < textWidth + 8)
                                 moduleElement.setSettingsWidth(textWidth + 8);
@@ -107,21 +107,21 @@ public class LiquidSenseStyle extends Style {
                             GlStateManager.resetColor();
                             RenderUtils.drawRect(moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() - 15, yPos + 5, moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() - 9, yPos + 9, Integer.MAX_VALUE);
                             RenderUtils.drawRect(moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() - 9, yPos + 4.5, moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() - 4, yPos + 9.5, ((BoolValue) value).get() ? Color.WHITE.getRGB() : new Color(10, 10, 10).getRGB());
-                            Fonts.font35.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, Color.WHITE.getRGB());
+                            Fonts.font18.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, Color.WHITE.getRGB());
                             yPos += 12;
                         }else if(value instanceof ListValue) {
                             ListValue listValue = (ListValue) value;
 
                             final String text = value.getName();
-                            final float textWidth = Fonts.font35.getStringWidth(text);
+                            final float textWidth = Fonts.font18.getStringWidth(text);
 
                             if(moduleElement.getSettingsWidth() < textWidth + 16)
                                 moduleElement.setSettingsWidth(textWidth + 16);
 
                             RenderUtils.drawRect(moduleElement.getX() + moduleElement.getWidth() + 4, yPos + 2, moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth(), yPos + 14, new Color(35, 35, 35).getRGB());
                             GlStateManager.resetColor();
-                            Fonts.font35.drawString("§f" + text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, 0xffffff);
-                            Fonts.font35.drawString(listValue.openList ? "-" : "+", (int) (moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() - (listValue.openList ? 5 : 6)), yPos + 4, 0xffffff);
+                            Fonts.font18.drawString("§f" + text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, 0xffffff);
+                            Fonts.font18.drawString(listValue.openList ? "-" : "+", (int) (moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() - (listValue.openList ? 5 : 6)), yPos + 4, 0xffffff);
 
                             if(mouseX >= moduleElement.getX() + moduleElement.getWidth() + 4 && mouseX <= moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() && mouseY >= yPos + 2 && mouseY <= yPos + 14) {
                                 if(Mouse.isButtonDown(0) && moduleElement.isntPressed()) {
@@ -133,7 +133,7 @@ public class LiquidSenseStyle extends Style {
                             yPos += 12;
 
                             for(final String valueOfList : listValue.getValues()) {
-                                final float textWidth2 = Fonts.font35.getStringWidth(">" + valueOfList);
+                                final float textWidth2 = Fonts.font18.getStringWidth(">" + valueOfList);
 
                                 if(moduleElement.getSettingsWidth() < textWidth2 + 8)
                                     moduleElement.setSettingsWidth(textWidth2 + 8);
@@ -150,8 +150,8 @@ public class LiquidSenseStyle extends Style {
                                     GlStateManager.resetColor();
                                     RenderUtils.drawFCircle(moduleElement.getX() + moduleElement.getWidth() + 11, (float)(yPos + 6.5), 1, listValue.get() != null && listValue.get().equalsIgnoreCase(valueOfList) ? Color.WHITE : new Color(0,0,0,0));
                                     RenderUtils.drawKCircle((float)(moduleElement.getX() + moduleElement.getWidth() + 11), (float)(yPos + 6.5), 3,4, Color.WHITE);
-                                    //Fonts.font35.drawString(listValue.get() != null && listValue.get().equalsIgnoreCase(valueOfList) ? ">" : "v", moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, Integer.MAX_VALUE);
-                                    Fonts.font35.drawString(valueOfList, moduleElement.getX() + moduleElement.getWidth() + 18, yPos + 4, Color.WHITE.getRGB());
+                                    //Fonts.font18.drawString(listValue.get() != null && listValue.get().equalsIgnoreCase(valueOfList) ? ">" : "v", moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, Integer.MAX_VALUE);
+                                    Fonts.font18.drawString(valueOfList, moduleElement.getX() + moduleElement.getWidth() + 18, yPos + 4, Color.WHITE.getRGB());
                                     yPos += 12;
 
                                 }
@@ -160,7 +160,7 @@ public class LiquidSenseStyle extends Style {
                             final FloatValue floatValue = (FloatValue) value;
                             final String text = value.getName();
                             final String text1 = "§f" + round(floatValue.get());
-                            final float textWidth = Fonts.font35.getStringWidth(text);
+                            final float textWidth = Fonts.font18.getStringWidth(text);
 
                             if(moduleElement.getSettingsWidth() < textWidth + 8)
                                 moduleElement.setSettingsWidth(textWidth + 8);
@@ -178,14 +178,14 @@ public class LiquidSenseStyle extends Style {
                             }
 
                             GlStateManager.resetColor();
-                            Fonts.font35.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, 0xffffff);
-                            Fonts.font30.drawString(text1, moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() / 2 - text1.length(), yPos + 12, 0xffffff);
+                            Fonts.font18.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, 0xffffff);
+                            Fonts.font16.drawString(text1, moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() / 2 - text1.length(), yPos + 12, 0xffffff);
                             yPos += 22;
                         }else if(value instanceof IntegerValue) {
                             final IntegerValue integerValue = (IntegerValue) value;
                             final String text = value.getName();
                             final String text1 = "§f" + (value instanceof BlockValue ? BlockUtils.getBlockName(integerValue.get()) + " (" + integerValue.get() + ")" : integerValue.get());
-                            final float textWidth = Fonts.font35.getStringWidth(text);
+                            final float textWidth = Fonts.font18.getStringWidth(text);
 
                             if(moduleElement.getSettingsWidth() < textWidth + 8)
                                 moduleElement.setSettingsWidth(textWidth + 8);
@@ -203,8 +203,8 @@ public class LiquidSenseStyle extends Style {
                             }
 
                             GlStateManager.resetColor();
-                            Fonts.font35.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, 0xffffff);
-                            Fonts.font30.drawString(text1, moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() / 2 - text1.length(), yPos + 12, 0xffffff);
+                            Fonts.font18.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, 0xffffff);
+                            Fonts.font16.drawString(text1, moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() / 2 - text1.length(), yPos + 12, 0xffffff);
                             yPos += 22;
                         }else if(value instanceof FontValue) {
                             final FontValue fontValue = (FontValue) value;
@@ -228,8 +228,8 @@ public class LiquidSenseStyle extends Style {
                                 }
                             }
 
-                            Fonts.font35.drawString(displayString, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, Color.WHITE.getRGB());
-                            int stringWidth = Fonts.font35.getStringWidth(displayString);
+                            Fonts.font18.drawString(displayString, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, Color.WHITE.getRGB());
+                            int stringWidth = Fonts.font18.getStringWidth(displayString);
 
                             if(moduleElement.getSettingsWidth() < stringWidth + 8)
                                 moduleElement.setSettingsWidth(stringWidth + 8);
@@ -274,14 +274,14 @@ public class LiquidSenseStyle extends Style {
                             yPos += 11;
                         }else{
                             String text = value.getName() + "§f: §f" + value.get();
-                            float textWidth = Fonts.font35.getStringWidth(text);
+                            float textWidth = Fonts.font18.getStringWidth(text);
 
                             if(moduleElement.getSettingsWidth() < textWidth + 8)
                                 moduleElement.setSettingsWidth(textWidth + 8);
 
                             RenderUtils.drawRect(moduleElement.getX() + moduleElement.getWidth() + 4, yPos + 2, moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth(), yPos + 14, Integer.MIN_VALUE);
                             GlStateManager.resetColor();
-                            Fonts.font35.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, 0xffffff);
+                            Fonts.font18.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, yPos + 4, 0xffffff);
                             yPos += 12;
                         }
                     }
@@ -304,7 +304,7 @@ public class LiquidSenseStyle extends Style {
                 for(final Value value : moduleValues) {
                     if(value instanceof BoolValue) {
                         final String text = value.getName();
-                        final float textWidth = Fonts.font35.getStringWidth(text);
+                        final float textWidth = Fonts.font18.getStringWidth(text);
 
                         if(moduleElement.getSettingsWidth() < textWidth + 8)
                             moduleElement.setSettingsWidth(textWidth + 8);
@@ -316,29 +316,29 @@ public class LiquidSenseStyle extends Style {
                             mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
                         }
 
-                        Fonts.font35.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 2, ((BoolValue) value).get() ? Color.WHITE.getRGB() : Integer.MAX_VALUE);
+                        Fonts.font18.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 2, ((BoolValue) value).get() ? Color.WHITE.getRGB() : Integer.MAX_VALUE);
                         moduleElement.slowlySettingsYPos += 11;
                     }else if(value instanceof ListValue) {
                         final ListValue listValue = (ListValue) value;
 
                         final String text = value.getName();
-                        final float textWidth = Fonts.font35.getStringWidth(text);
+                        final float textWidth = Fonts.font18.getStringWidth(text);
 
                         if(moduleElement.getSettingsWidth() < textWidth + 16)
                             moduleElement.setSettingsWidth(textWidth + 16);
 
-                        Fonts.font35.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 2, 0xffffff);
-                        Fonts.font35.drawString(listValue.openList ? "-" : "+", (int) (moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() - (listValue.openList ? 5 : 6)), moduleElement.slowlySettingsYPos + 2, 0xffffff);
+                        Fonts.font18.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 2, 0xffffff);
+                        Fonts.font18.drawString(listValue.openList ? "-" : "+", (int) (moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() - (listValue.openList ? 5 : 6)), moduleElement.slowlySettingsYPos + 2, 0xffffff);
 
-                        if(mouseX >= moduleElement.getX() + moduleElement.getWidth() + 4 && mouseX <= moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() && mouseY >= moduleElement.slowlySettingsYPos && mouseY <= moduleElement.slowlySettingsYPos + Fonts.font35.FONT_HEIGHT && Mouse.isButtonDown(0) && moduleElement.isntPressed()) {
+                        if(mouseX >= moduleElement.getX() + moduleElement.getWidth() + 4 && mouseX <= moduleElement.getX() + moduleElement.getWidth() + moduleElement.getSettingsWidth() && mouseY >= moduleElement.slowlySettingsYPos && mouseY <= moduleElement.slowlySettingsYPos + Fonts.font18.FONT_HEIGHT && Mouse.isButtonDown(0) && moduleElement.isntPressed()) {
                             listValue.openList = !listValue.openList;
                             mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("gui.button.press"), 1.0F));
                         }
 
-                        moduleElement.slowlySettingsYPos += Fonts.font35.FONT_HEIGHT + 1;
+                        moduleElement.slowlySettingsYPos += Fonts.font18.FONT_HEIGHT + 1;
 
                         for(final String valueOfList : listValue.getValues()) {
-                            final float textWidth2 = Fonts.font35.getStringWidth("> " + valueOfList);
+                            final float textWidth2 = Fonts.font18.getStringWidth("> " + valueOfList);
 
                             if(moduleElement.getSettingsWidth() < textWidth2 + 12)
                                 moduleElement.setSettingsWidth(textWidth2 + 12);
@@ -350,8 +350,8 @@ public class LiquidSenseStyle extends Style {
                                 }
 
                                 GlStateManager.resetColor();
-                                Fonts.font35.drawString("> " + valueOfList, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 2, listValue.get() != null && listValue.get().equalsIgnoreCase(valueOfList) ? Color.WHITE.getRGB() : Integer.MAX_VALUE);
-                                moduleElement.slowlySettingsYPos += Fonts.font35.FONT_HEIGHT + 1;
+                                Fonts.font18.drawString("> " + valueOfList, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 2, listValue.get() != null && listValue.get().equalsIgnoreCase(valueOfList) ? Color.WHITE.getRGB() : Integer.MAX_VALUE);
+                                moduleElement.slowlySettingsYPos += Fonts.font18.FONT_HEIGHT + 1;
                             }
                         }
 
@@ -361,7 +361,7 @@ public class LiquidSenseStyle extends Style {
                     }else if(value instanceof FloatValue) {
                         final FloatValue floatValue = (FloatValue) value;
                         final String text = value.getName() + "§f: " + round(floatValue.get());
-                        final float textWidth = Fonts.font35.getStringWidth(text);
+                        final float textWidth = Fonts.font18.getStringWidth(text);
 
                         if(moduleElement.getSettingsWidth() < textWidth + 8)
                             moduleElement.setSettingsWidth(textWidth + 8);
@@ -371,12 +371,12 @@ public class LiquidSenseStyle extends Style {
                         if(valueOfSlide != floatValue.get())
                             floatValue.set(valueOfSlide);
 
-                        Fonts.font35.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 3, 0xffffff);
+                        Fonts.font18.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 3, 0xffffff);
                         moduleElement.slowlySettingsYPos += 19;
                     }else if(value instanceof IntegerValue) {
                         final IntegerValue integerValue = (IntegerValue) value;
                         final String text = value.getName() + "§f: " + (value instanceof BlockValue ? BlockUtils.getBlockName(integerValue.get()) + " (" + integerValue.get() + ")" : integerValue.get());
-                        final float textWidth = Fonts.font35.getStringWidth(text);
+                        final float textWidth = Fonts.font18.getStringWidth(text);
 
                         if(moduleElement.getSettingsWidth() < textWidth + 8)
                             moduleElement.setSettingsWidth(textWidth + 8);
@@ -386,7 +386,7 @@ public class LiquidSenseStyle extends Style {
                         if(valueOfSlide != integerValue.get())
                             integerValue.set((int) valueOfSlide);
 
-                        Fonts.font35.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 3, 0xffffff);
+                        Fonts.font18.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 3, 0xffffff);
                         moduleElement.slowlySettingsYPos += 19;
                     }else if(value instanceof FontValue) {
                         final FontValue fontValue = (FontValue) value;
@@ -408,8 +408,8 @@ public class LiquidSenseStyle extends Style {
                             }
                         }
 
-                        Fonts.font35.drawString(displayString, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 2, Color.WHITE.getRGB());
-                        int stringWidth = Fonts.font35.getStringWidth(displayString);
+                        Fonts.font18.drawString(displayString, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 2, Color.WHITE.getRGB());
+                        int stringWidth = Fonts.font18.getStringWidth(displayString);
 
                         if(moduleElement.getSettingsWidth() < stringWidth + 8)
                             moduleElement.setSettingsWidth(stringWidth + 8);
@@ -454,13 +454,13 @@ public class LiquidSenseStyle extends Style {
                         moduleElement.slowlySettingsYPos += 11;
                     }else{
                         final String text = value.getName() + "§f: " + value.get();
-                        final float textWidth = Fonts.font35.getStringWidth(text);
+                        final float textWidth = Fonts.font18.getStringWidth(text);
 
                         if(moduleElement.getSettingsWidth() < textWidth + 8)
                             moduleElement.setSettingsWidth(textWidth + 8);
 
                         GlStateManager.resetColor();
-                        Fonts.font35.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 4, 0xffffff);
+                        Fonts.font18.drawString(text, moduleElement.getX() + moduleElement.getWidth() + 6, moduleElement.slowlySettingsYPos + 4, 0xffffff);
                         moduleElement.slowlySettingsYPos += 12;
                     }
                 }
@@ -471,7 +471,7 @@ public class LiquidSenseStyle extends Style {
 
                  */
             } else {
-                Fonts.font35.drawString(">", moduleElement.getX() + moduleElement.getWidth() - 8, moduleElement.getY() + 5, Color.WHITE.getRGB());
+                Fonts.font18.drawString(">", moduleElement.getX() + moduleElement.getWidth() - 8, moduleElement.getY() + 5, Color.WHITE.getRGB());
             }
         }
     }

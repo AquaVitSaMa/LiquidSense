@@ -90,12 +90,12 @@ public class BlockOverlay extends Module {
             RenderUtils.drawBorderedRect(
                     (float) scaledResolution.getScaledWidth() / 2 - 2F,
                     (float) scaledResolution.getScaledHeight() / 2 + 5F,
-                    (float) scaledResolution.getScaledWidth() / 2 + Fonts.font40.getStringWidth(info) + 2F,
+                    (float) scaledResolution.getScaledWidth() / 2 + Fonts.font20.getStringWidth(info) + 2F,
                     (float) scaledResolution.getScaledHeight() / 2 + 16F,
                     3F, Color.BLACK.getRGB(), Color.BLACK.getRGB()
             );
             GlStateManager.resetColor();
-            Fonts.font40.drawString(info, scaledResolution.getScaledWidth() / 2, scaledResolution.getScaledHeight() / 2 + 7,
+            Fonts.font20.drawString(info, scaledResolution.getScaledWidth() / 2, scaledResolution.getScaledHeight() / 2 + 7,
                     Color.WHITE.getRGB());
         }
     }

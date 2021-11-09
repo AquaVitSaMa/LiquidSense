@@ -28,6 +28,7 @@ public class FileManager extends MinecraftInstance {
     public final File dir = new File(mc.mcDataDir, LiquidBounce.CLIENT_NAME + "-Config");
     public final File fontsDir = new File(dir, "fonts");
     public final File settingsDir = new File(dir, "settings");
+    public final File CapeDir = new File(dir, "cape");
 
     public final FileConfig modulesConfig = new ModulesConfig(new File(dir, "modules.json"));
     public final FileConfig valuesConfig = new ValuesConfig(new File(dir, "values.json"));
@@ -68,6 +69,9 @@ public class FileManager extends MinecraftInstance {
 
         if(!settingsDir.exists())
             settingsDir.mkdir();
+
+        if(!CapeDir.exists())
+            CapeDir.mkdir();
     }
 
     /**

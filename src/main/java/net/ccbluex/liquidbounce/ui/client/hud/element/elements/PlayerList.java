@@ -74,12 +74,12 @@ public class PlayerList extends Element {
     @Override
     public Border drawElement() {
         String name = this.getLongestPlayerName();
-        float longestNameWidth = Fonts.csgo40.getStringWidth("F") + Fonts.font40.getStringWidth(name) + 10;
-        float borderedRectWidth = Fonts.csgo40.getStringWidth("F") + Fonts.font40.getStringWidth("PlayerList") + 60;
+        float longestNameWidth = Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth(name) + 10;
+        float borderedRectWidth = Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("PlayerList") + 60;
         float playerListWidth = Math.max(longestNameWidth, borderedRectWidth);
 
-        //Fonts.font40.drawString("width: " + playerListWidth, 100, 100, Color.WHITE.getRGB(), false);
-        //Fonts.font40.drawString("longestName: " + name + " | " + longestNameWidth, 100, 130, Color.WHITE.getRGB(), false);
+        //Fonts.font20.drawString("width: " + playerListWidth, 100, 100, Color.WHITE.getRGB(), false);
+        //Fonts.font20.drawString("longestName: " + name + " | " + longestNameWidth, 100, 130, Color.WHITE.getRGB(), false);
 
 
         /*
@@ -110,7 +110,7 @@ public class PlayerList extends Element {
                 if (playerInfo != null && alphaData.getAlpha() > 20) {
                     ResourceLocation locationSkin = playerInfo.getLocationSkin();
                     RenderUtils.drawHead(locationSkin, (int) -1.1F, y + 16, 9, 9);
-                    Fonts.font40.drawString(alphaData.getPlayerName(), Fonts.csgo40.getStringWidth("F") + 3, y + 17, new Color(255, 255, 255, alphaData.getAlpha()).getRGB(), false);
+                    Fonts.font20.drawString(alphaData.getPlayerName(), Fonts.csgo40.getStringWidth("F") + 3, y + 17, new Color(255, 255, 255, alphaData.getAlpha()).getRGB(), false);
                 }
                 y += 14;
             }
@@ -120,7 +120,7 @@ public class PlayerList extends Element {
                 new Color(16, 25, 32, 200).getRGB(), 1F, new Color(16, 25, 32, 200).getRGB());
         //RenderUtils.drawBorderedRect(-5.5F, -5.5F, playerListWidth, Fonts.csgo40.FONT_HEIGHT + 0.5F, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
         Fonts.csgo40.drawString("F", -1.5F, -0.4F, new Color(0, 131, 193).getRGB(), false);
-        Fonts.font40.drawString("PlayerList", Fonts.csgo40.getStringWidth("F") + 3, -1F, Color.WHITE.getRGB(), false);
+        Fonts.font20.drawString("PlayerList", Fonts.csgo40.getStringWidth("F") + 3, -1F, Color.WHITE.getRGB(), false);
 
         return new Border(20, 20, 120, 14 * alphaMap.size());
     }

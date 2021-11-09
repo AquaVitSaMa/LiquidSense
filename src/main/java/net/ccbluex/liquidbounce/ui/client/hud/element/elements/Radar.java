@@ -80,7 +80,7 @@ public class Radar extends Element {
                 new Color(16, 25, 32, 200).getRGB(), 1F,new Color(16, 25, 32, 200).getRGB());
         //RenderUtils.drawBorderedRect(0F, -7.2F - Fonts.csgo40.FONT_HEIGHT, size, 0, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
         Fonts.csgo40.drawString("P", 3.8F, -(Fonts.csgo40.FONT_HEIGHT + 1.7F), new Color(0, 131, 193).getRGB(), false);
-        Fonts.font40.drawString("Radar", Fonts.csgo40.getStringWidth("P") + 9.5F, -(Fonts.csgo40.FONT_HEIGHT + 2.1F), Color.WHITE.getRGB(), false);
+        Fonts.font20.drawString("Radar", Fonts.csgo40.getStringWidth("P") + 9.5F, -(Fonts.csgo40.FONT_HEIGHT + 2.1F), Color.WHITE.getRGB(), false);
         float viewDistance = viewDistanceValue.get() * 16.0F;
 
         float maxDisplayableDistanceSquare = ((viewDistance + fovSizeValue.get()) *

@@ -8,6 +8,7 @@ package net.ccbluex.liquidbounce.value
 import com.google.gson.JsonElement
 import com.google.gson.JsonObject
 import com.google.gson.JsonPrimitive
+import me.aquavit.liquidsense.utils.render.Translate
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.ClientUtils
@@ -17,7 +18,24 @@ import net.minecraftforge.fml.relauncher.SideOnly
 import java.util.*
 
 @SideOnly(Side.CLIENT)
-abstract class Value<T>(val name: String, protected var value: T) {
+abstract class Value<T>(val name: String, var value: T) {
+
+    val MultiBoolvalue = Translate(0f , 0f)
+    var MultiBool = 0f
+
+    val listvalue = Translate(0f , 0f)
+    var list = 0f
+
+    val boolvalue = Translate(0f , 0f)
+    var boolean = 0f
+
+    val floatvalue = Translate(0f , 0f)
+    var float = 0f
+
+    val intvalue = Translate(0f , 0f)
+    var int = 0f
+
+
 
     private var displayableFunc: () -> Boolean = { true }
 
@@ -46,8 +64,6 @@ abstract class Value<T>(val name: String, protected var value: T) {
 
     fun get() = value
 
-    open fun changeElement() {}
-
     open fun changeValue(value: T) {
         this.value = value
     }
@@ -64,7 +80,6 @@ abstract class Value<T>(val name: String, protected var value: T) {
  * Bool value represents a value with a boolean
  */
 open class BoolValue(name: String, value: Boolean) : Value<Boolean>(name, value) {
-
     override fun toJson() = JsonPrimitive(value)
 
     override fun fromJson(element: JsonElement) {
@@ -173,5 +188,58 @@ open class ListValue(name: String, val values: Array<String>, value: String) : V
         if (element.isJsonPrimitive) changeValue(element.asString)
     }
 
+    fun getModeAt(modeName: String) : String {
+        for (i in this.values.indices) {
+            if (this.values[i] == modeName) {
+                return this.values[i]
+            }
+        }
+        return "null"
+    }
 
+    fun getModeListNumber(modeName: String) : Int {
+        for(i in this.values.indices) {
+            if(values[i] == modeName) {
+                return i
+            }
+        }
+        return 0
+    }
+
+}
+
+
+open class MultiBoolValue(name: String, val values: Array<String>, value: BooleanArray) : Value<BooleanArray>(name, value) {
+
+    @JvmField
+    var openList = false
+
+    init {
+        this.value = value
+    }
+
+    fun getMultiBool(name : String) : Boolean{
+        for(i in 0..values.lastIndex) {
+            if(values[i] != name )
+                continue
+
+            return this.value[i]
+        }
+        return false
+    }
+
+    override fun toJson(): JsonElement? {
+        val valueObject = JsonObject()
+        for(i in 0..values.lastIndex) {
+            valueObject.addProperty(this.values[i], this.value[i])
+        }
+        return valueObject
+    }
+
+    override fun fromJson(element: JsonElement) {
+        if (!element.isJsonObject) return
+        val valueObject = element.asJsonObject
+        for(i in 0..values.lastIndex)
+            this.value[i] = valueObject[this.values[i]].asBoolean
+    }
 }

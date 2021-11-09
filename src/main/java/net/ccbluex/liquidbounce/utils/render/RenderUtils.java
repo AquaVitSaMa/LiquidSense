@@ -61,6 +61,48 @@ public final class RenderUtils extends MinecraftInstance {
         return (new Color(r, g, b, alpha)).getRGB();
     }
 
+    public static void drawScaledCustomSizeModalRect(int x, int y, float u, float v, int uWidth, int vHeight, int width, int height, float tileWidth, float tileHeight) {
+        float f = 1.0F / tileWidth;
+        float f1 = 1.0F / tileHeight;
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION_TEX);
+        worldrenderer.pos(x, y + height, 0.0D).tex(u * f, (v + (float) vHeight) * f1).endVertex();
+        worldrenderer.pos(x + width, y + height, 0.0D).tex((u + (float) uWidth) * f, (v + (float) vHeight) * f1).endVertex();
+        worldrenderer.pos(x + width, y, 0.0D).tex((u + (float) uWidth) * f, v * f1).endVertex();
+        worldrenderer.pos(x, y, 0.0D).tex(u * f, v * f1).endVertex();
+        tessellator.draw();
+    }
+
+
+    public static void drawRectBordered(double x, double y, double x1, double y1, double width, int internalColor, int borderColor) {
+        rectangle(x + width, y + width, x1 - width, y1 - width, internalColor);
+        rectangle(x + width, y, x1 - width, y + width, borderColor);
+        rectangle(x, y, x + width, y1, borderColor);
+        rectangle(x1 - width, y, x1, y1, borderColor);
+        rectangle(x + width, y1 - width, x1 - width, y1, borderColor);
+    }
+
+    public static void drawCircle(float x, float y, float radius, int start, int end, final Color color) {
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+        glColor(Color.WHITE);
+
+        glEnable(GL_LINE_SMOOTH);
+        glLineWidth(1F);
+        glBegin(GL_LINE_STRIP);
+        for (float i = end; i >= start; i -= (360 / 90)) {
+            glColor4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
+            glVertex2f((float) (x + (cos(i * PI / 180) * (radius * 1.001F))), (float) (y + (sin(i * PI / 180) * (radius * 1.001F))));
+        }
+        glEnd();
+        glDisable(GL_LINE_SMOOTH);
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
     // Notification
     public static void drawShader(float x, float y, float width, float height) {
         ScaledResolution sr = new ScaledResolution(mc);
@@ -83,6 +125,64 @@ public final class RenderUtils extends MinecraftInstance {
         GlStateManager.disableBlend();
         GlStateManager.enableAlpha();
         GL11.glPopMatrix();
+    }
+
+    public static void drawNLRect(float x, float y, float x1, float y1, float radius, int color) {
+        GlStateManager.color(0, 0, 0);
+        GL11.glColor4f(0, 0, 0, 0);
+
+        float var11 = (color >> 24 & 255) / 255.0F;
+        float var6 = (color >> 16 & 255) / 255.0F;
+        float var7 = (color >> 8 & 255) / 255.0F;
+        float var8 = (color & 255) / 255.0F;
+
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        GlStateManager.color(var6, var7, var8, var11);
+
+        // 圆角
+        quickRenderCircle(x1 - radius, y1 - radius, 0, 90, radius, radius);
+        quickRenderCircle(x + radius, y1 - radius, 90, 180, radius, radius);
+        quickRenderCircle(x + radius, y + radius, 180, 270, radius, radius);
+        quickRenderCircle(x1 - radius, y + radius, 270, 360, radius, radius);
+
+        // 矩形
+        quickDrawRect(x + radius, y + radius, x1 - radius, y1 - radius);
+        quickDrawRect(x, y + radius, x + radius, y1 - radius);
+        quickDrawRect(x1 - radius, y + radius, x1, y1 - radius);
+        quickDrawRect(x + radius, y, x1 - radius, y + radius);
+        quickDrawRect(x + radius, y1 - radius, x1 - radius, y1);
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
+    }
+
+    public static void quickRenderCircle(double x, double y, double start, double end, double w, double h) {
+        if (start > end) {
+            double temp = end;
+            end = start;
+            start = temp;
+        }
+
+        GL11.glBegin(GL11.GL_TRIANGLE_FAN);
+        GL11.glVertex2d(x, y);
+        for (double i = end; i >= start; i -= 3.1415) {
+            double ldx = Math.cos(i * Math.PI / 180.0) * w;
+            double ldy = Math.sin(i * Math.PI / 180.0) * h;
+            GL11.glVertex2d(x + ldx, y + ldy);
+        }
+        GL11.glVertex2d(x, y);
+        GL11.glEnd();
+    }
+
+    public static void quickDrawRect(final float x, final float y, final float x2, final float y2) {
+        glBegin(GL_QUADS);
+        glVertex2d(x2, y);
+        glVertex2d(x, y);
+        glVertex2d(x, y2);
+        glVertex2d(x2, y2);
+        glEnd();
     }
 
     public static BufferedImage convertCircular(BufferedImage bi1, int min) {
@@ -229,43 +329,6 @@ public final class RenderUtils extends MinecraftInstance {
         }
     }
 
-
-    public static void drawArc(float n, float n2, double n3, final int n4, int n5, final double n6, final int n7) {
-        n3 *= 2.0;
-        n *= 2.0f;
-        n2 *= 2.0f;
-        final float n8 = (n4 >> 24 & 0xFF) / 255.0f;
-        final float n9 = (n4 >> 16 & 0xFF) / 255.0f;
-        final float n10 = (n4 >> 8 & 0xFF) / 255.0f;
-        final float n11 = (n4 & 0xFF) / 255.0f;
-        GL11.glDisable(2929);
-        GL11.glEnable(3042);
-        GL11.glDisable(3553);
-        GL11.glBlendFunc(770, 771);
-        GL11.glDepthMask(true);
-        GL11.glEnable(2848);
-        GL11.glHint(3154, 4354);
-        GL11.glHint(3155, 4354);
-        GL11.glScalef(0.5f, 0.5f, 0.5f);
-        GL11.glLineWidth((float)n7);
-        GL11.glEnable(2848);
-        GL11.glColor4f(n9, n10, n11, n8);
-        GL11.glBegin(3);
-        while (n5 <= n6) {
-            GL11.glVertex2d(n + Math.sin(n5 * 3.141592653589793 / 180.0) * n3, n2 + Math.cos(n5 * 3.141592653589793 / 180.0) * n3);
-            ++n5;
-        }
-        GL11.glEnd();
-        GL11.glDisable(2848);
-        GL11.glScalef(2.0f, 2.0f, 2.0f);
-        GL11.glEnable(3553);
-        GL11.glDisable(3042);
-        GL11.glEnable(2929);
-        GL11.glDisable(2848);
-        GL11.glHint(3154, 4352);
-        GL11.glHint(3155, 4352);
-    }
-
     public static void drawOutlinedBoundingBox(final AxisAlignedBB aa) {
         final Tessellator tessellator = Tessellator.getInstance();
         final WorldRenderer worldRenderer = tessellator.getWorldRenderer();
@@ -295,40 +358,12 @@ public final class RenderUtils extends MinecraftInstance {
         tessellator.draw();
     }
 
-    public static void drawblock(double a, double a2, double a3, int a4, int a5, float a6) {
-        float a7 = (float) (a4 >> 24 & 255) / 255.0f;
-        float a8 = (float) (a4 >> 16 & 255) / 255.0f;
-        float a9 = (float) (a4 >> 8 & 255) / 255.0f;
-        float a10 = (float) (a4 & 255) / 255.0f;
-        float a11 = (float) (a5 >> 24 & 255) / 255.0f;
-        float a12 = (float) (a5 >> 16 & 255) / 255.0f;
-        float a13 = (float) (a5 >> 8 & 255) / 255.0f;
-        float a14 = (float) (a5 & 255) / 255.0f;
-        org.lwjgl.opengl.GL11.glPushMatrix();
-        org.lwjgl.opengl.GL11.glEnable((int) 3042);
-        org.lwjgl.opengl.GL11.glBlendFunc((int) 770, (int) 771);
-        org.lwjgl.opengl.GL11.glDisable((int) 3553);
-        org.lwjgl.opengl.GL11.glEnable((int) 2848);
-        org.lwjgl.opengl.GL11.glDisable((int) 2929);
-        org.lwjgl.opengl.GL11.glDepthMask((boolean) false);
-        org.lwjgl.opengl.GL11.glColor4f((float) a8, (float) a9, (float) a10, (float) a7);
-        drawOutlinedBoundingBox(new AxisAlignedBB(a, a2, a3, a + 1.0, a2 + 1.0, a3 + 1.0));
-        org.lwjgl.opengl.GL11.glLineWidth((float) a6);
-        org.lwjgl.opengl.GL11.glColor4f((float) a12, (float) a13, (float) a14, (float) a11);
-        drawOutlinedBoundingBox(new AxisAlignedBB(a, a2, a3, a + 1.0, a2 + 1.0, a3 + 1.0));
-        org.lwjgl.opengl.GL11.glDisable((int) 2848);
-        org.lwjgl.opengl.GL11.glEnable((int) 3553);
-        org.lwjgl.opengl.GL11.glEnable((int) 2929);
-        org.lwjgl.opengl.GL11.glDepthMask((boolean) true);
-        org.lwjgl.opengl.GL11.glDisable((int) 3042);
-        org.lwjgl.opengl.GL11.glPopMatrix();
-    }
-
     private static boolean isInViewFrustrum(AxisAlignedBB bb) {
         Entity current = mc.getRenderViewEntity();
         frustrum.setPosition(current.posX, current.posY, current.posZ);
         return frustrum.isBoundingBoxInFrustum(bb);
     }
+
     public static void drawnewrect(float left, float top, float right, float bottom, int color)
     {
         if (left < right)
@@ -428,14 +463,7 @@ public final class RenderUtils extends MinecraftInstance {
         drawRect(x, y, x2, y2, color2);
         drawBorder(x, y, x2, y2, width, color1);
     }
-    public static void drawOutlinedString(String str, int x, int y, int color,int color2) {
-        Minecraft mc = Minecraft.getMinecraft();
-        mc.fontRendererObj.drawString(str, (int) ((int)x - 1.0F), y, color2);
-        mc.fontRendererObj.drawString(str, (int) (x + 1.0F), y,color2);
-        mc.fontRendererObj.drawString(str, x, (int) (y + 1.0F), color2);
-        mc.fontRendererObj.drawString(str, x, (int) (y -1.0F),color2);
-        mc.fontRendererObj.drawString(str, x, y, color);
-    }
+
     public static void drawBorder(float x, float y, float x2, float y2, float width, int color1) {
         glEnable(GL_BLEND);
         glDisable(GL_TEXTURE_2D);
@@ -964,39 +992,6 @@ public final class RenderUtils extends MinecraftInstance {
         return null;
     }
 
-
-    public static void drawESPCircle(float cx, float cy, float size,  int color) {
-        GL11.glPushMatrix();
-        float theta = (float) (6.2831852D / 3);
-        float p = (float) Math.cos(theta);
-        float s = (float) Math.sin(theta);
-        float x = size *= 2.0F;
-        float y = 0.0F;
-        enableGL2D();
-        GL11.glScalef(0.5F, 0.5F, 0.5F);
-        GlStateManager.color(0 , 0, 0);
-
-        GlStateManager.resetColor();
-        glColor(color);
-
-        glEnable(GL_LINE_SMOOTH);
-        glBegin(2);
-        for (int i = 0; i < 3;i++){
-            GL11.glVertex2f(x + cx, y + cy);
-            float t = x;
-            x = p * x - s * y;
-            y = s * t + p * y;
-        }
-        Colors.getColor(-1);
-        glEnd();
-        glDisable(GL_LINE_SMOOTH);
-
-        GL11.glScalef(2.0F, 2.0F, 2.0F);
-        disableGL2D();
-        GlStateManager.color(1, 1, 1, 1);
-        GL11.glPopMatrix();
-    }
-
     public static void enableGL2D() {
         GL11.glDisable((int) 2929);
         GL11.glEnable((int) 3042);
@@ -1072,11 +1067,31 @@ public final class RenderUtils extends MinecraftInstance {
         glScissor((int) (x * factor), (int) ((scaledResolution.getScaledHeight() - y2) * factor), (int) ((x2 - x) * factor), (int) ((y2 - y) * factor));
     }
 
-    public static void drawCircleFull(float x, float y ,float radius, float Bord , float LineWidth,final Color color) {
+    public static void drawFullCircle(float x, float y ,float radius, float Bord , float LineWidth,final Color color) {
         for(float i = 0; i < Bord; i+= LineWidth / 4) {
             drawHCircle(x , y , radius + i  , LineWidth , color);
             GlStateManager.resetColor();
         }
+    }
+
+    public static void drawCGCircle(float x, float y ,float radius, final Color color) {
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
+        glColor(Color.WHITE);
+
+        glEnable(GL_LINE_SMOOTH);
+        glLineWidth(1);
+        glBegin(GL_LINE_STRIP);
+        for (float i = 180; i >= -180; i -= (360 / 90)) {
+            glColor4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
+            glVertex2f((float) (x + (cos(i * PI / 180) * (radius * 1.001F))), (float) (y + (sin(i * PI / 180) * (radius * 1.001F))));
+        }
+        glEnd();
+        glDisable(GL_LINE_SMOOTH);
+
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
     }
 
     public static void drawHCircle(float x, float y ,float radius, float LineWidth,final Color color) {
@@ -1321,7 +1336,7 @@ public final class RenderUtils extends MinecraftInstance {
         GlStateManager.disableBlend();
     }
 
-    public static void drawRoundedRect(double x, double y, double width, double height, double radius, int color) {
+    public static void drawButtonRect(double x, double y, double width, double height, double radius, int color) {
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
@@ -1490,12 +1505,10 @@ public final class RenderUtils extends MinecraftInstance {
         disableRender2D();
     }
 
-
     public static void drawFullCircle(float x, float y ,float radius, float Bord , final Color color) {
-        drawNCircle(x , y , radius + 0.15f, color);
+        drawCGCircle(x , y , radius + 0.15f, color);
         drawCircleD(x , y , radius, color.getRGB());
     }
-
 
     public static void drawNCircle(float x, float y ,float radius, final Color color) {
         boolean blend = GL11.glIsEnabled((int) 3042);
@@ -1832,10 +1845,10 @@ public final class RenderUtils extends MinecraftInstance {
         setGlCap(GL_BLEND, true);
         glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
-        final int width = Fonts.font35.getStringWidth(string) / 2;
+        final int width = Fonts.font18.getStringWidth(string) / 2;
 
-        Gui.drawRect(-width - 1, -1, width + 1, Fonts.font35.FONT_HEIGHT, Integer.MIN_VALUE);
-        Fonts.font35.drawString(string, -width, 1.5F, Color.WHITE.getRGB(), true);
+        Gui.drawRect(-width - 1, -1, width + 1, Fonts.font18.FONT_HEIGHT, Integer.MIN_VALUE);
+        Fonts.font18.drawString(string, -width, 1.5F, Color.WHITE.getRGB(), true);
 
         resetCaps();
         glColor4f(1F, 1F, 1F, 1F);

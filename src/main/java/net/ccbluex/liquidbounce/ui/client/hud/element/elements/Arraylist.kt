@@ -113,7 +113,7 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
     private val textYValue = FloatValue("TextY", 0F, 0F, 20F)
     private val tagsArrayColor = BoolValue("TagsArrayColor", false)
     private val animationValue = ListValue("Animation", arrayOf("Normal", "slide"), "Normal")
-    private val fontValue = FontValue("Font", Fonts.font40)
+    private val fontValue = FontValue("Font", Fonts.font20)
 
 
     private var x2 = 0

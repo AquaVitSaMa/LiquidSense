@@ -76,7 +76,7 @@ class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
     private val shadow = BoolValue("Shadow", false)
     private val outline = BoolValue("Outline",false)
     private val rectMode = ListValue("RectMode", arrayOf("Custom", "OneTap", "Skeet","OnlyWhite","NeverLose"), "Skeet")
-    private var fontValue = FontValue("Font", Fonts.font40)
+    private var fontValue = FontValue("Font", Fonts.font20)
     private var username = BoolValue("Username",false).displayable{rectMode.get() == "NeverLose"}
     private var ping = BoolValue("Ping",false).displayable{rectMode.get() == "NeverLose"}
     private var fps = BoolValue("FPS",false).displayable{rectMode.get() == "NeverLose"}
@@ -229,19 +229,19 @@ class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
 
             }
             "neverlose" -> {
-                RenderUtils.drawRoundedRect(-5.2f, -3.5F, (Fonts.font40.getStringWidth("NL    $displayText").toFloat() + 25.5F), 4f + Fonts.csgo40.FONT_HEIGHT, 1.5f,
+                RenderUtils.drawRoundedRect(-5.2f, -3.5F, (Fonts.font20.getStringWidth("NL    $displayText").toFloat() + 25.5F), 4f + Fonts.csgo40.FONT_HEIGHT, 1.5f,
                         Color(16, 25, 32).rgb, 1f, Color(16, 25, 32).rgb)
-                //RenderUtils.drawBorderedRect(-5.5F, -3.5F, (Fonts.font40.getStringWidth("NL    $displayText").toFloat() + 8.5F), Fonts.font40.FONT_HEIGHT.toFloat() + 0.5F, 3F, Color(16, 25, 32).rgb, Color(16, 25, 32).rgb)
-                Fonts.font40.drawString("LS", -0.8F, -0.4F, Color(0, 149, 185).rgb, true)
-                Fonts.font40.drawString("LS", -0.5F, -0.3F, Color(190, 252, 255).rgb, true)
-                Fonts.font40.drawString("LS", -0.2F, -0.2F, Color(190, 252, 255).rgb, true)
-                Fonts.font40.drawString("LS", 0F, 0F, Color(247, 255, 255).rgb, true)
+                //RenderUtils.drawBorderedRect(-5.5F, -3.5F, (Fonts.font20.getStringWidth("NL    $displayText").toFloat() + 8.5F), Fonts.font20.FONT_HEIGHT.toFloat() + 0.5F, 3F, Color(16, 25, 32).rgb, Color(16, 25, 32).rgb)
+                Fonts.font20.drawString("LS", -0.8F, -0.4F, Color(0, 149, 185).rgb, true)
+                Fonts.font20.drawString("LS", -0.5F, -0.3F, Color(190, 252, 255).rgb, true)
+                Fonts.font20.drawString("LS", -0.2F, -0.2F, Color(190, 252, 255).rgb, true)
+                Fonts.font20.drawString("LS", 0F, 0F, Color(247, 255, 255).rgb, true)
                 var index = "LS"
                 val list = displayText.split(" ")
                 for ((count, text: String) in list.withIndex()) {
-                    Fonts.font40.drawString(text, Fonts.font40.getStringWidth(index).toFloat(), 0F, Color(155, 155, 155).rgb, false)
+                    Fonts.font20.drawString(text, Fonts.font20.getStringWidth(index).toFloat(), 0F, Color(155, 155, 155).rgb, false)
                     if (count + 1 == list.size) break
-                    Fonts.font40.drawString("|", Fonts.font40.getStringWidth(index + text).toFloat() + 1.5F, 0F, Color(6, 32, 55).rgb, false)
+                    Fonts.font20.drawString("|", Fonts.font20.getStringWidth(index + text).toFloat() + 1.5F, 0F, Color(6, 32, 55).rgb, false)
                     index += "$text " + "  "
                 }
             }

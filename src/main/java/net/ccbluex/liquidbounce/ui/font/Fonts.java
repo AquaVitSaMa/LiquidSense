@@ -27,17 +27,26 @@ import static net.ccbluex.liquidbounce.LiquidBounce.CLIENT_RESOURCE;
 @SideOnly(Side.CLIENT)
 public class Fonts {
 
+    @FontDetails(fontName = "Museo-Sans", fontSize = 14)
+    public static GameFontRenderer font14;
+
+    @FontDetails(fontName = "Museo-Sans", fontSize = 16)
+    public static GameFontRenderer font16;
+
+    @FontDetails(fontName = "Museo-Sans", fontSize = 17)
+    public static GameFontRenderer font17;
+
+    @FontDetails(fontName = "Museo-Sans", fontSize = 18)
+    public static GameFontRenderer font18;
+
+    @FontDetails(fontName = "Museo-Sans", fontSize = 20)
+    public static GameFontRenderer font20;
+
     @FontDetails(fontName = "Museo-Sans", fontSize = 25)
     public static GameFontRenderer font25;
 
     @FontDetails(fontName = "Museo-Sans", fontSize = 30)
     public static GameFontRenderer font30;
-
-    @FontDetails(fontName = "Museo-Sans", fontSize = 35)
-    public static GameFontRenderer font35;
-
-    @FontDetails(fontName = "Museo-Sans", fontSize = 40)
-    public static GameFontRenderer font40;
 
     @FontDetails(fontName = "Roboto Bold", fontSize = 90)
     public static GameFontRenderer fontBold180;
@@ -51,6 +60,9 @@ public class Fonts {
     @FontDetails(fontName = "Cs Go", fontSize = 35)
     public static GameFontRenderer csgo35;
 
+    @FontDetails(fontName = "stylesicons", fontSize = 30)
+    public static GameFontRenderer icon30;
+
     @FontDetails(fontName = "Minecraft Font")
     public static final FontRenderer minecraftFont = Minecraft.getMinecraft().fontRendererObj;
 
@@ -62,14 +74,18 @@ public class Fonts {
         ClientUtils.getLogger().info("Loading Fonts.");
 
         downloadFonts();
-        font25 = new GameFontRenderer(getFont("Museo-Sans.ttf", 14));
-        font30 = new GameFontRenderer(getFont("Museo-Sans.ttf", 16));
-        csgo40 = new GameFontRenderer(getFont("LiquidSense.ttf", 20));
-        font35 = new GameFontRenderer(getFont("Museo-Sans.ttf", 18));
+        font14 = new GameFontRenderer(getFont("Museo-Sans.ttf", 14));
+        font16 = new GameFontRenderer(getFont("Museo-Sans.ttf", 16));
+        font17 = new GameFontRenderer(getFont("Museo-Sans.ttf", 17));
+        font18 = new GameFontRenderer(getFont("Museo-Sans.ttf", 18));
+        font20 = new GameFontRenderer(getFont("Museo-Sans.ttf", 20));
+        font25 = new GameFontRenderer(getFont("Museo-Sans.ttf", 25));
+        font30 = new GameFontRenderer(getFont("Museo-Sans.ttf", 30));
         csgo35 = new GameFontRenderer(getFont("LiquidSense.ttf", 18));
-        font40 = new GameFontRenderer(getFont("Museo-Sans.ttf", 20));
+        csgo40 = new GameFontRenderer(getFont("LiquidSense.ttf", 20));
         fontBold180 = new GameFontRenderer(getFont("Roboto-Bold.ttf", 60));
         logo = new GameFontRenderer(getFont("Facon.ttf",60));
+        icon30 = new GameFontRenderer(getFont("Stylesicons.ttf", 30));
 
         try {
             CUSTOM_FONT_RENDERERS.clear();

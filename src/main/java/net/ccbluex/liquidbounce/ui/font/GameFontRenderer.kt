@@ -23,9 +23,8 @@ import org.lwjgl.opengl.GL20.glUseProgram
 import java.awt.Color
 import java.awt.Font
 
-open class GameFontRenderer(font: Font) : FontRenderer(
-        Minecraft.getMinecraft().gameSettings, ResourceLocation("liquidbounce/font/ascii.png"),
-        if (ClassUtils.hasForge()) null else Minecraft.getMinecraft().textureManager, false) {
+open class GameFontRenderer(font: Font) : FontRenderer(Minecraft.getMinecraft().gameSettings,
+        ResourceLocation("textures/font/ascii.png"), if (ClassUtils.hasForge()) null else Minecraft.getMinecraft().textureManager, false) {
 
     var defaultFont = AWTFontRenderer(font)
     private var boldFont = AWTFontRenderer(font.deriveFont(Font.BOLD))
@@ -63,17 +62,18 @@ open class GameFontRenderer(font: Font) : FontRenderer(
 
         if (shadow) {
             when {
-                HUD.fontShadow.get() == "Shadow" -> {
-                    drawText(currentText, x + HUD.shadowX.get(), currY + HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
-                }
-                HUD.fontShadow.get() == "Outline" -> {
-                    drawText(currentText, x + HUD.shadowX.get(), currY + HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
-                    drawText(currentText, x - HUD.shadowX.get(), currY - HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
-                    drawText(currentText, x + HUD.shadowX.get(), currY - HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
-                    drawText(currentText, x - HUD.shadowX.get(), currY + HUD.shadowY.get(), Color(0, 0, 0, HUD.shadowAlpha.get()).rgb, true)
+                HUD.fontShadow.get().equals("LiquidBounce", ignoreCase = true) -> drawText(currentText, x + 1f, currY + 1f, Color(0, 0, 0, 150).rgb, true)
+                HUD.fontShadow.get().equals("Default", ignoreCase = true) -> drawText(currentText, x + 0.5f, currY + 0.5f, Color(0, 0, 0, 130).rgb, true)
+                HUD.fontShadow.get().equals("Autumn", ignoreCase = true) -> drawText(currentText, x + 1f, currY + 1f, Color(20, 20, 20, 200).rgb, true)
+                HUD.fontShadow.get().equals("Outline", ignoreCase = true) -> {
+                    drawText(currentText, x + 0.5f, currY + 0.5f, Color(0, 0, 0, 130).rgb, true)
+                    drawText(currentText, x - 0.5f, currY - 0.5f, Color(0, 0, 0, 130).rgb, true)
+                    drawText(currentText, x + 0.5f, currY - 0.5f, Color(0, 0, 0, 130).rgb, true)
+                    drawText(currentText, x - 0.5f, currY + 0.5f, Color(0, 0, 0, 130).rgb, true)
                 }
             }
         }
+
 
         return drawText(currentText, x, currY, color, false, rainbow)
     }
@@ -202,7 +202,8 @@ open class GameFontRenderer(font: Font) : FontRenderer(
         return (x + getStringWidth(text)).toInt()
     }
 
-    override fun getColorCode(charCode: Char) = ColorUtils.hexColors[getColorIndex(charCode)]
+    override fun getColorCode(charCode: Char) =
+            ColorUtils.hexColors[getColorIndex(charCode)]
 
     override fun getStringWidth(text: String): Int {
         var currentText = text
@@ -265,6 +266,8 @@ open class GameFontRenderer(font: Font) : FontRenderer(
     override fun onResourceManagerReload(resourceManager: IResourceManager) {}
 
     override fun bindTexture(location: ResourceLocation?) {}
+
+    //fun drawStringWithShadow(op: String, offset: Double, d: Double, color: Int) {}
 
     companion object {
         @JvmStatic

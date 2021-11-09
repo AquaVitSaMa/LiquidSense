@@ -18,10 +18,10 @@ public class GuiButtonElement extends GuiButton {
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if (visible) {
             Color color = new Color(150, 150, 150);
-            FontRenderer fontrenderer = Fonts.font40;
+            FontRenderer fontrenderer = Fonts.font20;
             hovered = (mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height);
 
-            RenderUtils.drawRoundedRect(xPosition, yPosition, xPosition + width, yPosition + height, 6, new Color(1,1,1,80).getRGB());
+            RenderUtils.drawButtonRect(xPosition, yPosition, xPosition + width, yPosition + height, 6, new Color(1,1,1,80).getRGB());
 
             if (hovered) {
                 GL11.glPushMatrix();

@@ -2,6 +2,7 @@ package net.ccbluex.liquidbounce.features.module;
 
 import kotlin.jvm.internal.Intrinsics;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
+import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification;
@@ -38,7 +39,16 @@ public class Module extends MinecraftInstance implements Listenable {
     private float slide;
     private float higt;
     private float slideStep;
-    
+    private int outvalue;
+    private Translate openValue;
+    private Translate clickAnimation;
+    private boolean showSettings;
+    private String finalname;
+    private float guiposY;
+    private float click;
+    private float openValueposy;
+    private float suckDown;
+
     public void setKeyBind(final int keyBind) {
         this.keyBind = keyBind;
         LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.modulesConfig);
@@ -53,6 +63,15 @@ public class Module extends MinecraftInstance implements Listenable {
         this.canEnable = this.getClass().getAnnotation(ModuleInfo.class).canEnable();
         this.hue = (float) Math.random();
         this.array = true;
+        this.outvalue = 0;
+        this.openValue = new Translate(0f , 0f);
+        this.clickAnimation = new Translate(0f , 0f);
+        this.showSettings = false;
+        this.guiposY = 0f;
+        this.click = 0f;
+        this.openValueposy = 0f;
+        this.suckDown = 0f;
+
     }
 
 
@@ -101,6 +120,10 @@ public class Module extends MinecraftInstance implements Listenable {
 
     public void toggle() {
         this.setState(!this.getState());
+    }
+
+    public void toggleShowSettings() {
+        this.showSettings = !showSettings;
     }
 
     public final void setNameCommad(String namecommand) {
@@ -189,29 +212,37 @@ public class Module extends MinecraftInstance implements Listenable {
         return this.slideStep;
     }
 
-    public final void setSlideStep(float slide) {
-        this.slideStep = slide;
-    }
+    public final void setSlideStep(float slide) { this.slideStep = slide; }
 
     public final float getHue() {
         return this.hue;
     }
 
-    public final float getSlide() {
-        return this.slide;
-    }
+    public final float getSlide() { return this.slide; }
 
-    public final void setSlide(float slide) {
-        this.slide = slide;
-    }
+    public final void setSlide(float slide) { this.slide = slide; }
+
+    public final boolean getShowSettings() { return this.showSettings; }
+
+    public final void setShowSettings(boolean state) { this.showSettings = state; }
+
+    public final int getOutvalue() { return this.outvalue; }
+
+    public final void setOutvalue(int value) { this.outvalue = value; }
+
+    public final Translate getOpenValue() { return this.openValue; }
+
+    public final void setOpenValue(Translate value) { this.openValue = value; }
+
+    public final Translate getClickAnimation() { return this.clickAnimation; }
+
+    public final void setClickAnimation(Translate value) { this.clickAnimation = value; }
 
     public final boolean getArray() {
         return this.array;
     }
 
-    public final void setArray(boolean state) {
-        this.array = state;
-    }
+    public final void setArray(boolean state) { this.array = state; }
 
     public final float getHigt() {
         return this.higt;
@@ -220,4 +251,45 @@ public class Module extends MinecraftInstance implements Listenable {
     public final void setHigt(float higt) {
         this.higt = higt;
     }
+
+    public final String getFinalname() {
+        return this.finalname;
+    }
+
+    public final void setFinalname(String name) {
+        this.finalname = name;
+    }
+
+    public final float getGuiposY() {
+        return this.guiposY;
+    }
+
+    public final void setGuiposY(float y) {
+        this.guiposY = y;
+    }
+
+    public final float getClick() {
+        return this.click;
+    }
+
+    public final void setClick(float speed) {
+        this.click = speed;
+    }
+
+    public final float getOpenValueposy() {
+        return this.openValueposy;
+    }
+
+    public final void setOpenValueposy(float y) {
+        this.openValueposy = y;
+    }
+
+    public final float getSuckDown() {
+        return this.suckDown;
+    }
+
+    public final void setSuckDown(float time) {
+        this.suckDown = time;
+    }
+
 }

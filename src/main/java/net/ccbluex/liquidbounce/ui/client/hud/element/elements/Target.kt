@@ -48,7 +48,7 @@ class Target : Element() {
                 easingHealth = target.health
             }
 
-            val width = (38 + Fonts.font40.getStringWidth(target.name))
+            val width = (38 + Fonts.font20.getStringWidth(target.name))
                     .coerceAtLeast(118)
                     .toFloat()
 
@@ -71,13 +71,13 @@ class Target : Element() {
 
             easingHealth += ((target.health - easingHealth) / 2.0F.pow(10.0F - fadeSpeed.get())) * RenderUtils.deltaTime
 
-            Fonts.font40.drawString(target.name, 36, 3, 0xffffff)
-            Fonts.font35.drawString("Distance: ${decimalFormat.format(PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, target))}", 36, 15, 0xffffff)
+            Fonts.font20.drawString(target.name, 36, 3, 0xffffff)
+            Fonts.font18.drawString("Distance: ${decimalFormat.format(PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, target))}", 36, 15, 0xffffff)
 
             // Draw info
             val playerInfo = mc.netHandler.getPlayerInfo(target.uniqueID)
             if (playerInfo != null) {
-                Fonts.font35.drawString("Ping: ${playerInfo.responseTime.coerceAtLeast(0)}",
+                Fonts.font18.drawString("Ping: ${playerInfo.responseTime.coerceAtLeast(0)}",
                         36, 24, 0xffffff)
 
                 // Draw head

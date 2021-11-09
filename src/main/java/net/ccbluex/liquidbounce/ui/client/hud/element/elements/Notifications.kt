@@ -65,7 +65,7 @@ class Notification(
         val time: Int = 1500,
         val animeTime: Int = 500
 ) {
-    val width = 100 .coerceAtLeast(Fonts.font35.getStringWidth(this.title).coerceAtLeast(Fonts.font35.getStringWidth(this.content)) + 10)
+    val width = 100 .coerceAtLeast(Fonts.font18.getStringWidth(this.title).coerceAtLeast(Fonts.font18.getStringWidth(this.content)) + 10)
     val height = 30
 
     var fadeState = FadeState.IN
@@ -149,8 +149,8 @@ class Notification(
                 height.toFloat(),
                 type.renderColor
         )
-        Fonts.font35.drawString(title, 7F, 6F, -1)
-        Fonts.font30.drawString(content, 7F, 17F, -1)
+        Fonts.font18.drawString(title, 7F, 6F, -1)
+        Fonts.font16.drawString(content, 7F, 17F, -1)
         //RenderUtils.drawImage(ResourceLocation("liquidbounce/notification/INFO.png"), -19, 6, 16, 16)
         RenderUtils.drawImage(image, -19,  3, 22, 22)
         GlStateManager.resetColor()

@@ -34,10 +34,11 @@ public class HUD extends Module {
         }
     };
     public static final ListValue fontShadow = new ListValue("FontShadow", new String[] {
-            "Shadow",
+            "LiquidBounce",
             "Outline",
-            "None"
-    }, "Shadow");
+            "Default",
+            "Autumn"
+    }, "Default");
     public static final IntegerValue fontWidth = new IntegerValue("FontWidth", 8, 5, 10);
     public static final FloatValue shadowX = new FloatValue("ShadowX", 0.5f, 0.25f, 1f);
     public static final FloatValue shadowY = new FloatValue("ShadowY", 0.5f, 0.25f, 1f);
