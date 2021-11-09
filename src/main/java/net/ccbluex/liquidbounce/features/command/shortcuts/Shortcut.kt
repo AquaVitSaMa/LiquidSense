@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.features.command.shortcuts
 
+import me.aquavit.liquidsense.data.Pair
 import net.ccbluex.liquidbounce.features.command.Command
 
 class Shortcut(val name: String, val script: List<Pair<Command, Array<String>>>) : Command(name) {
