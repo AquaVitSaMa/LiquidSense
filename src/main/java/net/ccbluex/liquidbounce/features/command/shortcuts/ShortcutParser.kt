@@ -8,6 +8,7 @@ package net.ccbluex.liquidbounce.features.command.shortcuts
 object ShortcutParser {
     private val SEPARATOR = ";".codePointAt(0)
 
+    @JvmStatic
     fun parse(script: String): List<List<String>> {
         val tokens = tokenize(script)
 

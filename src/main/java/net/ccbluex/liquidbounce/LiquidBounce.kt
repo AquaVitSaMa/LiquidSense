@@ -5,15 +5,16 @@
  */
 package net.ccbluex.liquidbounce
 
-import CommandManager
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import me.aquavit.liquidsense.LiquidSense
 import me.aquavit.liquidsense.utils.forge.BlocksTab
 import me.aquavit.liquidsense.utils.forge.ExploitsTab
 import me.aquavit.liquidsense.utils.forge.HeadsTab
+import me.aquavit.liquidsense.utils.mc.ClassUtils
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent
 import net.ccbluex.liquidbounce.event.EventManager
+import net.ccbluex.liquidbounce.features.command.CommandManager
 import net.ccbluex.liquidbounce.features.module.ModuleManager
 import net.ccbluex.liquidbounce.features.special.AntiForge
 import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof
@@ -21,13 +22,11 @@ import net.ccbluex.liquidbounce.features.special.DonatorCape
 import net.ccbluex.liquidbounce.file.FileManager
 import net.ccbluex.liquidbounce.script.ScriptManager
 import net.ccbluex.liquidbounce.script.remapper.Remapper.loadSrg
-
 import net.ccbluex.liquidbounce.ui.client.altmanager.GuiAltManager
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
 import net.ccbluex.liquidbounce.ui.client.hud.HUD
 import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.createDefault
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import me.aquavit.liquidsense.utils.mc.ClassUtils
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.InventoryUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
