@@ -134,7 +134,7 @@ class CommandManager {
 
     fun registerShortcut(name: String, script: String) {
         if (getCommand(name) == null) {
-            registerCommand(Shortcut(name, ShortcutParser.parse(script).map {
+            registerCommand(Shortcut(name, ShortcutParser.INSTANCE.parse(script).map {
                 val command = getCommand(it[0]) ?: throw IllegalArgumentException("Command ${it[0]} not found!")
 
                 Pair(command, it.toTypedArray())
