@@ -47,7 +47,7 @@ public abstract class MixinGuiDisconnect extends MixinGuiScreen {
     private void initGui(CallbackInfo callbackInfo) {
         reconnectTimer = 0;
         buttonList.add(reconnectButton = new GuiButton(1, this.width / 2 - 100, this.height / 2 + field_175353_i / 2 + this.fontRendererObj.FONT_HEIGHT + 22, "Reconnect"));
-        buttonList.add(new GuiButton(4, this.width / 2 + 2, this.height / 2 + field_175353_i / 2 + this.fontRendererObj.FONT_HEIGHT + 44, 98, 20, "Random username"));
+        buttonList.add(new GuiButton(4, this.width / 2 - 100, this.height / 2 + field_175353_i / 2 + this.fontRendererObj.FONT_HEIGHT + 44, 200, 20, "Random username"));
         buttonList.add(forgeBypassButton = new GuiButton(2, this.width / 2 - 100, this.height / 2 + field_175353_i / 2 + this.fontRendererObj.FONT_HEIGHT + 66, "Bypass AntiForge: " + (AntiForge.enabled ? "On" : "Off")));
     }
 

@@ -11,7 +11,6 @@ import com.google.gson.JsonParser;
 import com.thealtening.AltService;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.ui.client.gui.altmanager.*;
-import net.ccbluex.liquidbounce.ui.client.gui.altmanager.altgenerator.GuiMCLeaks;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
 import me.aquavit.liquidsense.utils.login.LoginUtils;
@@ -148,9 +147,6 @@ public class GuiAltManager extends GuiScreen {
         this.buttonList.add(new GuiButton(88, 5, j + 24 * 4, 90, 20, "Change Name"));
         this.buttonList.add(new GuiButton(10, 5, j + 24 * 5 + 5, 90, 20, "Session Login"));
 
-        if (GENERATORS.getOrDefault("mcleaks", true))
-            this.buttonList.add(new GuiButton(5, 5, j + 24 * 6 + 5, 90, 20, "MCLeaks"));
-
     }
 
     @Override
@@ -223,9 +219,6 @@ public class GuiAltManager extends GuiScreen {
                     loginButton.enabled = randomButton.enabled = true;
                 }, "AltLogin");
                 thread.start();
-                break;
-            case 5:
-                mc.displayGuiScreen(new GuiMCLeaks(this));
                 break;
             case 6:
                 mc.displayGuiScreen(new GuiDirectLogin(this));
@@ -334,7 +327,7 @@ public class GuiAltManager extends GuiScreen {
         private int selectedSlot;
 
         GuiList(GuiScreen prevGui) {
-            super(GuiAltManager.this.mc, prevGui.width, prevGui.height, 40, prevGui.height - 40, 30);
+            super(prevGui.mc,prevGui.width, prevGui.height, 40, prevGui.height - 40, 30);
         }
 
         @Override
