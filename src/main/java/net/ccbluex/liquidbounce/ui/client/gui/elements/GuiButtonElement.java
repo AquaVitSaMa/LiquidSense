@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.ui.client.gui;
+package net.ccbluex.liquidbounce.ui.client.gui.elements;
 
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
@@ -9,9 +9,9 @@ import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
 
-public class GuiNewButton extends GuiButton {
+public class GuiButtonElement extends GuiButton {
 
-    public GuiNewButton(final int buttonId, final int x, final int y, final int width, final int height, final String buttonText) {
+    public GuiButtonElement(final int buttonId, final int x, final int y, final int width, final int height, final String buttonText) {
         super(buttonId, x, y, width, height, buttonText);
     }
 

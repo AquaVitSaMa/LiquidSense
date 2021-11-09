@@ -1,6 +1,7 @@
 package net.ccbluex.liquidbounce.ui.client.gui;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiButtonElement;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.gui.*;
@@ -21,11 +22,11 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
     public void addbutton(){
         int defaultHeight = height / 2 - 8;
 
-        buttonList.add(new GuiNewButton(1, width / 2 - 72, defaultHeight, 140, 20, I18n.format("menu.singleplayer")));
-        buttonList.add(new GuiNewButton(2, width / 2 - 72, defaultHeight + 24, 140, 20, I18n.format("menu.multiplayer")));
-        buttonList.add(new GuiNewButton(3, width / 2 - 72, defaultHeight + 48, 140, 20, I18n.format("Account Manager")));
-        buttonList.add(new GuiNewButton(4, width / 2 - 72, defaultHeight + 72, 140, 20, I18n.format("Background")));
-        buttonList.add(new GuiNewButton(0, width / 2 - 72, defaultHeight + 96, 140, 20, I18n.format("menu.options")));
+        buttonList.add(new GuiButtonElement(1, width / 2 - 72, defaultHeight, 140, 20, I18n.format("menu.singleplayer")));
+        buttonList.add(new GuiButtonElement(2, width / 2 - 72, defaultHeight + 24, 140, 20, I18n.format("menu.multiplayer")));
+        buttonList.add(new GuiButtonElement(3, width / 2 - 72, defaultHeight + 48, 140, 20, I18n.format("Account Manager")));
+        buttonList.add(new GuiButtonElement(4, width / 2 - 72, defaultHeight + 72, 140, 20, I18n.format("Background")));
+        buttonList.add(new GuiButtonElement(0, width / 2 - 72, defaultHeight + 96, 140, 20, I18n.format("menu.options")));
     }
 
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {

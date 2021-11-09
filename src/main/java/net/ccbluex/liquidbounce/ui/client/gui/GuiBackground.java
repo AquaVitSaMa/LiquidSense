@@ -2,6 +2,7 @@ package net.ccbluex.liquidbounce.ui.client.gui;
 
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiButtonElement;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -21,8 +22,8 @@ import java.nio.file.Files;
 
 public class GuiBackground extends GuiScreen {
 
-    private GuiNewButton enabledButton;
-    private GuiNewButton particlesButton;
+    private GuiButtonElement enabledButton;
+    private GuiButtonElement particlesButton;
 
     private final GuiScreen prevGui;
 
@@ -35,13 +36,13 @@ public class GuiBackground extends GuiScreen {
     }
 
     public void initGui() {
-        enabledButton = new GuiNewButton(1, width / 2 - 100, height / 4 + 35, 200, 20,"Enabled (" + (enabled ? "On" : "Off") + ")");
+        enabledButton = new GuiButtonElement(1, width / 2 - 100, height / 4 + 35, 200, 20,"Enabled (" + (enabled ? "On" : "Off") + ")");
         buttonList.add(enabledButton);
-        particlesButton = new GuiNewButton(2, width / 2 - 100, height / 4 + 50 + 25, 200, 20,"Particles (" + (particles ? "On" : "Off") + ")");
+        particlesButton = new GuiButtonElement(2, width / 2 - 100, height / 4 + 50 + 25, 200, 20,"Particles (" + (particles ? "On" : "Off") + ")");
         buttonList.add(particlesButton);
-        buttonList.add(new GuiNewButton(3, width / 2 - 100, height / 4 + 50 + 25 * 2, 98, 20, "Change wallpaper"));
-        buttonList.add(new GuiNewButton(4, width / 2 + 2, height / 4 + 50 + 25 * 2, 98, 20, "Reset wallpaper"));
-        buttonList.add(new GuiNewButton(0, width / 2 - 100, height / 4 + 55 + 25 * 4 + 5, 200, 20,"Back"));
+        buttonList.add(new GuiButtonElement(3, width / 2 - 100, height / 4 + 50 + 25 * 2, 98, 20, "Change wallpaper"));
+        buttonList.add(new GuiButtonElement(4, width / 2 + 2, height / 4 + 50 + 25 * 2, 98, 20, "Reset wallpaper"));
+        buttonList.add(new GuiButtonElement(0, width / 2 - 100, height / 4 + 55 + 25 * 4 + 5, 200, 20,"Back"));
         super.initGui();
     }
 

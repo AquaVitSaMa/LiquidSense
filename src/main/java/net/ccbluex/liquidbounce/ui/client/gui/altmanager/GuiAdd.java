@@ -12,7 +12,7 @@ import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.AltService;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
-import net.ccbluex.liquidbounce.ui.client.gui.GuiNewButton;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiButtonElement;
 import net.ccbluex.liquidbounce.ui.elements.GuiPasswordField;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.ClientUtils;
@@ -46,9 +46,9 @@ public class GuiAdd extends GuiScreen {
 
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
-        buttonList.add(addButton = new GuiNewButton(1, width / 2 - 100, height / 4 + 72, 200, 20,"Add"));
-        buttonList.add(clipboardButton = new GuiNewButton(2, width / 2 - 100, height / 4 + 96, 200, 20,"Clipboard"));
-        buttonList.add(new GuiNewButton(0, width / 2 - 100, height / 4 + 120,200, 20, "Back"));
+        buttonList.add(addButton = new GuiButtonElement(1, width / 2 - 100, height / 4 + 72, 200, 20,"Add"));
+        buttonList.add(clipboardButton = new GuiButtonElement(2, width / 2 - 100, height / 4 + 96, 200, 20,"Clipboard"));
+        buttonList.add(new GuiButtonElement(0, width / 2 - 100, height / 4 + 120,200, 20, "Back"));
         username = new GuiTextField(2, Fonts.font40, width / 2 - 100, 60, 200, 20);
         username.setFocused(true);
         username.setMaxStringLength(Integer.MAX_VALUE);
