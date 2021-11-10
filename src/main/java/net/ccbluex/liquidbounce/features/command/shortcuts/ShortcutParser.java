@@ -17,8 +17,8 @@ public final class ShortcutParser {
         SEPARATOR = string.codePointAt(0);
     }
 
-    public final List<List<String>> parse(String script) {
-        List<Token> tokens = this.tokenize(script);
+    public static List<List<String>> parse(String script) {
+        List<Token> tokens = tokenize(script);
 
         List<List<String>> parsed = new ArrayList<>();
         List<String> tmpStatement = new ArrayList<>();
@@ -38,7 +38,7 @@ public final class ShortcutParser {
         return parsed;
     }
 
-    private List<Token> tokenize(String script) {
+    private static List<Token> tokenize(String script) {
         ArrayList<Token> tokens = new ArrayList<>();
         StringBuilder tokenBuf = new StringBuilder();
 
@@ -46,9 +46,9 @@ public final class ShortcutParser {
         while (ofInt.hasNext()) {
             Integer code = ofInt.next();
             if (Character.isWhitespace(code)) {
-                this.finishLiteral(tokens, tokenBuf);
+                finishLiteral(tokens, tokenBuf);
             } else if (code == SEPARATOR) {
-                this.finishLiteral(tokens, tokenBuf);
+                finishLiteral(tokens, tokenBuf);
                 StatementEnd statementEnd = new StatementEnd();
                 tokens.add(statementEnd);
             } else {
@@ -62,7 +62,7 @@ public final class ShortcutParser {
         return tokens;
     }
 
-    private void finishLiteral(ArrayList<Token> tokens, StringBuilder tokenBuf) {
+    private static void finishLiteral(ArrayList<Token> tokens, StringBuilder tokenBuf) {
         if (tokenBuf.length() > 0) {
             tokens.add(new Literal(tokenBuf.toString()));
             tokenBuf.setLength(0);

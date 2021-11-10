@@ -10,6 +10,7 @@ import net.ccbluex.liquidbounce.utils.ClientUtils;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Supplier;
 import java.util.stream.Collectors;
 
 public class CommandManager {
@@ -55,7 +56,6 @@ public class CommandManager {
         registerCommand(new RenameCommand());
         registerCommand(new ReloadCommand());
         registerCommand(new LoginCommand());
-        registerCommand(new ScriptManagerCommand());
         registerCommand(new RemoteViewCommand());
         registerCommand(new PrefixCommand());
         registerCommand(new ShortcutCommand());
@@ -170,11 +170,11 @@ public class CommandManager {
             registerCommand(new Shortcut(name, ShortcutParser.parse(script).stream().map(it -> {
                 Command command = getCommand(it.get(0));
                 if (command != null) {
-                    return new Pair(command, it.toArray(new String[0]));
+                    return new Pair<>(command, it.toArray(new String[0]));
                 } else {
                     throw new IllegalArgumentException("Command " + it.get(0) + " not found!");
                 }
-            }).collect(Collectors.toList())));
+            }).collect(Collectors.toCollection((Supplier<List<Pair<Command,String[]>>>)ArrayList::new))));
 
             LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.shortcutsConfig);
         } else {

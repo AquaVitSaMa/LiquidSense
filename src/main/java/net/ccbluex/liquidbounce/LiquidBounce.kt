@@ -5,7 +5,6 @@
  */
 package net.ccbluex.liquidbounce
 
-import CommandManager
 import com.google.gson.JsonObject
 import com.google.gson.JsonParser
 import me.aquavit.liquidsense.LiquidSense
@@ -22,15 +21,13 @@ import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof
 import net.ccbluex.liquidbounce.file.FileManager
 import net.ccbluex.liquidbounce.script.ScriptManager
 import net.ccbluex.liquidbounce.script.remapper.Remapper.loadSrg
-
-import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager
 import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui
+import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager
 import net.ccbluex.liquidbounce.ui.client.hud.HUD
 import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.createDefault
-import net.ccbluex.liquidbounce.ui.font.Fonts
-import me.aquavit.liquidsense.utils.mc.ClassUtils
 import net.ccbluex.liquidbounce.ui.client.miscible.Miscible
 import net.ccbluex.liquidbounce.ui.client.neverlose.Main
+import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.utils.ClientUtils
 import net.ccbluex.liquidbounce.utils.InventoryUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
