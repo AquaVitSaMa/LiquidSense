@@ -11,7 +11,7 @@ import net.ccbluex.liquidbounce.features.command.Command;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.NotifyType;
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
-import net.mcleaks.Callback;
+import me.aquavit.liquidsense.utils.login.Callback;
 
 import java.util.ArrayList;
 import java.util.List;

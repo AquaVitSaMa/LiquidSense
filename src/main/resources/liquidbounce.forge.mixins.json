@@ -44,7 +44,6 @@
     "client.MixinShaderGroup",
     "render.MixinModelBiped",
     "render.MixinModelPlayer",
-    "network.MixinNetHandlerLoginClient",
     "network.MixinNetHandlerPlayClient",
     "network.MixinNetworkManager",
     "network.MixinNetworkPlayerInfo",

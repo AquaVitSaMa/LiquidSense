@@ -19,7 +19,6 @@ import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.login.UserUtils;
 import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
-import net.mcleaks.MCLeaks;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -81,13 +80,11 @@ public class GuiAltManager extends GuiScreen {
 
         if (minecraftAccount.isCracked()) {
             LoginUtils.loginCracked(minecraftAccount.getName());
-            MCLeaks.remove();
             return "§cYour name is now §8" + minecraftAccount.getName() + "§c.";
         }
 
         LoginUtils.LoginResult result = LoginUtils.login(minecraftAccount.getName(), minecraftAccount.getPassword());
         if (result == LoginUtils.LoginResult.LOGGED) {
-            MCLeaks.remove();
             String userName = Minecraft.getMinecraft().getSession().getUsername();
             minecraftAccount.setAccountName(userName);
             LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.accountsConfig);
@@ -158,8 +155,8 @@ public class GuiAltManager extends GuiScreen {
         Fonts.font20.drawCenteredString("AltManager", width / 2, 6, 0xffffff);
         Fonts.font18.drawCenteredString(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts", width / 2, 18, 0xffffff);
         Fonts.font18.drawCenteredString(status, width / 2, 32, 0xffffff);
-        Fonts.font18.drawStringWithShadow("§7User: §a" + (MCLeaks.isAltActive() ? MCLeaks.getSession().getUsername() : mc.getSession().getUsername()), 6, 6, 0xffffff);
-        Fonts.font18.drawStringWithShadow("§7Type: §a" + (altService.getCurrentService() == AltService.EnumAltService.THEALTENING ? "TheAltening" : MCLeaks.isAltActive() ? "MCLeaks" : UserUtils.isValidTokenOffline(mc.getSession().getToken()) ? "Premium" : "Cracked"), 6, 15, 0xffffff);
+        Fonts.font18.drawStringWithShadow("§7User: §a" + (mc.getSession().getUsername()), 6, 6, 0xffffff);
+        Fonts.font18.drawStringWithShadow("§7Type: §a" + (altService.getCurrentService() == AltService.EnumAltService.THEALTENING ? "TheAltening" :UserUtils.isValidTokenOffline(mc.getSession().getToken()) ? "Premium" : "Cracked"), 6, 15, 0xffffff);
 
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
