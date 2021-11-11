@@ -7,7 +7,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.network;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
 import net.mcleaks.MCLeaks;
 import net.mcleaks.Session;
 import net.minecraft.client.network.NetHandlerLoginClient;

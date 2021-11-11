@@ -11,7 +11,7 @@ import com.google.gson.JsonPrimitive
 import me.aquavit.liquidsense.utils.render.Translate
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.ClientUtils
+import me.aquavit.liquidsense.utils.client.ClientUtils
 import net.minecraft.client.gui.FontRenderer
 import net.minecraftforge.fml.relauncher.Side
 import net.minecraftforge.fml.relauncher.SideOnly

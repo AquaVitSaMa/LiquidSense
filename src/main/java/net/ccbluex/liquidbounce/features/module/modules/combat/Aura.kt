@@ -12,12 +12,12 @@ import net.ccbluex.liquidbounce.features.module.modules.player.Blink
 import net.ccbluex.liquidbounce.features.module.modules.render.FreeCam
 import me.aquavit.liquidsense.utils.entity.EntityUtils
 import net.ccbluex.liquidbounce.utils.OtherRotationUtils
-import net.ccbluex.liquidbounce.utils.RaycastUtils
+import me.aquavit.liquidsense.utils.entity.RaycastUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
 import me.aquavit.liquidsense.utils.misc.RandomUtils
 import me.aquavit.liquidsense.utils.extensions.PlayerExtensionUtils
-import net.ccbluex.liquidbounce.utils.timer.MSTimer
-import net.ccbluex.liquidbounce.utils.timer.TimeUtils
+import me.aquavit.liquidsense.utils.timer.MSTimer
+import me.aquavit.liquidsense.utils.timer.TimeUtils
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
 import net.ccbluex.liquidbounce.value.IntegerValue

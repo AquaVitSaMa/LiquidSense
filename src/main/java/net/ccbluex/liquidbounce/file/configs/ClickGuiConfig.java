@@ -15,7 +15,7 @@ import net.ccbluex.liquidbounce.file.FileManager;
 import net.ccbluex.liquidbounce.ui.client.clickgui.Panel;
 import net.ccbluex.liquidbounce.ui.client.clickgui.elements.Element;
 import net.ccbluex.liquidbounce.ui.client.clickgui.elements.ModuleElement;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
 
 import java.io.*;
 

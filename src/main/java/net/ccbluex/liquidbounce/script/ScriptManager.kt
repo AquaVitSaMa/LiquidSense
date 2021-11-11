@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.script
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.utils.ClientUtils
+import me.aquavit.liquidsense.utils.client.ClientUtils
 import java.io.File
 import java.io.FileFilter
 

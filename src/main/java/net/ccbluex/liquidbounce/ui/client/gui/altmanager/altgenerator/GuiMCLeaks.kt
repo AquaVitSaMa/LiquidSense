@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.ui.client.gui.altmanager.altgenerator
 import com.thealtening.AltService
 import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.ClientUtils
+import me.aquavit.liquidsense.utils.client.ClientUtils
 import me.aquavit.liquidsense.utils.misc.MiscUtils
 import net.mcleaks.MCLeaks
 import net.mcleaks.RedeemResponse

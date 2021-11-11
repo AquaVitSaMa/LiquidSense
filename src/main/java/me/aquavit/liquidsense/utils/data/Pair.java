@@ -1,4 +1,4 @@
-package me.aquavit.liquidsense.data;
+package me.aquavit.liquidsense.utils.data;
 
 public class Pair<K,V> {
 

@@ -33,7 +33,7 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import me.aquavit.liquidsense.modules.misc.Animations;
 import org.lwjgl.opengl.GL11;
-import net.ccbluex.liquidbounce.utils.timer.MSTimer;
+import me.aquavit.liquidsense.utils.timer.MSTimer;
 import me.aquavit.liquidsense.modules.render.ItemRotate;
 
 import static me.aquavit.liquidsense.modules.render.ItemRotate.ItemRenderRotate;

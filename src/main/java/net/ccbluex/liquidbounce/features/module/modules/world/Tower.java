@@ -14,7 +14,7 @@ import net.ccbluex.liquidbounce.utils.*;
 import me.aquavit.liquidsense.utils.block.BlockUtils;
 import me.aquavit.liquidsense.utils.block.PlaceInfo;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.utils.timer.TickTimer;
+import me.aquavit.liquidsense.utils.timer.TickTimer;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;

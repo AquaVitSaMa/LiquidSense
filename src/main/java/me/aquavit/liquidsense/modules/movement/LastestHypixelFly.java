@@ -1,7 +1,5 @@
 package me.aquavit.liquidsense.modules.movement;
 
-import com.google.gson.JsonObject;
-import io.netty.buffer.Unpooled;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.MoveEvent;
@@ -10,15 +8,13 @@ import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
-import net.ccbluex.liquidbounce.utils.timer.MSTimer;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
+import me.aquavit.liquidsense.utils.timer.MSTimer;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.minecraft.entity.player.PlayerCapabilities;
-import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.network.play.client.C0FPacketConfirmTransaction;
 import net.minecraft.network.play.client.C13PacketPlayerAbilities;
-import net.minecraft.network.play.client.C17PacketCustomPayload;
 import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 import net.minecraft.util.ChatComponentText;
 

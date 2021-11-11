@@ -1,6 +1,5 @@
 package net.ccbluex.liquidbounce.features.module;
 
-import kotlin.jvm.internal.Intrinsics;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.KeyEvent;
@@ -12,12 +11,10 @@ import net.ccbluex.liquidbounce.features.module.modules.movement.*;
 import net.ccbluex.liquidbounce.features.module.modules.render.*;
 import net.ccbluex.liquidbounce.features.module.modules.world.*;
 import net.ccbluex.liquidbounce.features.module.modules.player.*;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
 import net.ccbluex.liquidbounce.value.Value;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.*;
 

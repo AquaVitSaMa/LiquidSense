@@ -12,7 +12,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
 import net.ccbluex.liquidbounce.file.FileConfig;
 import net.ccbluex.liquidbounce.file.FileManager;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
 import net.minecraft.block.Block;
 
 import java.io.*;

@@ -15,7 +15,7 @@ import me.aquavit.liquidsense.utils.entity.EntityUtils
 import net.ccbluex.liquidbounce.utils.Rotation
 import net.ccbluex.liquidbounce.utils.RotationUtils
 import me.aquavit.liquidsense.utils.extensions.PlayerExtensionUtils
-import net.ccbluex.liquidbounce.utils.timer.MSTimer
+import me.aquavit.liquidsense.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
 import kotlin.random.Random

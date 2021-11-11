@@ -12,14 +12,14 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.CPSCounter
+import me.aquavit.liquidsense.utils.module.CPSCounter
 import me.aquavit.liquidsense.utils.entity.EntityUtils
 import me.aquavit.liquidsense.utils.misc.ServerUtils
 import net.ccbluex.liquidbounce.utils.render.ColorUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import me.aquavit.liquidsense.utils.render.UiUtils
 import net.ccbluex.liquidbounce.utils.render.shader.shaders.RainbowFontShader
-import net.ccbluex.liquidbounce.utils.timer.MSTimer
+import me.aquavit.liquidsense.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.value.*
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager

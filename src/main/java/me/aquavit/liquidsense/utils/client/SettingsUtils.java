@@ -1,11 +1,10 @@
-package me.aquavit.liquidsense.utils.module;
+package me.aquavit.liquidsense.utils.client;
 
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import net.ccbluex.liquidbounce.features.module.modules.misc.Spammer;
 import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
 import net.ccbluex.liquidbounce.value.*;
 import org.lwjgl.input.Keyboard;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;

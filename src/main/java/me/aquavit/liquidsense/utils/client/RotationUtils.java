@@ -1,11 +1,11 @@
-package me.aquavit.liquidsense.utils.module;
+package me.aquavit.liquidsense.utils.client;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.event.PacketEvent;
 import net.ccbluex.liquidbounce.event.TickEvent;
-import net.ccbluex.liquidbounce.utils.RaycastUtils;
+import me.aquavit.liquidsense.utils.entity.RaycastUtils;
 import net.ccbluex.liquidbounce.utils.Rotation;
 import net.ccbluex.liquidbounce.utils.VecRotation;
 import net.minecraft.client.Minecraft;

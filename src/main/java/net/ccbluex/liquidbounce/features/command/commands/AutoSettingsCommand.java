@@ -5,7 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
-import me.aquavit.liquidsense.utils.module.SettingsUtils;
+import me.aquavit.liquidsense.utils.client.SettingsUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.command.Command;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification;

@@ -9,7 +9,7 @@ import me.aquavit.liquidsense.modules.render.*;
 import me.aquavit.liquidsense.modules.world.*;
 import me.aquavit.liquidsense.modules.fun.*;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
 import org.lwjgl.opengl.Display;
 
 import java.util.ArrayList;
@@ -36,7 +36,8 @@ public class LiquidSense {
     }
 
     private void loadModules(){
-        this.liquidSenseModules = new ArrayList<>();liquidSenseModules.add(SuperKnockback.class);
+        this.liquidSenseModules = new ArrayList<>();
+        liquidSenseModules.add(SuperKnockback.class);
         liquidSenseModules.add(NeverLose.class);
         liquidSenseModules.add(Teams.class);
         liquidSenseModules.add(Projectiles.class);

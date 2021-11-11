@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.script.api
 import jdk.nashorn.api.scripting.JSObject
 import jdk.nashorn.api.scripting.ScriptUtils
 import net.ccbluex.liquidbounce.features.command.Command
-import net.ccbluex.liquidbounce.utils.ClientUtils
+import me.aquavit.liquidsense.utils.client.ClientUtils
 
 @Suppress("UNCHECKED_CAST", "unused")
 class ScriptCommand(private val commandObject: JSObject) : Command(commandObject.getMember("name") as String,

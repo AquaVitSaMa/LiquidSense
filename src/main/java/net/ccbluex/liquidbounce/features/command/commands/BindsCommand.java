@@ -2,9 +2,7 @@ package net.ccbluex.liquidbounce.features.command.commands;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.command.Command;
-import net.ccbluex.liquidbounce.features.module.ModuleManager;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
-import org.jetbrains.annotations.NotNull;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
 import org.lwjgl.input.Keyboard;
 
 public class BindsCommand extends Command {

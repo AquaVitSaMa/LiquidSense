@@ -12,12 +12,12 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.combat.AutoArmor
 import net.ccbluex.liquidbounce.injection.implementations.IItemStack
-import net.ccbluex.liquidbounce.utils.ClientUtils
+import me.aquavit.liquidsense.utils.client.ClientUtils
 import net.ccbluex.liquidbounce.utils.InventoryUtils
 import me.aquavit.liquidsense.utils.entity.MovementUtils
 import me.aquavit.liquidsense.utils.item.ArmorPiece
 import me.aquavit.liquidsense.utils.item.ItemUtils
-import net.ccbluex.liquidbounce.utils.timer.TimeUtils
+import me.aquavit.liquidsense.utils.timer.TimeUtils
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.IntegerValue
 import net.ccbluex.liquidbounce.value.ListValue

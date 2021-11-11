@@ -17,7 +17,7 @@ import net.ccbluex.liquidbounce.utils.RotationUtils;
 import net.ccbluex.liquidbounce.utils.VecRotation;
 import me.aquavit.liquidsense.utils.block.BlockUtils;
 import me.aquavit.liquidsense.utils.entity.FallingPlayer;
-import net.ccbluex.liquidbounce.utils.timer.TickTimer;
+import me.aquavit.liquidsense.utils.timer.TickTimer;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.ListValue;

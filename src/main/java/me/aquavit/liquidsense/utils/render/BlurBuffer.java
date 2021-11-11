@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.utils.render;
 
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.utils.timer.TimeUtils;
+import me.aquavit.liquidsense.utils.timer.TimeUtils;
 import net.minecraft.client.shader.Shader;
 import org.lwjgl.opengl.GL11;
 

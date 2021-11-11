@@ -15,11 +15,9 @@ import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.minecraft.potion.Potion;
 import net.ccbluex.liquidbounce.event.MotionEvent;
-import net.ccbluex.liquidbounce.utils.timer.TimeUtils;
+import me.aquavit.liquidsense.utils.timer.TimeUtils;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import org.lwjgl.input.Mouse;
-
-import java.util.Random;
 
 @ModuleInfo(name = "AutoHead", description = "AutoHead", category = ModuleCategory.COMBAT)
 public class AutoHead extends Module {

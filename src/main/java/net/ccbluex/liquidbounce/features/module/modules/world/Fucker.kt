@@ -22,7 +22,7 @@ import me.aquavit.liquidsense.utils.block.BlockUtils.isFullBlock
 import me.aquavit.liquidsense.utils.block.BlockUtils.searchBlocks
 import me.aquavit.liquidsense.utils.extensions.BlockExtensionUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
-import net.ccbluex.liquidbounce.utils.timer.MSTimer
+import me.aquavit.liquidsense.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.value.*
 import net.minecraft.block.Block
 import net.minecraft.block.BlockAir

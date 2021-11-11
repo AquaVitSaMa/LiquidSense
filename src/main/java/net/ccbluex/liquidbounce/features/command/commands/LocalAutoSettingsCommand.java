@@ -2,15 +2,13 @@ package net.ccbluex.liquidbounce.features.command.commands;
 
 import com.google.gson.JsonParser;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
-import me.aquavit.liquidsense.utils.module.SettingsUtils;
+import me.aquavit.liquidsense.utils.client.SettingsUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.command.Command;
 import net.ccbluex.liquidbounce.file.FileManager;
-import net.ccbluex.liquidbounce.file.configs.FriendsConfig;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.NotifyType;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
-import net.minecraft.entity.player.EntityPlayer;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
 
 import java.io.*;
 import java.util.ArrayList;

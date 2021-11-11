@@ -3,7 +3,7 @@ package net.ccbluex.liquidbounce.features.command.commands;
 import joptsimple.internal.Strings;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.command.Command;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
 
 public class HelpCommand extends Command {
     public HelpCommand() {

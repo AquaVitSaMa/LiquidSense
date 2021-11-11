@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.ui.client.tools;
 
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.ccbluex.liquidbounce.utils.TabUtils;
+import me.aquavit.liquidsense.utils.mc.TabUtils;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;

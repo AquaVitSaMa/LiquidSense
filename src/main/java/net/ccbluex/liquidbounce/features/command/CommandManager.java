@@ -1,11 +1,11 @@
 package net.ccbluex.liquidbounce.features.command;
 
-import me.aquavit.liquidsense.data.Pair;
+import me.aquavit.liquidsense.utils.data.Pair;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.command.commands.*;
 import net.ccbluex.liquidbounce.features.command.shortcuts.Shortcut;
 import net.ccbluex.liquidbounce.features.command.shortcuts.ShortcutParser;
-import net.ccbluex.liquidbounce.utils.ClientUtils;
+import me.aquavit.liquidsense.utils.client.ClientUtils;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.command.shortcuts;
 
-import me.aquavit.liquidsense.data.Pair;
+import me.aquavit.liquidsense.utils.data.Pair;
 import net.ccbluex.liquidbounce.features.command.Command;
 import org.jetbrains.annotations.NotNull;
 

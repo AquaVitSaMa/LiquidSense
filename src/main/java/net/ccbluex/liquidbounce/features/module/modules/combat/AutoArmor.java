@@ -15,7 +15,7 @@ import net.ccbluex.liquidbounce.utils.InventoryUtils;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.item.ArmorComparator;
 import me.aquavit.liquidsense.utils.item.ArmorPiece;
-import net.ccbluex.liquidbounce.utils.timer.TimeUtils;
+import me.aquavit.liquidsense.utils.timer.TimeUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
 import net.minecraft.client.gui.inventory.GuiInventory;

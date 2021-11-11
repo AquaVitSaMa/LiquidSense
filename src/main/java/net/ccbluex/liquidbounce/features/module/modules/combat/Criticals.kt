@@ -16,7 +16,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.movement.Fly
 import me.aquavit.liquidsense.utils.misc.MiscUtils.getRandom
 import me.aquavit.liquidsense.utils.misc.RandomUtils
-import net.ccbluex.liquidbounce.utils.timer.MSTimer
+import me.aquavit.liquidsense.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.value.IntegerValue
 import net.ccbluex.liquidbounce.value.ListValue
 import net.minecraft.entity.EntityLivingBase

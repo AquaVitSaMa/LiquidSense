@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.utils;
 
+import me.aquavit.liquidsense.utils.entity.RaycastUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventTarget;
