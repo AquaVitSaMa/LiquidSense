@@ -39,7 +39,6 @@ public class LiquidSense {
         this.liquidSenseModules = new ArrayList<>();
         liquidSenseModules.add(KillAura.class);
         liquidSenseModules.add(SuperKnockback.class);
-        liquidSenseModules.add(NeverLose.class);
         liquidSenseModules.add(Teams.class);
         liquidSenseModules.add(Projectiles.class);
         liquidSenseModules.add(AbortBreaking.class);

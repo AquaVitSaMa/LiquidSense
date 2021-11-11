@@ -10,6 +10,7 @@ import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.ui.client.clickgui.style.styles.*;
+import net.ccbluex.liquidbounce.ui.client.neverlose.Main;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
@@ -21,7 +22,7 @@ import java.awt.*;
 
 @ModuleInfo(name = "ClickGUI", description = "Opens the ClickGUI.", category = ModuleCategory.RENDER, keyBind = Keyboard.KEY_RSHIFT, canEnable = false)
 public class ClickGUI extends Module {
-    private final ListValue styleValue = new ListValue("Style", new String[] {"LiquidSense","Lnk","Null", "Slowly"}, "Slowly") {
+    private final ListValue styleValue = new ListValue("Style", new String[] {"LiquidSense","Lnk","Null", "Slowly","Neverlose"}, "Slowly") {
         @Override
         protected void onChanged(final String oldValue, final String newValue) {
             updateStyle();
@@ -46,6 +47,11 @@ public class ClickGUI extends Module {
 
     @Override
     public void onEnable() {
+        if (styleValue.get().equals("Neverlose")){
+            mc.displayGuiScreen(new Main());
+            return;
+        }
+
         updateStyle();
 
         mc.displayGuiScreen(LiquidBounce.clickGui);
