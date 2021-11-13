@@ -9,7 +9,7 @@ import me.aquavit.liquidsense.modules.render.AntiBlind;
 import me.aquavit.liquidsense.modules.render.EveryThingBlock;
 import me.aquavit.liquidsense.modules.render.SwingAnimation;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.combat.Aura;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;

@@ -1,6 +1,5 @@
-package net.ccbluex.liquidbounce.features.module.modules.combat
+package me.aquavit.liquidsense.modules.combat
 
-import me.aquavit.liquidsense.modules.combat.NoFriends
 import me.aquavit.liquidsense.modules.misc.Teams
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.*
@@ -18,6 +17,7 @@ import me.aquavit.liquidsense.utils.misc.RandomUtils
 import me.aquavit.liquidsense.utils.extensions.PlayerExtensionUtils
 import me.aquavit.liquidsense.utils.timer.MSTimer
 import me.aquavit.liquidsense.utils.timer.TimeUtils
+import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
 import net.ccbluex.liquidbounce.value.IntegerValue

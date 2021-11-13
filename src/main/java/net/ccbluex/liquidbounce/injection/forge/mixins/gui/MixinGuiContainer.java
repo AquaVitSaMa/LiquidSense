@@ -2,7 +2,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import com.google.common.collect.Sets;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.combat.Aura;
 import net.ccbluex.liquidbounce.features.module.modules.player.InventoryCleaner;
 import net.ccbluex.liquidbounce.features.module.modules.world.ChestStealer;
 import net.minecraft.client.Minecraft;

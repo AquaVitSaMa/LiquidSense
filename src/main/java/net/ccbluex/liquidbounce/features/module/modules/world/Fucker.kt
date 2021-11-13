@@ -13,7 +13,7 @@ import net.ccbluex.liquidbounce.event.UpdateEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import net.ccbluex.liquidbounce.features.module.modules.combat.Aura
+import me.aquavit.liquidsense.modules.combat.Aura
 import net.ccbluex.liquidbounce.utils.RotationUtils
 import me.aquavit.liquidsense.utils.block.BlockUtils.getBlock
 import me.aquavit.liquidsense.utils.block.BlockUtils.getBlockName

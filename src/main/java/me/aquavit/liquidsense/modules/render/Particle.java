@@ -19,7 +19,7 @@ import org.lwjgl.opengl.GL11;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
-import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.combat.Aura;
 
 @ModuleInfo(name = "Particle", description = "Particle", category = ModuleCategory.RENDER)
 public class Particle extends Module {
