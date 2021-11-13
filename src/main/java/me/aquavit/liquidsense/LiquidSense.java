@@ -72,6 +72,7 @@ public class LiquidSense {
         liquidSenseModules.add(NoHurtCam.class);
         liquidSenseModules.add(NoSwing.class);
         liquidSenseModules.add(TrueSight.class);
+        liquidSenseModules.add(Chams.class);
         liquidSenseModules.add(Particle.class);
         liquidSenseModules.add(EveryThingBlock.class);
         liquidSenseModules.add(FastBreak.class);

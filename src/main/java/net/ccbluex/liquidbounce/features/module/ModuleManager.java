@@ -89,7 +89,6 @@ public final class ModuleManager implements Listenable {
                 FastBow.class,
                 AutoClicker.class,
                 BlockESP.class,
-                Chams.class,
                 ServerCrasher.class,
                 FastStairs.class,
                 InventoryCleaner.class,

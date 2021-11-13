@@ -1,9 +1,9 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
 
+import me.aquavit.liquidsense.modules.render.Chams;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
-import net.ccbluex.liquidbounce.features.module.modules.render.Chams;
 import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;
 import net.ccbluex.liquidbounce.utils.RotationUtils;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -29,13 +29,12 @@ public abstract class MixinRenderPlayer extends MixinRender {
     @Overwrite
     private void setModelVisibilities(AbstractClientPlayer clientPlayer) {
         ModelPlayer modelplayer = this.getMainModel();
-        Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
         if (clientPlayer.isSpectator()) {
             modelplayer.setInvisible(false);
             modelplayer.bipedHead.showModel = true;
             modelplayer.bipedHeadwear.showModel = true;
         } else {
-            if(chams.getState() && chams.getOnlyhead().get()){
+            if(LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.onlyhead.get()){
                 modelplayer.setInvisible(false);
                 modelplayer.bipedHead.showModel = true;
                 modelplayer.bipedHeadwear.showModel = true;

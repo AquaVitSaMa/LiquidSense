@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.modules.render.Chams;
 import me.aquavit.liquidsense.modules.render.TrueSight;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
@@ -13,7 +14,6 @@ import com.google.common.collect.Lists;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.SommtheEvent;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Aura;
-import net.ccbluex.liquidbounce.features.module.modules.render.Chams;
 import net.ccbluex.liquidbounce.features.module.modules.render.ESP;
 import net.ccbluex.liquidbounce.features.module.modules.render.NameTags;
 import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;
@@ -129,8 +129,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
 
     @Overwrite
     public <T extends EntityLivingBase> void doRender(T p_doRender_1_, double p_doRender_2_, double p_doRender_4_, double p_doRender_6_, float p_doRender_8_, float p_doRender_9_) {
-        final Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
-        if (chams.getState() && chams.getTargetsValue().get() && EntityUtils.isSelected(p_doRender_1_, false)) {
+        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false)) {
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
             GL11.glPolygonOffset(0.75F, -1000000F);
         }
@@ -149,7 +148,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
             this.mainModel.isRiding = shouldSit;
             this.mainModel.isChild = p_doRender_1_.isChild();
 
-            if (chams.getState() && chams.getTargetsValue().get() && EntityUtils.isSelected(p_doRender_1_, false)) {
+            if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false)) {
                 GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
                 GL11.glPolygonOffset(1.0F, -1000000F);
             }
@@ -241,7 +240,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                 logger.error("Couldn't render entity", var20);
             }
 
-            if (chams.getState() && chams.getTargetsValue().get() && EntityUtils.isSelected(p_doRender_1_, false)) {
+            if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false)) {
                 GL11.glPolygonOffset(1.0F, 1000000F);
                 GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
             }
@@ -260,7 +259,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
             MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Post(p_doRender_1_, (RendererLivingEntity)(Object)this, p_doRender_2_, p_doRender_4_, p_doRender_6_));
         }
 
-        if (chams.getState() && chams.getTargetsValue().get() && EntityUtils.isSelected(p_doRender_1_, false)) {
+        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false)) {
             GL11.glPolygonOffset(1.0F, 1000000F);
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         }
@@ -273,10 +272,9 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
     protected <T extends EntityLivingBase> void renderModel(T entitylivingbaseIn, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float scaleFactor) {
         boolean visible = !entitylivingbaseIn.isInvisible();
         boolean semiVisible = !visible && (!entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer) || (LiquidBounce.moduleManager.getModule(TrueSight.class).getState() && TrueSight.entitiesValue.get()));
-        Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
         Rotations ra = (Rotations) LiquidBounce.moduleManager.getModule(Rotations.class);
         Aura killAura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
-        final Color sb = chams.getRainbow().get() ? ColorUtils.rainbow() : new Color(!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? ChamsColor.red2 : ChamsColor.red,!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? ChamsColor.green2 : ChamsColor.green,!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? ChamsColor.blue2 : ChamsColor.blue,!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? ChamsColor.Apl2 : ChamsColor.Apl);
+            final Color sb = Chams.rainbow.get() ? ColorUtils.rainbow() : new Color(!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? Chams.colorRed2Value.get() / 255 : Chams.colorRedValue.get() / 255,!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? Chams.colorGreen2Value.get() / 255 : Chams.colorGreen2Value.get() / 255,!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? Chams.colorBlue2Value.get() / 255 : Chams.colorBlue2Value.get() / 255,!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? Chams.colorA2Value.get() / 255 : Chams.colorA2Value.get() / 255);
         final Color cnm = ra.getRainbow().get() ? ColorUtils.rainbow() : new Color(ra.getColorRedValue().get(),ra.getColorGreenValue().get(),ra.getColorBlueValue().get(),ra.getAlphaValue().get());
 
         if(visible || semiVisible) {
@@ -383,7 +381,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                 }
             }
 
-            if(chams.getState() && (chams.getBoolValue().get() || EntityUtils.isSelected(entitylivingbaseIn, false))) {
+            if(LiquidBounce.moduleManager.getModule(Chams.class).getState() && (Chams.all.get() || EntityUtils.isSelected(entitylivingbaseIn, false))) {
                 GL11.glPushMatrix();
                 GL11.glPushAttrib(1048575);
                 GL11.glDisable(2929);
