@@ -7,7 +7,7 @@ import kotlin.jvm.internal.Intrinsics;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.item.ItemUtils;
-import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
+import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Items;
 import net.minecraft.item.Item;

@@ -3,15 +3,49 @@ package me.aquavit.liquidsense.utils.misc;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import net.ccbluex.liquidbounce.LiquidBounce;
+import org.apache.commons.io.FileUtils;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
-import java.net.URLConnection;
+import java.io.*;
+import java.net.*;
 
 public class HttpUtils {
+
+    public HttpUtils(){
+        HttpURLConnection.setFollowRedirects(true);
+    }
+
+    private static HttpURLConnection make(String url, String method, String agent) throws IOException {
+        HttpURLConnection httpConnection = (HttpURLConnection) (new URL(url)).openConnection();
+        httpConnection.setRequestMethod(method);
+        httpConnection.setConnectTimeout(2000);
+        httpConnection.setReadTimeout(10000);
+        httpConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+        httpConnection.setInstanceFollowRedirects(true);
+        httpConnection.setDoOutput(true);
+        return httpConnection;
+    }
+
+    public static String request(String url, String method, String agent) throws IOException {
+        HttpURLConnection connection = make(url, method, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+
+        final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+        final StringBuilder stringBuilder = new StringBuilder();
+        String line;
+        while ((line = bufferedReader.readLine()) != null) {
+            stringBuilder.append(line).append("\n");
+        }
+        bufferedReader.close();
+        return stringBuilder.toString();
+    }
+
+    public static String get(String url) throws IOException {
+        return request(url, "GET",null);
+    }
+
+    public static void download(String url, File file) throws IOException {
+        FileUtils.copyInputStreamToFile(make(url, "GET", null).getInputStream(), file);
+    }
+
     public static String getCurrentVersion() throws Exception {
         URL url = new URL("https://liquidsense.mingerxd.me/version.json");
         URLConnection urlConnection = url.openConnection();
@@ -30,4 +64,5 @@ public class HttpUtils {
         }
         return builder.toString();
     }
+
 }

@@ -13,7 +13,6 @@ import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import net.ccbluex.liquidbounce.event.ClientShutdownEvent;
 import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.features.command.CommandManager;
-import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleManager;
 import net.ccbluex.liquidbounce.features.special.AntiForge;
 import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof;
@@ -28,12 +27,10 @@ import net.ccbluex.liquidbounce.ui.client.neverlose.Main;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.InventoryUtils;
 import net.ccbluex.liquidbounce.utils.RotationUtils;
-import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
+import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 @SideOnly(Side.CLIENT)
 public class LiquidBounce {
@@ -74,7 +71,7 @@ public class LiquidBounce {
         LiquidSense liquidSense = LiquidBounce.liquidSense = new LiquidSense(this);
         liquidSense.onStarting();
 
-        this.fileManager = new FileManager();
+        fileManager = new FileManager();
 
         EventManager eventManager = LiquidBounce.eventManager = new EventManager();
 

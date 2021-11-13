@@ -17,7 +17,7 @@ import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.login.LoginUtils;
 import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.login.UserUtils;
-import net.ccbluex.liquidbounce.utils.misc.HttpUtils;
+import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;

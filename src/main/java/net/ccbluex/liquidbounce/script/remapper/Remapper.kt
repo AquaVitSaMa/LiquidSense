@@ -7,7 +7,7 @@ package net.ccbluex.liquidbounce.script.remapper
 
 import net.ccbluex.liquidbounce.LiquidBounce
 import me.aquavit.liquidsense.utils.client.ClientUtils
-import net.ccbluex.liquidbounce.utils.misc.HttpUtils
+import me.aquavit.liquidsense.utils.misc.HttpUtils
 import java.io.File
 
 /**
