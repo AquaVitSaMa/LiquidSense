@@ -1,34 +1,31 @@
 package me.aquavit.liquidsense.modules.combat
 
 import me.aquavit.liquidsense.modules.misc.Teams
+import me.aquavit.liquidsense.utils.entity.EntityUtils
+import me.aquavit.liquidsense.utils.extensions.PlayerExtensionUtils
+import me.aquavit.liquidsense.utils.misc.RandomUtils
+import me.aquavit.liquidsense.utils.client.RotationUtils
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
+import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot
 import net.ccbluex.liquidbounce.features.module.modules.player.Blink
 import net.ccbluex.liquidbounce.features.module.modules.render.FreeCam
-import me.aquavit.liquidsense.utils.entity.EntityUtils
-import net.ccbluex.liquidbounce.utils.OtherRotationUtils
 import me.aquavit.liquidsense.utils.entity.RaycastUtils
-import net.ccbluex.liquidbounce.utils.RotationUtils
-import me.aquavit.liquidsense.utils.misc.RandomUtils
-import me.aquavit.liquidsense.utils.extensions.PlayerExtensionUtils
 import me.aquavit.liquidsense.utils.timer.MSTimer
 import me.aquavit.liquidsense.utils.timer.TimeUtils
-import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
 import net.ccbluex.liquidbounce.value.IntegerValue
 import net.ccbluex.liquidbounce.value.ListValue
-import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.inventory.GuiContainer
-import net.minecraft.client.gui.inventory.GuiInventory
-import net.minecraft.client.settings.KeyBinding
 import net.minecraft.enchantment.EnchantmentHelper
 import net.minecraft.entity.Entity
 import net.minecraft.entity.EntityLivingBase
+import net.minecraft.entity.boss.EntityWither
 import net.minecraft.entity.item.EntityArmorStand
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.ItemSword
@@ -43,16 +40,11 @@ import java.util.*
 import kotlin.math.max
 import kotlin.math.min
 
-@ModuleInfo(name = "Aura", description = "Automatically attacks targets around you.",
-        category = ModuleCategory.COMBAT, keyBind = Keyboard.KEY_R)
+@ModuleInfo(name = "Aura", description = "Automatically attacks targets around you.", category = ModuleCategory.COMBAT, keyBind = Keyboard.KEY_R)
 class Aura : Module() {
 
-    /**
-     * OPTIONS
-     */
-
-    // CPS - Attack speed
-    private val maxCPS: IntegerValue = object : IntegerValue("MaxCPS", 8, 1, 20) {
+    // 点击速度
+    private val maxCPS: IntegerValue = object : IntegerValue("MaxCPS", 10, 1, 20) {
         override fun onChanged(oldValue: Int, newValue: Int) {
             val i = minCPS.get()
             if (i > newValue) set(i)
@@ -60,8 +52,7 @@ class Aura : Module() {
             attackDelay = TimeUtils.randomClickDelay(minCPS.get(), this.get())
         }
     }
-
-    private val minCPS: IntegerValue = object : IntegerValue("MinCPS", 5, 1, 20) {
+    private val minCPS: IntegerValue = object : IntegerValue("MinCPS", 8, 1, 20) {
         override fun onChanged(oldValue: Int, newValue: Int) {
             val i = maxCPS.get()
             if (i < newValue) set(i)
@@ -69,115 +60,112 @@ class Aura : Module() {
             attackDelay = TimeUtils.randomClickDelay(this.get(), maxCPS.get())
         }
     }
-
+    // 伤害时间
     private val hurtTimeValue = IntegerValue("HurtTime", 10, 0, 10)
-
-    // Range
-    private val rangeValue = FloatValue("Range", 3.7f, 1f, 8f)
-    private var BlockRangeValue = FloatValue("BlockRange", 3f, 0f, 8f)
-    private val throughwallValue = FloatValue("ThroughWallRange", 2f, 0f, 8f)
-    private val rangeSprintReducementValue = FloatValue("RangeSprintReducement", 0f, 0f, 0.4f)
-
-    // Modes
-    private val priorityValue = ListValue("Priority", arrayOf("Health", "Distance", "Direction", "LivingTime"), "Distance")
+    // NCP更多设置
+    private val hitBoxValue = FloatValue("HitBox", 0.4f, 0.0f, 0.4f).displayable{modeValue.get() == "NCP"}
+    // 距离
+    private val rangeValue = FloatValue("Range", 4.6f, 1f, 6f)
+    private val blockRangeValue = FloatValue("BlockRange", 8.0f, 1f, 12f)
+    private val throughWallsRangeValue = FloatValue("ThroughWallsRange", 4.0f, 0f, 6f)
+    // 锁敌模式
+    private val priorityValue = ListValue("Priority", arrayOf("Health", "Distance", "Direction", "LivingTime", "Armor", "HurtTime", "HurtResistantTime"), "Distance")
     private val targetModeValue = ListValue("TargetMode", arrayOf("Single", "Switch", "Multi"), "Switch")
-    private val rotations = ListValue("RotationMode", arrayOf("Vanilla", "Other", "BackTrack"), "BackTrack")
-    private val AutoBlockValue = ListValue("AutoBlockMode", arrayOf("Off", "Vanilla", "Both", "Pos", "Click", "AAC"), "Vanilla")
-    // Bypass
+    // Switch更多设置
+    private val switchDelayValue = IntegerValue("SwitchDelay", 250, 0, 2000).displayable{targetModeValue.get() == "Switch"}
+    // Multi更多设置
+    private val limitedMultiTargetsValue = IntegerValue("LimitedMultiTargets", 0, 0, 50).displayable{targetModeValue.get() == "Multi"}
+    // 摇头速度
+    private val maxTurnSpeed: IntegerValue = object : IntegerValue("MaxTurnSpeed", 180, 0, 180) {
+        override fun onChanged(oldValue: Int, newValue: Int) {
+            val i = minTurnSpeed.get()
+            if (i > newValue) set(i)
+        }
+    }
+    private val minTurnSpeed: IntegerValue = object : IntegerValue("MinTurnSpeed", 180, 0, 180) {
+        override fun onChanged(oldValue: Int, newValue: Int) {
+            val i = maxTurnSpeed.get()
+            if (i < newValue) set(i)
+        }
+    }
+    // 摇头
+    private val rotationMode = ListValue("RotationMode", arrayOf("Vanilla", "RayCast", "BackTrack", "None"), "Vanilla")
+    private val silentRotationValue = BoolValue("SilentRotation", true)
+    private val faceHitableValue = BoolValue("FaceHitable", false).displayable{rotationMode.get() != "None" || !raycastValue.get()}
+    // AAC摇头设置
+    private val rotationStrafeValue = ListValue("Strafe", arrayOf("Off", "Strict", "Silent"), "Off").displayable{modeValue.get() == "AAC"}
+    private val randomCenterValue = BoolValue("RandomCenter", true).displayable{modeValue.get() == "AAC"}
+    private val outborderValue = BoolValue("Outborder", false).displayable{modeValue.get() == "AAC"}
+    private val fovValue = FloatValue("FOV", 180f, 0f, 180f).displayable{modeValue.get() == "AAC"}
+    // 格挡
+    private val AutoBlockValue = ListValue("AutoBlockMode", arrayOf("Off", "Normal", "Pos", "Click", "AfterTick","AAC"), "Normal")
+    // NCP格挡设置
+    private val interactAutoBlockValue = BoolValue("InteractAutoBlock", true).displayable{modeValue.get() == "NCP" && AutoBlockValue.get() != "Off"}
+    // AAC格挡设置
+    private val delayedBlockValue = BoolValue("DelayedBlock", true).displayable{modeValue.get() == "AAC" && AutoBlockValue.get() != "Off"}
+    // 格挡速度
+    private val blockRate = IntegerValue("BlockRate", 100, 1, 100).displayable{AutoBlockValue.get() != "Off"}
+    // 其他设置
     private val swingValue = BoolValue("Swing", true)
     private val keepSprintValue = BoolValue("KeepSprint", true)
-
-    // AutoBlock
-    private var interactAutoBlockValue = BoolValue("InteractAutoBlock", true)
-    private var delayedBlockValue = BoolValue("DelayedBlock", true)
-    private var blockRate = IntegerValue("BlockRate", 100, 1, 100)
-
-    // Raycast
-    private val raycastValue =
-            object : BoolValue("RayCast", true){
-
-    }
-    private val raycastIgnoredValue = BoolValue("RayCastIgnored", false)
-    private val livingRaycastValue = BoolValue("LivingRayCast", true)
-
-    // Bypass
-    private val aacValue = BoolValue("AAC", false)
-    //switchdelay
-    private val switchdelayValue = IntegerValue("SwitchDelay", 10, 0, 100)
-    // Turn Speed
-    private val maxTurnSpeed: FloatValue = object : FloatValue("MaxTurnSpeed", 180f, 0f, 180f) {
-        override fun onChanged(oldValue: Float, newValue: Float) {
-            val v = minTurnSpeed.get()
-            if (v > newValue) set(v)
-        }
-    }
-
-    private val minTurnSpeed: FloatValue = object : FloatValue("MinTurnSpeed", 180f, 0f, 180f) {
-        override fun onChanged(oldValue: Float, newValue: Float) {
-            val v = maxTurnSpeed.get()
-            if (v < newValue) set(v)
-        }
-    }
-
-    private val silentRotationValue = BoolValue("SilentRotation", true)
-    private val rotationStrafeValue = ListValue("Strafe", arrayOf("Off", "OldStrict","NewStrict", "Silent"), "Off")
-    private val randomCenterValue = BoolValue("RandomCenter", true)
-    private val outborderValue = BoolValue("Outborder", false)
-    private val fovValue = FloatValue("FOV", 180f, 0f, 180f)
-
-    // Predict
-    private val predictValue = BoolValue("Predict", true)
-
-    private val maxPredictSize: FloatValue = object : FloatValue("MaxPredictSize", 1f, 0.1f, 5f) {
+    // AAC预测设置
+    private val predictValue = BoolValue("Predict", true).displayable{modeValue.get() == "AAC"}
+    private val maxPredictSize: FloatValue = object : FloatValue("MaxPredictSize", 1f, 0f, 5f) {
         override fun onChanged(oldValue: Float, newValue: Float) {
             val v = minPredictSize.get()
             if (v > newValue) set(v)
         }
-    }
 
-    private val minPredictSize: FloatValue = object : FloatValue("MinPredictSize", 1f, 0.1f, 5f) {
+    }.displayable{modeValue.get() == "AAC" && predictValue.get()} as FloatValue
+    private val minPredictSize: FloatValue = object : FloatValue("MinPredictSize", 1f, 0f, 5f) {
+
         override fun onChanged(oldValue: Float, newValue: Float) {
             val v = maxPredictSize.get()
             if (v < newValue) set(v)
         }
-    }
+    }.displayable{modeValue.get() == "AAC" && predictValue.get()} as FloatValue
+    // AAC更多设置
+    private val raycastValue = BoolValue("RayCast", true).displayable{modeValue.get() == "AAC"}
+    private val raycastIgnoredValue = BoolValue("RayCastIgnored", false).displayable{modeValue.get() == "AAC" && raycastValue.get()}
+    private val livingRaycastValue = BoolValue("LivingRayCast", true).displayable{modeValue.get() == "AAC" && raycastValue.get()}
+    private val fakeSwingValue = BoolValue("FakeSwing", true).displayable{modeValue.get() == "AAC"}
 
-    // Bypass
+    // 其他设置
     private val failRateValue = FloatValue("FailRate", 0f, 0f, 100f)
-    private val fakeSwingValue = BoolValue("FakeSwing", true)
+    private val witherValue = BoolValue("TargetWither", true)
     private val noInventoryAttackValue = BoolValue("NoInvAttack", false)
-    private val noInventoryDelayValue = IntegerValue("NoInvDelay", 200, 0, 500)
-    private val limitedMultiTargetsValue = IntegerValue("LimitedMultiTargets", 0, 0, 50)
+    private val autoDisableValue = BoolValue("AutoDisable", true)
+    // 主绕过设置
+    private val modeValue = ListValue("BypassMode", arrayOf("NCP", "AAC"), "NCP")
 
-    private val fakeSharpValue = BoolValue("FakeSharp", true)
-
-    /**
-     * MODULE
-     */
-
-    // Target
+    // 目标
     var target: EntityLivingBase? = null
     private var currentTarget: EntityLivingBase? = null
+    private var useItemEntity: EntityLivingBase? = null
     private var hitable = false
     private val prevTargetEntities = mutableListOf<Int>()
-
-    // Attack delay
-    private val attackTimer = MSTimer()
-    private var attackDelay = 0L
-    private var clicks = 0
     private var flag = false
 
-
-    var Rotationhit = false;
-    val Timer = MSTimer()
-    // Container Delay
-    private var containerOpen = -1L
+    // 攻击延迟
+    private val attackTimer = MSTimer()
+    private val switchDelay = MSTimer()
+    private var attackDelay = 0L
+    private var clicks = 0
 
     // Fake block status
     var blockingStatus = false
 
+    // 凋零
+    private var preBoss : EntityLivingBase? = null
+    private var boss = false
+
+    //懒狗
+    val aacMode = modeValue.get().equals("AAC", ignoreCase = true)
+    val turnSpeed = (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat()
+
+
     /**
-     * Enable kill aura module
+     * Enable killAura module
      */
     override fun onEnable() {
         mc.thePlayer ?: return
@@ -187,7 +175,7 @@ class Aura : Module() {
     }
 
     /**
-     * Disable kill aura module
+     * Disable killAura module
      */
     override fun onDisable() {
         target = null
@@ -206,6 +194,10 @@ class Aura : Module() {
     @EventTarget
     fun onMotion(event: MotionEvent) {
         if (event.eventState == EventState.POST) {
+
+            if (autoDisableValue.get() && (mc.thePlayer!!.isDead || mc.thePlayer!!.ticksExisted <= 1))
+                state = false
+
             target ?: return
             currentTarget ?: return
 
@@ -213,14 +205,27 @@ class Aura : Module() {
             updateHitable()
 
             // AutoBlock
-            if (!AutoBlockValue.get().equals("Off", ignoreCase = true) && delayedBlockValue.get() && canBlock)
-                startBlocking(currentTarget!!, hitable)
+            if (useItemEntity != null) {
+                // AutoBlock 防砍
+                if (AutoBlockValue.get().equals("AfterTick", true) && canBlock)
+                    startBlocking(currentTarget!!,hitable)
 
-            return
+                // Start blocking after attack 攻击之后开始防砍
+                if (AutoBlockValue.get().equals("Packet", true) && !blockingStatus && canBlock) {
+                    startBlocking(useItemEntity!!,hitable)
+                }
+            }
+
+            if(target != null && currentTarget != null && attackTimer.hasTimePassed(TimeUtils.randomClickDelay(maxCPS.get(), minCPS.get())) && currentTarget!!.hurtTime <= 10) {
+                clicks++
+                attackTimer.reset()
+            }
+        } else {
+            if (!aacMode || rotationStrafeValue.get().equals("Off", true))
+                update()
+
+            useItemEntity = addtarget()
         }
-
-        if (rotationStrafeValue.get().equals("Off", true))
-            update()
     }
 
     /**
@@ -228,7 +233,7 @@ class Aura : Module() {
      */
     @EventTarget
     fun onStrafe(event: StrafeEvent) {
-        if (rotationStrafeValue.get().equals("Off", true))
+        if (!aacMode || rotationStrafeValue.get().equals("Off", true))
             return
 
         update()
@@ -237,7 +242,7 @@ class Aura : Module() {
             return
 
         when (rotationStrafeValue.get().toLowerCase()) {
-            "newstrict" -> {
+            "strict" -> {
                 currentTarget ?: return
 
                 val (yaw) = RotationUtils.targetRotation ?: return
@@ -263,35 +268,6 @@ class Aura : Module() {
                     mc.thePlayer.motionX += strafe * yawCos - forward * yawSin
                     mc.thePlayer.motionZ += forward * yawCos + strafe * yawSin
                 }
-                event.cancelEvent()
-            }
-            "oldstrict" -> {
-                currentTarget ?: return
-
-                val (yaw) = RotationUtils.targetRotation ?: return
-                var strafe = event.strafe
-                var forward = event.forward
-                val friction = event.friction
-
-                var f = strafe * strafe + forward * forward
-
-                if (f >= 1.0E-4F) {
-                    f = MathHelper.sqrt_float(f)
-
-                    if (f < 1.0F)
-                        f = 1.0F
-
-                    f = friction / f
-                    strafe *= f
-                    forward *= f
-
-                    val yawSin = MathHelper.sin((yaw * Math.PI / 180F).toFloat())
-                    val yawCos = MathHelper.cos((yaw * Math.PI / 180F).toFloat())
-
-                    mc.thePlayer.motionX += strafe * yawCos - forward * yawSin
-                    mc.thePlayer.motionZ += forward * yawCos + strafe * yawSin
-                }
-
                 event.cancelEvent()
             }
             "silent" -> {
@@ -305,9 +281,186 @@ class Aura : Module() {
         }
     }
 
+    /**
+     * Update event
+     */
+    @EventTarget
+    fun onUpdate(event: UpdateEvent) {
+        if(AutoBlockValue.get().equals("AAC", ignoreCase = true) && mc.thePlayer.heldItem.item is ItemSword) return
+        if (cancelRun) {
+            target = null
+            currentTarget = null
+            hitable = false
+            stopBlocking()
+            return
+        }
+
+        if (noInventoryAttackValue.get() && mc.currentScreen is GuiContainer) {
+            target = null
+            currentTarget = null
+            hitable = false
+            return
+        }
+
+        if (target != null && currentTarget != null) {
+            while (clicks > 0) {
+                runAttack()
+                clicks--
+            }
+        }
+    }
+
+    /**
+     * Attack enemy 发起进攻~
+     */
+    private fun runAttack() {
+        target ?: return
+        currentTarget ?: return
+
+        val thePlayer = mc.thePlayer ?: return
+        val theWorld = mc.theWorld ?: return
+
+        // Settings 设置
+        val failRate = failRateValue.get()
+        val swing = swingValue.get()
+        val multi = targetModeValue.get().equals("Multi", ignoreCase = true)
+        val switchmode = targetModeValue.get().equals("Switch", ignoreCase = true)
+        val openInventory = aacMode && mc.currentScreen is GuiContainer
+        val failHit = failRate > 0 && Random().nextInt(100) <= failRate
+
+        // Close inventory when open 打开杀戮时关闭背包
+        if (openInventory)
+            mc.netHandler.addToSendQueue(C0EPacketClickWindow())
+
+        // Check is not hitable or check failrate 检测是否可以攻击和空刀率
+        if (!hitable || failHit) {
+            if (swing && (fakeSwingValue.get() || failHit)) mc.thePlayer.swingItem()
+        } else {
+            // Attack 攻击
+            if (!multi) {
+                attackEntity(currentTarget!!)
+            } else {
+                var targets = 0
+
+                for (entity in theWorld.loadedEntityList) {
+                    val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
+
+                    if (entity is EntityLivingBase && isEnemy(entity) && distance <= getRange(entity)) {
+                        attackEntity(entity)
+
+                        targets += 1
+
+                        if (limitedMultiTargetsValue.get() != 0 && limitedMultiTargetsValue.get() <= targets)
+                            break
+                    }
+                }
+            }
+
+            if (switchmode) {
+                if (switchDelay.hasTimePassed(switchDelayValue.get().toLong())) {
+                    if (switchDelayValue.get() != 0) {
+                        prevTargetEntities.add(if (aacMode) target!!.entityId else currentTarget!!.entityId)
+                        switchDelay.reset()
+                    }
+                }
+                /*if (target == currentTarget)
+                    target = null*/
+            } else {
+                prevTargetEntities.add(if (aacMode) target!!.entityId else currentTarget!!.entityId)
+            }
+        }
+
+        // Open inventory
+        if (openInventory)
+            mc.netHandler.addToSendQueue(C16PacketClientStatus(C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT))
+    }
+
+    /**
+     * Attack [entity] 攻击实体
+     */
+    private fun attackEntity(entity: EntityLivingBase) {
+        // Stop blocking 停止防砍
+
+        if (mc.thePlayer!!.isBlocking || blockingStatus)
+            stopBlocking()
+
+        val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
+
+        if (hitable && distance < rangeValue.get()) {
+            // Call attack event 调用攻击事件
+            LiquidBounce.eventManager.callEvent(AttackEvent(entity))
+
+            // Attack target
+            if (swingValue.get())
+                mc.thePlayer.swingItem()
+            mc.netHandler.addToSendQueue(C02PacketUseEntity(entity, C02PacketUseEntity.Action.ATTACK))
+
+            if (keepSprintValue.get()) {
+                // Critical Effect
+                if (mc.thePlayer.fallDistance > 0F && !mc.thePlayer.onGround && !mc.thePlayer.isOnLadder &&
+                        !mc.thePlayer.isInWater && !mc.thePlayer.isPotionActive(Potion.blindness) && !mc.thePlayer.isRiding)
+                    mc.thePlayer.onCriticalHit(entity)
+
+                // Enchant Effect
+                if (EnchantmentHelper.getModifierForCreature(mc.thePlayer.heldItem, entity.creatureAttribute) > 0F)
+                    mc.thePlayer.onEnchantmentCritical(entity)
+            } else {
+                if (mc.playerController.currentGameType != WorldSettings.GameType.SPECTATOR)
+                    mc.thePlayer.attackTargetEntityWithCurrentItem(entity)
+            }
+
+            // Extra critical effects
+            val criticals = LiquidBounce.moduleManager[Criticals::class.java] as Criticals
+
+            for (i in 0..2) {
+                // Critical Effect
+                if (mc.thePlayer.fallDistance > 0F && !mc.thePlayer.onGround && !mc.thePlayer.isOnLadder && !mc.thePlayer.isInWater && !mc.thePlayer.isPotionActive(Potion.blindness) && mc.thePlayer.ridingEntity == null || criticals.state && criticals.msTimer.hasTimePassed(criticals.delayValue.get().toLong()) && !mc.thePlayer.isInWater && !mc.thePlayer.isInLava && !mc.thePlayer.isInWeb)
+                    mc.thePlayer.onCriticalHit(target)
+
+                // Extra critical effects 更多的暴击粒子
+                if (EnchantmentHelper.getModifierForCreature(mc.thePlayer.heldItem, target!!.creatureAttribute) > 0.0f)
+                    mc.thePlayer.onEnchantmentCritical(target)
+            }
+        }
+
+        // Start blocking after attack
+        if (mc.thePlayer.isBlocking || (!AutoBlockValue.get().equals("Off", ignoreCase = true) && canBlock)) {
+            if (!(blockRate.get() > 0 && Random().nextInt(100) <= blockRate.get()))
+                return
+
+            if (aacMode && delayedBlockValue.get())
+                return
+
+            startBlocking(entity, !aacMode && interactAutoBlockValue.get())
+        }
+    }
+
+    /**
+     * Add target 添加目标
+     */
+    private fun addtarget(): EntityLivingBase? {
+        // Find possible targets 寻找可能的目标
+        val targets = mutableListOf<EntityLivingBase>()
+
+        targets.clear()
+
+        for (entity in mc.theWorld!!.loadedEntityList) {
+            if (entity !is EntityLivingBase || !isEnemy(entity))
+                continue
+
+            if (mc.thePlayer!!.getDistanceToEntity(entity) <= blockRangeValue.get()) {
+                targets.add(entity)
+                useItemEntity = entity
+            }
+        }
+
+        return if (targets.isEmpty()) {
+            null
+        } else targets[0]
+    }
+
     fun update() {
-        if (cancelRun || (noInventoryAttackValue.get() && (mc.currentScreen is GuiContainer ||
-                        System.currentTimeMillis() - containerOpen < noInventoryDelayValue.get())))
+        if (cancelRun || (noInventoryAttackValue.get() && mc.currentScreen is GuiContainer))
             return
 
         // Update target
@@ -326,159 +479,76 @@ class Aura : Module() {
     }
 
     /**
-     * Update event
+     * Check if enemy is hitable with current rotations 检测敌人是否是当前摇头可攻击的
      */
-    @EventTarget
-    fun onUpdate(event: UpdateEvent) {
-        if(AutoBlockValue.get().equals("AAC", ignoreCase = true) && mc.thePlayer.heldItem.item is ItemSword) return
-        if (cancelRun) {
-            target = null
-            currentTarget = null
-            hitable = false
-            stopBlocking()
+    private fun updateHitable() {
+        if (maxTurnSpeed.get() <= 0F) {
+            hitable = true
             return
         }
 
-        if (noInventoryAttackValue.get() && (mc.currentScreen is GuiContainer ||
-                        System.currentTimeMillis() - containerOpen < noInventoryDelayValue.get())) {
-            target = null
-            currentTarget = null
-            hitable = false
-            if (mc.currentScreen is GuiContainer) containerOpen = System.currentTimeMillis()
-            return
-        }
+        val reach = if (aacMode) min(maxRange.toDouble(), PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, target!!)) + 1.4 else
+            min(maxRange.toDouble(), PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, target!!) + hitBoxValue.get()) + 1
 
-        if (target != null && currentTarget != null) {
-            while (clicks > 0) {
-                runAttack()
-                clicks--
+        if (aacMode && raycastValue.get()) {
+            val raycastedEntity = RaycastUtils.raycastEntity(reach) {
+                (!livingRaycastValue.get() || it is EntityLivingBase && it !is EntityArmorStand) &&
+                        (isEnemy(it) || raycastIgnoredValue.get() || aacMode && mc.theWorld.getEntitiesWithinAABBExcludingEntity(it, it.entityBoundingBox).isNotEmpty())
             }
-        }
-    }
 
-    /**
-     * Render event
-     */
-    @EventTarget
-    fun onRender3D(event: Render3DEvent) {
-        if (cancelRun) {
-            target = null
-            currentTarget = null
-            hitable = false
-            stopBlocking()
-            return
-        }
+            if (raycastValue.get() && raycastedEntity is EntityLivingBase
+                    && (LiquidBounce.moduleManager[NoFriends::class.java]!!.state || !EntityUtils.isFriend(raycastedEntity)))
+                currentTarget = raycastedEntity
 
-        if (noInventoryAttackValue.get() && (mc.currentScreen is GuiContainer ||
-                        System.currentTimeMillis() - containerOpen < noInventoryDelayValue.get())) {
-            target = null
-            currentTarget = null
-            hitable = false
-            if (mc.currentScreen is GuiContainer) containerOpen = System.currentTimeMillis()
-            return
-        }
-
-        target ?: return
-
-        if (currentTarget != null && attackTimer.hasTimePassed(attackDelay) &&
-                currentTarget!!.hurtTime <= hurtTimeValue.get()) {
-            clicks++
-            attackTimer.reset()
-            attackDelay = TimeUtils.randomClickDelay(minCPS.get(), maxCPS.get())
-        }
-    }
-
-    /**
-     * Handle entity move
-     */
-    @EventTarget
-    fun onEntityMove(event: EntityMovementEvent) {
-        val movedEntity = event.movedEntity
-
-        if (target == null || movedEntity != currentTarget)
-            return
-
-        updateHitable()
-    }
-
-    /**
-     * Attack enemy
-     */
-    private fun runAttack() {
-        target ?: return
-        currentTarget ?: return
-
-        // Settings
-        val failRate = failRateValue.get()
-        val swing = swingValue.get()
-        val multi = targetModeValue.get().equals("Multi", ignoreCase = true)
-        val switchmode = targetModeValue.get().equals("Switch", ignoreCase = true)
-        val openInventory = aacValue.get() && mc.currentScreen is GuiInventory
-        val failHit = failRate > 0 && Random().nextInt(100) <= failRate
-
-        // Close inventory when open
-        if (openInventory)
-            mc.netHandler.addToSendQueue(C0DPacketCloseWindow())
-
-        // Check is not hitable or check failrate
-        if (!hitable || failHit) {
-            if (swing && (fakeSwingValue.get() || failHit)) mc.thePlayer.swingItem()
+            hitable = if (maxTurnSpeed.get() > 0F) currentTarget == raycastedEntity else true
         } else {
-            // Attack
-            if (!multi) {
-                attackEntity(currentTarget!!)
-            } else {
-                var targets = 0
+            when (rotationMode.get()) {
+                "Normal" -> {
+                    hitable = if (!faceHitableValue.get()) true else RotationUtils.isFaced(currentTarget, reach)
+                }
 
-                for (entity in mc.theWorld.loadedEntityList) {
-                    val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
-
-                    if (entity is EntityLivingBase && isEnemy(entity) && distance <= getRange(entity)) {
-                        attackEntity(entity)
-
-                        targets += 1
-
-                        if (limitedMultiTargetsValue.get() != 0 && limitedMultiTargetsValue.get() <= targets)
-                            break
+                "RayCast" -> {
+                    val raycastedEntity = RaycastUtils.raycastEntity(reach) {
+                        (it is EntityLivingBase && it !is EntityArmorStand) && (isEnemy(it) || aacMode && mc.theWorld.getEntitiesWithinAABBExcludingEntity(it, it.entityBoundingBox).isNotEmpty())
                     }
+
+                    if (raycastedEntity is EntityLivingBase
+                            && (LiquidBounce.moduleManager[NoFriends::class.java]!!.state || !EntityUtils.isFriend(raycastedEntity)))
+                        currentTarget = raycastedEntity
+
+                    hitable = if (!faceHitableValue.get()) true else RotationUtils.isFaced(currentTarget, reach)
                 }
-            }
-            if (switchmode) {
-                if(Timer.hasTimePassed((switchdelayValue.get() * 10).toLong()) && (this.switchdelayValue.get()) != 10){
-                    prevTargetEntities.add(if (aacValue.get()) target!!.entityId else currentTarget!!.entityId)
-                }
-                /*if (target == currentTarget)
-                    target = null*/
-            } else {
-                prevTargetEntities.add(if (aacValue.get()) target!!.entityId else currentTarget!!.entityId)
-            }
-            Timer.reset()
 
 
+
+                else -> hitable = true
+            }
         }
-
-        // Open inventory
-        if (openInventory)
-            mc.netHandler.addToSendQueue(C16PacketClientStatus(C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT))
     }
 
     /**
-     * Update current target
+     * Update current target 更新当前的目标
      */
     private fun updateTarget() {
-        // Reset fixed target to null
+        // Reset fixed target to null 将固定目标重置为空
         target = null
 
-        // Settings
+        // Settings 设置
         val hurtTime = hurtTimeValue.get()
         val fov = fovValue.get()
-        val switchMode = targetModeValue.get().equals("Switch", ignoreCase = true)
 
-        // Find possible targets
+        // Find possible targets 寻找可能的目标
         val targets = mutableListOf<EntityLivingBase>()
 
-        for (entity in mc.theWorld.loadedEntityList) {
-            if (entity !is EntityLivingBase || !isEnemy(entity) || (switchMode && prevTargetEntities.contains(entity.entityId)))
+
+        val theWorld = mc.theWorld!!
+        val thePlayer = mc.thePlayer!!
+
+        for (entity in theWorld.loadedEntityList) {
+            if (entity is EntityWither)
+                preBoss = entity
+
+            if (entity !is EntityLivingBase || !isEnemy(entity) ||  if(boss) false else (targetModeValue.get().equals("Switch", ignoreCase = true) && prevTargetEntities.contains(entity.entityId)))
                 continue
 
             val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
@@ -486,28 +556,52 @@ class Aura : Module() {
 
             if (distance <= maxRange && (fov == 180F || entityFov <= fov) && entity.hurtTime <= hurtTime)
                 targets.add(entity)
+
+            if(entity is EntityWither) {
+                if (if (aacMode) distance <= maxRange - 1 && (fov == 180F || entityFov <= fov) && entity.hurtTime <= hurtTime
+                        else distance <= maxRange - 1 && entity.hurtTime <= hurtTime) targets.add(entity)
+            } else {
+                if (if (aacMode) distance <= maxRange && (fov == 180F || entityFov <= fov) && entity.hurtTime <= hurtTime
+                        else distance <= maxRange && entity.hurtTime <= hurtTime) {
+                    targets.add(entity)
+                } else {
+                    preBoss = null
+                }
+            }
+
+            boss = if (witherValue.get()) targets.contains(preBoss) else false
         }
 
-        // Sort targets by priority
+        // Sort targets by priority 使用优先级整理目标
         when (priorityValue.get().toLowerCase()) {
-            "distance" -> targets.sortBy { PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, it) } // Sort by distance
-            "health" -> targets.sortBy { it.health } // Sort by health
-            "direction" -> targets.sortBy { RotationUtils.getRotationDifference(it) } // Sort by FOV
-            "livingtime" -> targets.sortBy { -it.ticksExisted } // Sort by existence
+            "distance" -> targets.sortBy { PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, it) }
+            "health" -> targets.sortBy { it.health }
+            "direction" -> targets.sortBy { RotationUtils.getRotationDifference(it) }
+            "armor" -> targets.sortBy { it.totalArmorValue }
+            "hurttime" -> targets.sortBy { it.hurtTime }
+            "hurtresistanttime" -> targets.sortBy { it.hurtResistantTime }
+            "livingtime" -> targets.sortBy { -it.ticksExisted }
         }
 
-        // Find best target
+        // Find best target 寻找最好的目标
         for (entity in targets) {
-            // Update rotations to current target
-            if (!updateRotations(entity)) // when failed then try another target
-                continue
-
+            val distance = PlayerExtensionUtils.getDistanceToEntityBox(thePlayer, entity)
             // Set target to current entity
-            target = entity
-            return
+            // target = entity
+            if (boss && witherValue.get()) {
+                if(distance <= maxRange - 1 && preBoss !=null) {
+                    updateRotations(preBoss as EntityWither)
+                    target = preBoss
+                    return
+                }
+            } else {
+                updateRotations(entity)
+                target = entity
+                return
+            }
         }
 
-        // Cleanup last targets when no target found and try again
+        // Cleanup last targets when no target found and try again 未找到目标时清除最后一个目标，然后重试
         if (prevTargetEntities.isNotEmpty()) {
             prevTargetEntities.clear()
             updateTarget()
@@ -515,7 +609,68 @@ class Aura : Module() {
     }
 
     /**
-     * Check if [entity] is selected as enemy with current target options and other modules
+     * Update killAura rotations to enemy 设置杀戮摇头到可攻击实体
+     */
+    private fun updateRotations(entity: Entity): Boolean {
+        var boundingBox = entity.entityBoundingBox
+
+        if (maxTurnSpeed.get() <= 0F)
+            return true
+
+        if (aacMode && predictValue.get())
+            boundingBox = boundingBox.offset(
+                    (entity.posX - entity.prevPosX) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get()),
+                    (entity.posY - entity.prevPosY) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get()),
+                    (entity.posZ - entity.prevPosZ) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get())
+            )
+
+        val (_, rotation) = if (aacMode) RotationUtils.searchCenterAAC(
+                boundingBox,
+                outborderValue.get() && !attackTimer.hasTimePassed(attackDelay / 2),
+                randomCenterValue.get(),
+                predictValue.get(),
+                PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) < throughWallsRangeValue.get(),
+                maxRange) ?: return false
+        else RotationUtils.searchCenterNCP(boundingBox,
+                PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) < throughWallsRangeValue.get(), maxRange)
+                ?: return false
+
+        when (rotationMode.get()) {
+            "Vanilla" -> {
+                val limitedRotation = RotationUtils.limitAngleChange(RotationUtils.serverRotation, rotation, turnSpeed)
+
+                if (silentRotationValue.get()) {
+                    RotationUtils.setTargetRotation(limitedRotation,if(aacMode)15 else 0)
+                } else limitedRotation.toPlayer(mc.thePlayer!!)
+            }
+
+            "RayCast" -> {
+                val raycastedEntity = RotationUtils.isFaced(entity, maxRange.toDouble())
+                val limitedRotation = RotationUtils.limitAngleChange(RotationUtils.serverRotation, rotation, if (raycastedEntity) 0f else turnSpeed)
+
+                if (silentRotationValue.get()) {
+                    RotationUtils.setTargetRotation(limitedRotation,if(aacMode)15 else 0)
+                } else limitedRotation.toPlayer(mc.thePlayer!!)
+            }
+
+            "BackTrack" -> {
+                val limitedRotation = RotationUtils.limitAngleChange(RotationUtils.serverRotation,
+                        RotationUtils.OtherRotation(boundingBox, RotationUtils.getCenter(entity.entityBoundingBox),
+                                PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) < throughWallsRangeValue.get(), maxRange), turnSpeed)
+
+                if (silentRotationValue.get()) {
+                    RotationUtils.setTargetRotation(limitedRotation,if(aacMode)15 else 0)
+                } else limitedRotation.toPlayer(mc.thePlayer!!)
+            }
+
+
+        }
+
+        return true
+    }
+
+    /**
+     * Check if [entity] is selected as enemy with current target options and other modules 检测实体是否应该攻击
      */
     private fun isEnemy(entity: Entity?): Boolean {
         if (entity is EntityLivingBase && (EntityUtils.targetDead || isAlive(entity)) && entity != mc.thePlayer) {
@@ -534,242 +689,26 @@ class Aura : Module() {
                 return !teams.state || !Teams.isInYourTeam(entity)
             }
 
-            return EntityUtils.targetMobs && EntityUtils.isMob(entity) || EntityUtils.targetAnimals &&
-                    EntityUtils.isAnimal(entity)
+            if (entity is EntityWither) {
+                return witherValue.get()
+            }
+
+            return EntityUtils.targetMobs && EntityUtils.isMob(entity) || EntityUtils.targetAnimals && EntityUtils.isAnimal(entity)
         }
 
         return false
     }
 
     /**
-     * Attack [entity]
+     * Check if run should be cancelled 检测是否应该取消攻击
      */
-    private fun attackEntity(entity: EntityLivingBase) {
-        if (rotations.get().equals("Other", ignoreCase = true)){
-            // Stop blocking
-
-            val distance = Minecraft.getMinecraft().thePlayer.getDistanceToEntity(entity)
-            if (distance <= rangeValue.get() && Rotationhit && hitable) {
-                //
-                if (mc.thePlayer.isBlocking|| blockingStatus) {
-                    if (AutoBlockValue.get().equals("Click", ignoreCase = true)) {
-                        KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), false)
-                    } else if (AutoBlockValue.get().equals("AAC", ignoreCase = true) && mc.thePlayer.heldItem.item is ItemSword) {
-                        mc.gameSettings.keyBindUseItem.pressed = false
-                    } else {
-                        mc.netHandler.addToSendQueue(C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN))
-                    }
-                    blockingStatus = false
-                }
-                // Call attack event
-                LiquidBounce.eventManager.callEvent(AttackEvent(entity))
-                // Attack target
-                if (swingValue.get())
-                    mc.thePlayer.swingItem()
-                mc.netHandler.addToSendQueue(C02PacketUseEntity(entity, C02PacketUseEntity.Action.ATTACK))
-
-                // Extra critical effects
-                if (EnchantmentHelper.getModifierForCreature(mc.thePlayer.heldItem, target!!.creatureAttribute) > 0.0f || fakeSharpValue.get())
-                    mc.thePlayer.onEnchantmentCritical(target)
-                if (mc.thePlayer.isBlocking || (!AutoBlockValue.get().equals("Off", ignoreCase = true) && canBlock)) {
-                    if (!(blockRate.get() > 0 && Random().nextInt(100) <= blockRate.get()))
-                        return
-
-                    if (delayedBlockValue.get())
-                        return
-                    startBlocking(entity, interactAutoBlockValue.get())
-                }
-            }
-        } else {
-            // Stop blocking
-            if (mc.thePlayer.isBlocking || blockingStatus) {
-                if (AutoBlockValue.get().equals("Click", ignoreCase = true)) {
-                    KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), false)
-                } else if (AutoBlockValue.get().equals("AAC", ignoreCase = true) && mc.thePlayer.heldItem.item is ItemSword) {
-                    mc.gameSettings.keyBindUseItem.pressed = false
-                } else {
-                    mc.netHandler.addToSendQueue(C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN))
-                }
-
-                blockingStatus = false
-            }
-            val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
-
-            if (hitable && distance < rangeValue.get()) {
-                // Call attack event
-                LiquidBounce.eventManager.callEvent(AttackEvent(entity))
-
-                // Attack target
-                if (swingValue.get())
-                    mc.thePlayer.swingItem()
-                mc.netHandler.addToSendQueue(C02PacketUseEntity(entity, C02PacketUseEntity.Action.ATTACK))
-
-                if (keepSprintValue.get()) {
-                    // Critical Effect
-                    if (mc.thePlayer.fallDistance > 0F && !mc.thePlayer.onGround && !mc.thePlayer.isOnLadder &&
-                            !mc.thePlayer.isInWater && !mc.thePlayer.isPotionActive(Potion.blindness) && !mc.thePlayer.isRiding)
-                        mc.thePlayer.onCriticalHit(entity)
-
-                    // Enchant Effect
-                    if (EnchantmentHelper.getModifierForCreature(mc.thePlayer.heldItem, entity.creatureAttribute) > 0F)
-                        mc.thePlayer.onEnchantmentCritical(entity)
-                } else {
-                    if (mc.playerController.currentGameType != WorldSettings.GameType.SPECTATOR)
-                        mc.thePlayer.attackTargetEntityWithCurrentItem(entity)
-                }
-
-                // Extra critical effects
-                val criticals = LiquidBounce.moduleManager[Criticals::class.java] as Criticals
-
-                for (i in 0..2) {
-                    // Critical Effect
-                    if (mc.thePlayer.fallDistance > 0F && !mc.thePlayer.onGround && !mc.thePlayer.isOnLadder && !mc.thePlayer.isInWater && !mc.thePlayer.isPotionActive(Potion.blindness) && mc.thePlayer.ridingEntity == null || criticals.state && criticals.msTimer.hasTimePassed(criticals.delayValue.get().toLong()) && !mc.thePlayer.isInWater && !mc.thePlayer.isInLava && !mc.thePlayer.isInWeb)
-                        mc.thePlayer.onCriticalHit(target)
-
-                    // Enchant Effect
-                    if (EnchantmentHelper.getModifierForCreature(mc.thePlayer.heldItem, target!!.creatureAttribute) > 0.0f || fakeSharpValue.get())
-                        mc.thePlayer.onEnchantmentCritical(target)
-                }
-            }
-            // Start blocking after attack
-            if (mc.thePlayer.isBlocking || (!AutoBlockValue.get().equals("Off", ignoreCase = true) && canBlock)) {
-                if (!(blockRate.get() > 0 && Random().nextInt(100) <= blockRate.get()))
-                    return
-
-                if (delayedBlockValue.get())
-                    return
-
-                startBlocking(entity, interactAutoBlockValue.get())
-            }
-        }
-    }
+    private val cancelRun: Boolean
+        inline get() = mc.thePlayer!!.isSpectator || !isAlive(mc.thePlayer!!)
+                || LiquidBounce.moduleManager[Blink::class.java]!!.state ||
+                LiquidBounce.moduleManager[FreeCam::class.java]!!.state
 
     /**
-     * Update killaura rotations to enemy
-     */
-    private fun updateRotations(entity: Entity): Boolean {
-        var boundingBox = entity.entityBoundingBox
-
-        if (rotations.get().equals("Vanilla", ignoreCase = true)) {
-            if (maxTurnSpeed.get() <= 0F)
-                return true
-
-            var boundingBox = entity.entityBoundingBox
-
-            if (predictValue.get())
-                boundingBox = boundingBox.offset(
-                        (entity.posX - entity.prevPosX) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get()),
-                        (entity.posY - entity.prevPosY) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get()),
-                        (entity.posZ - entity.prevPosZ) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get())
-                )
-
-            val (vec, rotation) = RotationUtils.searchCenter(
-                    boundingBox,
-                    outborderValue.get() && !attackTimer.hasTimePassed(attackDelay / 2),
-                    randomCenterValue.get(),
-                    predictValue.get(),
-                    PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) < throughwallValue.get(),
-                    maxRange
-            ) ?: return false
-
-            val limitedRotation = RotationUtils.limitAngleChange(RotationUtils.serverRotation, rotation,
-                    (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat())
-
-            val distance = PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity)
-
-            if (distance < rangeValue.get()) {
-                if (silentRotationValue.get())
-                    RotationUtils.setTargetRotation(limitedRotation, if (aacValue.get()) 15 else 0)
-                else
-                    limitedRotation.toPlayer(mc.thePlayer)
-            }
-
-            return true
-        }
-
-        if (rotations.get().equals("BackTrack", ignoreCase = true)) {
-            if (predictValue.get())
-                boundingBox = boundingBox.offset(
-                        (entity.posX - entity.prevPosX) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get()),
-                        (entity.posY - entity.prevPosY) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get()),
-                        (entity.posZ - entity.prevPosZ) * RandomUtils.nextFloat(minPredictSize.get(), maxPredictSize.get())
-                )
-
-            val limitedRotation = RotationUtils.limitAngleChange(RotationUtils.serverRotation,
-                    RotationUtils.OtherRotation(boundingBox,RotationUtils.getCenter(entity.entityBoundingBox), predictValue.get(),
-                            PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) < throughwallValue.get(),maxRange), (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat())
-
-            if (silentRotationValue.get()) {
-                RotationUtils.setTargetRotation(limitedRotation, if (aacValue.get()) 15 else 0)
-            }else {
-                limitedRotation.toPlayer(mc.thePlayer)
-                return true
-            }
-        }
-        if (rotations.get().equals("Other", ignoreCase = true)){
-            val distance = mc.thePlayer.getDistanceToEntity(entity)
-            val (vec, rotation) = OtherRotationUtils.searchCenter(
-                    boundingBox,
-                    outborderValue.get() && !attackTimer.hasTimePassed(attackDelay / 2),
-                    randomCenterValue.get(),
-                    predictValue.get(),
-                    PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) < throughwallValue.get(),
-                    maxRange
-            ) ?: return false
-
-            val limitedRotation = RotationUtils.limitAngleChange(RotationUtils.serverRotation, rotation,
-                    (Math.random() * (maxTurnSpeed.get() - minTurnSpeed.get()) + minTurnSpeed.get()).toFloat())
-
-            if((limitedRotation.yaw  <= 5  || limitedRotation.pitch  <= 5)
-                    || (limitedRotation.pitch  >= -5 || limitedRotation.pitch  >= -5))
-                Rotationhit = true
-            else
-                Rotationhit = false
-
-            if(distance <= rangeValue.get()) {
-                if (silentRotationValue.get())
-                    RotationUtils.setTargetRotation(limitedRotation, if (aacValue.get()) 15 else 0)
-                else
-                    limitedRotation.toPlayer(mc.thePlayer)
-
-                return  true
-            }
-            return  Rotationhit
-        }
-
-        return true
-
-    }
-
-    /**
-     * Check if enemy is hitable with current rotations
-     */
-    private fun updateHitable() {
-        // Disable hitable check if turn speed is zero
-        if (maxTurnSpeed.get() <= 0F) {
-            hitable = true
-            return
-        }
-
-        val reach = min(maxRange.toDouble(), PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, target!!)) + 1.4
-
-        if (raycastValue.get()) {
-            val raycastedEntity = RaycastUtils.raycastEntity(reach) {
-                (!livingRaycastValue.get() || it is EntityLivingBase && it !is EntityArmorStand) &&
-                        (isEnemy(it) || raycastIgnoredValue.get() || aacValue.get() && mc.theWorld.getEntitiesWithinAABBExcludingEntity(it, it.entityBoundingBox).isNotEmpty())
-            }
-
-            if (raycastValue.get() && raycastedEntity is EntityLivingBase
-                    && (LiquidBounce.moduleManager[NoFriends::class.java]!!.state || !EntityUtils.isFriend(raycastedEntity)))
-                currentTarget = raycastedEntity
-
-            hitable = if (maxTurnSpeed.get() > 0F) currentTarget == raycastedEntity else true
-        } else
-            hitable = RotationUtils.isFaced(currentTarget, reach)
-    }
-
-    /**
-     * Start blocking
+     * Start blocking 开始格挡
      */
     private fun startBlocking(interactEntity: Entity, interact: Boolean) {
         if (interact) {
@@ -777,31 +716,20 @@ class Aura : Module() {
             mc.netHandler.addToSendQueue(C02PacketUseEntity(interactEntity, C02PacketUseEntity.Action.INTERACT))
         }
 
-        if (AutoBlockValue.get().equals("AAC", ignoreCase = true) && mc.thePlayer.heldItem.item is ItemSword) {
-            mc.gameSettings.keyBindUseItem.pressed = true
-            blockingStatus = true
-            return
+        when (AutoBlockValue.get().toLowerCase()){
+            "normal", "aftertick" -> mc.netHandler.addToSendQueue(C08PacketPlayerBlockPlacement(mc.thePlayer.inventory.getCurrentItem()))
+
+            "pos" -> mc.netHandler.addToSendQueue(C08PacketPlayerBlockPlacement(BlockPos(-1, -1, -1), 255, mc.thePlayer.inventory.getCurrentItem(), 0.0f, 0.0f, 0.0f))
+
+            "click" -> mc.gameSettings.keyBindUseItem.pressed = true
+
+            "aac" -> {
+                if (mc.thePlayer.heldItem.item is ItemSword)
+                    mc.gameSettings.keyBindUseItem.pressed = true
+            }
         }
 
-        if (AutoBlockValue.get().equals("Vanilla", ignoreCase = true)){
-            mc.netHandler.addToSendQueue(C08PacketPlayerBlockPlacement(mc.thePlayer.inventory.getCurrentItem()))
-            blockingStatus = true
-        }
-
-        if (AutoBlockValue.get().equals("Pos", ignoreCase = true)){
-            mc.netHandler.addToSendQueue(C08PacketPlayerBlockPlacement(BlockPos(-1, -1, -1), 255, mc.thePlayer.inventory.getCurrentItem(), 0.0f, 0.0f, 0.0f))
-            blockingStatus = true
-        }
-
-        if (AutoBlockValue.get().equals("Both", ignoreCase = true)){
-            mc.netHandler.addToSendQueue(C08PacketPlayerBlockPlacement(mc.thePlayer.inventory.getCurrentItem()))
-            mc.netHandler.addToSendQueue(C08PacketPlayerBlockPlacement(BlockPos.ORIGIN, 255, mc.thePlayer.getHeldItem(), 0.0F, 0.0F, 0.0F));
-            blockingStatus = true
-        }
-        if (AutoBlockValue.get().equals("Click", ignoreCase = true)){
-            KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), true)
-            blockingStatus = true
-        }
+        blockingStatus = true
     }
 
     @EventTarget
@@ -821,12 +749,10 @@ class Aura : Module() {
                     return
                 }
 
-                if (noInventoryAttackValue.get() && (mc.currentScreen is GuiContainer ||
-                                System.currentTimeMillis() - containerOpen < noInventoryDelayValue.get())) {
+                if (noInventoryAttackValue.get() && (mc.currentScreen is GuiContainer)) {
                     target = null
                     currentTarget = null
                     hitable = false
-                    if (mc.currentScreen is GuiContainer) containerOpen = System.currentTimeMillis()
                     return
                 }
 
@@ -842,54 +768,36 @@ class Aura : Module() {
     }
 
     /**
-     * Stop blocking
+     * Stop blocking 停止格挡
      */
     private fun stopBlocking() {
-        if (blockingStatus) {
-            if (AutoBlockValue.get().equals("Click", ignoreCase = true)) {
-                KeyBinding.setKeyBindState(mc.gameSettings.keyBindUseItem.getKeyCode(), false)
-            } else if (AutoBlockValue.get().equals("AAC", ignoreCase = true) && mc.thePlayer.heldItem.item is ItemSword) {
-                mc.gameSettings.keyBindUseItem.pressed = false
-            } else {
-                mc.netHandler.addToSendQueue(C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN))
-            }
-            blockingStatus = false
+        if (!blockingStatus) return
+
+        when (AutoBlockValue.get().toLowerCase()){
+            "normal", "aftertick", "pos" -> mc.netHandler.addToSendQueue(C07PacketPlayerDigging(C07PacketPlayerDigging.Action.RELEASE_USE_ITEM, BlockPos.ORIGIN, EnumFacing.DOWN))
+
+            "click", "aac" -> mc.gameSettings.keyBindUseItem.pressed = false
         }
+
+        blockingStatus = false
     }
 
     /**
-     * Check if run should be cancelled
+     * Check if [entity] is alive 检测实体是否是活着
      */
-    private val cancelRun: Boolean
-        get() = mc.thePlayer.isSpectator || !isAlive(mc.thePlayer)
-                || LiquidBounce.moduleManager[Blink::class.java]!!.state || LiquidBounce.moduleManager[FreeCam::class.java]!!.state
+    private fun isAlive(entity: EntityLivingBase) = entity.isEntityAlive && entity.health > 0 || aacMode && entity.hurtTime > 5
 
     /**
-     * Check if [entity] is alive
-     */
-    private fun isAlive(entity: EntityLivingBase) = entity.isEntityAlive && entity.health > 0 ||
-            aacValue.get() && entity.hurtTime > 5
-
-
-    /**
-     * Check if player is able to block
+     * Check if player is able to block 检测玩家是否可以防砍
      */
     private val canBlock: Boolean
         get() = mc.thePlayer.heldItem != null && mc.thePlayer.heldItem.item is ItemSword
 
     /**
-     * Range
+     * Range 返回最大距离
      */
     private val maxRange: Float
-        get() = max(rangeValue.get(), BlockRangeValue.get())
-
+        get() = max(rangeValue.get(), throughWallsRangeValue.get())
     private fun getRange(entity: Entity) =
-            (if (PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) >= BlockRangeValue.get()) rangeValue.get() else rangeValue.get()) - if (mc.thePlayer.isSprinting) rangeSprintReducementValue.get() else 0F
-
-    /**
-     * HUD Tag
-     */
-    override fun getTag(): String {
-        return targetModeValue.get()
-    }
+            (if (PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, entity) >= throughWallsRangeValue.get()) rangeValue.get() else throughWallsRangeValue.get())
 }
