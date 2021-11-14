@@ -6,11 +6,15 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.net.*;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLConnection;
 
 public class HttpUtils {
 
-    public HttpUtils(){
+    private static final String DEFAULT_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0";
+
+    public HttpUtils() {
         HttpURLConnection.setFollowRedirects(true);
     }
 
@@ -19,14 +23,14 @@ public class HttpUtils {
         httpConnection.setRequestMethod(method);
         httpConnection.setConnectTimeout(2000);
         httpConnection.setReadTimeout(10000);
-        httpConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+        httpConnection.setRequestProperty("User-Agent", agent);
         httpConnection.setInstanceFollowRedirects(true);
         httpConnection.setDoOutput(true);
         return httpConnection;
     }
 
     public static String request(String url, String method, String agent) throws IOException {
-        HttpURLConnection connection = make(url, method, "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0");
+        HttpURLConnection connection = make(url, method, agent);
 
         final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
         final StringBuilder stringBuilder = new StringBuilder();
@@ -39,11 +43,11 @@ public class HttpUtils {
     }
 
     public static String get(String url) throws IOException {
-        return request(url, "GET",null);
+        return request(url, "GET", DEFAULT_AGENT);
     }
 
     public static void download(String url, File file) throws IOException {
-        FileUtils.copyInputStreamToFile(make(url, "GET", null).getInputStream(), file);
+        FileUtils.copyInputStreamToFile(make(url, "GET", DEFAULT_AGENT).getInputStream(), file);
     }
 
     public static String getCurrentVersion() throws Exception {
@@ -59,7 +63,7 @@ public class HttpUtils {
         BufferedReader reader = new BufferedReader(new InputStreamReader(in));
         StringBuilder builder = new StringBuilder();
         String line;
-        while((line = reader.readLine()) != null){
+        while ((line = reader.readLine()) != null) {
             builder.append(line);
         }
         return builder.toString();

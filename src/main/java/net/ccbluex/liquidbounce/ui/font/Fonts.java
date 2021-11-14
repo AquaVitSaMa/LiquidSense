@@ -6,9 +6,9 @@
 package net.ccbluex.liquidbounce.ui.font;
 
 import com.google.gson.*;
-import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
+import net.ccbluex.liquidbounce.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -84,7 +84,7 @@ public class Fonts {
         csgo35 = new GameFontRenderer(getFont("LiquidSense.ttf", 18));
         csgo40 = new GameFontRenderer(getFont("LiquidSense.ttf", 20));
         fontBold180 = new GameFontRenderer(getFont("Roboto-Bold.ttf", 60));
-        logo = new GameFontRenderer(getFont("Facon.ttf",60));
+        logo = new GameFontRenderer(getFont("Facon.ttf", 60));
         icon30 = new GameFontRenderer(getFont("Stylesicons.ttf", 30));
 
         try {
@@ -92,30 +92,30 @@ public class Fonts {
 
             final File fontsFile = new File(LiquidBounce.fileManager.fontsDir, "fonts.json");
 
-            if(fontsFile.exists()) {
+            if (fontsFile.exists()) {
                 final JsonElement jsonElement = new JsonParser().parse(new BufferedReader(new FileReader(fontsFile)));
 
-                if(jsonElement instanceof JsonNull)
+                if (jsonElement instanceof JsonNull)
                     return;
 
                 final JsonArray jsonArray = (JsonArray) jsonElement;
 
-                for(final JsonElement element : jsonArray) {
-                    if(element instanceof JsonNull)
+                for (final JsonElement element : jsonArray) {
+                    if (element instanceof JsonNull)
                         return;
 
                     final JsonObject fontObject = (JsonObject) element;
 
                     CUSTOM_FONT_RENDERERS.add(new GameFontRenderer(getFont(fontObject.get("fontFile").getAsString(), fontObject.get("fontSize").getAsInt())));
                 }
-            }else{
+            } else {
                 fontsFile.createNewFile();
 
                 final PrintWriter printWriter = new PrintWriter(new FileWriter(fontsFile));
                 printWriter.println(new GsonBuilder().setPrettyPrinting().create().toJson(new JsonArray()));
                 printWriter.close();
             }
-        }catch(final Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
         }
 
@@ -126,31 +126,31 @@ public class Fonts {
         try {
             final File outputFile = new File(LiquidBounce.fileManager.fontsDir, "font.zip");
 
-            if(!outputFile.exists()) {
+            if (!outputFile.exists()) {
                 ClientUtils.getLogger().info("Downloading fonts...");
-                HttpUtils.download(CLIENT_RESOURCE+"Font.zip", outputFile);
+                HttpUtils.download(CLIENT_RESOURCE + "Font.zip", outputFile);
                 ClientUtils.getLogger().info("Extract fonts...");
                 extractZip(outputFile.getPath(), LiquidBounce.fileManager.fontsDir.getPath());
             }
-        }catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
     public static FontRenderer getFontRenderer(final String name, final int size) {
-        for(final Field field : Fonts.class.getDeclaredFields()) {
+        for (final Field field : Fonts.class.getDeclaredFields()) {
             try {
                 field.setAccessible(true);
 
                 final Object o = field.get(null);
 
-                if(o instanceof FontRenderer) {
+                if (o instanceof FontRenderer) {
                     final FontDetails fontDetails = field.getAnnotation(FontDetails.class);
 
-                    if(fontDetails.fontName().equals(name) && fontDetails.fontSize() == size)
+                    if (fontDetails.fontName().equals(name) && fontDetails.fontSize() == size)
                         return (FontRenderer) o;
                 }
-            }catch(final IllegalAccessException e) {
+            } catch (final IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
@@ -158,7 +158,7 @@ public class Fonts {
         for (final GameFontRenderer liquidFontRenderer : CUSTOM_FONT_RENDERERS) {
             final Font font = liquidFontRenderer.getDefaultFont().getFont();
 
-            if(font.getName().equals(name) && font.getSize() == size)
+            if (font.getName().equals(name) && font.getSize() == size)
                 return liquidFontRenderer;
         }
 
@@ -166,18 +166,18 @@ public class Fonts {
     }
 
     public static Object[] getFontDetails(final FontRenderer fontRenderer) {
-        for(final Field field : Fonts.class.getDeclaredFields()) {
+        for (final Field field : Fonts.class.getDeclaredFields()) {
             try {
                 field.setAccessible(true);
 
                 final Object o = field.get(null);
 
-                if(o.equals(fontRenderer)) {
+                if (o.equals(fontRenderer)) {
                     final FontDetails fontDetails = field.getAnnotation(FontDetails.class);
 
-                    return new Object[] {fontDetails.fontName(), fontDetails.fontSize()};
+                    return new Object[]{fontDetails.fontName(), fontDetails.fontSize()};
                 }
-            }catch(final IllegalAccessException e) {
+            } catch (final IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
@@ -185,7 +185,7 @@ public class Fonts {
         if (fontRenderer instanceof GameFontRenderer) {
             final Font font = ((GameFontRenderer) fontRenderer).getDefaultFont().getFont();
 
-            return new Object[] {font.getName(), font.getSize()};
+            return new Object[]{font.getName(), font.getSize()};
         }
 
         return null;
@@ -194,14 +194,14 @@ public class Fonts {
     public static List<FontRenderer> getFonts() {
         final List<FontRenderer> fonts = new ArrayList<>();
 
-        for(final Field fontField : Fonts.class.getDeclaredFields()) {
+        for (final Field fontField : Fonts.class.getDeclaredFields()) {
             try {
                 fontField.setAccessible(true);
 
                 final Object fontObj = fontField.get(null);
 
-                if(fontObj instanceof FontRenderer) fonts.add((FontRenderer) fontObj);
-            }catch(final IllegalAccessException e) {
+                if (fontObj instanceof FontRenderer) fonts.add((FontRenderer) fontObj);
+            } catch (final IllegalAccessException e) {
                 e.printStackTrace();
             }
         }
@@ -218,7 +218,7 @@ public class Fonts {
             awtClientFont = awtClientFont.deriveFont(Font.PLAIN, size);
             inputStream.close();
             return awtClientFont;
-        }catch(final Exception e) {
+        } catch (final Exception e) {
             e.printStackTrace();
 
             return new Font("default", Font.PLAIN, size);
@@ -231,19 +231,19 @@ public class Fonts {
         try {
             final File folder = new File(outputFolder);
 
-            if(!folder.exists()) folder.mkdir();
+            if (!folder.exists()) folder.mkdir();
 
             final ZipInputStream zipInputStream = new ZipInputStream(new FileInputStream(zipFile));
 
             ZipEntry zipEntry = zipInputStream.getNextEntry();
-            while(zipEntry != null) {
+            while (zipEntry != null) {
                 File newFile = new File(outputFolder + File.separator + zipEntry.getName());
                 new File(newFile.getParent()).mkdirs();
 
                 FileOutputStream fileOutputStream = new FileOutputStream(newFile);
 
                 int i;
-                while((i = zipInputStream.read(buffer)) > 0)
+                while ((i = zipInputStream.read(buffer)) > 0)
                     fileOutputStream.write(buffer, 0, i);
 
                 fileOutputStream.close();
@@ -252,7 +252,7 @@ public class Fonts {
 
             zipInputStream.closeEntry();
             zipInputStream.close();
-        }catch(final IOException e) {
+        } catch (final IOException e) {
             e.printStackTrace();
         }
     }
