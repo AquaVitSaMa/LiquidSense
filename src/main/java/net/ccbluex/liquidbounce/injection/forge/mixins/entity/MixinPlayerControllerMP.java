@@ -45,6 +45,10 @@ public class MixinPlayerControllerMP {
     @Final
     public NetHandlerPlayClient netClientHandler;
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public ItemStack windowClick(int windowId, int slotId, int mouseButtonClicked, int mode, EntityPlayer playerIn) {
         final ClickWindowEvent event = new ClickWindowEvent(windowId, slotId, mouseButtonClicked, mode);

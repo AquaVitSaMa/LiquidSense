@@ -38,22 +38,16 @@ public abstract class MixinBlock {
     @Shadow
     public abstract AxisAlignedBB getCollisionBoundingBox(World worldIn, BlockPos pos, IBlockState state);
     @Shadow
-    @Final
     protected double minX;
     @Shadow
-    @Final
     protected double minY;
     @Shadow
-    @Final
     protected double minZ;
     @Shadow
-    @Final
     protected double maxX;
     @Shadow
-    @Final
     protected double maxY;
     @Shadow
-    @Final
     protected double maxZ;
 
     @Shadow
@@ -64,9 +58,10 @@ public abstract class MixinBlock {
     public abstract void setBlockBounds(float minX, float minY, float minZ, float maxX, float maxY, float maxZ);
 
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity) {
         AxisAlignedBB axisalignedbb = this.getCollisionBoundingBox(worldIn, pos, state);

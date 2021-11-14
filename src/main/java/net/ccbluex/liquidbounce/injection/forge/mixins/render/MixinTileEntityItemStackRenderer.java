@@ -43,9 +43,10 @@ public class MixinTileEntityItemStackRenderer {
     @Shadow
     private TileEntityChest field_147717_b;
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void renderByItem(ItemStack itemStackIn) {
         if(itemStackIn.getItem() == Items.banner) {

@@ -39,9 +39,10 @@ public abstract class MixinRenderEntityItem extends MixinRender{
 
     private float ItemToRotate;
 
-    /**
-     * @author AquaVit QQ:2924270322
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     private int func_177077_a(EntityItem itemIn, double p_177077_2_, double p_177077_4_, double p_177077_6_, float p_177077_8_, IBakedModel p_177077_9_) {
 

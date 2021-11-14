@@ -34,6 +34,10 @@ public abstract class MixinRenderItem implements IResourceManagerReloadListener 
     @Shadow
     protected abstract void renderModel(IBakedModel p_renderModel_1_, int p_renderModel_2_);
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     private void renderEffect(IBakedModel p_renderEffect_1_) {
         final EnchantEffect effect = (EnchantEffect) LiquidBounce.moduleManager.get(EnchantEffect.class);

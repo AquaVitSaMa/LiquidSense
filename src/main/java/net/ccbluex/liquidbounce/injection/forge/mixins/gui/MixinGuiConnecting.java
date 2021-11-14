@@ -62,9 +62,10 @@ public abstract class MixinGuiConnecting extends GuiScreen {
         ServerUtils.serverData = new ServerData("", ip + ":" + port, false);
     }
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     private void connect(final String ip, final int port) {
         logger.info("Connecting to " + ip + ", " + port);
@@ -106,9 +107,10 @@ public abstract class MixinGuiConnecting extends GuiScreen {
         }, "Server Connector #" + CONNECTION_ID.incrementAndGet()).start();
     }
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         ScaledResolution scaledResolution = new ScaledResolution(Minecraft.getMinecraft());

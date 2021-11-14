@@ -83,6 +83,10 @@ public abstract class MixinGuiNewChat extends Gui{
         percentComplete = clamp(percentComplete, 0, 1);
     }
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void drawChat(int updateCounter) {
         final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
@@ -178,6 +182,10 @@ public abstract class MixinGuiNewChat extends Gui{
         }
     }
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void printChatMessageWithOptionalDeletion(IChatComponent chatComponent, int chatLineId) {
         ChatComponentEvent event = new ChatComponentEvent(chatComponent, this.drawnChatLines);
@@ -190,6 +198,10 @@ public abstract class MixinGuiNewChat extends Gui{
         LogManager.getLogger().info("[LiquidSense-CHAT] " + chatComponent.getUnformattedText());
     }
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     private void setChatLine(IChatComponent chatComponent, int chatLineId, int updateCounter, boolean displayOnly) {
         final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
@@ -226,6 +238,10 @@ public abstract class MixinGuiNewChat extends Gui{
         }
     }
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public IChatComponent getChatComponent(int p_getChatComponent_1_, int p_getChatComponent_2_) {
         final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);

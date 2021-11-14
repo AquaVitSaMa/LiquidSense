@@ -100,9 +100,10 @@ public abstract class MixinGuiChat extends MixinGuiScreen {
         }
     }
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
         Gui.drawRect(2, this.height - (int) fade, this.width - 2, this.height, Integer.MIN_VALUE);

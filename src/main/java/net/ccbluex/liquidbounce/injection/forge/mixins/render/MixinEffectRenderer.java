@@ -27,10 +27,10 @@ public abstract class MixinEffectRenderer {
     @Shadow
     private List<EntityParticleEmitter> particleEmitters;
 
-    /**
-     * @author Mojang
-     * @author Marco
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void updateEffects() {
         try {

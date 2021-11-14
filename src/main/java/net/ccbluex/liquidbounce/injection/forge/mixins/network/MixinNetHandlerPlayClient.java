@@ -114,6 +114,11 @@ public abstract class MixinNetHandlerPlayClient {
             callbackInfo.cancel();
         }
     }
+
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void handleConfirmTransaction(S32PacketConfirmTransaction packetIn) {
         PacketThreadUtil.checkThreadAndEnqueue((Packet)packetIn, (INetHandler)this, this.gameController);

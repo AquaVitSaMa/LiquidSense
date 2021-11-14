@@ -31,9 +31,10 @@ public class MixinC00Handshake {
     @Shadow
     public String ip;
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void writePacketData(PacketBuffer buf) {
         buf.writeVarIntToBuffer(this.protocolVersion);
