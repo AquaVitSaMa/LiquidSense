@@ -35,12 +35,10 @@ abstract class Value<T>(val name: String, var value: T) {
     val intvalue = Translate(0f , 0f)
     var int = 0f
 
-
-
-    private var displayableFunc: () -> Boolean = { true }
+    private var displayableFunc : () -> Boolean = { true }
 
     fun displayable(func: () -> Boolean): Value<T> {
-        displayableFunc=func
+        displayableFunc = func
         return this
     }
 

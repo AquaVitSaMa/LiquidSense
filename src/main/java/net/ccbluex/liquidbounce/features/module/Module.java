@@ -164,7 +164,7 @@ public class Module extends MinecraftInstance implements Listenable {
             try {
                 field.setAccessible(true);
                 final Object o = field.get(this);
-                if (o instanceof Value) {
+                if (o instanceof Value && ((Value<?>) o).getDisplayable()) {
                     values.add((Value<?>)o);
                 }
             }
