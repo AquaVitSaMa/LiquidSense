@@ -11,13 +11,13 @@ public final class Translate {
 	}
 
 	public void translate(float targetX, float targetY, double speed) {
-		x = AnimationUtils.lstransition(targetX, targetY, speed);
-		y = AnimationUtils.lstransition(targetX, targetY, speed);
+		x = AnimationUtils.lstransition(x, targetX, speed);
+		y = AnimationUtils.lstransition(y, targetY, speed);
 	}
 
 	public void translate(float targetX, float targetY) {
-		x = AnimationUtils.lstransition(targetX, targetY, 0.0);
-		y = AnimationUtils.lstransition(targetX, targetY, 0.0);
+		x = AnimationUtils.lstransition(x, targetX, 0.0);
+		y = AnimationUtils.lstransition(y, targetY, 0.0);
 	}
 
 	public float getX() {
