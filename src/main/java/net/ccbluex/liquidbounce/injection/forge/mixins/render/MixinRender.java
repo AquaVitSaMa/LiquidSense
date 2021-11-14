@@ -35,6 +35,10 @@ public abstract class MixinRender<T extends Entity> {
     @Final
     protected RenderManager renderManager;
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
         LiquidBounce.eventManager.callEvent(new RenderEntityEvent(entity, x, y, z, entityYaw, partialTicks));

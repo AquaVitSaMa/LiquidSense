@@ -93,7 +93,7 @@ public class PlayerList extends Element {
          */
         int y = 1;
 
-        if (alphaMap.size() != 0) {
+        if (alphaMap.size() > 0) {
             BlurBuffer.blurArea((int) ((-4.5F + this.getRenderX()) * this.getScale()),
                     (int) ((this.getRenderY() + Fonts.csgo40.FONT_HEIGHT - 2) * this.getScale()),
                     (playerListWidth + 4.5F) * this.getScale(),
@@ -112,7 +112,7 @@ public class PlayerList extends Element {
                     RenderUtils.drawHead(locationSkin, (int) -1.1F, y + 16, 9, 9);
                     Fonts.font20.drawString(alphaData.getPlayerName(), Fonts.csgo40.getStringWidth("F") + 3, y + 17, new Color(255, 255, 255, alphaData.getAlpha()).getRGB(), false);
                 }
-                y += 14;
+                y += 15;
             }
         }
 

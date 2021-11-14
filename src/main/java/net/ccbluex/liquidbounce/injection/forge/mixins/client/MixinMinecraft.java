@@ -98,6 +98,10 @@ public abstract class MixinMinecraft {
     @Shadow
     public abstract void setIngameFocus();
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void setIngameNotInFocus() {
         if (this.inGameHasFocus) {
@@ -130,10 +134,10 @@ public abstract class MixinMinecraft {
 //            Minecraft.getMinecraft().displayGuiScreen(new GuiUpdate());
     }
 
-    @Inject(method = "createDisplay", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V", shift = At.Shift.AFTER))
+  /*  @Inject(method = "createDisplay", at = @At(value = "INVOKE", target = "Lorg/lwjgl/opengl/Display;setTitle(Ljava/lang/String;)V", shift = At.Shift.AFTER))
     private void createDisplay(CallbackInfo callbackInfo) {
         Display.setTitle(LiquidBounce.CLIENT_NAME + " | " + LiquidBounce.CLIENT_VERSION + " | " + "By AquaVit" + " | " + LiquidBounce.MINECRAFT_VERSION + " | Injection...");
-    }
+    }*/
 
     @Inject(method = "displayGuiScreen", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;currentScreen:Lnet/minecraft/client/gui/GuiScreen;", shift = At.Shift.AFTER))
     private void displayGuiScreen(CallbackInfo callbackInfo) {
@@ -230,6 +234,7 @@ public abstract class MixinMinecraft {
 
     /**
      * @author CCBlueX
+     * @reason CCBlueX
      */
     @Overwrite
     private void sendClickBlockToController(boolean leftClick) {
@@ -258,7 +263,8 @@ public abstract class MixinMinecraft {
     }
 
     /**
-     * @author
+     * @author CCBlueX
+     * @reason CCBlueX
      */
     @Overwrite
     public int getLimitFramerate() {

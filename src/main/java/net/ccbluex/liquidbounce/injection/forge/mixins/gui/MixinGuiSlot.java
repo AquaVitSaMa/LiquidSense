@@ -86,9 +86,10 @@ public abstract class MixinGuiSlot {
     @Shadow
     protected abstract void func_148142_b(int p_148142_1_, int p_148142_2_);
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void drawScreen(int mouseXIn, int mouseYIn, float p_148128_3_) {
         if(this.field_178041_q) {
@@ -171,9 +172,10 @@ public abstract class MixinGuiSlot {
         }
     }
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     protected int getScrollBarX() {
         return this.width - 5;

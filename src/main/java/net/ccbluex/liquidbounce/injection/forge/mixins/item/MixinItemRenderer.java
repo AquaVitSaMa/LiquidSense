@@ -95,9 +95,10 @@ public abstract class MixinItemRenderer {
     @Shadow
     protected abstract void renderPlayerArm(AbstractClientPlayer clientPlayer, float equipProgress, float swingProgress);
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void renderItemInFirstPerson(float partialTicks) {
         final ItemRotate ItemRotate = (ItemRotate) LiquidBounce.moduleManager.getModule(ItemRotate.class);

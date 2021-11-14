@@ -123,6 +123,10 @@ public abstract class MixinGuiContainer extends GuiScreen{
         }
     }
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void drawScreen(int p_drawScreen_1_, int p_drawScreen_2_, float p_drawScreen_3_) {
         ChestStealer ch = (ChestStealer) LiquidBounce.moduleManager.getModule(ChestStealer.class);

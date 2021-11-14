@@ -18,9 +18,10 @@ public abstract class MixinGuiKeyBindingList extends GuiSlot {
         super(mcIn, width, height, topIn, bottomIn, slotHeightIn);
     }
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     protected int getScrollBarX() {
         return this.width - 5;

@@ -44,6 +44,10 @@ public abstract class MixinGuiInGame extends Gui {
     double speed = 1.0D;
     int lastSlot = 0;
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     protected void renderHotbarItem(int index, int xPos, int yPos, float partialTicks, EntityPlayer player){
         ItemStack itemStack = player.inventory.mainInventory[index];

@@ -21,6 +21,10 @@ public abstract class MixinRenderPlayer extends MixinRender {
     @Shadow
     public abstract ModelPlayer getMainModel();
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     private void setModelVisibilities(AbstractClientPlayer clientPlayer) {
         ModelPlayer modelplayer = this.getMainModel();

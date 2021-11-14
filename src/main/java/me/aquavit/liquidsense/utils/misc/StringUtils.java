@@ -3,7 +3,6 @@ package me.aquavit.liquidsense.utils.misc;
 import net.minecraft.client.Minecraft;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import sun.misc.BASE64Encoder;
 
 import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
@@ -35,7 +34,7 @@ public final class StringUtils {
         return new String(output);
     }
 
-    public static String encrypt(String input, String key) {
+   /* public static String encrypt(String input, String key) {
         SecretKeySpec skey = new SecretKeySpec(key.getBytes(), "AES");
         try {
             Cipher cipher = Cipher.getInstance("AES/ECB/PKCS5Padding");
@@ -46,7 +45,7 @@ public final class StringUtils {
         } catch (Exception e) {
             return "";
         }
-    }
+    }*/
 
     public static Long timestampToDate(long time) {
         String text = String.valueOf(time).substring(0, 10);

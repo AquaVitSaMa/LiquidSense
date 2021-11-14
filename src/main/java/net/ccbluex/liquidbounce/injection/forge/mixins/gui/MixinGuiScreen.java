@@ -150,11 +150,10 @@ public abstract class MixinGuiScreen extends Gui {
         drawHoveringText(Collections.singletonList("§c§l" + clickEvent.getAction().getCanonicalName().toUpperCase() + ": §a" + clickEvent.getValue()), x, y - (hoverEvent != null ? 17 : 0));
     }
 
-    /**
-     * @description: InputFix
-     * @author: As丶One
-     * @create: 2020/12/21 14:53
-     **/
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void handleKeyboardInput() throws IOException {
         char character = Keyboard.getEventCharacter();

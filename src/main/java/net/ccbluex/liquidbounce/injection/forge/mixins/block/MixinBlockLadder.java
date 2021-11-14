@@ -27,9 +27,10 @@ public abstract class MixinBlockLadder extends MixinBlock {
     @Final
     public static PropertyDirection FACING;
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void setBlockBoundsBasedOnState(IBlockAccess worldIn, BlockPos pos) {
         final IBlockState iblockstate = worldIn.getBlockState(pos);

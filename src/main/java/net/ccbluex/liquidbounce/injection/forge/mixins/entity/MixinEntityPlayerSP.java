@@ -129,9 +129,10 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
     @Shadow
     private float lastReportedPitch;
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void onUpdateWalkingPlayer() {
         final Rotations rotations = (Rotations) LiquidBounce.moduleManager.getModule(Rotations.class);
@@ -236,9 +237,10 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
             callbackInfoReturnable.setReturnValue(false);
     }
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void onLivingUpdate() {
         LiquidBounce.eventManager.callEvent(new UpdateEvent());

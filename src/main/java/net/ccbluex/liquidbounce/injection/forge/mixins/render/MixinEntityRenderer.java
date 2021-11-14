@@ -72,9 +72,10 @@ public abstract class MixinEntityRenderer {
             callbackInfo.cancel();
     }
 
-    /**
-     * @author Minger
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     private void orientCamera(float partialTicks) {
         CameraView ca = (CameraView) LiquidBounce.moduleManager.getModule(CameraView.class);
@@ -245,9 +246,10 @@ public abstract class MixinEntityRenderer {
         if (LiquidBounce.moduleManager.getModule(Tracers.class).getState()) GL11.glPopMatrix();
     }
 
-    /**
-     * @author
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void getMouseOver(float p_getMouseOver_1_) {
         Entity entity = this.mc.getRenderViewEntity();

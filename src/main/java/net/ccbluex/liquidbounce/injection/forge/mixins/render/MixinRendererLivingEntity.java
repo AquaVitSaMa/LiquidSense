@@ -100,6 +100,10 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
     protected abstract <T extends EntityLivingBase> boolean setBrightness(T p_setBrightness_1_, float p_setBrightness_2_, boolean p_setBrightness_3_);
 
 
+	/**
+	 * @author  CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public <T extends EntityLivingBase> void renderLayers(T p_renderLayers_1_, float p_renderLayers_2_, float p_renderLayers_3_, float p_renderLayers_4_, float p_renderLayers_5_, float p_renderLayers_6_, float p_renderLayers_7_, float p_renderLayers_8_) {
         Iterator var9 = this.layerRenderers.iterator();
@@ -127,6 +131,10 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
             callbackInfoReturnable.setReturnValue(false);
     }
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public <T extends EntityLivingBase> void doRender(T p_doRender_1_, double p_doRender_2_, double p_doRender_4_, double p_doRender_6_, float p_doRender_8_, float p_doRender_9_) {
         if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false)) {
@@ -265,9 +273,10 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
         }
     }
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     protected <T extends EntityLivingBase> void renderModel(T entitylivingbaseIn, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float scaleFactor) {
         boolean visible = !entitylivingbaseIn.isInvisible();

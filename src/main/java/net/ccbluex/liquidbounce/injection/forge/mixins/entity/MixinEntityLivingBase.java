@@ -62,9 +62,10 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
 
     @Shadow protected abstract void updateAITick();
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     protected void jump() {
         final JumpEvent jumpEvent = new JumpEvent(this.getJumpUpwardsMotion());
@@ -86,6 +87,10 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
         this.isAirBorne = true;
     }
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     private int getArmSwingAnimationEnd() {
         Animations sb = (Animations) LiquidBounce.moduleManager.getModule(Animations.class);
@@ -123,7 +128,7 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
             callbackInfoReturnable.setReturnValue(false);
     }
 
-    @Inject(method = "onEntityUpdate", at = { @At("HEAD") })
+    @Inject(method = "onEntityUpdate", at = @At("HEAD"))
     public void onEntityUpdate(CallbackInfo info) {
         EventLivingUpdate eventLivingUpdate = new EventLivingUpdate((EntityLivingBase) (Object) this);
         LiquidBounce.eventManager.callEvent(eventLivingUpdate);

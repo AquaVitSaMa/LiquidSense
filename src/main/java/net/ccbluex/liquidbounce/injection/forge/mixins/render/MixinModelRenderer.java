@@ -47,6 +47,10 @@ public abstract class MixinModelRenderer{
     @Shadow
     public List<ModelRenderer> childModels;
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     public void render(float p_render_1_) {
         if (!this.isHidden && this.showModel) {

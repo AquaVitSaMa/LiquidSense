@@ -17,6 +17,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
@@ -31,6 +32,7 @@ public abstract class MixinLayerArmorBase <T extends ModelBase> implements Layer
     @Shadow
     public abstract T getArmorModel(int p_getArmorModel_1_);
 
+    @Final
     @Shadow
     private RendererLivingEntity<?> renderer;
 
@@ -41,7 +43,7 @@ public abstract class MixinLayerArmorBase <T extends ModelBase> implements Layer
     protected abstract void setModelPartVisible(T var1, int var2);
 
     @Shadow
-    public abstract boolean isSlotForLeggings(int p_isSlotForLeggings_1_);
+    protected abstract boolean isSlotForLeggings(int p_isSlotForLeggings_1_);
 
     @Shadow
     public abstract ResourceLocation getArmorResource(Entity p_getArmorResource_1_, ItemStack p_getArmorResource_2_, int p_getArmorResource_3_, String p_getArmorResource_4_);
@@ -64,6 +66,10 @@ public abstract class MixinLayerArmorBase <T extends ModelBase> implements Layer
     @Shadow
     public abstract void renderGlint(EntityLivingBase p_renderGlint_1_, T p_renderGlint_2_, float p_renderGlint_3_, float p_renderGlint_4_, float p_renderGlint_5_, float p_renderGlint_6_, float p_renderGlint_7_, float p_renderGlint_8_, float p_renderGlint_9_);
 
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     private void renderLayer(EntityLivingBase p_renderLayer_1_, float p_renderLayer_2_, float p_renderLayer_3_, float p_renderLayer_4_, float p_renderLayer_5_, float p_renderLayer_6_, float p_renderLayer_7_, float p_renderLayer_8_, int p_renderLayer_9_) {
         Rotations ra = (Rotations) LiquidBounce.moduleManager.getModule(Rotations.class);

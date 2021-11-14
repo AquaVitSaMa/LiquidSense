@@ -99,9 +99,10 @@ public class MixinGuiEditSign extends GuiScreen {
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
-    /**
-     * @author CCBlueX
-     */
+	/**
+	 * @author CCBlueX
+	 * @reason CCBlueX
+	 */
     @Overwrite
     protected void keyTyped(char typedChar, int keyCode) throws IOException {
         this.signCommand1.textboxKeyTyped(typedChar, keyCode);
