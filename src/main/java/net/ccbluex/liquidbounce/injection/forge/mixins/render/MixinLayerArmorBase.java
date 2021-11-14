@@ -37,7 +37,7 @@ public abstract class MixinLayerArmorBase <T extends ModelBase> implements Layer
     private RendererLivingEntity<?> renderer;
 
     @Shadow
-    protected abstract T getArmorModelHook(EntityLivingBase p_getArmorModelHook_1_, ItemStack p_getArmorModelHook_2_, int p_getArmorModelHook_3_, T p_getArmorModelHook_4_);
+    protected abstract T getArmorModelHook(EntityLivingBase entity, ItemStack itemStack, int slot, T model);
 
     @Shadow
     protected abstract void setModelPartVisible(T var1, int var2);
@@ -46,7 +46,7 @@ public abstract class MixinLayerArmorBase <T extends ModelBase> implements Layer
     protected abstract boolean isSlotForLeggings(int p_isSlotForLeggings_1_);
 
     @Shadow
-    public abstract ResourceLocation getArmorResource(Entity p_getArmorResource_1_, ItemStack p_getArmorResource_2_, int p_getArmorResource_3_, String p_getArmorResource_4_);
+    public abstract ResourceLocation getArmorResource(Entity entity, ItemStack stack, int slot, String type);
 
     @Shadow
     private float alpha = 1.0F;

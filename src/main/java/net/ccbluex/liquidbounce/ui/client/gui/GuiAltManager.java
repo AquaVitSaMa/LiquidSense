@@ -19,6 +19,7 @@ import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.login.UserUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
+import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -324,7 +325,7 @@ public class GuiAltManager extends GuiScreen {
         private int selectedSlot;
 
         GuiList(GuiScreen prevGui) {
-            super(prevGui.mc,prevGui.width, prevGui.height, 40, prevGui.height - 40, 30);
+            super(260, prevGui.height, 40, prevGui.height - 40, 30);
         }
 
         @Override
@@ -367,12 +368,6 @@ public class GuiAltManager extends GuiScreen {
             }
         }
 
-        @Override
-        protected void drawSlot(int id, int x, int y, int var4, int var5, int var6) {
-            final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id);
-            Fonts.font20.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), y + 2, Color.WHITE.getRGB(), true);
-            Fonts.font20.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), y + 15, minecraftAccount.isCracked() ? Color.GRAY.getRGB() : (minecraftAccount.getAccountName() == null ? Color.GREEN.getRGB() : Color.LIGHT_GRAY.getRGB()), true);
-        }
 
         @Override
         protected void drawBackground() {
