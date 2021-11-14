@@ -21,9 +21,7 @@ public class MixinBlockSoulSand {
 
     @Inject(method = "onEntityCollidedWithBlock", at = @At("HEAD"), cancellable = true)
     private void onEntityCollidedWithBlock(CallbackInfo callbackInfo) {
-        final NoSlow noSlow = (NoSlow) LiquidBounce.moduleManager.getModule(NoSlow.class);
-
-        if(noSlow.getState() && noSlow.getSoulsandValue().get())
+        if(LiquidBounce.moduleManager.getModule(NoSlow.class).getState() && NoSlow.soulsandValue.get())
             callbackInfo.cancel();
     }
 }
