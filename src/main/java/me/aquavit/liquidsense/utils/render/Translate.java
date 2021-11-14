@@ -2,47 +2,37 @@ package me.aquavit.liquidsense.utils.render;
 
 public final class Translate {
 
-    private float x;
-    private float y;
+	private float x;
+	private float y;
 
-    public Translate(float x, float y) {
-        this.x = x;
-        this.y = y;
-    }
+	public Translate(float x, float y) {
+		this.x = x;
+		this.y = y;
+	}
 
-    public void interpolate(float targetX, float targetY, double smoothing) {
-        x = (float) AnimationUtils.animate(targetX, this.x, smoothing);
-        y = (float) AnimationUtils.animate(targetY, this.y, smoothing);
-    }
+	public void translate(float targetX, float targetY, double speed) {
+		x = AnimationUtils.lstransition(targetX, targetY, speed);
+		y = AnimationUtils.lstransition(targetX, targetY, speed);
+	}
 
-    public void translate(float targetX, float targetY) {
-        x = (float) AnimationUtils.Anim(x, targetX, 1.0);
-        y = (float) AnimationUtils.Anim(y, targetY, 1.0);
-    }
+	public void translate(float targetX, float targetY) {
+		x = AnimationUtils.lstransition(targetX, targetY, 0.0);
+		y = AnimationUtils.lstransition(targetX, targetY, 0.0);
+	}
 
-    public void translate(float targetX, float targetY , double speed) {
-        x = (float) AnimationUtils.Anim(x, targetX, speed);
-        y = (float) AnimationUtils.Anim(y, targetY, speed);
-    }
+	public float getX() {
+		return this.x;
+	}
 
-    public void translate(float targetX, float targetY , double xspeed , double yspeed) {
-        x = (float) AnimationUtils.Anim(x, targetX, xspeed);
-        y = (float) AnimationUtils.Anim(y, targetY, yspeed);
-    }
+	public void setX(float x) {
+		this.x = x;
+	}
 
-    public float getX() {
-        return this.x;
-    }
+	public float getY() {
+		return this.y;
+	}
 
-    public void setX(float x) {
-        this.x = x;
-    }
-
-    public float getY() {
-        return this.y;
-    }
-
-    public void setY(float y) {
-        this.y = y;
-    }
+	public void setY(float y) {
+		this.y = y;
+	}
 }

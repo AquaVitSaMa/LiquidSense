@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.utils.render;
 
+import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 
 import java.awt.*;
@@ -32,6 +33,34 @@ public class AnimationUtils {
         return current;
     }
 
+	public static float lstransition(float now, float desired, double speed) {
+
+		final double dif = Math.abs(desired - now);
+
+		float a = (float) Math.abs((desired - (desired - (Math.abs(desired - now)))) / (100 - (speed * 10)));
+
+		float x = now;
+
+		if (dif != 0 && dif < a)
+			a = (float) dif;
+
+		if (dif > 0) {
+			if (now < desired) {
+				x += a * RenderUtils.deltaTime;
+			} else if (now > desired) {
+				x -= a * RenderUtils.deltaTime;
+			}
+		} else {
+			x = desired;
+		}
+
+		if(Math.abs(desired - x) < 10.0E-3 && x != desired) {
+			x = desired;
+		}
+
+		return x;
+	}
+
     public static double Anim(double now, double desired, double speed) {
         double dif = Math.abs(now - desired);
         int fps = Minecraft.getDebugFPS();
@@ -43,65 +72,13 @@ public class AnimationUtils {
         }
         return now;
     }
-
-    public static float clamp(float number, float min, float max) {
-        return (number < min) ? min : Math.min(number, max);
-    }
-
-    public static float moveUD(float current, float end, float smoothSpeed, float minSpeed) {
-        float movement = (end - current) * smoothSpeed;
-
-        if (movement > 0.0F) {
-            movement = Math.max(minSpeed, movement);
-            movement = Math.min(end - current, movement);
-        } else if (movement < 0.0F) {
-            movement = Math.min(-minSpeed, movement);
-            movement = Math.max(end - current, movement);
-        }
-        return current + movement;
-    }
-
-    public static float easeOut(float t, float d) {
-        return (t = t / d - 1) * t * t + 1;
-    }
-
-    public static float animate(float target, float current, float speed) {
-        boolean larger = target > current;
-
-        if (speed < 0F) {
-            speed = 0F;
-        } else if (speed > 1F) {
-            speed = 1F;
-        }
-
-        float dif = Math.max(target, current) - Math.min(target, current);
-        float factor = dif * speed;
-
-        if (factor < 0.1F) {
-            factor = 0.1F;
-        }
-
-        if (larger) {
-            current += factor;
-        } else {
-            current -= factor;
-        }
-        return current;
-    }
-
-    private long ms = getCurrentMS();
-
     private long getCurrentMS() {
         return System.currentTimeMillis();
     }
 
-    public final boolean elapsed(long milliseconds) {
-        return getCurrentMS() - ms > milliseconds;
-    }
-
-    public final void reset() {
+  /*  public final void reset() {
         ms = getCurrentMS();
-    }
+    }*/
 
     public static Color getHealthColor(float health, float maxHealth) {
         float[] fractions = new float[] { 0.0F, 0.5F, 1.0F };
