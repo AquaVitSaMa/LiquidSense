@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.utils.render;
 
+import net.ccbluex.liquidbounce.injection.implementations.IShaderGroup;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
 import net.minecraft.client.shader.Shader;
@@ -39,21 +40,11 @@ public class BlurBuffer{
 	}
 
 	private static void setShaderConfigs(float intensity, float blurWidth, float blurHeight){
+		((IShaderGroup)blurShader).getShaders().get(0).getShaderManager().getShaderUniform("Radius").set(intensity);
+		((IShaderGroup)blurShader).getShaders().get(1).getShaderManager().getShaderUniform("Radius").set(intensity);
 
-		try {
-			List<Shader> listShaders = (List<Shader>) blurShader.getClass().getField("listShaders").get(blurShader);
-
-			listShaders.get(0).getShaderManager().getShaderUniform("Radius").set(intensity);
-			listShaders.get(1).getShaderManager().getShaderUniform("Radius").set(intensity);
-			listShaders.get(0).getShaderManager().getShaderUniform("BlurDir").set(blurWidth, blurHeight);
-			listShaders.get(1).getShaderManager().getShaderUniform("BlurDir").set(blurHeight, blurWidth);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
-
-
-
+		((IShaderGroup)blurShader).getShaders().get(0).getShaderManager().getShaderUniform("BlurDir").set(blurWidth, blurHeight);
+		((IShaderGroup)blurShader).getShaders().get(1).getShaderManager().getShaderUniform("BlurDir").set(blurHeight, blurWidth);
 	}
 
 	public static void blurArea(int x, int y, float width, float height, boolean setupOverlay) {
