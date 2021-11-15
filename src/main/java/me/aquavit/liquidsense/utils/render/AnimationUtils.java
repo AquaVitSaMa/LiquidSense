@@ -35,28 +35,19 @@ public class AnimationUtils {
 
 	public static float lstransition(float now, float desired, double speed) {
 		final double dif = Math.abs(desired - now);
-
 		float a = (float) Math.abs((desired - (desired - (Math.abs(desired - now)))) / (100 - (speed * 10)));
-
 		float x = now;
-
 		if (dif != 0 && dif < a)
 			a = (float) dif;
-
 		if (dif > 0) {
-			if (now < desired) {
+			if (now < desired)
 				x += a * RenderUtils.deltaTime;
-			} else if (now > desired) {
+			else if (now > desired)
 				x -= a * RenderUtils.deltaTime;
-			}
-		} else {
+		} else
 			x = desired;
-		}
-
-		if(Math.abs(desired - x) < 10.0E-3 && x != desired) {
+		if(Math.abs(desired - x) < 10.0E-3 && x != desired)
 			x = desired;
-		}
-
 		return x;
 	}
 

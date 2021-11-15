@@ -30,6 +30,9 @@ public class Fonts {
     @FontDetails(fontName = "Museo-Sans", fontSize = 14)
     public static GameFontRenderer font14;
 
+    @FontDetails(fontName = "Museo-Sans", fontSize = 15)
+    public static GameFontRenderer font15;
+
     @FontDetails(fontName = "Museo-Sans", fontSize = 16)
     public static GameFontRenderer font16;
 
@@ -75,6 +78,7 @@ public class Fonts {
 
         downloadFonts();
         font14 = new GameFontRenderer(getFont("Museo-Sans.ttf", 14));
+	  font15 = new GameFontRenderer(getFont("Museo-Sans.ttf", 15));
         font16 = new GameFontRenderer(getFont("Museo-Sans.ttf", 16));
         font17 = new GameFontRenderer(getFont("Museo-Sans.ttf", 17));
         font18 = new GameFontRenderer(getFont("Museo-Sans.ttf", 18));
