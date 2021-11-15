@@ -12,16 +12,16 @@ import java.net.URLConnection;
 
 public class HttpUtils {
 
-    private static final String DEFAULT_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0";
+    public static final String DEFAULT_AGENT = "Mozilla/5.0 (Windows NT 6.1; WOW64; rv:25.0) Gecko/20100101 Firefox/25.0";
 
     public HttpUtils() {
         HttpURLConnection.setFollowRedirects(true);
     }
 
-    private static HttpURLConnection make(String url, String method, String agent) throws IOException {
+    public static HttpURLConnection make(String url, String method, String agent) throws IOException {
         HttpURLConnection httpConnection = (HttpURLConnection) (new URL(url)).openConnection();
         httpConnection.setRequestMethod(method);
-        httpConnection.setConnectTimeout(2000);
+        httpConnection.setConnectTimeout(5000);
         httpConnection.setReadTimeout(10000);
         httpConnection.setRequestProperty("User-Agent", agent);
         httpConnection.setInstanceFollowRedirects(true);

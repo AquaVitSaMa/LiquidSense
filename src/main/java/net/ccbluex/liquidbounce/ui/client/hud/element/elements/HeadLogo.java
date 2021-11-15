@@ -1,22 +1,17 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
+import me.aquavit.liquidsense.utils.login.UserUtils;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.Colors;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.value.BoolValue;
 import net.minecraft.client.renderer.GlStateManager;
-import net.minecraft.client.renderer.IImageBuffer;
-import net.minecraft.client.renderer.ThreadDownloadImageData;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-
-import static net.ccbluex.liquidbounce.utils.render.RenderUtils.convertCircular;
 
 @ElementInfo(name = "HeadLogo")
 public class HeadLogo extends Element {
@@ -28,20 +23,7 @@ public class HeadLogo extends Element {
     public Border drawElement() {
         if (rl == null) {
             rl = new ResourceLocation("sb.png");
-            IImageBuffer iib = new IImageBuffer() {
-                public BufferedImage parseUserSkin(BufferedImage img) {
-                    img = convertCircular(img, img.getWidth());
-                    return img;
-                }
-
-                @Override
-                public void skinAvailable() {
-
-                }
-            };
-
-            ThreadDownloadImageData tex = new ThreadDownloadImageData(null, "https://cdn.jsdelivr.net/gh/ImageHelper/image_repository@main/headlogo.png", (ResourceLocation) null, iib);
-            mc.getTextureManager().loadTexture(rl, tex);
+            UserUtils.getWebImageResource(rl,"https://cdn.jsdelivr.net/gh/ImageHelper/image_repository@main/headlogo.png");
         }
 
         int picture = 48;
