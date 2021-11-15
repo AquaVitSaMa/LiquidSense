@@ -1,6 +1,7 @@
 package net.ccbluex.liquidbounce.ui.client.gui.elements;
 
 import me.aquavit.liquidsense.utils.login.MinecraftAccount;
+import me.aquavit.liquidsense.utils.login.UserUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
@@ -10,10 +11,15 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.MathHelper;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 
 import java.awt.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -35,7 +41,6 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
     private int scrollDownButtonID;
     protected int mouseX;
     protected int mouseY;
-    protected boolean field_148163_i = true;
     /** Where the mouse was in the window when you first clicked to scroll */
     protected int initialClickY = -2;
     /**
@@ -66,7 +71,9 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
         this.right = width;
     }
 
-    protected abstract int getSize();
+    protected int getSize() {
+        return LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size();
+    }
 
     /**
      * The element in the slot that was clicked, boolean for whether it was double clicked or not
@@ -160,36 +167,6 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
                 this.initialClickY = -2;
                 this.bindAmountScrolled();
             }
-        }
-    }
-
-    public void drawScreen(int mouseXIn, int mouseYIn, float p_148128_3_) {
-        if (this.field_178041_q)
-        {
-            this.mouseX = mouseXIn;
-            this.mouseY = mouseYIn;
-            this.drawBackground();
-            int i = this.getScrollBarX();
-            int j = i + 6;
-            this.bindAmountScrolled();
-            GlStateManager.disableLighting();
-            GlStateManager.disableFog();
-            Tessellator tessellator = Tessellator.getInstance();
-            int k = this.left + this.width / 2 - this.getListWidth() / 2 + 2;
-            int l = this.top + 4 - (int)this.amountScrolled;
-
-            if (this.hasListHeader)
-            {
-                this.drawListHeader(k, l, tessellator);
-            }
-
-            this.drawSelectionBox(k, l, mouseXIn, mouseYIn);
-
-            this.func_148142_b(mouseXIn, mouseYIn);
-            GlStateManager.enableTexture2D();
-            GlStateManager.shadeModel(7424);
-            GlStateManager.enableAlpha();
-            GlStateManager.disableBlend();
         }
     }
 
@@ -324,12 +301,40 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
         return 220;
     }
 
+    public void drawScreen(int mouseXIn, int mouseYIn, float p_148128_3_) {
+        if (this.field_178041_q) {
+            this.mouseX = mouseXIn;
+            this.mouseY = mouseYIn;
+            this.drawBackground();
+            int i = this.getScrollBarX();
+            this.bindAmountScrolled();
+            GlStateManager.disableLighting();
+            GlStateManager.disableFog();
+            Tessellator tessellator = Tessellator.getInstance();
+            int k = this.left + this.width / 2 - this.getListWidth() / 2 + 2;
+            int l = this.top + 4 - (int)this.amountScrolled;
+
+            if (this.hasListHeader)
+            {
+                this.drawListHeader(k, l, tessellator);
+            }
+
+            this.drawSelectionBox(k, l, mouseXIn, mouseYIn);
+
+            this.func_148142_b(mouseXIn, mouseYIn);
+            GlStateManager.enableTexture2D();
+            GlStateManager.shadeModel(7424);
+            GlStateManager.enableAlpha();
+            GlStateManager.disableBlend();
+        }
+    }
+
     /**
      * Draws the selection box around the selected slot element.
      */
     protected void drawSelectionBox(int p_148120_1_, int p_148120_2_, int mouseXIn, int mouseYIn) {
-        int i = this.getSize();
-        for (int j = 0; j < i; ++j) {
+        for (int j = 0; j < LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size(); ++j) {
+            final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(j);
             int k = p_148120_2_ + j * this.slotHeight + this.headerPadding;
             int l = this.slotHeight - 4;
 
@@ -344,23 +349,27 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
             if (this.showSelectionBox && this.isSelected(j)) {
                 RenderUtils.drawRect(j1 - 1, k + l + 2, i1 + 1, k - 2, new Color(1,1,1, 80));
                 RenderUtils.drawRect(i1 - 1, k + l + 2, i1 + 1, k - 2, new Color(129, 147,255, 255));
-/*
-                    int i1 = 10;
-                    int j1 = 60;
-                    RenderUtils.drawRect(j1 - 1, k + l + 2, i1 + 1, k - 2, new Color(255,255,255, 200));
-                    RenderUtils.drawRect(i1 + 1, k + l + 2, i1 + 3, k - 2, new Color(17, 211,255, 255));
-
- */
+            }
+            if (!minecraftAccount.isCracked()) {
+                if (!skin.containsKey(j)){
+                    skin.put(j,UserUtils.getPlayerSkin(UserUtils.getUUID(minecraftAccount.getAccountName())));
+                }
+                RenderUtils.drawHead(skin.get(j),(width / 2) - 26, k + 2, 20, 20);
+            } else {
+                RenderUtils.drawHead(new ResourceLocation("textures/entity/steve.png"), (width / 2) - 26, k + 2, 20, 20);
             }
             this.drawSlot(j, p_148120_1_, k, l, mouseXIn, mouseYIn);
+
         }
     }
 
+    private HashMap<Integer, ResourceLocation> skin = new HashMap<Integer, ResourceLocation>();
+
     protected void drawSlot(int id, int x, int y, int var4, int var5, int var6) {
         final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id);
-        //RenderUtils.drawRect((width / 2) - 36,y + 2, 10, 10, Color.BLACK);
         Fonts.font20.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), y + 2, Color.WHITE.getRGB(), true);
         Fonts.font20.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), y + 15, minecraftAccount.isCracked() ? Color.GRAY.getRGB() : (minecraftAccount.getAccountName() == null ? Color.GREEN.getRGB() : Color.LIGHT_GRAY.getRGB()), true);
+
     }
 
     protected int getScrollBarX()

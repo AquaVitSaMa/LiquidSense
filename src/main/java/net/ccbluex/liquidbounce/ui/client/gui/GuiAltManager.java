@@ -23,6 +23,7 @@ import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
@@ -367,7 +368,6 @@ public class GuiAltManager extends GuiScreen {
                     status = "§cSelect an account.";
             }
         }
-
 
         @Override
         protected void drawBackground() {

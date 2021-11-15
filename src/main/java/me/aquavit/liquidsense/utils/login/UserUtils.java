@@ -109,7 +109,7 @@ public final class UserUtils {
 
     public static ResourceLocation getPlayerSkin(String uuid) {
         try {
-            HttpURLConnection httpURLConnection = HttpUtils.make("https://sessionserver.mojang.com/session/minecraft/profile/" + "4566e69fc90748ee8d71d7ba5aa00d20", "GET", HttpUtils.DEFAULT_AGENT);
+            HttpURLConnection httpURLConnection = HttpUtils.make("https://sessionserver.mojang.com/session/minecraft/profile/" + uuid, "GET", HttpUtils.DEFAULT_AGENT);
             httpURLConnection.setRequestProperty("Content-Type", "application/json");
 
             String result = HttpUtils.getResultFormStream(httpURLConnection.getInputStream());
