@@ -45,11 +45,9 @@ open class Miscible : GuiScreen() {
         RenderUtils.drawShader(MElement.x, MElement.y, MElement.dropx, MElement.dropy)
         RenderUtils.drawRect(MElement.x, MElement.y, MElement.x + MElement.dropx, MElement.y + MElement.dropy, Color(33, 33, 33).rgb)
 
-        // ���౳��
         RenderUtils.drawNLRect(MElement.x + 5f, MElement.y + 5f, MElement.x + (105 * dropxsize), MElement.y + (245f * dropysize), 2.5f, Color(44, 44, 44).darker().rgb) // Setting����
         RenderUtils.drawNLRect(MElement.x + 8, MElement.y + (225 * dropysize), MElement.x + (103 * dropxsize), MElement.y + (243f * dropysize), 3f, Color(33, 33, 33).rgb)
 
-        // ����ͷ��
         renderHead()
 
         Fonts.font16.drawString(mc.thePlayer.name.toUpperCase(), MElement.x + 38f, MElement.y + 18f, -1, false)
@@ -159,7 +157,6 @@ open class Miscible : GuiScreen() {
 
         if (hovertoFloatL(MElement.x + 8, MElement.y + 225 * dropysize, MElement.x + 102f * dropxsize, MElement.y + 243f * dropysize, mouseX, mouseY, true)) mc.displayGuiScreen(GuiHudDesigner())
 
-        //����
         background(dropxsize, dropysize)
 
         RenderUtils.drawShader(MElement.x + 5, MElement.y + 5, 100f * dropxsize, 240f * dropysize)
@@ -184,7 +181,6 @@ open class Miscible : GuiScreen() {
         RenderUtils.drawRect(MElement.x + (407f * dropxsize), MElement.y + 4, MElement.x + (409f * dropxsize), MElement.y + (242f * dropysize), Color(15, 15, 15).rgb)
         RenderUtils.drawRect(MElement.x + (406f * dropxsize), MElement.y + (v + (5 * dropysize)), MElement.x + (410f * dropxsize), MElement.y + v + (15 * dropysize), Color(98, 98, 98).rgb)
 
-        //����
         wheeltranslate.translate(0f, MElement.wheel)
         if (abs(MElement.wheel) > modulePosY - (245 * dropysize) && modulePosY > (245 * dropysize)) MElement.wheel = -(modulePosY - (245 * dropysize))
         if (hovertoFloatL(MElement.x + 105f, MElement.y + 5f, MElement.x + 410f, MElement.y + (245f * dropysize), mouseX, mouseY, false) && modulePosY > (245 * dropysize)) {
@@ -241,18 +237,15 @@ open class Miscible : GuiScreen() {
             openSearch = false
 
         }
-        //�������������
         if (ChatAllowedCharacters.isAllowedCharacter(typedChar) && openSearch) {
             MElement.Search = MElement.Search + typedChar
             MElement.wheel = 0f
         }
 
-        //����������ճ��
         if (keyCode == 47 && isCtrlKeyDown() && !isShiftKeyDown() && !isAltKeyDown() && openSearch) {
             MElement.Search += getClipboardString()
         }
 
-        //����������ɾ��
         if (keyCode == 14 && openSearch) {
             if (checkall) {
                 MElement.Search = ""
