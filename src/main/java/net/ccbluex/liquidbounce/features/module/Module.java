@@ -1,28 +1,19 @@
 package net.ccbluex.liquidbounce.features.module;
 
-import kotlin.jvm.internal.Intrinsics;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Listenable;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.NotifyType;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Print;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.value.Value;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.audio.ISound;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
-import org.lwjgl.input.Keyboard;
 
-import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @SideOnly(Side.CLIENT)
@@ -86,7 +77,7 @@ public class Module extends MinecraftInstance implements Listenable {
                 LiquidBounce.hud.addPrint(new Print(" " + name + (state ? " Enabled" : " Disabled"),3000f, Print.Type.state));
                 mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("random.click"),
                         1F));
-                LiquidBounce.hud.addNotification(new Notification(state ? "Enabled " : "Disabled "+name,"Toggled", NotifyType.SUCCESS,1500,500));
+//                LiquidBounce.hud.addNotification(new Notification(state ? "Enabled " : "Disabled "+name,"Toggled", NotifyType.SUCCESS,1500,500));
             }
 
             if (state) {
