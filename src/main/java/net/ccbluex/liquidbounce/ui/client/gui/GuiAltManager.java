@@ -84,6 +84,7 @@ public class GuiAltManager extends GuiScreen {
 
         if (minecraftAccount.isCracked()) {
             LoginUtils.loginCracked(minecraftAccount.getName());
+            loadcircle = false;
             return "§cYour name is now §8" + minecraftAccount.getName() + "§c.";
         }
 
@@ -92,6 +93,7 @@ public class GuiAltManager extends GuiScreen {
             String userName = Minecraft.getMinecraft().getSession().getUsername();
             minecraftAccount.setAccountName(userName);
             LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.accountsConfig);
+            loadcircle = false;
             return "§cYour name is now §f§l" + userName + "§c.";
         }
 
@@ -142,11 +144,11 @@ public class GuiAltManager extends GuiScreen {
 
         this.buttonList.add(new GuiButton(0, width - 80, height - 65, 70, 20, "Back"));
 
-        //this.buttonList.add(loginButton = new GuiButton(3, 5, j + 24, 90, 20, "Login"));
-        //this.buttonList.add(randomButton = new GuiButton(4, 5, j + 24 * 2, 90, 20, "Random"));
-        //this.buttonList.add(new GuiButton(6, 5, j + 24 * 3, 90, 20, "Direct Login"));
-        //this.buttonList.add(new GuiButton(88, 5, j + 24 * 4, 90, 20, "Change Name"));
-        //this.buttonList.add(new GuiButton(10, 5, j + 24 * 5 + 5, 90, 20, "Session Login"));
+        this.buttonList.add(loginButton = new GuiButton(3, 5, j + 24, 90, 20, "Login"));
+        this.buttonList.add(randomButton = new GuiButton(4, 5, j + 24 * 2, 90, 20, "Random"));
+        this.buttonList.add(new GuiButton(6, 5, j + 24 * 3, 90, 20, "Direct Login"));
+        this.buttonList.add(new GuiButton(88, 5, j + 24 * 4, 90, 20, "Change Name"));
+        this.buttonList.add(new GuiButton(10, 5, j + 24 * 5 + 5, 90, 20, "Session Login"));
 
     }
 

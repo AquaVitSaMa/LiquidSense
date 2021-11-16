@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.ui.client.gui.altmanager;
 
 import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
-import net.ccbluex.liquidbounce.ui.elements.GuiPasswordField;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiPasswordField;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.mc.TabUtils;
