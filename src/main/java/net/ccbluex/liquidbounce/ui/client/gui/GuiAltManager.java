@@ -42,9 +42,11 @@ public class GuiAltManager extends GuiScreen {
     private static final Map<String, Boolean> GENERATORS = new HashMap<>();
     private final GuiScreen prevGui;
     public String status = "§7Idle...";
+    public static boolean loadcircle = false;
     private GuiButton loginButton;
     private GuiButton randomButton;
     private GuiList altsList;
+    private HashMap<Integer, ResourceLocation> skin = new HashMap<Integer, ResourceLocation>();
 
     public GuiAltManager(final GuiScreen prevGui) {
         this.prevGui = prevGui;
@@ -140,11 +142,11 @@ public class GuiAltManager extends GuiScreen {
 
         this.buttonList.add(new GuiButton(0, width - 80, height - 65, 70, 20, "Back"));
 
-        this.buttonList.add(loginButton = new GuiButton(3, 5, j + 24, 90, 20, "Login"));
-        this.buttonList.add(randomButton = new GuiButton(4, 5, j + 24 * 2, 90, 20, "Random"));
-        this.buttonList.add(new GuiButton(6, 5, j + 24 * 3, 90, 20, "Direct Login"));
-        this.buttonList.add(new GuiButton(88, 5, j + 24 * 4, 90, 20, "Change Name"));
-        this.buttonList.add(new GuiButton(10, 5, j + 24 * 5 + 5, 90, 20, "Session Login"));
+        //this.buttonList.add(loginButton = new GuiButton(3, 5, j + 24, 90, 20, "Login"));
+        //this.buttonList.add(randomButton = new GuiButton(4, 5, j + 24 * 2, 90, 20, "Random"));
+        //this.buttonList.add(new GuiButton(6, 5, j + 24 * 3, 90, 20, "Direct Login"));
+        //this.buttonList.add(new GuiButton(88, 5, j + 24 * 4, 90, 20, "Change Name"));
+        //this.buttonList.add(new GuiButton(10, 5, j + 24 * 5 + 5, 90, 20, "Session Login"));
 
     }
 
@@ -155,7 +157,7 @@ public class GuiAltManager extends GuiScreen {
         altsList.drawScreen(mouseX, mouseY, partialTicks);
 
         Fonts.font20.drawCenteredString("AltManager", width / 2, 6, 0xffffff);
-        Fonts.font18.drawCenteredString(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts", width / 2, 18, 0xffffff);
+        //Fonts.font18.drawCenteredString(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts", width / 2, 18, 0xffffff);
         Fonts.font18.drawCenteredString(status, width / 2, 32, 0xffffff);
         Fonts.font18.drawStringWithShadow("§7User: §a" + (mc.getSession().getUsername()), 6, 6, 0xffffff);
         Fonts.font18.drawStringWithShadow("§7Type: §a" + (altService.getCurrentService() == AltService.EnumAltService.THEALTENING ? "TheAltening" :UserUtils.isValidTokenOffline(mc.getSession().getToken()) ? "Premium" : "Cracked"), 6, 15, 0xffffff);
@@ -189,13 +191,16 @@ public class GuiAltManager extends GuiScreen {
                     final Thread thread = new Thread(() -> {
                         final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot());
                         status = "§aLogging in...";
+                        loadcircle = true;
                         status = login(minecraftAccount);
 
                         loginButton.enabled = randomButton.enabled = true;
                     }, "AltLogin");
                     thread.start();
-                } else
+                } else {
                     status = "§cSelect an account.";
+                    loadcircle = false;
+                }
                 break;
             case 4:
                 if (LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() <= 0) {
@@ -213,6 +218,7 @@ public class GuiAltManager extends GuiScreen {
                 final Thread thread = new Thread(() -> {
                     final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(randomInteger);
                     status = "§aLogging in...";
+                    loadcircle = true;
                     status = login(minecraftAccount);
 
                     loginButton.enabled = randomButton.enabled = true;
@@ -360,12 +366,41 @@ public class GuiAltManager extends GuiScreen {
                     new Thread(() -> {
                         MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot());
                         status = "§aLogging in...";
+                        loadcircle = true;
                         status = "§c" + login(minecraftAccount);
 
                         loginButton.enabled = randomButton.enabled = true;
                     }, "AltManagerLogin").start();
-                } else
+                } else {
                     status = "§cSelect an account.";
+                    loadcircle = false;
+                }
+
+            }
+        }
+
+        @Override
+        protected void drawSlot(int id, int x, int y, int var4, int var5, int var6) {
+            MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id);
+            if (loadcircle && minecraftAccount == LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot())) {
+                int rot = (int) ((System.nanoTime() / 5000000) % 360);
+                RenderUtils.drawCircle((width / 2) + 100, y + 4, 3, rot - 180, rot);
+            }
+            if (!minecraftAccount.isCracked()) {
+                if (!skin.containsKey(id)){
+                    skin.put(id,UserUtils.getPlayerSkin(UserUtils.getUUID(minecraftAccount.getAccountName())));
+                } else {
+                    if (skin.get(id) != null) {
+                        RenderUtils.drawHead(skin.get(id),(width / 2) - 104, y + 2, 20, 20);
+                        RenderUtils.drawFilledCircle((width / 2) - 84,y + 2,2,Color.GREEN);
+                    } else {
+                        RenderUtils.drawHead(new ResourceLocation("textures/entity/steve.png"), (width / 2) - 104, y + 2, 20, 20);
+                        RenderUtils.drawFilledCircle((width / 2) - 84,y + 2,2,Color.GREEN);
+                    }
+                }
+            } else {
+                RenderUtils.drawHead(new ResourceLocation("textures/entity/steve.png"), (width / 2) - 104, y + 2, 20, 20);
+                RenderUtils.drawFilledCircle((width / 2) - 84,y + 2,2,Color.GRAY);
             }
         }
 

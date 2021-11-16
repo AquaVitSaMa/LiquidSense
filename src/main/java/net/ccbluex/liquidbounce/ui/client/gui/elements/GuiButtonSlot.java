@@ -317,7 +317,7 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
             {
                 this.drawListHeader(k, l, tessellator);
             }
-            Fonts.font30.drawCenteredString("Alts",(width / 2), l - 35, Color.WHITE.getRGB(), true);
+            Fonts.font30.drawCenteredString(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts",(width / 2) - 90, l - 30, Color.WHITE.getRGB(), true);
 
             this.drawSelectionBox(k, l, mouseXIn, mouseYIn);
 
@@ -343,12 +343,12 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
             }
             int i1 = this.left + (this.width / 2 - this.getListWidth() / 2);
             int j1 = this.left + this.width / 2 + this.getListWidth() / 2;
-            RenderUtils.drawRect(j1 - 1, k + l + 2, i1 + 1, k - 2, new Color(255,255,255, 180));
+            RenderUtils.drawRect(j1 - 1, k + l + 2, i1 + 1, k - 2, new Color(1,1,1, 80));
             RenderUtils.drawRect(i1 - 1, k + l + 2, i1 + 1, k - 2, new Color(17, 211,255, 255));
-            Fonts.font20.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), k + 2, Color.LIGHT_GRAY.getRGB(), true);
-            Fonts.font20.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), k + 15, Color.LIGHT_GRAY.getRGB(), true);
+            Fonts.font20.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), k + 2, new Color(150, 150, 150).darker().getRGB(), true);
+            Fonts.font20.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), k + 15, new Color(150, 150, 150).darker().getRGB(), true);
             if (this.showSelectionBox && this.isSelected(j)) {
-                RenderUtils.drawRect(j1 - 1, k + l + 2, i1 + 1, k - 2, new Color(1,1,1, 80));
+                RenderUtils.drawRect(j1 - 1, k + l + 2, i1 + 1, k - 2, new Color(255,255,255, 120));
                 RenderUtils.drawRect(i1 - 1, k + l + 2, i1 + 1, k - 2, new Color(129, 147,255, 255));
                 Fonts.font20.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), k + 2, Color.WHITE.getRGB(), true);
                 Fonts.font20.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), k + 15, Color.WHITE.getRGB(), true);
@@ -360,23 +360,7 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
         }
     }
 
-    private HashMap<Integer, ResourceLocation> skin = new HashMap<Integer, ResourceLocation>();
-
     protected void drawSlot(int id, int x, int y, int var4, int var5, int var6) {
-        final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id);
-        if (!minecraftAccount.isCracked()) {
-            if (!skin.containsKey(id)){
-                skin.put(id,UserUtils.getPlayerSkin(UserUtils.getUUID(minecraftAccount.getAccountName())));
-            } else {
-                if (skin.get(id) != null) {
-                    RenderUtils.drawHead(skin.get(id),(width / 2) - 86, y + 2, 20, 20);
-                    RenderUtils.drawFilledCircle((width / 2) - 66,y + 2,2,Color.GREEN);
-                }
-            }
-        } else {
-            RenderUtils.drawHead(new ResourceLocation("textures/entity/steve.png"), (width / 2) - 86, y + 2, 20, 20);
-            RenderUtils.drawFilledCircle((width / 2) - 66,y + 2,2,Color.GRAY);
-        }
     }
 
     protected int getScrollBarX()
