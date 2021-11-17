@@ -7,6 +7,7 @@ package net.ccbluex.liquidbounce.ui.client.gui.altmanager;
 
 import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
 import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiPasswordField;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiUsernameField;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.mc.TabUtils;
@@ -29,7 +30,7 @@ public class GuiDirectLogin extends GuiScreen {
 
     private GuiButton loginButton;
     private GuiButton clipboardLoginButton;
-    private GuiTextField username;
+    private GuiUsernameField username;
     private GuiPasswordField password;
 
     private String status = "§7Idle...";
@@ -43,7 +44,7 @@ public class GuiDirectLogin extends GuiScreen {
         buttonList.add(loginButton = new GuiButton(1, width / 2 - 100, height / 4 + 72, "Login"));
         buttonList.add(clipboardLoginButton = new GuiButton(2, width / 2 - 100, height / 4 + 96, "Clipboard Login"));
         buttonList.add(new GuiButton(0, width / 2 - 100, height / 4 + 120, "Back"));
-        username = new GuiTextField(2, Fonts.font20, width / 2 - 100, 60, 200, 20);
+        username = new GuiUsernameField(2, Fonts.font20, width / 2 - 100, 60, 200, 20);
         username.setFocused(true);
         username.setMaxStringLength(Integer.MAX_VALUE);
         password = new GuiPasswordField(3, Fonts.font20, width / 2 - 100, 85, 200, 20);

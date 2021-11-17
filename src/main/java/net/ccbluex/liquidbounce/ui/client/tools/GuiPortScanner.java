@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.ui.client.tools;
 
+import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiUsernameField;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.mc.TabUtils;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
@@ -27,10 +28,10 @@ public class GuiPortScanner extends GuiScreen {
 
     private final GuiScreen prevGui;
 
-    private GuiTextField hostField;
-    private GuiTextField minPortField;
-    private GuiTextField maxPortField;
-    private GuiTextField threadsField;
+    private GuiUsernameField hostField;
+    private GuiUsernameField minPortField;
+    private GuiUsernameField maxPortField;
+    private GuiUsernameField threadsField;
     private GuiButton buttonToggle;
 
     private boolean running;
@@ -55,20 +56,20 @@ public class GuiPortScanner extends GuiScreen {
     public void initGui() {
         Keyboard.enableRepeatEvents(true);
 
-        hostField = new GuiTextField(0, Fonts.font20, width / 2 - 100, 60, 200, 20);
+        hostField = new GuiUsernameField(0, Fonts.font20, width / 2 - 100, 60, 200, 20);
         hostField.setFocused(true);
         hostField.setMaxStringLength(Integer.MAX_VALUE);
         hostField.setText("localhost");
 
-        minPortField = new GuiTextField(1, Fonts.font20, width / 2 - 100, 90, 90, 20);
+        minPortField = new GuiUsernameField(1, Fonts.font20, width / 2 - 100, 90, 90, 20);
         minPortField.setMaxStringLength(5);
         minPortField.setText(String.valueOf(1));
 
-        maxPortField = new GuiTextField(2, Fonts.font20, width / 2 + 10, 90, 90, 20);
+        maxPortField = new GuiUsernameField(2, Fonts.font20, width / 2 + 10, 90, 90, 20);
         maxPortField.setMaxStringLength(5);
         maxPortField.setText(String.valueOf(65535));
 
-        threadsField = new GuiTextField(3, Fonts.font20, width / 2 - 100, 120, 200, 20);
+        threadsField = new GuiUsernameField(3, Fonts.font20, width / 2 - 100, 120, 200, 20);
         threadsField.setMaxStringLength(Integer.MAX_VALUE);
         threadsField.setText(String.valueOf(500));
 

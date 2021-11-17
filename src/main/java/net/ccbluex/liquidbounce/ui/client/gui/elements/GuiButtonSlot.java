@@ -345,13 +345,13 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
             int j1 = this.left + this.width / 2 + this.getListWidth() / 2;
             RenderUtils.drawRect(j1 - 1, k + l + 2, i1 + 1, k - 2, new Color(1,1,1, 80));
             RenderUtils.drawRect(i1 - 1, k + l + 2, i1 + 1, k - 2, new Color(17, 211,255, 255));
-            Fonts.font20.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), k + 2, new Color(150, 150, 150).darker().getRGB(), true);
-            Fonts.font20.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), k + 15, new Color(150, 150, 150).darker().getRGB(), true);
+            Fonts.font20.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), k + 2, Color.WHITE.getRGB(), true);
+            Fonts.font20.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), k + 15, Color.WHITE.getRGB(), true);
             if (this.showSelectionBox && this.isSelected(j)) {
                 RenderUtils.drawRect(j1 - 1, k + l + 2, i1 + 1, k - 2, new Color(255,255,255, 120));
                 RenderUtils.drawRect(i1 - 1, k + l + 2, i1 + 1, k - 2, new Color(129, 147,255, 255));
-                Fonts.font20.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), k + 2, Color.WHITE.getRGB(), true);
-                Fonts.font20.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), k + 15, Color.WHITE.getRGB(), true);
+                Fonts.font20.drawCenteredString(minecraftAccount.getAccountName() == null ? minecraftAccount.getName() : minecraftAccount.getAccountName(), (width / 2), k + 2, new Color(150, 150, 150).darker().getRGB(), true);
+                Fonts.font20.drawCenteredString(minecraftAccount.isCracked() ? "Cracked" : (minecraftAccount.getAccountName() == null ? "Premium" : minecraftAccount.getName()), (width / 2), k + 15, new Color(150, 150, 150).darker().getRGB(), true);
             }
 
 
