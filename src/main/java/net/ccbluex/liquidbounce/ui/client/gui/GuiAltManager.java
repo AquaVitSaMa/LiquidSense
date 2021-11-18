@@ -15,7 +15,6 @@ import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.AltService;
 import me.aquavit.liquidsense.utils.mc.TabUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.ui.client.gui.altmanager.*;
 import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiButtonElement;
 import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiButtonSlot;
 import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiPasswordField;
