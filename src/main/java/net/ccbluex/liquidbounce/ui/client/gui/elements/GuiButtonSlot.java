@@ -1,9 +1,11 @@
 package net.ccbluex.liquidbounce.ui.client.gui.elements;
 
+import com.thealtening.AltService;
 import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.login.UserUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.LiquidBounce;
+import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -317,7 +319,15 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
             {
                 this.drawListHeader(k, l, tessellator);
             }
-            Fonts.font30.drawCenteredString(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts",(width / 2) - 90, l - 30, Color.WHITE.getRGB(), true);
+            Fonts.font30.drawStringWithShadow(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts",(width / 2) - 110, l - 30, Color.WHITE.getRGB());
+
+            Fonts.font16.drawStringWithShadow("Name: " + (mc.getSession().getUsername()),
+                    (width / 2) - 110 + 20 +Fonts.font30.getStringWidth(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts"),
+                    l - 23, Color.WHITE.getRGB());
+
+            Fonts.font16.drawStringWithShadow("Type: " + (UserUtils.isValidTokenOffline(mc.getSession().getToken()) ? "§aOnline" : "§7Cracked"),
+                    (width / 2) - 110 + 40 +Fonts.font30.getStringWidth(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts") + Fonts.font16.getStringWidth("Name: " + (mc.getSession().getUsername())),
+                    l - 23, Color.WHITE.getRGB());
 
             this.drawSelectionBox(k, l, mouseXIn, mouseYIn);
 

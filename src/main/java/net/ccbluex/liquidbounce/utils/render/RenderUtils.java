@@ -587,18 +587,7 @@ public final class RenderUtils extends MinecraftInstance {
         resetCaps();
     }
 
-    public static void drawFace(int x, int y, float u, float v, int uWidth, int vHeight, int width, int height, float tileWidth, float tileHeight, AbstractClientPlayer target) {
-        try {
-            ResourceLocation skin = target.getLocationSkin();
-            Minecraft.getMinecraft().getTextureManager().bindTexture(skin);
-            GL11.glEnable(GL11.GL_BLEND);
-            GL11.glColor4f(1, 1, 1, 1);
-            Gui.drawScaledCustomSizeModalRect(x, y, u, v, uWidth, vHeight, width, height, tileWidth, tileHeight);
-            GL11.glDisable(GL11.GL_BLEND);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
+
 
     public static void rectangle(double left, double top, double right, double bottom, int color) {
         if (left < right) {
@@ -1708,6 +1697,19 @@ public final class RenderUtils extends MinecraftInstance {
         glDepthMask(true);
         glDisable(GL_BLEND);
         glEnable(GL_DEPTH_TEST);
+    }
+
+    public static void drawFace(int x, int y, int width, int height, AbstractClientPlayer target) {
+        try {
+            ResourceLocation skin = target.getLocationSkin();
+            Minecraft.getMinecraft().getTextureManager().bindTexture(skin);
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glColor4f(1, 1, 1, 1);
+            Gui.drawScaledCustomSizeModalRect(x, y, 8F, 8F, 8, 8, width, height, 64F, 64F);
+            GL11.glDisable(GL11.GL_BLEND);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public static void drawHead(ResourceLocation skin, int x, int y, int width, int height) {

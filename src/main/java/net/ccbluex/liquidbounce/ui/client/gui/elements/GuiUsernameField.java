@@ -10,6 +10,8 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.util.ChatAllowedCharacters;
 import net.minecraft.util.MathHelper;
 
+import java.awt.*;
+
 public class GuiUsernameField extends Gui {
 
     private final int id;
@@ -337,11 +339,13 @@ public class GuiUsernameField extends Gui {
     public void drawTextBox() {
         if (this.getVisible()) {
             if (this.getEnableBackgroundDrawing()) {
-                drawRect(this.xPosition - 1, this.yPosition - 1, this.xPosition + this.width + 1, this.yPosition + this.height + 1, -6250336); //描边
+                //drawRect(this.xPosition, this.yPosition - 1, this.xPosition + this.width, this.yPosition + this.height + 1, -6250336);
+
                 //drawRect(this.xPosition, this.yPosition, this.xPosition + this.width, this.yPosition + this.height, -16777216); //背景
+                drawRect(this.xPosition, this.yPosition + this.height, this.xPosition + this.width, this.yPosition + this.height + 1, Color.WHITE.getRGB());//描边
             }
 
-            int lvt_1_1_ = this.isEnabled ? this.enabledColor : this.disabledColor;
+            int fontColor = this.isEnabled ? Color.WHITE.getRGB() : this.disabledColor;
             int lvt_2_1_ = this.cursorPosition - this.lineScrollOffset;
             int lvt_3_1_ = this.selectionEnd - this.lineScrollOffset;
             String lvt_4_1_ = this.fontRendererInstance.trimStringToWidth(this.text.substring(this.lineScrollOffset), this.getWidth());
@@ -356,7 +360,7 @@ public class GuiUsernameField extends Gui {
 
             if (lvt_4_1_.length() > 0) {
                 String lvt_10_1_ = lvt_5_1_ ? lvt_4_1_.substring(0, lvt_2_1_) : lvt_4_1_;
-                lvt_9_1_ = this.fontRendererInstance.drawStringWithShadow(lvt_10_1_, (float)lvt_7_1_, (float)lvt_8_1_, lvt_1_1_);
+                lvt_9_1_ = this.fontRendererInstance.drawStringWithShadow(lvt_10_1_, (float)lvt_7_1_, (float)lvt_8_1_ + 1, fontColor);
             }
 
             boolean lvt_10_2_ = this.cursorPosition < this.text.length() || this.text.length() >= this.getMaxStringLength();
@@ -369,14 +373,14 @@ public class GuiUsernameField extends Gui {
             }
 
             if (lvt_4_1_.length() > 0 && lvt_5_1_ && lvt_2_1_ < lvt_4_1_.length()) {
-                lvt_9_1_ = this.fontRendererInstance.drawStringWithShadow(lvt_4_1_.substring(lvt_2_1_), (float)lvt_9_1_, (float)lvt_8_1_, lvt_1_1_);
+                lvt_9_1_ = this.fontRendererInstance.drawStringWithShadow(lvt_4_1_.substring(lvt_2_1_), (float)lvt_9_1_, (float)lvt_8_1_, fontColor);
             }
 
             if (lvt_6_1_) {
                 if (lvt_10_2_) {
                     Gui.drawRect(lvt_11_1_, lvt_8_1_ - 1, lvt_11_1_ + 1, lvt_8_1_ + 1 + this.fontRendererInstance.FONT_HEIGHT, -3092272);
                 } else {
-                    this.fontRendererInstance.drawStringWithShadow("_", (float)lvt_11_1_, (float)lvt_8_1_, lvt_1_1_);
+                    this.fontRendererInstance.drawStringWithShadow("_", (float)lvt_11_1_, (float)lvt_8_1_, fontColor);
                 }
             }
 

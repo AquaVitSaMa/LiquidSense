@@ -144,5 +144,13 @@ public final class UserUtils {
         Minecraft.getMinecraft().getTextureManager().loadTexture(rl, tex);
     }
 
+    public static String fixUUID(String uuid) {
+        StringBuilder builder = new StringBuilder(uuid);
+        builder.insert(8,"-");
+        builder.insert(13,"-");
+        builder.insert(18,"-");
+        builder.insert(23,"-");
+        return builder.toString();
+    }
 
 }

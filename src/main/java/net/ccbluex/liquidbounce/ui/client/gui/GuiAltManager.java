@@ -8,10 +8,18 @@ package net.ccbluex.liquidbounce.ui.client.gui;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import com.mojang.authlib.Agent;
+import com.mojang.authlib.exceptions.AuthenticationException;
+import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
+import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.AltService;
+import me.aquavit.liquidsense.utils.mc.TabUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.ui.client.gui.altmanager.*;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiButtonElement;
 import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiButtonSlot;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiPasswordField;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiUsernameField;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.login.LoginUtils;
@@ -19,22 +27,29 @@ import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.login.UserUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
+import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
 import java.awt.*;
+import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.UnsupportedFlavorException;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.UUID;
 
 public class GuiAltManager extends GuiScreen {
 
@@ -43,10 +58,15 @@ public class GuiAltManager extends GuiScreen {
     private final GuiScreen prevGui;
     public String status = "§7Idle...";
     public static boolean loadcircle = false;
-    private GuiButton loginButton;
-    private GuiButton randomButton;
+    private GuiButtonElement loginButton;
+    private GuiButtonElement randomButton;
     private GuiList altsList;
     private HashMap<Integer, ResourceLocation> skin = new HashMap<Integer, ResourceLocation>();
+    //GuiAdd
+    private GuiButtonElement addButton;
+    private GuiButtonElement clipboardButton;
+    private GuiUsernameField username;
+    private GuiPasswordField password;
 
     public GuiAltManager(final GuiScreen prevGui) {
         this.prevGui = prevGui;
@@ -137,19 +157,24 @@ public class GuiAltManager extends GuiScreen {
         altsList.scrollBy(index * altsList.slotHeight);
 
         int j = 22;
-        this.buttonList.add(new GuiButton(1, width - 80, j + 24, 70, 20, "Add"));
-        this.buttonList.add(new GuiButton(2, width - 80, j + 24 * 2, 70, 20, "Remove"));
-        this.buttonList.add(new GuiButton(7, width - 80, j + 24 * 3, 70, 20, "Import"));
-        this.buttonList.add(new GuiButton(8, width - 80, j + 24 * 4, 70, 20, "Copy"));
+        this.buttonList.add(new GuiButtonElement(2, 440, j + 24, 70, 20, "Remove"));
+        this.buttonList.add(new GuiButtonElement(7, 440, j + 24 * 2, 70, 20, "Import"));
+        this.buttonList.add(new GuiButtonElement(8, 440, j + 24 * 3, 70, 20, "Copy"));
+        this.buttonList.add(new GuiButtonElement(0, 440, j + 24 * 4, 70, 20, "Back"));
 
-        this.buttonList.add(new GuiButton(0, width - 80, height - 65, 70, 20, "Back"));
 
-        this.buttonList.add(loginButton = new GuiButton(3, 5, j + 24, 90, 20, "Login"));
-        this.buttonList.add(randomButton = new GuiButton(4, 5, j + 24 * 2, 90, 20, "Random"));
-        this.buttonList.add(new GuiButton(6, 5, j + 24 * 3, 90, 20, "Direct Login"));
-        this.buttonList.add(new GuiButton(88, 5, j + 24 * 4, 90, 20, "Change Name"));
-        this.buttonList.add(new GuiButton(10, 5, j + 24 * 5 + 5, 90, 20, "Session Login"));
+        //GuiAdd
+        Keyboard.enableRepeatEvents(true);
+        buttonList.add(addButton = new GuiButtonElement(12, 290, 93, 50, 15,"Add"));
+        buttonList.add(loginButton = new GuiButtonElement(3, 360, 93, 50, 15, "Login"));
+        buttonList.add(clipboardButton = new GuiButtonElement(13, 290, 113, 50, 15,"Clip"));
+        buttonList.add(randomButton = new GuiButtonElement(4, 360, 113, 50, 15,"Random"));
 
+        username = new GuiUsernameField(2, Fonts.font20, 290, 51, 120, 15);
+        username.setFocused(true);
+        username.setMaxStringLength(Integer.MAX_VALUE);
+        password = new GuiPasswordField(3, Fonts.font20, 290, 71, 120, 15);
+        password.setMaxStringLength(Integer.MAX_VALUE);
     }
 
     @Override
@@ -158,12 +183,19 @@ public class GuiAltManager extends GuiScreen {
 
         altsList.drawScreen(mouseX, mouseY, partialTicks);
 
-        Fonts.font20.drawCenteredString("AltManager", width / 2, 6, 0xffffff);
-        //Fonts.font18.drawCenteredString(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts", width / 2, 18, 0xffffff);
-        Fonts.font18.drawCenteredString(status, width / 2, 32, 0xffffff);
-        Fonts.font18.drawStringWithShadow("§7User: §a" + (mc.getSession().getUsername()), 6, 6, 0xffffff);
-        Fonts.font18.drawStringWithShadow("§7Type: §a" + (altService.getCurrentService() == AltService.EnumAltService.THEALTENING ? "TheAltening" :UserUtils.isValidTokenOffline(mc.getSession().getToken()) ? "Premium" : "Cracked"), 6, 15, 0xffffff);
+        Fonts.font18.drawStringWithShadow("Status: " + status, 280, 158, Color.WHITE.getRGB());
 
+        //Guiadd
+        drawRect(280, 43, 280 + 140, 138, new Color(1,1,1, 80).getRGB());
+        drawRect(280, 43, 282, 138, new Color(17, 211,255, 255).getRGB());
+        username.drawTextBox();
+        password.drawTextBox();
+
+        if(username.getText().isEmpty() && !username.isFocused())
+            drawCenteredString(Fonts.font20, "Username / E-Mail", 337, 55, Color.WHITE.getRGB());
+
+        if(password.getText().isEmpty() && !password.isFocused())
+            drawCenteredString(Fonts.font20, "Password", 317, 75, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -175,9 +207,6 @@ public class GuiAltManager extends GuiScreen {
             case 0:
                 mc.displayGuiScreen(prevGui);
                 break;
-            case 1:
-                mc.displayGuiScreen(new GuiAdd(this));
-                break;
             case 2:
                 if (altsList.getSelectedSlot() != -1 && altsList.getSelectedSlot() < altsList.getSize()) {
                     LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.remove(altsList.getSelectedSlot());
@@ -187,7 +216,22 @@ public class GuiAltManager extends GuiScreen {
                     status = "§cSelect an account.";
                 break;
             case 3:
-                if (altsList.getSelectedSlot() != -1 && altsList.getSelectedSlot() < altsList.getSize()) {
+                if (!username.getText().isEmpty()) {
+                    loginButton.enabled = randomButton.enabled = false;
+
+                    new Thread(() -> {
+                        status = "§aLogging in...";
+
+                        if (password.getText().isEmpty())
+                            status = GuiAltManager.login(new MinecraftAccount(ColorUtils.translateAlternateColorCodes(username.getText())));
+                        else
+                            status = GuiAltManager.login(new MinecraftAccount(username.getText(), password.getText()));
+
+                        loginButton.enabled = randomButton.enabled = true;
+                        username.setText("");
+                        password.setText("");
+                    }).start();
+                } else if ((username.getText().isEmpty() || username.getText().equals("")) && altsList.getSelectedSlot() != -1 && altsList.getSelectedSlot() < altsList.getSize()) {
                     loginButton.enabled = randomButton.enabled = false;
 
                     final Thread thread = new Thread(() -> {
@@ -200,7 +244,7 @@ public class GuiAltManager extends GuiScreen {
                     }, "AltLogin");
                     thread.start();
                 } else {
-                    status = "§cSelect an account.";
+                    status = "§cEnter/Select an account.";
                     loadcircle = false;
                 }
                 break;
@@ -226,9 +270,6 @@ public class GuiAltManager extends GuiScreen {
                     loginButton.enabled = randomButton.enabled = true;
                 }, "AltLogin");
                 thread.start();
-                break;
-            case 6:
-                mc.displayGuiScreen(new GuiDirectLogin(this));
                 break;
             case 7:
                 final File file = MiscUtils.openFileChooser();
@@ -277,11 +318,30 @@ public class GuiAltManager extends GuiScreen {
                 } else
                     status = "§cSelect an account.";
                 break;
-            case 88:
-                mc.displayGuiScreen(new GuiChangeName(this));
+            case 12:
+                if (LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.stream().anyMatch(account -> account.getName().equals(username.getText()))) {
+                    status = "§cThe account has already been added.";
+                    break;
+                }
+
+                addAccount(username.getText(), password.getText());
                 break;
-            case 10:
-                mc.displayGuiScreen(new GuiSessionLogin(this));
+            case 13:
+                try{
+                    final String clipboardData = (String) Toolkit.getDefaultToolkit().getSystemClipboard()
+                            .getData(DataFlavor.stringFlavor);
+                    final String[] accountData = clipboardData.split(":", 2);
+
+                    if (!clipboardData.contains(":") || accountData.length != 2) {
+                        status = "§cInvalid clipboard data. (Use: E-Mail:Password)";
+                        return;
+                    }
+
+                    addAccount(accountData[0], accountData[1]);
+                }catch(final UnsupportedFlavorException e) {
+                    status = "§cClipboard flavor unsupported!";
+                    ClientUtils.getLogger().error("Failed to read data from clipboard.", e);
+                }
                 break;
         }
     }
@@ -291,6 +351,9 @@ public class GuiAltManager extends GuiScreen {
         switch (keyCode) {
             case Keyboard.KEY_ESCAPE:
                 mc.displayGuiScreen(prevGui);
+                return;
+            case Keyboard.KEY_TAB: //GuiAdd
+                TabUtils.tab(username, password);
                 return;
             case Keyboard.KEY_UP: {
                 int i = altsList.getSelectedSlot() - 1;
@@ -307,7 +370,11 @@ public class GuiAltManager extends GuiScreen {
                 break;
             }
             case Keyboard.KEY_RETURN: {
-                altsList.elementClicked(altsList.getSelectedSlot(), true, 0, 0);
+                if (username.getText().isEmpty()) {
+                    altsList.elementClicked(altsList.getSelectedSlot(), true, 0, 0);
+                } else {
+                    actionPerformed(addButton);
+                }
                 break;
             }
             case Keyboard.KEY_NEXT: {
@@ -320,7 +387,87 @@ public class GuiAltManager extends GuiScreen {
             }
         }
 
+        //GuiAdd
+        if(username.isFocused())
+            username.textboxKeyTyped(typedChar, keyCode);
+
+        if(password.isFocused())
+            password.textboxKeyTyped(typedChar, keyCode);
+
         super.keyTyped(typedChar, keyCode);
+    }
+
+    @Override //GuiAdd
+    protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
+        username.mouseClicked(mouseX, mouseY, mouseButton);
+        password.mouseClicked(mouseX, mouseY, mouseButton);
+        super.mouseClicked(mouseX, mouseY, mouseButton);
+    }
+
+    @Override //GuiAdd
+    public void updateScreen() {
+        username.updateCursorCounter();
+        password.updateCursorCounter();
+
+        super.updateScreen();
+    }
+
+    @Override //GuiAdd
+    public void onGuiClosed() {
+        Keyboard.enableRepeatEvents(false);
+        super.onGuiClosed();
+    }
+
+    private void addAccount(final String name, final String passwordd) { //GuiAdd
+        if (LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.stream()
+                .anyMatch(account -> account.getName().equals(name))) {
+            status = "§cThe account has already been added.";
+            return;
+        }
+
+        addButton.enabled = clipboardButton.enabled = false;
+
+        final MinecraftAccount account = new MinecraftAccount(name, passwordd);
+
+        new Thread(() -> {
+            if (!account.isCracked()) {
+                status = "§aChecking...";
+
+                try {
+                    final AltService.EnumAltService oldService = GuiAltManager.altService.getCurrentService();
+
+                    if (oldService != AltService.EnumAltService.MOJANG) {
+                        GuiAltManager.altService.switchService(AltService.EnumAltService.MOJANG);
+                    }
+
+                    final YggdrasilUserAuthentication userAuthentication = (YggdrasilUserAuthentication)
+                            new YggdrasilAuthenticationService(Proxy.NO_PROXY, "")
+                                    .createUserAuthentication(Agent.MINECRAFT);
+
+                    userAuthentication.setUsername(account.getName());
+                    userAuthentication.setPassword(account.getPassword());
+
+                    userAuthentication.logIn();
+                    account.setAccountName(userAuthentication.getSelectedProfile().getName());
+
+                    if (oldService == AltService.EnumAltService.THEALTENING)
+                        GuiAltManager.altService.switchService(AltService.EnumAltService.THEALTENING);
+                } catch (NullPointerException | AuthenticationException | NoSuchFieldException | IllegalAccessException e) {
+                    status = "§cThe account doesn't work.";
+                    addButton.enabled = clipboardButton.enabled = true;
+                    return;
+                }
+            }
+
+
+            LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.add(account);
+            LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.accountsConfig);
+
+            status = "§aThe account has been added.";
+            addButton.enabled = clipboardButton.enabled = true;
+            username.setText("");
+            password.setText("");
+        }).start();
     }
 
     @Override
