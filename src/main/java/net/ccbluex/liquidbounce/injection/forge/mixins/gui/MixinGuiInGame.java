@@ -11,6 +11,9 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Render2DEvent;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
+import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.HeadLogo;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Hotbar;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -84,6 +87,13 @@ public abstract class MixinGuiInGame extends Gui {
         if (OpenGlHelper.shadersSupported && Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer)
            BlurBuffer.updateBlurBuffer(20f,true);
 
+        for (Element e : LiquidBounce.hud.getElements()) {
+            if (e instanceof Hotbar) {
+                LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
+                return;
+            }
+        }
+
         if(Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer && hud.getState() && hud.blackHotbarValue.get()) {
             EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().getRenderViewEntity();
 
@@ -156,6 +166,7 @@ public abstract class MixinGuiInGame extends Gui {
             RenderHelper.disableStandardItemLighting();
             GlStateManager.disableRescaleNormal();
             GlStateManager.disableBlend();
+
             LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
             callbackInfo.cancel();
         }

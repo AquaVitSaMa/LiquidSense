@@ -44,7 +44,8 @@ open class HUD : MinecraftInstance() {
                 SpeedGraph::class.java,
                 HeadLogo::class.java,
                 KeyBinds::class.java,
-                Prints::class.java
+                Prints::class.java,
+                Hotbar::class.java
         )
 
         /**
