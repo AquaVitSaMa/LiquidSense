@@ -127,7 +127,7 @@ import java.awt.image.BufferedImage
         GL11.glEnd()
 
         if (assumeNonVolatile) {
-            cachedStrings[text] = CachedFont(list, System.currentTimeMillis())
+            cachedStrings[text] = CachedFont(list, System.currentTimeMillis(),false)
             GL11.glEndList()
         }
 
