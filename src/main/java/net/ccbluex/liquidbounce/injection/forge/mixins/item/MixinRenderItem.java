@@ -32,14 +32,14 @@ public abstract class MixinRenderItem implements IResourceManagerReloadListener 
     public abstract void onResourceManagerReload(IResourceManager iResourceManager);
 
     @Shadow
-    protected abstract void renderModel(IBakedModel p_renderModel_1_, int p_renderModel_2_);
+    protected abstract void renderModel(IBakedModel iBakedModel, int p_renderModel_2_);
 
 	/**
 	 * @author CCBlueX
 	 * @reason CCBlueX
 	 */
     @Overwrite
-    private void renderEffect(IBakedModel p_renderEffect_1_) {
+    private void renderEffect(IBakedModel iBakedModel) {
         final EnchantEffect effect = (EnchantEffect) LiquidBounce.moduleManager.get(EnchantEffect.class);
         final Color color = effect.getRainbow().get() ? ColorUtils.rainbow() : new Color(effect.getRedValue().get(),effect.getGreenValue().get(),effect.getBlueValue().get(),effect.getalphaValue().get());
         GlStateManager.depthMask(false);
@@ -54,9 +54,9 @@ public abstract class MixinRenderItem implements IResourceManagerReloadListener 
         GlStateManager.translate(f, 0.0F, 0.0F);
         GlStateManager.rotate(-50.0F, 0.0F, 0.0F, 1.0F);
         if(effect.getState())
-            this.renderModel(p_renderEffect_1_, color.getRGB());
+            this.renderModel(iBakedModel, color.getRGB());
         else
-            this.renderModel(p_renderEffect_1_, -8372020);
+            this.renderModel(iBakedModel, -8372020);
         GlStateManager.popMatrix();
         GlStateManager.pushMatrix();
         GlStateManager.scale(8.0F, 8.0F, 8.0F);
@@ -64,9 +64,9 @@ public abstract class MixinRenderItem implements IResourceManagerReloadListener 
         GlStateManager.translate(-f1, 0.0F, 0.0F);
         GlStateManager.rotate(10.0F, 0.0F, 0.0F, 1.0F);
         if(effect.getState())
-            this.renderModel(p_renderEffect_1_, color.getRGB());
+            this.renderModel(iBakedModel, color.getRGB());
         else
-            this.renderModel(p_renderEffect_1_, -8372020);
+            this.renderModel(iBakedModel, -8372020);
         GlStateManager.popMatrix();
         GlStateManager.matrixMode(5888);
         GlStateManager.blendFunc(770, 771);

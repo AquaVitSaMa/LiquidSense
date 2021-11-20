@@ -53,6 +53,7 @@ public class LiquidSense {
         liquidSenseModules.add(BlockOverlay.class);
         liquidSenseModules.add(Clip.class);
         liquidSenseModules.add(Ghost.class);
+        liquidSenseModules.add(Tracers.class);
         liquidSenseModules.add(GhostHand.class);
         liquidSenseModules.add(Kick.class);
         liquidSenseModules.add(HYTBypass.class);

@@ -67,7 +67,6 @@ public final class ModuleManager implements Listenable {
                 Tower.class,
                 ESP.class,
                 Speed.class,
-                Tracers.class,
                 NameTags.class,
                 FastUse.class,
                 Teleport.class,
