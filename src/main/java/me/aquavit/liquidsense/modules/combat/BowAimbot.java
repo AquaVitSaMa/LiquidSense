@@ -15,6 +15,7 @@ import net.ccbluex.liquidbounce.value.ListValue;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemBow;
+import net.minecraft.item.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
@@ -42,8 +43,8 @@ public class BowAimbot extends Module {
     @EventTarget
     public void onUpdate(UpdateEvent event) {
         target = null;
-
-        if (mc.thePlayer.getItemInUse().getItem() != null && mc.thePlayer.getItemInUse().getItem() instanceof ItemBow) {
+        ItemStack itemStack = mc.thePlayer.getItemInUse();
+        if ((itemStack != null ? itemStack.getItem() : null) instanceof ItemBow) {
             Entity entity = getTarget(throughWallsValue.get(), priorityValue.get());
             if (entity == null)return;
             target = entity;
