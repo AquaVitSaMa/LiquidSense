@@ -1,7 +1,6 @@
 package net.ccbluex.liquidbounce.ui.client.hud;
 
 import com.google.common.collect.Lists;
-import kotlin.jvm.JvmStatic;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner;
@@ -56,7 +55,6 @@ public class HUD extends MinecraftInstance {
             };
         }
 
-        @JvmStatic
         public static final HUD createDefault() {
             return (new HUD())
                     .addElement(Text.Companion.defaultClient())
@@ -110,17 +108,15 @@ public class HUD extends MinecraftInstance {
 
     }
 
-    public final void handleMouseClick(int mouseX, int mouseY, int button) {
-        for (Element element : Lists.reverse(elements))
+    public void handleMouseClick(final int mouseX, final int mouseY, final int button) {
+        for (final Element element : elements) {
             element.handleMouseClick((mouseX / element.getScale()) - element.getRenderX(), (mouseY / element.getScale()) - element.getRenderY(), button);
-
-        if (button == 0) {
-            for (int i = elements.size() - 1; i >= 0; --i) {
-                final Element element = elements.get(i);
-                if (!element.isInBorder((int)(mouseX / element.getScale()), (int)(mouseY / element.getScale()))) continue;
+        }
+        for (final Element element : Lists.reverse(elements)) {
+            if (element.isInBorder((mouseX / element.getScale()) - element.getRenderX(), (mouseY / element.getScale()) - element.getRenderY()) && button == 0) {
                 element.setDrag(true);
-                elements.remove(element);
-                elements.add(element);
+                this.elements.remove(element);
+                this.elements.add(element);
                 break;
             }
         }
