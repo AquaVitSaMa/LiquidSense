@@ -43,6 +43,7 @@ public class LiquidSense {
         liquidSenseModules.add(AbortBreaking.class);
         liquidSenseModules.add(SwingAnimation.class);
         liquidSenseModules.add(FastPlace.class);
+        liquidSenseModules.add(BowAimbot.class);
         liquidSenseModules.add(Zoot.class);
         liquidSenseModules.add(Regen.class);
         liquidSenseModules.add(ConsoleSpammer.class);

@@ -50,7 +50,6 @@ public final class ModuleManager implements Listenable {
                 AutoBow.class,
                 AutoPot.class,
                 AutoSoup.class,
-                BowAimbot.class,
                 Criticals.class,
                 Aura.class,
                 Velocity.class,
