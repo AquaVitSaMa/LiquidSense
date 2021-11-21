@@ -1,14 +1,13 @@
 package net.ccbluex.liquidbounce.ui.client.hud;
 
+import com.google.common.collect.Lists;
 import kotlin.jvm.JvmStatic;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.*;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
@@ -112,7 +111,7 @@ public class HUD extends MinecraftInstance {
     }
 
     public final void handleMouseClick(int mouseX, int mouseY, int button) {
-        for (Element element : elements)
+        for (Element element : Lists.reverse(elements))
             element.handleMouseClick((mouseX / element.getScale()) - element.getRenderX(), (mouseY / element.getScale()) - element.getRenderY(), button);
 
         if (button == 0) {
