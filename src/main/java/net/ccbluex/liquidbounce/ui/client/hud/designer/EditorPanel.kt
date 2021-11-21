@@ -5,16 +5,16 @@
  */
 package net.ccbluex.liquidbounce.ui.client.hud.designer
 
+import me.aquavit.liquidsense.utils.mc.MinecraftInstance
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.features.module.modules.render.ClickGUI
+import net.ccbluex.liquidbounce.ui.client.hud.HUD
 import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.createDefault
-import net.ccbluex.liquidbounce.ui.client.hud.HUD.Companion.elements
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import net.ccbluex.liquidbounce.ui.font.GameFontRenderer
-import me.aquavit.liquidsense.utils.mc.MinecraftInstance
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.*
 import net.minecraft.client.gui.Gui
@@ -115,7 +115,7 @@ class EditorPanel(private val hudDesigner: GuiHudDesigner, var x: Int, var y: In
         realHeight = 15
         width = 90
 
-        for (element in elements) {
+        for (element in HUD.Companion.getElements()) {
             val info = element.getAnnotation(ElementInfo::class.java) ?: continue
 
             if (info.single && LiquidBounce.hud.elements.any { it.javaClass == element })
