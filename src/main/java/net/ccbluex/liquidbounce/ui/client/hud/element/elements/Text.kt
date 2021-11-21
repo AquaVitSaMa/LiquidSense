@@ -5,6 +5,11 @@
  */
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements
 
+import me.aquavit.liquidsense.utils.entity.EntityUtils
+import me.aquavit.liquidsense.utils.misc.ServerUtils
+import me.aquavit.liquidsense.utils.module.CPSCounter
+import me.aquavit.liquidsense.utils.render.UiUtils
+import me.aquavit.liquidsense.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border
@@ -12,14 +17,9 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Element
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import me.aquavit.liquidsense.utils.module.CPSCounter
-import me.aquavit.liquidsense.utils.entity.EntityUtils
-import me.aquavit.liquidsense.utils.misc.ServerUtils
 import net.ccbluex.liquidbounce.utils.render.ColorUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
-import me.aquavit.liquidsense.utils.render.UiUtils
 import net.ccbluex.liquidbounce.utils.render.shader.shaders.RainbowFontShader
-import me.aquavit.liquidsense.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.value.*
 import net.minecraft.client.Minecraft
 import net.minecraft.client.renderer.GlStateManager
@@ -37,7 +37,7 @@ import kotlin.math.sqrt
  */
 @ElementInfo(name = "Text")
 class Text(x: Double = 10.0, y: Double = 10.0, scale: Float = 1F,
-           side: Side = Side.default()) : Element(x, y, scale, side) {
+           side: Side = Side(Side.Horizontal.LEFT, Side.Vertical.UP)) : Element(x, y, scale, side) {
 
     companion object {
 

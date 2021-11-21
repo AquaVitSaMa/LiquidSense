@@ -15,8 +15,7 @@ import kotlin.math.min
 /**
  * CustomHUD element
  */
-abstract class Element(var x: Double = 2.0, var y: Double = 2.0, scale: Float = 1F,
-                       var side: Side = Side.default()) : MinecraftInstance() {
+abstract class Element(var x: Double = 2.0, var y: Double = 2.0, scale: Float = 1F, var side: Side = Side(Side.Horizontal.LEFT, Side.Vertical.UP)) : MinecraftInstance() {
     val info = javaClass.getAnnotation(ElementInfo::class.java)
             ?: throw IllegalArgumentException("Passed element with missing element info")
 
@@ -135,75 +134,5 @@ abstract class Element(var x: Double = 2.0, var y: Double = 2.0, scale: Float = 
      * Called when key pressed
      */
     open fun handleKey(c: Char, keyCode: Int) {}
-
-}
-
-/**
- * Element info
- */
-@kotlin.annotation.Retention(AnnotationRetention.RUNTIME)
-annotation class ElementInfo(val name: String, val single: Boolean = false, val force: Boolean = false, val disableScale: Boolean = false, val priority: Int = 0)
-
-/**
- * CustomHUD Side
- *
- * Allows to change default x and y position by side
- */
-class Side(var horizontal: Horizontal, var vertical: Vertical) {
-
-    companion object {
-
-        /**
-         * Default element side
-         */
-        fun default() = Side(Horizontal.LEFT, Vertical.UP)
-
-    }
-
-    /**
-     * Horizontal side
-     */
-    enum class Horizontal(val sideName: String) {
-
-        LEFT("Left"),
-        MIDDLE("Middle"),
-        RIGHT("Right");
-
-        companion object {
-
-            @JvmStatic
-            fun getByName(name: String) = values().find { it.sideName == name }
-
-        }
-
-    }
-
-    /**
-     * Vertical side
-     */
-    enum class Vertical(val sideName: String) {
-
-        UP("Up"),
-        MIDDLE("Middle"),
-        DOWN("Down");
-
-        companion object {
-
-            @JvmStatic
-            fun getByName(name: String) = values().find { it.sideName == name }
-
-        }
-
-    }
-
-}
-
-/**
- * Border of element
- */
-data class Border(val x: Float, val y: Float, val x2: Float, val y2: Float) {
-
-
-    fun draw() = RenderUtils.drawBorderedRect(x, y, x2, y2, 3F, Int.MIN_VALUE, 0)
 
 }
