@@ -113,9 +113,5 @@ public class Print {
         }
 
     }
-
-    public enum FadeState {IN, STAY, OUT, END}
-
-    public enum Type {error, success, info, state, none}
 }
 

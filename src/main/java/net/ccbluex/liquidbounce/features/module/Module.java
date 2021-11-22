@@ -5,6 +5,7 @@ import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Print;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Type;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.value.Value;
 import net.minecraft.client.audio.PositionedSoundRecord;
@@ -74,7 +75,7 @@ public class Module extends MinecraftInstance implements Listenable {
             this.onToggle(state);
 
             if (!LiquidBounce.INSTANCE.isStarting()) {
-                LiquidBounce.hud.addPrint(new Print(" " + name + (state ? " Enabled" : " Disabled"),3000f, Print.Type.state));
+                LiquidBounce.hud.addPrint(new Print(" " + name + (state ? " Enabled" : " Disabled"),3000f, Type.state));
                 mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("random.click"),
                         1F));
 //                LiquidBounce.hud.addNotification(new Notification(state ? "Enabled " : "Disabled "+name,"Toggled", NotifyType.SUCCESS,1500,500));

@@ -8,6 +8,8 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Print;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.FadeState;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Type;
 import net.minecraft.entity.EntityLivingBase;
 import org.jetbrains.annotations.Nullable;
 
@@ -20,7 +22,7 @@ import static me.aquavit.liquidsense.utils.module.Particles.roundToPlace;
 @ElementInfo(name = "Print")
 public class Prints extends Element {
 
-    private final Print exampleNotification = new Print("Example Print", 0.0F, Print.Type.info);
+    private final Print exampleNotification = new Print("Example Print", 0.0F, Type.info);
 
     public Prints() {
         super(0, 30, 1f, new Side(Side.Horizontal.LEFT, Side.Vertical.UP));
@@ -40,7 +42,7 @@ public class Prints extends Element {
             }
             print.y = print.translate.getY();
             print.drawPrint();
-            if(print.fadeState == Print.FadeState.END) {
+            if(print.fadeState == FadeState.END) {
                 LiquidBounce.hud.removePrint(print);
                 index--;
             }
@@ -50,7 +52,7 @@ public class Prints extends Element {
             if (!LiquidBounce.INSTANCE.getHud().getPrints().contains(exampleNotification)) {
                 LiquidBounce.hud.addPrint(exampleNotification);
             }
-            exampleNotification.fadeState = Print.FadeState.STAY;
+            exampleNotification.fadeState = FadeState.STAY;
             exampleNotification.x = ((float) this.exampleNotification.textLength + 8.0F);
             return new Border(-exampleNotification.x + 12 + exampleNotification.textLength, 0, -exampleNotification.x - 35, 20 + 11F * LiquidBounce.INSTANCE.getHud().getNotifications().size());
         }
@@ -71,7 +73,7 @@ public class Prints extends Element {
             if (floatValue != health) {
                 int remaining = floatValue - (floatValue - health) < 0 ? 0 : (int) Math.floor(floatValue - (floatValue - health));
                 String text = "Hurt " + name + " for " + roundToPlace(floatValue - health, 1) + " hp " + "(" + remaining + " remaining).";
-                LiquidBounce.hud.addPrint(new Print(text,3000, Print.Type.success));
+                LiquidBounce.hud.addPrint(new Print(text,3000, Type.success));
                 this.healthMap.remove(entity);
                 this.healthMap.put(entity, entity.getHealth());
             }

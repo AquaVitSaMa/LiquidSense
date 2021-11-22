@@ -1,5 +1,7 @@
 package me.aquavit.liquidsense.modules.movement;
 
+import me.aquavit.liquidsense.modules.combat.Aura
+import me.aquavit.liquidsense.utils.entity.MovementUtils
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventTarget
 import net.ccbluex.liquidbounce.event.MoveEvent
@@ -7,10 +9,8 @@ import net.ccbluex.liquidbounce.event.Render3DEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import me.aquavit.liquidsense.modules.combat.Aura
 import net.ccbluex.liquidbounce.features.module.modules.movement.Fly
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed
-import me.aquavit.liquidsense.utils.entity.MovementUtils
 import net.ccbluex.liquidbounce.utils.RotationUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.BoolValue
@@ -21,8 +21,7 @@ import net.minecraft.entity.Entity
 import net.minecraft.util.AxisAlignedBB
 import java.awt.Color
 
-@ModuleInfo(name = "TargetStrafe", description = "No Faq",
-        category = ModuleCategory.MOVEMENT)
+@ModuleInfo(name = "TargetStrafe", description = "Rotate around with entity", category = ModuleCategory.COMBAT)
 class TargetStrafe : Module() {
 
     private val ThirdPersonView = BoolValue("ThirdPersonView",  false)
