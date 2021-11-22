@@ -45,6 +45,9 @@ public class Fonts {
     @FontDetails(fontName = "Museo-Sans", fontSize = 20)
     public static GameFontRenderer font20;
 
+    @FontDetails(fontName = "Museo-Sans", fontSize = 22)
+    public static GameFontRenderer font22;
+
     @FontDetails(fontName = "Museo-Sans", fontSize = 25)
     public static GameFontRenderer font25;
 
@@ -86,6 +89,7 @@ public class Fonts {
         font17 = new GameFontRenderer(getFont("Museo-Sans.ttf", 17));
         font18 = new GameFontRenderer(getFont("Museo-Sans.ttf", 18));
         font20 = new GameFontRenderer(getFont("Museo-Sans.ttf", 20));
+        font22 = new GameFontRenderer(getFont("Museo-Sans.ttf", 22));
         font25 = new GameFontRenderer(getFont("Museo-Sans.ttf", 25));
         font30 = new GameFontRenderer(getFont("Museo-Sans.ttf", 30));
         csgo35 = new GameFontRenderer(getFont("LiquidSense.ttf", 18));
