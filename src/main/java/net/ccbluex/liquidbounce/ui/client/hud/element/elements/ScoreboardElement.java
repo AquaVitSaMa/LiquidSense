@@ -2,7 +2,6 @@ package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
-import kotlin.ranges.RangesKt;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
@@ -89,7 +88,7 @@ public class ScoreboardElement extends Element {
             for (Score score : scoreCollection) {
                 ScorePlayerTeam scorePlayerTeam = scoreboard.getPlayersTeam(score.getPlayerName());
                 String width = ScorePlayerTeam.formatPlayerName(scorePlayerTeam, score.getPlayerName()) + ": " + EnumChatFormatting.RED + score.getScorePoints();
-                maxWidth = RangesKt.coerceAtLeast(maxWidth, fontRenderer.getStringWidth(width));
+                maxWidth = Math.max(maxWidth,fontRenderer.getStringWidth(width));
             }
 
             maxHeight = scoreCollection.size() * fontRenderer.FONT_HEIGHT;
