@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.player;
 
+import me.aquavit.liquidsense.utils.mc.VoidCheck;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -87,7 +88,7 @@ public class NoFall extends Module {
                 if (fallDist > mc.thePlayer.fallDistance)
                     fallDist = 0;
 
-                if (mc.thePlayer.motionY < 0 && mc.thePlayer.fallDistance > 2.124 && !checkVoid(mc.thePlayer) && isBlockUnder() && !mc.thePlayer.isSpectator() && !mc.thePlayer.capabilities.allowFlying) {
+                if (mc.thePlayer.motionY < 0 && mc.thePlayer.fallDistance > 2.124 && !VoidCheck.checkVoid(mc.thePlayer) && isBlockUnder() && !mc.thePlayer.isSpectator() && !mc.thePlayer.capabilities.allowFlying) {
                     double motionY = mc.thePlayer.motionY;
                     double fallingDist = mc.thePlayer.fallDistance - fallDist;
                     double realDist = fallingDist + -((motionY - 0.08D) * 0.9800000190734863D);
@@ -189,7 +190,7 @@ public class NoFall extends Module {
         if (modeValue.get().equalsIgnoreCase("AAC4.4.0")) {
             final EventState eventState = event.getEventState();
             if (eventState == EventState.PRE) {
-                if (!inVoid()) {
+                if (!VoidCheck.checkVoid(mc.thePlayer)) {
                     if (fakelag) {
                         fakelag = false;
                         if (packets.size() > 0) {
@@ -215,7 +216,7 @@ public class NoFall extends Module {
                     packetmodify = true;
                     mc.thePlayer.fallDistance = 0;
                 }
-                if (inAir(4.0, 1.0)) {
+                if (VoidCheck.inAir(4.0, 1.0)) {
                     return;
                 }
                 if (!fakelag) {
@@ -367,61 +368,7 @@ public class NoFall extends Module {
             }
         }
     }
-    public boolean inVoid() {
-        if (mc.thePlayer.posY < 0) {
-            return false;
-        }
 
-        for (int off = 0; off < mc.thePlayer.posY + 2; off += 2) {
-            AxisAlignedBB bb = new AxisAlignedBB(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, mc.thePlayer.posX, off, mc.thePlayer.posZ);
-            if (!mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, bb).isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    private boolean isVoid(int X, int Z, EntityLivingBase entity){
-        Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
-
-        if (fly.getState()) {
-            return false;
-        }
-        if (mc.thePlayer.posY < 0.0) {
-            return true;
-        }
-        for (int off = 0; off < entity.posY + 2; off += 2) {
-            AxisAlignedBB bb = entity.getEntityBoundingBox().offset(X,-off,Z);
-            if (mc.theWorld.getCollidingBoundingBoxes(entity, bb).isEmpty()) {
-                continue;
-            }
-            return false;
-        }
-        return true;
-    }
-
-    private boolean checkVoid(EntityLivingBase entity) {
-        for(int x = -1; x <= 0; ++x) {
-            for(int z = -1; z <= 0; ++z) {
-                if (this.isVoid(x, z, entity)) {
-                    return true;
-                }
-            }
-        }
-        return false;
-    }
-
-    public boolean inAir(double height, double plus) {
-        if (mc.thePlayer.posY < 0)
-            return false;
-        for (int off = 0; off < height; off += plus) {
-            AxisAlignedBB bb = new AxisAlignedBB(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, mc.thePlayer.posX, mc.thePlayer.posY - off, mc.thePlayer.posZ);
-            if (!mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, bb).isEmpty()) {
-                return true;
-            }
-        }
-        return false;
-    }
     @EventTarget(ignoreCondition = true)
     public void onJump(final JumpEvent event) {
         jumped = true;

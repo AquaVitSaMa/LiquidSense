@@ -1,0 +1,51 @@
+package me.aquavit.liquidsense.utils.mc;
+
+import net.ccbluex.liquidbounce.LiquidBounce;
+import net.ccbluex.liquidbounce.features.module.modules.movement.Fly;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.util.AxisAlignedBB;
+
+public class VoidCheck extends MinecraftInstance{
+
+    public static boolean checkVoid(EntityLivingBase entity) {
+        for(int x = -1; x <= 0; ++x) {
+            for(int z = -1; z <= 0; ++z) {
+                if (isVoid(x, z, entity)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public static boolean isVoid(int X, int Z, EntityLivingBase entity){
+        Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
+
+        if (fly.getState()) {
+            return false;
+        }
+        if (mc.thePlayer.posY < 0.0) {
+            return true;
+        }
+        for (int off = 0; off < entity.posY + 2; off += 2) {
+            AxisAlignedBB bb = entity.getEntityBoundingBox().offset(X,-off,Z);
+            if (mc.theWorld.getCollidingBoundingBoxes(entity, bb).isEmpty()) {
+                continue;
+            }
+            return false;
+        }
+        return true;
+    }
+
+    public static boolean inAir(double height, double plus) {
+        if (mc.thePlayer.posY < 0)
+            return false;
+        for (int off = 0; off < height; off += plus) {
+            AxisAlignedBB bb = new AxisAlignedBB(mc.thePlayer.posX, mc.thePlayer.posY, mc.thePlayer.posZ, mc.thePlayer.posX, mc.thePlayer.posY - off, mc.thePlayer.posZ);
+            if (!mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, bb).isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+}
