@@ -51,6 +51,9 @@ public class Fonts {
     @FontDetails(fontName = "Museo-Sans", fontSize = 30)
     public static GameFontRenderer font30;
 
+    @FontDetails(fontName = "Roboto Bold", fontSize = 60)
+    public static GameFontRenderer fontBold30;
+
     @FontDetails(fontName = "Roboto Bold", fontSize = 90)
     public static GameFontRenderer fontBold180;
 
@@ -87,7 +90,8 @@ public class Fonts {
         font30 = new GameFontRenderer(getFont("Museo-Sans.ttf", 30));
         csgo35 = new GameFontRenderer(getFont("LiquidSense.ttf", 18));
         csgo40 = new GameFontRenderer(getFont("LiquidSense.ttf", 20));
-        fontBold180 = new GameFontRenderer(getFont("Roboto-Bold.ttf", 60));
+	  fontBold30 = new GameFontRenderer(getFont("Roboto-Bold.ttf", 28));
+	  fontBold180 = new GameFontRenderer(getFont("Roboto-Bold.ttf", 60));
         logo = new GameFontRenderer(getFont("Facon.ttf", 60));
         icon30 = new GameFontRenderer(getFont("Stylesicons.ttf", 30));
 

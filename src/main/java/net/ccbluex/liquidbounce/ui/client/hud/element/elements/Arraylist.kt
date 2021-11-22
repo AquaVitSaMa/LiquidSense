@@ -130,9 +130,6 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
         for (module in LiquidBounce.moduleManager.modules) {
             if (!module.array || (!module.state && module.slide == 0F)) continue
 
-
-
-
             var displayString =  ("")  +
 
                     if (!tags.get())
