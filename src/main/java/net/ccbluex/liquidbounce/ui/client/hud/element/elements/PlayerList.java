@@ -5,6 +5,7 @@ import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.AlphaData;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.IntegerValue;
@@ -136,25 +137,3 @@ public class PlayerList extends Element {
     }
 }
 
-class AlphaData {
-
-    private String playerName;
-    private int alpha;
-
-    public AlphaData(String playerName, int alpha) {
-        this.playerName = playerName;
-        this.alpha = alpha;
-    }
-
-    public String getPlayerName() {
-        return playerName;
-    }
-
-    public int getAlpha() {
-        return alpha;
-    }
-
-    public void setAlpha(int alpha) {
-        this.alpha = alpha;
-    }
-}

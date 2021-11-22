@@ -7,6 +7,7 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Print;
 import net.minecraft.entity.EntityLivingBase;
 import org.jetbrains.annotations.Nullable;
 

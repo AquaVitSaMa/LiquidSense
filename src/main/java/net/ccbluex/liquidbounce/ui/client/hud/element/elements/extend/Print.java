@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
+package net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend;
 
 import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
