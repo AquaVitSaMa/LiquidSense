@@ -235,7 +235,6 @@ open class Miscible : GuiScreen() {
         }
         else if (keyCode == Keyboard.KEY_ESCAPE && openSearch) {
             openSearch = false
-
         }
         if (ChatAllowedCharacters.isAllowedCharacter(typedChar) && openSearch) {
             MElement.Search = MElement.Search + typedChar
