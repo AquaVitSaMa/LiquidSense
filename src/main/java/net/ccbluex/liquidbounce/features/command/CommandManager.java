@@ -85,7 +85,7 @@ public class CommandManager {
             }
         }
 
-        ClientUtils.displayChatMessage("§cCommand not found. Type ${prefix}help to view all commands.");
+        ClientUtils.displayChatMessage("§cCommand not found. Type "+prefix+"help to view all commands.");
     }
 
     public Command getCommand(String name) {
@@ -138,6 +138,7 @@ public class CommandManager {
 
             if (args.length > 1) {
                 Command command = getCommand(args[0].substring(1));
+                if (command == null) return null;
                 List<String> tabCompletions = command.tabComplete(Arrays.copyOfRange(args, 1, args.length));
 
                 return tabCompletions.toArray(new String[0]);
