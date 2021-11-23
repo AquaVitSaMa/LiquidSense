@@ -163,7 +163,7 @@ public class Radar extends Element {
 
 
         for (Entity entity : Minecraft.getMinecraft().theWorld.loadedEntityList) {
-            if (entity != null && EntityUtils.isSelectedMe(entity, false)) {
+            if (entity != null && EntityUtils.isSelected(entity, false, true)) {
                 Vector2f positionRelativeToPlayer = new Vector2f((float) (renderViewEntity.posX - entity.posX),
                         (float) (renderViewEntity.posZ - entity.posZ));
 

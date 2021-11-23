@@ -45,7 +45,7 @@ public class PointerESP extends Module {
     public void onRender2D(Render2DEvent event) {
 
         mc.theWorld.loadedEntityList.forEach(o -> {
-            if (o instanceof EntityLivingBase && EntityUtils.isSelected(o, true)) {
+            if (o instanceof EntityLivingBase && EntityUtils.isSelected(o, true,false)) {
                 EntityLivingBase entity = (EntityLivingBase) o;
                 Vec3 pos = entityListener.getEntityLowerBounds().get(entity);
                 if (pos != null) {

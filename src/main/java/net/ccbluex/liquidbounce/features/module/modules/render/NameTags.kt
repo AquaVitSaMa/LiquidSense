@@ -66,7 +66,7 @@ class NameTags : Module() {
     fun onRender3D(event: Render3DEvent) {
         if (modeValue.get().equals("liquidbounce", ignoreCase = true)) {
             for(entity in mc.theWorld.loadedEntityList) {
-                if(!EntityUtils.isSelected(entity, false))
+                if(!EntityUtils.isSelected(entity, false, false))
                     continue
 
                 renderNameTag(entity as EntityLivingBase,
@@ -81,14 +81,14 @@ class NameTags : Module() {
             val iterator: Iterator<Entity> = mc.theWorld.loadedEntityList.iterator()
             while (iterator.hasNext()) {
                 val entity = iterator.next()
-                if (entity != null && entity !== mc.thePlayer && EntityUtils.isSelected(entity, false)) {
+                if (entity != null && entity !== mc.thePlayer && EntityUtils.isSelected(entity, false, false)) {
                     updateView()
                 }
             }
         }
         if (modeValue.get().equals("New", ignoreCase = true)) {
             for(entity in mc.theWorld.loadedEntityList) {
-                if(!EntityUtils.isSelected(entity, false))
+                if(!EntityUtils.isSelected(entity, false, false))
                     continue
                 val RenderManager = mc.renderManager
                 if (entity !== mc.thePlayer) {
@@ -185,7 +185,7 @@ class NameTags : Module() {
             val iterator: Iterator<Entity> = mc.theWorld.loadedEntityList.iterator()
             while (iterator.hasNext()) {
                 val entity = iterator.next()
-                if (entity != null && entity !== mc.thePlayer && EntityUtils.isSelected(entity, false)) {
+                if (entity != null && entity !== mc.thePlayer && EntityUtils.isSelected(entity, false, false)) {
                     updatePositions(entity)
                     var maxLeft = Float.MAX_VALUE
                     var maxRight = Float.MIN_VALUE

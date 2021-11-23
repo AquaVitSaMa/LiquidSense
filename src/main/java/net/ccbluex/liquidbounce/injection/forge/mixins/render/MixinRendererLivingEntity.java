@@ -127,7 +127,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
 
     @Inject(method = "canRenderName", at = @At("HEAD"), cancellable = true)
     private <T extends EntityLivingBase> void canRenderName(T entity, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        if (!ESP.renderNameTags || (LiquidBounce.moduleManager.getModule(NameTags.class).getState() && EntityUtils.isSelected(entity, false)))
+        if (!ESP.renderNameTags || (LiquidBounce.moduleManager.getModule(NameTags.class).getState() && EntityUtils.isSelected(entity, false, false)))
             callbackInfoReturnable.setReturnValue(false);
     }
 
@@ -137,7 +137,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
 	 */
     @Overwrite
     public <T extends EntityLivingBase> void doRender(T p_doRender_1_, double p_doRender_2_, double p_doRender_4_, double p_doRender_6_, float p_doRender_8_, float p_doRender_9_) {
-        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false)) {
+        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false, false)) {
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
             GL11.glPolygonOffset(0.75F, -1000000F);
         }
@@ -156,7 +156,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
             this.mainModel.isRiding = shouldSit;
             this.mainModel.isChild = p_doRender_1_.isChild();
 
-            if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false)) {
+            if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false, false)) {
                 GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
                 GL11.glPolygonOffset(1.0F, -1000000F);
             }
@@ -248,7 +248,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                 logger.error("Couldn't render entity", var20);
             }
 
-            if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false)) {
+            if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false, false)) {
                 GL11.glPolygonOffset(1.0F, 1000000F);
                 GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
             }
@@ -267,7 +267,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
             MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Post(p_doRender_1_, (RendererLivingEntity)(Object)this, p_doRender_2_, p_doRender_4_, p_doRender_6_));
         }
 
-        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false)) {
+        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false, false)) {
             GL11.glPolygonOffset(1.0F, 1000000F);
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         }
@@ -300,7 +300,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
             }
 
             final ESP esp = (ESP) LiquidBounce.moduleManager.getModule(ESP.class);
-            if(esp.getState() && EntityUtils.isSelected(entitylivingbaseIn, false)) {
+            if(esp.getState() && EntityUtils.isSelected(entitylivingbaseIn, false, false)) {
                 Minecraft mc = Minecraft.getMinecraft();
                 boolean fancyGraphics = mc.gameSettings.fancyGraphics;
                 mc.gameSettings.fancyGraphics = false;
@@ -390,7 +390,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                 }
             }
 
-            if(LiquidBounce.moduleManager.getModule(Chams.class).getState() && (Chams.all.get() || EntityUtils.isSelected(entitylivingbaseIn, false))) {
+            if(LiquidBounce.moduleManager.getModule(Chams.class).getState() && (Chams.all.get() || EntityUtils.isSelected(entitylivingbaseIn, false, false))) {
                 GL11.glPushMatrix();
                 GL11.glPushAttrib(1048575);
                 GL11.glDisable(2929);

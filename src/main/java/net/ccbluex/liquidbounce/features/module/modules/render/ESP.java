@@ -74,7 +74,7 @@ public class ESP extends Module {
     public void onRender3D(Render3DEvent event) {
         final String mode = modeValue.get();
         for(final Entity entity : mc.theWorld.loadedEntityList) {
-            if(entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false)) {
+            if(entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false, false)) {
                 final EntityLivingBase entityLiving = (EntityLivingBase) entity;
                 final RenderManager renderManager = mc.getRenderManager();
                 final Timer timer = mc.timer;
@@ -138,7 +138,7 @@ public class ESP extends Module {
 
             try {
                 for (final Entity entity : mc.theWorld.loadedEntityList) {
-                    if (!EntityUtils.isSelected(entity, false))
+                    if (!EntityUtils.isSelected(entity, false, false))
                         continue;
 
                     mc.getRenderManager().renderEntityStatic(entity, mc.timer.renderPartialTicks, true);
@@ -162,7 +162,7 @@ public class ESP extends Module {
             GlStateManager.scale(twoDscale, twoDscale, twoDscale);
 
             for (Entity entity : mc.theWorld.loadedEntityList){
-                if (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false)) {
+                if (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false, false)) {
                     this.updatePositions(entity);
                     int maxLeft = Integer.MAX_VALUE;
                     int maxRight = Integer.MIN_VALUE;
@@ -207,7 +207,7 @@ public class ESP extends Module {
             double twoDscale = sr.getScaleFactor() / Math.pow(sr.getScaleFactor(), 2);
             GlStateManager.scale(twoDscale, twoDscale, twoDscale);
             for (Entity entity:mc.theWorld.loadedEntityList){
-                if (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false)) {
+                if (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false, false)) {
                     this.updatePositions(entity);
                     int maxLeft = Integer.MAX_VALUE;
                     int maxRight = Integer.MIN_VALUE;

@@ -59,7 +59,7 @@ public class BowAimbot extends Module {
     }
 
     private Entity getTarget(boolean throughWalls, String priorityMode) {
-        List<Entity> targets = mc.theWorld.loadedEntityList.stream().filter(it -> it instanceof EntityLivingBase && EntityUtils.isSelected(it, true) &&
+        List<Entity> targets = mc.theWorld.loadedEntityList.stream().filter(it -> it instanceof EntityLivingBase && EntityUtils.isSelected(it, true,false) &&
                 (throughWalls || mc.thePlayer.canEntityBeSeen(it))).collect(Collectors.toList());;
 
         switch (priorityMode.toLowerCase()){

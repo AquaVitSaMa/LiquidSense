@@ -25,7 +25,7 @@ public class Tracers extends Module {
     @EventTarget
     public void onRender3D(Render3DEvent event) {
         for (Entity entity : mc.theWorld.loadedEntityList) {
-            if (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false)) {
+            if (entity != null && entity != mc.thePlayer && EntityUtils.isSelected(entity, false, false)) {
                 int dist = (int) (mc.thePlayer.getDistanceToEntity(entity) * 2);
                 if (dist > 255) dist = 255;
 
