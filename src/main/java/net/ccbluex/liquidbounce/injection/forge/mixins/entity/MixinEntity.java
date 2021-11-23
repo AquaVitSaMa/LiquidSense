@@ -5,9 +5,11 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
+import me.aquavit.liquidsense.modules.combat.Aura;
 import me.aquavit.liquidsense.modules.combat.HitBox;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.StrafeEvent;
+import net.ccbluex.liquidbounce.event.WallDamageEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
@@ -185,16 +187,17 @@ public abstract class MixinEntity {
     private void getCollisionBorderSize(final CallbackInfoReturnable<Float> callbackInfoReturnable) {
         if (LiquidBounce.moduleManager.getModule(HitBox.class).getState())
             callbackInfoReturnable.setReturnValue(0.1F + HitBox.sizeValue.get());
-    }
 
-    @Inject(method = "setAngles", at = @At("HEAD"), cancellable = true)
-    private void setAngles(final float yaw, final float pitch, final CallbackInfo callbackInfo) {
+        Aura ka = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
 
+        if (ka.getTarget() != null || ka.getTarget() != Minecraft.getMinecraft().thePlayer) {
+            callbackInfoReturnable.setReturnValue(0.1F + ka.getHitBoxValue().get());
+        }
     }
 
     @Inject(method = "moveFlying", at = @At("HEAD"), cancellable = true)
     private void handleRotations(float strafe, float forward, float friction, final CallbackInfo callbackInfo) {
-        if ((Entity) (Object) this != Minecraft.getMinecraft().thePlayer)
+        if ((Object) this != Minecraft.getMinecraft().thePlayer)
             return;
 
         final StrafeEvent strafeEvent = new StrafeEvent(strafe, forward, friction);
@@ -202,5 +205,17 @@ public abstract class MixinEntity {
 
         if (strafeEvent.isCancelled())
             callbackInfo.cancel();
+    }
+
+    //no obsidian view
+    @Inject(method = "isEntityInsideOpaqueBlock", at = @At(value = "RETURN", ordinal = 1), cancellable = true)
+    public void isEntityInsideOpaqueBlock(CallbackInfoReturnable<Boolean> cir) {
+
+        if ((Object) this != Minecraft.getMinecraft().thePlayer)
+            return;
+
+        final WallDamageEvent wallDamageEvent = new WallDamageEvent();
+        LiquidBounce.eventManager.callEvent(wallDamageEvent);
+        cir.setReturnValue(false);
     }
 }

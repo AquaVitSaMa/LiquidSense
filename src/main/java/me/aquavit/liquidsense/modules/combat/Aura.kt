@@ -63,7 +63,7 @@ class Aura : Module() {
     // 伤害时间
     private val hurtTimeValue = IntegerValue("HurtTime", 10, 0, 10)
     // NCP更多设置
-    private val hitBoxValue = FloatValue("HitBox", 0.4f, 0.0f, 0.4f).displayable{modeValue.get() == "NCP"}
+    val hitBoxValue = FloatValue("HitBox", 0.4f, 0.0f, 0.4f).displayable{modeValue.get() == "NCP"}
     // 距离
     private val rangeValue = FloatValue("Range", 4.6f, 1f, 6f)
     private val blockRangeValue = FloatValue("BlockRange", 8.0f, 1f, 12f)
