@@ -3,8 +3,8 @@ package net.ccbluex.liquidbounce.features.command.commands;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.command.Command;
 import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.NotifyType;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class BindCommand extends Command {
         final int key = Keyboard.getKeyIndex(args[2].toUpperCase());
         module.setKeyBind(key);
         this.chat("Bound module §a§l" + module.getName() + "§3 to key §a§l" + Keyboard.getKeyName(key) + "§3.");
-        LiquidBounce.hud.addNotification(new Notification("Bound " + module.getName() + " to " + Keyboard.getKeyName(key),"",NotifyType.SUCCESS,1500,500));
+        LiquidBounce.hud.addNotification(new Notification("Bound " + module.getName() + " to " + Keyboard.getKeyName(key),"", ColorType.INFO,1500,500));
         playEdit();
     }
 

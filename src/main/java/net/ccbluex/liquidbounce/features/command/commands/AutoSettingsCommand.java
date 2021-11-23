@@ -8,10 +8,10 @@ import me.aquavit.liquidsense.utils.misc.StringUtils;
 import me.aquavit.liquidsense.utils.client.SettingsUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.command.Command;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Notification;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.NotifyType;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.login.Callback;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
+import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,7 +60,7 @@ public class AutoSettingsCommand extends Command {
                     chat("Applying settings...");
                     SettingsUtils.executeScript(StringUtils.toLines(settings));
                     chat("§6Settings applied successfully");
-                    LiquidBounce.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", NotifyType.SUCCESS, 1500, 500));
+                    LiquidBounce.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", ColorType.INFO, 1500, 500));
                     playEdit();
                 } catch (Exception exception) {
                     exception.printStackTrace();
