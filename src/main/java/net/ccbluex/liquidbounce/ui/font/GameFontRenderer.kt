@@ -8,11 +8,10 @@ package net.ccbluex.liquidbounce.ui.font
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.TextEvent
 import me.aquavit.liquidsense.utils.mc.ClassUtils
-import me.aquavit.liquidsense.utils.render.BlurBuffer
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD
 import net.ccbluex.liquidbounce.utils.render.ColorUtils
 import net.ccbluex.liquidbounce.utils.render.RenderUtils
-import net.ccbluex.liquidbounce.utils.render.shader.shaders.RainbowFontShader
+import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowFontShader
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.FontRenderer
 import net.minecraft.client.renderer.GlStateManager

@@ -1,9 +1,4 @@
-/*
- * LiquidBounce Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/CCBlueX/LiquidBounce/
- */
-package net.ccbluex.liquidbounce.utils.render.shader;
+package me.aquavit.liquidsense.utils.render.shader;
 
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;

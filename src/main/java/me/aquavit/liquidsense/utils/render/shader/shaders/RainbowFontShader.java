@@ -1,17 +1,18 @@
-package net.ccbluex.liquidbounce.utils.render.shader.shaders;
+package me.aquavit.liquidsense.utils.render.shader.shaders;
 
-import net.ccbluex.liquidbounce.utils.render.shader.Shader;
+import me.aquavit.liquidsense.utils.render.shader.Shader;
 import org.lwjgl.opengl.GL20;
 
 import java.io.Closeable;
 
-public final class RainbowShader extends Shader implements Closeable {
+public final class RainbowFontShader extends Shader implements Closeable {
+
     private boolean isInUse;
     private float strengthX;
     private float strengthY;
     private float offset;
 
-    public static RainbowShader INSTANCE = new RainbowShader();
+    public static final RainbowFontShader INSTANCE = new RainbowFontShader();
 
     @Override
     public void setupUniforms() {
@@ -44,12 +45,12 @@ public final class RainbowShader extends Shader implements Closeable {
         }
     }
 
-    public RainbowShader() {
-        super("rainbow_shader.frag");
+    public RainbowFontShader() {
+        super("rainbow_font_shader.frag");
     }
 
-    public static RainbowShader begin(boolean enable, float x, float y, float offset) {
-        RainbowShader instance = INSTANCE;
+    public static RainbowFontShader begin(boolean enable, float x, float y, float offset) {
+        RainbowFontShader instance = INSTANCE;
         if (enable) {
             instance.setStrengthX(x);
             instance.setStrengthY(y);
@@ -75,7 +76,9 @@ public final class RainbowShader extends Shader implements Closeable {
         return this.strengthY;
     }
 
-    public final void setStrengthY(float y) { this.strengthY = y; }
+    public final void setStrengthY(float y) {
+        this.strengthY = y;
+    }
 
     public final float getOffset() {
         return this.offset;
@@ -84,4 +87,6 @@ public final class RainbowShader extends Shader implements Closeable {
     public final void setOffset(float offset) {
         this.offset = offset;
     }
+
 }
+
