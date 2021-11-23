@@ -61,6 +61,10 @@ public class MSTimer {
         return result;
     }
 
+    public boolean hasReached(long milliseconds) {
+        return System.nanoTime() / 1000000L - time >= milliseconds;
+    }
+
     public boolean hasPassed(double milli) {
         return (double)(this.getTime() - this.lastMs) >= milli;
     }
