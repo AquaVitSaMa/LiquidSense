@@ -57,7 +57,7 @@ public class HUD extends MinecraftInstance {
             };
         }
 
-        public static final HUD createDefault() {
+        public static HUD createDefault() {
             return (new HUD())
                     .addElement(Text.Companion.defaultClient())
                     .addElement(new Arraylist())
@@ -114,14 +114,19 @@ public class HUD extends MinecraftInstance {
         for (final Element element : elements) {
             element.handleMouseClick((mouseX / element.getScale()) - element.getRenderX(), (mouseY / element.getScale()) - element.getRenderY(), button);
         }
-        for (final Element element : Lists.reverse(elements)) {
-            if (element.isInBorder((mouseX / element.getScale()) - element.getRenderX(), (mouseY / element.getScale()) - element.getRenderY()) && button == 0) {
-                element.setDrag(true);
-                this.elements.remove(element);
-                this.elements.add(element);
-                break;
-            }
-        }
+	  if(button == 0) {
+		  for (final Element element : Lists.reverse(elements)) {
+
+			  if (!element.isInBorder((mouseX / element.getScale()) - element.getRenderX(),
+				  (mouseY / element.getScale()) - element.getRenderY()))
+				  continue;
+
+			  element.setDrag(true);
+			  this.elements.remove(element);
+			  this.elements.add(element);
+			  break;
+		  }
+	  }
     }
 
     public final void handleMouseReleased() {
@@ -150,15 +155,15 @@ public class HUD extends MinecraftInstance {
 
                 if (moveX == 0F && moveY == 0F) continue;
 
-                if (element.getBorder() == null) continue;
-
                 Border border = element.getBorder();
 
-                float minX = Math.min(border.getX(), border.getX2()) + 1;
-                float minY = Math.min(border.getY(), border.getY2()) + 1;
+		    if (border == null) continue;
 
-                float maxX = Math.max(border.getX(), border.getX2()) - 1;
-                float maxY = Math.max(border.getY(), border.getY2()) - 1;
+                float minX = Math.min(border.x, border.x2) + 1;
+                float minY = Math.min(border.y, border.y2) + 1;
+
+                float maxX = Math.max(border.x, border.x2) - 1;
+                float maxY = Math.max(border.y, border.y2) - 1;
 
                 float width = scaledResolution.getScaledWidth() / element.getScale();
                 float height = scaledResolution.getScaledHeight() / element.getScale();

@@ -56,7 +56,7 @@ public class Hotbar extends Element {
             now.renderHotbarItem(i, x + scale,now.translate.getY() - scale / 2f - 2f / scale, mc.timer.renderPartialTicks);
             GlStateManager.popMatrix();
 
-            mc.getRenderItem().renderItemOverlays(scale == 1f ? Fonts.font15 : Fonts.font18, mc.thePlayer.inventory.mainInventory[i], (int) (i * 25f), -3);
+		mc.getRenderItem().renderItemOverlays(scale == 1f ? Fonts.font15 : Fonts.font18, mc.thePlayer.inventory.mainInventory[i], (int) (i * 25f), -3);
         }
 
         RenderHelper.disableStandardItemLighting();

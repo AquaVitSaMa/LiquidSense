@@ -437,7 +437,6 @@ class Arraylist(x: Double = 1.0, y: Double = 2.0, scale: Float = 1F,
                 }
             }
             y2 = (if (side.vertical == Vertical.DOWN) -textSpacer else textSpacer) * modules.size
-
             return Border(0F, 0F, x2 - 7F, y2 - if (side.vertical == Vertical.DOWN) 1F else 0F)
         }
 
