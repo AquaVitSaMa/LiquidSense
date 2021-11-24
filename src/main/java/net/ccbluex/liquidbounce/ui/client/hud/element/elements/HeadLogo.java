@@ -1,6 +1,7 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
 import me.aquavit.liquidsense.utils.login.UserUtils;
+import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
@@ -18,6 +19,9 @@ public class HeadLogo extends Element {
 
     private ResourceLocation rl;
 
+    private final Translate translate = new Translate(0f , 0f);
+
+
     @Nullable
     @Override
     public Border drawElement() {
@@ -25,6 +29,8 @@ public class HeadLogo extends Element {
             rl = new ResourceLocation("sb.png");
             UserUtils.getWebImageResource(rl,"https://cdn.jsdelivr.net/gh/ImageHelper/image_repository@main/headlogo.png");
         }
+
+	  translate.translate((mc.thePlayer.getHealth() * 16.5f - 10) , 0f );
 
         int picture = 48;
         //头像
@@ -40,7 +46,7 @@ public class HeadLogo extends Element {
         //小矩形
         RenderUtils.drawGradientSideway(picture / 2f + 25.5f, 0 - picture / 2f + 45, picture / 2f + 100, 0 - picture / 2f + 60, new Color(45, 45, 45, 255).getRGB(), new Color(45, 45, 45, 0).getRGB());
         //血量值
-        RenderUtils.drawLogoArc(picture / 2f, picture / 2f, 34, -10, (int) (mc.thePlayer.getHealth() * 16.5f - 10), Colors.getHealthColor(mc.thePlayer));
+        RenderUtils.drawLogoArc(picture / 2f, picture / 2f, 34, -10, (int) translate.getX(), Colors.getHealthColor(mc.thePlayer));
         //大矩形
         RenderUtils.drawGradientSideway(picture / 2f + 25.5f, 0 - picture / 2f + 26, picture / 2f + 150, 0 - picture / 2f + 43, new Color(45, 45, 45, 255).getRGB(), new Color(45, 45, 45, 0).getRGB());
         Fonts.font14.drawString(mc.thePlayer.getName() + "  |  " + (int)mc.thePlayer.getHealth() + "hp", picture / 2f + 43, 0 - picture / 2f + 33, -1);
