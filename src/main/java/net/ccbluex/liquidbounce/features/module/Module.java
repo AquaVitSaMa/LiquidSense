@@ -78,7 +78,7 @@ public class Module extends MinecraftInstance implements Listenable {
                 LiquidBounce.hud.addPrint(new Print(" " + name + (state ? " Enabled" : " Disabled"),3000f, Type.state));
                 mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("random.click"),
                         1F));
-//                LiquidBounce.hud.addNotification(new Notification(state ? "Enabled " : "Disabled "+name,"Toggled", NotifyType.SUCCESS,1500,500));
+//                LiquidBounce.hud.addNotification(new Notification(state ? "Enabled " : "Disabled "+name,"Toggled", ColorType.SUCCESS,1500,500));
             }
 
             if (state) {

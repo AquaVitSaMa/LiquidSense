@@ -67,7 +67,6 @@ public class ESP extends Module {
     private FloatValue range = new FloatValue("ShadowRange", 1.0F, 0.0F, 5.0F);
 
     public static boolean renderNameTags = true;
-    final NameTags nameTags = (NameTags) LiquidBounce.moduleManager.getModule(NameTags.class);
     private List<Vec3> positions = new ArrayList<Vec3>();
 
     @EventTarget

@@ -51,6 +51,7 @@ public class LiquidSense {
         liquidSenseModules.add(SkinDerp.class);
         liquidSenseModules.add(Derp.class);
         liquidSenseModules.add(EventLogger.class);
+        liquidSenseModules.add(NameTags.class);
         liquidSenseModules.add(Timer.class);
         liquidSenseModules.add(BlockOverlay.class);
         liquidSenseModules.add(Clip.class);

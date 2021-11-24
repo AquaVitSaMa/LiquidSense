@@ -6,6 +6,7 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
 import me.aquavit.liquidsense.modules.render.Chams;
+import me.aquavit.liquidsense.modules.render.NameTags;
 import me.aquavit.liquidsense.modules.render.TrueSight;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
@@ -15,7 +16,6 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.SommtheEvent;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import net.ccbluex.liquidbounce.features.module.modules.render.ESP;
-import net.ccbluex.liquidbounce.features.module.modules.render.NameTags;
 import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;
 import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
 import net.ccbluex.liquidbounce.utils.*;

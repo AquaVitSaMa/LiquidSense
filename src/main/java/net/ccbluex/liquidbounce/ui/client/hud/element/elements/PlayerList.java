@@ -87,7 +87,7 @@ public class PlayerList extends Element {
         int y2 = 1;
         Fonts.minecraftFont.drawStringWithShadow("Other",123,31,new Color(200,50,50,255).getRGB());
         for (EntityLivingBase m : playername) {
-            Fonts.minecraftFont.drawStringWithShadow((int) m.getHealth() + "\2477 " + m.getDisplayName().getFormattedText()+"\2477["+(int)mc.thePlayer.getDistanceToEntity(m)+"]", 123, y2 + 40, Color.red.getRGB());
+            Fonts.minecraftFont.drawStringWithShadow((int) m.getHealth() + "§7 " + m.getDisplayName().getFormattedText()+"§7["+(int)mc.thePlayer.getDistanceToEntity(m)+"]", 123, y2 + 40, Color.red.getRGB());
             y2 += 9;
         }
 

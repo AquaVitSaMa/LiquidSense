@@ -74,6 +74,25 @@ public final class RenderUtils extends MinecraftInstance {
         tessellator.draw();
     }
 
+    private final static FloatBuffer modelview = GLAllocation.createDirectFloatBuffer(16);
+    private final static FloatBuffer projections = GLAllocation.createDirectFloatBuffer(16);
+    public static double interpolate(double current, double old, double scale) {
+        return old + (current - old) * scale;
+    }
+    public static ScaledResolution getResolution() {
+        return new ScaledResolution(mc);
+    }
+
+    public static javax.vecmath.Vector3d project(double x, double y, double z) {
+        FloatBuffer vector = GLAllocation.createDirectFloatBuffer(4);
+        GL11.glGetFloat(2982, modelview);
+        GL11.glGetFloat(2983, projections);
+        GL11.glGetInteger(2978, viewport);
+        if (GLU.gluProject((float) x, (float) y, (float) z, modelview, projections, viewport, vector)) {
+            return new javax.vecmath.Vector3d(vector.get(0) / getResolution().getScaleFactor(), (Display.getHeight() - vector.get(1)) / getResolution().getScaleFactor(), vector.get(2));
+        }
+        return null;
+    }
 
     public static void drawRectBordered(double x, double y, double x1, double y1, double width, int internalColor, int borderColor) {
         rectangle(x + width, y + width, x1 - width, y1 - width, internalColor);
@@ -830,6 +849,50 @@ public final class RenderUtils extends MinecraftInstance {
         worldRenderer.pos(axisAlignedBB.maxX, axisAlignedBB.maxY, axisAlignedBB.maxZ).endVertex();
         worldRenderer.pos(axisAlignedBB.maxX, axisAlignedBB.minY, axisAlignedBB.maxZ).endVertex();
         tessellator.draw();
+    }
+
+    public static void SmoothRect(double x, double y, double width, double height, int color) {
+        float f = (color >> 24 & 0xFF) / 255.0F;
+        float f1 = (color >> 16 & 0xFF) / 255.0F;
+        float f2 = (color >> 8 & 0xFF) / 255.0F;
+        float f3 = (color & 0xFF) / 255.0F;
+        GL11.glColor4f(f1, f2, f3, f);
+        RectSmooth(x, y, x + width, y + height, color);
+    }
+
+    public static void RectSmooth(double left, double top, double right, double bottom, int color) {
+        if (left < right)
+        {
+            int i = (int)left;
+            left = right;
+            right = i;
+        }
+
+        if (top < bottom)
+        {
+            int j = (int)top;
+            top = bottom;
+            bottom = j;
+        }
+
+        float f3 = (float)(color >> 24 & 255) / 255.0F;
+        float f = (float)(color >> 16 & 255) / 255.0F;
+        float f1 = (float)(color >> 8 & 255) / 255.0F;
+        float f2 = (float)(color & 255) / 255.0F;
+        Tessellator tessellator = Tessellator.getInstance();
+        WorldRenderer worldrenderer = tessellator.getWorldRenderer();
+        GlStateManager.enableBlend();
+        GlStateManager.disableTexture2D();
+        GlStateManager.tryBlendFuncSeparate(770, 771, 1, 0);
+        GlStateManager.color(f, f1, f2, f3);
+        worldrenderer.begin(7, DefaultVertexFormats.POSITION);
+        worldrenderer.pos((double)left, (double)bottom, 0.0D).endVertex();
+        worldrenderer.pos((double)right, (double)bottom, 0.0D).endVertex();
+        worldrenderer.pos((double)right, (double)top, 0.0D).endVertex();
+        worldrenderer.pos((double)left, (double)top, 0.0D).endVertex();
+        tessellator.draw();
+        GlStateManager.enableTexture2D();
+        GlStateManager.disableBlend();
     }
 
     public static void drawRect(final float x, final float y, final float x2, final float y2, final int color) {
