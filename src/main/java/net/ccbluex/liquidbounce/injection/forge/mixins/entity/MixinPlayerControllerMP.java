@@ -49,16 +49,12 @@ public class MixinPlayerControllerMP {
 	 * @author CCBlueX
 	 * @reason CCBlueX
 	 */
-    @Overwrite
-    public ItemStack windowClick(int windowId, int slotId, int mouseButtonClicked, int mode, EntityPlayer playerIn) {
+    @Inject(method = "windowClick", at = @At("HEAD"), cancellable = true)
+    private void windowClick(int windowId, int slotId, int mouseButtonClicked, int mode, EntityPlayer playerIn, CallbackInfoReturnable<ItemStack> callbackInfo) {
         final ClickWindowEvent event = new ClickWindowEvent(windowId, slotId, mouseButtonClicked, mode);
         LiquidBounce.eventManager.callEvent(event);
 
         if (event.isCancelled())
-            return null;
-        short short1 = playerIn.openContainer.getNextTransactionID(playerIn.inventory);
-        ItemStack itemstack = playerIn.openContainer.slotClick(slotId, mouseButtonClicked, mode, playerIn);
-        this.netClientHandler.addToSendQueue(new C0EPacketClickWindow(windowId, slotId, mouseButtonClicked, mode, itemstack, (short) -1));
-        return itemstack;
+            callbackInfo.cancel();
     }
 }
