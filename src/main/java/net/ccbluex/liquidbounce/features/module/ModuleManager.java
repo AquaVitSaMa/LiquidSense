@@ -83,7 +83,6 @@ public final class ModuleManager implements Listenable {
                 FreeCam.class,
                 Plugins.class,
                 LongJump.class,
-                FastBow.class,
                 AutoClicker.class,
                 BlockESP.class,
                 ServerCrasher.class,

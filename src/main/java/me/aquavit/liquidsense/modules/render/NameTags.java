@@ -41,7 +41,7 @@ import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-@ModuleInfo(name = "NameTagss", description = "Changes the scale of the nametags so you can always read them.", category = ModuleCategory.RENDER)
+@ModuleInfo(name = "NameTags", description = "Changes the scale of the nametags so you can always read them.", category = ModuleCategory.RENDER)
 public class NameTags extends Module {
     private final ListValue modeValue = new ListValue("Mode", new String[]{"2D", "3D"}, "2D");
     private final MultiBoolValue elements = new MultiBoolValue("Elements",
