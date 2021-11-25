@@ -47,7 +47,6 @@ public final class ModuleManager implements Listenable {
         registerALLModule(
                 Aimbot.class,
                 AutoArmor.class,
-                AutoBow.class,
                 AutoPot.class,
                 AutoSoup.class,
                 Criticals.class,

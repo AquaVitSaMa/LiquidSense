@@ -57,6 +57,7 @@ public class LiquidSense {
         liquidSenseModules.add(Clip.class);
         liquidSenseModules.add(Ghost.class);
         liquidSenseModules.add(Tracers.class);
+        liquidSenseModules.add(AutoBow.class);
         liquidSenseModules.add(GhostHand.class);
         liquidSenseModules.add(Kick.class);
         liquidSenseModules.add(HYTBypass.class);
