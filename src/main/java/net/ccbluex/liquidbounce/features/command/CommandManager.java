@@ -61,6 +61,7 @@ public class CommandManager {
         registerCommand(new ShortcutCommand());
         registerCommand(new HideCommand());
         registerCommand(new SetNameCommand());
+        registerCommand(new XrayCommand());
     }
 
 
