@@ -10,6 +10,7 @@
     "block.MixinBlockModelRenderer",
     "block.MixinBlockSoulSand",
     "block.MixinBlockRendererDispatcher",
+    "block.MixinBlockGrass",
     "packets.MixinC00Handshake",
     "world.MixinChunk",
     "render.MixinEffectRenderer",

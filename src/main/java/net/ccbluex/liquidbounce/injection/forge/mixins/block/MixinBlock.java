@@ -1,6 +1,7 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.block;
 
 import me.aquavit.liquidsense.modules.exploit.GhostHand;
+import me.aquavit.liquidsense.modules.render.CaveFinder;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.BlockBBEvent;
 import net.ccbluex.liquidbounce.event.BlockRenderSideEvent;
@@ -15,6 +16,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.EnumFacing;
+import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 import net.minecraftforge.fml.relauncher.Side;
@@ -73,11 +75,21 @@ public abstract class MixinBlock {
 
     }
 
+    @Overwrite
+    public EnumWorldBlockLayer getBlockLayer()
+    {
+        return EnumWorldBlockLayer.SOLID;
+    }
+
     @Inject(method = "shouldSideBeRendered", at = @At("HEAD"), cancellable = true)
     private void shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         final XRay xray = (XRay) LiquidBounce.moduleManager.getModule(XRay.class);
+        final CaveFinder cavefinder = (CaveFinder) LiquidBounce.moduleManager.getModule(CaveFinder.class);
 
         LiquidBounce.eventManager.callEvent(new BlockRenderSideEvent(worldIn, pos, side, maxX, minX, maxY, minY, maxZ, minZ));
+
+        if (cavefinder.getState() && !CaveFinder.caveFinder.get())
+            callbackInfoReturnable.setReturnValue(cavefinder.xrayBlocks.contains(this));
 
         if(xray.getState())
             callbackInfoReturnable.setReturnValue(xray.getXrayBlocks().contains(this));
