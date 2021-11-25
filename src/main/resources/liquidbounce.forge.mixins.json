@@ -42,6 +42,7 @@
     "render.MixinRenderPlayer",
     "render.MixinLayerHeldItem",
     "render.MixinModelRenderer",
+    "render.MixinWorldRenderer",
     "client.MixinMinecraft",
     "client.MixinShaderGroup",
     "render.MixinModelBiped",
