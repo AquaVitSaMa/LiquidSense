@@ -18,6 +18,7 @@ import me.aquavit.liquidsense.utils.entity.RaycastUtils
 import me.aquavit.liquidsense.utils.timer.MSTimer
 import me.aquavit.liquidsense.utils.timer.TimeUtils
 import net.ccbluex.liquidbounce.event.events.AttackEvent
+import net.ccbluex.liquidbounce.event.events.UpdateEvent
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
 import net.ccbluex.liquidbounce.value.IntegerValue

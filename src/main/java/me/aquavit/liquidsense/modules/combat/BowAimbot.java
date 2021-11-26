@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.modules.combat;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.Render3DEvent;
-import net.ccbluex.liquidbounce.event.UpdateEvent;
+import net.ccbluex.liquidbounce.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
@@ -16,7 +16,6 @@ import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemBow;
 import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.NotNull;
 
 import java.awt.*;
 import java.util.Comparator;

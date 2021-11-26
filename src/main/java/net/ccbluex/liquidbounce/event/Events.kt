@@ -90,11 +90,6 @@ class MoveEvent(var x: Double, var y: Double, var z: Double) : CancellableEvent(
 }
 
 /**
- * ShaBi
- */
-class SlientStealerEvent() : CancellableEvent()
-
-/**
  * Called when receive or send a packet
  */
 class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableEvent()
@@ -163,16 +158,6 @@ class StepConfirmEvent(var stepHeight: Float) : Event()
  * Called when a text is going to be rendered
  */
 class TextEvent(var text: String?) : Event()
-
-/**
- * tick... tack... tick... tack
- */
-class TickEvent : Event()
-
-/**
- * Called when minecraft player will be updated
- */
-class UpdateEvent : Event()
 
 /**
  * Called when the world changes
