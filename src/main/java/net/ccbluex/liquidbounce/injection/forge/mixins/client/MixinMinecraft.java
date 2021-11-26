@@ -11,6 +11,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.event.events.ClickBlockEvent;
 import net.ccbluex.liquidbounce.event.events.TickEvent;
+import net.ccbluex.liquidbounce.event.events.WorldEvent;
 import net.ccbluex.liquidbounce.features.module.modules.combat.AutoClicker;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiMainMenu;
 import me.aquavit.liquidsense.utils.module.CPSCounter;
