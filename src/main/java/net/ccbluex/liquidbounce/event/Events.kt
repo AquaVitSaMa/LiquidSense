@@ -24,24 +24,6 @@ import net.minecraft.world.IBlockAccess
 class ChatComponentEvent(val component: IChatComponent,var chatLineId: List<ChatLine>) : CancellableEvent()
 
 /**
- * Called when minecraft get bounding box of block
- *
- * @param blockPos block position of block
- * @param block block itself
- * @param boundingBox vanilla bounding box
- */
-class BlockBBEvent(blockPos: BlockPos, val block: Block, var boundingBox: AxisAlignedBB?) : Event() {
-    val x = blockPos.x
-    val y = blockPos.y
-    val z = blockPos.z
-}
-class RenderHitting(var f : Float , var f1 : Float ) : Event()
-/**
- * Called when player clicks a block
- */
-class ClickBlockEvent(val clickedBlock: BlockPos?, val enumFacing: EnumFacing?) : Event()
-
-/**
  * Called when client is shutting down
  */
 class ClientShutdownEvent : Event()

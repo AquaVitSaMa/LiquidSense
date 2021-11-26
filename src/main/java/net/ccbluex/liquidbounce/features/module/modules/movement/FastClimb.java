@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import net.ccbluex.liquidbounce.event.BlockBBEvent;
+import net.ccbluex.liquidbounce.event.events.BlockBBEvent;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.MoveEvent;
 import net.ccbluex.liquidbounce.features.module.Module;

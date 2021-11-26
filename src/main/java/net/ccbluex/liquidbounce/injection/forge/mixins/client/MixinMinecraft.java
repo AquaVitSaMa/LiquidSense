@@ -9,6 +9,7 @@ import me.aquavit.liquidsense.modules.exploit.AbortBreaking;
 import me.aquavit.liquidsense.modules.world.FastPlace;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
+import net.ccbluex.liquidbounce.event.events.ClickBlockEvent;
 import net.ccbluex.liquidbounce.features.module.modules.combat.AutoClicker;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiMainMenu;
 import me.aquavit.liquidsense.utils.module.CPSCounter;
