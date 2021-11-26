@@ -47,12 +47,6 @@ class StrafeEvent(val strafe: Float, val forward: Float, val friction: Float) : 
 class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableEvent()
 
 
-/**
- * shabi
- */
-class BlockRenderSideEvent(val world: IBlockAccess, val pos: BlockPos, val side: EnumFacing, val maxX: Double, val minX: Double, val maxY: Double, val minY: Double, val maxZ: Double, val minZ: Double) : Event()
-
-
 class PacketSenEvent(val packet: Packet<*>) : CancellableEvent()
 
 /**
