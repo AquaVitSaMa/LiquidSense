@@ -81,8 +81,8 @@ class Criticals : Module() {
 
     @EventTarget
     fun onAttack(event: AttackEvent) {
-        if (event.targetEntity is EntityLivingBase) {
-            val entity = event.targetEntity
+        val entity = event.targetEntity
+        if (entity is EntityLivingBase) {
 
             if (!mc.thePlayer.onGround || mc.thePlayer.isOnLadder || mc.thePlayer.isInWeb || mc.thePlayer.isInWater ||
                     mc.thePlayer.isInLava || mc.thePlayer.ridingEntity != null || entity.hurtTime > hurtTimeValue.get() ||
