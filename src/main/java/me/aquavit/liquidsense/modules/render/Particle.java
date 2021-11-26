@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.Random;
 
 import org.lwjgl.opengl.GL11;
-import net.ccbluex.liquidbounce.event.Render3DEvent;
+import net.ccbluex.liquidbounce.event.events.Render3DEvent;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
 import me.aquavit.liquidsense.modules.combat.Aura;

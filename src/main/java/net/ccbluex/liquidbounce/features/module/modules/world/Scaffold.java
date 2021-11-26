@@ -8,6 +8,8 @@ package net.ccbluex.liquidbounce.features.module.modules.world;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
+import net.ccbluex.liquidbounce.event.events.Render2DEvent;
+import net.ccbluex.liquidbounce.event.events.Render3DEvent;
 import net.ccbluex.liquidbounce.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;

@@ -89,19 +89,11 @@ class MoveEvent(var x: Double, var y: Double, var z: Double) : CancellableEvent(
  */
 class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableEvent()
 
-/**
- * Called when screen is going to be rendered
- */
-class Render2DEvent(val partialTicks: Float) : Event()
+
 /**
  * shabi
  */
 class BlockRenderSideEvent(val world: IBlockAccess, val pos: BlockPos, val side: EnumFacing, val maxX: Double, val minX: Double, val maxY: Double, val minY: Double, val maxZ: Double, val minZ: Double) : Event()
-
-/**
- * Called when world is going to be rendered
- */
-class Render3DEvent(val partialTicks: Float) : Event()
 
 /**
  * shabi
@@ -115,11 +107,6 @@ class UpdateModelEvent(val player: EntityPlayer, val model: ModelPlayer) : Event
  */
 class RenderEntityEvent(val entity: Entity, val x: Double, val y: Double, val z: Double, val entityYaw: Float,
                         val partialTicks: Float) : Event()
-
-/**
- * Called when the screen changes
- */
-class ScreenEvent(val guiScreen: GuiScreen?) : Event()
 
 class PacketSenEvent(val packet: Packet<*>) : CancellableEvent()
 

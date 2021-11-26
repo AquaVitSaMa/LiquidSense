@@ -2,8 +2,8 @@ package me.aquavit.liquidsense.modules.render;
 
 import com.google.common.collect.Maps;
 import net.ccbluex.liquidbounce.event.EventTarget;
-import net.ccbluex.liquidbounce.event.Render2DEvent;
-import net.ccbluex.liquidbounce.event.Render3DEvent;
+import net.ccbluex.liquidbounce.event.events.Render2DEvent;
+import net.ccbluex.liquidbounce.event.events.Render3DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
