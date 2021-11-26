@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.modules.combat.Aura
 import me.aquavit.liquidsense.utils.entity.MovementUtils
 import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.event.EventTarget
-import net.ccbluex.liquidbounce.event.MoveEvent
+import net.ccbluex.liquidbounce.event.events.MoveEvent
 import net.ccbluex.liquidbounce.event.events.Render3DEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory

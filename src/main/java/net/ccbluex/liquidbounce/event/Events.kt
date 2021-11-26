@@ -42,28 +42,6 @@ class SlowDownEvent(var strafe: Float, var forward: Float) : Event()
 class StrafeEvent(val strafe: Float, val forward: Float, val friction: Float) : CancellableEvent()
 
 /**
- * Called when player moves
- *
- * @param x motion
- * @param y motion
- * @param z motion
- */
-class MoveEvent(var x: Double, var y: Double, var z: Double) : CancellableEvent() {
-    var isSafeWalk = false
-
-    fun zero() {
-        x = 0.0
-        y = 0.0
-        z = 0.0
-    }
-
-    fun zeroXZ() {
-        x = 0.0
-        z = 0.0
-    }
-}
-
-/**
  * Called when receive or send a packet
  */
 class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableEvent()
@@ -73,12 +51,6 @@ class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableE
  * shabi
  */
 class BlockRenderSideEvent(val world: IBlockAccess, val pos: BlockPos, val side: EnumFacing, val maxX: Double, val minX: Double, val maxY: Double, val minY: Double, val maxZ: Double, val minZ: Double) : Event()
-
-/**
- * shabi
- */
-
-class UpdateModelEvent(val player: EntityPlayer, val model: ModelPlayer) : Event()
 
 
 class PacketSenEvent(val packet: Packet<*>) : CancellableEvent()

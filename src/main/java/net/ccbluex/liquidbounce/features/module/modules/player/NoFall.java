@@ -10,6 +10,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.event.events.JumpEvent;
 import net.ccbluex.liquidbounce.event.events.MotionEvent;
+import net.ccbluex.liquidbounce.event.events.MoveEvent;
 import net.ccbluex.liquidbounce.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;

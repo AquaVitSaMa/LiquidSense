@@ -6,7 +6,6 @@ import net.minecraft.entity.Entity;
 public class LivingUpdateEvent extends CancellableEvent {
     private Entity entity;
     public LivingUpdateEvent(Entity entity) {
-        super();
         this.entity = entity;
     }
 
