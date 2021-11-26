@@ -6,8 +6,8 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement.speeds;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.JumpEvent;
-import net.ccbluex.liquidbounce.event.MotionEvent;
+import net.ccbluex.liquidbounce.event.events.JumpEvent;
+import net.ccbluex.liquidbounce.event.events.MotionEvent;
 import net.ccbluex.liquidbounce.event.MoveEvent;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;

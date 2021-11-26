@@ -10,7 +10,7 @@ import me.aquavit.liquidsense.modules.movement.NoJumpDelay;
 import me.aquavit.liquidsense.modules.render.AntiBlind;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.events.LivingUpdateEvent;
-import net.ccbluex.liquidbounce.event.JumpEvent;
+import net.ccbluex.liquidbounce.event.events.JumpEvent;
 import net.ccbluex.liquidbounce.features.module.modules.movement.LiquidWalk;
 import net.minecraft.block.Block;
 import net.minecraft.client.entity.EntityPlayerSP;

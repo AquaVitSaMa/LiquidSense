@@ -29,20 +29,6 @@ class ChatComponentEvent(val component: IChatComponent,var chatLineId: List<Chat
 data class EntityMovementEvent(val movedEntity: Entity) : Event()
 
 /**
- * Called when player jumps
- *
- * @param motion jump motion (y motion)
- */
-class JumpEvent(var motion: Float) : CancellableEvent()
-
-/**
- * Called in "onUpdateWalkingPlayer"
- *
- * @param eventState PRE or POST
- */
-class MotionEvent(val eventState: EventState) : Event()
-
-/**
  * Called in "onLivingUpdate" when the player is using a use item.
  *
  * @param strafe the applied strafe slow down

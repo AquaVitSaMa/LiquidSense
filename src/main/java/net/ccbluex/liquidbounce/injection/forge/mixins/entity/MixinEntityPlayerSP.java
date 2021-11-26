@@ -10,6 +10,7 @@ import me.aquavit.liquidsense.modules.render.NoSwing;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import me.aquavit.liquidsense.modules.combat.Aura;
+import net.ccbluex.liquidbounce.event.events.MotionEvent;
 import net.ccbluex.liquidbounce.event.events.PushOutEvent;
 import net.ccbluex.liquidbounce.event.events.StepEvent;
 import net.ccbluex.liquidbounce.event.events.UpdateEvent;

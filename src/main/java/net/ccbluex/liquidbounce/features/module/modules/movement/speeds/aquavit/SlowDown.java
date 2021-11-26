@@ -5,8 +5,8 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.movement.speeds.aquavit;
 
-import net.ccbluex.liquidbounce.event.JumpEvent;
-import net.ccbluex.liquidbounce.event.MotionEvent;
+import net.ccbluex.liquidbounce.event.events.JumpEvent;
+import net.ccbluex.liquidbounce.event.events.MotionEvent;
 import net.ccbluex.liquidbounce.event.MoveEvent;
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMode;
 import me.aquavit.liquidsense.utils.misc.RandomUtils;
