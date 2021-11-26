@@ -93,8 +93,6 @@ class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableE
  * Called when screen is going to be rendered
  */
 class Render2DEvent(val partialTicks: Float) : Event()
-
-class EventRespawn(): CancellableEvent()
 /**
  * shabi
  */
@@ -122,11 +120,6 @@ class RenderEntityEvent(val entity: Entity, val x: Double, val y: Double, val z:
  * Called when the screen changes
  */
 class ScreenEvent(val guiScreen: GuiScreen?) : Event()
-
-/**
- * Called when the session changes
- */
-class SessionEvent : Event()
 
 class PacketSenEvent(val packet: Packet<*>) : CancellableEvent()
 
