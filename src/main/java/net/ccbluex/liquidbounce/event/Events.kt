@@ -111,23 +111,9 @@ class RenderEntityEvent(val entity: Entity, val x: Double, val y: Double, val z:
 class PacketSenEvent(val packet: Packet<*>) : CancellableEvent()
 
 /**
- * Ni kan ni ma ne?
- */
-
-/**
- * Called when player is going to step
- */
-class StepEvent(var stepHeight: Float) : Event()
-
-/**
  * Called when player step is confirmed
  */
 class StepConfirmEvent(var stepHeight: Float) : Event()
-
-/**
- * Called when a text is going to be rendered
- */
-class TextEvent(var text: String?) : Event()
 
 /**
  * Called when window clicked

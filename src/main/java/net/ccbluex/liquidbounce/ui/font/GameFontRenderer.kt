@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.ui.font
 
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.TextEvent
+import net.ccbluex.liquidbounce.event.events.TextEvent
 import me.aquavit.liquidsense.utils.mc.ClassUtils
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD
 import net.ccbluex.liquidbounce.utils.render.ColorUtils

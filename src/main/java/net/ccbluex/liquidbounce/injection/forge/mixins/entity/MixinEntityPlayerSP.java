@@ -11,6 +11,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import net.ccbluex.liquidbounce.event.events.PushOutEvent;
+import net.ccbluex.liquidbounce.event.events.StepEvent;
 import net.ccbluex.liquidbounce.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.modules.movement.InventoryMove;
 import net.ccbluex.liquidbounce.features.module.modules.movement.NoSlow;
