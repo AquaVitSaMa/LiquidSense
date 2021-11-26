@@ -3,7 +3,7 @@ package net.ccbluex.liquidbounce.features.module;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventTarget;
-import net.ccbluex.liquidbounce.event.KeyEvent;
+import net.ccbluex.liquidbounce.event.events.KeyEvent;
 import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.features.module.modules.combat.*;
 import net.ccbluex.liquidbounce.features.module.modules.exploit.*;

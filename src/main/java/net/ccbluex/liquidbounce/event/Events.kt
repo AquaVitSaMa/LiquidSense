@@ -36,13 +36,6 @@ data class EntityMovementEvent(val movedEntity: Entity) : Event()
 class JumpEvent(var motion: Float) : CancellableEvent()
 
 /**
- * Called when user press a key once
- *
- * @param key Pressed key
- */
-class KeyEvent(val key: Int) : Event()
-
-/**
  * Called in "onUpdateWalkingPlayer"
  *
  * @param eventState PRE or POST
@@ -101,12 +94,6 @@ class BlockRenderSideEvent(val world: IBlockAccess, val pos: BlockPos, val side:
 
 class UpdateModelEvent(val player: EntityPlayer, val model: ModelPlayer) : Event()
 
-
-/**
- * Called when entity is going to be rendered
- */
-class RenderEntityEvent(val entity: Entity, val x: Double, val y: Double, val z: Double, val entityYaw: Float,
-                        val partialTicks: Float) : Event()
 
 class PacketSenEvent(val packet: Packet<*>) : CancellableEvent()
 

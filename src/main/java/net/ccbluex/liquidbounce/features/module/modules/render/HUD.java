@@ -7,10 +7,7 @@ package net.ccbluex.liquidbounce.features.module.modules.render;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
-import net.ccbluex.liquidbounce.event.events.LivingUpdateEvent;
-import net.ccbluex.liquidbounce.event.events.Render2DEvent;
-import net.ccbluex.liquidbounce.event.events.ScreenEvent;
-import net.ccbluex.liquidbounce.event.events.UpdateEvent;
+import net.ccbluex.liquidbounce.event.events.*;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
