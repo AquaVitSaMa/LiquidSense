@@ -15,28 +15,6 @@ import net.minecraft.init.Blocks
 
 @ModuleInfo(name = "XRay", description = "Allows you to see ores through walls.", category = ModuleCategory.RENDER)
 class XRay : Module() {
-    val cavefinder = mutableListOf<Block>(
-            Blocks.clay,
-            Blocks.glowstone,
-            Blocks.crafting_table,
-            Blocks.torch,
-            Blocks.ladder,
-            Blocks.tnt,
-            Blocks.fire,
-            Blocks.mossy_cobblestone,
-            Blocks.mob_spawner,
-            Blocks.end_portal_frame,
-            Blocks.enchanting_table,
-            Blocks.bookshelf,
-            Blocks.command_block,
-            Blocks.lava,
-            Blocks.flowing_lava,
-            Blocks.water,
-            Blocks.flowing_water,
-            Blocks.furnace,
-            Blocks.lit_furnace
-    )
-
     val xrayBlocks = mutableListOf<Block>(
             Blocks.coal_ore,
             Blocks.iron_ore,

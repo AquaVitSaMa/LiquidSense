@@ -75,12 +75,6 @@ public abstract class MixinBlock {
 
     }
 
-    @Overwrite
-    public EnumWorldBlockLayer getBlockLayer()
-    {
-        return EnumWorldBlockLayer.SOLID;
-    }
-
     @Inject(method = "shouldSideBeRendered", at = @At("HEAD"), cancellable = true)
     private void shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         final XRay xray = (XRay) LiquidBounce.moduleManager.getModule(XRay.class);
@@ -88,11 +82,13 @@ public abstract class MixinBlock {
 
         LiquidBounce.eventManager.callEvent(new BlockRenderSideEvent(worldIn, pos, side, maxX, minX, maxY, minY, maxZ, minZ));
 
-        if (cavefinder.getState() && !CaveFinder.caveFinder.get())
+        if (cavefinder.getState() && !CaveFinder.caveFinder.get()) {
             callbackInfoReturnable.setReturnValue(cavefinder.xrayBlocks.contains(this));
+        }
 
-        if(xray.getState())
+        if(xray.getState()) {
             callbackInfoReturnable.setReturnValue(xray.getXrayBlocks().contains(this));
+        }
 
     }
 

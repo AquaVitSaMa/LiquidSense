@@ -11,13 +11,15 @@ import org.spongepowered.asm.mixin.Overwrite;
 
 @Mixin(BlockGrass.class)
 @SideOnly(Side.CLIENT)
-public abstract class MixinBlockGrass extends MixinBlock {
+public class MixinBlockGrass {
 
+    /**
+     * @author CCBlueX
+     * @reason CCBlueX
+     */
     @Overwrite
     public EnumWorldBlockLayer getBlockLayer() {
-        if (LiquidBounce.moduleManager.getModule(CaveFinder.class).getState()) {
-            return super.getBlockLayer();
-        }
+        if (LiquidBounce.moduleManager.getModule(CaveFinder.class).getState()) return EnumWorldBlockLayer.SOLID;
         return EnumWorldBlockLayer.CUTOUT_MIPPED;
     }
 

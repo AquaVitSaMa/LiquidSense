@@ -5,6 +5,7 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.modules.render.CaveFinder;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
 import net.minecraft.client.renderer.chunk.VisGraph;
@@ -18,6 +19,10 @@ public class MixinVisGraph {
 
     @Inject(method = "func_178606_a", at = @At("HEAD"), cancellable = true)
     private void func_178606_a(final CallbackInfo callbackInfo) {
+
+        if (LiquidBounce.moduleManager.getModule(CaveFinder.class).getState())
+            callbackInfo.cancel();
+
         if (LiquidBounce.moduleManager.getModule(XRay.class).getState())
             callbackInfo.cancel();
     }
