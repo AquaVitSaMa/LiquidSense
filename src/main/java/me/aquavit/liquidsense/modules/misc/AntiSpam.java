@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.modules.misc;
 
-import net.ccbluex.liquidbounce.event.ChatComponentEvent;
+import net.ccbluex.liquidbounce.event.events.ChatEvent;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -20,7 +20,7 @@ public class AntiSpam extends Module {
     private int amount;
 
     @EventTarget
-    public void onChat(ChatComponentEvent event) {
+    public void onChat(ChatEvent event) {
         List<ChatLine> chatLines = event.getChatLineId();
         if (chatLines.isEmpty()) {
             return;

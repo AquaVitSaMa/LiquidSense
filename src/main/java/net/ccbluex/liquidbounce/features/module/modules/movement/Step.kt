@@ -14,6 +14,7 @@ import net.ccbluex.liquidbounce.features.module.modules.exploit.Phase
 import me.aquavit.liquidsense.utils.entity.MovementUtils
 import me.aquavit.liquidsense.utils.timer.MSTimer
 import net.ccbluex.liquidbounce.event.events.MoveEvent
+import net.ccbluex.liquidbounce.event.events.StepConfirmEvent
 import net.ccbluex.liquidbounce.event.events.StepEvent
 import net.ccbluex.liquidbounce.event.events.UpdateEvent
 import net.ccbluex.liquidbounce.value.FloatValue

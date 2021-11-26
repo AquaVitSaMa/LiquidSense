@@ -21,8 +21,6 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.IChatComponent
 import net.minecraft.world.IBlockAccess
 
-class ChatComponentEvent(val component: IChatComponent,var chatLineId: List<ChatLine>) : CancellableEvent()
-
 /**
  * Called when an other entity moves
  */
@@ -35,13 +33,3 @@ class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableE
 
 
 class PacketSenEvent(val packet: Packet<*>) : CancellableEvent()
-
-/**
- * Called when player step is confirmed
- */
-class StepConfirmEvent(var stepHeight: Float) : Event()
-
-/**
- * Called when window clicked
- */
-class ClickWindowEvent(val windowId: Int, val slotId: Int, val mouseButtonClicked: Int, val mode: Int) : CancellableEvent()

@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.utils;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.event.ClickWindowEvent;
+import net.ccbluex.liquidbounce.event.events.ClickWindowEvent;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.Listenable;
 import net.ccbluex.liquidbounce.event.PacketEvent;

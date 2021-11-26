@@ -5,11 +5,9 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
-import com.google.common.collect.Lists;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.ChatComponentEvent;
+import net.ccbluex.liquidbounce.event.events.ChatEvent;
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;
@@ -18,16 +16,10 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IChatComponent;
 import net.minecraft.util.MathHelper;
 import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
-import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
-import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 import java.util.Iterator;
 import java.util.List;
@@ -188,7 +180,7 @@ public abstract class MixinGuiNewChat extends Gui{
 	 */
     @Overwrite
     public void printChatMessageWithOptionalDeletion(IChatComponent chatComponent, int chatLineId) {
-        ChatComponentEvent event = new ChatComponentEvent(chatComponent, this.drawnChatLines);
+        ChatEvent event = new ChatEvent(chatComponent, this.drawnChatLines);
         LiquidBounce.eventManager.callEvent(event);
         if (event.isCancelled()) {
             return;
