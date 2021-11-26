@@ -25,11 +25,3 @@ import net.minecraft.world.IBlockAccess
  * Called when an other entity moves
  */
 data class EntityMovementEvent(val movedEntity: Entity) : Event()
-
-/**
- * Called when receive or send a packet
- */
-class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableEvent()
-
-
-class PacketSenEvent(val packet: Packet<*>) : CancellableEvent()

@@ -8,6 +8,7 @@ package net.ccbluex.liquidbounce.features.module.modules.world;
 import net.ccbluex.liquidbounce.event.*;
 import net.ccbluex.liquidbounce.event.events.JumpEvent;
 import net.ccbluex.liquidbounce.event.events.MotionEvent;
+import net.ccbluex.liquidbounce.event.events.PacketEvent;
 import net.ccbluex.liquidbounce.event.events.Render2DEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;

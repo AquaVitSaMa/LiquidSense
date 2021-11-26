@@ -7,7 +7,7 @@ import io.netty.util.concurrent.GenericFutureListener;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.events.RespawnEvent;
 import net.ccbluex.liquidbounce.event.EventType;
-import net.ccbluex.liquidbounce.event.PacketEvent;
+import net.ccbluex.liquidbounce.event.events.PacketEvent;
 import net.ccbluex.liquidbounce.injection.implementations.INetworkManager;
 import net.minecraft.network.*;
 import net.minecraft.network.play.server.S07PacketRespawn;

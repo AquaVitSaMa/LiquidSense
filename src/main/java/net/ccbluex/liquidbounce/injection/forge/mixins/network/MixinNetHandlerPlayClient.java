@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.network;
 import io.netty.buffer.Unpooled;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EntityMovementEvent;
-import net.ccbluex.liquidbounce.event.PacketSenEvent;
+import net.ccbluex.liquidbounce.event.events.PacketSendEvent;
 import net.ccbluex.liquidbounce.features.special.AntiForge;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import net.minecraft.client.ClientBrandRetriever;
@@ -108,7 +108,7 @@ public abstract class MixinNetHandlerPlayClient {
 
     @Inject(method = "addToSendQueue", at = @At("HEAD"), cancellable = true)
     private void senpacket(Packet<?> packet, final CallbackInfo callbackInfo) {
-        final PacketSenEvent event = new PacketSenEvent(packet);
+        final PacketSendEvent event = new PacketSendEvent(packet);
         LiquidBounce.eventManager.callEvent(event);
         if (event.isCancelled()) {
             callbackInfo.cancel();
