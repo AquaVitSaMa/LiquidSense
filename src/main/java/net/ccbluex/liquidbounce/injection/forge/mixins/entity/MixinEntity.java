@@ -8,7 +8,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import me.aquavit.liquidsense.modules.combat.HitBox;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.StrafeEvent;
+import net.ccbluex.liquidbounce.event.events.StrafeEvent;
 import net.ccbluex.liquidbounce.event.events.WallDamageEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;

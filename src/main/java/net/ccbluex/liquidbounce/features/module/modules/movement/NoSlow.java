@@ -6,7 +6,7 @@ import me.aquavit.liquidsense.utils.timer.MSTimer;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.events.MotionEvent;
-import net.ccbluex.liquidbounce.event.SlowDownEvent;
+import net.ccbluex.liquidbounce.event.events.SlowDownEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;

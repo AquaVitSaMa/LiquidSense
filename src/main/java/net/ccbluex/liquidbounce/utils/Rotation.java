@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.utils;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.event.StrafeEvent;
+import net.ccbluex.liquidbounce.event.events.StrafeEvent;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.MathHelper;
