@@ -21,14 +21,6 @@ import net.minecraft.util.EnumFacing
 import net.minecraft.util.IChatComponent
 import net.minecraft.world.IBlockAccess
 
-/**
- * Called when player attacks other entity
- *
- * @param targetEntity Attacked entity
- */
-
-class AttackEvent(val targetEntity: Entity?) : Event()
-
 class ChatComponentEvent(val component: IChatComponent,var chatLineId: List<ChatLine>) : CancellableEvent()
 
 /**

@@ -9,6 +9,7 @@ import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
+import net.ccbluex.liquidbounce.event.events.AttackEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;

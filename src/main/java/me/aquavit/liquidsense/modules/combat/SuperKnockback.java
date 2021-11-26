@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.modules.combat;
 
-import net.ccbluex.liquidbounce.event.AttackEvent;
+import net.ccbluex.liquidbounce.event.events.AttackEvent;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;

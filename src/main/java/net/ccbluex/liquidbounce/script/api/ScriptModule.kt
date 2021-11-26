@@ -11,6 +11,7 @@ import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import me.aquavit.liquidsense.utils.client.ClientUtils
+import net.ccbluex.liquidbounce.event.events.AttackEvent
 import net.ccbluex.liquidbounce.value.Value
 
 @Suppress("unused")
