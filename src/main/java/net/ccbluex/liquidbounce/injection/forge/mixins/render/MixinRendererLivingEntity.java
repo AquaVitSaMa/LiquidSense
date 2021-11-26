@@ -13,7 +13,7 @@ import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.utils.render.OutlineUtils;
 import com.google.common.collect.Lists;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.SommtheEvent;
+import me.aquavit.liquidsense.event.SommtheEvent;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import net.ccbluex.liquidbounce.features.module.modules.render.ESP;
 import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;

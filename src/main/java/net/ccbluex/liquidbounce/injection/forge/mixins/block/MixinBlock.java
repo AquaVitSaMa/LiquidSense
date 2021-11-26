@@ -3,7 +3,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.block;
 import me.aquavit.liquidsense.modules.exploit.GhostHand;
 import me.aquavit.liquidsense.modules.render.CaveFinder;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.events.BlockBBEvent;
+import me.aquavit.liquidsense.event.events.BlockBBEvent;
 import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals;
 import net.ccbluex.liquidbounce.features.module.modules.player.NoFall;
 import net.ccbluex.liquidbounce.features.module.modules.render.XRay;

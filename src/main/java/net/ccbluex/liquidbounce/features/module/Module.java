@@ -3,7 +3,7 @@ package net.ccbluex.liquidbounce.features.module;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.Listenable;
+import me.aquavit.liquidsense.event.Listenable;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Print;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Type;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;

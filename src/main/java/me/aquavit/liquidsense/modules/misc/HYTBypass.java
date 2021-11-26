@@ -2,8 +2,8 @@ package me.aquavit.liquidsense.modules.misc;
 
 import com.google.gson.JsonObject;
 import io.netty.buffer.Unpooled;
-import net.ccbluex.liquidbounce.event.EventTarget;
-import net.ccbluex.liquidbounce.event.events.WorldEvent;
+import me.aquavit.liquidsense.event.EventTarget;
+import me.aquavit.liquidsense.event.events.WorldEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;

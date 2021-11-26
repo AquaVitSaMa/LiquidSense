@@ -1,11 +1,11 @@
 package me.aquavit.liquidsense.modules.render;
 
+import me.aquavit.liquidsense.event.EventTarget;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.*;
-import net.ccbluex.liquidbounce.event.events.PacketEvent;
-import net.ccbluex.liquidbounce.event.events.Render3DEvent;
-import net.ccbluex.liquidbounce.event.events.UpdateEvent;
-import net.ccbluex.liquidbounce.event.events.WorldEvent;
+import me.aquavit.liquidsense.event.events.PacketEvent;
+import me.aquavit.liquidsense.event.events.Render3DEvent;
+import me.aquavit.liquidsense.event.events.UpdateEvent;
+import me.aquavit.liquidsense.event.events.WorldEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;

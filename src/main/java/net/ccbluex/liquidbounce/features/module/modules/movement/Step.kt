@@ -5,15 +5,15 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.movement
 
+import me.aquavit.liquidsense.event.EventTarget
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.*
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.exploit.Phase
 import me.aquavit.liquidsense.utils.entity.MovementUtils
 import me.aquavit.liquidsense.utils.timer.MSTimer
-import net.ccbluex.liquidbounce.event.events.*
+import me.aquavit.liquidsense.event.events.*
 import net.ccbluex.liquidbounce.value.FloatValue
 import net.ccbluex.liquidbounce.value.IntegerValue
 import net.ccbluex.liquidbounce.value.ListValue

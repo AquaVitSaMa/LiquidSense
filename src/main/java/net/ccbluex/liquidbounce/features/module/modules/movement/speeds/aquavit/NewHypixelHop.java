@@ -1,10 +1,11 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement.speeds.aquavit;
 
+import me.aquavit.liquidsense.event.EventTarget;
+import me.aquavit.liquidsense.event.Listenable;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.*;
-import net.ccbluex.liquidbounce.event.events.JumpEvent;
-import net.ccbluex.liquidbounce.event.events.MotionEvent;
-import net.ccbluex.liquidbounce.event.events.MoveEvent;
+import me.aquavit.liquidsense.event.events.JumpEvent;
+import me.aquavit.liquidsense.event.events.MotionEvent;
+import me.aquavit.liquidsense.event.events.MoveEvent;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed;
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMode;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;

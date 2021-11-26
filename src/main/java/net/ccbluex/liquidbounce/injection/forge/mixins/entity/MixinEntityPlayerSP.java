@@ -5,12 +5,13 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
+import me.aquavit.liquidsense.event.EventState;
+import me.aquavit.liquidsense.event.SommtheEvent;
 import me.aquavit.liquidsense.modules.fun.Derp;
 import me.aquavit.liquidsense.modules.render.NoSwing;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.*;
 import me.aquavit.liquidsense.modules.combat.Aura;
-import net.ccbluex.liquidbounce.event.events.*;
+import me.aquavit.liquidsense.event.events.*;
 import net.ccbluex.liquidbounce.features.module.modules.movement.InventoryMove;
 import net.ccbluex.liquidbounce.features.module.modules.movement.NoSlow;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Sprint;

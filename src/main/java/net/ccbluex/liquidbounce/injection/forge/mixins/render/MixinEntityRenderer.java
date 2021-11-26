@@ -12,7 +12,7 @@ import me.aquavit.liquidsense.modules.render.CaveFinder;
 import me.aquavit.liquidsense.modules.render.NoHurtCam;
 import me.aquavit.liquidsense.modules.render.Tracers;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.events.Render3DEvent;
+import me.aquavit.liquidsense.event.events.Render3DEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;

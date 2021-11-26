@@ -5,10 +5,11 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
+import me.aquavit.liquidsense.event.EventState;
+import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.modules.movement.Stair;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.*;
-import net.ccbluex.liquidbounce.event.events.*;
+import me.aquavit.liquidsense.event.events.*;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;

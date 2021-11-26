@@ -7,9 +7,9 @@ package net.ccbluex.liquidbounce.features.module.modules.combat
 
 import me.aquavit.liquidsense.modules.combat.Aura
 import net.ccbluex.liquidbounce.LiquidBounce
-import net.ccbluex.liquidbounce.event.EventState.PRE
-import net.ccbluex.liquidbounce.event.EventTarget
-import net.ccbluex.liquidbounce.event.events.MotionEvent
+import me.aquavit.liquidsense.event.EventState.PRE
+import me.aquavit.liquidsense.event.EventTarget
+import me.aquavit.liquidsense.event.events.MotionEvent
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo

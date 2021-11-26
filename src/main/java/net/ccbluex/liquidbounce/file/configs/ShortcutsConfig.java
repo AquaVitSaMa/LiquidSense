@@ -3,8 +3,8 @@ package net.ccbluex.liquidbounce.file.configs;
 import com.google.gson.*;
 import me.aquavit.liquidsense.utils.data.Pair;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.command.Command;
-import net.ccbluex.liquidbounce.features.command.shortcuts.Shortcut;
+import me.aquavit.liquidsense.command.Command;
+import me.aquavit.liquidsense.command.shortcuts.Shortcut;
 import net.ccbluex.liquidbounce.file.FileConfig;
 import net.ccbluex.liquidbounce.file.FileManager;
 

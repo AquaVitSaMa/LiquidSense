@@ -6,12 +6,12 @@
 package net.ccbluex.liquidbounce.script.api
 
 import jdk.nashorn.api.scripting.JSObject
-import net.ccbluex.liquidbounce.event.*
+import me.aquavit.liquidsense.event.EventTarget
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import me.aquavit.liquidsense.utils.client.ClientUtils
-import net.ccbluex.liquidbounce.event.events.*
+import me.aquavit.liquidsense.event.events.*
 import net.ccbluex.liquidbounce.value.Value
 
 @Suppress("unused")

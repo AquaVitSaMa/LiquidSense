@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.modules.combat;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
+import me.aquavit.liquidsense.event.EventTarget;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
@@ -14,7 +14,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.network.play.client.C08PacketPlayerBlockPlacement;
 import net.minecraft.network.play.client.C09PacketHeldItemChange;
 import net.minecraft.potion.Potion;
-import net.ccbluex.liquidbounce.event.events.MotionEvent;
+import me.aquavit.liquidsense.event.events.MotionEvent;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import org.lwjgl.input.Mouse;

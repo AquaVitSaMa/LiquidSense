@@ -2,8 +2,7 @@ package net.ccbluex.liquidbounce.features.module;
 
 import me.aquavit.liquidsense.utils.block.BlockUtils;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
-import net.ccbluex.liquidbounce.features.command.Command;
-import net.ccbluex.liquidbounce.features.module.Module;
+import me.aquavit.liquidsense.command.Command;
 import net.ccbluex.liquidbounce.value.*;
 import net.minecraft.block.Block;
 

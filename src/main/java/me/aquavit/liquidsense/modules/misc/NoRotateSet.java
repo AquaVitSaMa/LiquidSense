@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.modules.misc;
 
-import net.ccbluex.liquidbounce.event.EventTarget;
-import net.ccbluex.liquidbounce.event.events.PacketEvent;
+import me.aquavit.liquidsense.event.EventTarget;
+import me.aquavit.liquidsense.event.events.PacketEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;

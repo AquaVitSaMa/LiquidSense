@@ -9,7 +9,7 @@ import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.events.SessionEvent;
+import me.aquavit.liquidsense.event.events.SessionEvent;
 import net.minecraft.util.Session;
 
 import java.io.IOException;

@@ -6,7 +6,7 @@
 package me.aquavit.liquidsense.utils.entity;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.event.events.MoveEvent;
+import me.aquavit.liquidsense.event.events.MoveEvent;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.block.BlockLiquid;

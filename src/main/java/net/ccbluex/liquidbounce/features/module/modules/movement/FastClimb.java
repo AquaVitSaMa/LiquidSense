@@ -5,9 +5,9 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import net.ccbluex.liquidbounce.event.events.BlockBBEvent;
-import net.ccbluex.liquidbounce.event.EventTarget;
-import net.ccbluex.liquidbounce.event.events.MoveEvent;
+import me.aquavit.liquidsense.event.events.BlockBBEvent;
+import me.aquavit.liquidsense.event.EventTarget;
+import me.aquavit.liquidsense.event.events.MoveEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;

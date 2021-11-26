@@ -7,8 +7,8 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.network;
 
 import io.netty.buffer.Unpooled;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.events.EntityMovementEvent;
-import net.ccbluex.liquidbounce.event.events.PacketSendEvent;
+import me.aquavit.liquidsense.event.events.EntityMovementEvent;
+import me.aquavit.liquidsense.event.events.PacketSendEvent;
 import net.ccbluex.liquidbounce.features.special.AntiForge;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import net.minecraft.client.ClientBrandRetriever;
