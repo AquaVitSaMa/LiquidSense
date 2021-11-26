@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.modules.render;
 import me.aquavit.liquidsense.utils.module.Location;
 import me.aquavit.liquidsense.utils.module.Particles;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.EventLivingUpdate;
+import net.ccbluex.liquidbounce.event.events.LivingUpdateEvent;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -26,7 +26,7 @@ public class Particle extends Module {
     private HashMap<EntityLivingBase, Float> healthMap = new HashMap<EntityLivingBase, Float>();
     private List<Particles> particles = new ArrayList<Particles>();
     @EventTarget
-    public void onLivingUpdate(EventLivingUpdate e) {
+    public void onLivingUpdate(LivingUpdateEvent e) {
         Aura a = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
         EntityLivingBase entity = a.getTarget();
         if (entity != null && entity != mc.thePlayer) {

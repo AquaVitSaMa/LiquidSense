@@ -7,6 +7,7 @@ package net.ccbluex.liquidbounce.features.module.modules.render;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.event.*;
+import net.ccbluex.liquidbounce.event.events.LivingUpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
@@ -63,7 +64,7 @@ public class HUD extends Module {
     }
 
     @EventTarget
-    public void onLivingUpdate(final EventLivingUpdate event){
+    public void onLivingUpdate(final LivingUpdateEvent event){
         LiquidBounce.hud.livingupdate();
     }
 

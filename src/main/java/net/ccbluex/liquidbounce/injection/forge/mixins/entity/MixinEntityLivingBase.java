@@ -9,7 +9,7 @@ import me.aquavit.liquidsense.modules.misc.Animations;
 import me.aquavit.liquidsense.modules.movement.NoJumpDelay;
 import me.aquavit.liquidsense.modules.render.AntiBlind;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.EventLivingUpdate;
+import net.ccbluex.liquidbounce.event.events.LivingUpdateEvent;
 import net.ccbluex.liquidbounce.event.JumpEvent;
 import net.ccbluex.liquidbounce.features.module.modules.movement.LiquidWalk;
 import net.minecraft.block.Block;
@@ -130,7 +130,7 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
 
     @Inject(method = "onEntityUpdate", at = @At("HEAD"))
     public void onEntityUpdate(CallbackInfo info) {
-        EventLivingUpdate eventLivingUpdate = new EventLivingUpdate((EntityLivingBase) (Object) this);
-        LiquidBounce.eventManager.callEvent(eventLivingUpdate);
+        LivingUpdateEvent livingUpdateEvent = new LivingUpdateEvent((EntityLivingBase) (Object) this);
+        LiquidBounce.eventManager.callEvent(livingUpdateEvent);
     }
 }

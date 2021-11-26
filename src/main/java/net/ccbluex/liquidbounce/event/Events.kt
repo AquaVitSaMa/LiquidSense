@@ -27,9 +27,6 @@ import net.minecraft.world.IBlockAccess
  * @param targetEntity Attacked entity
  */
 
-
-class EventLivingUpdate(val entity: Entity) : CancellableEvent()
-
 class AttackEvent(val targetEntity: Entity?) : Event()
 
 class ChatComponentEvent(val component: IChatComponent,var chatLineId: List<ChatLine>) : CancellableEvent()
