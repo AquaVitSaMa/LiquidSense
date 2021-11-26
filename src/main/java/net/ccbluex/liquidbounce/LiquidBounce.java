@@ -10,7 +10,7 @@ import me.aquavit.liquidsense.utils.forge.BlocksTab;
 import me.aquavit.liquidsense.utils.forge.ExploitsTab;
 import me.aquavit.liquidsense.utils.forge.HeadsTab;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
-import net.ccbluex.liquidbounce.event.ClientShutdownEvent;
+import net.ccbluex.liquidbounce.event.events.ClientShutdownEvent;
 import net.ccbluex.liquidbounce.event.EventManager;
 import net.ccbluex.liquidbounce.features.command.CommandManager;
 import net.ccbluex.liquidbounce.features.module.ModuleManager;

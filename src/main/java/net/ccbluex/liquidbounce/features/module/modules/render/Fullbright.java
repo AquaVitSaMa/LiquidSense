@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.features.module.modules.render;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.event.ClientShutdownEvent;
+import net.ccbluex.liquidbounce.event.events.ClientShutdownEvent;
 import net.ccbluex.liquidbounce.event.EventTarget;
 import net.ccbluex.liquidbounce.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;

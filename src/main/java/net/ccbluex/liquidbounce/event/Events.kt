@@ -24,11 +24,6 @@ import net.minecraft.world.IBlockAccess
 class ChatComponentEvent(val component: IChatComponent,var chatLineId: List<ChatLine>) : CancellableEvent()
 
 /**
- * Called when client is shutting down
- */
-class ClientShutdownEvent : Event()
-
-/**
  * Called when an other entity moves
  */
 data class EntityMovementEvent(val movedEntity: Entity) : Event()
@@ -93,11 +88,6 @@ class MoveEvent(var x: Double, var y: Double, var z: Double) : CancellableEvent(
  * Called when receive or send a packet
  */
 class PacketEvent(val packet: Packet<*>,val eventType: EventType) : CancellableEvent()
-
-/**
- * Called when a block tries to push you
- */
-class PushOutEvent : CancellableEvent()
 
 /**
  * Called when screen is going to be rendered
