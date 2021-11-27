@@ -15,8 +15,8 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import me.aquavit.liquidsense.modules.combat.Aura
 import me.aquavit.liquidsense.modules.combat.BowAimbot
+import me.aquavit.liquidsense.modules.world.Fucker
 import net.ccbluex.liquidbounce.features.module.modules.world.ChestAura
-import net.ccbluex.liquidbounce.features.module.modules.world.Fucker
 import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold
 import net.ccbluex.liquidbounce.features.module.modules.world.Tower
 import net.ccbluex.liquidbounce.utils.RotationUtils

@@ -96,7 +96,6 @@ public final class ModuleManager implements Listenable {
                 BugUp.class,
                 AntiObsidian.class);
 
-        this.registerModule(Fucker.INSTANCE);
         this.registerModule(ChestAura.INSTANCE);
 
         ClientUtils.getLogger().info("[ModuleManager] Loaded " + modules.size() + " modules.");

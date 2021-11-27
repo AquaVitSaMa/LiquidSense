@@ -63,6 +63,7 @@ public class LiquidSense {
         liquidSenseModules.add(GhostHand.class);
         liquidSenseModules.add(Kick.class);
         liquidSenseModules.add(HYTBypass.class);
+        liquidSenseModules.add(Fucker.class);
         liquidSenseModules.add(AntiAFK.class);
         liquidSenseModules.add(Reach.class);
         liquidSenseModules.add(NoClip.class);
