@@ -107,8 +107,8 @@ public class BlockUtils extends MinecraftInstance {
      * Check if [axisAlignedBB] has collidable blocks using custom [collide] check
      */
     public static boolean collideBlock(AxisAlignedBB axisAlignedBB, Collidable collide) {
-        for (int x = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minX); x < MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().maxX) + 1; x++) {
-            for (int z = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minZ); z < MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().maxZ) + 1; z++) {
+        for (int x = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minX); x < MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().maxX) + 1; ++x) {
+            for (int z = MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().minZ); z < MathHelper.floor_double(mc.thePlayer.getEntityBoundingBox().maxZ) + 1; ++z) {
                 Block block = getBlock(new BlockPos(x, axisAlignedBB.minY, z));
 
                 if (!collide.collideBlock(block))
