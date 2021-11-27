@@ -161,7 +161,7 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
                     final MovingObjectPosition obj = mc.theWorld.rayTraceBlocks(eyesPos, vector, false,
                             false, true);
 
-                    if (obj.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
+                    if (obj != null && obj.typeOfHit == MovingObjectPosition.MovingObjectType.BLOCK) {
                         final VecRotation currentVec = new VecRotation(posVec, rotation);
 
                         if (vecRotation == null || getRotationDifference(currentVec.getRotation()) < getRotationDifference(vecRotation.getRotation()))
