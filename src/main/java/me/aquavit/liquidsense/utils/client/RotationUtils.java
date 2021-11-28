@@ -212,23 +212,27 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
      * @return center
      */
     public static VecRotation searchCenter(final AxisAlignedBB bb, final float distance) {
+
+        final Vec3 randomVec = new Vec3(bb.minX + (bb.maxX - bb.minX) * x * 0.8, bb.minY + (bb.maxY - bb.minY) * y * 0.8, bb.minZ + (bb.maxZ - bb.minZ) * z * 0.8);
+
         final Vec3 eyes = mc.thePlayer.getPositionEyes(1F);
+
         VecRotation vecRotation = null;
 
-        for(double xSearch = 0.1D; xSearch < 0.9D; xSearch += 0.1D) {
-            for (double ySearch = 0.9D; ySearch < 0.9D; ySearch += 0.1D) {
-                for (double zSearch = 0.1D; zSearch < 0.9D; zSearch += 0.1D) {
-                    final Vec3 vec3 = new Vec3(bb.minX + (bb.maxX - bb.minX) * xSearch, bb.minY + (bb.maxY - bb.minY) * ySearch, bb.minZ + (bb.maxZ - bb.minZ) * zSearch);
-                    final Rotation rotation = toRotation(vec3,false);
+        for(double xSearch = 0.15D; xSearch < 0.85D; xSearch += 0.1D) {
+            for (double ySearch = 0.15D; ySearch < 1D; ySearch += 0.1D) {
+                for (double zSearch = 0.15D; zSearch < 0.85D; zSearch += 0.1D) {
+                    final Vec3 vec3 = new Vec3(bb.minX + (bb.maxX - bb.minX) * xSearch,
+                            bb.minY + (bb.maxY - bb.minY) * ySearch, bb.minZ + (bb.maxZ - bb.minZ) * zSearch);
                     final double vecDist = eyes.distanceTo(vec3);
-
+                    final Rotation rotation = toRotation(vec3, false);
                     if (vecDist > distance)
                         continue;
 
-                    if(isVisible(vec3)) {
+                    if (isVisible(vec3)) {
                         final VecRotation currentVec = new VecRotation(vec3, rotation);
 
-                        if (vecRotation == null || (getRotationDifference(currentVec.getRotation()) < getRotationDifference(vecRotation.getRotation())))
+                        if (vecRotation == null || getRotationDifference(currentVec.getRotation()) < getRotationDifference(vecRotation.getRotation()))
                             vecRotation = currentVec;
                     }
                 }
