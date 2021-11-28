@@ -113,7 +113,7 @@ public final class UserUtils {
             httpURLConnection.setRequestProperty("Content-Type", "application/json");
 
             String result = HttpUtils.getResultFormStream(httpURLConnection.getInputStream());
-            System.out.println(result);
+            //System.out.println(result);
             String encodedSkinUrl = new JsonParser().parse(result).getAsJsonObject().getAsJsonArray("properties").get(0).getAsJsonObject().get("value").getAsString();
             JsonObject jsonObject = new JsonParser().parse(new String(Base64.getDecoder().decode(encodedSkinUrl), StandardCharsets.UTF_8)).getAsJsonObject();
             String skinUrl = jsonObject.getAsJsonObject("textures").getAsJsonObject("SKIN").get("url").getAsString();

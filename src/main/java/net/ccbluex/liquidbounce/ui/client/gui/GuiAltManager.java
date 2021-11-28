@@ -60,7 +60,7 @@ public class GuiAltManager extends GuiScreen {
     private GuiButtonElement loginButton;
     private GuiButtonElement randomButton;
     private GuiList altsList;
-    private HashMap<Integer, ResourceLocation> skin = new HashMap<Integer, ResourceLocation>();
+    public static HashMap<Integer, ResourceLocation> skin = new HashMap<Integer, ResourceLocation>();
     //GuiAdd
     private GuiButtonElement addButton;
     private GuiButtonElement clipboardButton;

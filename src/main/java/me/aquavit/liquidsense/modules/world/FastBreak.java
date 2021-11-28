@@ -56,10 +56,9 @@ public class FastBreak extends Module {
                 float breakdamage = 2.1f - breakSpeed.get();
                 if (mc.playerController.curBlockDamageMP > breakdamage)
                     mc.playerController.curBlockDamageMP = 1f;
-                /*
-                if (Fucker.currentDamage > breakDamage.get())
-                    Fucker.currentDamage = 1F
-                 */
+
+                if (Fucker.currentDamage > breakdamage)
+                    Fucker.currentDamage = 1F;
                 break;
             }
 
