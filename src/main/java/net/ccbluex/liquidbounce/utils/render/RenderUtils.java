@@ -123,17 +123,32 @@ public final class RenderUtils extends MinecraftInstance {
     }
 
     // Notification
-    public static void drawShader(float x, float y, float width, float height) {
+    public static void drawShader(float x, float y, float width, float height , int color) {
         ScaledResolution sr = new ScaledResolution(mc);
-        drawTexturedRect(x - 9.0f, y - 9.0f, 9.0f, 9.0f, "paneltopleft", sr);
-        drawTexturedRect(x - 9.0f, y + height, 9.0f, 9.0f, "panelbottomleft", sr);
-        drawTexturedRect(x + width, y + height, 9.0f, 9.0f, "panelbottomright", sr);
-        drawTexturedRect(x + width, y - 9.0f, 9.0f, 9.0f, "paneltopright", sr);
-        drawTexturedRect(x - 9.0f, y, 9.0f, height, "panelleft", sr);
-        drawTexturedRect(x + width, y, 9.0f, height, "panelright", sr);
-        drawTexturedRect(x, y - 9.0f, width, 9.0f, "paneltop", sr);
-        drawTexturedRect(x, y + height, width, 9.0f, "panelbottom", sr);
+        drawTexturedRect(x - 9.0f, y - 9.0f, 9.0f, 9.0f, "paneltopleft", color,  sr);
+        drawTexturedRect(x - 9.0f, y + height, 9.0f, 9.0f, "panelbottomleft", color,sr);
+        drawTexturedRect(x + width, y + height, 9.0f, 9.0f, "panelbottomright", color,sr);
+        drawTexturedRect(x + width, y - 9.0f, 9.0f, 9.0f, "paneltopright", color,sr);
+        drawTexturedRect(x - 9.0f, y, 9.0f, height, "panelleft", color,sr);
+        drawTexturedRect(x + width, y, 9.0f, height, "panelright",color, sr);
+        drawTexturedRect(x, y - 9.0f, width, 9.0f, "paneltop", color,sr);
+        drawTexturedRect(x, y + height, width, 9.0f, "panelbottom", color,sr);
     }
+
+
+	// Notification
+	public static void drawShader(float x, float y, float width, float height ) {
+		ScaledResolution sr = new ScaledResolution(mc);
+		drawTexturedRect(x - 9.0f, y - 9.0f, 9.0f, 9.0f, "paneltopleft", sr);
+		drawTexturedRect(x - 9.0f, y + height, 9.0f, 9.0f, "panelbottomleft",sr);
+		drawTexturedRect(x + width, y + height, 9.0f, 9.0f, "panelbottomright", sr);
+		drawTexturedRect(x + width, y - 9.0f, 9.0f, 9.0f, "paneltopright",sr);
+		drawTexturedRect(x - 9.0f, y, 9.0f, height, "panelleft", sr);
+		drawTexturedRect(x + width, y, 9.0f, height, "panelright",sr);
+		drawTexturedRect(x, y - 9.0f, width, 9.0f, "paneltop", sr);
+		drawTexturedRect(x, y + height, width, 9.0f, "panelbottom", sr);
+	}
+
     public static void drawTexturedRect(float x, float y, float width, float height, String image, ScaledResolution sr) {
         GL11.glPushMatrix();
         GlStateManager.enableBlend();
@@ -145,6 +160,22 @@ public final class RenderUtils extends MinecraftInstance {
         GlStateManager.enableAlpha();
         GL11.glPopMatrix();
     }
+
+	public static void drawTexturedRect(float x, float y, float width, float height, String image, int color , ScaledResolution sr) {
+		GL11.glPushMatrix();
+		GlStateManager.enableBlend();
+		GlStateManager.disableAlpha();
+		mc.getTextureManager().bindTexture(new ResourceLocation("liquidbounce/shader/" + image + ".png"));
+		float var11 = (color >> 24 & 255) / 255.0F;
+		float var6 = (color >> 16 & 255) / 255.0F;
+		float var7 = (color >> 8 & 255) / 255.0F;
+		float var8 = (color & 255) / 255.0F;
+		GlStateManager.color(var6, var7, var8, var11);
+		Gui.drawModalRectWithCustomSizedTexture((int)x, (int)y, 0.0f, 0.0f, (int)width, (int)height, (int)width, (int)height);
+		GlStateManager.disableBlend();
+		GlStateManager.enableAlpha();
+		GL11.glPopMatrix();
+	}
 
     public static void drawNLRect(float x, float y, float x1, float y1, float radius, int color) {
         GlStateManager.color(0, 0, 0);
