@@ -47,6 +47,7 @@ public class Module extends MinecraftInstance implements Listenable {
     }
 
     public Module() {
+	  this.finalname = this.getClass().getAnnotation(ModuleInfo.class).name();
         this.name = this.getClass().getAnnotation(ModuleInfo.class).name();
         this.arrayListName = name;
         this.description = this.getClass().getAnnotation(ModuleInfo.class).description();
