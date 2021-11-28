@@ -9,6 +9,8 @@ import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.forge.BlocksTab;
 import me.aquavit.liquidsense.utils.forge.ExploitsTab;
 import me.aquavit.liquidsense.utils.forge.HeadsTab;
+import me.aquavit.liquidsense.utils.login.MinecraftAccount;
+import me.aquavit.liquidsense.utils.login.UserUtils;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import me.aquavit.liquidsense.event.events.ClientShutdownEvent;
 import me.aquavit.liquidsense.event.EventManager;
@@ -129,6 +131,8 @@ public class LiquidBounce {
             ClientUtils.getLogger().error("Failed to check for updates.", exception);
         }
 
+        LoadAltManagerSkin();
+
         GuiAltManager.loadGenerators();
 
         fileManager.loadConfigs(fileManager.setnameConfig);
@@ -141,6 +145,16 @@ public class LiquidBounce {
     public final void stopClient() {
         LiquidBounce.eventManager.callEvent(new ClientShutdownEvent());
         LiquidBounce.fileManager.saveAllConfigs();
+    }
+
+    public final void LoadAltManagerSkin(){
+
+        ClientUtils.getLogger().info("Loading AltManagerSkin.");
+
+        for (int id = 0; id < LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size(); ++id) {
+            if (!LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id).isCracked() && !GuiAltManager.skin.containsKey(id))
+                GuiAltManager.skin.put(id, UserUtils.getPlayerSkin(UserUtils.getUUID(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id).getAccountName())));
+        }
     }
 
     public final LiquidSense getLiquidSense() {
