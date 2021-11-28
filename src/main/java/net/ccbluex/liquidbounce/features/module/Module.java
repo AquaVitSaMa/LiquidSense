@@ -40,6 +40,9 @@ public class Module extends MinecraftInstance implements Listenable {
     private float click;
     private float openValueposy;
     private float suckDown;
+    private Translate translate;
+
+
 
     public void setKeyBind(final int keyBind) {
         this.keyBind = keyBind;
@@ -63,6 +66,7 @@ public class Module extends MinecraftInstance implements Listenable {
         this.click = 0f;
         this.openValueposy = 0f;
         this.suckDown = 0f;
+        this.translate = new Translate(0f, 0f);
 
     }
 
@@ -104,6 +108,30 @@ public class Module extends MinecraftInstance implements Listenable {
 
     public final String getTagName() {
         return this.arrayListName + (this.getTag() == null ? "" : " §7" + this.getTag());
+    }
+
+    public final String getTagName2() {
+        return this.arrayListName + (this.getTag() == null ? "" : " §7[" + this.getTag()+"]");
+    }
+
+    public final String getTagName3() {
+        return this.arrayListName + (this.getTag() == null ? "" : " §7(" + this.getTag()+")");
+    }
+
+    public final String getTagName4() {
+        return this.arrayListName + (this.getTag() == null ? "" : " §7<" + this.getTag()+">");
+    }
+
+    public final String getTagName5() {
+        return this.arrayListName + (this.getTag() == null ? "" : " §7- " + this.getTag());
+    }
+
+    public final String getTagName6() {
+        return this.arrayListName + (this.getTag() == null ? "" : " §7§l" + this.getTag());
+    }
+
+    public final String getTagName7() {
+        return this.arrayListName + (this.getTag() == null ? "" : " §f" + this.getTag());
     }
 
     public final String getColorlessTagName() {
@@ -225,6 +253,14 @@ public class Module extends MinecraftInstance implements Listenable {
     public final Translate getOpenValue() { return this.openValue; }
 
     public final void setOpenValue(Translate value) { this.openValue = value; }
+
+    public final Translate getTranslate() {
+        return this.translate;
+    }
+
+    public final void setTranslate(Translate translate) {
+       this.translate = translate;
+    }
 
     public final Translate getClickAnimation() { return this.clickAnimation; }
 

@@ -10,6 +10,11 @@ public final class Translate {
 		this.y = y;
 	}
 
+	public void interpolate(float targetX, float targetY, double smoothing) {
+		x = (float) AnimationUtils.animate(targetX, this.x, smoothing);
+		y = (float) AnimationUtils.animate(targetY, this.y, smoothing);
+	}
+
 	public void translate(float targetX, float targetY, double speed) {
 		x = AnimationUtils.lstransition(x, targetX, speed);
 		y = AnimationUtils.lstransition(y, targetY, speed);

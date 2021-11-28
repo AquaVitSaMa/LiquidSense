@@ -49,7 +49,7 @@ public class BlockOverlay extends Module {
         Block block = mc.theWorld.getBlockState(blockPos).getBlock();
         if (block == null) return;
         float partialTicks = event.getPartialTicks();
-        Color color = colorRainbow.get() ? ColorUtils.rainbow(0.4f) : new Color(colorRedValue.get(), colorGreenValue.get(), colorBlueValue.get(), 102);
+        Color color = colorRainbow.get() ? ColorUtils.rainbow((long) 0.4f) : new Color(colorRedValue.get(), colorGreenValue.get(), colorBlueValue.get(), 102);
 
         GlStateManager.enableBlend();
         GlStateManager.tryBlendFuncSeparate(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA, GL11.GL_ONE, GL11.GL_ZERO);

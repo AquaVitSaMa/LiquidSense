@@ -61,6 +61,44 @@ public final class RenderUtils extends MinecraftInstance {
         return (new Color(r, g, b, alpha)).getRGB();
     }
 
+    public static void ArrayListBGGradient(double left, double top, double right, double bottom, int col1, int col2) {
+        float f = (col1 >> 24 & 0xFF) / 230.0F;
+        float f1 = (col1 >> 16 & 0xFF) / 230.0F;
+        float f2 = (col1 >> 8 & 0xFF) / 230.0F;
+        float f3 = (col1 & 0xFF) / 230.0F;
+        float f4 = (col2 >> 24 & 0xFF) / 230.0F;
+        float f5 = (col2 >> 16 & 0xFF) / 230.0F;
+        float f6 = (col2 >> 8 & 0xFF) / 230.0F;
+        float f7 = (col2 & 0xFF) / 230.0F;
+        GL11.glEnable(3042);
+        GL11.glDisable(3553);
+        GL11.glBlendFunc(770, 771);
+        GL11.glEnable(2848);
+        GL11.glShadeModel(7425);
+        GL11.glPushMatrix();
+        GL11.glBegin(7);
+        GL11.glColor4f(f1, f2, f3, f);
+        GL11.glVertex2d(left, top);
+        GL11.glVertex2d(left, bottom);
+        GL11.glColor4f(f5, f6, f7, f4);
+        GL11.glVertex2d(right, bottom);
+        GL11.glVertex2d(right, top);
+        GL11.glEnd();
+        GL11.glPopMatrix();
+        GL11.glEnable(3553);
+        GL11.glDisable(3042);
+        GL11.glDisable(2848);
+        GL11.glShadeModel(7424);
+    }
+
+    public static void drawRoundRect(float d, float e, float g, float h, int color)
+    {
+        drawRect(d+1, e, g, h, color);
+        drawRect(d, e+0.75, d, h, color);
+        drawRect(d, e+1, d+1, h-0.5, color);
+        drawRect(d-0.75, e+1.5, d, h-1.25, color);
+    }
+
     public static void drawScaledCustomSizeModalRect(int x, int y, float u, float v, int uWidth, int vHeight, int width, int height, float tileWidth, float tileHeight) {
         float f = 1.0F / tileWidth;
         float f1 = 1.0F / tileHeight;

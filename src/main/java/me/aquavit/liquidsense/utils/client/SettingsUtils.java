@@ -5,6 +5,7 @@ import net.ccbluex.liquidbounce.features.module.modules.misc.Spammer;
 import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.LiquidBounce;
+import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.value.*;
 import org.lwjgl.input.Keyboard;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -29,7 +30,7 @@ public class SettingsUtils {
                 final String s = split[0];
                 switch (s) {
                     case "chat": {
-                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §e" + translateAlternateColorCodes(StringUtils.toCompleteString(split, 1)));
+                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §e" + ColorUtils.translateAlternateColorCodes(StringUtils.toCompleteString(split, 1)));
                         continue;
                     }
                     case "load": {
