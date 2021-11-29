@@ -29,7 +29,7 @@ public class Zoot extends Module {
 
         if (fireValue.get())
             if (!mc.thePlayer.capabilities.isCreativeMode && mc.thePlayer.isBurning())
-                for (int i=0; i<= 9; i++)
+                for (int i=0; i<= 9; ++i)
                     mc.getNetHandler().addToSendQueue(new C03PacketPlayer());
     }
 
