@@ -70,10 +70,10 @@ public class GuiBackground extends GuiScreen {
                     Files.copy(file.toPath(), new FileOutputStream(LiquidBounce.INSTANCE.getFileManager().backgroundFile));
                     BufferedImage image = ImageIO.read(new FileInputStream(LiquidBounce.INSTANCE.getFileManager().backgroundFile));
                     LiquidBounce.INSTANCE.setBackground(new ResourceLocation(LiquidBounce.CLIENT_NAME.toLowerCase() + "/background.png"));
-                    mc.getTextureManager().loadTexture(LiquidBounce.INSTANCE.getBackground(), (ITextureObject)new DynamicTexture(image));
+                    mc.getTextureManager().loadTexture(LiquidBounce.INSTANCE.getBackground(), new DynamicTexture(image));
                 } catch (Exception e) {
                     e.printStackTrace();
-                    MiscUtils.showErrorPopup((String)"Error", (String)("Exception class: " + e.getClass().getName() + "\nMessage: " + e.getMessage()));
+                    MiscUtils.showErrorPopup("Error", "Exception class: " + e.getClass().getName() + "\nMessage: " + e.getMessage());
                     LiquidBounce.fileManager.backgroundFile.delete();
                 }
                 break;

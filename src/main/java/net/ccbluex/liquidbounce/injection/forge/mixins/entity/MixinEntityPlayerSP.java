@@ -15,10 +15,9 @@ import me.aquavit.liquidsense.event.events.*;
 import net.ccbluex.liquidbounce.features.module.modules.movement.InventoryMove;
 import net.ccbluex.liquidbounce.features.module.modules.movement.NoSlow;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Sprint;
-import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;
 import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
-import net.ccbluex.liquidbounce.utils.Rotation;
-import net.ccbluex.liquidbounce.utils.RotationUtils;
+import me.aquavit.liquidsense.utils.client.Rotation;
+import me.aquavit.liquidsense.utils.client.RotationUtils;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockFence;
 import net.minecraft.block.BlockFenceGate;
@@ -137,7 +136,6 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
 	 */
     @Overwrite
     public void onUpdateWalkingPlayer() {
-        final Rotations rotations = (Rotations) LiquidBounce.moduleManager.getModule(Rotations.class);
         try {
             LiquidBounce.eventManager.callEvent(new MotionEvent(EventState.PRE));
 
@@ -208,9 +206,9 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
                     this.lastReportedYaw = this.rotationYaw;
                     this.lastReportedPitch = this.rotationPitch;
                 }
-                PreUpdateEvent sommther = new PreUpdateEvent(this.posX, this.posY, this.posZ, yaw, pitch, mc.thePlayer.isSneaking(), this.onGround);
-                LiquidBounce.eventManager.callEvent(sommther);
-                sommther.fire();
+                PreUpdateEvent preUpdate = new PreUpdateEvent(this.posX, this.posY, this.posZ, yaw, pitch, this.isSneaking(), this.onGround);
+                LiquidBounce.eventManager.callEvent(preUpdate);
+                preUpdate.fire();
             }
 
             LiquidBounce.eventManager.callEvent(new MotionEvent(EventState.POST));

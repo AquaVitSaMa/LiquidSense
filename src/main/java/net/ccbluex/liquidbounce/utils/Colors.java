@@ -30,6 +30,22 @@ public class Colors {
         color |= blue;
         return color;
     }
+
+    public static Color reAlpha(int color, float alpha) {
+        Color c = new Color(color);
+        float r = 0.003921569F * (float) c.getRed();
+        float g = 0.003921569F * (float) c.getGreen();
+        float b = 0.003921569F * (float) c.getBlue();
+        return (new Color(r, g, b, alpha));
+    }
+
+    public static Color rainbowEffect(long offset, float saturation, float fade) {
+        float hue = (float)(System.nanoTime() + offset) / 1.0E10F % 1.0F;
+        long color = Long.parseLong(Integer.toHexString(Integer.valueOf(Color.HSBtoRGB(hue, saturation, 1.0F)).intValue()),16);
+        Color c = new Color((int)color);
+        return new Color(c.getRed() / 255.0F * fade, c.getGreen() / 255.0F * fade, c.getBlue() / 255.0F * fade, c.getAlpha() / 255.0F);
+    }
+
     public static int getRainbow(int speed, int offset) {
         float hue = (System.currentTimeMillis() + (long)offset) % (long)speed;
         return Color.getHSBColor((float)(hue /= (float)speed), (float)0.4f, (float)1.0f).getRGB();

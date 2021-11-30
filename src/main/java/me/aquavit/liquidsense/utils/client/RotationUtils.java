@@ -1,15 +1,17 @@
 package me.aquavit.liquidsense.utils.client;
 
-import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.Listenable;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.TickEvent;
+import me.aquavit.liquidsense.modules.combat.FastBow;
 import me.aquavit.liquidsense.utils.entity.RaycastUtils;
-import net.ccbluex.liquidbounce.utils.Rotation;
-import net.ccbluex.liquidbounce.utils.VecRotation;
+import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
+import net.ccbluex.liquidbounce.LiquidBounce;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.Packet;
 import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.*;
@@ -35,6 +37,12 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
     private static double z = random.nextDouble();
 
     public static boolean keepCurrentRotation = false;
+
+    public static float getRotations(EntityLivingBase ent , float otPos) {
+        double x = ent.posX + Math.sin(otPos);
+        double z = ent.posZ + Math.cos(otPos);
+        return getRotationFromPosition(x, z);
+    }
 
     public static float getMoveYaw() {
         float moveYaw = mc.thePlayer.rotationYaw;
@@ -81,6 +89,31 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
 
         float yaw = (float) (Math.atan2(zDiff, xDiff) * 180.0D / 3.141592653589793D) - 90.0F;
         return yaw;
+    }
+
+    public static void faceBow(final Entity target, final boolean silent, final boolean predict, final float predictSize) {
+        final EntityPlayerSP player = mc.thePlayer;
+
+        final double posX = target.posX + (predict ? (target.posX - target.prevPosX) * predictSize : 0) - (player.posX + (predict ? (player.posX - player.prevPosX) : 0));
+        final double posY = target.getEntityBoundingBox().minY + (predict ? (target.getEntityBoundingBox().minY - target.prevPosY) * predictSize : 0) + target.getEyeHeight() - 0.15 - (player.getEntityBoundingBox().minY + (predict ? (player.posY - player.prevPosY) : 0)) - player.getEyeHeight();
+        final double posZ = target.posZ + (predict ? (target.posZ - target.prevPosZ) * predictSize : 0) - (player.posZ + (predict ? (player.posZ - player.prevPosZ) : 0));
+        final double posSqrt = Math.sqrt(posX * posX + posZ * posZ);
+
+        float velocity = LiquidBounce.moduleManager.getModule(FastBow.class).getState() ? 1F : player.getItemInUseDuration() / 20F;
+        velocity = (velocity * velocity + velocity * 2) / 3;
+
+        if(velocity > 1) velocity = 1;
+
+        final Rotation rotation = new Rotation(
+                (float) (Math.atan2(posZ, posX) * 180 / Math.PI) - 90,
+                (float) -Math.toDegrees(Math.atan((velocity * velocity - Math.sqrt(velocity * velocity * velocity * velocity - 0.006F * (0.006F * (posSqrt * posSqrt) + 2 * posY * (velocity * velocity)))) / (0.006F * posSqrt)))
+        );
+
+        if(silent)
+            setTargetRotation(rotation);
+        else
+            limitAngleChange(new Rotation(player.rotationYaw, player.rotationPitch), rotation,10 +
+                    new Random().nextInt(6)).toPlayer(mc.thePlayer);
     }
 
     public static float[] getRotationFromPosition(double x, double z, double y) {

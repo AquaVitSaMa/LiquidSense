@@ -16,7 +16,10 @@ import net.minecraft.entity.Entity;
 @ModuleInfo(name = "Animations", description = "Animations", category = ModuleCategory.MISC)
 public class Animations extends Module {
     private final ListValue modeValue = new ListValue("Mode", new String[]{"Rotate360","Push","PushOther","Screw","Windmill","SmoothFloat","Sigma","SigmaOther","Remix","Swang","Swong","Swank","MeMe","Slide","Swing","Jello","Swaing","IDK"}, "Push");
-    public static final ListValue GodMode = new ListValue("ThirdView",new String[]{"1.7","1.8","Dev"},"1.7");
+    public static final ListValue GodMode = new ListValue("ThirdView",new String[]{"1.7","1.8","Dev","Test","Custom"},"1.8");
+    public static final FloatValue GodCustomX = new FloatValue("ThirdViewCustomX", 1.82f, -3f, 5f);
+    public static final FloatValue GodCustomY = new FloatValue("ThirdViewCustomY", 2.5f, -3f, 5f);
+    public static final FloatValue GodCustomZ = new FloatValue("ThirdViewCustomZ", 2.0f, -3f, 5f);
     private final IntegerValue ScrewSpeedValue = new IntegerValue("ScrewSpeed", 10, 1, 20);
     public static final FloatValue SpeedRotate = new FloatValue("SpeedRotate", 1f, 0f, 10f);
     public static final FloatValue Scale = new FloatValue("Scale", 1f, 0f, 3.5f);

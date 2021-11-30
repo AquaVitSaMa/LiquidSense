@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.utils.entity;
 
 import com.google.common.base.Predicates;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.utils.RotationUtils;
+import me.aquavit.liquidsense.utils.client.RotationUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.*;
 import net.minecraft.util.Vec3;

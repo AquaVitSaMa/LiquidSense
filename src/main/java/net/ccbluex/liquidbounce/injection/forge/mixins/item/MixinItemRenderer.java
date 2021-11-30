@@ -5,9 +5,7 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.item;
 
-import me.aquavit.liquidsense.modules.render.AntiBlind;
-import me.aquavit.liquidsense.modules.render.EveryThingBlock;
-import me.aquavit.liquidsense.modules.render.SwingAnimation;
+import me.aquavit.liquidsense.modules.render.*;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import net.minecraft.client.Minecraft;
@@ -17,6 +15,9 @@ import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
+import net.minecraft.client.renderer.entity.Render;
+import net.minecraft.client.renderer.entity.RenderManager;
+import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.EnumAction;
 import net.minecraft.item.ItemStack;
@@ -34,7 +35,6 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 import me.aquavit.liquidsense.modules.misc.Animations;
 import org.lwjgl.opengl.GL11;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import me.aquavit.liquidsense.modules.render.ItemRotate;
 
 import static me.aquavit.liquidsense.modules.render.ItemRotate.ItemRenderRotate;
 import static me.aquavit.liquidsense.modules.misc.Animations.ItemRenderRotation;
@@ -91,9 +91,6 @@ public abstract class MixinItemRenderer {
 
     @Shadow
     public abstract void renderItem(EntityLivingBase entityIn, ItemStack heldStack, ItemCameraTransforms.TransformType transform);
-
-    @Shadow
-    protected abstract void renderPlayerArm(AbstractClientPlayer clientPlayer, float equipProgress, float swingProgress);
 
 	/**
 	 * @author CCBlueX
@@ -427,18 +424,6 @@ public abstract class MixinItemRenderer {
         GlStateManager.scale(Animations.Scale.get(), Animations.Scale.get(), Animations.Scale.get());
     }
 
-    private void tap(float var2, float swingProgress) {
-        GlStateManager.translate(Animations.itemPosX.get(), Animations.itemPosY.get(), Animations.itemPosZ.get());
-        float smooth = (swingProgress*0.8f - (swingProgress*swingProgress)*0.8f);
-        GlStateManager.translate(0.56F, -0.52F, -0.71999997F);
-        GlStateManager.translate(0.0F,  var2 * -0.15F, 0.0F);
-        GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
-        float var3 = MathHelper.sin(swingProgress * swingProgress * (float) Math.PI);
-        float var4 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float) Math.PI);
-        GlStateManager.rotate(smooth * -90.0F, 0.0F, 1.0F, 0.0F);
-        GlStateManager.scale(0.37F, 0.37F, 0.37F);
-        GlStateManager.scale(Animations.Scale.get(), Animations.Scale.get(), Animations.Scale.get());
-    }
     private void func_178096_b(float p_178096_1_, float p_178096_2_)
     {
         GlStateManager.translate(Animations.itemPosX.get(), Animations.itemPosY.get(), Animations.itemPosZ.get());
@@ -478,36 +463,6 @@ public abstract class MixinItemRenderer {
         GlStateManager.scale(0.37F, 0.37F, 0.37F);
         GlStateManager.scale(Animations.Scale.get(), Animations.Scale.get(), Animations.Scale.get());
     }
-    private void avatar(float equipProgress, float swingProgress){
-        GlStateManager.translate(Animations.itemPosX.get(), Animations.itemPosY.get(), Animations.itemPosZ.get());
-        GlStateManager.translate(0.56F, -0.52F, -0.71999997F);
-        GlStateManager.translate(0.0F, 0, 0.0F);
-        GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
-        float f = MathHelper.sin(swingProgress * swingProgress * (float)Math.PI);
-        float f1 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * (float)Math.PI);
-        GlStateManager.rotate(f * -20.0F, 0.0F, 1.0F, 0.0F);
-        GlStateManager.rotate(f1 * -20.0F, 0.0F, 0.0F, 1.0F);
-        GlStateManager.rotate(f1 * -40.0F, 1.0F, 0.0F, 0.0F);
-        GlStateManager.scale(0.4F, 0.4F, 0.4F);
-        GlStateManager.scale(Animations.Scale.get(), Animations.Scale.get(), Animations.Scale.get());
-    }
-
-    private void emilio(float equipProgress, float swingProgress) {
-        GlStateManager.translate(Animations.itemPosX.get(), Animations.itemPosY.get(), Animations.itemPosZ.get());
-        float smooth = swingProgress * 0.78F - swingProgress * swingProgress * 0.78F;
-        GlStateManager.scale(1.7F, 1.7F, 1.7F);
-        GlStateManager.rotate(48.0F, 0.0F, -0.6F, 0.0F);
-        GlStateManager.translate(-0.3F, 0.4F, 0.0F);
-        GlStateManager.translate(0.0F, 0.08F, 0.0F);
-        GlStateManager.translate(0.56F, -0.489F, -0.71999997F);
-        GlStateManager.translate(0.0F, 0.0F, 0.0F);
-        GlStateManager.rotate(52.0F, 0.0F, 180.0F + smooth * 0.5F, smooth * 20.0F);
-        float f = MathHelper.sin(swingProgress * swingProgress * 3.1415927F);
-        float f2 = MathHelper.sin(MathHelper.sqrt_float(swingProgress) * 3.1415927F);
-        GlStateManager.rotate(f2 * -51.3F, 2.0F, 0.0F, 0.0F);
-        GlStateManager.translate(0.0F, -0.2F, 0.0F);
-        GlStateManager.scale(Animations.Scale.get(), Animations.Scale.get(), Animations.Scale.get());
-    }
 
     private void func_178103_d2()
     {
@@ -530,6 +485,47 @@ public abstract class MixinItemRenderer {
         GlStateManager.rotate(var4 * -30F, 1.3F, 0.1F, 0.2F);
         GlStateManager.scale(0.4F, 0.4F, 0.4F);
         GlStateManager.scale(Animations.Scale.get(), Animations.Scale.get(), Animations.Scale.get());
+    }
+
+    /**
+     * @author CCBlueX
+     * @reason CCBlueX
+     */
+    @Overwrite
+    private void renderPlayerArm(AbstractClientPlayer p_renderPlayerArm_1_, float p_renderPlayerArm_2_, float p_renderPlayerArm_3_) {
+        final RenderManager renderManager = mc.getRenderManager();
+        final Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
+        float f = -0.3F * MathHelper.sin(MathHelper.sqrt_float(p_renderPlayerArm_3_) * 3.1415927F);
+        float f1 = 0.4F * MathHelper.sin(MathHelper.sqrt_float(p_renderPlayerArm_3_) * 3.1415927F * 2.0F);
+        float f2 = -0.4F * MathHelper.sin(p_renderPlayerArm_3_ * 3.1415927F);
+        GlStateManager.translate(f, f1, f2);
+        GlStateManager.translate(0.64000005F, -0.6F, -0.71999997F);
+        GlStateManager.translate(0.0F, p_renderPlayerArm_2_ * -0.6F, 0.0F);
+        GlStateManager.rotate(45.0F, 0.0F, 1.0F, 0.0F);
+        float f3 = MathHelper.sin(p_renderPlayerArm_3_ * p_renderPlayerArm_3_ * 3.1415927F);
+        float f4 = MathHelper.sin(MathHelper.sqrt_float(p_renderPlayerArm_3_) * 3.1415927F);
+        GlStateManager.rotate(f4 * 70.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.rotate(f3 * -20.0F, 0.0F, 0.0F, 1.0F);
+        GlStateManager.translate(-1.0F, 3.6F, 3.5F);
+        GlStateManager.rotate(120.0F, 0.0F, 0.0F, 1.0F);
+        GlStateManager.rotate(200.0F, 1.0F, 0.0F, 0.0F);
+        GlStateManager.rotate(-135.0F, 0.0F, 1.0F, 0.0F);
+        GlStateManager.scale(1.0F, 1.0F, 1.0F);
+        GlStateManager.translate(5.6F, 0.0F, 0.0F);
+        Render<AbstractClientPlayer> render = renderManager.getEntityRenderObject(this.mc.thePlayer);
+        GlStateManager.disableCull();
+        RenderPlayer renderplayer = (RenderPlayer)render;
+        if (Chams.shouldRenderHand()) {
+            Chams.preHandRender();
+        } else {
+            this.mc.getTextureManager().bindTexture(p_renderPlayerArm_1_.getLocationSkin());
+            GL11.glColor4f(1f, 1f, 1f ,1f);
+        }
+        renderplayer.renderRightArm(this.mc.thePlayer);
+        if (Chams.shouldRenderHand()) {
+            Chams.postHandRender();
+        }
+        GlStateManager.enableCull();
     }
 
     @Inject(method = "renderFireInFirstPerson", at = @At("HEAD"), cancellable = true)

@@ -1,27 +1,20 @@
-/*
- * LiquidBounce Hacked Client
- * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
- * https://github.com/CCBlueX/LiquidBounce/
- */
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
-import me.aquavit.liquidsense.modules.render.Chams;
-import me.aquavit.liquidsense.modules.render.NameTags;
-import me.aquavit.liquidsense.modules.render.TrueSight;
+import me.aquavit.liquidsense.modules.fun.Derp;
+import me.aquavit.liquidsense.modules.render.*;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
+import me.aquavit.liquidsense.utils.client.RotationUtils;
 import me.aquavit.liquidsense.utils.render.OutlineUtils;
 import com.google.common.collect.Lists;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.PreUpdateEvent;
-import me.aquavit.liquidsense.modules.combat.Aura;
 import net.ccbluex.liquidbounce.features.module.modules.render.ESP;
-import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;
-import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
 import net.ccbluex.liquidbounce.utils.*;
 import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
+import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
@@ -30,6 +23,8 @@ import net.minecraft.client.renderer.entity.RendererLivingEntity;
 import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EnumPlayerModelParts;
+import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.MathHelper;
 import net.minecraftforge.client.event.RenderLivingEvent;
 import net.minecraftforge.common.MinecraftForge;
@@ -49,9 +44,12 @@ import java.awt.*;
 import java.util.Iterator;
 import java.util.List;
 
+import static org.lwjgl.opengl.GL11.*;
+
 @Mixin(RendererLivingEntity.class)
 @SideOnly(Side.CLIENT)
-public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> extends MixinRender {
+public abstract class MixinRendererLivingEntity extends MixinRender {
+    Minecraft mc = Minecraft.getMinecraft();
 
     @Shadow
     private static final Logger logger = LogManager.getLogger();
@@ -63,8 +61,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
     protected abstract <T extends EntityLivingBase> boolean setScoreTeamColor(T p_setScoreTeamColor_1_);
 
     @Shadow
-   // protected List<LayerRenderer<T>> layerRenderers = Lists.newArrayList();
-    public List<LayerRenderer<T>> layerRenderers = Lists.newArrayList();
+    protected List<LayerRenderer<?>> layerRenderers = Lists.newArrayList();
 
     @Shadow
     public boolean renderOutlines = false;
@@ -82,9 +79,6 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
     public abstract <T extends EntityLivingBase> float handleRotationFloat(T p_handleRotationFloat_1_, float p_handleRotationFloat_2_);
 
     @Shadow
-    public abstract <T extends EntityLivingBase> void rotateCorpse(T p_rotateCorpse_1_, float p_rotateCorpse_2_, float p_rotateCorpse_3_, float p_rotateCorpse_4_);
-
-    @Shadow
     public abstract <T extends EntityLivingBase> void preRenderCallback(T p_preRenderCallback_1_, float p_preRenderCallback_2_);
 
     @Shadow
@@ -95,6 +89,11 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
 
     @Shadow
     public abstract  void unsetBrightness();
+
+    @Shadow
+    protected <T extends EntityLivingBase> float getDeathMaxRotation(T p_getDeathMaxRotation_1_) {
+        return 90.0F;
+    }
 
     @Shadow
     protected abstract <T extends EntityLivingBase> boolean setBrightness(T p_setBrightness_1_, float p_setBrightness_2_, boolean p_setBrightness_3_);
@@ -136,83 +135,143 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
 	 * @reason CCBlueX
 	 */
     @Overwrite
-    public <T extends EntityLivingBase> void doRender(T p_doRender_1_, double p_doRender_2_, double p_doRender_4_, double p_doRender_6_, float p_doRender_8_, float p_doRender_9_) {
-        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false, false)) {
-            GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
-            GL11.glPolygonOffset(0.75F, -1000000F);
-        }
+    protected <T extends EntityLivingBase> void rotateCorpse(T p_rotateCorpse_1_, float p_rotateCorpse_2_, float p_rotateCorpse_3_, float p_rotateCorpse_4_){
+        GlStateManager.rotate(180.0F - p_rotateCorpse_3_, 0.0F, 1.0F, 0.0F);
 
-        if (!MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Pre(p_doRender_1_, (RendererLivingEntity)(Object)this, p_doRender_2_, p_doRender_4_, p_doRender_6_))) {
+        if (p_rotateCorpse_1_.deathTime > 0) {
+            float f = ((float) p_rotateCorpse_1_.deathTime + p_rotateCorpse_4_ - 1.0F) / 20.0F * 1.6F;
+            f = MathHelper.sqrt_float(f);
 
-            final Aura killAura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
-            final Scaffold scaffold = (Scaffold) LiquidBounce.moduleManager.getModule(Scaffold.class);
-            final Rotations rotations = (Rotations) LiquidBounce.moduleManager.getModule(Rotations.class);
-
-
-            GlStateManager.pushMatrix();
-            GlStateManager.disableCull();
-            this.mainModel.swingProgress = this.getSwingProgress(p_doRender_1_, p_doRender_9_);
-            boolean shouldSit = p_doRender_1_.isRiding() && p_doRender_1_.ridingEntity != null && p_doRender_1_.ridingEntity.shouldRiderSit();
-            this.mainModel.isRiding = shouldSit;
-            this.mainModel.isChild = p_doRender_1_.isChild();
-
-            if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false, false)) {
-                GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
-                GL11.glPolygonOffset(1.0F, -1000000F);
+            if (f > 1.0F) {
+                f = 1.0F;
             }
 
+            GlStateManager.rotate(f * getDeathMaxRotation(p_rotateCorpse_1_), 0.0F, 0.0F, 1.0F);
+        } else {
+            final String s = EnumChatFormatting.getTextWithoutFormattingCodes(p_rotateCorpse_1_.getName());
+
+            final RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+            final boolean flag = rc.getState() && RenderChanger.flipEntitiesValue.get();
+
+            if (s != null && (s.equals("Dinnerbone") || s.equals("Grumm") || flag) && (!(p_rotateCorpse_1_ instanceof EntityPlayer)
+                    || ((EntityPlayer) p_rotateCorpse_1_).isWearing(EnumPlayerModelParts.CAPE))) {
+                GlStateManager.translate(0.0F, flag && RenderChanger.littleEntitiesValue.get() ? 1 : (p_rotateCorpse_1_.height + 0.1F), 0.0F);
+                GlStateManager.rotate(180.0F, 0.0F, 0.0F, 1.0F);
+            }
+        }
+    }
+
+    /**
+     * @author CCBlueX
+     * @reason CCBlueX
+     */
+    @Overwrite
+    public <T extends EntityLivingBase> void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
+        final Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
+        final RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+
+        if (chams.getState() && Chams.targetsValue.get() && EntityUtils.isSelected(entity, false,false)) {
+            GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
+            GL11.glPolygonOffset(1.0F, -1000000F);
+        }
+
+        if (!MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Pre(entity, (RendererLivingEntity)(Object)this, x, y, z))) {
+            GlStateManager.pushMatrix();
+            GlStateManager.disableCull();
+            mainModel.swingProgress = getSwingProgress(entity, partialTicks);
+            boolean shouldSit = entity.isRiding() && entity.ridingEntity != null && entity.ridingEntity.shouldRiderSit();
+            boolean rider = entity == mc.thePlayer && rc.getState() && RenderChanger.riderValue.get();
+            mainModel.isRiding = shouldSit || rider;
+            mainModel.isChild = entity.isChild();
+
             try {
-                float f = this.interpolateRotation(p_doRender_1_.prevRenderYawOffset, p_doRender_1_.renderYawOffset, p_doRender_9_);
-                float f1 = this.interpolateRotation(p_doRender_1_.prevRotationYawHead, p_doRender_1_.rotationYawHead, p_doRender_9_);
+                float f = interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks);
+                float f1 = interpolateRotation(entity.prevRotationYawHead, entity.rotationYawHead, partialTicks);
                 float f2 = f1 - f;
-                float f8;
-                if (shouldSit && p_doRender_1_.ridingEntity instanceof EntityLivingBase) {
-                    EntityLivingBase entitylivingbase = (EntityLivingBase)p_doRender_1_.ridingEntity;
-                    f = this.interpolateRotation(entitylivingbase.prevRenderYawOffset, entitylivingbase.renderYawOffset, p_doRender_9_);
+                float f3;
+                if (shouldSit && entity.ridingEntity instanceof EntityLivingBase) {
+                    EntityLivingBase entitylivingbase = (EntityLivingBase)entity.ridingEntity;
+                    f = interpolateRotation(entitylivingbase.prevRenderYawOffset, entitylivingbase.renderYawOffset, partialTicks);
                     f2 = f1 - f;
-                    f8 = MathHelper.wrapAngleTo180_float(f2);
-                    if (f8 < -85.0F) {
-                        f8 = -85.0F;
+                    f3 = MathHelper.wrapAngleTo180_float(f2);
+                    if (f3 < -85.0F) {
+                        f3 = -85.0F;
                     }
 
-                    if (f8 >= 85.0F) {
-                        f8 = 85.0F;
+                    if (f3 >= 85.0F) {
+                        f3 = 85.0F;
                     }
 
-                    f = f1 - f8;
-                    if (f8 * f8 > 2500.0F) {
-                        f += f8 * 0.2F;
+                    f = f1 - f3;
+                    if (f3 * f3 > 2500.0F) {
+                        f += f3 * 0.2F;
                     }
                 }
-                Minecraft mc = Minecraft.getMinecraft();
-                float f7 = p_doRender_1_.prevRotationPitch + (p_doRender_1_.rotationPitch - p_doRender_1_.prevRotationPitch) * p_doRender_9_;
-                this.renderLivingAt(p_doRender_1_, p_doRender_2_, p_doRender_4_, p_doRender_6_);
-                f8 = this.handleRotationFloat(p_doRender_1_, p_doRender_9_);
-                if( p_doRender_1_ instanceof EntityPlayerSP && rotations.getState() && rotations.getModeValue().equals("Other")){
-                    float YAW = PreUpdateEvent.YAW;
-                    float PITCH = PreUpdateEvent.PITCH;
-                    float PREVYAW = PreUpdateEvent.PREVYAW;
-                    float PREVPITCH = PreUpdateEvent.PREVPITCH;
-                    boolean sneaking = PreUpdateEvent.SNEAKING;
-                    if(killAura.getTarget() !=null || scaffold.getState()) {
-                        f = this.interpolateRotation(PREVYAW, YAW, p_doRender_9_);
 
-                        float renderYaw = this.interpolateRotation(PREVYAW, YAW, p_doRender_9_) - f;
-                        float renderPitch = this.interpolateRotation(PREVPITCH, PITCH, p_doRender_9_);
-                        f2 = renderYaw;
-                        f7 = renderPitch;
+                float f7 = entity.prevRotationPitch + (entity.rotationPitch - entity.prevRotationPitch) * partialTicks;
+                float f5 = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * partialTicks;
+                float f6 = entity.limbSwing - entity.limbSwingAmount * (1.0f - partialTicks);
+
+                boolean ok = (RotationUtils.targetRotation != null || LiquidBounce.moduleManager.getModule(Derp.class).getState());
+
+                renderLivingAt(entity, x, y, z);
+
+                if (this.mainModel.isRiding)
+                    GlStateManager.translate(0.0, RenderChanger.sleeperValue.get() ? 0.05 : -0.5, 0.0);
+
+                /* Ghost ---------------------------------------------------------------------------------------------- */
+                if (LiquidBounce.moduleManager.getModule(Rotations.class).getState() && Rotations.ghost.get() && ok && entity == mc.thePlayer) {
+                    GlStateManager.pushMatrix();
+                    this.rotateCorpse(entity, f7, this.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks), partialTicks);
+                    GlStateManager.enableRescaleNormal();
+                    GlStateManager.scale(-1.0F, -1.0F, 1.0F);
+                    this.preRenderCallback(entity, partialTicks);
+                    GlStateManager.translate(0.0F, -1.5078125F, 0.0F);
+                    if (entity.isChild()) {
+                        f6 *= 3.0F;
+                    }
+                    if (f5 > 1.0F) {
+                        f5 = 1.0F;
+                    }
+                    GlStateManager.enableAlpha();
+                    this.mainModel.setLivingAnimations(entity, f6, f5, partialTicks);
+                    this.mainModel.setRotationAngles(f6, f5, f7, f2, f7, 0.0625f, entity);
+
+                    this.renderModel(entity, f6, f5, f7, f2, f7, 0.0625f);
+
+                    if (setDoRenderBrightness(entity, partialTicks)) {
+                        unsetBrightness();
                     }
 
+                    GlStateManager.depthMask(true);
+
+                    if (!((EntityPlayer) entity).isSpectator()) {
+                        this.renderLayers(entity, f6, f5, partialTicks, f7, f2, f7, 0.0625f);
+                    }
+                    GlStateManager.popMatrix();
                 }
-                this.rotateCorpse(p_doRender_1_, f8, f, p_doRender_9_);
+                /* ---------------------------------------------------------------------------------------------------- */
+
+                if (entity instanceof EntityPlayerSP && LiquidBounce.moduleManager.getModule(Rotations.class).getState() && ok){
+                    float YAW = PreUpdateEvent.Companion.getYAW();
+                    float PITCH = PreUpdateEvent.Companion.getPITCH();
+                    float PREVYAW = PreUpdateEvent.Companion.getPrevYAW();
+                    float PREVPITCH = PreUpdateEvent.Companion.getPrevPITCH();
+
+                    f = this.interpolateRotation(PREVYAW, YAW, partialTicks);
+                    float renderYaw = this.interpolateRotation(PREVYAW, YAW, partialTicks) - f;
+                    float renderPitch = this.interpolateRotation(PREVPITCH, PITCH, partialTicks);
+                    f2 = renderYaw;
+                    f7 = renderPitch;
+                }
+
+                rotateCorpse(entity, f7, f, partialTicks);
                 GlStateManager.enableRescaleNormal();
                 GlStateManager.scale(-1.0F, -1.0F, 1.0F);
-                this.preRenderCallback(p_doRender_1_, p_doRender_9_);
-                float f4 = 0.0625F;
+                preRenderCallback(entity, partialTicks);
                 GlStateManager.translate(0.0F, -1.5078125F, 0.0F);
-                float f5 = p_doRender_1_.prevLimbSwingAmount + (p_doRender_1_.limbSwingAmount - p_doRender_1_.prevLimbSwingAmount) * p_doRender_9_;
-                float f6 = p_doRender_1_.limbSwing - p_doRender_1_.limbSwingAmount * (1.0F - p_doRender_9_);
-                if (p_doRender_1_.isChild()) {
+
+                if (entity.isChild()) {
                     f6 *= 3.0F;
                 }
 
@@ -220,27 +279,70 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                     f5 = 1.0F;
                 }
 
+                if (rc.getState() && RenderChanger.littleEntitiesValue.get()) {
+                    GL11.glPushMatrix();
+                    GL11.glScaled(0.5, 0.5, 0.5);
+                    GL11.glTranslated(0, 1.5, 0);
+                }
+
                 GlStateManager.enableAlpha();
-                this.mainModel.setLivingAnimations(p_doRender_1_, f6, f5, p_doRender_9_);
-                this.mainModel.setRotationAngles(f6, f5, f8, f2, f7, 0.0625F, p_doRender_1_);
+                mainModel.setLivingAnimations(entity, f6, f5, partialTicks);
+                mainModel.setRotationAngles(f6, f5, f7, f2, f7, 0.0625F, entity);
+
                 boolean flag;
-                if (this.renderOutlines) {
-                    flag = this.setScoreTeamColor(p_doRender_1_);
-                    this.renderModel(p_doRender_1_, f6, f5, f8, f2, f7, 0.0625F);
+                if (renderOutlines) {
+                    flag = setScoreTeamColor(entity);
+                    renderModel(entity, f6, f5, f7, f2, f7, 0.0625F);
                     if (flag) {
-                        this.unsetScoreTeamColor();
+                        unsetScoreTeamColor();
                     }
                 } else {
-                    flag = this.setDoRenderBrightness(p_doRender_1_, p_doRender_9_);
-                    this.renderModel(p_doRender_1_, f6, f5, f8, f2, f7, 0.0625F);
-                    if (flag) {
-                        this.unsetBrightness();
-                    }
+                    flag = setDoRenderBrightness(entity, partialTicks);
 
-                    GlStateManager.depthMask(true);
-                    if (!(p_doRender_1_ instanceof EntityPlayer) || !((EntityPlayer)p_doRender_1_).isSpectator()) {
-                        this.renderLayers(p_doRender_1_, f6, f5, p_doRender_9_, f8, f2, f7, 0.0625F);
+                    if (LiquidBounce.moduleManager.getModule(Rotations.class).getState() && Rotations.ghost.get() && ok && entity == mc.thePlayer) {
+                        glPushMatrix();
+                        glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
+                        glDisable(GL11.GL_DEPTH_TEST);
+                        glDisable(GL11.GL_TEXTURE_2D);
+                        glEnable(GL11.GL_BLEND);
+                        glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
+                        glDisable(GL11.GL_LIGHTING);
+                        glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_FILL);
+                        int ghost = Rotations.rainbow.get() ? ColorUtils.rainbow(400000000L, Rotations.alphaValue.get()).getRGB() :
+                                new Color(Rotations.colorRedValue.get(),Rotations.colorGreenValue.get(),
+                                        Rotations.colorBlueValue.get(),Rotations.alphaValue.get()).getRGB();
+                        float alpha = (ghost >> 24 & 0xFF) / 255.0F;
+                        float red = (ghost >> 16 & 0xFF) / 255.0F;
+                        float green = (ghost >> 8 & 0xFF) / 255.0F;
+                        float blue = (ghost & 0xFF) / 255.0F;
+                        glColor4f(red , green , blue , alpha);
+                        this.renderModel(entity, f6, f5, f7, f2, f7, 0.0625F);
+                        glColor4f(1f , 1f , 1f , 1f);
+                        glEnable(GL11.GL_LIGHTING);
+                        glDisable(GL11.GL_BLEND);
+                        glEnable(GL11.GL_TEXTURE_2D);
+                        glEnable(GL11.GL_DEPTH_TEST);
+                        glPopAttrib();
+                        glPopMatrix();
+                        if (flag) {
+                            unsetBrightness();
+                        }
+                        GlStateManager.depthMask(true);
+                    } else {
+                        renderModel(entity, f6, f5, f7, f2, f7, 0.0625F);
+                        if (flag) {
+                            unsetBrightness();
+                        }
+
+                        GlStateManager.depthMask(true);
+                        if (!(entity instanceof EntityPlayer) || !((EntityPlayer) entity).isSpectator()) {
+                            renderLayers(entity, f6, f5, partialTicks, f7, f2, f7, 0.0625F);
+                        }
                     }
+                }
+
+                if (rc.getState() && RenderChanger.littleEntitiesValue.get()) {
+                    GL11.glPopMatrix();
                 }
 
                 GlStateManager.disableRescaleNormal();
@@ -248,49 +350,43 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                 logger.error("Couldn't render entity", var20);
             }
 
-            if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false, false)) {
-                GL11.glPolygonOffset(1.0F, 1000000F);
-                GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
-            }
-
             GlStateManager.setActiveTexture(OpenGlHelper.lightmapTexUnit);
             GlStateManager.enableTexture2D();
             GlStateManager.setActiveTexture(OpenGlHelper.defaultTexUnit);
             GlStateManager.enableCull();
             GlStateManager.popMatrix();
-            if (!this.renderOutlines) {
-                super.doRender(p_doRender_1_, p_doRender_2_, p_doRender_4_, p_doRender_6_, p_doRender_8_, p_doRender_9_);
+            if (!renderOutlines) {
+                super.doRender(entity, x, y, z, entityYaw, partialTicks);
             }
 
-
-
-            MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Post(p_doRender_1_, (RendererLivingEntity)(Object)this, p_doRender_2_, p_doRender_4_, p_doRender_6_));
-        }
-
-        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.targetsValue.get() && EntityUtils.isSelected(p_doRender_1_, false, false)) {
-            GL11.glPolygonOffset(1.0F, 1000000F);
-            GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
+            MinecraftForge.EVENT_BUS.post(new RenderLivingEvent.Post(entity, (RendererLivingEntity)(Object)this, x, y, z));
         }
     }
+
 
 	/**
 	 * @author CCBlueX
 	 * @reason CCBlueX
 	 */
     @Overwrite
-    protected <T extends EntityLivingBase> void renderModel(T entitylivingbaseIn, float p_77036_2_, float p_77036_3_, float p_77036_4_, float p_77036_5_, float p_77036_6_, float scaleFactor) {
-        boolean visible = !entitylivingbaseIn.isInvisible();
-        boolean semiVisible = !visible && (!entitylivingbaseIn.isInvisibleToPlayer(Minecraft.getMinecraft().thePlayer) || (LiquidBounce.moduleManager.getModule(TrueSight.class).getState() && TrueSight.entitiesValue.get()));
-        Rotations ra = (Rotations) LiquidBounce.moduleManager.getModule(Rotations.class);
-        Aura killAura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
-            final Color sb = Chams.rainbow.get() ? ColorUtils.rainbow() : new Color(!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? Chams.colorRed2Value.get() / 255 : Chams.colorRedValue.get() / 255,!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? Chams.colorGreen2Value.get() / 255 : Chams.colorGreen2Value.get() / 255,!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? Chams.colorBlue2Value.get() / 255 : Chams.colorBlue2Value.get() / 255,!Minecraft.getMinecraft().thePlayer.canEntityBeSeen(entitylivingbaseIn) ? Chams.colorA2Value.get() / 255 : Chams.colorA2Value.get() / 255);
-        final Color cnm = ra.getRainbow().get() ? ColorUtils.rainbow() : new Color(ra.getColorRedValue().get(),ra.getColorGreenValue().get(),ra.getColorBlueValue().get(),ra.getAlphaValue().get());
+    protected <T extends EntityLivingBase> void renderModel(T entityLivingBaseIn, float x, float y, float z, float yaw, float pitch, float scaleFactor) {
+        boolean visible = !entityLivingBaseIn.isInvisible();
+        final TrueSight trueSight = (TrueSight) LiquidBounce.moduleManager.getModule(TrueSight.class);
+        boolean semiVisible = !visible && (!entityLivingBaseIn.isInvisibleToPlayer(mc.thePlayer) || (trueSight.getState() && TrueSight.entitiesValue.get()));
 
-        if(visible || semiVisible) {
-            if(!this.bindEntityTexture(entitylivingbaseIn))
+        Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
+        RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+
+        if (entityLivingBaseIn == mc.thePlayer && rc.getState() && RenderChanger.riderValue.get()) {
+            x += ((AbstractClientPlayer) entityLivingBaseIn).renderOffsetX;
+            z += ((AbstractClientPlayer) entityLivingBaseIn).renderOffsetZ;
+        }
+
+        if (visible || semiVisible) {
+            if(!bindEntityTexture(entityLivingBaseIn))
                 return;
 
-            if(semiVisible) {
+            if (semiVisible) {
                 GlStateManager.pushMatrix();
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 0.15F);
                 GlStateManager.depthMask(false);
@@ -299,9 +395,15 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                 GlStateManager.alphaFunc(516, 0.003921569F);
             }
 
+            if (rc.getState() && RenderChanger.littleEntitiesValue.get()) {
+                GL11.glPushMatrix();
+                GL11.glScaled(0.5, 0.5, 0.5);
+                GL11.glTranslated(0, 1.5, 0);
+                GL11.glPopMatrix();
+            }
+
             final ESP esp = (ESP) LiquidBounce.moduleManager.getModule(ESP.class);
-            if(esp.getState() && EntityUtils.isSelected(entitylivingbaseIn, false, false)) {
-                Minecraft mc = Minecraft.getMinecraft();
+            if (esp.getState() && EntityUtils.isSelected(entityLivingBaseIn, false, false)) {
                 boolean fancyGraphics = mc.gameSettings.fancyGraphics;
                 mc.gameSettings.fancyGraphics = false;
 
@@ -309,7 +411,7 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                 mc.gameSettings.gammaSetting = 100000F;
 
                 switch(esp.modeValue.get().toLowerCase()) {
-                    case "wireframe":
+                    case "frame":
                         GL11.glPushMatrix();
                         GL11.glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
                         GL11.glPolygonMode(GL11.GL_FRONT_AND_BACK, GL11.GL_LINE);
@@ -319,9 +421,9 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                         GL11.glEnable(GL11.GL_LINE_SMOOTH);
                         GL11.glEnable(GL11.GL_BLEND);
                         GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-                        RenderUtils.glColor(esp.getColor(entitylivingbaseIn));
+                        RenderUtils.glColor(esp.getColor(entityLivingBaseIn));
                         GL11.glLineWidth(esp.wireframeWidth.get());
-                        this.mainModel.render(entitylivingbaseIn, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
+                        mainModel.render(entityLivingBaseIn, x, y, z, yaw, pitch, scaleFactor);
                         GL11.glPopAttrib();
                         GL11.glPopMatrix();
                         break;
@@ -329,19 +431,19 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                         ClientUtils.disableFastRender();
                         GlStateManager.resetColor();
 
-                        final Color color = esp.getColor(entitylivingbaseIn);
+                        final Color color = esp.getColor(entityLivingBaseIn);
                         OutlineUtils.setColor(color);
                         OutlineUtils.renderOne(esp.outlineWidth.get());
-                        this.mainModel.render(entitylivingbaseIn, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
+                        mainModel.render(entityLivingBaseIn, x, y, z, yaw, pitch, scaleFactor);
                         OutlineUtils.setColor(color);
                         OutlineUtils.renderTwo();
-                        this.mainModel.render(entitylivingbaseIn, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
+                        mainModel.render(entityLivingBaseIn, x, y, z, yaw, pitch, scaleFactor);
                         OutlineUtils.setColor(color);
                         OutlineUtils.renderThree();
-                        this.mainModel.render(entitylivingbaseIn, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
+                        mainModel.render(entityLivingBaseIn, x, y, z, yaw, pitch, scaleFactor);
                         OutlineUtils.setColor(color);
                         OutlineUtils.renderFour(color);
-                        this.mainModel.render(entitylivingbaseIn, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
+                        mainModel.render(entityLivingBaseIn, x, y, z, yaw, pitch, scaleFactor);
                         OutlineUtils.setColor(color);
                         OutlineUtils.renderFive();
                         OutlineUtils.setColor(Color.WHITE);
@@ -350,77 +452,46 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                 mc.gameSettings.gammaSetting = gamma;
             }
 
-            if(ra.getState() && ra.getModeValue().get().equalsIgnoreCase("Ghost")){
-                if (entitylivingbaseIn.equals(Minecraft.getMinecraft().thePlayer)){
-                    if(killAura.getTarget() !=null && RotationUtils.serverRotation != null) {
-                        //Ghost
-                        GL11.glPushMatrix();
-                        GL11.glPushAttrib(1048575);
-                        GL11.glDisable(2929);
-                        GL11.glDisable(3553);
-                        GL11.glEnable(3042);
-                        GL11.glBlendFunc(770, 771);
-                        GL11.glDisable(2896);
-                        GL11.glPolygonMode(1032, 6914);
-                        RenderUtils.chamsColor(cnm);
-                        this.mainModel.render(Minecraft.getMinecraft().thePlayer, Minecraft.getMinecraft().thePlayer.prevRenderYawOffset, Minecraft.getMinecraft().thePlayer.renderYawOffset, p_77036_4_, RotationUtils.serverRotation.getYaw(), RotationUtils.serverRotation.getPitch(), scaleFactor);
-                        GL11.glEnable(2896);
-                        GL11.glDisable(3042);
-                        GL11.glEnable(3553);
-                        GL11.glEnable(2929);
-                        GL11.glColor3d(1.0D, 1.0D, 1.0D);
-                        GL11.glPopAttrib();
-                        GL11.glPopMatrix();
-                        //开始画本体
-                        GlStateManager.pushMatrix();
-                        GlStateManager.color(1.0F, 1.0F, 1.0F, 0.35F);
-                        GlStateManager.depthMask(false);
-                        GlStateManager.enableBlend();
-                        GlStateManager.blendFunc(770, 771);
-                        GlStateManager.alphaFunc(516, 0.003921569F);
-                        this.mainModel.render(Minecraft.getMinecraft().thePlayer,  p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
-                        GlStateManager.disableBlend();
-                        GlStateManager.alphaFunc(516, 0.1F);
-                        GlStateManager.popMatrix();
-                        GlStateManager.depthMask(true);
-
-                    } else {
-                        this.mainModel.render(Minecraft.getMinecraft().thePlayer,  p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
-                    }
-                }
-            }
-
-            if(LiquidBounce.moduleManager.getModule(Chams.class).getState() && (Chams.all.get() || EntityUtils.isSelected(entitylivingbaseIn, false, false))) {
-                GL11.glPushMatrix();
+            if (chams.getState() && !Chams.modeValue.get().equals("Normal") && (Chams.all.get() || EntityUtils.isSelected(entityLivingBaseIn, false,false))) {
                 GL11.glPushAttrib(1048575);
-                GL11.glDisable(2929);
+                GL11.glDisable(3008);
                 GL11.glDisable(3553);
+                if (!Chams.modeValue.get().equals("CSGO"))
+                    GL11.glDisable(2896);
                 GL11.glEnable(3042);
                 GL11.glBlendFunc(770, 771);
-                GL11.glDisable(2896);
-                GL11.glPolygonMode(1032, 6914);
+                GL11.glLineWidth(1.5f);
+                GL11.glEnable(2960);
 
-                RenderUtils.chamsColor(sb);
-                this.mainModel.render(entitylivingbaseIn, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
-                GL11.glEnable(2896);
-                GL11.glDisable(3042);
+                GL11.glDisable(GL11.GL_DEPTH_TEST);
+                GL11.glDepthMask(false);
+                GL11.glEnable(10754);
+                OpenGlHelper.setLightmapTextureCoords(OpenGlHelper.lightmapTexUnit, 240.0f, 240.0f);
+                RenderUtils.glColor(Colors.reAlpha(Chams.rainbow.get() ?
+                        Colors.rainbowEffect(1,Chams.saturationValue.get(), Chams.brightnessValue.get()).getRGB() :
+                        new Color(Chams.colorRed2Value.get() / 255,Chams.colorGreen2Value.get() / 255, Chams.colorBlue2Value.get() / 255).getRGB(),
+                        Chams.colorA2Value.get() / 255));
+                this.mainModel.render(entityLivingBaseIn, x, y, z, yaw, pitch, scaleFactor);
+
+                GL11.glEnable(GL11.GL_DEPTH_TEST);
+                GL11.glDepthMask(true);
+                RenderUtils.glColor(Colors.reAlpha(Chams.rainbow.get() ?
+                        Colors.rainbowEffect(1, Chams.saturationValue.get(), Chams.brightnessValue.get()).getRGB() :
+                        new Color(Chams.colorRedValue.get() / 255, Chams.colorGreenValue.get() / 255, Chams.colorBlueValue.get() / 255).getRGB(),
+                        Chams.colorAValue.get() / 255));
+                this.mainModel.render(entityLivingBaseIn, x, y, z, yaw, pitch, scaleFactor);
+
+                GL11.glEnable(3042);
+                if (!Chams.modeValue.get().equals("CSGO"))
+                    GL11.glEnable(2896);
                 GL11.glEnable(3553);
-                GL11.glEnable(2929);
-                GL11.glColor3d(1.0D, 1.0D, 1.0D);
+                GL11.glEnable(3008);
                 GL11.glPopAttrib();
-                GL11.glPopMatrix();
-            }else{
-                if(ra.getState() && ra.getModeValue().get().equalsIgnoreCase("Ghost")){
-                    if(!entitylivingbaseIn.equals(Minecraft.getMinecraft().thePlayer)){
-                        this.mainModel.render(entitylivingbaseIn, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
-                    }
-                } else {
-                    this.mainModel.render(entitylivingbaseIn, p_77036_2_, p_77036_3_, p_77036_4_, p_77036_5_, p_77036_6_, scaleFactor);
-
-                }
+            } else {
+                mainModel.render(entityLivingBaseIn, x, y, z,yaw,pitch, scaleFactor);
             }
 
-            if(semiVisible) {
+            if (semiVisible) {
                 GlStateManager.disableBlend();
                 GlStateManager.alphaFunc(516, 0.1F);
                 GlStateManager.popMatrix();

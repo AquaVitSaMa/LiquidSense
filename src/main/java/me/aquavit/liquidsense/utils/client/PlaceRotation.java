@@ -1,6 +1,7 @@
-package net.ccbluex.liquidbounce.utils;
+package me.aquavit.liquidsense.utils.client;
 
 import me.aquavit.liquidsense.utils.block.PlaceInfo;
+import me.aquavit.liquidsense.utils.client.Rotation;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 
 public final class PlaceRotation extends MinecraftInstance {

@@ -92,7 +92,6 @@ public final class ModuleManager implements Listenable {
                 ProphuntESP.class,
                 KeepContainer.class,
                 HUD.class,
-                Rotations.class,
                 BugUp.class,
                 AntiObsidian.class);
 

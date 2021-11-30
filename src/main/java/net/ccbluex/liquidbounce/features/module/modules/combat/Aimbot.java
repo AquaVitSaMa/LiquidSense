@@ -10,13 +10,12 @@ import me.aquavit.liquidsense.utils.timer.MSTimer;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.utils.Rotation;
+import me.aquavit.liquidsense.utils.client.Rotation;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.minecraft.entity.Entity;
 
 import java.util.Comparator;
-import java.util.Objects;
 import java.util.Random;
 
 @ModuleInfo(name = "Aimbot", description = "Automatically faces selected entities around you.", category = ModuleCategory.COMBAT)

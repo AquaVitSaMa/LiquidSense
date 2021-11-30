@@ -13,7 +13,7 @@ import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.player.Blink
-import net.ccbluex.liquidbounce.utils.RotationUtils
+import me.aquavit.liquidsense.utils.client.RotationUtils
 import me.aquavit.liquidsense.utils.block.BlockUtils
 import me.aquavit.liquidsense.utils.extensions.BlockExtensionUtils
 import me.aquavit.liquidsense.utils.timer.MSTimer

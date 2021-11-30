@@ -7,7 +7,7 @@ import me.aquavit.liquidsense.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.utils.RotationUtils;
+import me.aquavit.liquidsense.utils.client.RotationUtils;
 import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
