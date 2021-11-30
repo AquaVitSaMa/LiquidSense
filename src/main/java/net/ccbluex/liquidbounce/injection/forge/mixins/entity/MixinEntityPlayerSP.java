@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
 import me.aquavit.liquidsense.event.EventState;
-import me.aquavit.liquidsense.event.SommtheEvent;
+import me.aquavit.liquidsense.event.events.PreUpdateEvent;
 import me.aquavit.liquidsense.modules.fun.Derp;
 import me.aquavit.liquidsense.modules.render.NoSwing;
 import net.ccbluex.liquidbounce.LiquidBounce;
@@ -208,7 +208,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
                     this.lastReportedYaw = this.rotationYaw;
                     this.lastReportedPitch = this.rotationPitch;
                 }
-                SommtheEvent sommther = new SommtheEvent(this.posX, this.posY, this.posZ, yaw, pitch, mc.thePlayer.isSneaking(), this.onGround);
+                PreUpdateEvent sommther = new PreUpdateEvent(this.posX, this.posY, this.posZ, yaw, pitch, mc.thePlayer.isSneaking(), this.onGround);
                 LiquidBounce.eventManager.callEvent(sommther);
                 sommther.fire();
             }

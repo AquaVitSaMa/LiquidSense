@@ -13,7 +13,7 @@ import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.utils.render.OutlineUtils;
 import com.google.common.collect.Lists;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import me.aquavit.liquidsense.event.SommtheEvent;
+import me.aquavit.liquidsense.event.events.PreUpdateEvent;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import net.ccbluex.liquidbounce.features.module.modules.render.ESP;
 import net.ccbluex.liquidbounce.features.module.modules.render.Rotations;
@@ -189,11 +189,11 @@ public abstract class MixinRendererLivingEntity<T extends EntityLivingBase> exte
                 this.renderLivingAt(p_doRender_1_, p_doRender_2_, p_doRender_4_, p_doRender_6_);
                 f8 = this.handleRotationFloat(p_doRender_1_, p_doRender_9_);
                 if( p_doRender_1_ instanceof EntityPlayerSP && rotations.getState() && rotations.getModeValue().equals("Other")){
-                    float YAW = SommtheEvent.YAW;
-                    float PITCH = SommtheEvent.PITCH;
-                    float PREVYAW = SommtheEvent.PREVYAW;
-                    float PREVPITCH = SommtheEvent.PREVPITCH;
-                    boolean sneaking = SommtheEvent.SNEAKING;
+                    float YAW = PreUpdateEvent.YAW;
+                    float PITCH = PreUpdateEvent.PITCH;
+                    float PREVYAW = PreUpdateEvent.PREVYAW;
+                    float PREVPITCH = PreUpdateEvent.PREVPITCH;
+                    boolean sneaking = PreUpdateEvent.SNEAKING;
                     if(killAura.getTarget() !=null || scaffold.getState()) {
                         f = this.interpolateRotation(PREVYAW, YAW, p_doRender_9_);
 

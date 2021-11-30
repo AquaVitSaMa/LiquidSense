@@ -1,6 +1,8 @@
-package me.aquavit.liquidsense.event;
+package me.aquavit.liquidsense.event.events;
 
-public class SommtheEvent extends Event  {
+import me.aquavit.liquidsense.event.Event;
+
+public class PreUpdateEvent extends Event {
 
     private float yaw;
     private float pitch;
@@ -10,7 +12,7 @@ public class SommtheEvent extends Event  {
     public static float YAW, PITCH, PREVYAW, PREVPITCH;
     public static boolean SNEAKING;
 
-    public  SommtheEvent(double x, double y, double z, float yaw, float pitch, boolean sneaking, boolean ground) {
+    public PreUpdateEvent(double x, double y, double z, float yaw, float pitch, boolean sneaking, boolean ground) {
         this.yaw = yaw;
         this.pitch = pitch;
         this.y = y;
