@@ -25,17 +25,14 @@ import net.minecraft.potion.Potion
 )
 class AutoApple : Module() {
 
-    val modeValue =
-            ListValue("EadMode", arrayOf("Slow", "Fast","HYT"), "Fast")
-
+    private val modeValue = ListValue("EadMode", arrayOf("Slow", "Fast","HYT"), "Fast")
     private val maxHealth = FloatValue("MaxHealth", 8f, 1f, 19f)
-    val delayValue = IntegerValue("nextDelay", 150, 0, 2000)
-    private val RegenVaule = BoolValue("NoRegen", true)
+    private val delayValue = IntegerValue("nextDelay", 150, 0, 2000)
+    private val regenVaule = BoolValue("NoRegen", true)
 
     private val timer = MSTimer()
-    var isUse = false
-    var eadId = -1
-
+    private var isUse = false
+    private var eadId = -1
     private var delay = 0L
 
     override fun getTag(): String {
@@ -102,7 +99,7 @@ class AutoApple : Module() {
                     return
                 }
 
-                val potifinSave = if (RegenVaule.get()) !mc.thePlayer!!.isPotionActive(Potion.regeneration) else true
+                val potifinSave = if (regenVaule.get()) !mc.thePlayer!!.isPotionActive(Potion.regeneration) else true
 
                 (if (GAPPLE == -1 && SKULL != -1) SKULL else GAPPLE).also {
                     if (thePlayer.health <= maxHealth.get() && it != -1 && potifinSave) {

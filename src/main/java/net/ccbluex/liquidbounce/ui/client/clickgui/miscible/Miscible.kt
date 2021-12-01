@@ -162,7 +162,7 @@ open class Miscible : GuiScreen() {
         RenderUtils.drawShader(MElement.x + 5, MElement.y + 5, 100f * dropxsize, 240f * dropysize)
 
         var categoryPosY = 0f
-        for (category in ModuleCategory.values()) { //����
+        for (category in ModuleCategory.values()) {
             CategoryElement.drawCategory(category, this, categoryPosY, dropxsize, dropysize, mouseX, mouseY)
             categoryPosY += 30
         }
@@ -210,9 +210,7 @@ open class Miscible : GuiScreen() {
         }
         if (translate.y > 0) searchgui()
 
-        if (hovermove) RenderUtils.drawRectBordered(
-            MElement.x.toDouble() - 1, MElement.y.toDouble() - 1, MElement.x.toDouble() + MElement.dropx + 1, MElement.y.toDouble() + MElement.dropy + 1, 2.0, Color(35, 35, 35, 150).rgb, Color(75, 75, 75, 255).rgb
-                                                   )
+        if (hovermove) RenderUtils.drawRectBordered(MElement.x.toDouble() - 1, MElement.y.toDouble() - 1, MElement.x.toDouble() + MElement.dropx + 1, MElement.y.toDouble() + MElement.dropy + 1, 2.0, Color(35, 35, 35, 150).rgb, Color(75, 75, 75, 255).rgb)
     }
 
 
