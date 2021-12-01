@@ -92,10 +92,9 @@ public final class ModuleManager implements Listenable {
                 ProphuntESP.class,
                 KeepContainer.class,
                 HUD.class,
+                ChestAura.class,
                 BugUp.class,
                 AntiObsidian.class);
-
-        this.registerModule(ChestAura.INSTANCE);
 
         ClientUtils.getLogger().info("[ModuleManager] Loaded " + modules.size() + " modules.");
     }
