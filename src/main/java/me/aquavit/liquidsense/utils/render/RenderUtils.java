@@ -3,7 +3,7 @@
  * A free open source mixin-based injection hacked client for Minecraft using Minecraft Forge.
  * https://github.com/CCBlueX/LiquidBounce/
  */
-package net.ccbluex.liquidbounce.utils.render;
+package me.aquavit.liquidsense.utils.render;
 
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
@@ -1504,8 +1504,8 @@ public final class RenderUtils extends MinecraftInstance {
 
 
     public static void drawRoundedRect(float x, float y, float width, float height, float edgeRadius, int color, float borderWidth, int borderColor) {
-        if (color == 16777215) color = Colors.WHITE.c;
-        if (borderColor == 16777215) borderColor = Colors.WHITE.c;
+        if (color == 16777215) color = ColorEnum.WHITE.c;
+        if (borderColor == 16777215) borderColor = ColorEnum.WHITE.c;
 
         if (edgeRadius < 0.0F) {
             edgeRadius = 0.0F;

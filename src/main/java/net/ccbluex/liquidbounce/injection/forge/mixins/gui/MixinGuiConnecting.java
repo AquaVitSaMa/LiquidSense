@@ -7,7 +7,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.misc.ServerUtils;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiDisconnected;
 import net.minecraft.client.gui.GuiScreen;

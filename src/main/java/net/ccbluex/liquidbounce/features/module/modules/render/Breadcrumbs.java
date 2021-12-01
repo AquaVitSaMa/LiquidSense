@@ -11,8 +11,8 @@ import me.aquavit.liquidsense.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.utils.render.ColorUtils;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.ColorUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
 

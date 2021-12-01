@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
 import net.minecraft.item.ItemStack;
 
-import static net.ccbluex.liquidbounce.utils.render.ColorUtils.translateAlternateColorCodes;
+import static me.aquavit.liquidsense.utils.render.ColorUtils.translateAlternateColorCodes;
 
 public class RenameCommand extends Command
 {

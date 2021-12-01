@@ -26,13 +26,11 @@ import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.login.UserUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
-import net.ccbluex.liquidbounce.utils.render.ColorUtils;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.ColorUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.resources.DefaultPlayerSkin;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Keyboard;
 
@@ -48,7 +46,6 @@ import java.net.Proxy;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
-import java.util.UUID;
 
 public class GuiAltManager extends GuiScreen {
 

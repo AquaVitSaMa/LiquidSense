@@ -29,8 +29,6 @@ import java.net.URLConnection;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-import static net.ccbluex.liquidbounce.utils.render.RenderUtils.convertCircular;
-
 public final class UserUtils {
 
     public static boolean isValidTokenOffline(String token) {

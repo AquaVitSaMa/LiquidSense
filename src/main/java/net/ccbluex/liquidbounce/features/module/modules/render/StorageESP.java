@@ -14,7 +14,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.features.module.modules.world.ChestAura;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.shader.FramebufferShader;
 import me.aquavit.liquidsense.utils.render.shader.shaders.GlowShader;
 import me.aquavit.liquidsense.utils.render.shader.shaders.OutlineShader;

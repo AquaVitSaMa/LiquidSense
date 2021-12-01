@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend;
 
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.opengl.GL11;

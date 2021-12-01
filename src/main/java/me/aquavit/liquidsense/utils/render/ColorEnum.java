@@ -1,8 +1,8 @@
-package net.ccbluex.liquidbounce.utils.render;
+package me.aquavit.liquidsense.utils.render;
 
 import java.awt.Color;
 
-public enum Colors {
+public enum ColorEnum {
     BLACK(-16711423),
     BLUE(-12028161),
     DARKBLUE(-12621684),
@@ -24,7 +24,7 @@ public enum Colors {
 
     public int c;
 
-    private Colors(int co) {
+    private ColorEnum(int co) {
         this.c = co;
     }
 

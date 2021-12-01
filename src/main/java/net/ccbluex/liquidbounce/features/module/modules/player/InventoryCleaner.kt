@@ -13,7 +13,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.combat.AutoArmor
 import net.ccbluex.liquidbounce.injection.implementations.IItemStack
 import me.aquavit.liquidsense.utils.client.ClientUtils
-import net.ccbluex.liquidbounce.utils.InventoryUtils
+import me.aquavit.liquidsense.utils.client.InventoryUtils
 import me.aquavit.liquidsense.utils.entity.MovementUtils
 import me.aquavit.liquidsense.utils.item.ArmorPiece
 import me.aquavit.liquidsense.utils.item.ItemUtils

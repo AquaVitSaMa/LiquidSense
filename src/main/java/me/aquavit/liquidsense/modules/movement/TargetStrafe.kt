@@ -12,7 +12,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import net.ccbluex.liquidbounce.features.module.modules.movement.Fly
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed
 import me.aquavit.liquidsense.utils.client.RotationUtils
-import net.ccbluex.liquidbounce.utils.render.RenderUtils
+import me.aquavit.liquidsense.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
 import net.ccbluex.liquidbounce.value.IntegerValue

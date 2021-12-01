@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.utils;
+package me.aquavit.liquidsense.utils.render;
 
 import net.minecraft.entity.EntityLivingBase;
 

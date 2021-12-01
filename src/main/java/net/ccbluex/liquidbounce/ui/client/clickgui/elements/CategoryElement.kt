@@ -4,7 +4,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.ui.client.miscible.MElement
 import net.ccbluex.liquidbounce.ui.client.miscible.Miscible
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.render.RenderUtils
+import me.aquavit.liquidsense.utils.render.RenderUtils
 import java.awt.Color
 
 object CategoryElement {

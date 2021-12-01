@@ -9,14 +9,13 @@ import net.ccbluex.liquidbounce.ui.client.miscible.MElement.move
 import net.ccbluex.liquidbounce.ui.client.miscible.`package`.CategoryElement
 import net.ccbluex.liquidbounce.ui.client.miscible.`package`.ModuleElement
 import net.ccbluex.liquidbounce.ui.font.Fonts
-import net.ccbluex.liquidbounce.utils.render.RenderUtils
+import me.aquavit.liquidsense.utils.render.RenderUtils
 import net.minecraft.client.gui.GuiScreen
 import net.minecraft.client.gui.ScaledResolution
 import net.minecraft.client.renderer.GlStateManager
 import net.minecraft.util.ChatAllowedCharacters
 import org.lwjgl.input.Keyboard
 import org.lwjgl.input.Mouse
-import org.lwjgl.opengl.GL11
 import org.lwjgl.opengl.GL11.*
 import java.awt.Color
 import kotlin.math.abs

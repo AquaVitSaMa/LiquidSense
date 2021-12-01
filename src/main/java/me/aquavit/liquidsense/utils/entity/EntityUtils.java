@@ -5,7 +5,7 @@ import me.aquavit.liquidsense.modules.misc.Teams;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot;
-import net.ccbluex.liquidbounce.utils.render.ColorUtils;
+import me.aquavit.liquidsense.utils.render.ColorUtils;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;

@@ -1,11 +1,7 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
 import com.google.gson.JsonElement;
-import kotlin.TypeCastException;
-import kotlin.jvm.internal.Intrinsics;
-import kotlin.ranges.RangesKt;
 import me.aquavit.liquidsense.utils.data.Ranges;
-import me.aquavit.liquidsense.utils.render.Translate;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowFontShader;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowShader;
 import net.ccbluex.liquidbounce.LiquidBounce;
@@ -16,9 +12,9 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.ccbluex.liquidbounce.utils.render.ColorUtils;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.utils.render.Replacement;
+import me.aquavit.liquidsense.utils.render.ColorUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.client.Replacement;
 import net.ccbluex.liquidbounce.value.*;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;

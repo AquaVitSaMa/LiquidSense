@@ -1,6 +1,5 @@
 package me.aquavit.liquidsense.utils.render;
 
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 
 import java.awt.*;

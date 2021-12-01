@@ -25,7 +25,7 @@ import net.ccbluex.liquidbounce.ui.client.hud.HUD;
 import net.ccbluex.liquidbounce.ui.client.miscible.Miscible;
 import net.ccbluex.liquidbounce.ui.client.neverlose.Main;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.ccbluex.liquidbounce.utils.InventoryUtils;
+import me.aquavit.liquidsense.utils.client.InventoryUtils;
 import me.aquavit.liquidsense.utils.client.RotationUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import net.minecraft.util.ResourceLocation;

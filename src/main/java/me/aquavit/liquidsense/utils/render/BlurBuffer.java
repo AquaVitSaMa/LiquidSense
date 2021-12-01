@@ -1,9 +1,7 @@
 package me.aquavit.liquidsense.utils.render;
 
 import net.ccbluex.liquidbounce.injection.implementations.IShaderGroup;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
-import net.minecraft.client.shader.Shader;
 import org.lwjgl.opengl.GL11;
 
 import net.minecraft.client.Minecraft;
@@ -13,8 +11,6 @@ import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.client.shader.ShaderGroup;
 import net.minecraft.util.ResourceLocation;
-
-import java.util.List;
 
 public class BlurBuffer{
 	private static ShaderGroup blurShader;

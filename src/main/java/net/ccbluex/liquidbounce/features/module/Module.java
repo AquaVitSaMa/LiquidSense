@@ -6,7 +6,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.Listenable;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Print;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Type;
-import net.ccbluex.liquidbounce.utils.render.ColorUtils;
+import me.aquavit.liquidsense.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.value.Value;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;

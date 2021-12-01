@@ -1,6 +1,5 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
-import kotlin.jvm.internal.Intrinsics;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import me.aquavit.liquidsense.utils.misc.RandomUtils;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
@@ -12,13 +11,12 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.ccbluex.liquidbounce.utils.render.ColorUtils;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.ColorUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
 import net.ccbluex.liquidbounce.value.ListValue;
 import net.ccbluex.liquidbounce.value.Value;
-import net.minecraft.client.network.NetHandlerPlayClient;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.Entity;

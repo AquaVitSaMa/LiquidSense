@@ -9,8 +9,8 @@ import net.ccbluex.liquidbounce.LiquidBounce
 import me.aquavit.liquidsense.event.events.TextEvent
 import me.aquavit.liquidsense.utils.mc.ClassUtils
 import net.ccbluex.liquidbounce.features.module.modules.render.HUD
-import net.ccbluex.liquidbounce.utils.render.ColorUtils
-import net.ccbluex.liquidbounce.utils.render.RenderUtils
+import me.aquavit.liquidsense.utils.render.ColorUtils
+import me.aquavit.liquidsense.utils.render.RenderUtils
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowFontShader
 import net.minecraft.client.Minecraft
 import net.minecraft.client.gui.FontRenderer

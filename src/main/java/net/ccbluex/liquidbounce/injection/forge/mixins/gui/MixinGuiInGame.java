@@ -13,7 +13,7 @@ import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Hotbar;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiIngame;

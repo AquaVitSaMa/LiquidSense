@@ -17,7 +17,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
 import me.aquavit.liquidsense.utils.client.VecRotation;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.*;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;

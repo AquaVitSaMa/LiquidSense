@@ -1,6 +1,5 @@
-package net.ccbluex.liquidbounce.utils.render;
+package me.aquavit.liquidsense.utils.render;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.util.ChatAllowedCharacters;
 
 import java.awt.*;

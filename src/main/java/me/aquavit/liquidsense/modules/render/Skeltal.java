@@ -6,7 +6,7 @@ import me.aquavit.liquidsense.event.events.UpdateModelEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.minecraft.client.model.ModelPlayer;
 import net.minecraft.entity.player.EntityPlayer;

@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.utils.render;
+package me.aquavit.liquidsense.utils.client;
 
 import kotlin.jvm.internal.Intrinsics;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;

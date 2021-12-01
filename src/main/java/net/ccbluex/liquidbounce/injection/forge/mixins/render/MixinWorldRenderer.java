@@ -2,7 +2,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
 import me.aquavit.liquidsense.modules.render.CaveFinder;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.utils.Colors;
+import me.aquavit.liquidsense.utils.render.Colors;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

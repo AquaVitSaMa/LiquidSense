@@ -14,7 +14,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo
 import me.aquavit.liquidsense.utils.entity.MovementUtils
 import me.aquavit.liquidsense.utils.block.BlockUtils
 import me.aquavit.liquidsense.utils.entity.FallingPlayer
-import net.ccbluex.liquidbounce.utils.render.RenderUtils
+import me.aquavit.liquidsense.utils.render.RenderUtils
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
 import net.ccbluex.liquidbounce.value.IntegerValue

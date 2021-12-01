@@ -5,7 +5,7 @@ import net.ccbluex.liquidbounce.features.module.modules.misc.Spammer;
 import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.utils.render.ColorUtils;
+import me.aquavit.liquidsense.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.value.*;
 import org.lwjgl.input.Keyboard;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
@@ -18,8 +18,6 @@ import me.aquavit.liquidsense.utils.misc.StringUtils;
 import java.util.List;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-
-import static net.ccbluex.liquidbounce.utils.render.ColorUtils.translateAlternateColorCodes;
 
 @SideOnly(Side.CLIENT)
 public class SettingsUtils {

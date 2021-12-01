@@ -13,7 +13,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.file.configs.FriendsConfig;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
-import net.ccbluex.liquidbounce.utils.render.ColorUtils;
+import me.aquavit.liquidsense.utils.render.ColorUtils;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.input.Mouse;

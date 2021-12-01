@@ -9,7 +9,7 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.utils.render.MiniMapRegister;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.SafeVertexBuffer;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.ListValue;

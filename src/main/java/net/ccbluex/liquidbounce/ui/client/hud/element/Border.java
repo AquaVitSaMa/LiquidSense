@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element;
 
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 
 import java.awt.*;
 

@@ -6,7 +6,7 @@ import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import me.aquavit.liquidsense.utils.client.RotationUtils;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.entity.RenderManager;

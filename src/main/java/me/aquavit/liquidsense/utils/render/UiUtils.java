@@ -3,7 +3,6 @@ package me.aquavit.liquidsense.utils.render;
 import java.awt.Color;
 
 import org.lwjgl.opengl.GL11;
-import net.ccbluex.liquidbounce.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
