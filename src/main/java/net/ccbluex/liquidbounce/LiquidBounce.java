@@ -20,7 +20,6 @@ import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof;
 import net.ccbluex.liquidbounce.file.FileManager;
 import net.ccbluex.liquidbounce.script.ScriptManager;
 import net.ccbluex.liquidbounce.script.remapper.Remapper;
-import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
 import net.ccbluex.liquidbounce.ui.client.hud.HUD;
 import net.ccbluex.liquidbounce.ui.client.miscible.Miscible;
@@ -56,7 +55,6 @@ public class LiquidBounce {
     public static ScriptManager scriptManager;
 
     public static HUD hud;
-    public static ClickGui clickGui;
     public static Miscible miscible;
     public static Main neverlose;
 
@@ -102,10 +100,8 @@ public class LiquidBounce {
         fileManager.loadConfigs(fileManager.modulesConfig, fileManager.valuesConfig, fileManager.accountsConfig,
                 fileManager.friendsConfig, fileManager.xrayConfig, fileManager.shortcutsConfig);
 
-        clickGui = new ClickGui();
         miscible = new Miscible();
         neverlose = new Main();
-        fileManager.loadConfig(fileManager.clickGuiConfig);
 
         if (ClassUtils.hasForge()) {
             new BlocksTab();
@@ -218,14 +214,6 @@ public class LiquidBounce {
 
     public final void setHud(HUD hUD) {
         hud = hUD;
-    }
-
-    public final ClickGui getClickGui() {
-        return LiquidBounce.clickGui;
-    }
-
-    public final void setClickGui(ClickGui clickGui) {
-        LiquidBounce.clickGui = clickGui;
     }
 
     public final Miscible getMiscible() {

@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.command.commands;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
-import net.ccbluex.liquidbounce.ui.client.clickgui.ClickGui;
+import net.ccbluex.liquidbounce.ui.client.neverlose.Main;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 
 public class ReloadCommand extends Command
@@ -31,8 +31,7 @@ public class ReloadCommand extends Command
         this.chat("§c§lReloading hud...");
         LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.hudConfig);
         this.chat("§c§lReloading ClickGUI...");
-        LiquidBounce.clickGui = new ClickGui();
-        LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.clickGuiConfig);
+        LiquidBounce.neverlose= new Main();
         this.chat("Reloaded.");
     }
 }

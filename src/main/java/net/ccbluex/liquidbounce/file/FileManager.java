@@ -32,7 +32,6 @@ public class FileManager extends MinecraftInstance {
 
     public final FileConfig modulesConfig = new ModulesConfig(new File(dir, "modules.json"));
     public final FileConfig valuesConfig = new ValuesConfig(new File(dir, "values.json"));
-    public final FileConfig clickGuiConfig = new ClickGuiConfig(new File(dir, "clickgui.json"));
     public final AccountsConfig accountsConfig = new AccountsConfig(new File(dir, "accounts.json"));
     public final FriendsConfig friendsConfig = new FriendsConfig(new File(dir, "friends.json"));
     public final FileConfig xrayConfig = new XRayConfig(new File(dir, "xray-blocks.json"));

@@ -12,12 +12,15 @@ import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner;
+import net.ccbluex.liquidbounce.utils.render.ColorUtils;
 import net.ccbluex.liquidbounce.value.*;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.GuiChat;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+
+import java.awt.*;
 
 @ModuleInfo(name = "HUD", description = "Toggles visibility of the HUD.", category = ModuleCategory.RENDER,array = false)
 @SideOnly(Side.CLIENT)
@@ -41,9 +44,14 @@ public class HUD extends Module {
             "Autumn"
     }, "Default");
     public static final IntegerValue fontWidth = new IntegerValue("FontWidth", 8, 5, 10);
-    public static final FloatValue shadowX = new FloatValue("ShadowX", 0.5f, 0.25f, 1f);
-    public static final FloatValue shadowY = new FloatValue("ShadowY", 0.5f, 0.25f, 1f);
-    public static final IntegerValue shadowAlpha = new IntegerValue("ShadowAlpha", 150, 50, 255);
+    private static final IntegerValue colorRedValue = new IntegerValue("R", 0, 0, 255);
+    private static final IntegerValue colorGreenValue = new IntegerValue("G", 160, 0, 255);
+    private static final IntegerValue colorBlueValue = new IntegerValue("B", 255, 0, 255);
+    private static final BoolValue colorRainbow = new BoolValue("Rainbow", false);
+
+    public static Color generateColor() {
+        return colorRainbow.get() ? ColorUtils.rainbow() : new Color(colorRedValue.get(), colorGreenValue.get(), colorBlueValue.get());
+    }
 
     public HUD() {
         setState(true);

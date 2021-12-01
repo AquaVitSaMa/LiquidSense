@@ -140,7 +140,7 @@ public class EditorPanel extends MinecraftInstance {
             realHeight += 10;
         }
 
-        Gui.drawRect(x, y, x + width, y + 12, ClickGUI.generateColor().getRGB());
+        Gui.drawRect(x, y, x + width, y + 12, net.ccbluex.liquidbounce.features.module.modules.render.HUD.generateColor().getRGB());
         Fonts.font18.drawString("§lEditor", x + 2F, y + 3.5f, Color.WHITE.getRGB());
     }
 
@@ -183,7 +183,7 @@ public class EditorPanel extends MinecraftInstance {
             realHeight += 10;
         }
 
-        Gui.drawRect(x, y, x + width, y + 12, ClickGUI.generateColor().getRGB());
+        Gui.drawRect(x, y, x + width, y + 12, net.ccbluex.liquidbounce.features.module.modules.render.HUD.generateColor().getRGB());
         Fonts.font18.drawString("§lCreate element", x + 2F, y + 3.5F, Color.WHITE.getRGB());
     }
 
@@ -448,7 +448,7 @@ public class EditorPanel extends MinecraftInstance {
         }
 
         // Header
-        Gui.drawRect(x, y, x + width, y + 12, ClickGUI.generateColor().getRGB());
+        Gui.drawRect(x, y, x + width, y + 12, net.ccbluex.liquidbounce.features.module.modules.render.HUD.generateColor().getRGB());
         Fonts.font18.drawString("§l" + element.getName(), x + 2F, y + 3.5F, Color.WHITE.getRGB());
 
         // Delete button
