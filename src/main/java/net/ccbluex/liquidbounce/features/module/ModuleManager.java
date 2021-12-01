@@ -55,7 +55,7 @@ public final class ModuleManager implements Listenable {
                 Fly.class,
                 ClickGUI.class,
                 HighJump.class,
-                InventoryMove.class,
+                InvMove.class,
                 NoSlow.class,
                 LiquidWalk.class,
                 Sprint.class,

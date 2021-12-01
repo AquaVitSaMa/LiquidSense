@@ -12,7 +12,7 @@ import me.aquavit.liquidsense.modules.render.NoSwing;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import me.aquavit.liquidsense.event.events.*;
-import net.ccbluex.liquidbounce.features.module.modules.movement.InventoryMove;
+import net.ccbluex.liquidbounce.features.module.modules.movement.InvMove;
 import net.ccbluex.liquidbounce.features.module.modules.movement.NoSlow;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Sprint;
 import net.ccbluex.liquidbounce.features.module.modules.world.Scaffold;
@@ -139,8 +139,8 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
         try {
             LiquidBounce.eventManager.callEvent(new MotionEvent(EventState.PRE));
 
-            final InventoryMove inventoryMove = (InventoryMove) LiquidBounce.moduleManager.getModule(InventoryMove.class);
-            final boolean fakeSprint = (inventoryMove.getState() && inventoryMove.getAacAdditionProValue().get());
+            final InvMove inventoryMove = (InvMove) LiquidBounce.moduleManager.getModule(InvMove.class);
+            final boolean fakeSprint = (inventoryMove.getState() && InvMove.aacAdditionProValue.get());
 
             boolean sprinting = this.isSprinting() && !fakeSprint;
 
