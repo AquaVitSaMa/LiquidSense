@@ -45,6 +45,7 @@ public class LiquidSense {
         liquidSenseModules.add(SwingAnimation.class);
         liquidSenseModules.add(FastPlace.class);
         liquidSenseModules.add(BowAimbot.class);
+        liquidSenseModules.add(Compass.class);
         liquidSenseModules.add(Zoot.class);
         liquidSenseModules.add(RenderChanger.class);
         liquidSenseModules.add(Rotations.class);
