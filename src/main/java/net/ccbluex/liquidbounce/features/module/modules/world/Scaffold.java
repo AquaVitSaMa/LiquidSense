@@ -32,6 +32,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
+import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.client.settings.GameSettings;
 import net.minecraft.init.Blocks;
@@ -667,22 +668,37 @@ public class Scaffold extends Module {
             event.setSafeWalk(true);
     }
 
-    /**
-     * Scaffold visuals
-     *
-     * @param event
-     */
+    private ItemStack barrier = new ItemStack(Item.getItemById(166), 0, 0);
+
     @EventTarget
     public void onRender2D(final Render2DEvent event) {
         if(counterDisplayValue.get()) {
             GlStateManager.pushMatrix();
-
-            final String info = "Blocks: §7" + getBlocksAmount();
+            final String info = "Blocks: " + getBlocksAmount();
             final ScaledResolution scaledResolution = new ScaledResolution(mc);
-            RenderUtils.drawBorderedRect((scaledResolution.getScaledWidth() / 2) - 2, (scaledResolution.getScaledHeight() / 2) + 5, (scaledResolution.getScaledWidth() / 2) + Fonts.font20.getStringWidth(info) + 2, (scaledResolution.getScaledHeight() / 2) + 16, 3, Color.BLACK.getRGB(), Color.BLACK.getRGB());
-            GlStateManager.resetColor();
-            Fonts.font20.drawString(info, scaledResolution.getScaledWidth() / 2, scaledResolution.getScaledHeight() / 2 + 7, Color.WHITE.getRGB());
-
+            float width = scaledResolution.getScaledWidth();
+            float height = scaledResolution.getScaledHeight();
+            int slot = InventoryUtils.findAutoBlockBlock();
+            ItemStack stack = barrier;
+            if (slot != -1) {
+                if (mc.thePlayer.inventory.getCurrentItem() != null) {
+                    Item handItem = mc.thePlayer.inventory.getCurrentItem().getItem();
+                    if (handItem instanceof ItemBlock && InventoryUtils.canPlaceBlock(((ItemBlock) handItem).getBlock())) {
+                        stack = mc.thePlayer.inventory.getCurrentItem();
+                    }
+                }
+                if (stack == barrier) {
+                    stack = mc.thePlayer.inventory.getStackInSlot(InventoryUtils.findAutoBlockBlock() - 36);
+                    if (stack == null) {
+                        stack = barrier;
+                    }
+                }
+            }
+            RenderHelper.enableGUIStandardItemLighting();
+            mc.getRenderItem().renderItemIntoGUI(stack, (int) width / 2 - Fonts.font20.getStringWidth(info)
+                    , (int) (height * 0.6 - Fonts.font20.FONT_HEIGHT * 0.5));
+            RenderHelper.disableStandardItemLighting();
+            Fonts.font20.drawCenteredString(info, width / 2f, height * 0.6f, Color.WHITE.getRGB(), false);
             GlStateManager.popMatrix();
         }
     }
@@ -862,7 +878,7 @@ public class Scaffold extends Module {
         for(int i = 36; i < 45; i++) {
             final ItemStack itemStack = mc.thePlayer.inventoryContainer.getSlot(i).getStack();
 
-            if(itemStack != null && itemStack.getItem() instanceof ItemBlock)
+            if(itemStack != null && itemStack.getItem() instanceof ItemBlock && InventoryUtils.canPlaceBlock(((ItemBlock)itemStack.getItem()).block))
                 amount += itemStack.stackSize;
         }
 

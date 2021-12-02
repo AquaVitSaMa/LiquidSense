@@ -49,6 +49,10 @@ public final class InventoryUtils extends MinecraftInstance implements Listenabl
         return false;
     }
 
+    public static boolean canPlaceBlock(Block block) {
+        return block.isFullCube() && !BLOCK_BLACKLIST.contains(block);
+    }
+
     public static int findAutoBlockBlock() {
         for(int i = 36; i < 45; i++) {
             final ItemStack itemStack = mc.thePlayer.inventoryContainer.getSlot(i).getStack();
