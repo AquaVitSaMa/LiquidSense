@@ -47,7 +47,7 @@ object ValueElement {
         else if (value is ListValue) {
             value.listvalue.translate(0f, value.list, 1.0)
             if (value.openList) value.list = 21f
-            val name = value.name + " : ��7" + value.get()
+            val name = value.name + " : §7" + value.get()
 
             val x = (if (Fonts.font18.getStringWidth(name) > 100) Fonts.font18.getStringWidth(name) * 2f + 14 else 224f) / 2
 
@@ -128,7 +128,7 @@ object ValueElement {
                     }
 
                     if (hover) RenderUtils.drawRect(MElement.x + (120.0 * dropxsize), MElement.y + 42.0 + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), MElement.x + (120.0 + x.toDouble()) * dropxsize, MElement.y + 63.0 + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), Color(75, 75, 75, (255 * fix).toInt()).rgb)
-                    Fonts.font17.drawString(if (valueenabler) "��l${value.values[valueOfList]}" else value.values[valueOfList], MElement.x + (125f * dropxsize).toInt(), MElement.y + 50.0f + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), if (valueenabler) Color(70, 111, 255, (255 * fix).toInt()).rgb else Color(255, 255, 255, (255 * fix).toInt()).rgb, false)
+                    Fonts.font17.drawString(if (valueenabler) "§l${value.values[valueOfList]}" else value.values[valueOfList], MElement.x + (125f * dropxsize).toInt(), MElement.y + 50.0f + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), if (valueenabler) Color(70, 111, 255, (255 * fix).toInt()).rgb else Color(255, 255, 255, (255 * fix).toInt()).rgb, false)
 
                     miscible.modulePosY += value.MultiBoolvalue.y
                     module.guiposY += 21
@@ -170,7 +170,7 @@ object ValueElement {
                 RenderUtils.drawFullCircle(MElement.x + (125f * dropxsize) + value.floatvalue.x, MElement.y + 58.0f + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), 6.25F, 0F, Color(30, 30, 30, (255 * fix).toInt()))
                 RenderUtils.drawFullCircle(MElement.x + (125f * dropxsize) + value.floatvalue.x, MElement.y + 58.0f + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), 4F, 0F, Color(72, 131, 255, (255 * fix).toInt()))
                 GlStateManager.resetColor()
-                Fonts.font16.drawString(name + " : ��7" + value.get(), MElement.x + (123f * dropxsize).toInt(), MElement.y + 47.0f + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), Color(255, 255, 255, (255 * fix).toInt()).rgb, false)
+                Fonts.font16.drawString(name + " : §7" + value.get(), MElement.x + (123f * dropxsize).toInt(), MElement.y + 47.0f + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), Color(255, 255, 255, (255 * fix).toInt()).rgb, false)
             }
             miscible.modulePosY += module.openValue.y
             if (module.showSettings) module.guiposY += 21
@@ -203,7 +203,7 @@ object ValueElement {
                 RenderUtils.drawFullCircle(MElement.x + (125f * dropxsize) + value.intvalue.x, MElement.y + 58.0f + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), 4F, 0F, Color(72, 131, 255, (255 * fix).toInt()))
 
                 GlStateManager.resetColor()
-                Fonts.font16.drawString(name + " : ��7" + value.get(), MElement.x + (123f * dropxsize).toInt(), MElement.y + 47.0f + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), Color(255, 255, 255, (255 * fix).toInt()).rgb, false)
+                Fonts.font16.drawString(name + " : §7" + value.get(), MElement.x + (123f * dropxsize).toInt(), MElement.y + 47.0f + miscible.modulePosY + miscible.wheeltranslate.y.toInt(), Color(255, 255, 255, (255 * fix).toInt()).rgb, false)
             }
 
             miscible.modulePosY += module.openValue.y

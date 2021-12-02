@@ -180,16 +180,16 @@ open class Miscible : GuiScreen() {
         RenderUtils.drawRect(MElement.x + (407f * dropxsize), MElement.y + 4, MElement.x + (409f * dropxsize), MElement.y + (242f * dropysize), Color(15, 15, 15).rgb)
         RenderUtils.drawRect(MElement.x + (406f * dropxsize), MElement.y + (v + (5 * dropysize)), MElement.x + (410f * dropxsize), MElement.y + v + (15 * dropysize), Color(98, 98, 98).rgb)
 
-        wheeltranslate.translate(0f, MElement.wheel)
+        wheeltranslate.translate(0f, MElement.wheel , 5.0)
         if (abs(MElement.wheel) > modulePosY - (245 * dropysize) && modulePosY > (245 * dropysize)) MElement.wheel = -(modulePosY - (245 * dropysize))
         if (hovertoFloatL(MElement.x + 105f, MElement.y + 5f, MElement.x + 410f, MElement.y + (245f * dropysize), mouseX, mouseY, false) && modulePosY > (245 * dropysize)) {
             val dWheel = Mouse.getDWheel()
             for (i in 0 until 10) {
                 if (dWheel < 0 && abs(MElement.wheel) < modulePosY - (242 * dropysize)) {
-                    MElement.wheel -= i * dropysize
+                    MElement.wheel -= i
                 }
                 else if (dWheel > 0) {
-                    MElement.wheel += i * dropysize
+                    MElement.wheel += i
                     if (MElement.wheel > 0) MElement.wheel = 0f
                 }
             }
@@ -254,6 +254,7 @@ open class Miscible : GuiScreen() {
                 }
             }
         }
+
         if (isCtrlKeyDown() && Keyboard.isKeyDown(Keyboard.KEY_A) && MElement.Search.length > 1) {
             checkall = !checkall
         }
