@@ -1,36 +1,59 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
+import me.aquavit.liquidsense.utils.client.InventoryUtils;
+import me.aquavit.liquidsense.utils.render.BlurBuffer;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
+import net.ccbluex.liquidbounce.ui.font.Fonts;
+import net.ccbluex.liquidbounce.value.ListValue;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemBlock;
+import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
 import org.jetbrains.annotations.Nullable;
+import org.lwjgl.opengl.GL11;
 
+import java.awt.*;
 import java.util.List;
 
 @ElementInfo(name = "Inventory")
 public class Inventory extends Element {
 
+    private ListValue mode = new ListValue("Mode",new String[]{"Minecraft","Rect"},"Minecraft");
     private static final ResourceLocation TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
 
     @Nullable
     @Override
     public Border drawElement() {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
-        mc.getTextureManager().bindTexture(TEXTURE);
+        if (mode.get().equalsIgnoreCase("Minecraft")) mc.getTextureManager().bindTexture(TEXTURE);
 
         int value1 = (175 - 176) / 2;
         int value2 = (298 - 166) / 2;
 
-        this.drawTexturedModalRect(0, 0, 0, 0, 176, 3 * 18 + 17);
+        if (mode.get().equalsIgnoreCase("Minecraft")) this.drawTexturedModalRect(0, 0, 0, 0, 176, 3 * 18 + 17);
 
-        GlStateManager.enableRescaleNormal();
+        if (mode.get().equalsIgnoreCase("Rect")) {
+            BlurBuffer.blurArea((int)(getRenderX() * getScale()),(int)((getRenderY() + 17) * getScale()),176*getScale(),3 * 18 *getScale(),true);
+            if (!this.getInfo().disableScale())
+                GL11.glScalef(this.getScale(), this.getScale(), this.getScale());
+
+            GL11.glTranslated(this.getRenderX(), this.getRenderY(), 0.0);
+            RenderUtils.drawRect(0,17,176, 3 * 18 + 17, new Color(0,0,0,160));
+            RenderUtils.drawRoundedRect(-0.5F, 0, 176.5F, 7F + Fonts.csgo40.FONT_HEIGHT,1.5F,
+                    new Color(16, 25, 32, 200).getRGB(), 1F,new Color(16, 25, 32, 200).getRGB());
+            Fonts.csgo40.drawString("P", 4.2F, (float) (Fonts.csgo40.FONT_HEIGHT / 2) + 1.2F, new Color(0, 131, 193).getRGB(), false);
+            Fonts.font20.drawString("Inventory", Fonts.csgo40.getStringWidth("P") + 10F, (float) (Fonts.csgo40.FONT_HEIGHT / 2) + 0.2F, Color.WHITE.getRGB(), false);
+        }
+
+        GlStateManager.pushMatrix();
         RenderHelper.enableGUIStandardItemLighting();
         List<Slot> inventorySlots = mc.thePlayer.inventoryContainer.inventorySlots;
         for (Slot slot : inventorySlots) {
@@ -40,8 +63,24 @@ public class Inventory extends Element {
             }
         }
         RenderHelper.disableStandardItemLighting();
-        GlStateManager.disableRescaleNormal();
+        if (mode.get().equalsIgnoreCase("Rect") && getInventoryCount() == 0)
+            Fonts.font20.drawString("Inventory Empty", 88 - (float)(Fonts.font20.getStringWidth("Inventory Empty") / 2),
+                48 - Fonts.font20.getHeight(), Color.WHITE.getRGB(),true);
+        GlStateManager.popMatrix();
         return new Border(0, 0, 176, 3 * 18 + 17);
+    }
+
+    private int getInventoryCount() {
+        int amount = 0;
+
+        for(int i = 9; i < 35; i++) {
+            final ItemStack itemStack = mc.thePlayer.inventoryContainer.getSlot(i).getStack();
+
+            if(itemStack != null)
+                amount += itemStack.stackSize;
+        }
+
+        return amount;
     }
 
     public void drawTexturedModalRect(int x, int y, int textureX, int textureY, int width, int height) {
