@@ -41,7 +41,7 @@ public class Module extends MinecraftInstance implements Listenable {
     private float openValueposy;
     private float suckDown;
     private Translate translate;
-
+    private Translate keytranslate;
 
 
     public void setKeyBind(final int keyBind) {
@@ -68,7 +68,7 @@ public class Module extends MinecraftInstance implements Listenable {
         this.openValueposy = 0f;
         this.suckDown = 0f;
         this.translate = new Translate(0f, 0f);
-
+	  this.keytranslate = new Translate(0f, 0f);
     }
 
 
@@ -258,6 +258,8 @@ public class Module extends MinecraftInstance implements Listenable {
     public final Translate getTranslate() {
         return this.translate;
     }
+
+    public final Translate getKeytranslate() {return this.keytranslate;}
 
     public final void setTranslate(Translate translate) {
        this.translate = translate;
