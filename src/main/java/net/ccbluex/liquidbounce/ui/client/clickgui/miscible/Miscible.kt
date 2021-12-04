@@ -162,6 +162,7 @@ open class Miscible : GuiScreen() {
 
         var categoryPosY = 0f
         for (category in ModuleCategory.values()) {
+            RenderUtils.makeScissorBox(MElement.x + 5f, MElement.y + 45 , MElement.x + (105f * dropxsize), MElement.y + (225 * dropysize))
             CategoryElement.drawCategory(category, this, categoryPosY, dropxsize, dropysize, mouseX, mouseY)
             categoryPosY += 30
         }
