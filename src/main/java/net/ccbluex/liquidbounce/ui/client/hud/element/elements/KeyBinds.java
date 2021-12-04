@@ -40,24 +40,25 @@ public class KeyBinds extends Element {
 
 		int y = 1;
 		for (Module module : LiquidBounce.moduleManager.getModules()) {
-			if(module.getKeyBind() == Keyboard.KEY_NONE && module.getKeytranslate().getY() > 0f)
+			if (module.getKeyBind() == Keyboard.KEY_NONE && module.getKeytranslate().getY() > 0f)
 				module.getKeytranslate().translate(0f, 0f);
-                  else {
 
-				GlStateManager.resetColor();
+			if (module.getKeyBind() == Keyboard.KEY_NONE && module.getKeytranslate().getY() == 0f)
+				continue;
 
-				module.getKeytranslate().translate(0f, 14f);
+			GlStateManager.resetColor();
 
-				if (module.getState()) {
-					Fonts.font20.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
-					Fonts.font20.drawString("on", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F, y + 17, Color.WHITE.getRGB());
-				} else {
-					Fonts.font20.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
-					Fonts.font20.drawString("off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 45, y + 17, Color.WHITE.getRGB());
+			module.getKeytranslate().translate(0f, 14f);
 
-				}
-				y += module.getKeytranslate().getY();
+			if (module.getState()) {
+				Fonts.font20.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
+				Fonts.font20.drawString("on", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F, y + 17, Color.WHITE.getRGB());
+			} else {
+				Fonts.font20.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
+				Fonts.font20.drawString("off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 45, y + 17, Color.WHITE.getRGB());
+
 			}
+			y += module.getKeytranslate().getY();
 		}
 		RenderUtils.drawRoundedRect(-5.2F, -5.5F, Fonts.csgo40.getStringWidth("K") + Fonts.font20.getStringWidth("Binds") + 65, Fonts.csgo40.FONT_HEIGHT + 6F, 1.5F,
 			new Color(16, 25, 32, 200).getRGB(), 1F, new Color(16, 25, 32, 200).getRGB());
