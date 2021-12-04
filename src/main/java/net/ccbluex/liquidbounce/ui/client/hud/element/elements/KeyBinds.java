@@ -1,6 +1,7 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
+import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
@@ -45,9 +46,11 @@ public class KeyBinds extends Element {
             if(module.getKeyBind() == Keyboard.KEY_NONE)
                 continue;
 
+		Translate translate = new Translate(0f , 0f);
+		translate.translate(0f , 14f);
+
             GlStateManager.resetColor();
 
-            //RenderUtils.drawRect(0f, 10f + ypos , 150f, 10f + ypos + 12, new Color(35, 35, 35, 255).getRGB());
             if (module.getState()){
                 Fonts.font20.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
                 Fonts.font20.drawString("on" , Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F , y + 17, Color.WHITE.getRGB());
@@ -56,7 +59,7 @@ public class KeyBinds extends Element {
                 Fonts.font20.drawString("off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 45 , y + 17, Color.WHITE.getRGB());
 
             }
-            y += 14;
+            y += translate.getY();
         }
         RenderUtils.drawRoundedRect(-5.2F, -5.5F, Fonts.csgo40.getStringWidth("K") + Fonts.font20.getStringWidth("Binds") + 65, Fonts.csgo40.FONT_HEIGHT + 6F,1.5F,
                 new Color(16, 25, 32, 200).getRGB(), 1F,new Color(16, 25, 32, 200).getRGB());
