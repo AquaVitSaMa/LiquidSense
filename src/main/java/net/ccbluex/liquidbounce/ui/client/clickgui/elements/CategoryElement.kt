@@ -5,6 +5,7 @@ import net.ccbluex.liquidbounce.ui.client.miscible.MElement
 import net.ccbluex.liquidbounce.ui.client.miscible.Miscible
 import net.ccbluex.liquidbounce.ui.font.Fonts
 import me.aquavit.liquidsense.utils.render.RenderUtils
+import net.minecraft.client.renderer.GlStateManager
 import org.lwjgl.opengl.GL11
 import java.awt.Color
 
@@ -30,6 +31,7 @@ object CategoryElement {
             MElement.wheel = 0f
         }
 
+        GlStateManager.pushMatrix()
         RenderUtils.makeScissorBox(MElement.x + 5f, MElement.y + 45 + categoryPosY, MElement.x + (105f * dropxsize), MElement.y + (225 * dropysize))
         GL11.glEnable(GL11.GL_SCISSOR_TEST)
 
@@ -39,5 +41,6 @@ object CategoryElement {
         Fonts.icon30.drawString(icon(category.displayName.toLowerCase()), MElement.x + 14.5f, MElement.y + 48 + categoryPosY, if (MElement.hovercategory == category.displayName) Color(255, 255, 255).rgb else Color(150, 150, 150).rgb) //displayName
         Fonts.font17.drawString(category.displayName, MElement.x + 34.5f, MElement.y + 50 + categoryPosY, if (MElement.hovercategory == category.displayName) Color(255, 255, 255).rgb else Color(150, 150, 150).rgb) // ѡ�����
         GL11.glDisable(GL11.GL_SCISSOR_TEST)
+        GlStateManager.popMatrix()
     }
 }

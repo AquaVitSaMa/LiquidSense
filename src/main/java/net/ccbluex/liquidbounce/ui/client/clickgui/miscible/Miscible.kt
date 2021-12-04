@@ -268,11 +268,11 @@ open class Miscible : GuiScreen() {
 
     fun hovertoFloatL(xOne: Float, yOne: Float, xTwo: Float, yTwo: Float, mouseX: Int, mouseY: Int, click: Boolean): Boolean {
         val hoverSystem = mouseX >= xOne && mouseX <= xTwo && mouseY >= yOne && mouseY <= yTwo
-        return ((click && !mouseLDown && Mouse.isButtonDown(0) && hoverSystem) || (!click && hoverSystem)) && !openSearch
+        return ((click && !mouseLDown && Mouse.isButtonDown(0) && hoverSystem) || (!click && hoverSystem)) && !openSearch && !ismove
     }
 
     fun hovertoFloatR(xOne: Float, yOne: Float, xTwo: Float, yTwo: Float, mouseX: Int, mouseY: Int, click: Boolean): Boolean {
         val hoverSystem = mouseX >= xOne && mouseX <= xTwo && mouseY >= yOne && mouseY <= yTwo
-        return ((click && !mouseRDown && Mouse.isButtonDown(1) && hoverSystem) || (!click && hoverSystem)) && !openSearch
+        return ((click && !mouseRDown && Mouse.isButtonDown(1) && hoverSystem) || (!click && hoverSystem)) && !openSearch && !ismove
     }
 }
