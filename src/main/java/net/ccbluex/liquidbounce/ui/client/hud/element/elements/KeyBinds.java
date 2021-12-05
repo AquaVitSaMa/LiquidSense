@@ -2,6 +2,7 @@ package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
+import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
@@ -19,6 +20,8 @@ import java.awt.*;
 @ElementInfo(name = "KeyBinds")
 public class KeyBinds extends Element {
 
+	private Translate translate = new Translate(0f , 0f);
+
 	@Nullable
 	@Override
 	public Border drawElement() {
@@ -28,10 +31,12 @@ public class KeyBinds extends Element {
 				continue;
 			index++;
 		}
+		translate.translate(0f , (8 + index * 14) , 2.0);
+
 		BlurBuffer.blurArea((int) ((-4.5F + this.getRenderX()) * this.getScale()),
 			(int) ((this.getRenderY() + Fonts.csgo40.FONT_HEIGHT - 2) * this.getScale()),
 			(Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 67) * this.getScale(),
-			(8 + index * 14) * this.getScale(),
+			translate.getY() * this.getScale(),
 			true);
 
 		if (!this.getInfo().disableScale())
@@ -40,29 +45,22 @@ public class KeyBinds extends Element {
 
 		int y = 1;
 		for (Module module : LiquidBounce.moduleManager.getModules()) {
-			if (module.getKeyBind() == Keyboard.KEY_NONE && module.getKeytranslate().getY() > 0f)
-				module.getKeytranslate().translate(0f, 0f);
+			if (module.getKeyBind() == Keyboard.KEY_NONE ) {
+				if(module.getKeytranslate().getY() > 0f)
+				module.getKeytranslate().translate(0f, 0f , 2.0);
+			} else
+				module.getKeytranslate().translate(255f, 14f , 2.0);
 
-			if (module.getKeyBind() == Keyboard.KEY_NONE && module.getKeytranslate().getY() == 0f)
+			if (module.getKeytranslate().getY() == 0f || module.getKeytranslate().getX() <= 30f)
 				continue;
 
 			GlStateManager.resetColor();
-
-			module.getKeytranslate().translate(0f, 14f);
-
-			if (module.getState()) {
-				Fonts.font20.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
-				Fonts.font20.drawString("on", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F, y + 17, Color.WHITE.getRGB());
-			} else {
-				Fonts.font20.drawString(module.getName(), -1.1F, y + 17, Color.WHITE.getRGB());
-				Fonts.font20.drawString("off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 45, y + 17, Color.WHITE.getRGB());
-
-			}
+			Fonts.font20.drawString(module.getName(), -1.1F, y + 17, new Color(255 , 255 ,255 , (int) module.getKeytranslate().getX() ).getRGB());
+			Fonts.font20.drawString(module.getState() ? "on" : "off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F, y + 17, new Color(255 , 255 ,255 , (int) module.getKeytranslate().getX() ).getRGB());
 			y += module.getKeytranslate().getY();
 		}
 		RenderUtils.drawRoundedRect(-5.2F, -5.5F, Fonts.csgo40.getStringWidth("K") + Fonts.font20.getStringWidth("Binds") + 65, Fonts.csgo40.FONT_HEIGHT + 6F, 1.5F,
 			new Color(16, 25, 32, 200).getRGB(), 1F, new Color(16, 25, 32, 200).getRGB());
-		//RenderUtils.drawBorderedRect(-5.5F, -5.5F, Fonts.csgo40.getStringWidth("K") + Fonts.font20.getStringWidth("Binds") + 60, Fonts.csgo40.FONT_HEIGHT + 0.5F, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
 		Fonts.csgo40.drawString("K", -1.5F, -1.5F, new Color(0, 131, 193).getRGB(), false);
 		Fonts.font20.drawString("Binds", Fonts.csgo40.getStringWidth("K") + 1.8F, -1F, Color.WHITE.getRGB(), false);
 		return new Border(20, 20, 120, 80);
