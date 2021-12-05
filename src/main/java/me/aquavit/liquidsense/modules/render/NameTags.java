@@ -65,6 +65,8 @@ public class NameTags extends Module {
     private final BoolValue shadow = new BoolValue("Shadow", false);
     public static final FontValue font = new FontValue("Font", Fonts.minecraftFont);
 
+    final RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+
     @EventTarget
     public void onRender2D(Render2DEvent event) {
         if (modeValue.get().equalsIgnoreCase("3D")) return;
@@ -93,7 +95,10 @@ public class NameTags extends Module {
         double posZ = RenderUtils.interpolate(entity.posZ, entity.lastTickPosZ, event.getPartialTicks());
 
         double width = entity.width / 1.5;
-        double height = (entity.height + (entity.isSneaking() ? -0.4 : 0.1) + 0.0) * 1.0;
+        double height = (entity.height + (entity.isSneaking() ? -0.4 : 0.1) +
+                ((rc.getState() && RenderChanger.bigHeadsValue.get()) ? 0.25 : 0.0)) *
+                ((rc.getState() && RenderChanger.littleEntitiesValue.get()) ? 0.5 : 1.0);
+
 
         AxisAlignedBB aabb = new AxisAlignedBB(posX - width, posY, posZ - width, posX + width, posY + height + 0.05, posZ + width);
         List<Vector3d> vectors = Arrays.asList(

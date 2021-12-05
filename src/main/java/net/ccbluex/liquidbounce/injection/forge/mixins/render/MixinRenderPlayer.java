@@ -1,7 +1,11 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.modules.render.RenderChanger;
+import net.ccbluex.liquidbounce.LiquidBounce;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelPlayer;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderPlayer;
 import net.minecraft.entity.player.EnumPlayerModelParts;
 import net.minecraft.item.EnumAction;
@@ -11,6 +15,9 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
+import org.spongepowered.asm.mixin.injection.At;
+import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(RenderPlayer.class)
 @SideOnly(Side.CLIENT)
@@ -55,6 +62,17 @@ public abstract class MixinRenderPlayer extends MixinRender {
                     }
                 }
             }
+        }
+    }
+
+    @Inject(method = "rotateCorpse", at = @At("HEAD"), cancellable = true)
+    public void sleep1(AbstractClientPlayer bat, float p_77043_2_, float p_77043_3_, float partialTicks, CallbackInfo callbackInfo) {
+        if (bat == Minecraft.getMinecraft().thePlayer && LiquidBounce.moduleManager.getModule(RenderChanger.class).getState() && RenderChanger.sleeperValue.get()) {
+            GlStateManager.translate(0f, 0.3f, 0f);
+            GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationYaw - 90f, 0.0F, 1.0F, 0.0F);
+            GlStateManager.rotate(90f, 0.0F, 0.0F, 1.0F);
+            GlStateManager.rotate(270.0F, 0.0F, 1.0F, 0.0F);
+            callbackInfo.cancel();
         }
     }
 }
