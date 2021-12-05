@@ -30,7 +30,7 @@ public class KeyBinds extends Element {
 			if (module.getKeyBind() == Keyboard.KEY_NONE)
 				continue;
 			index++;
-		}
+		}/**/
 		translate.translate(0f , (8 + index * 14) , 2.0);
 
 		BlurBuffer.blurArea((int) ((-4.5F + this.getRenderX()) * this.getScale()),

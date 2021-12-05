@@ -22,7 +22,7 @@ public class HotbarUtil extends MinecraftInstance {
     public Translate translate = new Translate(0f , 0f);
     public float size = 1.0f;
 
-    public void renderHotbarItem(int index, float xPos, float yPos, float partialTicks){
+    public void renderXHotbarItem(int index, float xPos, float yPos, float partialTicks){
         ItemStack itemStack = mc.thePlayer.inventory.mainInventory[index];
         if (itemStack != null) {
             float animantion = (float)itemStack.animationsToGo - partialTicks;
@@ -47,6 +47,24 @@ public class HotbarUtil extends MinecraftInstance {
                     yPos + Fonts.font22.getHeight() / 2f, Color.WHITE.getRGB());
         }
     }
+
+	public void renderYHotbarItem(int index, float xPos, float yPos, float partialTicks){
+		ItemStack itemStack = mc.thePlayer.inventory.mainInventory[index];
+		if (itemStack != null) {
+			float animantion = (float)itemStack.animationsToGo - partialTicks;
+			if (animantion > 0.0F) {
+				GlStateManager.pushMatrix();
+				float scale = 1.0F + animantion / 5.0F;
+				GlStateManager.translate(xPos + 8F, yPos + 12F, 0.0F);
+				GlStateManager.scale(1.0F / scale, (scale + 1.0F) / 2.0F, 1.0F);
+				GlStateManager.translate(-xPos - 8F, -yPos - 12F, 0.0F);
+			}
+			renderItemAndEffectIntoGUI(itemStack, xPos, yPos);
+			if (animantion > 0.0F) {
+				GlStateManager.popMatrix();
+			}
+		}
+	}
 
     private void renderItemAndEffectIntoGUI(final ItemStack itemStack, float xPos, float yPos) {
         if (itemStack != null && itemStack.getItem() != null) {
