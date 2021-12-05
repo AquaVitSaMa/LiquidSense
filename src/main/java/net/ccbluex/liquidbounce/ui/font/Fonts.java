@@ -51,8 +51,23 @@ public class Fonts {
     @FontDetails(fontName = "Museo-Sans", fontSize = 25)
     public static GameFontRenderer font25;
 
+    @FontDetails(fontName = "Museo-Sans", fontSize = 26)
+    public static GameFontRenderer font26;
+
+    @FontDetails(fontName = "Museo-Sans", fontSize = 27)
+    public static GameFontRenderer font27;
+
+    @FontDetails(fontName = "Museo-Sans", fontSize = 28)
+    public static GameFontRenderer font28;
+
+    @FontDetails(fontName = "Museo-Sans", fontSize = 29)
+    public static GameFontRenderer font29;
+
     @FontDetails(fontName = "Museo-Sans", fontSize = 30)
     public static GameFontRenderer font30;
+
+    @FontDetails(fontName = "Museo-Sans", fontSize = 60)
+    public static GameFontRenderer font60;
 
     @FontDetails(fontName = "Roboto Bold", fontSize = 60)
     public static GameFontRenderer fontBold30;
@@ -91,7 +106,12 @@ public class Fonts {
         font20 = new GameFontRenderer(getFont("Museo-Sans.ttf", 20));
         font22 = new GameFontRenderer(getFont("Museo-Sans.ttf", 22));
         font25 = new GameFontRenderer(getFont("Museo-Sans.ttf", 25));
+        font26 = new GameFontRenderer(getFont("Museo-Sans.ttf", 26));
+        font27 = new GameFontRenderer(getFont("Museo-Sans.ttf", 27));
+        font28 = new GameFontRenderer(getFont("Museo-Sans.ttf", 28));
+        font29 = new GameFontRenderer(getFont("Museo-Sans.ttf", 29));
         font30 = new GameFontRenderer(getFont("Museo-Sans.ttf", 30));
+        font60 = new GameFontRenderer(getFont("Museo-Sans.ttf", 60));
         csgo35 = new GameFontRenderer(getFont("LiquidSense.ttf", 18));
         csgo40 = new GameFontRenderer(getFont("LiquidSense.ttf", 20));
 	  fontBold30 = new GameFontRenderer(getFont("Roboto-Bold.ttf", 28));
