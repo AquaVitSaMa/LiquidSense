@@ -51,7 +51,6 @@ public final class ModuleManager implements Listenable {
                 AutoSoup.class,
                 Criticals.class,
                 Aura.class,
-                Velocity.class,
                 Fly.class,
                 ClickGUI.class,
                 HighJump.class,

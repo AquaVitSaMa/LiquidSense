@@ -55,6 +55,7 @@ public class LiquidSense {
         liquidSenseModules.add(SkinDerp.class);
         liquidSenseModules.add(Derp.class);
         liquidSenseModules.add(EventLogger.class);
+        liquidSenseModules.add(Velocity.class);
         liquidSenseModules.add(FastBow.class);
         liquidSenseModules.add(NameTags.class);
         liquidSenseModules.add(Timer.class);

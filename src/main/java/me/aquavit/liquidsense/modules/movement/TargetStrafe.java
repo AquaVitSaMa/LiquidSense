@@ -28,7 +28,7 @@ import org.lwjgl.util.glu.Cylinder;
 import java.awt.*;
 import java.util.Objects;
 
-@ModuleInfo(name = "TargetStrafe", description = "Can make you to rotate around the entity", category = ModuleCategory.COMBAT)
+@ModuleInfo(name = "TargetStrafe", description = "Can make you to rotate around the entity", category = ModuleCategory.MOVEMENT)
 public class TargetStrafe extends Module {
     private final Rotation targetRotation = new Rotation(0f, 0f);
     private final Rotation serverRotation = new Rotation(0f, 0f);
