@@ -30,18 +30,21 @@ public class KeyBinds extends Element {
 			if (module.getKeyBind() == Keyboard.KEY_NONE)
 				continue;
 			index++;
-		}/**/
+		}
+
 		translate.translate(0f , (8 + index * 14) , 2.0);
 
-		BlurBuffer.blurArea((int) ((-4.5F + this.getRenderX()) * this.getScale()),
-			(int) ((this.getRenderY() + Fonts.csgo40.FONT_HEIGHT - 2) * this.getScale()),
-			(Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 67) * this.getScale(),
-			translate.getY() * this.getScale(),
-			true);
+		if (translate.getY() > 0 ) {
+			BlurBuffer.blurArea((int) ((-4.5F + this.getRenderX()) * this.getScale()),
+					(int) ((this.getRenderY() + Fonts.csgo40.FONT_HEIGHT - 2) * this.getScale()),
+					(Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 67) * this.getScale(),
+					translate.getY() * this.getScale(),
+					true);
 
-		if (!this.getInfo().disableScale())
-			GL11.glScalef(this.getScale(), this.getScale(), this.getScale());
-		GL11.glTranslated(this.getRenderX(), this.getRenderY(), 0.0);
+			if (!this.getInfo().disableScale())
+				GL11.glScalef(this.getScale(), this.getScale(), this.getScale());
+			GL11.glTranslated(this.getRenderX(), this.getRenderY(), 0.0);
+		}
 
 		int y = 1;
 		for (Module module : LiquidBounce.moduleManager.getModules()) {
@@ -55,8 +58,10 @@ public class KeyBinds extends Element {
 				continue;
 
 			GlStateManager.resetColor();
-			Fonts.font20.drawString(module.getName(), -1.1F, y + 17, new Color(255 , 255 ,255 , (int) module.getKeytranslate().getX() ).getRGB());
-			Fonts.font20.drawString(module.getState() ? "on" : "off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F, y + 17, new Color(255 , 255 ,255 , (int) module.getKeytranslate().getX() ).getRGB());
+			if ((int) module.getKeytranslate().getX() > -1 && (int) module.getKeytranslate().getX() < 256) {
+				Fonts.font20.drawString(module.getName(), -1.1F, y + 17, new Color(255 , 255 ,255 , (int) module.getKeytranslate().getX() ).getRGB());
+				Fonts.font20.drawString(module.getState() ? "on" : "off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F, y + 17, new Color(255 , 255 ,255 , (int) module.getKeytranslate().getX() ).getRGB());
+			}
 			y += module.getKeytranslate().getY();
 		}
 		RenderUtils.drawRoundedRect(-5.2F, -5.5F, Fonts.csgo40.getStringWidth("K") + Fonts.font20.getStringWidth("Binds") + 65, Fonts.csgo40.FONT_HEIGHT + 6F, 1.5F,
