@@ -9,7 +9,7 @@ import io.netty.buffer.Unpooled;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.EntityMovementEvent;
 import me.aquavit.liquidsense.event.events.PacketSendEvent;
-import net.ccbluex.liquidbounce.features.special.AntiForge;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.AntiForge;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import net.minecraft.client.ClientBrandRetriever;
 import net.minecraft.client.Minecraft;

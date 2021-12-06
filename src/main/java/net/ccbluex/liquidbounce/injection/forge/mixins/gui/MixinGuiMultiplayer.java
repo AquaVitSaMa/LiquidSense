@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.special.BungeeCordSpoof;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.BungeeCordSpoof;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiAntiForge;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiMultiplayer;

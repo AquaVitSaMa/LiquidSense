@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.ui.client.gui;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.special.AntiForge;
+import net.ccbluex.liquidbounce.ui.client.gui.elements.AntiForge;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
