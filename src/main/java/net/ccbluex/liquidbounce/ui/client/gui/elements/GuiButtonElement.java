@@ -17,7 +17,7 @@ public class GuiButtonElement extends GuiButton {
 
     public void drawButton(Minecraft mc, int mouseX, int mouseY) {
         if (visible) {
-            Color color = new Color(150, 150, 150);
+            Color color = new Color(225,225,225,225);
             FontRenderer fontrenderer = Fonts.font20;
             hovered = (mouseX >= xPosition && mouseY >= yPosition && mouseX < xPosition + width && mouseY < yPosition + height);
 
@@ -30,7 +30,7 @@ public class GuiButtonElement extends GuiButton {
             }
 
             mouseDragged(mc, mouseX, mouseY);
-            int stringColor = new Color(255,255,255,180).getRGB();
+            int stringColor = new Color(255,255,255,200).getRGB();
 
             if (hovered)
                 stringColor = color.darker().getRGB();
