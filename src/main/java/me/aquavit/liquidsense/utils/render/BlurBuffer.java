@@ -72,7 +72,7 @@ public class BlurBuffer{
 
 	public static void updateBlurBuffer(float amount,boolean setupOverlay) {
 		// 以60帧每秒的速度更新 FrameBuffer
-		if (updateTimer.delay(1000 / 60f) && blurShader != null) {
+		if (updateTimer.hasReached(1000L / 60L) && blurShader != null) {
 			mc.getFramebuffer().unbindFramebuffer();
 
 			setShaderConfigs(amount, 0f, 1f);

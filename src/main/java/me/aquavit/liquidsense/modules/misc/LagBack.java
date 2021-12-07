@@ -32,7 +32,7 @@ public class LagBack extends Module {
         Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
         Step step = (Step) LiquidBounce.moduleManager.getModule(Step.class);
 
-        if (event.getPacket() instanceof S08PacketPlayerPosLook && this.deactivationDelay.delay(2000F)) {
+        if (event.getPacket() instanceof S08PacketPlayerPosLook && this.deactivationDelay.hasReached(2000L)) {
             if (speedlag.get()) {
                 if (speed.getState()) {
                     if(mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown()){
