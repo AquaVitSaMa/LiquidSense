@@ -114,7 +114,6 @@ public class LiquidSense {
         liquidSenseModules.add(Jesus.class);
         liquidSenseModules.add(Cape.class);
         liquidSenseModules.add(AutoApple.class);
-        liquidSenseModules.add(LastestHypixelFly.class);
         liquidSenseModules.add(AntiSpam.class);
         liquidSenseModules.add(AutoTool.class);
     }
