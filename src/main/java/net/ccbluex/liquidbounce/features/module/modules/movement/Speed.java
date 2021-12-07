@@ -7,7 +7,7 @@ package net.ccbluex.liquidbounce.features.module.modules.movement;
 
 import me.aquavit.liquidsense.event.EventState;
 import me.aquavit.liquidsense.event.EventTarget;
-import me.aquavit.liquidsense.modules.movement.Stair;
+import me.aquavit.liquidsense.modules.movement.Step;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.*;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -241,7 +241,7 @@ public class Speed extends Module {
 
         mc.timer.timerSpeed = 1F;
 
-        Stair sp = (Stair) LiquidBounce.moduleManager.getModule("Stair");
+        Step sp = (Step) LiquidBounce.moduleManager.getModule("Stair");
 
         if(sp.getState()){
             yn = true;

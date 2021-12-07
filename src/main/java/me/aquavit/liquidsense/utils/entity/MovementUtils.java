@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.entity.Entity;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
+import net.minecraft.stats.StatList;
 import net.minecraft.util.BlockPos;
 import net.minecraft.util.MathHelper;
 
@@ -76,6 +77,10 @@ public final class MovementUtils extends MinecraftInstance {
         return Minecraft.getMinecraft().thePlayer.isPotionActive(Potion.moveSpeed)?Minecraft.getMinecraft().thePlayer.getActivePotionEffect(Potion.moveSpeed).getAmplifier() + 1:0;
     }
 
+    public static int getJumpEffect() {
+        return Minecraft.getMinecraft().thePlayer.isPotionActive(Potion.jump)?Minecraft.getMinecraft().thePlayer.getActivePotionEffect(Potion.jump).getAmplifier() + 1:0;
+    }
+
     public static double getJumpBoostModifier(double baseJumpHeight, boolean potionJumpHeight) {
         if (mc.thePlayer.isPotionActive(Potion.jump) && potionJumpHeight) {
             int amplifier = mc.thePlayer.getActivePotionEffect(Potion.jump).getAmplifier();
@@ -84,10 +89,11 @@ public final class MovementUtils extends MinecraftInstance {
         return baseJumpHeight;
     }
 
-    public static int getJumpEffect() {
-        return Minecraft.getMinecraft().thePlayer.isPotionActive(Potion.jump)?Minecraft.getMinecraft().thePlayer.getActivePotionEffect(Potion.jump).getAmplifier() + 1:0;
+    //Send jump packets, bypasses Hypixel.
+    public static void fakeJump() {
+        mc.thePlayer.isAirBorne = true;
+        mc.thePlayer.triggerAchievement(StatList.jumpStat);
     }
-
 
     public static boolean isInLiquid() {
         if(Minecraft.getMinecraft().thePlayer.isInWater()) {
@@ -117,6 +123,7 @@ public final class MovementUtils extends MinecraftInstance {
         double forward = mc.thePlayer.movementInput.moveForward;
         double strafe = mc.thePlayer.movementInput.moveStrafe;
         float yaw = mc.thePlayer.rotationYaw;
+
         if ((forward == 0.0D) && (strafe == 0.0D)) {
             mc.thePlayer.motionX = 0;
             mc.thePlayer.motionZ = 0;
@@ -134,8 +141,11 @@ public final class MovementUtils extends MinecraftInstance {
                     forward = -1;
                 }
             }
-            mc.thePlayer.motionX = forward * speed * Math.cos(Math.toRadians(yaw + 90.0F)) + strafe * speed * Math.sin(Math.toRadians(yaw + 90.0F));
-            mc.thePlayer.motionZ = forward * speed * Math.sin(Math.toRadians(yaw + 90.0F)) - strafe * speed * Math.cos(Math.toRadians(yaw + 90.0F));
+
+            double cosX = Math.cos(Math.toRadians(yaw + 90.0F));
+            double sinZ = Math.sin(Math.toRadians(yaw + 90.0F));
+            mc.thePlayer.motionX = forward * speed * cosX + strafe * speed * sinZ;
+            mc.thePlayer.motionZ = forward * speed * sinZ - strafe * speed * cosX;
         }
     }
 

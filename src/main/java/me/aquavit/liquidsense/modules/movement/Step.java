@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 @ModuleInfo(name = "Stair", description = ":/", category = ModuleCategory.MOVEMENT)
-public class Stair extends Module {
+public class Step extends Module {
     private final ListValue ModeValue = new ListValue("Mode", new String[] {"Hypixel","New"}, "Hypixel");
     private final IntegerValue delay = new IntegerValue("Delay", 200, 0, 1000);
     public final BoolValue steplag = new BoolValue("Timer", true);

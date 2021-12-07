@@ -66,6 +66,7 @@ public final class ModuleManager implements Listenable {
                 Speed.class,
                 FastUse.class,
                 Teleport.class,
+                Phase.class,
                 Fullbright.class,
                 ItemESP.class,
                 StorageESP.class,

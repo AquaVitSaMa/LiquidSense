@@ -107,7 +107,7 @@ public class LiquidSense {
         liquidSenseModules.add(Skeltal.class);
         liquidSenseModules.add(LightningCheck.class);
         liquidSenseModules.add(TargetStrafe.class);
-        liquidSenseModules.add(Stair.class);
+        liquidSenseModules.add(Step.class);
         liquidSenseModules.add(AutoADL.class);
         liquidSenseModules.add(CameraView.class);
         liquidSenseModules.add(KillESP.class);

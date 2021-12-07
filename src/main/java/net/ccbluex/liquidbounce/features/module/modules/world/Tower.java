@@ -12,6 +12,7 @@ import me.aquavit.liquidsense.event.events.MotionEvent;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
 import me.aquavit.liquidsense.utils.client.*;
+import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
@@ -146,12 +147,6 @@ public class Tower extends Module {
         }
     }
 
-    //Send jump packets, bypasses Hypixel.
-    private void fakeJump() {
-        mc.thePlayer.isAirBorne = true;
-        mc.thePlayer.triggerAchievement(StatList.jumpStat);
-    }
-
     /**
      * Move player
      */
@@ -196,27 +191,27 @@ public class Tower extends Module {
                 break;
             case "jump":
                 if (mc.thePlayer.onGround && timer.hasTimePassed(jumpDelayValue.get())) {
-                    fakeJump();
+                    MovementUtils.fakeJump();
                     mc.thePlayer.motionY = jumpMotionValue.get();
                     timer.reset();
                 }
                 break;
             case "motion":
                 if (mc.thePlayer.onGround) {
-                    fakeJump();
+                    MovementUtils.fakeJump();
                     mc.thePlayer.motionY = 0.42D;
                 } else if (mc.thePlayer.motionY < 0.1D) mc.thePlayer.motionY = -0.3D;
                 break;
             case "motiontp":
                 if (mc.thePlayer.onGround) {
-                    fakeJump();
+                    MovementUtils.fakeJump();
                     mc.thePlayer.motionY = 0.42D;
                 } else if (mc.thePlayer.motionY < 0.23D)
                     mc.thePlayer.setPosition(mc.thePlayer.posX, (int) mc.thePlayer.posY, mc.thePlayer.posZ);
                 break;
             case "packet":
                 if (mc.thePlayer.onGround && timer.hasTimePassed(2)) {
-                    fakeJump();
+                    MovementUtils.fakeJump();
                     mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX,
                             mc.thePlayer.posY + 0.42D, mc.thePlayer.posZ, false));
                     mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(mc.thePlayer.posX,
@@ -230,20 +225,20 @@ public class Tower extends Module {
                     mc.thePlayer.motionY = 0;
 
                 if ((mc.thePlayer.onGround || !teleportGroundValue.get()) && timer.hasTimePassed(teleportDelayValue.get())) {
-                    fakeJump();
+                    MovementUtils.fakeJump();
                     mc.thePlayer.setPositionAndUpdate(mc.thePlayer.posX, mc.thePlayer.posY + teleportHeightValue.get(), mc.thePlayer.posZ);
                     timer.reset();
                 }
                 break;
             case "constantmotion":
                 if (mc.thePlayer.onGround) {
-                    fakeJump();
+                    MovementUtils.fakeJump();
                     jumpGround = mc.thePlayer.posY;
                     mc.thePlayer.motionY = constantMotionValue.get();
                 }
 
                 if (mc.thePlayer.posY > jumpGround + constantMotionJumpGroundValue.get()) {
-                    fakeJump();
+                    MovementUtils.fakeJump();
                     mc.thePlayer.setPosition(mc.thePlayer.posX, (int) mc.thePlayer.posY, mc.thePlayer.posZ);
                     mc.thePlayer.motionY = constantMotionValue.get();
                     jumpGround = mc.thePlayer.posY;
@@ -251,7 +246,7 @@ public class Tower extends Module {
                 break;
             case "aac3.3.9":
                 if (mc.thePlayer.onGround) {
-                    fakeJump();
+                    MovementUtils.fakeJump();
                     mc.thePlayer.motionY = 0.4001;
                 }
                 mc.timer.timerSpeed = 1F;
