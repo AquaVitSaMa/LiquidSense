@@ -2,6 +2,7 @@ package me.aquavit.liquidsense.modules.render;
 
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
+import me.aquavit.liquidsense.utils.JumpCircleUitl;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowShader;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -28,13 +29,11 @@ public class JumpCircle extends Module {
     private final FloatValue smoothLineValue = new FloatValue("SmoothLine", 6f, 1f, 10f);
 
     private boolean inAir;
-    private List<BlockPos> pos = new ArrayList<BlockPos>();
-    private List<BlockPos> lastTick = new ArrayList<BlockPos>();
+    private final List<JumpCircleUitl> pos = new ArrayList<>();
 
     @Override
     public void onEnable(){
         pos.clear();
-        lastTick.clear();
     }
 
     @EventTarget
@@ -43,22 +42,27 @@ public class JumpCircle extends Module {
             inAir = true;
 
         if (inAir && mc.thePlayer.onGround) {
-            pos.add(new BlockPos(
-                    mc.thePlayer.posX,
-                    mc.thePlayer.posY,
-                    mc.thePlayer.posZ));
-            lastTick.add(new BlockPos(
-                    mc.thePlayer.lastTickPosX,
-                    mc.thePlayer.lastTickPosY,
-                    mc.thePlayer.lastTickPosZ));
+            pos.add(new JumpCircleUitl(
+			new BlockPos(
+			mc.thePlayer.posX,
+			mc.thePlayer.posY,
+			mc.thePlayer.posZ) ,
+			new BlockPos(
+			mc.thePlayer.lastTickPosX,
+			mc.thePlayer.lastTickPosY,
+			mc.thePlayer.lastTickPosZ)));
+
             inAir = false;
         }
 
-        for (int i = 0; i < pos.size(); i++) {
-
-            drawCircle(pos.get(i), lastTick.get(i), 3f, event.getPartialTicks(), Color.white);
-
-        }
+	  // 不知道为什么有些圆环会抽搐
+	    for (JumpCircleUitl po : pos) {
+		    po.translate.translate(3f, 0f);
+		    drawCircle(po.blockPos, po.lastTick, po.translate.getX(), event.getPartialTicks(), Color.white);
+		    po.tick++;
+		    if(po.tick >= 3000)
+			    pos.remove(po);
+	    }
     }
 
     private void drawCircle(BlockPos pos, BlockPos lastPos, float radius, float partialTicks, Color color) {
