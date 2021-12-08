@@ -11,11 +11,13 @@ import net.ccbluex.liquidbounce.value.FloatValue;
 @ModuleInfo(name = "Timer", description = "Changes the speed of the entire game.", category = ModuleCategory.WORLD)
 public class Timer extends Module {
 
-    private FloatValue speedValue = new FloatValue("Speed", 2F, 0.1F, 10F);
+    private final FloatValue speedValue = new FloatValue("Speed", 2F, 0.1F, 10F);
 
     @Override
     public void onDisable() {
-        if (mc.thePlayer == null) return;
+        if (mc.thePlayer == null)
+            return;
+
         mc.timer.timerSpeed = 1F;
     }
 
