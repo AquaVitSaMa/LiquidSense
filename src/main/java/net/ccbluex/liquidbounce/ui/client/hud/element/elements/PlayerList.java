@@ -28,9 +28,12 @@ public class PlayerList extends Element {
 
 	private final HashMap<UUID, AlphaData> alphaMap = new HashMap<>();
 
+
+	@Nullable
 	@Override
-	public void updateElement() {
-		if (mc.thePlayer == null || mc.theWorld == null) return;
+	public Border drawElement() {
+
+
 		ArrayList<EntityLivingBase> playername = new ArrayList<>();
 		for (EntityLivingBase player : mc.theWorld.playerEntities) {
 			if (!AntiBot.isBot(player) && !(player instanceof EntityPlayerSP)) {
@@ -67,29 +70,11 @@ public class PlayerList extends Element {
 			}
 
 		}
-	}
 
-	@Nullable
-	@Override
-	public Border drawElement() {
 		String name = this.getLongestPlayerName();
 		float longestNameWidth = Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth(name) + 10;
 		float borderedRectWidth = Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("PlayerList") + 60;
 		float playerListWidth = Math.max(longestNameWidth, borderedRectWidth);
-
-		//Fonts.font20.drawString("width: " + playerListWidth, 100, 100, Color.WHITE.getRGB(), false);
-		//Fonts.font20.drawString("longestName: " + name + " | " + longestNameWidth, 100, 130, Color.WHITE.getRGB(), false);
-
-
-        /*
-        int y2 = 1;
-        Fonts.minecraftFont.drawStringWithShadow("Other",123,31,new Color(200,50,50,255).getRGB());
-        for (EntityLivingBase m : playername) {
-            Fonts.minecraftFont.drawStringWithShadow((int) m.getHealth() + "§7 " + m.getDisplayName().getFormattedText()+"§7["+(int)mc.thePlayer.getDistanceToEntity(m)+"]", 123, y2 + 40, Color.red.getRGB());
-            y2 += 9;
-        }
-
-         */
 		int y = 1;
 
 		if (alphaMap.size() > 0) {
