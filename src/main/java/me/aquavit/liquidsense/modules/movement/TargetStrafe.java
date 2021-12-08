@@ -46,7 +46,7 @@ public class TargetStrafe extends Module {
     private final BoolValue autoGodValue = new BoolValue("ThirdPersonView", false);
 
     private final ListValue drawMode = new ListValue("DrawMode", new String[]{"Normal", "Outline", "None"}, "None");
-    private final Value<Boolean> rainbow = (BoolValue) new BoolValue("Rainbow", false).displayable(() -> !drawMode.get().equals("None"));
+    private final Value<Boolean> rainbow = new BoolValue("Rainbow", false).displayable(() -> !drawMode.get().equals("None"));
     private final Value<Float> rainbowX = new FloatValue("Rainbow-X", -1000F, -2000F, 2000F).displayable(() -> rainbow.get() && !drawMode.get().equals("None"));
     private final Value<Float> rainbowY = new FloatValue("Rainbow-Y", -1000F, -2000F, 2000F).displayable(() -> rainbow.get() && !drawMode.get().equals("None"));
 
