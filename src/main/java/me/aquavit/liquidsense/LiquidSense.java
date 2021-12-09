@@ -51,6 +51,7 @@ public class LiquidSense {
         liquidSenseModules.add(RenderChanger.class);
         liquidSenseModules.add(Rotations.class);
         liquidSenseModules.add(Regen.class);
+        liquidSenseModules.add(JumpCircle.class);
         liquidSenseModules.add(ConsoleSpammer.class);
         liquidSenseModules.add(Damage.class);
         liquidSenseModules.add(SkinDerp.class);

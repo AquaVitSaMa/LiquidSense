@@ -75,7 +75,7 @@ public class BlurBuffer{
 		if (updateTimer.hasReached(1000L / 60L) && blurShader != null) {
 			mc.getFramebuffer().unbindFramebuffer();
 
-			setShaderConfigs(amount, 0f, 1f);
+			setShaderConfigs(amount, 1f, 0f);
 			buffer.bindFramebuffer(true);
 
 			mc.getFramebuffer().framebufferRenderExt(mc.displayWidth, mc.displayHeight, true);
