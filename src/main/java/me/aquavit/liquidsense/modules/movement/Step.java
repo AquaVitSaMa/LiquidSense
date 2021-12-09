@@ -24,11 +24,10 @@ import java.math.RoundingMode;
 public class Step extends Module {
     private final ListValue modeValue = new ListValue("Mode", new String[] {"Vanilla", "NCP", "MotionNCP"}, "NCP");
     private final FloatValue heightValue = new FloatValue("Height", 1.5F, 0.6F, 10F);
-    private final FloatValue timerValue = new FloatValue("Timer", 0.5F, 0.1F, 1F);
     private final IntegerValue delay = new IntegerValue("Delay", 0, 0, 500);
 
     private final MSTimer delayTimer = new MSTimer();
-    boolean isStep = false;
+    public boolean isStep = false;
     private double posX = 0.0, posY = 0.0, posZ = 0.0;
 
     @Override
@@ -42,7 +41,7 @@ public class Step extends Module {
 
     @EventTarget
     public void onUpdate(UpdateEvent event) {
-        if (!isStep && posY == (new BigDecimal(posY)).setScale(3, RoundingMode.HALF_DOWN).doubleValue())
+        if (!isStep && posY == new BigDecimal(posY).setScale(3, RoundingMode.HALF_DOWN).doubleValue())
             mc.timer.timerSpeed = 1.0f;
     }
 
@@ -55,7 +54,7 @@ public class Step extends Module {
             return;
         }
 
-        if (!mc.thePlayer.onGround || !delayTimer.hasTimePassed(delay.get())) {
+        if (!mc.thePlayer.onGround || !delayTimer.hasTimePassed((long) delay.get())) {
             mc.thePlayer.stepHeight = 0.5F;
             event.setStepHeight(0.5F);
             return;
@@ -76,7 +75,7 @@ public class Step extends Module {
     public void onStepConfirm(StepConfirmEvent event) {
         final double height = mc.thePlayer.getEntityBoundingBox().minY - mc.thePlayer.posY;
 
-        if (isStep) {
+        if (!isStep) {
             return;
         }
 
@@ -84,7 +83,7 @@ public class Step extends Module {
             if (modeValue.get().equals("NCP")) {
                 MovementUtils.fakeJump();
                 // Half legit step (1 packet missing) [COULD TRIGGER TOO MANY PACKETS]
-                mc.timer.timerSpeed = Math.max(timerValue.get() - (((float) height >= 1) ? Math.abs(0.6F - (float) height) * 0.25F : 0.1F), 0.1F);
+                mc.timer.timerSpeed = Math.max(0.5F - (((float) height >= 1) ? Math.abs(0.6F - (float) height) * 0.25F : 0.0F), 0.1F);
                 ncpOffsets(height);
                 delayTimer.reset();
             }
@@ -119,8 +118,9 @@ public class Step extends Module {
 
             if (posY + second < posY + height)
                 mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + second, posZ, false));
+
         } else if (height < 1.6) {
-            double[] offsets = {0.41999998688698, 0.753, 1.001, 1.061, 0.982};
+            double[] offsets = {0.412, 0.753, 1.001, 1.061, 0.982};
             for (double offset : offsets) {
                 mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + offset, posZ, false));
             }
