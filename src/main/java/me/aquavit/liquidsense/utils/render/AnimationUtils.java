@@ -36,6 +36,7 @@ public class AnimationUtils {
 		final double dif = Math.abs(desired - now);
 		float a = (float) Math.abs((desired - (desired - (Math.abs(desired - now)))) / (100 - (speed * 10)));
 		float x = now;
+
 		if (dif > 0) {
 			if (now < desired)
 				x += a * RenderUtils.deltaTime;

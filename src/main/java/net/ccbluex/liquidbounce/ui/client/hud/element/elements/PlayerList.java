@@ -33,7 +33,6 @@ public class PlayerList extends Element {
 	@Override
 	public Border drawElement() {
 
-
 		ArrayList<EntityLivingBase> playername = new ArrayList<>();
 		for (EntityLivingBase player : mc.theWorld.playerEntities) {
 			if (!AntiBot.isBot(player) && !(player instanceof EntityPlayerSP)) {
@@ -58,7 +57,7 @@ public class PlayerList extends Element {
 
 			AlphaData alphaData = alphaMap.get(uuid);
 			if (flag) {
-				alphaData.translate.translate(255f , 15f);
+				alphaData.translate.translate(255f , 15f );
 				alphaMap.put(uuid, alphaData);
 			} else {
 				if (alphaData.translate.getX()  < 30) {
@@ -68,7 +67,6 @@ public class PlayerList extends Element {
 					alphaMap.put(uuid, alphaData);
 				}
 			}
-
 		}
 
 		String name = this.getLongestPlayerName();
@@ -102,10 +100,8 @@ public class PlayerList extends Element {
 
 		RenderUtils.drawRoundedRect(-5.2F, -5.5F, playerListWidth + 5.2F, Fonts.csgo40.FONT_HEIGHT + 6F, 1.5F,
 			new Color(16, 25, 32, 200).getRGB(), 1F, new Color(16, 25, 32, 200).getRGB());
-		//RenderUtils.drawBorderedRect(-5.5F, -5.5F, playerListWidth, Fonts.csgo40.FONT_HEIGHT + 0.5F, 3F, new Color(16, 25, 32, 200).getRGB(), new Color(16, 25, 32, 200).getRGB());
 		Fonts.csgo40.drawString("F", -1.5F, -0.4F, new Color(0, 131, 193).getRGB(), false);
 		Fonts.font20.drawString("PlayerList", Fonts.csgo40.getStringWidth("F") + 3, -1F, Color.WHITE.getRGB(), false);
-
 		return new Border(20, 20, 120, 14 * alphaMap.size());
 	}
 

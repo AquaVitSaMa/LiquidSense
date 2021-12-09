@@ -2,6 +2,7 @@ package me.aquavit.liquidsense.modules.render;
 
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
+import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.utils.JumpCircleUitl;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowShader;
@@ -11,10 +12,10 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.Value;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.BlockPos;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Cylinder;
+import scala.collection.script.Update;
 
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,72 +24,83 @@ import java.util.List;
 @ModuleInfo(name = "JumpCircle", description = "Draw a circle when u jump", category = ModuleCategory.RENDER)
 public class JumpCircle extends Module {
 
-    private final Value<Boolean> rainbow = new BoolValue("Rainbow", false);
-    private final Value<Float> rainbowX = new FloatValue("Rainbow-X", -1000F, -2000F, 2000F).displayable(rainbow::get);
-    private final Value<Float> rainbowY = new FloatValue("Rainbow-Y", -1000F, -2000F, 2000F).displayable(rainbow::get);
-    private final FloatValue smoothLineValue = new FloatValue("SmoothLine", 6f, 1f, 10f);
+	private final Value<Boolean> rainbow = new BoolValue("Rainbow", false);
+	private final Value<Float> rainbowX = new FloatValue("Rainbow-X", -1000F, -2000F, 2000F).displayable(rainbow::get);
+	private final Value<Float> rainbowY = new FloatValue("Rainbow-Y", -1000F, -2000F, 2000F).displayable(rainbow::get);
+	private final FloatValue smoothLineValue = new FloatValue("SmoothLine", 6f, 1f, 10f);
+	private final List<JumpCircleUitl> pos = new ArrayList<>();
+	private boolean inAir;
 
-    private boolean inAir;
-    private final List<JumpCircleUitl> pos = new ArrayList<>();
+	@Override
+	public void onEnable() {
+		pos.clear();
+	}
 
-    @Override
-    public void onEnable(){
-        pos.clear();
-    }
+	@EventTarget
+	public void onUpdate(UpdateEvent event) {
+		if (!mc.thePlayer.onGround)
+			inAir = true;
 
-    @EventTarget
-    public void onRender3D(Render3DEvent event) {
-        if (!mc.thePlayer.onGround)
-            inAir = true;
+		if (inAir && mc.thePlayer.onGround) {
+			pos.add(new JumpCircleUitl(
+					mc.thePlayer.posX,
+					mc.thePlayer.posY,
+					mc.thePlayer.posZ,
+					mc.thePlayer.lastTickPosX,
+					mc.thePlayer.lastTickPosY,
+					mc.thePlayer.lastTickPosZ));
+			inAir = false;
+		}
+	}
 
-        if (inAir && mc.thePlayer.onGround) {
-            pos.add(new JumpCircleUitl(
-			new BlockPos(
-			mc.thePlayer.posX,
-			mc.thePlayer.posY,
-			mc.thePlayer.posZ) ,
-			new BlockPos(
-			mc.thePlayer.lastTickPosX,
-			mc.thePlayer.lastTickPosY,
-			mc.thePlayer.lastTickPosZ)));
+	@EventTarget
+	public void onRender3D(Render3DEvent event) {
+		int index = 0;
+		while (pos.size() > index) {
+			JumpCircleUitl the = pos.get(index);
+			if (the.tick > 500)
+				the.remove = true;
+			if(the.remove && the.translate.getY() <= 1)
+				pos.remove(the);
+			index++;
+		}
 
-            inAir = false;
-        }
+		for (JumpCircleUitl po : pos) {
+			po.translate.translate(3f, (po.remove)? 0 : 254f, -2);
+			if (po.translate.getX() > 0 && po.translate.getY() > 0) {
+				drawCircle(po.posX, po.posY , po.posZ , po.lastTickPosX , po.lastTickPosY , po.lastTickPosZ, po.translate.getX(), mc.timer.renderPartialTicks, new Color(255, 255, 255,(int) po.translate.getY() ));
+			}
+			po.tick++;
+		}
+	}
 
-	  // 不知道为什么有些圆环会抽搐
-	    for (JumpCircleUitl po : pos) {
-		    po.translate.translate(3f, 0f);
-		    drawCircle(po.blockPos, po.lastTick, po.translate.getX(), event.getPartialTicks(), Color.white);
-		    po.tick++;
-		    if(po.tick >= 3000)
-			    pos.remove(po);
-	    }
-    }
-
-    private void drawCircle(BlockPos pos, BlockPos lastPos, float radius, float partialTicks, Color color) {
-        double x = lastPos.getX() + (pos.getX() - lastPos.getX()) * partialTicks - mc.getRenderManager().renderPosX;
-        double y = lastPos.getY() + (pos.getY() - lastPos.getY()) * partialTicks - mc.getRenderManager().renderPosY;
-        double z = lastPos.getZ() + (pos.getZ() - lastPos.getZ()) * partialTicks - mc.getRenderManager().renderPosZ;
-        Cylinder cylinder = new Cylinder();
-        GL11.glPushMatrix();
-        GL11.glTranslated(x, y, z);
-        GL11.glRotatef(-90f, 1f, 0f, 0f);
-        cylinder.setDrawStyle(100011);
-
-        RenderUtils.glColor(0, 0, 0, 120);
-
-        if (rainbow.get()) {
-            RainbowShader.INSTANCE.setStrengthX(rainbowX.get() == 0.0f ? 0.0f : 1.0f / rainbowX.get());
-            RainbowShader.INSTANCE.setStrengthY(rainbowY.get() == 0.0f ? 0.0f : 1.0f / rainbowY.get());
-            RainbowShader.INSTANCE.setOffset((System.currentTimeMillis() % 10000) / 10000.0f);
-            RainbowShader.INSTANCE.startShader();
-        }
-        RenderUtils.glColor(color);
-        RenderUtils.enableSmoothLine(smoothLineValue.get());
-        cylinder.draw(radius, radius, 0.0f, 64, 2);
-        if (rainbow.get()) RainbowShader.INSTANCE.stopShader();
-
-        RenderUtils.disableSmoothLine();
-        GL11.glPopMatrix();
-    }
+	private void drawCircle(double posX1 , double posY1 , double posZ1,double lastTickPosX1 ,double lastTickPosY1 ,double lastTickPosZ1, float radius, float partialTicks, Color color) {
+		double x = lastTickPosX1 + (posX1 - lastTickPosX1) * partialTicks - mc.getRenderManager().renderPosX;
+		double y = lastTickPosY1 + (posY1 - lastTickPosY1) * partialTicks - mc.getRenderManager().renderPosY;
+		double z = lastTickPosZ1 + (posZ1 - lastTickPosZ1) * partialTicks - mc.getRenderManager().renderPosZ;
+		GL11.glDisable(3553);
+		GL11.glEnable(2848);
+		GL11.glEnable(2881);
+		GL11.glEnable(2832);
+		GL11.glEnable(3042);
+		GL11.glBlendFunc(770, 771);
+		GL11.glHint(3154, 4354);
+		GL11.glHint(3155, 4354);
+		GL11.glHint(3153, 4354);
+		GL11.glDisable(2929);
+		GL11.glDepthMask(false);
+		GL11.glLineWidth(3f);
+		GL11.glBegin(3);
+		for (int i = 0; i < 360; i += 5) {
+			RenderUtils.glColor(color);
+			GL11.glVertex3d(x - Math.sin(i * Math.PI / 180F) * radius, y, z + Math.cos(i * Math.PI / 180F) * radius);
+		}
+		GL11.glEnd();
+		GL11.glDepthMask(true);
+		GL11.glEnable(2929);
+		GL11.glDisable(2848);
+		GL11.glDisable(2881);
+		GL11.glEnable(2832);
+		GL11.glEnable(3553);
+	}
 }
