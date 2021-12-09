@@ -72,7 +72,6 @@ public final class ModuleManager implements Listenable {
                 StorageESP.class,
                 PingSpoof.class,
                 FastClimb.class,
-                Step.class,
                 Spammer.class,
                 IceSpeed.class,
                 NoFall.class,

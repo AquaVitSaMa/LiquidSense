@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.modules.misc;
 
+import me.aquavit.liquidsense.modules.movement.Step;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.PacketEvent;
@@ -9,12 +10,10 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Fly;
 import net.ccbluex.liquidbounce.features.module.modules.movement.LongJump;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed;
-import net.ccbluex.liquidbounce.features.module.modules.movement.Step;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 import net.minecraft.util.ChatComponentText;
-
 
 @ModuleInfo(name = "LagBack", description = "LagBack", category = ModuleCategory.MISC)
 public class LagBack extends Module {

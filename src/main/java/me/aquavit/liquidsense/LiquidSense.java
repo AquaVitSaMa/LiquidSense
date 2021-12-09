@@ -38,6 +38,7 @@ public class LiquidSense {
     private void loadModules(){
         this.liquidSenseModules = new ArrayList<>();
         liquidSenseModules.add(CaveFinder.class);
+        liquidSenseModules.add(Step.class);
         liquidSenseModules.add(SuperKnockback.class);
         liquidSenseModules.add(Teams.class);
         liquidSenseModules.add(Projectiles.class);
@@ -58,7 +59,7 @@ public class LiquidSense {
         liquidSenseModules.add(Velocity.class);
         liquidSenseModules.add(FastBow.class);
         liquidSenseModules.add(NameTags.class);
-        liquidSenseModules.add(Timer.class);
+        liquidSenseModules.add(GameSpeed.class);
         liquidSenseModules.add(BlockOverlay.class);
         liquidSenseModules.add(Clip.class);
         liquidSenseModules.add(Ghost.class);
@@ -106,7 +107,6 @@ public class LiquidSense {
         liquidSenseModules.add(Disabler.class);
         liquidSenseModules.add(Skeltal.class);
         liquidSenseModules.add(TargetStrafe.class);
-        liquidSenseModules.add(Step.class);
         liquidSenseModules.add(AutoADL.class);
         liquidSenseModules.add(CameraView.class);
         liquidSenseModules.add(KillESP.class);
@@ -120,7 +120,6 @@ public class LiquidSense {
     public List<Object> getLiquidSenseModules() {
         return liquidSenseModules;
     }
-
 
     class TitleRunnable implements Runnable{
 

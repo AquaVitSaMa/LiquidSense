@@ -4,144 +4,104 @@ import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.StepConfirmEvent;
 import me.aquavit.liquidsense.event.events.StepEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
+import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import net.ccbluex.liquidbounce.value.BoolValue;
+import net.ccbluex.liquidbounce.features.module.modules.exploit.Phase;
+import net.ccbluex.liquidbounce.features.module.modules.movement.Fly;
+import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
 import net.ccbluex.liquidbounce.value.ListValue;
 import net.minecraft.network.play.client.C03PacketPlayer;
 
-import java.util.Arrays;
-import java.util.List;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 
-@ModuleInfo(name = "Stair", description = ":/", category = ModuleCategory.MOVEMENT)
+@ModuleInfo(name = "Step", description = ":/", category = ModuleCategory.MOVEMENT)
 public class Step extends Module {
-    private final ListValue ModeValue = new ListValue("Mode", new String[] {"Hypixel","New"}, "Hypixel");
-    private final IntegerValue delay = new IntegerValue("Delay", 200, 0, 1000);
-    public final BoolValue steplag = new BoolValue("Timer", true);
+    private final ListValue modeValue = new ListValue("Mode", new String[] {"Vanilla", "NCP", "MotionNCP"}, "NCP");
+    private final FloatValue heightValue = new FloatValue("Height", 1.5F, 0.6F, 10F);
+    private final FloatValue timerValue = new FloatValue("Timer", 0.5F, 0.1F, 1F);
+    private final IntegerValue delay = new IntegerValue("Delay", 0, 0, 500);
+
     private final MSTimer delayTimer = new MSTimer();
-    boolean resetTimer;
-
-    @Override
-    public String getTag() {
-        return ModeValue.get();
-    }
-
-    public ListValue getModeValue() {
-        return ModeValue;
-    }
-
-    @Override
-    public void onEnable() {
-        if(ModeValue.get().equalsIgnoreCase("Hypixel")){
-            resetTimer = false;
-        }
-        super.onEnable();
-    }
+    boolean isStep = false;
+    private double posX = 0.0, posY = 0.0, posZ = 0.0;
 
     @Override
     public void onDisable() {
-        if(ModeValue.get().equalsIgnoreCase("Hypixel")){
-            if (mc.thePlayer != null) {
-                mc.thePlayer.stepHeight = 0.5F;
-            }
-            mc.timer.timerSpeed = 1.0F;
+        if (mc.thePlayer != null) {
+            mc.thePlayer.stepHeight = 0.5F;
         }
+
         super.onDisable();
     }
 
     @EventTarget
     public void onUpdate(UpdateEvent event) {
-        if(ModeValue.get().equalsIgnoreCase("Hypixel")){
-            if(mc.timer.timerSpeed < 1 && mc.thePlayer.onGround) {
-                mc.timer.timerSpeed = 1;
-            }
-        }
+        if (!isStep && posY == (new BigDecimal(posY)).setScale(3, RoundingMode.HALF_DOWN).doubleValue())
+            mc.timer.timerSpeed = 1.0f;
     }
 
     @EventTarget
     public void onStep(StepEvent event) {
-        if(ModeValue.get().equalsIgnoreCase("Hypixel")){
-            if (!MovementUtils.isInLiquid()) {
-                if(resetTimer){
-                    resetTimer = !resetTimer;
-                    mc.timer.timerSpeed = 1;
-                }
-                if (!mc.thePlayer.onGround || !delayTimer.isDelayComplete(delay.get().longValue())) {
-                    mc.thePlayer.stepHeight = 0.5F;
-                    event.setStepHeight(0.5F);
-                    return;
-                }
-                mc.thePlayer.stepHeight = 1.0F;
-                event.setStepHeight(1.0F);
-            }
+        final Phase phase = (Phase) LiquidBounce.moduleManager.getModule(Phase.class);
+        final Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
+        if (phase.getState() || (fly.getState() && (fly.modeValue.get().contains("Hypixel") || fly.modeValue.get().contains("Zoom")))) {
+            event.setStepHeight(0F);
+            return;
         }
-        if(ModeValue.get().equalsIgnoreCase("New")){
-            if(!mc.thePlayer.isInWater()) {
-                if(mc.thePlayer.isCollidedVertically && !mc.gameSettings.keyBindJump.isKeyDown()) {
-                    event.setStepHeight(2f);
-                    return;
-                }
-            }
 
+        if (!mc.thePlayer.onGround || !delayTimer.hasTimePassed(delay.get())) {
+            mc.thePlayer.stepHeight = 0.5F;
+            event.setStepHeight(0.5F);
+            return;
+        }
+
+        mc.thePlayer.stepHeight = heightValue.get();
+        event.setStepHeight(heightValue.get());
+
+        if (event.getStepHeight() > 0.5F) {
+            isStep = true;
+            posX = mc.thePlayer.posX;
+            posY = mc.thePlayer.posY;
+            posZ = mc.thePlayer.posZ;
         }
     }
+
     @EventTarget(ignoreCondition = true)
     public void onStepConfirm(StepConfirmEvent event) {
-        if(ModeValue.get().equalsIgnoreCase("Hypixel")){
-            if (!MovementUtils.isInLiquid()) {
-                if (resetTimer) {
-                    resetTimer = !resetTimer;
-                    mc.timer.timerSpeed = 1;
-                }
-                if (event.getStepHeight() > 0.5) {
-                    double height = mc.thePlayer.getEntityBoundingBox().minY - mc.thePlayer.posY;
-                    if (height >= 0.625) {
-                        if (steplag.get()) {
-                            mc.timer.timerSpeed = 0.6f - (height >= 1 ? Math.abs(1 - (float) height) * (0.6f * 0.55f) : 0);
-                            if (mc.timer.timerSpeed <= 0.05f) {
-                                mc.timer.timerSpeed = 0.05f;
-                            }
-                        }
-                        ncpStep(height);
-                        delayTimer.reset();
-                    }
-                }
-            }
-        }
-        if(ModeValue.get().equalsIgnoreCase("New")){
-            if(!mc.thePlayer.isInWater()) {
-                double rheight = mc.thePlayer.getEntityBoundingBox().minY - mc.thePlayer.posY;
-                boolean canStep = rheight >= 0.625D;
-                if(canStep) {
-                    this.ncpStep(rheight);
+        final double height = mc.thePlayer.getEntityBoundingBox().minY - mc.thePlayer.posY;
 
-                    mc.timer.timerSpeed = 0.4F;
-                    new Thread(new Runnable()
-                    {
-                        public void run() {
-                            try {
-                                Thread.sleep(100L);
-                            }
-                            catch (InterruptedException localInterruptedException) {}
-                            mc.timer.timerSpeed = 1.0F;}}).start();
-                }
+        if (isStep) {
+            return;
+        }
+
+        if (height > 0.5) {
+            if (modeValue.get().equals("NCP")) {
+                MovementUtils.fakeJump();
+                // Half legit step (1 packet missing) [COULD TRIGGER TOO MANY PACKETS]
+                mc.timer.timerSpeed = Math.max(timerValue.get() - (((float) height >= 1) ? Math.abs(0.6F - (float) height) * 0.25F : 0.1F), 0.1F);
+                ncpOffsets(height);
+                delayTimer.reset();
             }
         }
+
+        isStep = false;
+        posX = 0.0;
+        posY = 0.0;
+        posZ = 0.0;
     }
 
-    void ncpStep(double height) {
-        List<Double> offset = Arrays.asList(0.42, 0.333, 0.248, 0.083, -0.078);
-        double posX = mc.thePlayer.posX;
-        double posZ = mc.thePlayer.posZ;
-        double y = mc.thePlayer.posY;
+    private void ncpOffsets(double height) {
         if (height < 1.1) {
-            double first = 0.42;
+            double first = 0.41999998688698;
             double second = 0.75;
-            if (height != 1) {
+
+            if (height != 1.0) {
                 first *= height;
                 second *= height;
                 if (first > 0.425) {
@@ -154,29 +114,31 @@ public class Step extends Module {
                     second = 0.49;
                 }
             }
-            if (first == 0.42)
-                first = 0.41999998688698;
-            mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, y + first, posZ, false));
-            if (y + second < y + height)
-                mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, y + second, posZ, false));
-            return;
+
+            mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + first, posZ, false));
+
+            if (posY + second < posY + height)
+                mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + second, posZ, false));
         } else if (height < 1.6) {
-            for (int i = 0; i < offset.size(); i++) {
-                double off = offset.get(i);
-                y += off;
-                mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, y, posZ, false));
+            double[] offsets = {0.41999998688698, 0.753, 1.001, 1.061, 0.982};
+            for (double offset : offsets) {
+                mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + offset, posZ, false));
             }
         } else if (height < 2.1) {
-            double[] heights = {0.425, 0.821, 0.699, 0.599, 1.022, 1.372, 1.652, 1.869};
-            for (double off : heights) {
-                mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, y + off, posZ, false));
+            double[] offsets = {0.425, 0.821, 0.699, 0.599, 1.022, 1.372, 1.652, 1.869};
+            for (double offset : offsets) {
+                mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + offset, posZ, false));
             }
         } else {
-            double[] heights = {0.425, 0.821, 0.699, 0.599, 1.022, 1.372, 1.652, 1.869, 2.019, 1.907};
-            for (double off : heights) {
-                mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, y + off, posZ, false));
+            double[] offsets = {0.425, 0.821, 0.699, 0.599, 1.022, 1.372, 1.652, 1.869, 2.019, 1.907};
+            for (double offset : offsets) {
+                mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + offset, posZ, false));
             }
         }
+    }
 
+    @Override
+    public String getTag() {
+        return modeValue.get();
     }
 }

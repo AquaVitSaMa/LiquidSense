@@ -185,12 +185,12 @@ public class LongJump extends Module {
             mc.thePlayer.motionZ = 0;
             event.zeroXZ();
         } else if (mode.equalsIgnoreCase("watchdog")){
-            if (!delayTimer.isDelayComplete(delay.get())) {
+            if (!delayTimer.hasTimePassed(delay.get())) {
                 event.setX(0);
                 event.setZ(0);
             }
 
-            if (delayTimer.isDelayComplete(delay.get())) {
+            if (delayTimer.hasTimePassed(delay.get())) {
 
                 if (stage == 1 && MovementUtils.isMoving()) {
                     stage = 2;

@@ -24,10 +24,7 @@ public class ItemRotate extends Module {
         return modeValue;
     }
 
-
-
     public static void ItemRenderRotate() {
-
         MSTimer rotationTimer = new MSTimer();
         final ItemRotate ItemRotate = (ItemRotate) LiquidBounce.moduleManager.getModule(ItemRotate.class);
         if(ItemRotate.getModeValue().get().equalsIgnoreCase("Straight")){
@@ -43,10 +40,10 @@ public class ItemRotate extends Module {
             GlStateManager.rotate(delay, 1.0F, 0.0F, 1.0F);
         }
 
-        if (rotationTimer.hasPassed(1F)) {
+        if (rotationTimer.hasTimePassed(1L)) {
             ++delay;
             delay = delay + ItemRotate.getValue().get();
-            rotationTimer.reSet();
+            rotationTimer.reset();
         }
         if (delay > 360.0F) {
             delay = 0.0F;
