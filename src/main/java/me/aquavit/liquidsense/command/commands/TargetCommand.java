@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
+import me.aquavit.liquidsense.modules.client.Target;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.command.Command;
 
@@ -18,32 +19,32 @@ public class TargetCommand extends Command {
 
         if (args.length > 1) {
             if (args[1].equalsIgnoreCase("players")) {
-                EntityUtils.targetPlayer = !EntityUtils.targetPlayer;
-                this.chat("§7Target player toggled " + (EntityUtils.targetPlayer ? "on" : "off") + '.');
+                Target.player.set(!Target.player.get());
+                this.chat("§7Target player toggled " + (Target.player.get() ? "on" : "off") + '.');
                 this.playEdit();
                 return;
             }
             if (args[1].equalsIgnoreCase("mobs")) {
-                EntityUtils.targetMobs = !EntityUtils.targetMobs;
-                this.chat("§7Target mobs toggled " + (EntityUtils.targetMobs ? "on" : "off") + '.');
+                Target.mob.set(!Target.mob.get());
+                this.chat("§7Target mobs toggled " + (Target.mob.get() ? "on" : "off") + '.');
                 this.playEdit();
                 return;
             }
             if (args[1].equalsIgnoreCase("animals")) {
-                EntityUtils.targetAnimals = !EntityUtils.targetAnimals;
-                this.chat("§7Target animals toggled " + (EntityUtils.targetAnimals ? "on" : "off") + '.');
+                Target.animal.set(!Target.animal.get());
+                this.chat("§7Target animals toggled " + (Target.animal.get() ? "on" : "off") + '.');
                 this.playEdit();
                 return;
             }
             if (args[1].equalsIgnoreCase("invisible")) {
-                EntityUtils.targetInvisible = !EntityUtils.targetInvisible;
-                this.chat("§7Target Invisible toggled " + (EntityUtils.targetInvisible ? "on" : "off") + '.');
+                Target.invisible.set(!Target.invisible.get());
+                this.chat("§7Target Invisible toggled " + (Target.invisible.get() ? "on" : "off") + '.');
                 this.playEdit();
                 return;
             }
             if (args[1].equalsIgnoreCase("dead")) {
-                EntityUtils.targetDead = !EntityUtils.targetDead;
-                this.chat("§7Target dead toggled " + (EntityUtils.targetDead ? "on" : "off") + '.');
+                Target.dead.set(!Target.dead.get());
+                this.chat("§7Target dead toggled " + (Target.dead.get() ? "on" : "off") + '.');
                 this.playEdit();
                 return;
             }

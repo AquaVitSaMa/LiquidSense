@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.utils.entity;
 
+import me.aquavit.liquidsense.modules.client.Target;
 import me.aquavit.liquidsense.modules.combat.NoFriends;
 import me.aquavit.liquidsense.modules.misc.Teams;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
@@ -26,16 +27,10 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public final class EntityUtils extends MinecraftInstance {
 
-    public static boolean targetInvisible = false;
-    public static boolean targetPlayer = true;
-    public static boolean targetMobs = true;
-    public static boolean targetAnimals = false;
-    public static boolean targetDead = false;
-
     public static boolean isSelected(final Entity entity, final boolean canAttackCheck, final boolean showself) {
-        if(entity instanceof EntityLivingBase && (targetDead || entity.isEntityAlive()) && (showself || entity != mc.thePlayer)) {
-            if(targetInvisible || !entity.isInvisible()) {
-                if(targetPlayer && entity instanceof EntityPlayer) {
+        if(entity instanceof EntityLivingBase && (Target.dead.get() || entity.isEntityAlive()) && (showself || entity != mc.thePlayer)) {
+            if(Target.invisible.get() || !entity.isInvisible()) {
+                if(Target.player.get() && entity instanceof EntityPlayer) {
                     final EntityPlayer entityPlayer = (EntityPlayer) entity;
 
                     if(canAttackCheck) {
@@ -55,7 +50,7 @@ public final class EntityUtils extends MinecraftInstance {
                     return true;
                 }
 
-                return targetMobs && isMob(entity) || targetAnimals && isAnimal(entity);
+                return Target.mob.get() && isMob(entity) || Target.animal.get() && isAnimal(entity);
 
             }
         }

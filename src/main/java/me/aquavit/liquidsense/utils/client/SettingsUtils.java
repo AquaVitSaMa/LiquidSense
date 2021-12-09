@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.utils.client;
 
+import me.aquavit.liquidsense.modules.client.Target;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import net.ccbluex.liquidbounce.features.module.modules.misc.Spammer;
 import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
@@ -54,28 +55,28 @@ public class SettingsUtils {
                         continue;
                     }
                     case "targetPlayer": {
-                        EntityUtils.targetPlayer = split[1].equalsIgnoreCase("true");
-                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + EntityUtils.targetPlayer + "§7.");
+                        Target.player.set(true);
+                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + Target.player.get() + "§7.");
                         continue;
                     }
                     case "targetMobs": {
-                        EntityUtils.targetMobs = split[1].equalsIgnoreCase("true");
-                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + EntityUtils.targetMobs + "§7.");
+                        Target.mob.set(true);
+                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + Target.mob.get() + "§7.");
                         continue;
                     }
                     case "targetAnimals": {
-                        EntityUtils.targetAnimals = split[1].equalsIgnoreCase("true");
-                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + EntityUtils.targetAnimals + "§7.");
+                        Target.animal.set(true);
+                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + Target.animal.get() + "§7.");
                         continue;
                     }
                     case "targetInvisible": {
-                        EntityUtils.targetInvisible = split[1].equalsIgnoreCase("true");
-                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + EntityUtils.targetInvisible + "§7.");
+                        Target.invisible.set(true);
+                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + Target.invisible.get() + "§7.");
                         continue;
                     }
                     case "targetDead": {
-                        EntityUtils.targetDead = split[1].equalsIgnoreCase("true");
-                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + EntityUtils.targetDead + "§7.");
+                        Target.dead.set(true);
+                        ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + split[0] + "§7 set to §c§l" + Target.dead.get() + "§7.");
                         continue;
                     }
                     default: {

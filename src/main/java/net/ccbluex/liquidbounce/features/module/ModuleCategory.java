@@ -9,7 +9,8 @@ public enum ModuleCategory
     WORLD("World"),
     MISC("Misc"),
     EXPLOIT("Exploit"),
-    FUN("Fun");
+    FUN("Fun"),
+    CLIENT("Client");
 
     public final String displayName;
 

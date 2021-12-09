@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module;
 
+import me.aquavit.liquidsense.modules.client.Target;
 import me.aquavit.liquidsense.modules.combat.Aura;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.EventTarget;
@@ -45,6 +46,7 @@ public final class ModuleManager implements Listenable {
     public void registerModules() {
         ClientUtils.getLogger().info("[ModuleManager] Loading modules...");
         registerALLModule(
+                Target.class,
                 Aimbot.class,
                 AutoArmor.class,
                 AutoPot.class,

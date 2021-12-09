@@ -19,6 +19,7 @@ import me.aquavit.liquidsense.utils.entity.RaycastUtils
 import me.aquavit.liquidsense.utils.timer.MSTimer
 import me.aquavit.liquidsense.utils.timer.TimeUtils
 import me.aquavit.liquidsense.event.events.*
+import me.aquavit.liquidsense.modules.client.Target
 import net.ccbluex.liquidbounce.value.BoolValue
 import net.ccbluex.liquidbounce.value.FloatValue
 import net.ccbluex.liquidbounce.value.IntegerValue
@@ -675,11 +676,11 @@ class Aura : Module() {
      * Check if [entity] is selected as enemy with current target options and other modules 检测实体是否应该攻击
      */
     private fun isEnemy(entity: Entity?): Boolean {
-        if (entity is EntityLivingBase && (EntityUtils.targetDead || isAlive(entity)) && entity != mc.thePlayer) {
-            if (!EntityUtils.targetInvisible && entity.isInvisible())
+        if (entity is EntityLivingBase && (Target.dead.get() || isAlive(entity)) && entity != mc.thePlayer) {
+            if (!Target.invisible.get() && entity.isInvisible())
                 return false
 
-            if (EntityUtils.targetPlayer && entity is EntityPlayer) {
+            if (Target.player.get() && entity is EntityPlayer) {
                 if (entity.isSpectator || AntiBot.isBot(entity))
                     return false
 
@@ -695,7 +696,7 @@ class Aura : Module() {
                 return witherValue.get()
             }
 
-            return EntityUtils.targetMobs && EntityUtils.isMob(entity) || EntityUtils.targetAnimals && EntityUtils.isAnimal(entity)
+            return Target.mob.get() && EntityUtils.isMob(entity) || Target.animal.get() && EntityUtils.isAnimal(entity)
         }
 
         return false
