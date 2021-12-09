@@ -14,47 +14,58 @@ import net.minecraft.network.play.server.S03PacketTimeUpdate;
 
 @ModuleInfo(name = "Ambience", description = "Ambience", category = ModuleCategory.RENDER)
 public class Ambience extends Module {
-    private final ListValue modeValue = new ListValue("Mode", new String[] {"Daytime","Night","DIY","DayWithNight"}, "Night");
-    private final IntegerValue time = new IntegerValue("DIYTime", 13000, 0, 24000);
-    private final IntegerValue don = new IntegerValue("DayWithNight", 10, 1, 24000);
-    int a;
-    MSTimer Timer = new MSTimer();
+    private final ListValue modeValue = new ListValue("Mode", new String[] {"Day", "Dusk", "Night", "Dynamic", "Custom"}, "Dynamic");
+    private final IntegerValue customTime = new IntegerValue("Custom", 12000, 0, 24000);
+    private final IntegerValue dynamicSpeed = new IntegerValue("DynamicSpeed", 20, 1, 50);
+
+    private long currentTime;
+    private final MSTimer msTimer = new MSTimer();
+
     @Override
     public void onEnable() {
-        a = 0;
+        currentTime = mc.theWorld.getWorldTime();
     }
 
     @EventTarget
     public void onPacket(PacketEvent event) {
         final Packet<?> packet = event.getPacket();
+
         if (packet instanceof S03PacketTimeUpdate) {
             event.cancelEvent();
         }
     }
+
     @EventTarget
     public void onUpdate(UpdateEvent event) {
-        if (this.Timer.hasPassed(1F)) {
-            ++this.a;
-            this.a = this.a + don.get();
-            this.Timer.reSet();
-        }
-        if (a >= 24000) {
-            a = 0;
+        switch (modeValue.get()) {
+            case "Day":
+                currentTime = 2000;
+                break;
+            case "Dusk":
+                currentTime = 13050;
+                break;
+            case "Night":
+                currentTime = 16000;
+                break;
+            case "Dynamic":
+                if (msTimer.hasTimePassed(1L)) {
+                    if (currentTime < 24000L) {
+                        currentTime += dynamicSpeed.get();
+                    }
+
+                    msTimer.reset();
+                }
+
+                if (currentTime >= 24000L) {
+                    currentTime = 1L;
+                }
+
+                break;
+            case "Custom":
+                currentTime = customTime.get();
+                break;
         }
 
-        if(modeValue.get().equalsIgnoreCase("Daytime")){
-            mc.theWorld.setWorldTime((long)1000);
-        }
-        if(modeValue.get().equalsIgnoreCase("Night")){
-            mc.theWorld.setWorldTime((long)16000);
-        }
-        if(modeValue.get().equalsIgnoreCase("DIY")){
-            mc.theWorld.setWorldTime(time.get());
-        }
-        if(modeValue.get().equalsIgnoreCase("DayWithNight")){
-            mc.theWorld.setWorldTime(a);
-        }
-
+        mc.theWorld.setWorldTime(currentTime);
     }
-
 }
