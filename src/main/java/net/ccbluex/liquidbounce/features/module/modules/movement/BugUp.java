@@ -58,7 +58,7 @@ public class BugUp extends Module {
                     mc.thePlayer.rotationYaw, mc.thePlayer.moveStrafing, mc.thePlayer.moveForward
             );
 
-            if (fallingPlayer.findCollision(60) != null)
+            if (fallingPlayer.findCollision(60).getPos() != null)
                 detectedLocation = fallingPlayer.findCollision(60).getPos();
         }
 

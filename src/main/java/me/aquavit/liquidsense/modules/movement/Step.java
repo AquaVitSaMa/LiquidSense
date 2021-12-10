@@ -33,7 +33,7 @@ public class Step extends Module {
     @Override
     public void onDisable() {
         if (mc.thePlayer != null) {
-            mc.thePlayer.stepHeight = 0.5F;
+            mc.thePlayer.stepHeight = 0.625F;
         }
 
         super.onDisable();
@@ -55,15 +55,15 @@ public class Step extends Module {
         }
 
         if (!mc.thePlayer.onGround || !delayTimer.hasTimePassed((long) delay.get())) {
-            mc.thePlayer.stepHeight = 0.5F;
-            event.setStepHeight(0.5F);
+            mc.thePlayer.stepHeight = 0.625F;
+            event.setStepHeight(0.625F);
             return;
         }
 
         mc.thePlayer.stepHeight = heightValue.get();
         event.setStepHeight(heightValue.get());
 
-        if (event.getStepHeight() > 0.5F) {
+        if (event.getStepHeight() > 0.625F) {
             isStep = true;
             posX = mc.thePlayer.posX;
             posY = mc.thePlayer.posY;
@@ -79,7 +79,7 @@ public class Step extends Module {
             return;
         }
 
-        if (height > 0.5) {
+        if (height > 0.625) {
             if (modeValue.get().equals("NCP")) {
                 MovementUtils.fakeJump();
                 // Half legit step (1 packet missing) [COULD TRIGGER TOO MANY PACKETS]
@@ -96,9 +96,9 @@ public class Step extends Module {
     }
 
     private void ncpOffsets(double height) {
-        if (height < 1.1) {
+        if (height <= 1.0) {
             double first = 0.41999998688698;
-            double second = 0.75;
+            double second = 0.7531999805212;
 
             if (height != 1.0) {
                 first *= height;
@@ -119,12 +119,12 @@ public class Step extends Module {
             if (posY + second < posY + height)
                 mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + second, posZ, false));
 
-        } else if (height < 1.6) {
-            double[] offsets = {0.412, 0.753, 1.001, 1.061, 0.982};
+        } else if (height <= 1.5) {
+            double[] offsets = {0.42, 0.753, 1.001, 1.084, 1.006};
             for (double offset : offsets) {
                 mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + offset, posZ, false));
             }
-        } else if (height < 2.1) {
+        } else if (height <= 2.0) {
             double[] offsets = {0.425, 0.821, 0.699, 0.599, 1.022, 1.372, 1.652, 1.869};
             for (double offset : offsets) {
                 mc.getNetHandler().addToSendQueue(new C03PacketPlayer.C04PacketPlayerPosition(posX, posY + offset, posZ, false));
