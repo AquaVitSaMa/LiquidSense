@@ -39,6 +39,7 @@ public class LiquidSense {
         this.liquidSenseModules = new ArrayList<>();
         liquidSenseModules.add(CaveFinder.class);
         liquidSenseModules.add(Step.class);
+        liquidSenseModules.add(Criticals.class);
         liquidSenseModules.add(SuperKnockback.class);
         liquidSenseModules.add(Teams.class);
         liquidSenseModules.add(Projectiles.class);

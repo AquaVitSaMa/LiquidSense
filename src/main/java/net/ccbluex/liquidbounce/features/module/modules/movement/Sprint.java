@@ -5,13 +5,11 @@
  */
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.client.Rotation;
 import me.aquavit.liquidsense.utils.client.RotationUtils;
@@ -35,11 +33,8 @@ public class Sprint extends Module {
             return;
         }
 
-        if(allDirectionsValue.get() || mc.thePlayer.movementInput.moveForward >= 0.8F){
-            Criticals criticals = (Criticals) LiquidBounce.moduleManager.getModule(Criticals.class);
-            if(!criticals.getState() || !criticals.getModeValue().get().equals("HYTJump")){
-                mc.thePlayer.setSprinting(true);
-            }
+        if (allDirectionsValue.get() || mc.thePlayer.movementInput.moveForward >= 0.8F){
+            mc.thePlayer.setSprinting(true);
         }
     }
 }

@@ -1,10 +1,10 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.block;
 
+import me.aquavit.liquidsense.modules.combat.Criticals;
 import me.aquavit.liquidsense.modules.exploit.GhostHand;
 import me.aquavit.liquidsense.modules.render.CaveFinder;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.BlockBBEvent;
-import net.ccbluex.liquidbounce.features.module.modules.combat.Criticals;
 import net.ccbluex.liquidbounce.features.module.modules.player.NoFall;
 import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
 import net.minecraft.block.Block;
@@ -109,8 +109,7 @@ public abstract class MixinBlock {
             final NoFall noFall = (NoFall) LiquidBounce.moduleManager.getModule(NoFall.class);
             final Criticals criticals = (Criticals) LiquidBounce.moduleManager.getModule(Criticals.class);
 
-            if (noFall.getState() && noFall.modeValue.get().equalsIgnoreCase("NoGround") ||
-                    criticals.getState() && criticals.getModeValue().get().equalsIgnoreCase("NoGround")) {
+            if (noFall.getState() && noFall.modeValue.get().equals("NoGround") || criticals.getState() && criticals.mode.get().equals("NoGround")) {
                 f /= 5F;
             }
         }
