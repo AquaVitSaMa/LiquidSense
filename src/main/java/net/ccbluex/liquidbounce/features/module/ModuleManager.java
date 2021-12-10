@@ -92,9 +92,9 @@ public final class ModuleManager implements Listenable {
                 BufferSpeed.class,
                 ProphuntESP.class,
                 KeepContainer.class,
+                BugUp.class,
                 HUD.class,
                 ChestAura.class,
-                BugUp.class,
                 AntiObsidian.class);
 
         ClientUtils.getLogger().info("[ModuleManager] Loaded " + modules.size() + " modules.");

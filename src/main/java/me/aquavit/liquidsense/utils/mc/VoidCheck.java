@@ -15,6 +15,7 @@ public class VoidCheck extends MinecraftInstance{
                 }
             }
         }
+
         return false;
     }
 
@@ -34,7 +35,29 @@ public class VoidCheck extends MinecraftInstance{
             }
             return false;
         }
+
         return true;
+    }
+
+    public static boolean isBlockUnder() {
+        if (mc.thePlayer.posY < 0.0) {
+            return false;
+        } else {
+            int off = 0;
+
+            while(true) {
+                if (off >= (int) mc.thePlayer.posY + 2) {
+                    return false;
+                }
+
+                AxisAlignedBB bb = mc.thePlayer.getEntityBoundingBox().offset(0.0, -off, 0.0);
+                if (!mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, bb).isEmpty()) {
+                    return true;
+                }
+
+                off += 2;
+            }
+        }
     }
 
     public static boolean inAir(double height, double plus) {
@@ -46,6 +69,7 @@ public class VoidCheck extends MinecraftInstance{
                 return true;
             }
         }
+
         return false;
     }
 }

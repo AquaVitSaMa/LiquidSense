@@ -89,7 +89,7 @@ public class NoFall extends Module {
                 if (fallDist > mc.thePlayer.fallDistance)
                     fallDist = 0;
 
-                if (mc.thePlayer.motionY < 0 && mc.thePlayer.fallDistance > 2.124 && !VoidCheck.checkVoid(mc.thePlayer) && isBlockUnder() && !mc.thePlayer.isSpectator() && !mc.thePlayer.capabilities.allowFlying) {
+                if (mc.thePlayer.motionY < 0 && mc.thePlayer.fallDistance > 2.124 && !VoidCheck.checkVoid(mc.thePlayer) && VoidCheck.isBlockUnder() && !mc.thePlayer.isSpectator() && !mc.thePlayer.capabilities.allowFlying) {
                     double motionY = mc.thePlayer.motionY;
                     double fallingDist = mc.thePlayer.fallDistance - fallDist;
                     double realDist = fallingDist + -((motionY - 0.08D) * 0.9800000190734863D);
@@ -308,27 +308,6 @@ public class NoFall extends Module {
         }
 
 
-    }
-
-    public static boolean isBlockUnder() {
-        if (mc.thePlayer.posY < 0.0D) {
-            return false;
-        } else {
-            int off = 0;
-
-            while(true) {
-                if (off >= (int)mc.thePlayer.posY + 2) {
-                    return false;
-                }
-
-                AxisAlignedBB bb = mc.thePlayer.getEntityBoundingBox().offset(0.0D, (double)(-off), 0.0D);
-                if (!mc.theWorld.getCollidingBoundingBoxes(mc.thePlayer, bb).isEmpty()) {
-                    return true;
-                }
-
-                off += 2;
-            }
-        }
     }
 
     @EventTarget
