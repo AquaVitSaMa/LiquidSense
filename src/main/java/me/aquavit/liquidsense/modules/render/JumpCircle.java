@@ -28,6 +28,7 @@ public class JumpCircle extends Module {
 	private final BoolValue keepAlive = new BoolValue("keepAlive", false);
 	private final IntegerValue AliveTickValue = new IntegerValue("keepAlive-Tick", 200, 100, 500);
 	private final FloatValue FadeSpeedValue = new FloatValue("FadeSpeed", 6f, 1f, 10f);
+	private final FloatValue radiusValue = new FloatValue("Radius", 1f, 0.1f, 3f);
 	private final FloatValue smoothLineValue = new FloatValue("SmoothLine", 6f, 1f, 10f);
 	private final List<JumpCircleUitl> pos = new ArrayList<>();
 	private boolean inAir;
@@ -61,15 +62,18 @@ public class JumpCircle extends Module {
 			JumpCircleUitl the = pos.get(index);
 			if(keepAlive.get())
 				the.remove = the.tick >= AliveTickValue.get();
-			if(the.translate.getY() >= 254 && ((keepAlive.get() && the.remove) || !keepAlive.get()))
+			if((keepAlive.get() && the.remove && the.translate.getY() <= 1) || !keepAlive.get() && the.translate.getY() >= 254)
 				pos.remove(the);
 			index++;
 		}
 
 		for (JumpCircleUitl po : pos) {
-			po.translate.translate(1.5f, 254f , -10 + FadeSpeedValue.get());
+
+			po.translate.translate(radiusValue.get(), (po.remove) ? 0f : 254f , -10 + FadeSpeedValue.get());
+
+			int alpha = (int) ((keepAlive.get()) ? po.translate.getY()  : 255 - po.translate.getY());
 			if (po.translate.getX() > 0 && po.translate.getY() > 0)
-				drawCircle(po.posX, po.posY , po.posZ , po.lastTickPosX , po.lastTickPosY , po.lastTickPosZ, po.translate.getX(), mc.timer.renderPartialTicks, new Color(255, 255, 255,255 - (int) po.translate.getY() ));
+				drawCircle(po.posX, po.posY , po.posZ , po.lastTickPosX , po.lastTickPosY , po.lastTickPosZ, po.translate.getX(), mc.timer.renderPartialTicks, new Color(255, 255, 255, alpha));
 			if(keepAlive.get())
 				po.tick ++;
 		}
@@ -92,7 +96,7 @@ public class JumpCircle extends Module {
 		GL11.glDepthMask(false);
 		GL11.glLineWidth(smoothLineValue.get());
 		GL11.glBegin(3);
-		for (int i = 0; i < 360; i += 5) {
+		for (int i = 0; i < 365; i += 5) {
 			RenderUtils.glColor(color);
 			GL11.glVertex3d(x - Math.sin(i * Math.PI / 180F) * radius, y, z + Math.cos(i * Math.PI / 180F) * radius);
 		}
