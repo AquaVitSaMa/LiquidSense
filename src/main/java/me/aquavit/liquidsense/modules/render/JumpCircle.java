@@ -11,6 +11,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
+import net.ccbluex.liquidbounce.value.IntegerValue;
 import net.ccbluex.liquidbounce.value.Value;
 import net.minecraft.util.BlockPos;
 import org.lwjgl.opengl.GL11;
@@ -24,9 +25,9 @@ import java.util.List;
 @ModuleInfo(name = "JumpCircle", description = "Draw a circle when u jump", category = ModuleCategory.RENDER)
 public class JumpCircle extends Module {
 
-	private final Value<Boolean> rainbow = new BoolValue("Rainbow", false);
-	private final Value<Float> rainbowX = new FloatValue("Rainbow-X", -1000F, -2000F, 2000F).displayable(rainbow::get);
-	private final Value<Float> rainbowY = new FloatValue("Rainbow-Y", -1000F, -2000F, 2000F).displayable(rainbow::get);
+	private final BoolValue keepAlive = new BoolValue("keepAlive", false);
+	private final IntegerValue AliveTickValue = new IntegerValue("keepAlive-Tick", 200, 100, 500);
+	private final FloatValue FadeSpeedValue = new FloatValue("FadeSpeed", 6f, 1f, 10f);
 	private final FloatValue smoothLineValue = new FloatValue("SmoothLine", 6f, 1f, 10f);
 	private final List<JumpCircleUitl> pos = new ArrayList<>();
 	private boolean inAir;
@@ -58,19 +59,19 @@ public class JumpCircle extends Module {
 		int index = 0;
 		while (pos.size() > index) {
 			JumpCircleUitl the = pos.get(index);
-			if (the.tick > 500)
-				the.remove = true;
-			if(the.remove && the.translate.getY() <= 1)
+			if(keepAlive.get())
+				the.remove = the.tick >= AliveTickValue.get();
+			if(the.translate.getY() >= 254 && ((keepAlive.get() && the.remove) || !keepAlive.get()))
 				pos.remove(the);
 			index++;
 		}
 
 		for (JumpCircleUitl po : pos) {
-			po.translate.translate(3f, (po.remove)? 0 : 254f, -2);
-			if (po.translate.getX() > 0 && po.translate.getY() > 0) {
-				drawCircle(po.posX, po.posY , po.posZ , po.lastTickPosX , po.lastTickPosY , po.lastTickPosZ, po.translate.getX(), mc.timer.renderPartialTicks, new Color(255, 255, 255,(int) po.translate.getY() ));
-			}
-			po.tick++;
+			po.translate.translate(1.5f, 254f , -10 + FadeSpeedValue.get());
+			if (po.translate.getX() > 0 && po.translate.getY() > 0)
+				drawCircle(po.posX, po.posY , po.posZ , po.lastTickPosX , po.lastTickPosY , po.lastTickPosZ, po.translate.getX(), mc.timer.renderPartialTicks, new Color(255, 255, 255,255 - (int) po.translate.getY() ));
+			if(keepAlive.get())
+				po.tick ++;
 		}
 	}
 
@@ -89,7 +90,7 @@ public class JumpCircle extends Module {
 		GL11.glHint(3153, 4354);
 		GL11.glDisable(2929);
 		GL11.glDepthMask(false);
-		GL11.glLineWidth(3f);
+		GL11.glLineWidth(smoothLineValue.get());
 		GL11.glBegin(3);
 		for (int i = 0; i < 360; i += 5) {
 			RenderUtils.glColor(color);
