@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.block;
 
+import me.aquavit.liquidsense.event.events.BlockRenderSideEvent;
 import me.aquavit.liquidsense.modules.combat.Criticals;
 import me.aquavit.liquidsense.modules.exploit.GhostHand;
 import me.aquavit.liquidsense.modules.render.CaveFinder;
@@ -77,6 +78,7 @@ public abstract class MixinBlock {
     private void shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         final XRay xray = (XRay) LiquidBounce.moduleManager.getModule(XRay.class);
         final CaveFinder cavefinder = (CaveFinder) LiquidBounce.moduleManager.getModule(CaveFinder.class);
+        LiquidBounce.eventManager.callEvent(new BlockRenderSideEvent(worldIn, pos, side, maxX, minX, maxY, minY, maxZ, minZ));
 
         if (cavefinder.getState() && !CaveFinder.caveFinder.get()) {
             callbackInfoReturnable.setReturnValue(cavefinder.xrayBlocks.contains(this));
