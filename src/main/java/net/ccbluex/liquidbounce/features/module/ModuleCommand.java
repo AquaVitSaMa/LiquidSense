@@ -95,8 +95,6 @@ public class ModuleCommand extends Command {
     public List<String> tabComplete(String[] args) {
         if (args.length == 0) return new ArrayList<>();
 
-        String moduleName = args[0];
-
         switch (args.length) {
             case 1:
                 return values.stream().filter(it -> !(it instanceof FontValue) && it.getName().startsWith(args[0]))
