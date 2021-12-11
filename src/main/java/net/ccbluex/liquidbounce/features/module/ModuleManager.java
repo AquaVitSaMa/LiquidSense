@@ -87,7 +87,7 @@ public final class ModuleManager implements Listenable {
                 BlockESP.class,
                 ServerCrasher.class,
                 FastStairs.class,
-                InventoryCleaner.class,
+                InvClean.class,
                 BufferSpeed.class,
                 ProphuntESP.class,
                 KeepContainer.class,

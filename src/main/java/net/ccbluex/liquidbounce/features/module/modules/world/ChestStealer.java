@@ -10,7 +10,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.features.module.modules.player.InventoryCleaner;
+import net.ccbluex.liquidbounce.features.module.modules.player.InvClean;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
@@ -104,7 +104,7 @@ public class ChestStealer extends Module {
                         new ItemStack(Item.itemRegistry.getObject(new ResourceLocation("minecraft:chest"))).getDisplayName())))
             return;
 
-        InventoryCleaner inventoryCleaner = (InventoryCleaner) LiquidBounce.moduleManager.getModule(InventoryCleaner.class);
+        InvClean inventoryCleaner = (InvClean) LiquidBounce.moduleManager.getModule(InvClean.class);
 
         if (!isEmpty((GuiChest) screen) && !(closeOnFullValue.get() && fullInventory())) {
             autoCloseTimer.reset();
@@ -168,7 +168,7 @@ public class ChestStealer extends Module {
     }
 
     private boolean isEmpty(GuiChest chest) {
-        InventoryCleaner inventoryCleaner = (InventoryCleaner) LiquidBounce.moduleManager.getModule(InventoryCleaner.class);
+        InvClean inventoryCleaner = (InvClean) LiquidBounce.moduleManager.getModule(InvClean.class);
 
         for (int i = 0; i < chest.inventoryRows * 9; ++i) {
             Slot slot = chest.inventorySlots.inventorySlots.get(i);

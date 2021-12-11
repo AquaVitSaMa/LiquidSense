@@ -3,7 +3,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 import me.aquavit.liquidsense.event.events.ChestEvent;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.modules.combat.Aura;
-import net.ccbluex.liquidbounce.features.module.modules.player.InventoryCleaner;
+import net.ccbluex.liquidbounce.features.module.modules.player.InvClean;
 import net.ccbluex.liquidbounce.features.module.modules.world.ChestStealer;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
@@ -37,7 +37,7 @@ public abstract class MixinGuiContainer extends GuiScreen{
                 LiquidBounce.moduleManager.getModule(Aura.class).setState(false);
             }
             if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11120) {
-                LiquidBounce.moduleManager.getModule(InventoryCleaner.class).setState(false);
+                LiquidBounce.moduleManager.getModule(InvClean.class).setState(false);
             }
             if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11130) {
                 LiquidBounce.moduleManager.getModule(ChestStealer.class).setState(false);
