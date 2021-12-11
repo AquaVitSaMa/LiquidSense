@@ -241,12 +241,12 @@ public class Speed extends Module {
 
         mc.timer.timerSpeed = 1F;
 
-//        Step sp = (Step) LiquidBounce.moduleManager.getModule("Stair");
-//
-//        if(sp.getState()){
-//            yn = true;
-//            LiquidBounce.moduleManager.getModule("Stair").setState(false);
-//        }
+        Step sp = (Step) LiquidBounce.moduleManager.getModule(Step.class);
+
+        if(sp.getState()){
+            yn = true;
+            LiquidBounce.moduleManager.getModule(Step.class).setState(false);
+        }
 
         final SpeedMode speedMode = getMode();
 
