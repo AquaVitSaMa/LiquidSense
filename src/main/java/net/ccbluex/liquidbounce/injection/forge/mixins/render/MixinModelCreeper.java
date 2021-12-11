@@ -35,6 +35,10 @@ public class MixinModelCreeper extends ModelBase {
     @Shadow
     public ModelRenderer leg4;
 
+    /**
+     * @author CCBlueX
+     * @reason CCBlueX
+     */
     @Overwrite
     public void render(Entity p_render_1_, float p_render_2_, float p_render_3_, float p_render_4_, float p_render_5_, float p_render_6_, float p_render_7_) {
         this.setRotationAngles(p_render_2_, p_render_3_, p_render_4_, p_render_5_, p_render_6_, p_render_7_, p_render_1_);
