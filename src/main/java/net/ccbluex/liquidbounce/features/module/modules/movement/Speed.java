@@ -155,6 +155,9 @@ public class Speed extends Module {
 
     @EventTarget
     public void onPacket(final PacketEvent event) {
+        if(mc.thePlayer == null)
+            return;
+
         if (this.lagbackcheckValue.get()) {
             if (event.getPacket() instanceof S08PacketPlayerPosLook) {
                 S08PacketPlayerPosLook packet = (S08PacketPlayerPosLook)event.getPacket();
