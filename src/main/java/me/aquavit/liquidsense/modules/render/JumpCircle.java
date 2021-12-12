@@ -29,7 +29,7 @@ public class JumpCircle extends Module {
 
 	private final BoolValue keepAlive = new BoolValue("keepAlive", false);
 	private final IntegerValue AliveTickValue = new IntegerValue("keepAlive-Tick", 200, 100, 500);
-	private final FloatValue FadeSpeedValue = new FloatValue("FadeSpeed", 6f, 1f, 10f);
+	private final FloatValue FadeSpeedValue = new FloatValue("FadeSpeed", 6f, 1f, 20f);
 	private final FloatValue radiusValue = new FloatValue("Radius", 1f, 0.1f, 3f);
 	private final FloatValue smoothLineValue = new FloatValue("SmoothLine", 6f, 1f, 10f);
 	private final List<JumpCircleUitl> pos = new ArrayList<>();
@@ -80,7 +80,7 @@ public class JumpCircle extends Module {
 
 		for (JumpCircleUitl po : pos) {
 
-			po.translate.translate(radiusValue.get(), (po.remove) ? 0f : 254f , -10 + FadeSpeedValue.get());
+			po.translate.translate(radiusValue.get(), (po.remove) ? 0f : 254f , -20 + FadeSpeedValue.get());
 
 			int alpha = (int) (keepAlive.get() ? po.translate.getY() : 255 - po.translate.getY());
 			if (po.translate.getX() > 0 && po.translate.getY() > 0 && alpha > - 1)
