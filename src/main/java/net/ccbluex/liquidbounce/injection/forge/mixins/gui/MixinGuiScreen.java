@@ -7,7 +7,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import me.aquavit.liquidsense.modules.misc.ComponentOnHover;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
+import me.aquavit.liquidsense.modules.client.HUD;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiBackground;
 import me.aquavit.liquidsense.utils.render.ParticleUtils;
 import me.aquavit.liquidsense.utils.render.shader.shaders.BackgroundShader;

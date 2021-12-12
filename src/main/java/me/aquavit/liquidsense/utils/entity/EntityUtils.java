@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.utils.entity;
 
 import me.aquavit.liquidsense.modules.client.Target;
-import me.aquavit.liquidsense.modules.combat.NoFriends;
+import me.aquavit.liquidsense.modules.blatant.NoFriends;
 import me.aquavit.liquidsense.modules.misc.Teams;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.LiquidBounce;

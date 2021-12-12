@@ -1,8 +1,8 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
-import me.aquavit.liquidsense.modules.combat.Aura;
-import me.aquavit.liquidsense.modules.render.RenderChanger;
-import me.aquavit.liquidsense.modules.render.Rotations;
+import me.aquavit.liquidsense.modules.blatant.Aura;
+import me.aquavit.liquidsense.modules.client.RenderChanger;
+import me.aquavit.liquidsense.modules.client.Rotations;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;

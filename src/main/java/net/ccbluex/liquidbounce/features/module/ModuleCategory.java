@@ -2,15 +2,17 @@ package net.ccbluex.liquidbounce.features.module;
 
 public enum ModuleCategory
 {
-    COMBAT("Combat"),
+    BLATANT("Blatant"),
+    GHOST("Ghost"),
     PLAYER("Player"),
     MOVEMENT("Movement"),
     RENDER("Render"),
     WORLD("World"),
-    MISC("Misc"),
     EXPLOIT("Exploit"),
-    FUN("Fun"),
-    CLIENT("Client");
+    MISC("Misc"),
+    CLIENT("Client"),
+    SCRIPTS("Scripts"),
+    FUN("Fun");
 
     public final String displayName;
 

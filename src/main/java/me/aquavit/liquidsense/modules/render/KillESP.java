@@ -9,7 +9,7 @@ import me.aquavit.liquidsense.event.events.WorldEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import me.aquavit.liquidsense.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.value.BoolValue;

@@ -6,9 +6,9 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
 import me.aquavit.liquidsense.modules.misc.Animations;
-import me.aquavit.liquidsense.modules.render.RenderChanger;
+import me.aquavit.liquidsense.modules.client.RenderChanger;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import me.aquavit.liquidsense.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;

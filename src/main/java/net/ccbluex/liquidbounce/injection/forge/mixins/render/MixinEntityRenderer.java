@@ -6,10 +6,10 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
 import com.google.common.base.Predicates;
-import me.aquavit.liquidsense.modules.player.Reach;
+import me.aquavit.liquidsense.modules.ghost.Reach;
 import me.aquavit.liquidsense.modules.render.CameraView;
 import me.aquavit.liquidsense.modules.render.CaveFinder;
-import me.aquavit.liquidsense.modules.render.NoHurtCam;
+import me.aquavit.liquidsense.modules.client.NoHurtCam;
 import me.aquavit.liquidsense.modules.render.Tracers;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.Render3DEvent;

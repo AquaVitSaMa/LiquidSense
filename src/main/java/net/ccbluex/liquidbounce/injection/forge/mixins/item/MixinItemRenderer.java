@@ -5,9 +5,10 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.item;
 
+import me.aquavit.liquidsense.modules.client.AntiBlind;
 import me.aquavit.liquidsense.modules.render.*;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import me.aquavit.liquidsense.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;

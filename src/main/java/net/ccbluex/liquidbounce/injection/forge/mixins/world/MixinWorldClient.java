@@ -5,7 +5,7 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.world;
 
-import me.aquavit.liquidsense.modules.render.TrueSight;
+import me.aquavit.liquidsense.modules.client.TrueSight;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.minecraft.client.multiplayer.WorldClient;
 import org.spongepowered.asm.mixin.Mixin;

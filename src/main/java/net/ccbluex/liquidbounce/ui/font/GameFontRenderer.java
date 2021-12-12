@@ -1,21 +1,17 @@
 package net.ccbluex.liquidbounce.ui.font;
 
-import kotlin.jvm.internal.Intrinsics;
-import me.aquavit.liquidsense.event.Event;
 import me.aquavit.liquidsense.event.events.TextEvent;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowFontShader;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
+import me.aquavit.liquidsense.modules.client.HUD;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.resources.IResourceManager;
 import net.minecraft.util.ResourceLocation;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 

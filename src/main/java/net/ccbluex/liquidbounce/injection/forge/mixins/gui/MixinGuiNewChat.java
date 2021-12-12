@@ -7,7 +7,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.ChatEvent;
-import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
+import me.aquavit.liquidsense.modules.client.HUD;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.*;
 import net.minecraft.client.renderer.GlStateManager;

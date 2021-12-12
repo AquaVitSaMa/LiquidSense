@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.features.module.modules.movement;
 
-import me.aquavit.liquidsense.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
 import net.ccbluex.liquidbounce.LiquidBounce;

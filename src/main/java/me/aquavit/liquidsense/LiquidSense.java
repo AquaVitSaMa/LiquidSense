@@ -1,9 +1,11 @@
 package me.aquavit.liquidsense;
 
+import me.aquavit.liquidsense.modules.blatant.*;
+import me.aquavit.liquidsense.modules.client.*;
 import me.aquavit.liquidsense.modules.exploit.*;
+import me.aquavit.liquidsense.modules.ghost.*;
 import me.aquavit.liquidsense.modules.misc.*;
 import me.aquavit.liquidsense.modules.movement.*;
-import me.aquavit.liquidsense.modules.combat.*;
 import me.aquavit.liquidsense.modules.player.*;
 import me.aquavit.liquidsense.modules.render.*;
 import me.aquavit.liquidsense.modules.world.*;
@@ -37,6 +39,7 @@ public class LiquidSense {
 
     private void loadModules(){
         this.liquidSenseModules = new ArrayList<>();
+        liquidSenseModules.add(WTap.class);
         liquidSenseModules.add(CaveFinder.class);
         liquidSenseModules.add(Step.class);
         liquidSenseModules.add(Criticals.class);

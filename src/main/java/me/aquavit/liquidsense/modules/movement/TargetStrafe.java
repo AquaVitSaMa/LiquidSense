@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.modules.movement;
 
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.*;
-import me.aquavit.liquidsense.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.utils.client.Rotation;
 import me.aquavit.liquidsense.utils.client.RotationUtils;
 import me.aquavit.liquidsense.utils.client.VecRotation;

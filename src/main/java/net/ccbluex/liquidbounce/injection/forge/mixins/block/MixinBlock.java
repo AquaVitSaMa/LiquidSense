@@ -1,12 +1,12 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.block;
 
 import me.aquavit.liquidsense.event.events.BlockRenderSideEvent;
-import me.aquavit.liquidsense.modules.combat.Criticals;
+import me.aquavit.liquidsense.modules.blatant.Criticals;
 import me.aquavit.liquidsense.modules.exploit.GhostHand;
 import me.aquavit.liquidsense.modules.render.CaveFinder;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.BlockBBEvent;
-import net.ccbluex.liquidbounce.features.module.modules.player.NoFall;
+import me.aquavit.liquidsense.modules.player.NoFall;
 import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.BlockState;

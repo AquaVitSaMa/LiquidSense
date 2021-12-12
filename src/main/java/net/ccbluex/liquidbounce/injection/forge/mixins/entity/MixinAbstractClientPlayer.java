@@ -5,8 +5,8 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
-import me.aquavit.liquidsense.modules.render.Cape;
-import me.aquavit.liquidsense.modules.render.NoFOV;
+import me.aquavit.liquidsense.modules.client.Cape;
+import me.aquavit.liquidsense.modules.client.NoFOV;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
 import net.minecraft.client.Minecraft;

@@ -5,11 +5,11 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
-import me.aquavit.liquidsense.modules.render.AntiBlind;
+import me.aquavit.liquidsense.modules.client.AntiBlind;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
-import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
+import me.aquavit.liquidsense.modules.client.HUD;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.Hotbar;

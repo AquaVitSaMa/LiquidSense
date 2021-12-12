@@ -7,7 +7,7 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
 import me.aquavit.liquidsense.modules.misc.Animations;
 import me.aquavit.liquidsense.modules.movement.NoJumpDelay;
-import me.aquavit.liquidsense.modules.render.AntiBlind;
+import me.aquavit.liquidsense.modules.client.AntiBlind;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.LivingUpdateEvent;
 import me.aquavit.liquidsense.event.events.JumpEvent;

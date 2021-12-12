@@ -49,8 +49,8 @@ public class Inventory extends Element {
             RenderUtils.drawRect(0,17,176, 3 * 18 + 17, new Color(0,0,0,160));
             RenderUtils.drawRoundedRect(-0.5F, 0, 176.5F, 7F + Fonts.csgo40.FONT_HEIGHT,1.5F,
                     new Color(16, 25, 32, 200).getRGB(), 1F,new Color(16, 25, 32, 200).getRGB());
-            Fonts.csgo40.drawString("P", 4.2F, (float) (Fonts.csgo40.FONT_HEIGHT / 2) + 1.2F, new Color(0, 131, 193).getRGB(), false);
-            Fonts.font20.drawString("Inventory", Fonts.csgo40.getStringWidth("P") + 10F, (float) (Fonts.csgo40.FONT_HEIGHT / 2) + 0.2F, Color.WHITE.getRGB(), false);
+            Fonts.csgo40.drawString("A", 4.2F, (float) (Fonts.csgo40.FONT_HEIGHT / 2) + 1.2F, new Color(0, 131, 193).getRGB(), false);
+            Fonts.font20.drawString("Inventory", Fonts.csgo40.getStringWidth("A") + 9.2F, (float) (Fonts.csgo40.FONT_HEIGHT / 2) + 0.2F, Color.WHITE.getRGB(), false);
         }
 
         GlStateManager.pushMatrix();

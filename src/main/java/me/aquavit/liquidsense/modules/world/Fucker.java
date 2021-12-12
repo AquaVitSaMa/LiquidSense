@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.event.events.WorldEvent;
-import me.aquavit.liquidsense.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.modules.player.AutoTool;
 import me.aquavit.liquidsense.utils.block.BlockUtils;
 import me.aquavit.liquidsense.utils.client.RotationUtils;

@@ -6,10 +6,10 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.client;
 
 import me.aquavit.liquidsense.modules.exploit.AbortBreaking;
-import me.aquavit.liquidsense.modules.world.FastPlace;
+import me.aquavit.liquidsense.modules.ghost.FastPlace;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.*;
-import net.ccbluex.liquidbounce.features.module.modules.combat.AutoClicker;
+import me.aquavit.liquidsense.modules.ghost.AutoClicker;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiMainMenu;
 import me.aquavit.liquidsense.utils.module.CPSCounter;
 import me.aquavit.liquidsense.utils.render.IconUtils;

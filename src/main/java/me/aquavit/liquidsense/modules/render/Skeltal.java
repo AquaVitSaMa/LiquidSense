@@ -3,6 +3,7 @@ package me.aquavit.liquidsense.modules.render;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
 import me.aquavit.liquidsense.event.events.UpdateModelEvent;
+import me.aquavit.liquidsense.modules.client.RenderChanger;
 import me.aquavit.liquidsense.utils.render.Translate;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -16,7 +17,6 @@ import net.minecraft.entity.player.EntityPlayer;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
-import java.util.List;
 import java.util.Map;
 import java.util.WeakHashMap;
 

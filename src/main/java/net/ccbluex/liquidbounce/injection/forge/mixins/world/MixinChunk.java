@@ -6,7 +6,7 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.world;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.module.modules.render.ProphuntESP;
+import me.aquavit.liquidsense.modules.render.ProphuntESP;
 import me.aquavit.liquidsense.utils.render.MiniMapRegister;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.util.BlockPos;

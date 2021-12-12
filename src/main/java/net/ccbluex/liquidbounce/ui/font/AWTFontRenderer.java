@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.ui.font;
 
-import net.ccbluex.liquidbounce.features.module.modules.render.HUD;
+import me.aquavit.liquidsense.modules.client.HUD;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraftforge.fml.relauncher.Side;

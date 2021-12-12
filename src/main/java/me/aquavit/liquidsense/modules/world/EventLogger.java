@@ -13,7 +13,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.features.module.modules.exploit.Phase;
 import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot;
-import net.ccbluex.liquidbounce.features.module.modules.render.FreeCam;
+import me.aquavit.liquidsense.modules.render.FreeCam;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
 import net.ccbluex.liquidbounce.value.BoolValue;

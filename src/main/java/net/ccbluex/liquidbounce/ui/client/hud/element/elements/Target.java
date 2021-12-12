@@ -1,6 +1,6 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
-import me.aquavit.liquidsense.modules.combat.Aura;
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.utils.misc.RandomUtils;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import me.aquavit.liquidsense.utils.render.TargetHudParticles;

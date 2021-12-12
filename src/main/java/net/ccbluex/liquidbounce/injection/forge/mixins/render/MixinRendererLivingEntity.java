@@ -1,5 +1,8 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.modules.client.RenderChanger;
+import me.aquavit.liquidsense.modules.client.Rotations;
+import me.aquavit.liquidsense.modules.client.TrueSight;
 import me.aquavit.liquidsense.modules.fun.Derp;
 import me.aquavit.liquidsense.modules.render.*;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
@@ -10,7 +13,7 @@ import me.aquavit.liquidsense.utils.render.OutlineUtils;
 import com.google.common.collect.Lists;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.PreUpdateEvent;
-import net.ccbluex.liquidbounce.features.module.modules.render.ESP;
+import me.aquavit.liquidsense.modules.render.ESP;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;

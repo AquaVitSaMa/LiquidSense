@@ -5,8 +5,8 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
-import me.aquavit.liquidsense.modules.combat.Aura;
-import me.aquavit.liquidsense.modules.combat.HitBox;
+import me.aquavit.liquidsense.modules.blatant.Aura;
+import me.aquavit.liquidsense.modules.ghost.HitBox;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.event.events.StrafeEvent;
 import me.aquavit.liquidsense.event.events.WallDamageEvent;

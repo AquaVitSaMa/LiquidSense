@@ -1,6 +1,7 @@
 package me.aquavit.liquidsense.modules.render;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import me.aquavit.liquidsense.modules.client.RenderChanger;
 import me.aquavit.liquidsense.modules.misc.Teams;
 import me.aquavit.liquidsense.modules.world.EventLogger;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
