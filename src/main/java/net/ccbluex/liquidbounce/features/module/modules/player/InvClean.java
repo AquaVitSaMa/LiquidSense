@@ -114,7 +114,7 @@ public class InvClean extends Module {
 
         if (sortValue.get()) sortHotbar();
 
-        if (cleanValue.get()) return;
+        if (!cleanValue.get()) return;
         for (final Map.Entry<Integer, ItemStack> stackEntry : garbageItems) {
             if (!this.isUseful(stackEntry.getValue(), stackEntry.getKey())) {
                 boolean openInventory = !(mc.currentScreen instanceof GuiInventory) && simulateInventory.get();
