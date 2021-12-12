@@ -4,6 +4,7 @@ import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.utils.JumpCircleUitl;
+import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowShader;
 import net.ccbluex.liquidbounce.features.module.Module;
@@ -13,6 +14,7 @@ import net.ccbluex.liquidbounce.value.BoolValue;
 import net.ccbluex.liquidbounce.value.FloatValue;
 import net.ccbluex.liquidbounce.value.IntegerValue;
 import net.ccbluex.liquidbounce.value.Value;
+import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.BlockPos;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.glu.Cylinder;
@@ -32,6 +34,7 @@ public class JumpCircle extends Module {
 	private final FloatValue smoothLineValue = new FloatValue("SmoothLine", 6f, 1f, 10f);
 	private final List<JumpCircleUitl> pos = new ArrayList<>();
 	private boolean inAir;
+	private double x, y, z, lastX, lastY, lastZ;
 
 	@Override
 	public void onEnable() {
@@ -40,18 +43,26 @@ public class JumpCircle extends Module {
 
 	@EventTarget
 	public void onUpdate(UpdateEvent event) {
-		if (!mc.thePlayer.onGround)
-			inAir = true;
-
-		if (inAir && mc.thePlayer.onGround) {
-			pos.add(new JumpCircleUitl(
-					mc.thePlayer.posX,
-					mc.thePlayer.posY,
-					mc.thePlayer.posZ,
-					mc.thePlayer.lastTickPosX,
-					mc.thePlayer.lastTickPosY,
-					mc.thePlayer.lastTickPosZ));
+		if (MovementUtils.isOnGround(0.01)) {
+			x = mc.thePlayer.posX;
+			y = mc.thePlayer.posY;
+			z = mc.thePlayer.posZ;
+			lastX = mc.thePlayer.lastTickPosX;
+			lastY = mc.thePlayer.lastTickPosY;
+			lastZ = mc.thePlayer.lastTickPosZ;
 			inAir = false;
+		}
+
+
+		if (!inAir && !MovementUtils.isOnGround(0.01)) {
+			inAir = true;
+			pos.add(new JumpCircleUitl(
+					x,
+					y,
+					z,
+					lastX,
+					lastY,
+					lastZ));
 		}
 	}
 
@@ -71,8 +82,8 @@ public class JumpCircle extends Module {
 
 			po.translate.translate(radiusValue.get(), (po.remove) ? 0f : 254f , -10 + FadeSpeedValue.get());
 
-			int alpha = (int) ((keepAlive.get()) ? po.translate.getY()  : 255 - po.translate.getY());
-			if (po.translate.getX() > 0 && po.translate.getY() > 0)
+			int alpha = (int) (keepAlive.get() ? po.translate.getY() : 255 - po.translate.getY());
+			if (po.translate.getX() > 0 && po.translate.getY() > 0 && alpha > - 1)
 				drawCircle(po.posX, po.posY , po.posZ , po.lastTickPosX , po.lastTickPosY , po.lastTickPosZ, po.translate.getX(), mc.timer.renderPartialTicks, new Color(255, 255, 255, alpha));
 			if(keepAlive.get())
 				po.tick ++;
