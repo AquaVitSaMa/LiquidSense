@@ -104,7 +104,7 @@ public class ChestStealer extends Module {
                         new ItemStack(Item.itemRegistry.getObject(new ResourceLocation("minecraft:chest"))).getDisplayName())))
             return;
 
-        InvClean inventoryCleaner = (InvClean) LiquidBounce.moduleManager.getModule(InvClean.class);
+	    InvClean inventoryCleaner = (InvClean) LiquidBounce.moduleManager.getModule(InvClean.class);
 
         if (!isEmpty((GuiChest) screen) && !(closeOnFullValue.get() && fullInventory())) {
             autoCloseTimer.reset();
@@ -168,7 +168,7 @@ public class ChestStealer extends Module {
     }
 
     private boolean isEmpty(GuiChest chest) {
-        InvClean inventoryCleaner = (InvClean) LiquidBounce.moduleManager.getModule(InvClean.class);
+	    InvClean inventoryCleaner = (InvClean) LiquidBounce.moduleManager.getModule(InvClean.class);
 
         for (int i = 0; i < chest.inventoryRows * 9; ++i) {
             Slot slot = chest.inventorySlots.inventorySlots.get(i);
