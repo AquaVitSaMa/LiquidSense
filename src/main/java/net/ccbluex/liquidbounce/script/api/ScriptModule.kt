@@ -7,11 +7,11 @@ package net.ccbluex.liquidbounce.script.api
 
 import jdk.nashorn.api.scripting.JSObject
 import me.aquavit.liquidsense.event.EventTarget
+import me.aquavit.liquidsense.event.events.*
+import me.aquavit.liquidsense.utils.client.ClientUtils
 import net.ccbluex.liquidbounce.features.module.Module
 import net.ccbluex.liquidbounce.features.module.ModuleCategory
 import net.ccbluex.liquidbounce.features.module.ModuleInfo
-import me.aquavit.liquidsense.utils.client.ClientUtils
-import me.aquavit.liquidsense.event.events.*
 import net.ccbluex.liquidbounce.value.Value
 
 @Suppress("unused")
@@ -53,10 +53,6 @@ class ScriptModule(private val moduleObject: JSObject) : Module() {
 
     override fun getTag(): String? {
         return _tag
-    }
-
-    fun setTag(value: String) {
-        _tag = value
     }
 
     /**
@@ -119,6 +115,9 @@ class ScriptModule(private val moduleObject: JSObject) : Module() {
 
     @EventTarget
     fun onSlowDown(slowDownEvent: SlowDownEvent) = callEvent("slowDown", slowDownEvent)
+
+    @EventTarget
+    fun onShutdown(shutdownEvent: ClientShutdownEvent) = callEvent("shutdown")
 
     /**
      * Calls the handler of a registered event.

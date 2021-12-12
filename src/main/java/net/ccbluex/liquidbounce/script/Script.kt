@@ -9,24 +9,25 @@ import jdk.internal.dynalink.beans.StaticClass
 import jdk.nashorn.api.scripting.JSObject
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory
 import jdk.nashorn.api.scripting.ScriptUtils
-import net.ccbluex.liquidbounce.LiquidBounce
 import me.aquavit.liquidsense.command.Command
+import me.aquavit.liquidsense.utils.client.ClientUtils
+import me.aquavit.liquidsense.utils.mc.MinecraftInstance
+import net.ccbluex.liquidbounce.LiquidBounce
 import net.ccbluex.liquidbounce.features.module.Module
-import net.ccbluex.liquidbounce.script.api.*
+import net.ccbluex.liquidbounce.script.api.ScriptCommand
+import net.ccbluex.liquidbounce.script.api.ScriptModule
+import net.ccbluex.liquidbounce.script.api.ScriptTab
 import net.ccbluex.liquidbounce.script.api.global.Chat
 import net.ccbluex.liquidbounce.script.api.global.Item
 import net.ccbluex.liquidbounce.script.api.global.Setting
-import me.aquavit.liquidsense.utils.client.ClientUtils
-import me.aquavit.liquidsense.utils.mc.MinecraftInstance
 import java.io.File
 import java.util.function.Function
 import javax.script.ScriptEngine
-import kotlin.collections.HashMap
 
 class Script(val scriptFile: File) : MinecraftInstance() {
 
     private val scriptEngine: ScriptEngine
-    private val scriptText = scriptFile.readText()
+    private val scriptText: String = scriptFile.readText()
 
     // Script information
     lateinit var scriptName: String
@@ -34,7 +35,9 @@ class Script(val scriptFile: File) : MinecraftInstance() {
     lateinit var scriptAuthors: Array<String>
 
     private var state = false
+
     private val events = HashMap<String, JSObject>()
+
     private val registeredModules = mutableListOf<Module>()
     private val registeredCommands = mutableListOf<Command>()
 
@@ -49,6 +52,7 @@ class Script(val scriptFile: File) : MinecraftInstance() {
 
         // Global instances
         scriptEngine.put("mc", mc)
+
         scriptEngine.put("moduleManager", LiquidBounce.moduleManager)
         scriptEngine.put("commandManager", LiquidBounce.commandManager)
         scriptEngine.put("scriptManager", LiquidBounce.scriptManager)
@@ -57,10 +61,14 @@ class Script(val scriptFile: File) : MinecraftInstance() {
         scriptEngine.put("registerScript", RegisterScript())
 
         supportLegacyScripts()
+    }
 
+    fun initScript() {
         scriptEngine.eval(scriptText)
 
         callEvent("load")
+
+        ClientUtils.getLogger().info("[ScriptAPI] Successfully loaded script '${scriptFile.name}'.")
     }
 
     @Suppress("UNCHECKED_CAST")
@@ -129,6 +137,7 @@ class Script(val scriptFile: File) : MinecraftInstance() {
             if (!it.startsWith(magicPrefix)) return null
 
             val commentData = it.substring(magicPrefix.length).split("=", limit = 2)
+
             if (commentData.first().trim() == name) {
                 return commentData.last().trim()
             }
@@ -186,7 +195,9 @@ class Script(val scriptFile: File) : MinecraftInstance() {
      * @param scriptFile Path to the file to be imported.
      */
     fun import(scriptFile: String) {
-        scriptEngine.eval(File(LiquidBounce.scriptManager.scriptsFolder, scriptFile).readText())
+        val scriptText = File(LiquidBounce.scriptManager.scriptsFolder, scriptFile).readText()
+
+        scriptEngine.eval(scriptText)
     }
 
     /**

@@ -5,8 +5,8 @@
  */
 package net.ccbluex.liquidbounce.script
 
-import net.ccbluex.liquidbounce.LiquidBounce
 import me.aquavit.liquidsense.utils.client.ClientUtils
+import net.ccbluex.liquidbounce.LiquidBounce
 import java.io.File
 import java.io.FileFilter
 
@@ -21,10 +21,10 @@ class ScriptManager {
      * Loads all scripts inside the scripts folder.
      */
     fun loadScripts() {
-        if(!scriptsFolder.exists())
+        if (!scriptsFolder.exists())
             scriptsFolder.mkdir()
 
-        scriptsFolder.listFiles(FileFilter { it.name.endsWith(scriptFileExtension) }).forEach { loadScript(it) }
+        scriptsFolder.listFiles(FileFilter { it.name.endsWith(scriptFileExtension) })?.forEach(this@ScriptManager::loadScript)
     }
 
     /**
@@ -37,11 +37,12 @@ class ScriptManager {
     /**
      * Loads a script from a file.
      */
-    fun loadScript(scriptFile : File) {
+    fun loadScript(scriptFile: File) {
         try {
-            scripts.add(Script(scriptFile))
-            ClientUtils.getLogger().info("[ScriptAPI] Successfully loaded script '${scriptFile.name}'.")
-        } catch(t : Throwable) {
+            val script = Script(scriptFile)
+            script.initScript()
+            scripts.add(script)
+        } catch (t: Throwable) {
             ClientUtils.getLogger().error("[ScriptAPI] Failed to load script '${scriptFile.name}'.", t)
         }
     }
@@ -64,19 +65,19 @@ class ScriptManager {
      * Imports a script.
      * @param file JavaScript file to be imported.
      */
-    fun importScript(file : File) {
+    fun importScript(file: File) {
         val scriptFile = File(scriptsFolder, file.name)
         file.copyTo(scriptFile)
 
         loadScript(scriptFile)
-        ClientUtils.getLogger().info("[ScriptAPI]  Successfully imported script '${scriptFile.name}'.")
+        ClientUtils.getLogger().info("[ScriptAPI] Successfully imported script '${scriptFile.name}'.")
     }
 
     /**
      * Deletes a script.
      * @param script Script to be deleted.
      */
-    fun deleteScript(script : Script) {
+    fun deleteScript(script: Script) {
         script.onDisable()
         scripts.remove(script)
         script.scriptFile.delete()
