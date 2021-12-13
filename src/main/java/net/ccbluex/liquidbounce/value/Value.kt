@@ -108,6 +108,7 @@ open class IntegerValue(name: String, value: Int, val minimum: Int = 0, val maxi
 open class FloatValue(name: String, value: Float, val minimum: Float = 0F, val maximum: Float = Float.MAX_VALUE)
     : Value<Float>(name, value) {
 
+
     override fun toJson() = JsonPrimitive(value)
 
     override fun fromJson(element: JsonElement) {
