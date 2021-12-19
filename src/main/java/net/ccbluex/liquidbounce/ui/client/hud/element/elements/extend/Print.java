@@ -62,20 +62,20 @@ public class Print {
             GlStateManager.pushMatrix();
             GlStateManager.resetColor();
             if (!message.isEmpty() && type != Type.none) {
-                RenderUtils.drawGradientSideway(-width + (Fonts.csgo40.getStringWidth(typemsg) + Fonts.font20.getStringWidth(message) + 10f), y - 5, -width - 36, y - 16f, new Color(0, 0, 0, 0).getRGB(), new Color(0, 0, 0, (150 - (int) removeingtranslate.getX())).getRGB());
+                RenderUtils.drawGradientSideway(-width + (Fonts.csgo35.getStringWidth(typemsg) + Fonts.font15.getStringWidth(message) + 10f), y - 5, -width - 36, y - 16f, new Color(0, 0, 0, 0).getRGB(), new Color(0, 0, 0, (150 - (int) removeingtranslate.getX())).getRGB());
                 switch (type){
                     case info:
-                        Fonts.csgo40.drawString(typemsg, -width - 29, y - 12f, new Color(0, 131, 193, (150 - (int) removeingtranslate.getX())).getRGB());
-                        Fonts.font16.drawString(message, -width - 29 + (Fonts.csgo40.getStringWidth(typemsg) * 2), y - 13f, new Color(255, 255, 255, (150 - (int) removeingtranslate.getX())).getRGB());
+                        Fonts.csgo35.drawString(typemsg, -width - 29, y - 12f, new Color(0, 131, 193, (150 - (int) removeingtranslate.getX())).getRGB());
+                        Fonts.font15.drawString(message, -width - 29 + (Fonts.csgo35.getStringWidth(typemsg) * 2), y - 12f, new Color(255, 255, 255, (150 - (int) removeingtranslate.getX())).getRGB());
                         break;
                     case error:
                     case success:
-                        Fonts.csgo40.drawString(typemsg, -width - 32, y - 13f, new Color(0, 131, 193, (150 - (int) removeingtranslate.getX())).getRGB());
-                        Fonts.font20.drawString(message, -width - 32 + Fonts.csgo40.getStringWidth(typemsg), y - 13f, new Color(255, 255, 255, (150 - (int) removeingtranslate.getX())).getRGB());
+                        Fonts.csgo35.drawString(typemsg, -width - 32, y - 13f, new Color(0, 131, 193, (150 - (int) removeingtranslate.getX())).getRGB());
+                        Fonts.font15.drawString(message, -width - 32 + Fonts.csgo35.getStringWidth(typemsg), y - 12f, new Color(255, 255, 255, (150 - (int) removeingtranslate.getX())).getRGB());
                         break;
                     case state:
-                        Fonts.csgo40.drawString(typemsg, -width - 32, y - 12f, new Color(0, 131, 193, (150 - (int) removeingtranslate.getX())).getRGB());
-                        Fonts.font20.drawString(message, -width - 32 + Fonts.csgo40.getStringWidth(typemsg), y - 13f, new Color(255, 255, 255, (150 - (int) removeingtranslate.getX())).getRGB());
+                        Fonts.csgo35.drawString(typemsg, -width - 32, y - 12f, new Color(0, 131, 193, (150 - (int) removeingtranslate.getX())).getRGB());
+                        Fonts.font15.drawString(message, -width - 32 + Fonts.csgo35.getStringWidth(typemsg), y - 12f, new Color(255, 255, 255, (150 - (int) removeingtranslate.getX())).getRGB());
                         break;
                 }
             }
@@ -111,7 +111,6 @@ public class Print {
                 break;
             }
         }
-
     }
 }
 
