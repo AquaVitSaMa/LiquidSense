@@ -45,6 +45,7 @@ public class LiquidBounce {
     public static final String MINECRAFT_VERSION = "1.8.9";
     public static final String CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce";
     public static final String CLIENT_RESOURCE = "https://cdn.jsdelivr.net/gh/BlogResourceRepositories/ClientResource@main/";
+    public static final Boolean IN_DEV = true;
 
     public boolean isStarting;
 
