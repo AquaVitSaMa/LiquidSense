@@ -5,14 +5,12 @@
  */
 package net.ccbluex.liquidbounce.injection.forge;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
-import net.minecraft.client.Minecraft;
+import net.ccbluex.liquidbounce.script.remapper.injection.transformers.ScriptSettingTransformer;
 import net.minecraftforge.fml.relauncher.IFMLLoadingPlugin;
 import org.spongepowered.asm.launch.MixinBootstrap;
 import org.spongepowered.asm.mixin.MixinEnvironment;
 import org.spongepowered.asm.mixin.Mixins;
 
-import javax.swing.*;
 import java.util.Map;
 
 public class MixinLoader implements IFMLLoadingPlugin {
@@ -25,7 +23,7 @@ public class MixinLoader implements IFMLLoadingPlugin {
 
     @Override
     public String[] getASMTransformerClass() {
-        return new String[0];
+        return new String[]{ScriptSettingTransformer.class.getName()};
     }
 
     @Override
