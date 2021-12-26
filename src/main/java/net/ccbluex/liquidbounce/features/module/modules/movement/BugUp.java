@@ -53,13 +53,23 @@ public class BugUp extends Module {
         }
 
         if (!mc.thePlayer.onGround && !mc.thePlayer.isOnLadder() && !mc.thePlayer.isInWater()) {
-            final FallingPlayer fallingPlayer = new FallingPlayer(x, y, z,
-                    mc.thePlayer.motionX, mc.thePlayer.motionY, mc.thePlayer.motionZ,
-                    mc.thePlayer.rotationYaw, mc.thePlayer.moveStrafing, mc.thePlayer.moveForward
-            );
+		  FallingPlayer fallingPlayer = new FallingPlayer(
+			  mc.thePlayer.posX,
+			  mc.thePlayer.posY,
+			  mc.thePlayer.posZ,
+			  mc.thePlayer.motionX,
+			  mc.thePlayer.motionY,
+			  mc.thePlayer.motionZ,
+			  mc.thePlayer.rotationYaw,
+			  mc.thePlayer.moveStrafing,
+			  mc.thePlayer.moveForward
+		  );
 
-            if (fallingPlayer.findCollision(60).getPos() != null)
-                detectedLocation = fallingPlayer.findCollision(60).getPos();
+		  FallingPlayer.CollisionResult collision = fallingPlayer.findCollision(60);
+
+		  if (collision != null) {
+			  detectedLocation = collision.getPos();
+		  }
         }
 
         if (detectedLocation != null) {
