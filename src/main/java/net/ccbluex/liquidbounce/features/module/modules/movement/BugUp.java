@@ -23,7 +23,7 @@ import java.util.Random;
 
 @ModuleInfo(name = "BugUp", description = "automatically setbacks you after falling a certain distance.", category = ModuleCategory.MOVEMENT)
 public class BugUp extends Module {
-    private final ListValue mode = new ListValue("Mode", new String[]{"TeleportPBack", "GroundSpoof", "FlyFlag", "PacketFlag", "MotionTeleportFlag"}, "FlyFlag");
+    private final ListValue mode = new ListValue("Mode", new String[]{"TeleportBack", "GroundSpoof", "FlyFlag", "PacketFlag", "MotionTeleportFlag"}, "FlyFlag");
     private final BoolValue resetFallDist = new BoolValue("ResetFallDistance", true);
     private final BoolValue setGround = new BoolValue("SetGround", true);
     private final BoolValue voidOnly = new BoolValue("VoidOnly", true);
