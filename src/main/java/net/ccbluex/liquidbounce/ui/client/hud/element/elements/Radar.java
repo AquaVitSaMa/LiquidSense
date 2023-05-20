@@ -6,13 +6,14 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
+import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.utils.render.MiniMapRegister;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.SafeVertexBuffer;
-import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.FloatValue;
+import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.Tessellator;
@@ -21,7 +22,6 @@ import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.renderer.vertex.VertexBuffer;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Vector2f;
 
@@ -33,6 +33,9 @@ import static org.lwjgl.opengl.GL11.*;
 @ElementInfo(name = "Radar")
 public class Radar extends Element {
 
+    public Radar() {
+        super(5.0, 130, 1f, new Side(Side.Horizontal.LEFT, Side.Vertical.UP));
+    }
     public static float SQRT_OF_TWO = (float) Math.sqrt(2f);
 
     private FloatValue sizeValue = new FloatValue("Size", 90f, 30f, 500f);
@@ -46,7 +49,6 @@ public class Radar extends Element {
     private VertexBuffer fovMarkerVertexBuffer;
     private float lastFov = 0f;
 
-    @Nullable
     @Override
     public Border drawElement() {
         MiniMapRegister.updateChunks();

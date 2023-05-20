@@ -7,10 +7,10 @@ package net.ccbluex.liquidbounce.injection.forge.mixins.entity;
 
 import me.aquavit.liquidsense.event.EventState;
 import me.aquavit.liquidsense.event.events.PreUpdateEvent;
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.modules.fun.Derp;
 import me.aquavit.liquidsense.modules.render.NoSwing;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.event.events.*;
 import net.ccbluex.liquidbounce.features.module.modules.movement.InvMove;
 import net.ccbluex.liquidbounce.features.module.modules.movement.NoSlow;

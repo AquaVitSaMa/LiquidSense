@@ -1,23 +1,20 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
-import me.aquavit.liquidsense.utils.client.InventoryUtils;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.inventory.Slot;
-import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -29,7 +26,6 @@ public class Inventory extends Element {
     private ListValue mode = new ListValue("Mode",new String[]{"Minecraft","Rect"},"Minecraft");
     private static final ResourceLocation TEXTURE = new ResourceLocation("textures/gui/container/generic_54.png");
 
-    @Nullable
     @Override
     public Border drawElement() {
         GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);

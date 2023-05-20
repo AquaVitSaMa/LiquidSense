@@ -60,7 +60,7 @@ public class TargetCommand extends Command {
         switch (args.length) {
             case 1:
                 return Arrays.stream(new String[]{"players", "mobs", "animals", "invisible","dead"})
-                        .filter(it -> it.startsWith(args[0]))
+                        .filter(it -> it.toLowerCase().startsWith(args[0]))
                         .collect(Collectors.toList());
             default:
                 return new ArrayList<>();

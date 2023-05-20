@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.modules.client;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.ListValue;
 
 @ModuleInfo(name = "Cape", description = "Cape", category = ModuleCategory.CLIENT)
 public class Cape extends Module {

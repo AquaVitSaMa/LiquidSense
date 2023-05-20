@@ -17,7 +17,6 @@ import net.minecraft.network.play.client.C03PacketPlayer;
 import net.minecraft.util.*;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
-import org.jetbrains.annotations.NotNull;
 
 import java.util.Random;
 
@@ -433,7 +432,6 @@ public final class RotationUtils extends MinecraftInstance implements Listenable
      * @param turnSpeed your turn speed
      * @return limited rotation
      */
-    @NotNull
     public static Rotation limitAngleChange(final Rotation currentRotation, final Rotation targetRotation, final float turnSpeed) {
         final float yawDifference = getAngleDifference(targetRotation.getYaw(), currentRotation.getYaw());
         final float pitchDifference = getAngleDifference(targetRotation.getPitch(), currentRotation.getPitch());

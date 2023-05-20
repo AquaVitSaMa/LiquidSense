@@ -4,12 +4,11 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.item.ItemStack;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
 @ElementInfo(name = "Armor")
@@ -21,7 +20,6 @@ public class Armor extends Element {
         super(-8,57,1f,new Side(Side.Horizontal.MIDDLE, Side.Vertical.DOWN));
     }
 
-    @Nullable
     @Override
     public Border drawElement() {
         if (mc.playerController.isNotCreative()) {

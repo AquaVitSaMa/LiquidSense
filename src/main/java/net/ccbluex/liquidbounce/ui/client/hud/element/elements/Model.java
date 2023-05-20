@@ -5,9 +5,8 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.ListValue;
-import org.jetbrains.annotations.Nullable;
+import me.aquavit.liquidsense.value.FloatValue;
+import me.aquavit.liquidsense.value.ListValue;
 
 import static me.aquavit.liquidsense.utils.render.RenderUtils.drawEntityOnScreen;
 
@@ -29,7 +28,6 @@ public class Model extends Element {
         super(40,100,1f,new Side(Side.Horizontal.LEFT, Side.Vertical.UP));
     }
 
-    @Nullable
     @Override
     public Border drawElement() {
         switch (yawMode.get()){

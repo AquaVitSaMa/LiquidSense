@@ -15,9 +15,9 @@ import me.aquavit.liquidsense.modules.player.Blink;
 import me.aquavit.liquidsense.modules.world.Scaffold;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
-import net.ccbluex.liquidbounce.value.Value;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.IntegerValue;
+import me.aquavit.liquidsense.value.Value;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
@@ -94,7 +94,8 @@ public class AutoPot extends Module {
         }
 
         if (potting) {
-            if (mc.thePlayer.inventory.getCurrentItem() != null && mc.playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.inventory.getCurrentItem())) {
+            if (mc.thePlayer.inventory.getCurrentItem() != null &&
+                    mc.playerController.sendUseItem(mc.thePlayer, mc.theWorld, mc.thePlayer.inventory.getCurrentItem())) {
                 mc.entityRenderer.itemRenderer.resetEquippedProgress2();
             }
 

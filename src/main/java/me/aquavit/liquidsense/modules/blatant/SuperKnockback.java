@@ -5,7 +5,7 @@ import me.aquavit.liquidsense.event.EventTarget;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.value.IntegerValue;
+import me.aquavit.liquidsense.value.IntegerValue;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.network.play.client.C0BPacketEntityAction;
 

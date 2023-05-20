@@ -10,7 +10,6 @@ import me.aquavit.liquidsense.utils.render.Colors;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.util.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 
 import java.awt.*;
 
@@ -21,8 +20,6 @@ public class HeadLogo extends Element {
 
     private final Translate translate = new Translate(0f , 0f);
 
-
-    @Nullable
     @Override
     public Border drawElement() {
         if (rl == null) {

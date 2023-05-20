@@ -1,6 +1,5 @@
 package me.aquavit.liquidsense.utils.client;
 
-import kotlin.jvm.internal.Intrinsics;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.misc.ServerUtils;
@@ -15,11 +14,11 @@ public class Replacement extends MinecraftInstance {
 
             switch (str.toLowerCase()) {
                 case "x":
-                    return Text.Companion.getDECIMAL_FORMAT().format(mc.thePlayer.posX);
+                    return Text.DECIMAL_FORMAT.format(mc.thePlayer.posX);
                 case "y":
-                    return Text.Companion.getY_FORMAT().format(mc.thePlayer.posY);
+                    return Text.Y_FORMAT.format(mc.thePlayer.posY);
                 case "z":
-                    return Text.Companion.getDECIMAL_FORMAT().format(mc.thePlayer.posZ);
+                    return Text.DECIMAL_FORMAT.format(mc.thePlayer.posZ);
                 case "xdp":
                     return String.valueOf(mc.thePlayer.posX);
                 case "ydp":
@@ -27,18 +26,18 @@ public class Replacement extends MinecraftInstance {
                 case "zdp":
                     return String.valueOf(mc.thePlayer.posZ);
                 case "velocity":
-                    return Text.Companion.getDECIMAL_FORMAT().format(Math.sqrt(
+                    return Text.DECIMAL_FORMAT.format(Math.sqrt(
                             mc.thePlayer.motionX * mc.thePlayer.motionX + mc.thePlayer.motionZ * mc.thePlayer.motionZ) * 20);
                 case "timer":
-                    return Text.Companion.getDECIMAL_FORMAT().format(mc.timer.timerSpeed);
+                    return Text.DECIMAL_FORMAT.format(mc.timer.timerSpeed);
                 case "ping":
                     return String.valueOf(EntityUtils.getPing(mc.thePlayer));
                 case "food":
                     return String.valueOf(mc.thePlayer.getFoodStats().getFoodLevel());
                 case "health":
-                    return Text.Companion.getDECIMAL_FORMAT().format(mc.thePlayer.getHealth());
+                    return Text.DECIMAL_FORMAT.format(mc.thePlayer.getHealth());
                 case "maxheatlh":
-                    return Text.Companion.getDECIMAL_FORMAT().format(mc.thePlayer.getMaxHealth());
+                    return Text.DECIMAL_FORMAT.format(mc.thePlayer.getMaxHealth());
             }
         }
 
@@ -54,9 +53,9 @@ public class Replacement extends MinecraftInstance {
             case "fps":
                 return String.valueOf(Minecraft.getDebugFPS());
             case "date":
-                return Text.Companion.getDECIMAL_FORMAT().format(System.currentTimeMillis());
+                return Text.DECIMAL_FORMAT.format(System.currentTimeMillis());
             case "time":
-                return Text.Companion.getHOUR_FORMAT().format(System.currentTimeMillis());
+                return Text.HOUR_FORMAT.format(System.currentTimeMillis());
             case "serverip":
                 return ServerUtils.getRemoteIp();
             case "cps":

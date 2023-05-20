@@ -10,10 +10,10 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.FloatValue;
+import me.aquavit.liquidsense.value.IntegerValue;
+import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.util.EnumFacing;
 

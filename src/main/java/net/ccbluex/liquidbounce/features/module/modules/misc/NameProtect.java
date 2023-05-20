@@ -14,8 +14,8 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.file.configs.FriendsConfig;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.TextValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.TextValue;
 import net.minecraft.client.network.NetworkPlayerInfo;
 
 @ModuleInfo(name = "NameProtect", description = "Changes playernames clientside.", category = ModuleCategory.MISC)

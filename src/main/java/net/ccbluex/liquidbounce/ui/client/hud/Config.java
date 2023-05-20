@@ -5,8 +5,8 @@ import me.aquavit.liquidsense.utils.client.ClientUtils;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
-import net.ccbluex.liquidbounce.value.FontValue;
-import net.ccbluex.liquidbounce.value.Value;
+import me.aquavit.liquidsense.value.FontValue;
+import me.aquavit.liquidsense.value.Value;
 
 import java.util.Objects;
 
@@ -15,7 +15,7 @@ public class Config {
 
     public Config(final String config) {
         this.jsonArray = new JsonArray();
-        this.jsonArray = (JsonArray)new Gson().fromJson(config, JsonArray.class);
+        this.jsonArray = new Gson().fromJson(config, JsonArray.class);
     }
 
     public Config(final HUD hud) {
@@ -37,11 +37,18 @@ public class Config {
     }
 
     public String toJson() {
+        if (jsonArray == null) {
+            return "";
+        }
         return new GsonBuilder().setPrettyPrinting().create().toJson(this.jsonArray);
     }
 
     public HUD toHUD() {
         final HUD hud = new HUD();
+
+        if (jsonArray == null) {
+            return HUD.Companion.createDefault();
+        }
 
         try {
             for (final JsonElement jsonElement : this.jsonArray) {

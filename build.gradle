@@ -5,7 +5,6 @@ allprojects {
 }
 
 buildscript {
-    ext.kotlin_version = '1.3.61'
     
     repositories {
         jcenter()
@@ -32,7 +31,6 @@ buildscript {
         classpath "gradle.plugin.com.matthewprenger:CurseGradle:1.0.10"
         classpath "org.spongepowered:mixingradle:0.6-SNAPSHOT"
         classpath "com.github.jengelman.gradle.plugins:shadow:4.0.4"
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
 
@@ -66,6 +64,7 @@ minecraft {
     runDir = "run"
     mappings = "stable_22"
     makeObfSourceJar = false //如果你不想让build时间变长就别开
+    clientJvmArgs += ["-Dfml.coreMods.load=net.ccbluex.liquidbounce.injection.forge.TransformerLoader", "-Xmx1024m -Xms1024m"]
 }
 
 dependencies {
@@ -74,7 +73,6 @@ dependencies {
     }
 
     compile "com.jagrosh:DiscordIPC:0.4"
-    compile group: "org.jetbrains.kotlin", name: "kotlin-stdlib", version: kotlin_version
 
     //implementation "com.github.TheAltening:API-Java:master-SNAPSHOT"
     implementation "com.github.TheAltening:API-Java-AuthLib:-SNAPSHOT"
@@ -120,23 +118,10 @@ jar {
 
 
 apply plugin: "idea"
-apply plugin: "kotlin"
 
 idea {
     module {
         inheritOutputDirs = true
-    }
-}
-
-compileKotlin {
-    kotlinOptions {
-        jvmTarget = "1.8"
-    }
-}
-
-compileTestKotlin {
-    kotlinOptions {
-        jvmTarget = "1.8"
     }
 }
 
@@ -150,8 +135,6 @@ shadowJar {
         include(dependency('org.scijava:native-lib-loader'))
         include(dependency('com.kohlschutter.junixsocket:junixsocket-common'))
         include(dependency('com.kohlschutter.junixsocket:junixsocket-native-common'))
-
-        include(dependency("org.jetbrains.kotlin:kotlin-stdlib:${kotlin_version}"))
 
         include(dependency("com.github.TheAltening:API-Java"))
         include(dependency("com.github.TheAltening:API-Java-AuthLib"))

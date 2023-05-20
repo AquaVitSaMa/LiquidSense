@@ -8,8 +8,8 @@ import me.aquavit.liquidsense.utils.timer.TimeUtils;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.IntegerValue;
 import net.minecraft.client.settings.KeyBinding;
 
 import java.util.Random;

@@ -16,7 +16,7 @@ import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot;
 import me.aquavit.liquidsense.modules.render.FreeCam;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
-import net.ccbluex.liquidbounce.value.BoolValue;
+import me.aquavit.liquidsense.value.BoolValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockAir;
 import net.minecraft.client.settings.GameSettings;

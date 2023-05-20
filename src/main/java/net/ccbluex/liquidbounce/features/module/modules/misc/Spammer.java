@@ -14,9 +14,9 @@ import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import me.aquavit.liquidsense.utils.misc.RandomUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
-import net.ccbluex.liquidbounce.value.TextValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.IntegerValue;
+import me.aquavit.liquidsense.value.TextValue;
 
 import java.util.Random;
 

@@ -59,7 +59,7 @@ public class HUD extends MinecraftInstance {
 
         public static HUD createDefault() {
             return (new HUD())
-                    .addElement(Text.Companion.defaultClient())
+                    .addElement(Text.defaultClient())
                     .addElement(new Arraylist())
                     .addElement(new ScoreboardElement())
                     .addElement(new Armor())
@@ -89,7 +89,7 @@ public class HUD extends MinecraftInstance {
 
             } catch (Exception ex) {
                 ClientUtils.getLogger()
-                        .error("Something went wrong while drawing ${it.name} element in HUD.", ex);
+                        .error("Something went wrong while drawing " + it.getName() + " element in HUD.", ex);
 
             }
 

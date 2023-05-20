@@ -11,7 +11,7 @@ import net.ccbluex.liquidbounce.features.module.modules.movement.Fly;
 import net.ccbluex.liquidbounce.features.module.modules.movement.LongJump;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Speed;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
-import net.ccbluex.liquidbounce.value.BoolValue;
+import me.aquavit.liquidsense.value.BoolValue;
 import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 import net.minecraft.util.ChatComponentText;
 

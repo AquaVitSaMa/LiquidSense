@@ -13,7 +13,7 @@ import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import net.ccbluex.liquidbounce.features.module.modules.render.XRay;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
 

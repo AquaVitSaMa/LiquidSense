@@ -53,7 +53,7 @@ public class ToggleCommand extends Command {
             case 1:
                 return LiquidBounce.moduleManager.getModules().stream()
                         .map(Module::getName)
-                        .filter(module -> module.startsWith(moduleName))
+                        .filter(module -> module.toLowerCase().startsWith(moduleName.toLowerCase()))
                         .collect(Collectors.toList());
             default:
                 return new ArrayList<>();

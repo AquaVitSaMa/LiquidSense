@@ -8,7 +8,6 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.RenderHelper;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +26,6 @@ public class Hotbar extends Element {
         }
     }
 
-    @Nullable
     @Override
     public Border drawElement() {
         GlStateManager.pushMatrix();

@@ -9,12 +9,8 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.FadeState;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Print;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -29,7 +25,6 @@ public class Notifications extends Element {
 
     public Stream<Notification> notification;
     @Override
-    @Nullable
     public Border drawElement() {
         notification = LiquidBounce.hud.getNotifications().stream();
         int index = 0;

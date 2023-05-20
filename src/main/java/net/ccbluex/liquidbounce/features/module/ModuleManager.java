@@ -1,5 +1,6 @@
 package net.ccbluex.liquidbounce.features.module;
 
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.modules.render.ClickGUI;
 import me.aquavit.liquidsense.modules.client.Fullbright;
 import me.aquavit.liquidsense.modules.client.HUD;
@@ -7,7 +8,6 @@ import me.aquavit.liquidsense.modules.ghost.AutoArmor;
 import me.aquavit.liquidsense.modules.blatant.AutoPot;
 import me.aquavit.liquidsense.modules.blatant.AutoSoup;
 import me.aquavit.liquidsense.modules.client.Target;
-import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.modules.ghost.*;
 import me.aquavit.liquidsense.modules.player.Blink;
 import me.aquavit.liquidsense.modules.player.FastUse;
@@ -27,7 +27,7 @@ import net.ccbluex.liquidbounce.features.module.modules.misc.*;
 import net.ccbluex.liquidbounce.features.module.modules.movement.*;
 import net.ccbluex.liquidbounce.features.module.modules.render.*;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
-import net.ccbluex.liquidbounce.value.Value;
+import me.aquavit.liquidsense.value.Value;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
@@ -51,8 +51,9 @@ public final class ModuleManager implements Listenable {
 
     private final HashMap<Class<?>, Module> moduleClassMap;
 
+
     public ModuleManager() {
-        this.moduleClassMap = new HashMap<Class<?>, Module>();
+        this.moduleClassMap = new HashMap<>();
         LiquidBounce.eventManager.registerListener(this);
     }
 
@@ -114,11 +115,12 @@ public final class ModuleManager implements Listenable {
 
     public void registerModule(final Module module) {
         modules.add(module);
-        ((Map)moduleClassMap).put(module.getClass(), module);
+        (moduleClassMap).put(module.getClass(), module);
 
         this.generateCommand(module);
         LiquidBounce.eventManager.registerListener(module);
     }
+
 
     public void registerModule(Class<? extends Module> moduleClass) {
         try {
@@ -132,22 +134,23 @@ public final class ModuleManager implements Listenable {
     /**
      * Register a list of modules
      */
-    public void registerALLModule(Class<? extends Module>... modules) {
+    @SafeVarargs
+    public final void registerALLModule(Class<? extends Module>... modules) {
         List<Object> liquidSenseModules = LiquidBounce.liquidSense.getLiquidSenseModules();
         for (Class<? extends Module> lbModule : modules) {
             this.registerModule(lbModule);
         }
-        for (Object cbModule : liquidSenseModules) {
-            this.registerModule(cbModule);
+        for (Object lsModule : liquidSenseModules) {
+            this.registerModule(lsModule);
         }
     }
 
-    private void registerModule(Object cbModule) {
+    private void registerModule(Object lsModule) {
         try {
-            this.registerModule((Module)((Class)cbModule).newInstance());
+            this.registerModule((Module)((Class<?>)lsModule).newInstance());
         }
         catch (Throwable e) {
-            ClientUtils.getLogger().error("Failed to load module: " + ((Class)cbModule).getName() + " (" + e.getClass().getName() + ": " + e.getMessage() + ")");
+            ClientUtils.getLogger().error("Failed to load module: " + ((Class<?>)lsModule).getName() + " (" + e.getClass().getName() + ": " + e.getMessage() + ")");
         }
     }
 

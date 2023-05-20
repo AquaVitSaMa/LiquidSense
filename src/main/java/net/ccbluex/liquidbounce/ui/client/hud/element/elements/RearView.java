@@ -13,7 +13,6 @@ import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraft.client.renderer.vertex.DefaultVertexFormats;
 import net.minecraft.client.shader.Framebuffer;
 import net.minecraft.util.Vec3;
-import org.jetbrains.annotations.Nullable;
 
 @ElementInfo(name = "RearView")
 public class RearView extends Element {
@@ -53,7 +52,6 @@ public class RearView extends Element {
         update();
     }
 
-    @Nullable
     @Override
     public Border drawElement() {
         float xOffset = 2;

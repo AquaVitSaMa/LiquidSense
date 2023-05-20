@@ -1,13 +1,12 @@
 package me.aquavit.liquidsense.utils.client;
 
 import me.aquavit.liquidsense.modules.client.Target;
-import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import net.ccbluex.liquidbounce.features.module.modules.misc.Spammer;
 import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
-import net.ccbluex.liquidbounce.value.*;
+import me.aquavit.liquidsense.value.*;
 import org.lwjgl.input.Keyboard;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 
@@ -109,11 +108,11 @@ public class SettingsUtils {
                                             } else if (moduleValue instanceof ListValue) {
                                                 ((ListValue)moduleValue).changeValue(value);
                                             }
-                                            ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + module.getName() + "§7 value §8§l" + moduleValue.getName() + "§7 set to §c§l" + value + "§7.");
+                                            ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + module.getName() + "§7 value §8§l" + moduleValue.name + "§7 set to §c§l" + value + "§7.");
 
                                         }
                                         catch (Exception e) {
-                                            ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + e.getClass().getName() + "§7(" + e.getMessage() + ") §cexception while set §a§l" + value + "§c to §a§l" + moduleValue.getName() + "§c in §a§l" + module.getName() + "§c.");
+                                            ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §a§l" + e.getClass().getName() + "§7(" + e.getMessage() + ") §cexception while set §a§l" + value + "§c to §a§l" + moduleValue.name + "§c in §a§l" + module.getName() + "§c.");
                                         }
                                     } else {
                                         ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §cValue §a§l" + valueName + "§c don't found in module §a§l" + moduleName + "§c.");
@@ -138,7 +137,7 @@ public class SettingsUtils {
         LiquidBounce.moduleManager.getModules().stream().filter(module -> module.getCategory() != ModuleCategory.RENDER && !(module instanceof NameProtect) && !(module instanceof Spammer)).forEach(module -> {
             if (values) {
                 for (Value<?> item : module.getValues()) {
-                    stringBuilder.append(module.getName()).append(" ").append(item.getName()).append(" ").append(((Value) item).get()).append("\n");
+                    stringBuilder.append(module.getName()).append(" ").append(item.name).append(" ").append(((Value) item).get()).append("\n");
                 }
             }
             if (states) {

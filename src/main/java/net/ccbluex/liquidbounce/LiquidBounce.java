@@ -1,9 +1,7 @@
 package net.ccbluex.liquidbounce;
 
-import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import kotlin.jvm.internal.Intrinsics;
 import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.forge.BlocksTab;
@@ -15,6 +13,7 @@ import me.aquavit.liquidsense.event.events.ClientShutdownEvent;
 import me.aquavit.liquidsense.event.EventManager;
 import me.aquavit.liquidsense.command.CommandManager;
 import net.ccbluex.liquidbounce.features.module.ModuleManager;
+import net.ccbluex.liquidbounce.ui.client.clickgui.neverlose.Main;
 import net.ccbluex.liquidbounce.ui.client.gui.elements.AntiForge;
 import net.ccbluex.liquidbounce.ui.client.gui.elements.BungeeCordSpoof;
 import net.ccbluex.liquidbounce.file.FileManager;
@@ -22,8 +21,6 @@ import net.ccbluex.liquidbounce.script.ScriptManager;
 import net.ccbluex.liquidbounce.script.remapper.Remapper;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
 import net.ccbluex.liquidbounce.ui.client.hud.HUD;
-import net.ccbluex.liquidbounce.ui.client.miscible.Miscible;
-import net.ccbluex.liquidbounce.ui.client.neverlose.Main;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.client.InventoryUtils;
 import me.aquavit.liquidsense.utils.client.RotationUtils;
@@ -56,7 +53,6 @@ public class LiquidBounce {
     public static ScriptManager scriptManager;
 
     public static HUD hud;
-    public static Miscible miscible;
     public static Main neverlose;
 
     public int latestVersion;
@@ -101,7 +97,6 @@ public class LiquidBounce {
         fileManager.loadConfigs(fileManager.modulesConfig, fileManager.valuesConfig, fileManager.accountsConfig,
                 fileManager.friendsConfig, fileManager.xrayConfig, fileManager.shortcutsConfig);
 
-        miscible = new Miscible();
         neverlose = new Main();
 
         if (ClassUtils.hasForge()) {
@@ -116,15 +111,15 @@ public class LiquidBounce {
         ClientUtils.disableFastRender();
 
         try {
-            final JsonElement jsonObj = new JsonParser().parse(HttpUtils.get(CLIENT_CLOUD+"/versions.json"));
-            if (jsonObj instanceof JsonObject && ((JsonObject)jsonObj).has(MINECRAFT_VERSION)) {
-                JsonElement jsonElement = ((JsonObject)jsonObj).get(MINECRAFT_VERSION);
-                Intrinsics.checkExpressionValueIsNotNull((Object)jsonElement, (String)"jsonObj[MINECRAFT_VERSION]");
-                latestVersion = jsonElement.getAsInt();
+            // Read versions json from cloud
+            JsonObject jsonObj = new JsonParser().parse(HttpUtils.get(CLIENT_CLOUD + "/versions.json")).getAsJsonObject();
+            // Check json is valid object and has current minecraft version
+            if (jsonObj.isJsonObject() && jsonObj.has(MINECRAFT_VERSION)) {
+                // Get official latest client version
+                latestVersion = jsonObj.get(MINECRAFT_VERSION).getAsInt();
             }
-        }
-        catch (Throwable exception) {
-            ClientUtils.getLogger().error("Failed to check for updates.", exception);
+        } catch (Throwable exception) {
+            ClientUtils.getLogger().error("Failed to check for updates.");
         }
 
         LoadAltManagerSkin();
@@ -213,16 +208,8 @@ public class LiquidBounce {
         return hud;
     }
 
-    public final void setHud(HUD hUD) {
-        hud = hUD;
-    }
-
-    public final Miscible getMiscible() {
-        return LiquidBounce.miscible;
-    }
-
-    public final void setMiscible(Miscible miscible) {
-        LiquidBounce.miscible = miscible;
+    public final void setHud(HUD hud) {
+        hud = hud;
     }
 
     public final Main getNeverlose() {

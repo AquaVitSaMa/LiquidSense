@@ -11,8 +11,8 @@ import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import me.aquavit.liquidsense.utils.client.Rotation;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.FloatValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.FloatValue;
 import net.minecraft.entity.Entity;
 
 import java.util.Comparator;
@@ -42,7 +42,7 @@ public class Aimbot extends Module {
 
         float range = rangeValue.get();
         Entity entity = mc.theWorld.loadedEntityList.stream().filter(it -> EntityUtils.isSelected(it, true, false) && mc.thePlayer.canEntityBeSeen(it) &&
-                mc.thePlayer.canEntityBeSeen(it) && PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, it) <= range &&
+                PlayerExtensionUtils.getDistanceToEntityBox(mc.thePlayer, it) <= range &&
                 RotationUtils.getRotationDifference(it) <= fovValue.get()).min(Comparator.comparingDouble(RotationUtils::getRotationDifference)).orElse(null);
 
         if (entity == null) return;

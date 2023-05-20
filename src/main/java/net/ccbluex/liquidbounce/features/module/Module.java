@@ -7,7 +7,7 @@ import me.aquavit.liquidsense.event.Listenable;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Print;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Type;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
-import net.ccbluex.liquidbounce.value.Value;
+import me.aquavit.liquidsense.value.Value;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
@@ -167,7 +167,7 @@ public class Module extends MinecraftInstance implements Listenable {
                 final Object o = field.get(this);
                 if (o instanceof Value) {
                     final Value value = (Value)o;
-                    if (value.getName().equalsIgnoreCase(valueName)) {
+                    if (value.name.equalsIgnoreCase(valueName)) {
                         return value;
                     }
                 }
@@ -185,7 +185,7 @@ public class Module extends MinecraftInstance implements Listenable {
             try {
                 field.setAccessible(true);
                 final Object o = field.get(this);
-                if (o instanceof Value && ((Value<?>) o).getDisplayable()) {
+                if (o instanceof Value && ((Value<?>) o).isDisplayable()) {
                     values.add((Value<?>)o);
                 }
             }

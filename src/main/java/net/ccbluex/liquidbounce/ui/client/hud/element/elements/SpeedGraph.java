@@ -5,10 +5,9 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
-import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
+import me.aquavit.liquidsense.value.FloatValue;
+import me.aquavit.liquidsense.value.IntegerValue;
 import net.minecraft.client.renderer.GlStateManager;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.opengl.GL11;
 
 import java.awt.*;
@@ -32,7 +31,6 @@ public class SpeedGraph extends Element {
     private List<Double> speedList = new ArrayList<Double>();
     private int lastTick = -1;
 
-    @Nullable
     @Override
     public Border drawElement() {
         int width = this.width.get();

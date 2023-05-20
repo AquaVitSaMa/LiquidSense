@@ -12,9 +12,9 @@ import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
 import net.ccbluex.liquidbounce.features.module.modules.exploit.Phase;
 import net.ccbluex.liquidbounce.features.module.modules.movement.Fly;
-import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.FloatValue;
+import me.aquavit.liquidsense.value.IntegerValue;
+import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.network.play.client.C03PacketPlayer;
 
 import java.math.BigDecimal;

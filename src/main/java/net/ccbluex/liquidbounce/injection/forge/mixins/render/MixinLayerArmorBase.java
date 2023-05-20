@@ -24,6 +24,7 @@ import org.spongepowered.asm.mixin.Shadow;
 
 @Mixin(LayerArmorBase.class)
 @SideOnly(Side.CLIENT)
+
 public abstract class MixinLayerArmorBase <T extends ModelBase> implements LayerRenderer<EntityLivingBase> {
 
     @Shadow

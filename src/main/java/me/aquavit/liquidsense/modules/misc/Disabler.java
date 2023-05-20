@@ -8,7 +8,7 @@ import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import net.ccbluex.liquidbounce.value.IntegerValue;
+import me.aquavit.liquidsense.value.IntegerValue;
 import net.minecraft.network.play.client.C00PacketKeepAlive;
 import net.minecraft.network.play.client.C0FPacketConfirmTransaction;
 import net.minecraft.network.play.client.C14PacketTabComplete;

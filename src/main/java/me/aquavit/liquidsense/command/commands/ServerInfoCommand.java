@@ -9,8 +9,7 @@ import net.minecraft.client.multiplayer.ServerData;
 import net.minecraft.network.Packet;
 import net.minecraft.network.handshake.client.C00Handshake;
 
-public class ServerInfoCommand extends Command implements Listenable
-{
+public class ServerInfoCommand extends Command implements Listenable {
     private String ip;
     private int port;
 

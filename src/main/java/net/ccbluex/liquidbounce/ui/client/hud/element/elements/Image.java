@@ -7,10 +7,9 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.value.TextValue;
+import me.aquavit.liquidsense.value.TextValue;
 import net.minecraft.client.renderer.texture.DynamicTexture;
 import net.minecraft.util.ResourceLocation;
-import org.jetbrains.annotations.Nullable;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -45,7 +44,6 @@ public class Image extends Element {
     private int width = 64;
     private int height = 64;
 
-    @Nullable
     @Override
     public Border drawElement() {
         RenderUtils.drawImage(resourceLocation, 0, 0, width / 2, height / 2);

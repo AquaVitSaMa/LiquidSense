@@ -6,9 +6,9 @@ import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.FloatValue;
+import me.aquavit.liquidsense.value.IntegerValue;
 
 @ModuleInfo(name = "GameSpeed", description = "Changes the speed of the entire game.", category = ModuleCategory.WORLD)
 public class GameSpeed extends Module {

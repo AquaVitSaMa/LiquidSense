@@ -5,8 +5,8 @@
  */
 package net.ccbluex.liquidbounce.injection.forge.mixins.render;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.modules.blatant.Aura;
+import net.ccbluex.liquidbounce.LiquidBounce;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;

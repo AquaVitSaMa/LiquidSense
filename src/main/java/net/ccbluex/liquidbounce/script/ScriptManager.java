@@ -69,8 +69,8 @@ public class ScriptManager {
     public void deleteScript(Script script) {
         script.onDisable();
         scripts.remove(script);
-        script.getScriptFile().delete();
-        ClientUtils.getLogger().info("Successfully deleted script: " + script.getScriptFile().getName());
+        script.scriptFile.delete();
+        ClientUtils.getLogger().info("Successfully deleted script: " + script.scriptFile.getName());
     }
 
     public void reloadScripts() {

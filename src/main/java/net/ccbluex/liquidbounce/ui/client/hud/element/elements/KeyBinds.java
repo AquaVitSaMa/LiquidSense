@@ -10,7 +10,6 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
 import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.minecraft.client.renderer.GlStateManager;
-import org.jetbrains.annotations.Nullable;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
 
@@ -22,7 +21,6 @@ public class KeyBinds extends Element {
 
 	private Translate translate = new Translate(0f , 0f);
 
-	@Nullable
 	@Override
 	public Border drawElement() {
 		int index = 0;

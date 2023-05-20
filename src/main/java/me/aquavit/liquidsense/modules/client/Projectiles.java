@@ -7,7 +7,7 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import me.aquavit.liquidsense.utils.client.RotationUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.value.BoolValue;
+import me.aquavit.liquidsense.value.BoolValue;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.renderer.entity.RenderManager;
 import net.minecraft.entity.Entity;
@@ -84,7 +84,8 @@ public class Projectiles extends Module {
 
         // Motions
         double motionX = (-MathHelper.sin(yaw / 180f * 3.1415927F) * MathHelper.cos(pitch / 180F * 3.1415927F) * (isBow ? 1.0 : 0.4));
-        double motionY = -MathHelper.sin((pitch + (item instanceof ItemPotion && ItemPotion.isSplash(mc.thePlayer.getHeldItem().getItemDamage()) ? -20 : 0)) / 180f * 3.1415927f) * (isBow ? 1.0 : 0.4);
+        double motionY = -MathHelper.sin((pitch +
+                (item instanceof ItemPotion && ItemPotion.isSplash(mc.thePlayer.getHeldItem().getItemDamage()) ? -20 : 0)) / 180f * 3.1415927f) * (isBow ? 1.0 : 0.4);
         double motionZ = (MathHelper.cos(yaw / 180f * 3.1415927F) * MathHelper.cos(pitch / 180F * 3.1415927F) * (isBow ? 1.0 : 0.4));
         double distance = MathHelper.sqrt_double(motionX * motionX + motionY * motionY + motionZ * motionZ);
 

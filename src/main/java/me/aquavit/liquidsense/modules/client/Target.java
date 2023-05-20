@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.modules.client;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.value.BoolValue;
+import me.aquavit.liquidsense.value.BoolValue;
 
 @ModuleInfo(name = "Target", description = "Choose Entity", category = ModuleCategory.CLIENT, canEnable = false)
 public class Target extends Module {

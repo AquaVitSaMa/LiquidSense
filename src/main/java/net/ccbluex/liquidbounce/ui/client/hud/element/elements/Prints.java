@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element.elements;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.modules.blatant.Aura;
+import net.ccbluex.liquidbounce.LiquidBounce;
 import net.ccbluex.liquidbounce.ui.client.hud.designer.GuiHudDesigner;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Border;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Element;
@@ -11,7 +11,6 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Print;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.FadeState;
 import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Type;
 import net.minecraft.entity.EntityLivingBase;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.HashMap;
 import java.util.stream.Collectors;
@@ -30,7 +29,7 @@ public class Prints extends Element {
 
     public Stream<Print> print;
     private HashMap<EntityLivingBase, Float> healthMap = new HashMap<EntityLivingBase, Float>();
-    @Nullable
+
     @Override
     public Border drawElement() {
         print = LiquidBounce.hud.getPrints().stream();

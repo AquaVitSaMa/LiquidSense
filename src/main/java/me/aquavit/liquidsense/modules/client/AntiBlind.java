@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.modules.client;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.value.BoolValue;
+import me.aquavit.liquidsense.value.BoolValue;
 
 @ModuleInfo(name = "AntiBlind", description = "Cancels blindness effects.", category = ModuleCategory.CLIENT)
 public class AntiBlind extends Module {

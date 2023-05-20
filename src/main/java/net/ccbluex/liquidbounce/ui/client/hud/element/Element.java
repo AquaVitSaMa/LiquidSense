@@ -1,7 +1,7 @@
 package net.ccbluex.liquidbounce.ui.client.hud.element;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.value.Value;
+import me.aquavit.liquidsense.value.Value;
 import net.minecraft.client.gui.ScaledResolution;
 
 import java.lang.reflect.Field;
@@ -143,7 +143,7 @@ public abstract class Element extends MinecraftInstance {
 			try {
 				field.setAccessible(true);
 				final Object o = field.get(this);
-				if (o instanceof Value && ((Value<?>) o).getDisplayable()) {
+				if (o instanceof Value && ((Value<?>) o).isDisplayable()) {
 					values.add((Value<?>) o);
 				}
 			} catch (IllegalAccessException e) {

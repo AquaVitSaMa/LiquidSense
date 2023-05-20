@@ -11,7 +11,7 @@ import net.ccbluex.liquidbounce.ui.client.gui.elements.BungeeCordSpoof;
 import net.ccbluex.liquidbounce.file.FileConfig;
 import net.ccbluex.liquidbounce.file.FileManager;
 import net.ccbluex.liquidbounce.ui.client.gui.GuiBackground;
-import net.ccbluex.liquidbounce.value.Value;
+import me.aquavit.liquidsense.value.Value;
 
 import java.io.*;
 import java.util.Iterator;

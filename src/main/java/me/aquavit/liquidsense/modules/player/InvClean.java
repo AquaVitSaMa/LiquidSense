@@ -13,9 +13,9 @@ import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
 import me.aquavit.liquidsense.modules.ghost.AutoArmor;
 import net.ccbluex.liquidbounce.injection.implementations.IItemStack;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.IntegerValue;
+import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
@@ -36,7 +36,7 @@ public class InvClean extends Module {
 	private final IntegerValue maxBlockStacksValue = new IntegerValue("MaxBlockStacks", 5, 0, 10) {
 		@Override
 		protected void onChanged(final Integer oldValue, final Integer newValue) {
-			if (newValue < getMinimum()) set(getMinimum());
+			if (newValue < minimum) set(minimum);
 		}
 	};	private final IntegerValue maxDelayValue = new IntegerValue("MaxDelay", 600, 0, 1000) {
 		@Override

@@ -15,7 +15,7 @@ public final class Rotation extends MinecraftInstance {
         this.pitch = pitch;
     }
 
-    public final void toPlayer(EntityPlayer player) {
+    public void toPlayer(EntityPlayer player) {
         if (Float.isNaN(yaw) || Float.isNaN(pitch))
             return;
 
@@ -24,7 +24,7 @@ public final class Rotation extends MinecraftInstance {
         player.rotationPitch = this.pitch;
     }
 
-    public final void fixedSensitivity(float sensitivity) {
+    public void fixedSensitivity(float sensitivity) {
         float f = sensitivity * 0.6f + 0.2f;
         float gcd = f * f * f * 1.2f;
         Rotation rotation = RotationUtils.serverRotation;
@@ -36,7 +36,7 @@ public final class Rotation extends MinecraftInstance {
         this.pitch = rotation.pitch + deltaPitch;
     }
 
-    public final void applyStrafeToPlayer(StrafeEvent event) {
+    public void applyStrafeToPlayer(StrafeEvent event) {
         float d;
         EntityPlayerSP player = mc.thePlayer;
         int dif = (int)((MathHelper.wrapAngleTo180_float(player.rotationYaw - this.yaw - 23.5f - (float)135) + (float)180) / (float)45);
@@ -107,6 +107,8 @@ public final class Rotation extends MinecraftInstance {
                 d = 1.0f;
             }
             d = friction / d;
+            calcStrafe *= d;
+            calcForward *= d;
             float yawSin = MathHelper.sin((float)((float)((double)yaw * Math.PI / (double)180.0f)));
             float yawCos = MathHelper.cos((float)((float)((double)yaw * Math.PI / (double)180.0f)));
             player.motionX += (double)((calcStrafe *= d) * yawCos) - (double)(calcForward *= d) * (double)yawSin;
@@ -114,27 +116,27 @@ public final class Rotation extends MinecraftInstance {
         }
     }
 
-    public final float getYaw() {
+    public float getYaw() {
         return this.yaw;
     }
 
-    public final void setYaw(float yaw) {
+    public void setYaw(float yaw) {
         this.yaw = yaw;
     }
 
-    public final float getPitch() {
+    public float getPitch() {
         return this.pitch;
     }
 
-    public final void setPitch(float pitch) {
+    public void setPitch(float pitch) {
         this.pitch = pitch;
     }
 
-    public final float component1() {
+    public float component1() {
         return this.yaw;
     }
 
-    public final float component2() {
+    public float component2() {
         return this.pitch;
     }
 }

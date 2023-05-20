@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.modules.render;
 
+import me.aquavit.liquidsense.modules.blatant.Aura;
 import me.aquavit.liquidsense.utils.module.Location;
 import me.aquavit.liquidsense.utils.module.Particles;
 import net.ccbluex.liquidbounce.LiquidBounce;
@@ -19,7 +20,6 @@ import org.lwjgl.opengl.GL11;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.EntityLivingBase;
-import me.aquavit.liquidsense.modules.blatant.Aura;
 
 @ModuleInfo(name = "Particle", description = "Particle", category = ModuleCategory.RENDER)
 public class Particle extends Module {

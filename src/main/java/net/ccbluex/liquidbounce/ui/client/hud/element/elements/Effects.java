@@ -6,13 +6,12 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.ElementInfo;
 import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import net.ccbluex.liquidbounce.ui.font.AWTFontRenderer;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.FontValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.FontValue;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.potion.Potion;
 import net.minecraft.potion.PotionEffect;
-import org.jetbrains.annotations.Nullable;
 
 @ElementInfo(name = "Effects")
 public class Effects extends Element {
@@ -24,7 +23,6 @@ public class Effects extends Element {
         super(2,10,1f,new Side(Side.Horizontal.RIGHT, Side.Vertical.DOWN));
     }
 
-    @Nullable
     @Override
     public Border drawElement() {
         float y = 0F;

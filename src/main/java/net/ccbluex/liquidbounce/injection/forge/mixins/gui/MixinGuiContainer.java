@@ -1,8 +1,8 @@
 package net.ccbluex.liquidbounce.injection.forge.mixins.gui;
 
 import me.aquavit.liquidsense.event.events.ChestEvent;
-import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.modules.blatant.Aura;
+import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.modules.player.InvClean;
 import me.aquavit.liquidsense.modules.world.ChestStealer;
 import net.minecraft.client.gui.GuiButton;

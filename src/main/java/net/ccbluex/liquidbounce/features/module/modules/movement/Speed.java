@@ -20,10 +20,10 @@ import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.SpeedMod
 import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.aquavit.*;
 //import net.ccbluex.liquidbounce.features.module.modules.movement.speeds.spartan.*;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.FloatValue;
+import me.aquavit.liquidsense.value.IntegerValue;
+import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.network.play.server.S08PacketPlayerPosLook;
 
 import java.util.ArrayList;
@@ -105,7 +105,7 @@ public class Speed extends Module {
             new NewHypixelHop(),
     };
 
-    public final ListValue modeValue = new ListValue("Mode", getModes(), "NCPBHop") {
+    public final ListValue modeValue = new ListValue("Mode", getModes(), "Hypixel") {
 
         @Override
         protected void onChange(final String oldValue, final String newValue) {

@@ -6,10 +6,10 @@ import me.aquavit.liquidsense.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
-import net.ccbluex.liquidbounce.value.ListValue;
-import net.ccbluex.liquidbounce.value.Value;
+import me.aquavit.liquidsense.value.FloatValue;
+import me.aquavit.liquidsense.value.IntegerValue;
+import me.aquavit.liquidsense.value.ListValue;
+import me.aquavit.liquidsense.value.Value;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.network.Packet;
@@ -70,7 +70,7 @@ public class FastBreak extends Module {
             }
 
             case "Haste": {
-                mc.thePlayer.addPotionEffect(new PotionEffect(Potion.nightVision.id, 1337, hasteLevel.get()));
+                mc.thePlayer.addPotionEffect(new PotionEffect(Potion.harm.id, 1337, hasteLevel.get()));
                 break;
             }
 

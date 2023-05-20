@@ -116,17 +116,16 @@ public final class RenderUtils extends MinecraftInstance {
         rectangle(x + width, y1 - width, x1 - width, y1, borderColor);
     }
 
-    public static void drawCircle(float x, float y, float radius, int start, int end, final Color color) {
+    public static void drawCircle(float x, float y, float radius, int start, int end, Color color) {
         GlStateManager.enableBlend();
         GlStateManager.disableTexture2D();
         GlStateManager.tryBlendFuncSeparate(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA, GL_ONE, GL_ZERO);
-        glColor(Color.WHITE);
+        glColor4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
 
         glEnable(GL_LINE_SMOOTH);
         glLineWidth(1F);
         glBegin(GL_LINE_STRIP);
-        for (float i = end; i >= start; i -= (360 / 90)) {
-            glColor4f(color.getRed() / 255F, color.getGreen() / 255F, color.getBlue() / 255F, color.getAlpha() / 255F);
+        for (float i = end; i >= start; i -= 360F / 90F) {
             glVertex2f((float) (x + (cos(i * PI / 180) * (radius * 1.001F))), (float) (y + (sin(i * PI / 180) * (radius * 1.001F))));
         }
         glEnd();

@@ -7,7 +7,7 @@ import me.aquavit.liquidsense.event.events.UpdateEvent;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.features.module.ModuleCategory;
 import net.ccbluex.liquidbounce.features.module.ModuleInfo;
-import net.ccbluex.liquidbounce.value.BoolValue;
+import me.aquavit.liquidsense.value.BoolValue;
 import net.minecraft.client.gui.GuiGameOver;
 
 @ModuleInfo(name = "AutoSpawn", description = "Automatically respawns you after dying.", category = ModuleCategory.PLAYER)

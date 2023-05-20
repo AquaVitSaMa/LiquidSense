@@ -3,8 +3,7 @@ package me.aquavit.liquidsense.command.commands;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
 
-public class SayCommand extends Command
-{
+public class SayCommand extends Command {
     public SayCommand() {
         super("say");
     }

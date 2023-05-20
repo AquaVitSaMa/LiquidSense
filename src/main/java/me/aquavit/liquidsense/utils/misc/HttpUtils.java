@@ -6,9 +6,7 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.net.URLConnection;
+import java.net.*;
 
 public class HttpUtils {
 
@@ -29,17 +27,24 @@ public class HttpUtils {
         return httpConnection;
     }
 
-    public static String request(String url, String method, String agent) throws IOException {
-        HttpURLConnection connection = make(url, method, agent);
-
-        final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-        final StringBuilder stringBuilder = new StringBuilder();
-        String line;
-        while ((line = bufferedReader.readLine()) != null) {
-            stringBuilder.append(line).append("\n");
+    public static String request(String url, String method, String agent) {
+        try {
+            HttpURLConnection connection = make(url, method, agent);
+            final BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            final StringBuilder stringBuilder = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                stringBuilder.append(line).append("\n");
+            }
+            bufferedReader.close();
+            return stringBuilder.toString();
+        } catch (SocketTimeoutException e) {
+            System.err.println("Read timed out");
+            return null;
+        } catch (IOException e) {
+            System.err.println("Error while making request");
+            return null;
         }
-        bufferedReader.close();
-        return stringBuilder.toString();
     }
 
     public static String get(String url) throws IOException {

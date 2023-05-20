@@ -14,8 +14,7 @@ public class Remapper {
     public static final Remapper INSTANCE = new Remapper();
 
     private final String srgName = "stable_22";
-    private static File srgFile = new File(LiquidBounce.fileManager.dir, "mcp-$srgName.srg");
-
+    private final File srgFile = new File(LiquidBounce.fileManager.dir, "mcp-" + srgName + ".srg");
     private static HashMap<String, HashMap<String, String>> fields = new HashMap<>();
     private static HashMap<String, HashMap<String, String>> methods = new HashMap<>();
 
@@ -32,13 +31,13 @@ public class Remapper {
                 ClientUtils.getLogger().error("[Remapper] Failed to create new file");
             }
 
-            ClientUtils.getLogger().info("[Remapper] Downloading $srgName srg...");
+            ClientUtils.getLogger().info("[Remapper] Downloading " + srgName + " srg...");
             try {
-                HttpUtils.download("${LiquidBounce.CLIENT_CLOUD}/srgs/mcp-$srgName.srg", srgFile);
+                HttpUtils.download(LiquidBounce.CLIENT_CLOUD + "/srgs/mcp-" + srgName + ".srg", srgFile);
             } catch (IOException e) {
                 ClientUtils.getLogger().error("[Remapper] Download " + srgName + " failed.");
             }
-            ClientUtils.getLogger().info("[Remapper] Downloaded $srgName.");
+            ClientUtils.getLogger().info("[Remapper] Downloaded " + srgName + ".");
         }
 
         // Load srg

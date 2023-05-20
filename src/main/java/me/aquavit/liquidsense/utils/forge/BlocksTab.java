@@ -1,6 +1,5 @@
 package me.aquavit.liquidsense.utils.forge;
 
-import kotlin.jvm.internal.Intrinsics;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;

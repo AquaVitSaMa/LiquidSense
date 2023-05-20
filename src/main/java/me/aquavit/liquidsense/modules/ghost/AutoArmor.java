@@ -16,8 +16,8 @@ import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.item.ArmorComparator;
 import me.aquavit.liquidsense.utils.item.ArmorPiece;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.IntegerValue;
 import net.minecraft.client.gui.inventory.GuiInventory;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
@@ -71,7 +71,9 @@ public class AutoArmor extends Module {
         final Map<Integer, List<ArmorPiece>> armorPieces = IntStream.range(0, 36).filter(i -> {
                     final ItemStack itemStack = mc.thePlayer.inventory.getStackInSlot(i);
 
-                    return itemStack != null && itemStack.getItem() instanceof ItemArmor && (i < 9 || System.currentTimeMillis() - ((IItemStack) (Object) itemStack).getItemDelay() >= itemDelayValue.get());
+                    return itemStack != null
+                            && itemStack.getItem() instanceof ItemArmor
+                            && (i < 9 || System.currentTimeMillis() - ((IItemStack) (Object) itemStack).getItemDelay() >= itemDelayValue.get());
                 })
                 .mapToObj(i -> new ArmorPiece(mc.thePlayer.inventory.getStackInSlot(i), i))
                 .collect(Collectors.groupingBy(ArmorPiece::getArmorType));
@@ -127,7 +129,9 @@ public class AutoArmor extends Module {
             if (openInventory)
                 mc.getNetHandler().addToSendQueue(new C16PacketClientStatus(C16PacketClientStatus.EnumState.OPEN_INVENTORY_ACHIEVEMENT));
 
-            mc.playerController.windowClick(mc.thePlayer.inventoryContainer.windowId, isArmorSlot ? item : (item < 9 ? item + 36 : item), 0, 1, mc.thePlayer);
+            mc.playerController.windowClick(
+                    mc.thePlayer.inventoryContainer.windowId, isArmorSlot ? item : (item < 9 ? item + 36 : item), 0, 1,
+                    mc.thePlayer);
 
             delay = TimeUtils.randomDelay(minDelayValue.get(), maxDelayValue.get());
 

@@ -24,10 +24,10 @@ import me.aquavit.liquidsense.utils.block.PlaceInfo;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
-import net.ccbluex.liquidbounce.value.BoolValue;
-import net.ccbluex.liquidbounce.value.FloatValue;
-import net.ccbluex.liquidbounce.value.IntegerValue;
-import net.ccbluex.liquidbounce.value.ListValue;
+import me.aquavit.liquidsense.value.BoolValue;
+import me.aquavit.liquidsense.value.FloatValue;
+import me.aquavit.liquidsense.value.IntegerValue;
+import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSnow;
 import net.minecraft.client.gui.ScaledResolution;
@@ -727,8 +727,8 @@ public class Scaffold extends Module {
             final double posX = mc.thePlayer.lastTickPosX + (mc.thePlayer.posX - mc.thePlayer.lastTickPosX) * timer.renderPartialTicks - renderManager.renderPosX;
             final double posY = mc.thePlayer.lastTickPosY + (mc.thePlayer.posY - mc.thePlayer.lastTickPosY) * timer.renderPartialTicks - renderManager.renderPosY;
             final double posZ = mc.thePlayer.lastTickPosZ + (mc.thePlayer.posZ - mc.thePlayer.lastTickPosZ) * timer.renderPartialTicks - renderManager.renderPosZ;
-            RenderUtils.shadow(mc.thePlayer, (double) posX, (double) posY, posZ, 1, 64);
-            RenderUtils.cylinder(mc.thePlayer, (double) posX, (double) posY, posZ, 1, 64);
+            RenderUtils.shadow(mc.thePlayer, posX, posY, posZ, 1, 64);
+            RenderUtils.cylinder(mc.thePlayer, posX, posY, posZ, 1, 64);
 
         }
 

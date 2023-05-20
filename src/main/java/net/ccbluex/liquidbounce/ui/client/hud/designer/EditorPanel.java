@@ -9,7 +9,7 @@ import net.ccbluex.liquidbounce.ui.client.hud.element.Side;
 import net.ccbluex.liquidbounce.ui.font.Fonts;
 import net.ccbluex.liquidbounce.ui.font.GameFontRenderer;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.value.*;
+import me.aquavit.liquidsense.value.*;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.ScaledResolution;
@@ -273,7 +273,7 @@ public class EditorPanel extends MinecraftInstance {
         realHeight += 10;
 
         // Values
-        for (Value value : element.getValues().stream().filter(Value::getDisplayable).toArray(Value[]::new)) {
+        for (Value value : element.getValues().stream().filter(Value::isDisplayable).toArray(Value[]::new)) {
 
             if (value instanceof BoolValue) {
 

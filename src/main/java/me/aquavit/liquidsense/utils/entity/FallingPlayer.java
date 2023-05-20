@@ -2,7 +2,6 @@ package me.aquavit.liquidsense.utils.entity;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.minecraft.util.*;
-import org.jetbrains.annotations.Nullable;
 
 public class FallingPlayer extends MinecraftInstance {
 
@@ -103,8 +102,6 @@ public class FallingPlayer extends MinecraftInstance {
         return null;
     }
 
-
-    @Nullable
     private BlockPos rayTrace(Vec3 start, Vec3 end) {
         MovingObjectPosition result = mc.theWorld.rayTraceBlocks(start, end, true);
 

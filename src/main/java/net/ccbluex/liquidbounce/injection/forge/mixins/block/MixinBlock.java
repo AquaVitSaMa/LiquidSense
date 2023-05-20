@@ -85,7 +85,7 @@ public abstract class MixinBlock {
         }
 
         if(xray.getState()) {
-            callbackInfoReturnable.setReturnValue(xray.getXrayBlocks().contains(this));
+            callbackInfoReturnable.setReturnValue(xray.xrayBlocks.contains(this));
         }
 
     }
