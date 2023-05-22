@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.value;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
+import me.aquavit.liquidsense.ui.font.Fonts;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;

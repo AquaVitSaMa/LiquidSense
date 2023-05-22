@@ -3,8 +3,8 @@ package me.aquavit.liquidsense.command.commands;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
+import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.ColorType;
+import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Notification;
 import org.lwjgl.input.Keyboard;
 
 import java.util.ArrayList;

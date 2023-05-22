@@ -1,11 +1,11 @@
 package me.aquavit.liquidsense.utils.entity;
 
-import me.aquavit.liquidsense.modules.client.Target;
-import me.aquavit.liquidsense.modules.blatant.NoFriends;
-import me.aquavit.liquidsense.modules.misc.Teams;
+import me.aquavit.liquidsense.module.modules.client.Target;
+import me.aquavit.liquidsense.module.modules.blatant.NoFriends;
+import me.aquavit.liquidsense.module.modules.misc.Teams;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.module.modules.misc.AntiBot;
+import me.aquavit.liquidsense.module.modules.misc.AntiBot;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import net.minecraft.client.network.NetworkPlayerInfo;
 import net.minecraft.entity.Entity;

@@ -2,8 +2,8 @@ package me.aquavit.liquidsense.command.commands;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
-import net.ccbluex.liquidbounce.ui.client.clickgui.neverlose.Main;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
+import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Main;
+import me.aquavit.liquidsense.ui.font.Fonts;
 
 public class ReloadCommand extends Command
 {

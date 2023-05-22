@@ -1,15 +1,15 @@
 package me.aquavit.liquidsense;
 
-import me.aquavit.liquidsense.modules.blatant.*;
-import me.aquavit.liquidsense.modules.client.*;
-import me.aquavit.liquidsense.modules.exploit.*;
-import me.aquavit.liquidsense.modules.ghost.*;
-import me.aquavit.liquidsense.modules.misc.*;
-import me.aquavit.liquidsense.modules.movement.*;
-import me.aquavit.liquidsense.modules.player.*;
-import me.aquavit.liquidsense.modules.render.*;
-import me.aquavit.liquidsense.modules.world.*;
-import me.aquavit.liquidsense.modules.fun.*;
+import me.aquavit.liquidsense.module.modules.blatant.*;
+import me.aquavit.liquidsense.module.modules.client.*;
+import me.aquavit.liquidsense.module.modules.exploit.*;
+import me.aquavit.liquidsense.module.modules.ghost.*;
+import me.aquavit.liquidsense.module.modules.misc.*;
+import me.aquavit.liquidsense.module.modules.movement.*;
+import me.aquavit.liquidsense.module.modules.player.*;
+import me.aquavit.liquidsense.module.modules.render.*;
+import me.aquavit.liquidsense.module.modules.world.*;
+import me.aquavit.liquidsense.module.modules.fun.*;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import org.lwjgl.opengl.Display;

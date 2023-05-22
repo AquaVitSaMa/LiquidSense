@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.utils.item;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.render.Translate;
-import net.ccbluex.liquidbounce.ui.font.Fonts;
+import me.aquavit.liquidsense.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;

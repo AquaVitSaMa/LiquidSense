@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.utils.render;
 
-import net.ccbluex.liquidbounce.injection.implementations.IShaderGroup;
+import me.aquavit.liquidsense.injection.implementations.IShaderGroup;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
 import org.lwjgl.opengl.GL11;
 

@@ -10,8 +10,8 @@ import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.login.Callback;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
+import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.ColorType;
+import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Notification;
 
 import java.util.ArrayList;
 import java.util.List;

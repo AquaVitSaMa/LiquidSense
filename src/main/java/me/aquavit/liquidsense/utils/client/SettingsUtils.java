@@ -1,8 +1,8 @@
 package me.aquavit.liquidsense.utils.client;
 
-import me.aquavit.liquidsense.modules.client.Target;
-import net.ccbluex.liquidbounce.features.module.modules.misc.Spammer;
-import net.ccbluex.liquidbounce.features.module.modules.misc.NameProtect;
+import me.aquavit.liquidsense.module.modules.client.Target;
+import me.aquavit.liquidsense.module.modules.misc.Spammer;
+import me.aquavit.liquidsense.module.modules.misc.NameProtect;
 import net.ccbluex.liquidbounce.features.module.Module;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.utils.render.ColorUtils;

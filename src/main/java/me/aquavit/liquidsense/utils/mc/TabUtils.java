@@ -1,7 +1,6 @@
 package me.aquavit.liquidsense.utils.mc;
 
-import net.ccbluex.liquidbounce.ui.client.gui.elements.GuiUsernameField;
-import net.minecraft.client.gui.GuiTextField;
+import me.aquavit.liquidsense.ui.client.gui.elements.GuiUsernameField;
 
 public final class TabUtils {
 

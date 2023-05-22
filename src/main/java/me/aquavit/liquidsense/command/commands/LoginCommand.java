@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.command.commands;
 import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.misc.ServerUtils;
 import me.aquavit.liquidsense.command.Command;
-import net.ccbluex.liquidbounce.ui.client.gui.GuiAltManager;
+import me.aquavit.liquidsense.ui.client.gui.GuiAltManager;
 
 public class LoginCommand extends Command
 {

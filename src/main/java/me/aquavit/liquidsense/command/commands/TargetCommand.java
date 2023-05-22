@@ -1,7 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.modules.client.Target;
-import me.aquavit.liquidsense.utils.entity.EntityUtils;
+import me.aquavit.liquidsense.module.modules.client.Target;
 import me.aquavit.liquidsense.command.Command;
 
 import java.util.ArrayList;

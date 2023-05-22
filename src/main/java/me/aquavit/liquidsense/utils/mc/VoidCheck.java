@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.utils.mc;
 
 import net.ccbluex.liquidbounce.LiquidBounce;
-import net.ccbluex.liquidbounce.features.module.modules.movement.Fly;
+import me.aquavit.liquidsense.module.modules.movement.Fly;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
 

@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.Listenable;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.TickEvent;
-import me.aquavit.liquidsense.modules.blatant.FastBow;
+import me.aquavit.liquidsense.module.modules.blatant.FastBow;
 import me.aquavit.liquidsense.utils.entity.RaycastUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import net.ccbluex.liquidbounce.LiquidBounce;

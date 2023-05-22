@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.command.commands;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
-import net.ccbluex.liquidbounce.file.configs.FriendsConfig;
+import me.aquavit.liquidsense.file.configs.FriendsConfig;
 import net.minecraft.entity.player.EntityPlayer;
 
 import java.util.ArrayList;

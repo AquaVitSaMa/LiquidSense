@@ -5,10 +5,10 @@ import me.aquavit.liquidsense.utils.misc.StringUtils;
 import me.aquavit.liquidsense.utils.client.SettingsUtils;
 import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
-import net.ccbluex.liquidbounce.file.FileManager;
+import me.aquavit.liquidsense.file.FileManager;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.ColorType;
-import net.ccbluex.liquidbounce.ui.client.hud.element.elements.extend.Notification;
+import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.ColorType;
+import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Notification;
 
 import java.io.*;
 import java.util.ArrayList;

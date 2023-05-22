@@ -52,7 +52,7 @@ repositories {
 }
 
 version = "Dev"
-group = "net.ccbluex"
+group = "me.aquavit"
 archivesBaseName = "LiquidSense"
 
 sourceCompatibility = JavaVersion.VERSION_1_8
@@ -64,7 +64,7 @@ minecraft {
     runDir = "run"
     mappings = "stable_22"
     makeObfSourceJar = false //如果你不想让build时间变长就别开
-    clientJvmArgs += ["-Dfml.coreMods.load=net.ccbluex.liquidbounce.injection.forge.TransformerLoader", "-Xmx1024m -Xms1024m"]
+    clientJvmArgs += ["-Dfml.coreMods.load=me.aquavit.liquidsense.injection.forge.TransformerLoader", "-Xmx1024m -Xms1024m"]
 }
 
 dependencies {
@@ -100,17 +100,17 @@ processResources {
 }
 
 mixin {
-    add sourceSets.main, "liquidbounce.mixins.refmap.json"
+    add sourceSets.main, "liquidsense.mixins.refmap.json"
 }
 
 jar {
     manifest.attributes(
-            "MixinConfigs": "liquidbounce.forge.mixins.json",
+            "MixinConfigs": "liquidsense.forge.mixins.json",
             "tweakClass": "org.spongepowered.asm.launch.MixinTweaker",
             "TweakOrder": 0,
-            "FMLCorePluginContainsFMLMod": "net.ccbluex.liquidbounce.injection.forge.MixinLoader",
-            "FMLCorePlugin": "net.ccbluex.liquidbounce.injection.forge.TransformerLoader",
-            "FMLAT": "liquidbounce_at.cfg",
+            "FMLCorePluginContainsFMLMod": "me.aquavit.liquidsense.injection.forge.MixinLoader",
+            "FMLCorePlugin": "me.aquavit.liquidsense.injection.forge.TransformerLoader",
+            "FMLAT": "liquidsense_at.cfg",
             "Manifest-Version": 1.0,
             "Main-Class": "me.aquavit.Instruction"
     )
