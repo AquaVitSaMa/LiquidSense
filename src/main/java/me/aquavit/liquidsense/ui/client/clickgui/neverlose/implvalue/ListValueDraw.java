@@ -80,29 +80,29 @@ public class ListValueDraw {
                     values.openList = !values.openList;
                 }
 
+                int hoverColor;
+                int stringColor;
+
                 switch (Impl.hue) {
                     case "black":
-                        RenderUtils.drawRect(nModule.positionX + 86f, nModule.positionY + 13f + nModule.valuePosY, nModule.positionX + 169f,
-                                nModule.positionY + 25f + nModule.valuePosY, new Color(13, 13, 13).getRGB());
-
-                        nModule.main.drawText(valueOf, 14, Fonts.font15, nModule.positionX + 88f, nModule.positionY + 17 + nModule.valuePosY,
-                                hover ? new Color(255, 255, 255).getRGB() : new Color(175, 175, 175).getRGB());
-                        break;
-                    case "blue":
-                        RenderUtils.drawRect(nModule.positionX + 86f, nModule.positionY + 13f + nModule.valuePosY, nModule.positionX + 169f,
-                                nModule.positionY + 25f + nModule.valuePosY, hover ? new Color(10, 22, 34).getRGB() : new Color(4, 12, 19).getRGB());
-
-                        nModule.main.drawText(valueOf, 14, Fonts.font15, nModule.positionX + 88f, nModule.positionY + 17 + nModule.valuePosY,
-                                hover ? new Color(255, 255, 255).getRGB() : new Color(175, 175, 175).getRGB());
+                        hoverColor = new Color(13, 13, 13).getRGB();
+                        stringColor = hover ? new Color(255, 255, 255).getRGB() : new Color(175, 175, 175).getRGB();
                         break;
                     case "white":
-                        RenderUtils.drawRect(nModule.positionX + 86f, nModule.positionY + 13f + nModule.valuePosY, nModule.positionX + 169f,
-                                nModule.positionY + 25f + nModule.valuePosY, new Color(255, 255, 255).getRGB());
-
-                        nModule.main.drawText(valueOf, 14, Fonts.font15, nModule.positionX + 88f, nModule.positionY + 17 + nModule.valuePosY,
-                                hover ? new Color(1, 1, 1).getRGB() : new Color(90, 90, 90).getRGB());
+                        hoverColor = new Color(255, 255, 255).getRGB();
+                        stringColor = hover ? new Color(1, 1, 1).getRGB() : new Color(90, 90, 90).getRGB();
+                        break;
+                    default:
+                        hoverColor = hover ? new Color(10, 22, 34).getRGB() : new Color(4, 12, 19).getRGB();
+                        stringColor = hover ? new Color(255, 255, 255).getRGB() : new Color(175, 175, 175).getRGB();
                         break;
                 }
+
+                RenderUtils.drawRect(nModule.positionX + 86f, nModule.positionY + 13f + nModule.valuePosY, nModule.positionX + 169f,
+                        nModule.positionY + 25f + nModule.valuePosY, hoverColor);
+
+                nModule.main.drawText(valueOf, 14, Fonts.font15, nModule.positionX + 88f, nModule.positionY + 17 + nModule.valuePosY,
+                        stringColor);
 
                 nModule.valuePosY += 12;
                 nModule.module.setOutvalue(nModule.module.getOutvalue() + 1);
