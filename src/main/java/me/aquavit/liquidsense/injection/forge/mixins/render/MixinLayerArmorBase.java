@@ -13,15 +13,14 @@ import net.minecraft.client.renderer.entity.layers.LayerRenderer;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemArmor;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
+import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Mixin(LayerArmorBase.class)
@@ -40,8 +39,7 @@ public abstract class MixinLayerArmorBase <T extends ModelBase> implements Layer
     private RendererLivingEntity<?> renderer;
 
     @Shadow
-    @Final
-    protected static ResourceLocation ENCHANTED_ITEM_GLINT_RES = new ResourceLocation("textures/misc/enchanted_item_glint.png");
+    protected abstract void renderGlint(EntityLivingBase entitylivingbase, T model, float p_177183_3_, float p_177183_4_, float partialTicks, float p_177183_6_, float p_177183_7_, float p_177183_8_, float scale);
 
     @Inject(method = "renderLayer", at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/GlStateManager.color(FF FF)V", shift = At.Shift.AFTER, ordinal = 1), cancellable = true)
     private void renderLayer(EntityLivingBase entitylivingbase, float p_renderLayer_2_, float p_renderLayer_3_, float partialTicks, float p_renderLayer_5_, float p_renderLayer_6_, float p_renderLayer_7_, float scale, int armorSlot, CallbackInfo callbackInfo) {
@@ -91,48 +89,16 @@ public abstract class MixinLayerArmorBase <T extends ModelBase> implements Layer
 
             callbackInfo.cancel();
         }
-       
-    }
-    /**
-     * @author CCBlueX
-     * @reason CCBlueX
-     */
-    @Overwrite
-    private void renderGlint(EntityLivingBase p_renderGlint_1_, T p_renderGlint_2_, float p_renderGlint_3_, float p_renderGlint_4_, float p_renderGlint_5_, float p_renderGlint_6_, float p_renderGlint_7_, float p_renderGlint_8_, float p_renderGlint_9_) {
-        float f = (float)p_renderGlint_1_.ticksExisted + p_renderGlint_5_;
-        this.renderer.bindTexture(ENCHANTED_ITEM_GLINT_RES);
-        GlStateManager.enableBlend();
-        GlStateManager.depthFunc(514);
-        GlStateManager.depthMask(false);
-        float f1 = 0.5F;
-        GlStateManager.color(f1, f1, f1, 1.0F);
 
-        for(int i = 0; i < 2; ++i) {
-            GlStateManager.disableLighting();
-            GlStateManager.blendFunc(768, 1);
-            if (LiquidBounce.moduleManager.getModule(RenderChanger.class).getState()) {
-                GlStateManager.color(RenderChanger.armorRed.get() / 255f, RenderChanger.armorGreen.get() / 255f, RenderChanger.armorBlue.get() / 255f, 0.66666667F);
-            } else {
-                float f2 = 0.76F;
-                GlStateManager.color(0.5F * f2, 0.25F * f2, 0.8F * f2, 1.0F);
-            }
-            GlStateManager.matrixMode(5890);
-            GlStateManager.loadIdentity();
-            float f3 = 0.33333334F;
-            GlStateManager.scale(f3, f3, f3);
-            GlStateManager.rotate(30.0F - (float)i * 60.0F, 0.0F, 0.0F, 1.0F);
-            GlStateManager.translate(0.0F, f * (0.001F + (float)i * 0.003F) * 20.0F, 0.0F);
-            GlStateManager.matrixMode(5888);
-            p_renderGlint_2_.render(p_renderGlint_1_, p_renderGlint_3_, p_renderGlint_4_, p_renderGlint_6_, p_renderGlint_7_, p_renderGlint_8_, p_renderGlint_9_);
+    }
+
+    @Redirect(method = "renderGlint", at = @At(value = "INVOKE", target = "L net/minecraft/client/renderer/GlStateManager;color(FF FF)V", ordinal = 1))
+    private void renderGlintColor(float colorRed, float colorGreen, float colorBlue, float colorAlpha) {
+        if (LiquidBounce.moduleManager.getModule(RenderChanger.class).getState()) {
+            GlStateManager.color(RenderChanger.armorRed.get() / 255f, RenderChanger.armorGreen.get() / 255f, RenderChanger.armorBlue.get() / 255f, 0.66666667F);
+        } else {
+            float f2 = 0.76F;
+            GlStateManager.color(0.5F * f2, 0.25F * f2, 0.8F * f2, 1.0F);
         }
-
-        GlStateManager.matrixMode(5890);
-        GlStateManager.loadIdentity();
-        GlStateManager.matrixMode(5888);
-        GlStateManager.enableLighting();
-        GlStateManager.depthMask(true);
-        GlStateManager.depthFunc(515);
-        GlStateManager.disableBlend();
     }
-
 }
