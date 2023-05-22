@@ -225,6 +225,11 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
                 /* Ghost ---------------------------------------------------------------------------------------------- */
                 if (LiquidBounce.moduleManager.getModule(Rotations.class).getState() && Rotations.ghost.get() && ok && entity == mc.thePlayer) {
 
+                    if (RenderChanger.littleEntitiesValue.get()) {
+                        GL11.glPushMatrix();
+                        GL11.glScaled(0.5, 0.5, 0.5);
+                    }
+
                     GlStateManager.pushMatrix();
                     this.rotateCorpse(entity, f7, this.interpolateRotation(entity.prevRenderYawOffset, entity.renderYawOffset, partialTicks), partialTicks);
                     GlStateManager.enableRescaleNormal();
@@ -253,6 +258,11 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
                         this.renderLayers(entity, f6, f5, partialTicks, f7, f2, f7, 0.0625f);
                     }
                     GlStateManager.popMatrix();
+
+
+                    if (RenderChanger.littleEntitiesValue.get()) {
+                        GL11.glPopMatrix();
+                    }
                 }
                 /* ---------------------------------------------------------------------------------------------------- */
 
