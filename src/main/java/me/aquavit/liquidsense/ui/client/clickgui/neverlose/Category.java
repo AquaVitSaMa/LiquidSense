@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose;
 
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.features.module.ModuleCategory;
+import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.ui.font.Fonts;
 import net.minecraft.client.renderer.GlStateManager;
 

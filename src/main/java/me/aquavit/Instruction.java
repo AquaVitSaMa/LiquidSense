@@ -1,6 +1,6 @@
 package me.aquavit;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 
 import javax.swing.*;
 import java.awt.*;

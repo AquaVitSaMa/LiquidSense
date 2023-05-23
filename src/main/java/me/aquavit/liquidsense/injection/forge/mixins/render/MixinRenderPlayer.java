@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelPlayer;

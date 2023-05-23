@@ -1,8 +1,7 @@
-package net.ccbluex.liquidbounce;
+package me.aquavit.liquidsense;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.forge.BlocksTab;
 import me.aquavit.liquidsense.utils.forge.ExploitsTab;
@@ -12,7 +11,7 @@ import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import me.aquavit.liquidsense.event.events.ClientShutdownEvent;
 import me.aquavit.liquidsense.event.EventManager;
 import me.aquavit.liquidsense.command.CommandManager;
-import net.ccbluex.liquidbounce.features.module.ModuleManager;
+import me.aquavit.liquidsense.module.ModuleManager;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Main;
 import me.aquavit.liquidsense.ui.client.gui.elements.AntiForge;
 import me.aquavit.liquidsense.ui.client.gui.elements.BungeeCordSpoof;

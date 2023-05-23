@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.command;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;

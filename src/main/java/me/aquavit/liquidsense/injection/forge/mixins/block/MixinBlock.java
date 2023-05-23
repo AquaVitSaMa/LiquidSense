@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.event.events.BlockRenderSideEvent;
 import me.aquavit.liquidsense.module.modules.blatant.Criticals;
 import me.aquavit.liquidsense.module.modules.exploit.GhostHand;
 import me.aquavit.liquidsense.module.modules.render.CaveFinder;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.BlockBBEvent;
 import me.aquavit.liquidsense.module.modules.player.NoFall;
 import me.aquavit.liquidsense.module.modules.render.XRay;

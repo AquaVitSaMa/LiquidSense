@@ -1,8 +1,8 @@
 package me.aquavit.liquidsense.command.commands;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
-import net.ccbluex.liquidbounce.features.module.Module;
+import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.ColorType;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Notification;
 import org.lwjgl.input.Keyboard;

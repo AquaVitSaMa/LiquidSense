@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.gui.elements.AntiForge;
 import me.aquavit.liquidsense.utils.misc.ServerUtils;
 import me.aquavit.liquidsense.utils.login.LoginUtils;

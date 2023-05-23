@@ -1,10 +1,14 @@
 package me.aquavit.liquidsense.script;
 
 import me.aquavit.liquidsense.utils.client.ClientUtils;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
+import java.io.FileFilter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Arrays;
@@ -12,48 +16,69 @@ import java.util.Objects;
 
 public class ScriptManager {
 
-    private List<Script> scripts = new ArrayList<Script>();
-    private File scriptsFolder = new File(LiquidBounce.fileManager.dir, "scripts");
-    private String scriptFileExtension = ".js";
-
-    public List<Script> getScripts() {
-        return scripts;
-    }
+    private final List<Script> scripts = new ArrayList<>();
+    private final File scriptsFolder = new File(LiquidBounce.fileManager.dir, "scripts");
+    private final String scriptFileExtension = ".js";
 
     public File getScriptsFolder() {
         return scriptsFolder;
     }
 
+    /**
+     * Loads all scripts inside the scripts folder.
+     */
     public void loadScripts() {
-        if (!scriptsFolder.exists())
+        if (!scriptsFolder.exists()) {
             scriptsFolder.mkdir();
+        }
 
-        Arrays.stream(Objects.requireNonNull(scriptsFolder.listFiles(file -> file.getName().endsWith(scriptFileExtension)))).forEach(this::loadScript);
+        File[] scriptFiles = scriptsFolder.listFiles(file -> file.getName().endsWith(scriptFileExtension));
+
+        if (scriptFiles != null) {
+            for (File scriptFile : scriptFiles) {
+                loadScript(scriptFile);
+            }
+        }
     }
 
-
+    /**
+     * Unloads all scripts.
+     */
     public void unloadScripts() {
         scripts.clear();
     }
 
+    /**
+     * Loads a script from a file.
+     */
     public void loadScript(File scriptFile) {
         try {
             Script script = new Script(scriptFile);
             script.initScript();
             scripts.add(script);
-        }
-        catch (Throwable t) {
+        } catch (Throwable t) {
             ClientUtils.getLogger().error("[ScriptAPI] Failed to load script '" + scriptFile.getName() + "'.", t);
         }
     }
 
+    /**
+     * Enables all scripts.
+     */
     public void enableScripts() {
-        scripts.forEach(Script::onEnable);
+        for (Script script : scripts) {
+            script.onEnable();
+        }
     }
 
+    /**
+     * Disables all scripts.
+     */
     public void disableScripts() {
-        scripts.forEach(Script::onDisable);
+        for (Script script : scripts) {
+            script.onDisable();
+        }
     }
+
 
     public void importScript(final File file) {
         File scriptFile = new File(scriptsFolder, file.getName());
@@ -64,21 +89,42 @@ public class ScriptManager {
         }
         loadScript(scriptFile);
         ClientUtils.getLogger().info("[ScriptAPI] Successfully imported script '" + scriptFile.getName() + "'.");
+
+        /*
+        File scriptFile = new File(scriptsFolder, file.getName());
+
+        try {
+            Files.copy(file.toPath(), scriptFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
+            loadScript(scriptFile);
+            ClientUtils.getLogger().info("[ScriptAPI] Successfully imported script '" + scriptFile.getName() + "'.");
+        } catch (IOException e) {
+            ClientUtils.getLogger().error("[ScriptAPI] Failed to import script '" + scriptFile.getName() + "'.", e);
+        }
+         */
     }
 
+    /**
+     * Deletes a script.
+     * @param script Script to be deleted.
+     */
     public void deleteScript(Script script) {
         script.onDisable();
         scripts.remove(script);
         script.scriptFile.delete();
-        ClientUtils.getLogger().info("Successfully deleted script: " + script.scriptFile.getName());
+
+        ClientUtils.getLogger().info("[ScriptAPI] Successfully deleted script '" + script.scriptFile.getName() + "'.");
     }
 
+    /**
+     * Reloads all scripts.
+     */
     public void reloadScripts() {
         disableScripts();
         unloadScripts();
         loadScripts();
         enableScripts();
-        ClientUtils.getLogger().info("Successfully reloaded scripts.");
+
+        ClientUtils.getLogger().info("[ScriptAPI] Successfully reloaded scripts.");
     }
 
 }

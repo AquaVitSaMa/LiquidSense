@@ -7,7 +7,7 @@ package me.aquavit.liquidsense.injection.forge.mixins.entity;
 
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.module.modules.ghost.HitBox;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.StrafeEvent;
 import me.aquavit.liquidsense.event.events.WallDamageEvent;
 import net.minecraft.block.Block;

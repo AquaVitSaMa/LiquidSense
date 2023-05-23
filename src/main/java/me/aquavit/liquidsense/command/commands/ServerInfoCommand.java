@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.Listenable;
 import me.aquavit.liquidsense.event.events.PacketEvent;

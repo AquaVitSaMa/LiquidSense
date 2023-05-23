@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.features.module;
+package me.aquavit.liquidsense.module;
 
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.module.modules.exploit.*;
@@ -24,7 +24,7 @@ import me.aquavit.liquidsense.module.modules.world.ChestAura;
 import me.aquavit.liquidsense.module.modules.world.ChestStealer;
 import me.aquavit.liquidsense.module.modules.world.Scaffold;
 import me.aquavit.liquidsense.module.modules.world.Tower;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.KeyEvent;
 import me.aquavit.liquidsense.event.Listenable;

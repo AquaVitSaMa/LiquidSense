@@ -8,7 +8,7 @@ package me.aquavit.liquidsense.injection.forge.mixins.item;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.module.modules.client.AntiBlind;
 import me.aquavit.liquidsense.module.modules.render.*;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;

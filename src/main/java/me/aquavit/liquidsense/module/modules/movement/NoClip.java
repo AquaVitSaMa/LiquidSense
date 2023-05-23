@@ -2,9 +2,9 @@ package me.aquavit.liquidsense.module.modules.movement;
 
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
-import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.features.module.ModuleCategory;
-import net.ccbluex.liquidbounce.features.module.ModuleInfo;
+import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.module.ModuleCategory;
+import me.aquavit.liquidsense.module.ModuleInfo;
 
 @ModuleInfo(name = "NoClip", description = "Allows you to freely move through walls (A sandblock has to fall on your head).", category = ModuleCategory.MOVEMENT)
 public class NoClip extends Module {

@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.features.module;
+package me.aquavit.liquidsense.module;
 
 import me.aquavit.liquidsense.utils.block.BlockUtils;
 import me.aquavit.liquidsense.utils.misc.StringUtils;

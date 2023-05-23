@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.block;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.movement.FastClimb;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.block.properties.PropertyDirection;

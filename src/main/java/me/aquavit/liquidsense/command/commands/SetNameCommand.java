@@ -1,9 +1,9 @@
 package me.aquavit.liquidsense.command.commands;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
-import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.features.module.ModuleInfo;
+import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.module.ModuleInfo;
 import net.minecraft.util.EnumChatFormatting;
 
 import java.util.ArrayList;

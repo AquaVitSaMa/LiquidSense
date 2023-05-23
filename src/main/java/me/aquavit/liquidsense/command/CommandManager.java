@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.command;
 
 import me.aquavit.liquidsense.utils.data.Pair;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.commands.*;
 import me.aquavit.liquidsense.command.shortcuts.Shortcut;
 import me.aquavit.liquidsense.command.shortcuts.ShortcutParser;

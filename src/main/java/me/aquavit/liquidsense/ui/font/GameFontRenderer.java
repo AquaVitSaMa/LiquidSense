@@ -5,7 +5,7 @@ import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowFontShader;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.client.HUD;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;

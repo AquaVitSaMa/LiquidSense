@@ -1,5 +1,6 @@
-package net.ccbluex.liquidbounce.features.module;
+package me.aquavit.liquidsense.module;
 
+import me.aquavit.liquidsense.module.ModuleCategory;
 import org.lwjgl.input.Keyboard;
 
 import java.lang.annotation.Retention;

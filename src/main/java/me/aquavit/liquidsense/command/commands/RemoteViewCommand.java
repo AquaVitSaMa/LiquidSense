@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;

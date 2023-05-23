@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.gui.elements.BungeeCordSpoof;
 import me.aquavit.liquidsense.ui.client.gui.GuiAntiForge;
 import net.minecraft.client.gui.GuiButton;

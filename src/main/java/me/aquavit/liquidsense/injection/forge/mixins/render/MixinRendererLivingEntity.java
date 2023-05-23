@@ -11,7 +11,7 @@ import me.aquavit.liquidsense.utils.client.RotationUtils;
 import me.aquavit.liquidsense.utils.render.Colors;
 import me.aquavit.liquidsense.utils.render.OutlineUtils;
 import com.google.common.collect.Lists;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.PreUpdateEvent;
 import me.aquavit.liquidsense.module.modules.render.ESP;
 import me.aquavit.liquidsense.utils.render.ColorUtils;

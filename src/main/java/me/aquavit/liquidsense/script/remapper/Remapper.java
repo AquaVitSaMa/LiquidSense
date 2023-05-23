@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.script.remapper;
 
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;

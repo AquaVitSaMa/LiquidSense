@@ -7,11 +7,11 @@ package me.aquavit.liquidsense.module.modules.movement;
 
 import me.aquavit.liquidsense.event.EventState;
 import me.aquavit.liquidsense.event.EventTarget;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.*;
-import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.features.module.ModuleCategory;
-import net.ccbluex.liquidbounce.features.module.ModuleInfo;
+import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.module.ModuleCategory;
+import me.aquavit.liquidsense.module.ModuleInfo;
 import me.aquavit.liquidsense.module.modules.movement.speeds.SpeedMode;
 //import me.aquavit.liquidsense.module.modules.movement.speeds.aac.*;
 //import me.aquavit.liquidsense.module.modules.movement.speeds.ncp.*;

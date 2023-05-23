@@ -4,9 +4,9 @@ import com.google.gson.JsonObject;
 import io.netty.buffer.Unpooled;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.WorldEvent;
-import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.features.module.ModuleCategory;
-import net.ccbluex.liquidbounce.features.module.ModuleInfo;
+import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.module.ModuleCategory;
+import me.aquavit.liquidsense.module.ModuleInfo;
 import net.minecraft.network.PacketBuffer;
 import net.minecraft.network.play.client.C17PacketCustomPayload;
 

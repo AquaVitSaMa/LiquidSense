@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.file.configs;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.file.FileConfig;
 import me.aquavit.liquidsense.ui.client.hud.Config;
 import org.apache.commons.io.FileUtils;

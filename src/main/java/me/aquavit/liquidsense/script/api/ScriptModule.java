@@ -1,4 +1,4 @@
-package me.aquavit.liquidsense.script.api.global;
+package me.aquavit.liquidsense.script.api;
 
 import java.util.*;
 
@@ -6,32 +6,29 @@ import jdk.nashorn.api.scripting.JSObject;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
-import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.features.module.ModuleCategory;
-import net.ccbluex.liquidbounce.features.module.ModuleInfo;
+import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.module.ModuleCategory;
+import me.aquavit.liquidsense.module.ModuleInfo;
 import me.aquavit.liquidsense.value.Value;
 
 @ModuleInfo(name = "ScriptModule", description = "Empty", category = ModuleCategory.MISC)
 public class ScriptModule extends Module {
+    private final JSObject moduleObject;
     private final HashMap<String, JSObject> events = new HashMap<>();
     private final LinkedHashMap<String, Value<?>> _values = new LinkedHashMap<>();
     private String _tag;
 
-    private JSObject moduleObject;
-
     /**
      * Allows the user to access values by typing module.settings.<valuename>
      */
-    public LinkedHashMap<String, Value<?>> getSettings() {
-        return _values;
-    }
+    public final LinkedHashMap<String, Value<?>> settings = _values;
 
     public ScriptModule(JSObject moduleObject) {
         this.moduleObject = moduleObject;
-        name = (String) moduleObject.getMember("name");
-        description = (String) moduleObject.getMember("description");
+        name = moduleObject.getMember("name").toString();
+        description = moduleObject.getMember("description").toString();
 
-        String categoryString = (String) moduleObject.getMember("category");
+        String categoryString = moduleObject.getMember("category").toString();
         for (ModuleCategory category : ModuleCategory.values()) {
             if (categoryString.equalsIgnoreCase(category.getDisplayName())) {
                 this.category = category;
@@ -42,12 +39,14 @@ public class ScriptModule extends Module {
         if (moduleObject.hasMember("settings")) {
             JSObject settings = (JSObject) moduleObject.getMember("settings");
 
-            for (String settingName : settings.keySet())
+            for (String settingName : settings.keySet()) {
                 _values.put(settingName, (Value<?>) settings.getMember(settingName));
+            }
         }
 
-        if (moduleObject.hasMember("tag"))
-            _tag = (String) moduleObject.getMember("tag");
+        if (moduleObject.hasMember("tag")) {
+            _tag = moduleObject.getMember("tag").toString();
+        }
     }
 
     @Override
@@ -168,7 +167,10 @@ public class ScriptModule extends Module {
      */
     private void callEvent(String eventName, Object payload) {
         try {
-            events.get(eventName).call(moduleObject, payload);
+            JSObject eventHandler = events.get(eventName);
+            if (eventHandler != null) {
+                eventHandler.call(moduleObject, payload);
+            }
         } catch (Throwable throwable) {
             ClientUtils.getLogger().error("[ScriptAPI] Exception in module '" + name + "'!", throwable);
         }

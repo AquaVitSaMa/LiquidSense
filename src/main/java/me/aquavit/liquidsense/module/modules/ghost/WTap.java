@@ -3,9 +3,9 @@ package me.aquavit.liquidsense.module.modules.ghost;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.EventType;
 import me.aquavit.liquidsense.event.events.PacketEvent;
-import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.features.module.ModuleCategory;
-import net.ccbluex.liquidbounce.features.module.ModuleInfo;
+import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.module.ModuleCategory;
+import me.aquavit.liquidsense.module.ModuleInfo;
 import net.minecraft.network.play.client.C02PacketUseEntity;
 import net.minecraft.network.play.client.C0BPacketEntityAction;
 

@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.injection.forge.mixins.render;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
 import me.aquavit.liquidsense.module.modules.client.Rotations;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;

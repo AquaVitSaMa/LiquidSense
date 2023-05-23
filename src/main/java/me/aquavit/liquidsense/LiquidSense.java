@@ -10,7 +10,6 @@ import me.aquavit.liquidsense.module.modules.player.*;
 import me.aquavit.liquidsense.module.modules.render.*;
 import me.aquavit.liquidsense.module.modules.world.*;
 import me.aquavit.liquidsense.module.modules.fun.*;
-import net.ccbluex.liquidbounce.LiquidBounce;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import org.lwjgl.opengl.Display;
 

@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.ui.client.hud.designer;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.hud.HUD;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
 import me.aquavit.liquidsense.ui.client.hud.element.ElementInfo;

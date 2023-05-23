@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose.About;
 
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Impl;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Main;
 import me.aquavit.liquidsense.ui.font.Fonts;

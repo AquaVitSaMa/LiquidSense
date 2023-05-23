@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.command.commands;
 
 import me.aquavit.liquidsense.utils.misc.StringUtils;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.file.configs.FriendsConfig;
 import net.minecraft.entity.player.EntityPlayer;

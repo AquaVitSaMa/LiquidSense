@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.misc.ServerUtils;
 import me.aquavit.liquidsense.utils.module.CPSCounter;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.Text;
 import net.minecraft.client.Minecraft;
 

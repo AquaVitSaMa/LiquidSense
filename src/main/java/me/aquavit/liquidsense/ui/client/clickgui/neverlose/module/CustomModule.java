@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.ui.client.clickgui.neverlose.module;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import net.ccbluex.liquidbounce.features.module.Module;
+import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Impl;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Main;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.implvalue.*;

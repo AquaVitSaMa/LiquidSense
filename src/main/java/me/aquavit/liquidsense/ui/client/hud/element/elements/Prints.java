@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.ui.client.hud.element.elements;
 
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.hud.designer.GuiHudDesigner;
 import me.aquavit.liquidsense.ui.client.hud.element.Border;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;

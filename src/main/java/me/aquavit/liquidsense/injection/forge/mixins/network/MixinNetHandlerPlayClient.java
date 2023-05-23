@@ -6,7 +6,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.network;
 
 import io.netty.buffer.Unpooled;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.EntityMovementEvent;
 import me.aquavit.liquidsense.event.events.PacketSendEvent;
 import me.aquavit.liquidsense.ui.client.gui.elements.AntiForge;

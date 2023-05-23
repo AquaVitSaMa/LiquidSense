@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.utils.forge;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.item.ItemUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;

@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.ChatEvent;
 import me.aquavit.liquidsense.module.modules.client.HUD;
 import net.minecraft.client.Minecraft;

@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.file.configs;
 
 import com.google.gson.*;
 import me.aquavit.liquidsense.utils.data.Pair;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.command.shortcuts.Shortcut;
 import me.aquavit.liquidsense.file.FileConfig;

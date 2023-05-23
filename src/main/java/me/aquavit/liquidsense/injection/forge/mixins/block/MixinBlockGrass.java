@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.block;
 
 import me.aquavit.liquidsense.module.modules.render.CaveFinder;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.block.BlockGrass;
 import net.minecraft.util.EnumWorldBlockLayer;
 import net.minecraftforge.fml.relauncher.Side;

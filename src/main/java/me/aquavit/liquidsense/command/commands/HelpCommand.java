@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.command.commands;
 
 import joptsimple.internal.Strings;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 

@@ -2,9 +2,9 @@ package me.aquavit.liquidsense.module.modules.client;
 
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
-import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.features.module.ModuleCategory;
-import net.ccbluex.liquidbounce.features.module.ModuleInfo;
+import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.module.ModuleCategory;
+import me.aquavit.liquidsense.module.ModuleInfo;
 import me.aquavit.liquidsense.ui.font.Fonts;
 import me.aquavit.liquidsense.value.FloatValue;
 import me.aquavit.liquidsense.value.IntegerValue;

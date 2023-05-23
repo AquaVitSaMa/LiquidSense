@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.ui.client.gui;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.gui.elements.AntiForge;
 import me.aquavit.liquidsense.ui.font.Fonts;
 import net.minecraft.client.gui.GuiButton;

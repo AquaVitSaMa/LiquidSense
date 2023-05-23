@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.utils.misc;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;

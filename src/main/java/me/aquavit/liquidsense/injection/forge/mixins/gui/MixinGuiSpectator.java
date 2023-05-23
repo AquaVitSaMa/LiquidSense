@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
 import net.minecraft.client.gui.GuiSpectator;
 import net.minecraft.client.gui.ScaledResolution;

@@ -1,4 +1,4 @@
-package net.ccbluex.liquidbounce.features.module;
+package me.aquavit.liquidsense.module;
 
 public enum ModuleCategory
 {

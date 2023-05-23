@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.HeadLogo;
 import net.minecraftforge.client.GuiIngameForge;

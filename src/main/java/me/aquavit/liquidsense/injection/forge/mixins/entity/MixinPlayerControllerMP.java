@@ -6,7 +6,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.entity;
 
 import me.aquavit.liquidsense.module.modules.exploit.AbortBreaking;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.AttackEvent;
 import me.aquavit.liquidsense.event.events.ClickWindowEvent;
 import net.minecraft.client.multiplayer.PlayerControllerMP;

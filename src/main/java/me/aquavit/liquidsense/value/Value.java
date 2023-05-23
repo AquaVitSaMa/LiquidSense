@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.value;
 import com.google.gson.JsonElement;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.render.Translate;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 
 import java.util.function.BooleanSupplier;
 

@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.ui.client.hud.designer;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;

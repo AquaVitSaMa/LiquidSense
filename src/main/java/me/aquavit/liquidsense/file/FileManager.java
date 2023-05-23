@@ -7,7 +7,7 @@ package me.aquavit.liquidsense.file;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.file.configs.*;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;

@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.block;
 
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.movement.NoSlow;
 import net.minecraft.block.BlockSoulSand;
 import net.minecraftforge.fml.relauncher.Side;

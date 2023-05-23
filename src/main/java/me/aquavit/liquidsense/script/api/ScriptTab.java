@@ -9,12 +9,13 @@ import jdk.nashorn.api.scripting.JSObject;
 
 import java.util.List;
 
+@SuppressWarnings({"unchecked", "unused"})
 public class ScriptTab extends CreativeTabs {
-    private JSObject tabObject;
-    private ItemStack[] items;
+    private final JSObject tabObject;
+    private final ItemStack[] items;
 
     public ScriptTab(JSObject tabObject) {
-        super((String) tabObject.getMember("name"));
+        super(tabObject.getMember("name").toString());
         this.tabObject = tabObject;
         this.items = (ItemStack[]) ScriptUtils.convert(tabObject.getMember("items"), ItemStack[].class);
     }

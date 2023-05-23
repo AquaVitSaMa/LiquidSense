@@ -1,8 +1,8 @@
-package net.ccbluex.liquidbounce.features.module;
+package me.aquavit.liquidsense.module;
 
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.render.Translate;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.Listenable;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Print;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Type;

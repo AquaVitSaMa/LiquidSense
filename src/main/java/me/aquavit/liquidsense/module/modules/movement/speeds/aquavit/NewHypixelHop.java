@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.module.modules.movement.speeds.aquavit;
 
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.Listenable;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.JumpEvent;
 import me.aquavit.liquidsense.event.events.MotionEvent;
 import me.aquavit.liquidsense.event.events.MoveEvent;

@@ -3,12 +3,12 @@ package me.aquavit.liquidsense.utils.client;
 import me.aquavit.liquidsense.module.modules.client.Target;
 import me.aquavit.liquidsense.module.modules.misc.Spammer;
 import me.aquavit.liquidsense.module.modules.misc.NameProtect;
-import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.value.*;
 import org.lwjgl.input.Keyboard;
-import net.ccbluex.liquidbounce.features.module.ModuleCategory;
+import me.aquavit.liquidsense.module.ModuleCategory;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

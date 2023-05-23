@@ -15,7 +15,7 @@ public class ScriptCommand extends Command {
 
     public ScriptCommand(JSObject commandObject) {
         super(commandObject.getMember("name").toString(),
-                (String) ScriptUtils.convert(commandObject.getMember("aliases"), String[].class));
+                ScriptUtils.convert(commandObject.getMember("aliases"), String[].class).toString());
         this.commandObject = commandObject;
         this.events = new HashMap<>();
     }

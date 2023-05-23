@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.command.commands;
 
 import me.aquavit.liquidsense.module.modules.render.CaveFinder;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import net.minecraft.block.Block;
 

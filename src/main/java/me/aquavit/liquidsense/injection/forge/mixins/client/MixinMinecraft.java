@@ -7,7 +7,7 @@ package me.aquavit.liquidsense.injection.forge.mixins.client;
 
 import me.aquavit.liquidsense.module.modules.exploit.AbortBreaking;
 import me.aquavit.liquidsense.module.modules.ghost.FastPlace;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.module.modules.ghost.AutoClicker;
 import me.aquavit.liquidsense.ui.client.gui.GuiMainMenu;

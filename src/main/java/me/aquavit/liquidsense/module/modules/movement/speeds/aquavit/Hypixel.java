@@ -5,7 +5,7 @@ import me.aquavit.liquidsense.event.events.MotionEvent;
 import me.aquavit.liquidsense.event.events.MoveEvent;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.module.Particles;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.movement.Speed;
 import me.aquavit.liquidsense.module.modules.movement.speeds.SpeedMode;
 

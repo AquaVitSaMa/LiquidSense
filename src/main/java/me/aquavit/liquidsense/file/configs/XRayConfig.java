@@ -8,7 +8,7 @@ package me.aquavit.liquidsense.file.configs;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.render.XRay;
 import me.aquavit.liquidsense.file.FileConfig;
 import me.aquavit.liquidsense.file.FileManager;

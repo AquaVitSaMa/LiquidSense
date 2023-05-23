@@ -7,7 +7,7 @@ package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
 import me.aquavit.liquidsense.module.modules.client.AntiBlind;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
 import me.aquavit.liquidsense.module.modules.client.HUD;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;

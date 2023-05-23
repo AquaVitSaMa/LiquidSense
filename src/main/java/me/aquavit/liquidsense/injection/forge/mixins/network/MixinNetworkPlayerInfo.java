@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.network;
 
 import com.mojang.authlib.GameProfile;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.misc.NameProtect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;

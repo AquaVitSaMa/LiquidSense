@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.module.modules.client.Target;
 import me.aquavit.liquidsense.module.modules.blatant.NoFriends;
 import me.aquavit.liquidsense.module.modules.misc.Teams;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.misc.AntiBot;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import net.minecraft.client.network.NetworkPlayerInfo;

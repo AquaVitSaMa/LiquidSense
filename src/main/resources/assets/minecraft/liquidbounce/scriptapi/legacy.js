@@ -89,7 +89,7 @@ var _AdaptedModule = function (module) {
 
     this.module = module;
 
-    this.moduleManager = Java.type("net.ccbluex.liquidbounce.LiquidBounce").moduleManager;
+    this.moduleManager = Java.type("me.aquavit.liquidsense.LiquidSense").moduleManager;
 
     this.getName = function () {
         return this.module.getName();
@@ -156,8 +156,8 @@ Object.defineProperty(_AdaptedModule.prototype, "bind", {
 
 var _ModuleManager = function () {
 
-    this.moduleManager = Java.type("net.ccbluex.liquidbounce.LiquidBounce").moduleManager;
-    this.Module = Java.type("net.ccbluex.liquidbounce.features.module.Module");
+    this.moduleManager = Java.type("me.aquavit.liquidsense.LiquidSense").moduleManager;
+    this.Module = Java.type("me.aquavit.liquidsense.module.Module");
     this.ArrayList = Java.type("java.util.ArrayList");
 
     this.registerModule = function (scriptModule) {
@@ -250,7 +250,7 @@ var _ModuleManager = function () {
 var _CommandManager = function () {
 
     this.Command = Java.type("me.aquavit.liquidsense.command.Command");
-    this.commandManager = Java.type("net.ccbluex.liquidbounce.LiquidBounce").commandManager;
+    this.commandManager = Java.type("me.aquavit.liquidsense.LiquidSense").commandManager;
 
     this.registerCommand = function (scriptCommand) {
         script.registerCommand({

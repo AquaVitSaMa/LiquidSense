@@ -6,7 +6,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.world;
 
 import me.aquavit.liquidsense.module.modules.client.TrueSight;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.multiplayer.WorldClient;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;

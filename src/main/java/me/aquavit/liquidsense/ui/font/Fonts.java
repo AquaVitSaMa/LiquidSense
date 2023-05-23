@@ -8,7 +8,7 @@ package me.aquavit.liquidsense.ui.font;
 import com.google.gson.*;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import static net.ccbluex.liquidbounce.LiquidBounce.CLIENT_RESOURCE;
+import static me.aquavit.liquidsense.LiquidBounce.CLIENT_RESOURCE;
 
 @SideOnly(Side.CLIENT)
 public class Fonts {

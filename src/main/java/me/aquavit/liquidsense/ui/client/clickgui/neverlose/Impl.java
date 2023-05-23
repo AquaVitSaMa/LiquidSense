@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose;
 
-import net.ccbluex.liquidbounce.features.module.Module;
+import me.aquavit.liquidsense.module.Module;
 
 public class Impl {
     public static String selectedCategory = "Blatant";

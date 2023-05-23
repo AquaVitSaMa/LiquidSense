@@ -6,7 +6,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
 import me.aquavit.liquidsense.module.modules.misc.ComponentOnHover;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.client.HUD;
 import me.aquavit.liquidsense.ui.client.gui.GuiBackground;
 import me.aquavit.liquidsense.utils.render.ParticleUtils;

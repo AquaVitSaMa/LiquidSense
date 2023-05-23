@@ -7,7 +7,7 @@ import me.aquavit.liquidsense.event.events.TickEvent;
 import me.aquavit.liquidsense.module.modules.blatant.FastBow;
 import me.aquavit.liquidsense.utils.entity.RaycastUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import net.ccbluex.liquidbounce.LiquidBounce;
+import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
 import net.minecraft.entity.Entity;

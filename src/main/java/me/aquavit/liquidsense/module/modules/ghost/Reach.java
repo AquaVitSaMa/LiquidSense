@@ -1,8 +1,8 @@
 package me.aquavit.liquidsense.module.modules.ghost;
 
-import net.ccbluex.liquidbounce.features.module.Module;
-import net.ccbluex.liquidbounce.features.module.ModuleCategory;
-import net.ccbluex.liquidbounce.features.module.ModuleInfo;
+import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.module.ModuleCategory;
+import me.aquavit.liquidsense.module.ModuleInfo;
 import me.aquavit.liquidsense.value.FloatValue;
 
 @ModuleInfo(name = "Reach", description = "Increases your reach.", category = ModuleCategory.GHOST)
