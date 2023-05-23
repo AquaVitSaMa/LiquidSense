@@ -1,6 +1,8 @@
 package me.aquavit.liquidsense.module;
 
 import me.aquavit.liquidsense.LiquidSense;
+import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.ColorType;
+import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Notification;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.render.Translate;
 import me.aquavit.liquidsense.event.Listenable;
@@ -81,6 +83,7 @@ public class Module extends MinecraftInstance implements Listenable {
 
             if (!LiquidSense.INSTANCE.isStarting()) {
                 LiquidSense.hud.addPrint(new Print(" " + name + (state ? " Enabled" : " Disabled"),3000f, Type.state));
+                LiquidSense.hud.addNotification(new Notification(" " + name + (state ? " Enabled" : " Disabled"), description, ColorType.INFO,1500,500));
                 mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("random.click"),
                         1F));
             }

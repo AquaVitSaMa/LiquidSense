@@ -18,8 +18,8 @@ public class GuiHudDesigner extends GuiScreen {
         return this.selectedElement;
     }
 
-    public final void setSelectedElement(Element element) {
-        this.selectedElement = element;
+    public final void setSelectedElement(Element selectedElement) {
+        this.selectedElement = selectedElement;
     }
 
     @Override
