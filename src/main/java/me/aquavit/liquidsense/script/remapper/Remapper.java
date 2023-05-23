@@ -11,17 +11,15 @@ import java.util.HashMap;
 
 public class Remapper {
 
-    public static final Remapper INSTANCE = new Remapper();
-
-    private final String srgName = "stable_22";
-    private final File srgFile = new File(LiquidSense.fileManager.dir, "mcp-" + srgName + ".srg");
+    private static final String srgName = "stable_22";
+    private static final File srgFile = new File(LiquidSense.fileManager.dir, "mcp-" + srgName + ".srg");
     private static HashMap<String, HashMap<String, String>> fields = new HashMap<>();
     private static HashMap<String, HashMap<String, String>> methods = new HashMap<>();
 
     /**
      * Load srg
      */
-    public void loadSrg() {
+    public static void loadSrg() {
         // Check if srg file is already downloaded
         if (!srgFile.exists()) {
             // Download srg file
@@ -51,7 +49,7 @@ public class Remapper {
         ClientUtils.getLogger().info("[Remapper] Loaded srg.");
     }
 
-    private void parseSrg() throws Exception {
+    private static void parseSrg() throws Exception {
 
 
         FileUtils.readLines(srgFile).forEach(it -> {

@@ -23,7 +23,7 @@ public class ScriptTab extends CreativeTabs {
     @Override
     public Item getTabIconItem() {
         try {
-            return (Item) Items.class.getField((String) tabObject.getMember("icon")).get(null);
+            return (Item) Items.class.getField(tabObject.getMember("icon").toString()).get(null);
         } catch (Exception e) {
             e.printStackTrace();
             return null;
@@ -32,7 +32,7 @@ public class ScriptTab extends CreativeTabs {
 
     @Override
     public String getTranslatedTabLabel() {
-        return (String) tabObject.getMember("name");
+        return tabObject.getMember("name").toString();
     }
 
     @Override

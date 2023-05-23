@@ -1,7 +1,6 @@
 package me.aquavit.liquidsense.module;
 
-public enum ModuleCategory
-{
+public enum ModuleCategory {
     BLATANT("Blatant"),
     GHOST("Ghost"),
     PLAYER("Player"),

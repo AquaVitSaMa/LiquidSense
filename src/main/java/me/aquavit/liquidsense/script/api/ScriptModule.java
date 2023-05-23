@@ -3,6 +3,7 @@ package me.aquavit.liquidsense.script.api;
 import java.util.*;
 
 import jdk.nashorn.api.scripting.JSObject;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
@@ -27,14 +28,7 @@ public class ScriptModule extends Module {
         this.moduleObject = moduleObject;
         name = moduleObject.getMember("name").toString();
         description = moduleObject.getMember("description").toString();
-
-        String categoryString = moduleObject.getMember("category").toString();
-        for (ModuleCategory category : ModuleCategory.values()) {
-            if (categoryString.equalsIgnoreCase(category.getDisplayName())) {
-                this.category = category;
-                break;
-            }
-        }
+        category = ModuleCategory.SCRIPTS;
 
         if (moduleObject.hasMember("settings")) {
             JSObject settings = (JSObject) moduleObject.getMember("settings");

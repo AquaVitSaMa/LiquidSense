@@ -99,10 +99,6 @@ var _AdaptedModule = function (module) {
         return this.module.getDescription();
     }
 
-    this.getCategory = function () {
-        return this.module.getCategory().displayName;
-    }
-
     this.getState = function () {
         return this.module.getState();
     }
@@ -164,7 +160,6 @@ var _ModuleManager = function () {
         var moduleConfig = {
             name: scriptModule.getName(),
             description: scriptModule.getDescription(),
-            category: scriptModule.getCategory()
         };
 
         if (scriptModule.addValues) {

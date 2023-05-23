@@ -14,7 +14,7 @@ public class AbstractJavaLinkerHandler {
 
         Class<?> currentClass = clazz;
         while(!currentClass.getName().equals("java.lang.Object")) {
-            String remapped = Remapper.INSTANCE.remapMethod(currentClass, name, Type.getMethodDescriptor((Method) accessibleObject));
+            String remapped = Remapper.remapMethod(currentClass, name, Type.getMethodDescriptor((Method) accessibleObject));
 
             if(!remapped.equals(name)) return remapped;
 
@@ -30,7 +30,7 @@ public class AbstractJavaLinkerHandler {
         if (clazz == null || name == null) return null;
         Class<?> currentClass = clazz;
         while(!currentClass.getName().equals("java.lang.Object")) {
-            String remapped = Remapper.INSTANCE.remapField(currentClass, name);
+            String remapped = Remapper.remapField(currentClass, name);
 
             if(!remapped.equals(name))
                 return remapped;
@@ -47,7 +47,7 @@ public class AbstractJavaLinkerHandler {
         if (clazz == null || name == null) return null;
         Class<?> currentClass = clazz;
         while(!currentClass.getName().equals("java.lang.Object")) {
-            String remapped = Remapper.INSTANCE.remapField(currentClass, name);
+            String remapped = Remapper.remapField(currentClass, name);
 
             if(!remapped.equals(name))
                 return remapped;

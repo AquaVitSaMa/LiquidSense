@@ -81,7 +81,7 @@ public class LiquidSense {
         moduleManager.registerModules();
 
         try {
-            Remapper.INSTANCE.loadSrg();
+            Remapper.loadSrg();
             scriptManager = new ScriptManager();
             scriptManager.loadScripts();
             scriptManager.enableScripts();
@@ -126,7 +126,7 @@ public class LiquidSense {
         fileManager.loadConfigs(fileManager.setnameConfig);
 
         Display.setTitle(LiquidSense.CLIENT_NAME + " | " + LiquidSense.CLIENT_VERSION + " | " + LiquidSense.MINECRAFT_VERSION +" | "+ "By AquaVit");
-        ClientUtils.getLogger().info(LiquidSense.CLIENT_NAME + " | " + "By AquaVit" + " | " + " Loading completed");
+        ClientUtils.getLogger().info(LiquidSense.CLIENT_NAME + " | " + "By AquaVit" + " | " + "Loading completed");
 
         isStarting = false;
     }
