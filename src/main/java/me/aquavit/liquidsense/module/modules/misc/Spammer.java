@@ -40,7 +40,7 @@ public class Spammer extends Module {
         }
     };
 
-    private final TextValue messageValue = new TextValue("Message", LiquidSense.CLIENT_NAME + " Client | liquidbounce(.net) | CCBlueX on yt");
+    private final TextValue messageValue = new TextValue("Message", LiquidSense.CLIENT_NAME + " Client | "+LiquidSense.CLIENT_WEB+" | By AquaVit");
     private final BoolValue customValue = new BoolValue("Custom", false);
 
     private final MSTimer msTimer = new MSTimer();

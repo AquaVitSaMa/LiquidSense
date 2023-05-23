@@ -27,7 +27,7 @@ public abstract class MixinAbstractClientPlayer extends MixinEntityPlayer {
         final Cape ca = (Cape) LiquidSense.moduleManager.getModule(Cape.class);
 
         if(ca.getState()) {
-            ResourceLocation cape = new ResourceLocation("liquidbounce" + "/cape/"+ ca.modeValue.get() +".png");
+            ResourceLocation cape = new ResourceLocation(LiquidSense.CLIENT_NAME.toLowerCase() + "/cape/"+ ca.modeValue.get() +".png");
             if(getUniqueID().equals(Minecraft.getMinecraft().thePlayer.getUniqueID())){
                 callbackInfoReturnable.setReturnValue(cape);
             }

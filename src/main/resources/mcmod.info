@@ -1,13 +1,13 @@
 [
   {
-    "modid": "liquidbounce",
-    "name": "LiquidBounce",
+    "modid": "liquidsense",
+    "name": "LiquidSense",
     "description": "",
     "version": "${version}",
     "mcversion": "${mcversion}",
-    "url": "https://liquidbounce.net",
+    "url": "https://minger.club",
     "updateUrl": "",
-    "authorList": ["CCBlueX"],
+    "authorList": ["AquaVit"],
     "credits": "",
     "logoFile": "",
     "screenshots": [],

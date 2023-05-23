@@ -36,6 +36,7 @@ public class LiquidSense {
 
     public static final String CLIENT_NAME = "LiquidSense";
 
+    public static final String CLIENT_WEB = "minger.club";
     public static final Boolean IN_DEV = true;
     public static final String CLIENT_VERSION = IN_DEV ? "Dev" : "Release";
     public static final String CLIENT_CREATOR = "AquaVit";

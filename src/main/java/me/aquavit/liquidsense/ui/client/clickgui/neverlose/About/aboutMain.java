@@ -8,6 +8,7 @@ import me.aquavit.liquidsense.ui.font.Fonts;
 
 import java.awt.*;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 
 public class aboutMain extends Main {
 
@@ -73,7 +74,7 @@ public class aboutMain extends Main {
         Fonts.font16.drawString("Version:", Impl.coordinateX + 475, Impl.coordinateY + 130, textColor.getRGB());
         Fonts.font16.drawString("BuildType:", Impl.coordinateX + 475, Impl.coordinateY + 142, textColor.getRGB());
         Fonts.font16.drawString("Date:", Impl.coordinateX + 475, Impl.coordinateY + 154, textColor.getRGB());
-        Fonts.font16.drawCenteredString("minger.club @2021", Impl.coordinateX + 548, Impl.coordinateY + 169, textColor.getRGB(), false);
+        Fonts.font16.drawCenteredString(LiquidSense.CLIENT_WEB+" @"+ Year.now().getValue(), Impl.coordinateX + 548, Impl.coordinateY + 169, textColor.getRGB(), false);
 
         Color styleColor;
         switch (Impl.hue) {

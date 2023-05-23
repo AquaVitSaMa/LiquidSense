@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.ui.client.hud.element.elements.extend;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.renderer.GlStateManager;
@@ -86,7 +87,7 @@ public class Notification {
         double pct;
         int realY = -(index + 1) * this.height;
         long nowTime = System.currentTimeMillis();
-        ResourceLocation image = new ResourceLocation("liquidbounce/notification/" + this.type.name() + ".png");
+        ResourceLocation image = new ResourceLocation(LiquidSense.CLIENT_NAME.toLowerCase()+ "/notification/" + this.type.name() + ".png");
         if (this.nowY != realY) {
             pct = (double)(nowTime - this.animeYTime) / (double)this.animeTime;
             if (pct > 1.0) {

@@ -30,10 +30,10 @@ public class GuiMainMenu extends GuiScreen implements GuiYesNoCallback {
     public void drawScreen(final int mouseX, final int mouseY, final float partialTicks) {
         this.drawBackground(0);
         //427 - 461
-        //RenderUtils.drawImage(new ResourceLocation("liquidbounce/LiquidSenseGirl.png"), -10, height - 220, 213, 230);
+        //RenderUtils.drawImage(new ResourceLocation("liquidsense/LiquidSenseGirl.png"), -10, height - 220, 213, 230);
         Fonts.font20.drawStringWithShadow("Welcome, AquaVit", width - Fonts.font20.getStringWidth("Welcome, AquaVit") - 4f, height - 12f, new Color(255, 255, 255, 200).getRGB());
         Fonts.font20.drawStringWithShadow("LiquidSense Reborn!", 4f, height - 12f, new Color(255, 255, 255, 200).getRGB());
-        //Fonts.logo.drawCenteredString(LiquidBounce.CLIENT_NAME, this.width / 2F - 1, height / 2F - 45, new Color(236, 87, 202, 200).getRGB(), true);
+        //Fonts.logo.drawCenteredString(LiquidSense.CLIENT_NAME, this.width / 2F - 1, height / 2F - 45, new Color(236, 87, 202, 200).getRGB(), true);
         Fonts.logo.drawCenteredString(LiquidSense.CLIENT_NAME, this.width / 2F + 1, height / 2F - 49, new Color(91, 162, 234, 200).getRGB(), true);
         Fonts.logo.drawCenteredString(LiquidSense.CLIENT_NAME, this.width / 2F, height / 2F - 50, new Color(255, 255, 255, 255).getRGB(), true);
         super.drawScreen(mouseX, mouseY, partialTicks);

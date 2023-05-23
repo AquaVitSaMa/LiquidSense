@@ -200,7 +200,7 @@ public class Speed extends Module {
             mc.thePlayer.horseJumpPower = 0;
             mc.thePlayer.onGround = true;
         }
-        if (mc.thePlayer.isSneaking() || stoptick > 0 || LiquidBounce.moduleManager.get(Scaffold.class).getState())
+        if (mc.thePlayer.isSneaking() || stoptick > 0 || LiquidSense.moduleManager.get(Scaffold.class).getState())
             return;
 
          */

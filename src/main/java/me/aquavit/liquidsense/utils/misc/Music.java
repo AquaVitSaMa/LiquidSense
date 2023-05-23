@@ -14,7 +14,7 @@ public class Music {
             public void run() {
                 try {
                     Clip clip = AudioSystem.getClip();
-                    BufferedInputStream buffInputStream = new BufferedInputStream(Music.class.getResourceAsStream("/assets/minecraft/liquidbounce/sound/" + url));
+                    BufferedInputStream buffInputStream = new BufferedInputStream(Music.class.getResourceAsStream("/assets/minecraft/liquidsense/sound/" + url));
                     AudioInputStream inputStream = AudioSystem.getAudioInputStream(buffInputStream);
 
                     clip.open(inputStream);

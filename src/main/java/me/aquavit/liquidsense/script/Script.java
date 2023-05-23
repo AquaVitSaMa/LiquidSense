@@ -165,7 +165,7 @@ public class Script extends MinecraftInstance {
     private void supportLegacyScripts() {
         if (!"2".equals(getMagicComment("api_version"))) {
             ClientUtils.getLogger().info("[ScriptAPI] Running script '" + scriptFile.getName() + "' with legacy support.");
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(LiquidSense.class.getResourceAsStream("/assets/minecraft/liquidbounce/scriptapi/legacy.js"))))) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(LiquidSense.class.getResourceAsStream("/assets/minecraft/liquidsense/scriptapi/legacy.js"))))) {
                 StringBuilder scriptBuilder = new StringBuilder();
                 String line;
                 while ((line = reader.readLine()) != null) {

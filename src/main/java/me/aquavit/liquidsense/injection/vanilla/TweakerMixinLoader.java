@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.injection.vanilla;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.script.remapper.injection.transformers.AbstractJavaLinkerTransformer;
 import net.minecraft.launchwrapper.ITweaker;
 import net.minecraft.launchwrapper.LaunchClassLoader;
@@ -37,7 +38,7 @@ public class TweakerMixinLoader implements ITweaker {
 
     @Override
     public void injectIntoClassLoader(LaunchClassLoader classLoader) {
-        System.out.println("[LiquidBounce] Injecting with TweakerMixinLoader.");
+        System.out.println("["+LiquidSense.CLIENT_NAME+"]"+" Injecting with TweakerMixinLoader.");
 
         MixinBootstrap.init();
         Mixins.addConfiguration("liquidsense.forge.mixins.json");

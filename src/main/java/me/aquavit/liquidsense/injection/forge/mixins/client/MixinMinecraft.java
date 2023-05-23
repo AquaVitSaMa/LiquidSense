@@ -183,10 +183,10 @@ public abstract class MixinMinecraft {
     @Inject(method = "setWindowIcon", at = @At("HEAD"), cancellable = true)
     private void setWindowIcon(CallbackInfo callbackInfo) {
         if(Util.getOSType() != Util.EnumOS.OSX) {
-            final ByteBuffer[] liquidBounceFavicon = IconUtils.getFavicon();
-            if(liquidBounceFavicon != null) {
+            final ByteBuffer[] liquidSenseFavicon = IconUtils.getFavicon();
+            if(liquidSenseFavicon != null) {
 
-                Display.setIcon(liquidBounceFavicon);
+                Display.setIcon(liquidSenseFavicon);
                 callbackInfo.cancel();
             }
         }

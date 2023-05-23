@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.utils.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.block.BlockUtils;
@@ -161,7 +162,7 @@ public final class RenderUtils extends MinecraftInstance {
         GL11.glPushMatrix();
         GlStateManager.enableBlend();
         GlStateManager.disableAlpha();
-        mc.getTextureManager().bindTexture(new ResourceLocation("liquidbounce/shader/" + image + ".png"));
+        mc.getTextureManager().bindTexture(new ResourceLocation(LiquidSense.CLIENT_NAME.toLowerCase() + "/shader/" + image + ".png"));
         GlStateManager.color(1.0f, 1.0f, 1.0f, 1.0f);
         Gui.drawModalRectWithCustomSizedTexture((int)x, (int)y, 0.0f, 0.0f, (int)width, (int)height, (int)width, (int)height);
         GlStateManager.disableBlend();
@@ -173,7 +174,7 @@ public final class RenderUtils extends MinecraftInstance {
 		GL11.glPushMatrix();
 		GlStateManager.enableBlend();
 		GlStateManager.disableAlpha();
-		mc.getTextureManager().bindTexture(new ResourceLocation("liquidbounce/shader/" + image + ".png"));
+		mc.getTextureManager().bindTexture(new ResourceLocation(LiquidSense.CLIENT_NAME.toLowerCase() + "/shader/" + image + ".png"));
 		float var11 = (color >> 24 & 255) / 255.0F;
 		float var6 = (color >> 16 & 255) / 255.0F;
 		float var7 = (color >> 8 & 255) / 255.0F;
