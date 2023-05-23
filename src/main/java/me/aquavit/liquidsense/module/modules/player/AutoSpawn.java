@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.module.modules.player;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.exploit.Ghost;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.module.Module;
@@ -16,7 +16,7 @@ public class AutoSpawn extends Module {
 
     @EventTarget
     public void onUpdate(UpdateEvent event){
-        if (LiquidBounce.moduleManager.getModule(Ghost.class).getState())
+        if (LiquidSense.moduleManager.getModule(Ghost.class).getState())
             return;
         if (instantValue.get() ? mc.thePlayer.getHealth() == 0F || mc.thePlayer.isDead : mc.currentScreen instanceof GuiGameOver && (((GuiGameOver)mc.currentScreen).enableButtonsTimer) >= 20) {
             mc.thePlayer.respawnPlayer();

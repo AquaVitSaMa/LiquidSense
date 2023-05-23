@@ -1,11 +1,11 @@
 package me.aquavit.liquidsense.module.modules.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
 import me.aquavit.liquidsense.event.events.UpdateModelEvent;
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
 import me.aquavit.liquidsense.utils.render.Translate;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -79,7 +79,7 @@ public class Skeltal extends Module {
             double y = RenderUtils.interpolate(player.posY, player.lastTickPosY, event.getPartialTicks()) - mc.getRenderManager().renderPosY;
             double z = RenderUtils.interpolate(player.posZ, player.lastTickPosZ, event.getPartialTicks()) - mc.getRenderManager().renderPosZ;
             GL11.glTranslated(x, y, z);
-            if (LiquidBounce.moduleManager.getModule(RenderChanger.class).getState() && RenderChanger.littleEntitiesValue.get())
+            if (LiquidSense.moduleManager.getModule(RenderChanger.class).getState() && RenderChanger.littleEntitiesValue.get())
                 GL11.glScalef(0.5f, 0.5f, 0.5f);
             float bodyYawOffset = player.prevRenderYawOffset + (player.renderYawOffset - player.prevRenderYawOffset) * mc.timer.renderPartialTicks;
             GL11.glRotatef((-bodyYawOffset), 0.0f, 1.0f, 0.0f);

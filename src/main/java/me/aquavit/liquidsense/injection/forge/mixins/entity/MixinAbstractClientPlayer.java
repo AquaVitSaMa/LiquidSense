@@ -5,9 +5,9 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.entity;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.client.Cape;
 import me.aquavit.liquidsense.module.modules.client.NoFOV;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.misc.NameProtect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
@@ -29,7 +29,7 @@ public abstract class MixinAbstractClientPlayer extends MixinEntityPlayer {
 
     @Inject(method = "getLocationCape", at = @At("HEAD"), cancellable = true)
     private void getCape(CallbackInfoReturnable<ResourceLocation> callbackInfoReturnable) {
-        final Cape ca = (Cape) LiquidBounce.moduleManager.getModule(Cape.class);
+        final Cape ca = (Cape) LiquidSense.moduleManager.getModule(Cape.class);
 
         if(ca.getState()) {
             ResourceLocation cape = new ResourceLocation("liquidbounce" + "/cape/"+ ca.modeValue.get() +".png");
@@ -42,7 +42,7 @@ public abstract class MixinAbstractClientPlayer extends MixinEntityPlayer {
     @Inject(method = "getFovModifier", at = @At("HEAD"), cancellable = true)
     private void getFovModifier(CallbackInfoReturnable<Float> callbackInfoReturnable) {
 
-        if(LiquidBounce.moduleManager.getModule(NoFOV.class).getState()) {
+        if(LiquidSense.moduleManager.getModule(NoFOV.class).getState()) {
             float newFOV = NoFOV.fovValue.get();
 
             if(!this.isUsingItem()) {
@@ -65,7 +65,7 @@ public abstract class MixinAbstractClientPlayer extends MixinEntityPlayer {
 
     @Inject(method = "getLocationSkin()Lnet/minecraft/util/ResourceLocation;", at = @At("HEAD"), cancellable = true)
     private void getSkin(CallbackInfoReturnable<ResourceLocation> callbackInfoReturnable) {
-        final NameProtect nameProtect = (NameProtect) LiquidBounce.moduleManager.getModule(NameProtect.class);
+        final NameProtect nameProtect = (NameProtect) LiquidSense.moduleManager.getModule(NameProtect.class);
 
         if(nameProtect.getState() && nameProtect.skinProtectValue.get()) {
             if (!nameProtect.allPlayersValue.get() && !Objects.equals(getGameProfile().getName(), Minecraft.getMinecraft().thePlayer.getGameProfile().getName()))

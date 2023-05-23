@@ -4,7 +4,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.file.FileConfig;
 import me.aquavit.liquidsense.file.FileManager;
@@ -33,7 +33,7 @@ public class SetNameConfig extends FileConfig {
         final Iterator<Map.Entry<String, JsonElement>> entryIterator = jsonElement.getAsJsonObject().entrySet().iterator();
         while(entryIterator.hasNext()) {
             final Map.Entry<String, JsonElement> entry = entryIterator.next();
-            final Module module = LiquidBounce.moduleManager.getModule(entry.getKey());
+            final Module module = LiquidSense.moduleManager.getModule(entry.getKey());
             if(module != null) {
                 final JsonObject jsonModule = (JsonObject) entry.getValue();
 
@@ -47,7 +47,7 @@ public class SetNameConfig extends FileConfig {
     protected void saveConfig() throws IOException {
         final JsonObject jsonObject = new JsonObject();
 
-        for (final Module module : LiquidBounce.moduleManager.getModules()) {
+        for (final Module module : LiquidSense.moduleManager.getModules()) {
             final JsonObject jsonMod = new JsonObject();
             jsonMod.addProperty("arrayListName", module.getArrayListName());
             jsonObject.add(module.getName(), jsonMod);

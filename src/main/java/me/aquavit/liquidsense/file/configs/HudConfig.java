@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.file.configs;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.file.FileConfig;
 import me.aquavit.liquidsense.ui.client.hud.Config;
 import org.apache.commons.io.FileUtils;
@@ -33,8 +33,8 @@ public class HudConfig extends FileConfig {
      */
     @Override
     protected void loadConfig() throws IOException {
-        LiquidBounce.hud.clearElements();
-        LiquidBounce.hud = new Config(FileUtils.readFileToString(getFile())).toHUD();
+        LiquidSense.hud.clearElements();
+        LiquidSense.hud = new Config(FileUtils.readFileToString(getFile())).toHUD();
     }
 
     /**
@@ -45,7 +45,7 @@ public class HudConfig extends FileConfig {
     @Override
     protected void saveConfig() throws IOException {
         final PrintWriter printWriter = new PrintWriter(new FileWriter(getFile()));
-        printWriter.println(new Config(LiquidBounce.hud).toJson());
+        printWriter.println(new Config(LiquidSense.hud).toJson());
         printWriter.close();
     }
 }

@@ -1,10 +1,10 @@
 package me.aquavit.liquidsense.module.modules.client;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -36,12 +36,12 @@ public class Rotations extends Module {
     }
 
     private boolean getState(Class<?> module) {
-        return LiquidBounce.moduleManager.getModule(module).getState();
+        return LiquidSense.moduleManager.getModule(module).getState();
     }
 
     private boolean shouldRotate() {
         return getState(Scaffold.class) ||
-                (getState(Aura.class) && ((Aura) LiquidBounce.moduleManager.getModule(Aura.class)).getTarget() != null) ||
+                (getState(Aura.class) && ((Aura) LiquidSense.moduleManager.getModule(Aura.class)).getTarget() != null) ||
                 getState(ChestAura.class);
     }
 

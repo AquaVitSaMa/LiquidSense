@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.Listenable;
 import me.aquavit.liquidsense.event.events.PacketEvent;
@@ -15,7 +15,7 @@ public class ServerInfoCommand extends Command implements Listenable {
 
     public ServerInfoCommand() {
         super("serverinfo");
-        LiquidBounce.eventManager.registerListener(this);
+        LiquidSense.eventManager.registerListener(this);
     }
 
     @Override

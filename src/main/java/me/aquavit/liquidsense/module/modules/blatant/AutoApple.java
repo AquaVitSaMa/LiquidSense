@@ -1,10 +1,10 @@
 package me.aquavit.liquidsense.module.modules.blatant;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.utils.client.InventoryUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -47,7 +47,7 @@ public class AutoApple extends Module {
         int SKULL = InventoryUtils.findItem(36, 45, Items.skull);
         int SORG = GAPPLE == -1 && SKULL != -1 ? SKULL : GAPPLE;
 
-        if (timer.hasTimePassed(delay) || !LiquidBounce.moduleManager.getModule(Scaffold.class).getState() || !mc.thePlayer.isDead){
+        if (timer.hasTimePassed(delay) || !LiquidSense.moduleManager.getModule(Scaffold.class).getState() || !mc.thePlayer.isDead){
 
             if (mc.thePlayer.getHealth() >= maxHealth.get()) {
                 if (isUse) {

@@ -5,9 +5,9 @@
  */
 package me.aquavit.liquidsense.module.modules.movement;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventState;
 import me.aquavit.liquidsense.event.EventTarget;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
@@ -243,11 +243,11 @@ public class Speed extends Module {
 
         mc.timer.timerSpeed = 1F;
 
-        Step sp = (Step) LiquidBounce.moduleManager.getModule(Step.class);
+        Step sp = (Step) LiquidSense.moduleManager.getModule(Step.class);
 
         if(sp.getState()){
             yn = true;
-            LiquidBounce.moduleManager.getModule(Step.class).setState(false);
+            LiquidSense.moduleManager.getModule(Step.class).setState(false);
         }
 
         final SpeedMode speedMode = getMode();
@@ -264,7 +264,7 @@ public class Speed extends Module {
         mc.timer.timerSpeed = 1F;
 
         if(yn){
-            LiquidBounce.moduleManager.getModule("Stair").setState(true);
+            LiquidSense.moduleManager.getModule("Stair").setState(true);
             yn = false;
         }
 

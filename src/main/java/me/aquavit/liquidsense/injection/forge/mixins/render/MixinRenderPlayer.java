@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.model.ModelPlayer;
@@ -67,7 +67,7 @@ public abstract class MixinRenderPlayer extends MixinRender {
 
     @Inject(method = "rotateCorpse", at = @At("HEAD"), cancellable = true)
     public void sleep1(AbstractClientPlayer bat, float p_77043_2_, float p_77043_3_, float partialTicks, CallbackInfo callbackInfo) {
-        if (bat == Minecraft.getMinecraft().thePlayer && LiquidBounce.moduleManager.getModule(RenderChanger.class).getState() && RenderChanger.sleeperValue.get()) {
+        if (bat == Minecraft.getMinecraft().thePlayer && LiquidSense.moduleManager.getModule(RenderChanger.class).getState() && RenderChanger.sleeperValue.get()) {
             GlStateManager.translate(0f, 0.3f, 0f);
             GlStateManager.rotate(-Minecraft.getMinecraft().thePlayer.rotationYaw - 90f, 0.0F, 1.0F, 0.0F);
             GlStateManager.rotate(90f, 0.0F, 0.0F, 1.0F);

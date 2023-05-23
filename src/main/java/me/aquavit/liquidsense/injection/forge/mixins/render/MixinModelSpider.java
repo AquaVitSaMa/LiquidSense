@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.client.model.ModelSpider;
@@ -47,7 +47,7 @@ public class MixinModelSpider extends ModelBase {
     @Overwrite
     public void render(Entity p_render_1_, float p_render_2_, float p_render_3_, float p_render_4_, float p_render_5_, float p_render_6_, float p_render_7_) {
         this.setRotationAngles(p_render_2_, p_render_3_, p_render_4_, p_render_5_, p_render_6_, p_render_7_, p_render_1_);
-        final RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+        final RenderChanger rc = (RenderChanger) LiquidSense.moduleManager.getModule(RenderChanger.class);
 
         if (rc.getState() && RenderChanger.bigHeadsValue.get()) {
             GL11.glPushMatrix();

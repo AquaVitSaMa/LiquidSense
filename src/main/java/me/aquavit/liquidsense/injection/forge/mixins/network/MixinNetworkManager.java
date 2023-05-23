@@ -4,7 +4,7 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.util.concurrent.Future;
 import io.netty.util.concurrent.GenericFutureListener;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.RespawnEvent;
 import me.aquavit.liquidsense.event.EventType;
 import me.aquavit.liquidsense.event.events.PacketEvent;
@@ -37,10 +37,10 @@ public abstract class MixinNetworkManager implements INetworkManager {
     private void readpacket(ChannelHandlerContext context, Packet<?> packet, CallbackInfo callback) {
         if (this.channel.isOpen()) {
             final PacketEvent event = new PacketEvent(packet, EventType.RECEIVE);
-            LiquidBounce.eventManager.callEvent(event);
+            LiquidSense.eventManager.callEvent(event);
             if (packet instanceof S07PacketRespawn) {
                 final RespawnEvent respawnEvent = new RespawnEvent();
-                LiquidBounce.eventManager.callEvent(respawnEvent);
+                LiquidSense.eventManager.callEvent(respawnEvent);
                 if(respawnEvent.isCancelled())
                     callback.cancel();
             }
@@ -53,7 +53,7 @@ public abstract class MixinNetworkManager implements INetworkManager {
     @Inject(method = "sendPacket(Lnet/minecraft/network/Packet;)V", at = @At("HEAD"), cancellable = true)
     private void send(Packet<?> packet, CallbackInfo callback) {
         final PacketEvent event = new PacketEvent(packet, EventType.SEND);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidSense.eventManager.callEvent(event);
 
         if(event.isCancelled())
             callback.cancel();

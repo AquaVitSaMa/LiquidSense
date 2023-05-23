@@ -8,7 +8,7 @@ package me.aquavit.liquidsense.module.modules.player;
 import me.aquavit.liquidsense.event.EventState;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.utils.mc.VoidCheck;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
@@ -56,7 +56,7 @@ public class NoFall extends Module {
     private boolean fakelag = false;
     public double fallDist = 0;
     private boolean packetmodify = false;
-    Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
+    Fly fly = (Fly) LiquidSense.moduleManager.getModule(Fly.class);
 
     private final BoolValue noSound = new BoolValue("NoSound", true);
 
@@ -77,7 +77,7 @@ public class NoFall extends Module {
         if(mc.thePlayer.motionY > 0)
             jumped = true;
 
-        if (!getState() || LiquidBounce.moduleManager.getModule(FreeCam.class).getState())
+        if (!getState() || LiquidSense.moduleManager.getModule(FreeCam.class).getState())
             return;
 
         if(BlockUtils.collideBlock(mc.thePlayer.getEntityBoundingBox(), block -> block instanceof BlockLiquid) ||

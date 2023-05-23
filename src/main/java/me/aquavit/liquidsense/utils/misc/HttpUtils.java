@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.utils.misc;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import org.apache.commons.io.FileUtils;
 
 import java.io.*;
@@ -61,7 +61,7 @@ public class HttpUtils {
         urlConnection.setRequestProperty("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/50.0.2661.87 Safari/537.36");
         String result = getResultFormStream(urlConnection.getInputStream());
         JsonObject json = new JsonParser().parse(result).getAsJsonObject();
-        return json.getAsJsonObject(LiquidBounce.MINECRAFT_VERSION).get("version").getAsString();
+        return json.getAsJsonObject(LiquidSense.MINECRAFT_VERSION).get("version").getAsString();
     }
 
     public static String getResultFormStream(InputStream in) throws IOException {

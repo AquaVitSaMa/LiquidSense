@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.ui.client.hud.element.elements;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.hud.designer.GuiHudDesigner;
 import me.aquavit.liquidsense.ui.client.hud.element.Border;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
@@ -26,7 +26,7 @@ public class Notifications extends Element {
     public Stream<Notification> notification;
     @Override
     public Border drawElement() {
-        notification = LiquidBounce.hud.getNotifications().stream();
+        notification = LiquidSense.hud.getNotifications().stream();
         int index = 0;
         for (Notification notify : notification.collect(Collectors.toList())) {
             GL11.glPushMatrix();
@@ -35,14 +35,14 @@ public class Notifications extends Element {
             }
             GL11.glPopMatrix();
             if (notify.getFadeState() == FadeState.END) {
-                LiquidBounce.hud.notifications.remove(notify);
+                LiquidSense.hud.notifications.remove(notify);
                 --index;
             }
             ++index;
         }
         if (mc.currentScreen instanceof GuiHudDesigner) {
-            if (!LiquidBounce.hud.notifications.contains(this.exampleNotification)) {
-                LiquidBounce.hud.addNotification(this.exampleNotification);
+            if (!LiquidSense.hud.notifications.contains(this.exampleNotification)) {
+                LiquidSense.hud.addNotification(this.exampleNotification);
             }
             this.exampleNotification.setFadeState(FadeState.STAY);
             this.exampleNotification.setDisplayTime(System.currentTimeMillis());

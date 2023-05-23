@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.module.modules.misc;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.movement.Step;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.module.Module;
@@ -26,41 +26,41 @@ public class LagBack extends Module {
 
     @EventTarget
     public void onPacket(PacketEvent event) {
-        Speed speed = (Speed) LiquidBounce.moduleManager.getModule(Speed.class);
-        LongJump longjump = (LongJump) LiquidBounce.moduleManager.getModule(LongJump.class);
-        Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
-        Step step = (Step) LiquidBounce.moduleManager.getModule(Step.class);
+        Speed speed = (Speed) LiquidSense.moduleManager.getModule(Speed.class);
+        LongJump longjump = (LongJump) LiquidSense.moduleManager.getModule(LongJump.class);
+        Fly fly = (Fly) LiquidSense.moduleManager.getModule(Fly.class);
+        Step step = (Step) LiquidSense.moduleManager.getModule(Step.class);
 
         if (event.getPacket() instanceof S08PacketPlayerPosLook && this.deactivationDelay.hasReached(2000L)) {
             if (speedlag.get()) {
                 if (speed.getState()) {
                     if(mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown()){
-                        LiquidBounce.moduleManager.getModule(Speed.class).setState(false);
-                        mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" +LiquidBounce.CLIENT_NAME+ "§8] §3"+ "SpeedLagBack"));
+                        LiquidSense.moduleManager.getModule(Speed.class).setState(false);
+                        mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" + LiquidSense.CLIENT_NAME+ "§8] §3"+ "SpeedLagBack"));
                     }
                 }
             }
             if (longjumplag.get()) {
                 if (longjump.getState() && mc.thePlayer.motionX == 0 && mc.thePlayer.motionZ == 0) {
                     if(mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown()){
-                        LiquidBounce.moduleManager.getModule(LongJump.class).setState(false);
-                        mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" +LiquidBounce.CLIENT_NAME+ "§8] §3"+ "LongJumpLagBack"));
+                        LiquidSense.moduleManager.getModule(LongJump.class).setState(false);
+                        mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" + LiquidSense.CLIENT_NAME+ "§8] §3"+ "LongJumpLagBack"));
                     }
                 }
             }
             if(flylag.get()){
                 if(fly.getState()) {
                     if (mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown()) {
-                        LiquidBounce.moduleManager.getModule(Fly.class).setState(false);
-                        mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" +LiquidBounce.CLIENT_NAME+ "§8] §3"+ "FlyLagBack"));
+                        LiquidSense.moduleManager.getModule(Fly.class).setState(false);
+                        mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" + LiquidSense.CLIENT_NAME+ "§8] §3"+ "FlyLagBack"));
                     }
                 }
             }
             if (steplag.get()) {
                 if (step.getState() && mc.thePlayer.motionX == 0 && mc.thePlayer.motionZ == 0) {
                     if(mc.gameSettings.keyBindForward.isKeyDown() || mc.gameSettings.keyBindBack.isKeyDown() || mc.gameSettings.keyBindLeft.isKeyDown() || mc.gameSettings.keyBindRight.isKeyDown()){
-                        LiquidBounce.moduleManager.getModule(Step.class).setState(false);
-                        mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" +LiquidBounce.CLIENT_NAME+ "§8] §3"+ "StepLagBack"));
+                        LiquidSense.moduleManager.getModule(Step.class).setState(false);
+                        mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" + LiquidSense.CLIENT_NAME+ "§8] §3"+ "StepLagBack"));
                     }
                 }
             }

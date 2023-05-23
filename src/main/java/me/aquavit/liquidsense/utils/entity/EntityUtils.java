@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.module.modules.client.Target;
 import me.aquavit.liquidsense.module.modules.blatant.NoFriends;
 import me.aquavit.liquidsense.module.modules.misc.Teams;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.misc.AntiBot;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -37,13 +37,13 @@ public final class EntityUtils extends MinecraftInstance {
                         if(AntiBot.isBot(entityPlayer))
                             return false;
 
-                        if (isFriend(entityPlayer) && !LiquidBounce.moduleManager.getModule(NoFriends.class).getState())
+                        if (isFriend(entityPlayer) && !LiquidSense.moduleManager.getModule(NoFriends.class).getState())
                             return false;
 
                         if(entityPlayer.isSpectator())
                             return false;
 
-                        final Teams teams = (Teams) LiquidBounce.moduleManager.getModule(Teams.class);
+                        final Teams teams = (Teams) LiquidSense.moduleManager.getModule(Teams.class);
                         return !teams.getState() || !Teams.isInYourTeam(entityPlayer);
                     }
 
@@ -59,7 +59,7 @@ public final class EntityUtils extends MinecraftInstance {
 
     public static boolean isFriend(final Entity entity) {
         return entity instanceof EntityPlayer && entity.getName() != null &&
-                LiquidBounce.fileManager.friendsConfig.isFriend(ColorUtils.stripColor(entity.getName()));
+                LiquidSense.fileManager.friendsConfig.isFriend(ColorUtils.stripColor(entity.getName()));
     }
 
     public static boolean isAnimal(final Entity entity) {

@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.ui.client.gui;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.gui.elements.AntiForge;
 import me.aquavit.liquidsense.ui.font.Fonts;
 import net.minecraft.client.gui.GuiButton;
@@ -43,22 +43,22 @@ public class GuiAntiForge extends GuiScreen {
             case 1:
                 AntiForge.enabled = !AntiForge.enabled;
                 enabledButton.displayString = "Enabled (" + (AntiForge.enabled ? "On" : "Off") + ")";
-                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
                 break;
             case 2:
                 AntiForge.blockFML = !AntiForge.blockFML;
                 fmlButton.displayString = "Block FML (" + (AntiForge.blockFML ? "On" : "Off") + ")";
-                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
                 break;
             case 3:
                 AntiForge.blockProxyPacket = !AntiForge.blockProxyPacket;
                 proxyButton.displayString = "Block FML Proxy Packet (" + (AntiForge.blockProxyPacket ? "On" : "Off") + ")";
-                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
                 break;
             case 4:
                 AntiForge.blockPayloadPackets = !AntiForge.blockPayloadPackets;
                 payloadButton.displayString = "Block Payload Packets (" + (AntiForge.blockPayloadPackets ? "On" : "Off") + ")";
-                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
                 break;
             case 0:
                 mc.displayGuiScreen(prevGui);

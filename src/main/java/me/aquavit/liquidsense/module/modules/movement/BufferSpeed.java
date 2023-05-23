@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.module.modules.movement;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
@@ -66,7 +66,7 @@ public class BufferSpeed extends Module {
 
     @EventTarget
     public void onUpdate(final UpdateEvent event) {
-        if (LiquidBounce.moduleManager.getModule(Speed.class).getState() || (noHurtValue.get() && mc.thePlayer.hurtTime > 0)) {
+        if (LiquidSense.moduleManager.getModule(Speed.class).getState() || (noHurtValue.get() && mc.thePlayer.hurtTime > 0)) {
             reset();
             return;
         }

@@ -1,10 +1,10 @@
 package me.aquavit.liquidsense.ui.client.hud.element.elements;
 
 import com.google.gson.JsonElement;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.data.Ranges;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowFontShader;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowShader;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.ui.client.hud.designer.GuiHudDesigner;
 import me.aquavit.liquidsense.ui.client.hud.element.Border;
@@ -38,9 +38,9 @@ public class Arraylist extends Element {
         @Override
         protected void onChanged(Boolean oldValue, Boolean newValue) {
             if (newValue)
-                LiquidBounce.moduleManager.getModules().forEach(it -> it.setArrayListName(getBreakName(it.getName())));
+                LiquidSense.moduleManager.getModules().forEach(it -> it.setArrayListName(getBreakName(it.getName())));
             else
-                LiquidBounce.moduleManager.getModules().forEach(it -> it.setArrayListName(it.getName()));
+                LiquidSense.moduleManager.getModules().forEach(it -> it.setArrayListName(it.getName()));
         }
 
         @Override
@@ -159,7 +159,7 @@ public class Arraylist extends Element {
 
         final int delta = RenderUtils.deltaTime;
 
-        for (Module module : LiquidBounce.moduleManager.getModules()) {
+        for (Module module : LiquidSense.moduleManager.getModules()) {
             if (!module.getArray() || (!module.getState() && module.getSlide() == 2F)) continue;
             String displayString = Replacement.multiReplace(
                     tagsArrayColor.get() ? module.getColorlessTagName() :
@@ -525,7 +525,7 @@ public class Arraylist extends Element {
 
     @Override
     public void updateElement() {
-        modules = LiquidBounce.moduleManager.getModules().stream().filter(it -> it.getArray() && it.getSlide() > 0).sorted(Comparator.comparing(it -> -fontValue.get().getStringWidth(
+        modules = LiquidSense.moduleManager.getModules().stream().filter(it -> it.getArray() && it.getSlide() > 0).sorted(Comparator.comparing(it -> -fontValue.get().getStringWidth(
                 Replacement.multiReplace(
                         lowerCaseValue.get() && tagsArrayColor.get() ? it.getColorlessTagName().toLowerCase() :
                                 (lowerCaseValue.get() && tags.get() && tagsMode.get().equalsIgnoreCase("Space") ? it.getTagName().toLowerCase() :
@@ -547,7 +547,7 @@ public class Arraylist extends Element {
                                                                                                                                                                 it.getArrayListName())))))))))))))))))))).collect(Collectors.toList());
 
 
-        if (alphaSort.get()) modules = LiquidBounce.moduleManager.getModules().stream().filter(it -> it.getArray() && it.getSlide() >0).sorted(Comparator.comparing(it -> -fontValue.get().getStringWidth(String.valueOf(0)))).collect(Collectors.toList());
+        if (alphaSort.get()) modules = LiquidSense.moduleManager.getModules().stream().filter(it -> it.getArray() && it.getSlide() >0).sorted(Comparator.comparing(it -> -fontValue.get().getStringWidth(String.valueOf(0)))).collect(Collectors.toList());
     }
 
     private String updateTags(Module it) {

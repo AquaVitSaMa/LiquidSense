@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.module.modules.movement;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.module.Module;
@@ -26,7 +26,7 @@ public class FastStairs extends Module {
 
     @EventTarget
     public void onUpdate(final UpdateEvent event) {
-        if (mc.thePlayer == null || LiquidBounce.moduleManager.getModule(Speed.class).getState())
+        if (mc.thePlayer == null || LiquidSense.moduleManager.getModule(Speed.class).getState())
             return;
 
         final BlockPos blockPos = new BlockPos(mc.thePlayer.posX, mc.thePlayer.getEntityBoundingBox().minY, mc.thePlayer.posZ);

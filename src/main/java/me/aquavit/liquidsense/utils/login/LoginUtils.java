@@ -7,8 +7,8 @@ import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.exceptions.AuthenticationUnavailableException;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.SessionEvent;
 import net.minecraft.util.Session;
 
@@ -25,7 +25,7 @@ public final class LoginUtils extends MinecraftInstance {
         try {
             userAuthentication.logIn();
             mc.session = new Session(userAuthentication.getSelectedProfile().getName(), userAuthentication.getSelectedProfile().getId().toString(), userAuthentication.getAuthenticatedToken(), "mojang");
-            LiquidBounce.eventManager.callEvent(new SessionEvent());
+            LiquidSense.eventManager.callEvent(new SessionEvent());
             return LoginResult.LOGGED;
         }
         catch (AuthenticationUnavailableException exception2) {
@@ -48,7 +48,7 @@ public final class LoginUtils extends MinecraftInstance {
     public static void loginCracked(final String username) {
         if (username == null) return;
         mc.session = new Session(username, UserUtils.getUUID(username), "-", "legacy");
-        LiquidBounce.eventManager.callEvent(new SessionEvent());
+        LiquidSense.eventManager.callEvent(new SessionEvent());
     }
 
     public static LoginResult loginSessionId(String sessionId) throws IOException {
@@ -73,7 +73,7 @@ public final class LoginUtils extends MinecraftInstance {
         }
 
         mc.session = new Session(username, uuid, accessToken, "mojang");
-        LiquidBounce.eventManager.callEvent(new SessionEvent());
+        LiquidSense.eventManager.callEvent(new SessionEvent());
         return LoginResult.LOGGED;
     }
 

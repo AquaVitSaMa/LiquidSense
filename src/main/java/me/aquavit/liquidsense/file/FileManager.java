@@ -7,7 +7,7 @@ package me.aquavit.liquidsense.file;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.file.configs.*;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
@@ -25,7 +25,7 @@ import java.lang.reflect.Field;
 @SideOnly(Side.CLIENT)
 public class FileManager extends MinecraftInstance {
 
-    public final File dir = new File(mc.mcDataDir, LiquidBounce.CLIENT_NAME + "-Config");
+    public final File dir = new File(mc.mcDataDir, LiquidSense.CLIENT_NAME + "-Config");
     public final File fontsDir = new File(dir, "fonts");
     public final File settingsDir = new File(dir, "settings");
     public final File CapeDir = new File(dir, "cape");
@@ -169,7 +169,7 @@ public class FileManager extends MinecraftInstance {
      * @param ignoreStarting check starting
      */
     private void saveConfig(final FileConfig config, final boolean ignoreStarting) {
-        if (!ignoreStarting && LiquidBounce.INSTANCE.isStarting())
+        if (!ignoreStarting && LiquidSense.INSTANCE.isStarting())
             return;
 
         try {
@@ -195,8 +195,8 @@ public class FileManager extends MinecraftInstance {
                 if(bufferedImage == null)
                     return;
 
-                LiquidBounce.INSTANCE.setBackground(new ResourceLocation(LiquidBounce.CLIENT_NAME.toLowerCase() + "/background.png"));
-                mc.getTextureManager().loadTexture(LiquidBounce.INSTANCE.getBackground(), new DynamicTexture(bufferedImage));
+                LiquidSense.INSTANCE.setBackground(new ResourceLocation(LiquidSense.CLIENT_NAME.toLowerCase() + "/background.png"));
+                mc.getTextureManager().loadTexture(LiquidSense.INSTANCE.getBackground(), new DynamicTexture(bufferedImage));
                 ClientUtils.getLogger().info("[FileManager] Loaded background.");
             }catch(final Exception e) {
                 ClientUtils.getLogger().error("[FileManager] Failed to load background.", e);

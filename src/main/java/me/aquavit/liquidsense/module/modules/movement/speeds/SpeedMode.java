@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.module.modules.movement.speeds;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.JumpEvent;
 import me.aquavit.liquidsense.event.events.MotionEvent;
 import me.aquavit.liquidsense.event.events.MoveEvent;
@@ -24,7 +24,7 @@ public abstract class SpeedMode extends MinecraftInstance {
     }
 
     public boolean isActive() {
-        final Speed speed = ((Speed) LiquidBounce.moduleManager.getModule(Speed.class));
+        final Speed speed = ((Speed) LiquidSense.moduleManager.getModule(Speed.class));
 
         return speed != null && !mc.thePlayer.isSneaking() && speed.getState() && speed.modeValue.get().equals(modeName);
     }

@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.ui.client.hud.element.elements;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
@@ -10,7 +11,6 @@ import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowFontShader;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.hud.designer.GuiHudDesigner;
 import me.aquavit.liquidsense.ui.client.hud.element.Border;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
@@ -232,11 +232,11 @@ public class  Text extends Element {
             case "username":
                 return mc.getSession().getUsername();
             case "clientname":
-                return LiquidBounce.CLIENT_NAME;
+                return LiquidSense.CLIENT_NAME;
             case "clientversion":
-                return "b" + LiquidBounce.CLIENT_VERSION;
+                return "b" + LiquidSense.CLIENT_VERSION;
             case "clientcreator":
-                return LiquidBounce.CLIENT_CREATOR;
+                return LiquidSense.CLIENT_CREATOR;
             case "fps":
                 return String.valueOf(Minecraft.getDebugFPS());
             case "date":

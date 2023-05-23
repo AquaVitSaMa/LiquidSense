@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.command;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.data.Pair;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.commands.*;
 import me.aquavit.liquidsense.command.shortcuts.Shortcut;
 import me.aquavit.liquidsense.command.shortcuts.ShortcutParser;
@@ -178,7 +178,7 @@ public class CommandManager {
                 }
             }).collect(Collectors.toCollection((Supplier<List<Pair<Command,String[]>>>)ArrayList::new))));
 
-            LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.shortcutsConfig);
+            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.shortcutsConfig);
         } else {
             throw new IllegalArgumentException("Command already exists!");
         }
@@ -187,7 +187,7 @@ public class CommandManager {
     public boolean unregisterShortcut(String name) {
         boolean removed = commands.removeIf(it -> it instanceof Shortcut && it.getCommand().equals(name));
 
-        LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.shortcutsConfig);
+        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.shortcutsConfig);
 
         return removed;
     }

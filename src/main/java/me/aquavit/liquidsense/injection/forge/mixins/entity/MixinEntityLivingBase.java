@@ -5,10 +5,10 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.entity;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.misc.Animations;
 import me.aquavit.liquidsense.module.modules.movement.NoJumpDelay;
 import me.aquavit.liquidsense.module.modules.client.AntiBlind;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.LivingUpdateEvent;
 import me.aquavit.liquidsense.event.events.JumpEvent;
 import me.aquavit.liquidsense.module.modules.movement.LiquidWalk;
@@ -69,7 +69,7 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
     @Overwrite
     protected void jump() {
         final JumpEvent jumpEvent = new JumpEvent(this.getJumpUpwardsMotion());
-        LiquidBounce.eventManager.callEvent(jumpEvent);
+        LiquidSense.eventManager.callEvent(jumpEvent);
         if(jumpEvent.isCancelled())
             return;
 
@@ -93,21 +93,21 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
 	 */
     @Overwrite
     private int getArmSwingAnimationEnd() {
-        Animations sb = (Animations) LiquidBounce.moduleManager.getModule(Animations.class);
+        Animations sb = (Animations) LiquidSense.moduleManager.getModule(Animations.class);
         Boolean nm = sb.getSB().get() > 0;
         return this.isPotionActive(Potion.digSpeed)? 6 - (1 + this.getActivePotionEffect(Potion.digSpeed).getAmplifier()) * 1 : nm ? 6  + sb.getSB().get() * 2 : ( this.isPotionActive(Potion.digSlowdown) ? 6 + (1 + this.getActivePotionEffect(Potion.digSlowdown).getAmplifier()) * 2 : 6);
     }
 
     @Inject(method = "onLivingUpdate", at = @At("HEAD"))
     private void headLiving(CallbackInfo callbackInfo) {
-        if (LiquidBounce.moduleManager.getModule(NoJumpDelay.class).getState())
+        if (LiquidSense.moduleManager.getModule(NoJumpDelay.class).getState())
             jumpTicks = 0;
     }
 
     @Inject(method = "onLivingUpdate", at = @At(value = "FIELD", target = "Lnet/minecraft/entity/EntityLivingBase;isJumping:Z", ordinal = 1))
     private void onJumpSection(CallbackInfo callbackInfo) {
 
-        final LiquidWalk liquidWalk = (LiquidWalk) LiquidBounce.moduleManager.getModule(LiquidWalk.class);
+        final LiquidWalk liquidWalk = (LiquidWalk) LiquidSense.moduleManager.getModule(LiquidWalk.class);
 
         if(liquidWalk.getState() && !isJumping && !isSneaking() && isInWater() &&
                 liquidWalk.modeValue.get().equalsIgnoreCase("Swim")) {
@@ -123,7 +123,7 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
 
     @Inject(method = "isPotionActive(Lnet/minecraft/potion/Potion;)Z", at = @At("HEAD"), cancellable = true)
     private void isPotionActive(Potion p_isPotionActive_1_, final CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        if((p_isPotionActive_1_ == Potion.confusion || p_isPotionActive_1_ == Potion.blindness) && LiquidBounce.moduleManager.getModule(AntiBlind.class).getState()
+        if((p_isPotionActive_1_ == Potion.confusion || p_isPotionActive_1_ == Potion.blindness) && LiquidSense.moduleManager.getModule(AntiBlind.class).getState()
                 && AntiBlind.confusionEffect.get())
             callbackInfoReturnable.setReturnValue(false);
     }
@@ -131,6 +131,6 @@ public abstract class MixinEntityLivingBase extends MixinEntity {
     @Inject(method = "onEntityUpdate", at = @At("HEAD"))
     public void onEntityUpdate(CallbackInfo info) {
         LivingUpdateEvent livingUpdateEvent = new LivingUpdateEvent((EntityLivingBase) (Object) this);
-        LiquidBounce.eventManager.callEvent(livingUpdateEvent);
+        LiquidSense.eventManager.callEvent(livingUpdateEvent);
     }
 }

@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.utils.forge;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.item.ItemUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
@@ -76,7 +76,7 @@ public class HeadsTab extends CreativeTabs {
         ClientUtils.getLogger().info("Loading heads...");
 
         try {
-            String headsConfigUrl = LiquidBounce.CLIENT_RESOURCE + "heads.json";
+            String headsConfigUrl = LiquidSense.CLIENT_RESOURCE + "heads.json";
             JsonObject headsConf = getJsonObject(headsConfigUrl);
             if (headsConf == null) {
                 ClientUtils.getLogger().error("Failed to load heads configuration.");

@@ -5,8 +5,8 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.entity;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.exploit.AbortBreaking;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.AttackEvent;
 import me.aquavit.liquidsense.event.events.ClickWindowEvent;
 import net.minecraft.client.multiplayer.PlayerControllerMP;
@@ -30,12 +30,12 @@ public class MixinPlayerControllerMP {
 
     @Inject(method = "attackEntity", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/multiplayer/PlayerControllerMP;syncCurrentPlayItem()V"))
     private void attackEntity(EntityPlayer entityPlayer, Entity targetEntity, CallbackInfo callbackInfo) {
-        LiquidBounce.eventManager.callEvent(new AttackEvent(targetEntity));
+        LiquidSense.eventManager.callEvent(new AttackEvent(targetEntity));
     }
 
     @Inject(method = "getIsHittingBlock", at = @At("HEAD"), cancellable = true)
     private void getIsHittingBlock(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        if (LiquidBounce.moduleManager.getModule(AbortBreaking.class).getState())
+        if (LiquidSense.moduleManager.getModule(AbortBreaking.class).getState())
             callbackInfoReturnable.setReturnValue(false);
     }
 
@@ -50,7 +50,7 @@ public class MixinPlayerControllerMP {
     @Inject(method = "windowClick", at = @At("HEAD"), cancellable = true)
     private void windowClick(int windowId, int slotId, int mouseButtonClicked, int mode, EntityPlayer playerIn, CallbackInfoReturnable<ItemStack> callbackInfo) {
         final ClickWindowEvent event = new ClickWindowEvent(windowId, slotId, mouseButtonClicked, mode);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidSense.eventManager.callEvent(event);
 
         if (event.isCancelled())
             callbackInfo.cancel();

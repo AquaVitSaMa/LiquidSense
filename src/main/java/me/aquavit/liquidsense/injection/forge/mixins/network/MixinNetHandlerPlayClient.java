@@ -6,7 +6,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.network;
 
 import io.netty.buffer.Unpooled;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.EntityMovementEvent;
 import me.aquavit.liquidsense.event.events.PacketSendEvent;
 import me.aquavit.liquidsense.ui.client.gui.elements.AntiForge;
@@ -103,13 +103,13 @@ public abstract class MixinNetHandlerPlayClient {
         final Entity entity = packetIn.getEntity(this.clientWorldController);
 
         if(entity != null)
-            LiquidBounce.eventManager.callEvent(new EntityMovementEvent(entity));
+            LiquidSense.eventManager.callEvent(new EntityMovementEvent(entity));
     }
 
     @Inject(method = "addToSendQueue", at = @At("HEAD"), cancellable = true)
     private void senpacket(Packet<?> packet, final CallbackInfo callbackInfo) {
         final PacketSendEvent event = new PacketSendEvent(packet);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidSense.eventManager.callEvent(event);
         if (event.isCancelled()) {
             callbackInfo.cancel();
         }

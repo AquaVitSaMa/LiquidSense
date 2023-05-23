@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.render.CaveFinder;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.utils.render.Colors;
 import net.minecraft.client.renderer.WorldRenderer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -52,7 +52,7 @@ public abstract class MixinWorldRenderer {
         if (this.noColor) {
             j = -1;
         }
-        if (LiquidBounce.moduleManager.getModule(CaveFinder.class).getState()) {
+        if (LiquidSense.moduleManager.getModule(CaveFinder.class).getState()) {
             j = Colors.getColor(iR, iG, iB, CaveFinder.opacity.get());
         }
         this.rawIntBuffer.put(i, j);

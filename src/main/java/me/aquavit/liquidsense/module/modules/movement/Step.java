@@ -1,10 +1,10 @@
 package me.aquavit.liquidsense.module.modules.movement;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.StepConfirmEvent;
 import me.aquavit.liquidsense.event.events.StepEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -46,8 +46,8 @@ public class Step extends Module {
 
     @EventTarget
     public void onStep(StepEvent event) {
-        final Phase phase = (Phase) LiquidBounce.moduleManager.getModule(Phase.class);
-        final Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
+        final Phase phase = (Phase) LiquidSense.moduleManager.getModule(Phase.class);
+        final Fly fly = (Fly) LiquidSense.moduleManager.getModule(Fly.class);
         if (phase.getState() || (fly.getState() && (fly.modeValue.get().contains("Hypixel") || fly.modeValue.get().contains("Zoom")))) {
             event.setStepHeight(0F);
             return;

@@ -1,11 +1,11 @@
 package me.aquavit.liquidsense.ui.font;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.TextEvent;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowFontShader;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.client.HUD;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
@@ -72,7 +72,7 @@ public class GameFontRenderer extends FontRenderer {
     public int drawString(String text, float x, float y, int color, boolean shadow) {
         String currentText = text;
         TextEvent event = new TextEvent(currentText);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidSense.eventManager.callEvent(event);
         String getText = event.getText();
         if (getText == null) return 0;
         currentText = getText;
@@ -227,7 +227,7 @@ public class GameFontRenderer extends FontRenderer {
     public int getStringWidth(String text) {
         String currentText = text;
         TextEvent event = new TextEvent(currentText);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidSense.eventManager.callEvent(event);
         String getText = event.getText();
         if (getText == null) return 0;
         currentText = getText;

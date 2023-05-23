@@ -1,10 +1,10 @@
 package me.aquavit.liquidsense.utils.client;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.client.Target;
 import me.aquavit.liquidsense.module.modules.misc.Spammer;
 import me.aquavit.liquidsense.module.modules.misc.NameProtect;
 import me.aquavit.liquidsense.module.Module;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.value.*;
 import org.lwjgl.input.Keyboard;
@@ -33,7 +33,7 @@ public class SettingsUtils {
                     }
                     case "load": {
                         final String urlRaw = StringUtils.toCompleteString(split, 1);
-                        final String url = urlRaw.startsWith("http") ? urlRaw : (LiquidBounce.CLIENT_CLOUD + "/autosettings/" + urlRaw.toLowerCase());
+                        final String url = urlRaw.startsWith("http") ? urlRaw : (LiquidSense.CLIENT_CLOUD + "/autosettings/" + urlRaw.toLowerCase());
                         try {
                             ClientUtils.displayChatMessage("§7[§3§lAutoSettings§7] §7Loading settings from §a§l" + url + "§7...");
                             final List<String> nextScript = new ArrayList<String>();
@@ -83,7 +83,7 @@ public class SettingsUtils {
                             final String moduleName = split[0];
                             final String valueName = split[1];
                             final String value = split[2];
-                            final Module module = LiquidBounce.moduleManager.getModule(moduleName);
+                            final Module module = LiquidSense.moduleManager.getModule(moduleName);
                             if (module != null) {
                                 if (valueName.equalsIgnoreCase("toggle")) {
                                     module.setState(value.equalsIgnoreCase("true"));
@@ -129,12 +129,12 @@ public class SettingsUtils {
                 }
             }
         }
-        LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
     }
 
     public static String generateScript(final boolean values, final boolean binds, final boolean states) {
         StringBuilder stringBuilder = new StringBuilder();
-        LiquidBounce.moduleManager.getModules().stream().filter(module -> module.getCategory() != ModuleCategory.RENDER && !(module instanceof NameProtect) && !(module instanceof Spammer)).forEach(module -> {
+        LiquidSense.moduleManager.getModules().stream().filter(module -> module.getCategory() != ModuleCategory.RENDER && !(module instanceof NameProtect) && !(module instanceof Spammer)).forEach(module -> {
             if (values) {
                 for (Value<?> item : module.getValues()) {
                     stringBuilder.append(module.getName()).append(" ").append(item.name).append(" ").append(((Value) item).get()).append("\n");

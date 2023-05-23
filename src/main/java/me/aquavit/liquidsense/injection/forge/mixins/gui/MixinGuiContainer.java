@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
 import me.aquavit.liquidsense.event.events.ChestEvent;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.player.InvClean;
 import me.aquavit.liquidsense.module.modules.world.ChestStealer;
 import net.minecraft.client.gui.GuiButton;
@@ -34,13 +34,13 @@ public abstract class MixinGuiContainer extends GuiScreen{
         for (Object aButtonList : this.buttonList) {
             GuiButton toggleButton = (GuiButton) aButtonList;
             if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11110) {
-                LiquidBounce.moduleManager.getModule(Aura.class).setState(false);
+                LiquidSense.moduleManager.getModule(Aura.class).setState(false);
             }
             if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11120) {
-                LiquidBounce.moduleManager.getModule(InvClean.class).setState(false);
+                LiquidSense.moduleManager.getModule(InvClean.class).setState(false);
             }
             if (toggleButton.mousePressed(mc, mouseX, mouseY) && toggleButton.id == 11130) {
-                LiquidBounce.moduleManager.getModule(ChestStealer.class).setState(false);
+                LiquidSense.moduleManager.getModule(ChestStealer.class).setState(false);
             }
         }
     }
@@ -48,7 +48,7 @@ public abstract class MixinGuiContainer extends GuiScreen{
     @Inject(method = "drawScreen", at = @At("HEAD"), cancellable = true)
     private void drawScreen(CallbackInfo callbackInfo) {
         final ChestEvent event = new ChestEvent();
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidSense.eventManager.callEvent(event);
         if(event.isCancelled())
             callbackInfo.cancel();
     }

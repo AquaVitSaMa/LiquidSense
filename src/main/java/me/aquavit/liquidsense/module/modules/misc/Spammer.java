@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.module.modules.misc;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.module.Module;
@@ -45,7 +45,7 @@ public class Spammer extends Module {
         }
     };
 
-    private final TextValue messageValue = new TextValue("Message", LiquidBounce.CLIENT_NAME + " Client | liquidbounce(.net) | CCBlueX on yt");
+    private final TextValue messageValue = new TextValue("Message", LiquidSense.CLIENT_NAME + " Client | liquidbounce(.net) | CCBlueX on yt");
     private final BoolValue customValue = new BoolValue("Custom", false);
 
     private final MSTimer msTimer = new MSTimer();

@@ -1,8 +1,8 @@
 package me.aquavit.liquidsense.module;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.render.Translate;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.Listenable;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Print;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Type;
@@ -46,7 +46,7 @@ public class Module extends MinecraftInstance implements Listenable {
 
     public void setKeyBind(final int keyBind) {
         this.keyBind = keyBind;
-        LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.modulesConfig);
+        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.modulesConfig);
     }
 
     public Module() {
@@ -79,8 +79,8 @@ public class Module extends MinecraftInstance implements Listenable {
             }
             this.onToggle(state);
 
-            if (!LiquidBounce.INSTANCE.isStarting()) {
-                LiquidBounce.hud.addPrint(new Print(" " + name + (state ? " Enabled" : " Disabled"),3000f, Type.state));
+            if (!LiquidSense.INSTANCE.isStarting()) {
+                LiquidSense.hud.addPrint(new Print(" " + name + (state ? " Enabled" : " Disabled"),3000f, Type.state));
                 mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("random.click"),
                         1F));
 //                LiquidBounce.hud.addNotification(new Notification(state ? "Enabled " : "Disabled "+name,"Toggled", ColorType.SUCCESS,1500,500));
@@ -96,7 +96,7 @@ public class Module extends MinecraftInstance implements Listenable {
                 this.onDisable();
                 this.state = false;
             }
-            LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.modulesConfig);
+            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.modulesConfig);
         }
         catch (Exception e) {
             e.printStackTrace();

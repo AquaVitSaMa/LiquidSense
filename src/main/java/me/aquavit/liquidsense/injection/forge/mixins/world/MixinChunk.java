@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.world;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.render.ProphuntESP;
 import me.aquavit.liquidsense.utils.render.MiniMapRegister;
 import net.minecraft.block.state.IBlockState;
@@ -42,7 +42,7 @@ public class MixinChunk {
 
     @Inject(method = "setBlockState", at = @At("HEAD"))
     private void setProphuntBlock(BlockPos pos, IBlockState state, final CallbackInfoReturnable callbackInfo) {
-        final ProphuntESP prophuntESP = (ProphuntESP) LiquidBounce.moduleManager.getModule(ProphuntESP.class);
+        final ProphuntESP prophuntESP = (ProphuntESP) LiquidSense.moduleManager.getModule(ProphuntESP.class);
 
         if(prophuntESP.getState()) {
             synchronized(prophuntESP.blocks) {

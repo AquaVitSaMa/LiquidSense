@@ -5,10 +5,10 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.item;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.module.modules.client.AntiBlind;
 import me.aquavit.liquidsense.module.modules.render.*;
-import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.AbstractClientPlayer;
 import net.minecraft.client.entity.EntityPlayerSP;
@@ -99,8 +99,8 @@ public abstract class MixinItemRenderer {
 	 */
     @Overwrite
     public void renderItemInFirstPerson(float partialTicks) {
-        final ItemRotate ItemRotate = (ItemRotate) LiquidBounce.moduleManager.getModule(ItemRotate.class);
-        final Animations animations = (Animations) LiquidBounce.moduleManager.getModule(Animations.class); //
+        final ItemRotate ItemRotate = (ItemRotate) LiquidSense.moduleManager.getModule(ItemRotate.class);
+        final Animations animations = (Animations) LiquidSense.moduleManager.getModule(Animations.class); //
         float f = 1.0F - (this.prevEquippedProgress + (this.equippedProgress - this.prevEquippedProgress) * partialTicks);
         AbstractClientPlayer abstractclientplayer = this.mc.thePlayer;
         float f1 = abstractclientplayer.getSwingProgress(partialTicks);
@@ -113,8 +113,8 @@ public abstract class MixinItemRenderer {
         GlStateManager.pushMatrix();
 
         if(this.itemToRender != null) {
-            final Aura killAura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
-            final EveryThingBlock EveryThingBlock = (EveryThingBlock) LiquidBounce.moduleManager.getModule(EveryThingBlock.class);
+            final Aura killAura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
+            final EveryThingBlock EveryThingBlock = (EveryThingBlock) LiquidSense.moduleManager.getModule(EveryThingBlock.class);
 
             if(this.itemToRender.getItem() instanceof net.minecraft.item.ItemMap) {
                 this.renderItemMap(abstractclientplayer, f2, f, f1);
@@ -339,16 +339,16 @@ public abstract class MixinItemRenderer {
                 }
             }else{
                 if (animations.getState()){
-                    if (LiquidBounce.moduleManager.getModule(SwingAnimation.class).getState()){
+                    if (LiquidSense.moduleManager.getModule(SwingAnimation.class).getState()){
                         GlStateManager.translate(Animations.itemPosX.get(), Animations.itemPosY.get(), Animations.itemPosZ.get());
                         this.transformFirstPersonItem(f, f1);
                         GlStateManager.scale(Animations.Scale.get(), Animations.Scale.get(), Animations.Scale.get());
-                    }else if(LiquidBounce.moduleManager.getModule(ItemRotate.class).getState()){
+                    }else if(LiquidSense.moduleManager.getModule(ItemRotate.class).getState()){
                         GlStateManager.translate(Animations.itemPosX.get(), Animations.itemPosY.get(), Animations.itemPosZ.get());
                         this.transformFirstPersonItem(f, f1);
                         ItemRenderRotate();
                         GlStateManager.scale(Animations.Scale.get(), Animations.Scale.get(), Animations.Scale.get());
-                    }else if(LiquidBounce.moduleManager.getModule(EveryThingBlock.class).getState()){
+                    }else if(LiquidSense.moduleManager.getModule(EveryThingBlock.class).getState()){
                         GlStateManager.translate(Animations.itemPosX.get(), Animations.itemPosY.get(), Animations.itemPosZ.get());
                         this.transformFirstPersonItem(f, f1);
                         if(this.mc.gameSettings.keyBindUseItem.isKeyDown()){
@@ -364,12 +364,12 @@ public abstract class MixinItemRenderer {
                         //GlStateManager.rotate(180F, 0.0F, 1.0F, 0.0F);//Left
                     }
                 }else{
-                    if (LiquidBounce.moduleManager.getModule(SwingAnimation.class).getState()){
+                    if (LiquidSense.moduleManager.getModule(SwingAnimation.class).getState()){
                         this.transformFirstPersonItem(f, f1);
-                    }else if(LiquidBounce.moduleManager.getModule(ItemRotate.class).getState()){
+                    }else if(LiquidSense.moduleManager.getModule(ItemRotate.class).getState()){
                         this.transformFirstPersonItem(f, f1);
                         ItemRenderRotate();
-                    }else if(LiquidBounce.moduleManager.getModule(EveryThingBlock.class).getState()){
+                    }else if(LiquidSense.moduleManager.getModule(EveryThingBlock.class).getState()){
                         this.transformFirstPersonItem(f, f1);
                         if(this.mc.gameSettings.keyBindUseItem.isKeyDown()){
                             this.doBlockTransformations();
@@ -495,7 +495,7 @@ public abstract class MixinItemRenderer {
     @Overwrite
     private void renderPlayerArm(AbstractClientPlayer p_renderPlayerArm_1_, float p_renderPlayerArm_2_, float p_renderPlayerArm_3_) {
         final RenderManager renderManager = mc.getRenderManager();
-        final Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
+        final Chams chams = (Chams) LiquidSense.moduleManager.getModule(Chams.class);
         float f = -0.3F * MathHelper.sin(MathHelper.sqrt_float(p_renderPlayerArm_3_) * 3.1415927F);
         float f1 = 0.4F * MathHelper.sin(MathHelper.sqrt_float(p_renderPlayerArm_3_) * 3.1415927F * 2.0F);
         float f2 = -0.4F * MathHelper.sin(p_renderPlayerArm_3_ * 3.1415927F);
@@ -531,6 +531,6 @@ public abstract class MixinItemRenderer {
 
     @Inject(method = "renderFireInFirstPerson", at = @At("HEAD"), cancellable = true)
     private void renderFireInFirstPerson(final CallbackInfo callbackInfo) {
-        if(LiquidBounce.moduleManager.getModule(AntiBlind.class).getState() && AntiBlind.fireEffect.get()) callbackInfo.cancel();
+        if(LiquidSense.moduleManager.getModule(AntiBlind.class).getState() && AntiBlind.fireEffect.get()) callbackInfo.cancel();
     }
 }

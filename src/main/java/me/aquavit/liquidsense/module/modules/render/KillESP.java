@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.module.modules.render;
 
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
@@ -39,7 +39,7 @@ public class KillESP extends Module {
     private final BoolValue hurt = new BoolValue("HurtTime", true);
 
     private HashMap<EntityLivingBase, Long> targetList = new HashMap<EntityLivingBase, Long>();
-    private Aura aura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+    private Aura aura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
     Random random = new Random();
 
     @EventTarget

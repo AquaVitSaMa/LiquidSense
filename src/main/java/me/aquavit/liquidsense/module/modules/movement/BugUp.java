@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.module.modules.movement;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.PreUpdateEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
@@ -7,7 +8,6 @@ import me.aquavit.liquidsense.utils.block.BlockUtils;
 import me.aquavit.liquidsense.utils.entity.FallingPlayer;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.mc.VoidCheck;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -108,7 +108,7 @@ public class BugUp extends Module {
                 resetDist();
             }
 
-            LiquidBounce.hud.addNotification(new Notification("AntiFall", "saved u from void", ColorType.SUCCESS, 250, 500));
+            LiquidSense.hud.addNotification(new Notification("AntiFall", "saved u from void", ColorType.SUCCESS, 250, 500));
         }
     }
 

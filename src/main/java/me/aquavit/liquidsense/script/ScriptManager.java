@@ -1,23 +1,17 @@
 package me.aquavit.liquidsense.script;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
-import java.io.FileFilter;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Arrays;
-import java.util.Objects;
 
 public class ScriptManager {
 
     private final List<Script> scripts = new ArrayList<>();
-    private final File scriptsFolder = new File(LiquidBounce.fileManager.dir, "scripts");
+    private final File scriptsFolder = new File(LiquidSense.fileManager.dir, "scripts");
     private final String scriptFileExtension = ".js";
 
     public File getScriptsFolder() {

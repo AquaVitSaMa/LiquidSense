@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.item;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.render.EnchantEffect;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
@@ -40,7 +40,7 @@ public abstract class MixinRenderItem implements IResourceManagerReloadListener 
 	 */
     @Overwrite
     private void renderEffect(IBakedModel iBakedModel) {
-        final EnchantEffect effect = (EnchantEffect) LiquidBounce.moduleManager.get(EnchantEffect.class);
+        final EnchantEffect effect = (EnchantEffect) LiquidSense.moduleManager.get(EnchantEffect.class);
         final Color color = effect.getRainbow().get() ? ColorUtils.rainbow() : new Color(effect.getRedValue().get(),effect.getGreenValue().get(),effect.getBlueValue().get(),effect.getalphaValue().get());
         GlStateManager.depthMask(false);
         GlStateManager.depthFunc(514);

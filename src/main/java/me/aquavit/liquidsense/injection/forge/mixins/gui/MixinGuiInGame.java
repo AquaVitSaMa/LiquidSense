@@ -7,7 +7,7 @@ package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
 import me.aquavit.liquidsense.module.modules.client.AntiBlind;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
 import me.aquavit.liquidsense.module.modules.client.HUD;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
@@ -74,21 +74,21 @@ public abstract class MixinGuiInGame extends Gui {
 
     @Inject(method = "renderScoreboard", at = @At("HEAD"), cancellable = true)
     private void renderScoreboard(CallbackInfo callbackInfo) {
-        if (LiquidBounce.moduleManager.getModule(HUD.class).getState())
+        if (LiquidSense.moduleManager.getModule(HUD.class).getState())
             callbackInfo.cancel();
     }
 
     @Inject(method = "renderTooltip", at = @At("HEAD"), cancellable = true)
     private void renderTooltip(ScaledResolution sr, float partialTicks, CallbackInfo callbackInfo) {
-        final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+        final HUD hud = (HUD) LiquidSense.moduleManager.getModule(HUD.class);
         int ScrollSpeed = hud.hotbarSpeed.get() - 1;
 
         if (OpenGlHelper.shadersSupported && Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer)
            BlurBuffer.updateBlurBuffer(20f,true);
 
-        for (Element e : LiquidBounce.hud.getElements()) {
+        for (Element e : LiquidSense.hud.getElements()) {
             if (e instanceof Hotbar) {
-                LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
+                LiquidSense.eventManager.callEvent(new Render2DEvent(partialTicks));
                 return;
             }
         }
@@ -166,7 +166,7 @@ public abstract class MixinGuiInGame extends Gui {
             GlStateManager.disableRescaleNormal();
             GlStateManager.disableBlend();
 
-            LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
+            LiquidSense.eventManager.callEvent(new Render2DEvent(partialTicks));
             callbackInfo.cancel();
         }
     }
@@ -174,13 +174,13 @@ public abstract class MixinGuiInGame extends Gui {
     @Inject(method = "renderTooltip", at = @At("RETURN"))
     private void renderTooltipPost(ScaledResolution sr, float partialTicks, CallbackInfo callbackInfo) {
         if (!ClassUtils.hasClass("net.labymod.api.LabyModAPI")) {
-            LiquidBounce.eventManager.callEvent(new Render2DEvent(partialTicks));
+            LiquidSense.eventManager.callEvent(new Render2DEvent(partialTicks));
         }
     }
 
     @Inject(method = "renderPumpkinOverlay", at = @At("HEAD"), cancellable = true)
     private void renderPumpkinOverlay(final CallbackInfo callbackInfo) {
-        if (LiquidBounce.moduleManager.getModule(AntiBlind.class).getState() && AntiBlind.pumpkinEffect.get())
+        if (LiquidSense.moduleManager.getModule(AntiBlind.class).getState() && AntiBlind.pumpkinEffect.get())
             callbackInfo.cancel();
     }
 

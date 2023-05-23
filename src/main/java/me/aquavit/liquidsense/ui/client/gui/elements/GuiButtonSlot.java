@@ -1,9 +1,9 @@
 package me.aquavit.liquidsense.ui.client.gui.elements;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.login.UserUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.font.Fonts;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
@@ -64,7 +64,7 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
     }
 
     protected int getSize() {
-        return LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size();
+        return LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size();
     }
 
     /**
@@ -309,14 +309,14 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
             {
                 this.drawListHeader(k, l, tessellator);
             }
-            Fonts.font30.drawStringWithShadow(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts",(width / 2) - 110, l - 30, Color.WHITE.getRGB());
+            Fonts.font30.drawStringWithShadow(LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts",(width / 2) - 110, l - 30, Color.WHITE.getRGB());
 
             Fonts.font16.drawStringWithShadow("Name: " + (mc.getSession().getUsername()),
-                    (width / 2) - 110 + 20 +Fonts.font30.getStringWidth(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts"),
+                    (width / 2) - 110 + 20 +Fonts.font30.getStringWidth(LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts"),
                     l - 23, Color.WHITE.getRGB());
 
             Fonts.font16.drawStringWithShadow("Type: " + (UserUtils.isValidTokenOffline(mc.getSession().getToken()) ? "§aOnline" : "§7Cracked"),
-                    (width / 2) - 110 + 40 +Fonts.font30.getStringWidth(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts") + Fonts.font16.getStringWidth("Name: " + (mc.getSession().getUsername())),
+                    (width / 2) - 110 + 40 +Fonts.font30.getStringWidth(LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size() + " Alts") + Fonts.font16.getStringWidth("Name: " + (mc.getSession().getUsername())),
                     l - 23, Color.WHITE.getRGB());
 
             this.drawSelectionBox(k, l, mouseXIn, mouseYIn);
@@ -333,8 +333,8 @@ public abstract class GuiButtonSlot extends MinecraftInstance {
      * Draws the selection box around the selected slot element.
      */
     protected void drawSelectionBox(int p_148120_1_, int p_148120_2_, int mouseXIn, int mouseYIn) {
-        for (int j = 0; j < LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size(); ++j) {
-            final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(j);
+        for (int j = 0; j < LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size(); ++j) {
+            final MinecraftAccount minecraftAccount = LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(j);
             int k = p_148120_2_ + j * this.slotHeight + this.headerPadding;
             int l = this.slotHeight - 4;
 

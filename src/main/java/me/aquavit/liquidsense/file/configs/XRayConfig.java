@@ -8,7 +8,7 @@ package me.aquavit.liquidsense.file.configs;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.render.XRay;
 import me.aquavit.liquidsense.file.FileConfig;
 import me.aquavit.liquidsense.file.FileManager;
@@ -35,7 +35,7 @@ public class XRayConfig extends FileConfig {
      */
     @Override
     protected void loadConfig() throws IOException {
-        final XRay xRay = (XRay) LiquidBounce.moduleManager.getModule(XRay.class);
+        final XRay xRay = (XRay) LiquidSense.moduleManager.getModule(XRay.class);
 
         if(xRay == null) {
             ClientUtils.getLogger().error("[FileManager] Failed to find xray module.");
@@ -69,7 +69,7 @@ public class XRayConfig extends FileConfig {
      */
     @Override
     protected void saveConfig() throws IOException {
-        final XRay xRay = (XRay) LiquidBounce.moduleManager.getModule(XRay.class);
+        final XRay xRay = (XRay) LiquidSense.moduleManager.getModule(XRay.class);
 
         if(xRay == null) {
             ClientUtils.getLogger().error("[FileManager] Failed to find xray module.");

@@ -5,9 +5,9 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.client;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.exploit.AbortBreaking;
 import me.aquavit.liquidsense.module.modules.ghost.FastPlace;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.module.modules.ghost.AutoClicker;
 import me.aquavit.liquidsense.ui.client.gui.GuiMainMenu;
@@ -124,7 +124,7 @@ public abstract class MixinMinecraft {
 
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V", ordinal = 2, shift = At.Shift.AFTER))
     private void startGame(CallbackInfo callbackInfo) {
-        LiquidBounce.INSTANCE.startClient();
+        LiquidSense.INSTANCE.startClient();
     }
 
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V", shift = At.Shift.AFTER))
@@ -149,7 +149,7 @@ public abstract class MixinMinecraft {
             skipRenderWorld = false;
         }
 
-        LiquidBounce.eventManager.callEvent(new ScreenEvent(currentScreen));
+        LiquidSense.eventManager.callEvent(new ScreenEvent(currentScreen));
     }
 
     private long lastFrame = getTime();
@@ -169,19 +169,19 @@ public abstract class MixinMinecraft {
 
     @Inject(method = "runTick", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;joinPlayerCounter:I", shift = At.Shift.BEFORE))
     private void onTick(final CallbackInfo callbackInfo) {
-        LiquidBounce.eventManager.callEvent(new TickEvent());
+        LiquidSense.eventManager.callEvent(new TickEvent());
     }
 
     @Inject(method = "runTick", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;dispatchKeypresses()V", shift = At.Shift.AFTER))
     private void onKey(CallbackInfo callbackInfo) {
         if(Keyboard.getEventKeyState() && currentScreen == null)
-            LiquidBounce.eventManager.callEvent(new KeyEvent(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey()));
+            LiquidSense.eventManager.callEvent(new KeyEvent(Keyboard.getEventKey() == 0 ? Keyboard.getEventCharacter() + 256 : Keyboard.getEventKey()));
     }
 
     @Inject(method = "sendClickBlockToController", at = @At(value = "INVOKE", target = "Lnet/minecraft/util/MovingObjectPosition;getBlockPos()Lnet/minecraft/util/BlockPos;"))
     private void onClickBlock(CallbackInfo callbackInfo) {
         if(this.leftClickCounter == 0 && theWorld.getBlockState(objectMouseOver.getBlockPos()).getBlock().getMaterial() != Material.air) {
-            LiquidBounce.eventManager.callEvent(new ClickBlockEvent(objectMouseOver.getBlockPos(), this.objectMouseOver.sideHit));
+            LiquidSense.eventManager.callEvent(new ClickBlockEvent(objectMouseOver.getBlockPos(), this.objectMouseOver.sideHit));
         }
     }
 
@@ -200,7 +200,7 @@ public abstract class MixinMinecraft {
     @Inject(method = "shutdown", at = @At("HEAD"))
     private void shutdown(CallbackInfo callbackInfo) {
         try{
-            LiquidBounce.INSTANCE.stopClient();
+            LiquidSense.INSTANCE.stopClient();
         }catch (Exception e){
             System.exit(0);
         }
@@ -211,7 +211,7 @@ public abstract class MixinMinecraft {
 
         CPSCounter.registerClick(CPSCounter.MouseButton.LEFT);
 
-        if (LiquidBounce.moduleManager.getModule(AutoClicker.class).getState())
+        if (LiquidSense.moduleManager.getModule(AutoClicker.class).getState())
             leftClickCounter = 0;
     }
 
@@ -224,12 +224,12 @@ public abstract class MixinMinecraft {
     @Inject(method = "rightClickMouse", at = @At(value = "FIELD", target = "Lnet/minecraft/client/Minecraft;rightClickDelayTimer:I", shift = At.Shift.AFTER))
     private void rightClickMouse(final CallbackInfo callbackInfo) {
         CPSCounter.registerClick(CPSCounter.MouseButton.RIGHT);
-        if (LiquidBounce.moduleManager.getModule(FastPlace.class).getState()) rightClickDelayTimer = FastPlace.speedValue.get();
+        if (LiquidSense.moduleManager.getModule(FastPlace.class).getState()) rightClickDelayTimer = FastPlace.speedValue.get();
     }
 
     @Inject(method = "loadWorld(Lnet/minecraft/client/multiplayer/WorldClient;Ljava/lang/String;)V", at = @At("HEAD"))
     private void loadWorld(WorldClient p_loadWorld_1_, String p_loadWorld_2_, final CallbackInfo callbackInfo) {
-        LiquidBounce.eventManager.callEvent(new WorldEvent(p_loadWorld_1_));
+        LiquidSense.eventManager.callEvent(new WorldEvent(p_loadWorld_1_));
     }
 
     /**
@@ -246,14 +246,14 @@ public abstract class MixinMinecraft {
                 BlockPos blockPos = this.objectMouseOver.getBlockPos();
 
                 if(this.leftClickCounter == 0)
-                    LiquidBounce.eventManager.callEvent(new ClickBlockEvent(blockPos, this.objectMouseOver.sideHit));
+                    LiquidSense.eventManager.callEvent(new ClickBlockEvent(blockPos, this.objectMouseOver.sideHit));
 
 
                 if(this.theWorld.getBlockState(blockPos).getBlock().getMaterial() != Material.air && this.playerController.onPlayerDamageBlock(blockPos, this.objectMouseOver.sideHit)) {
                     this.effectRenderer.addBlockHitEffects(blockPos, this.objectMouseOver.sideHit);
                     this.thePlayer.swingItem();
                 }
-            } else if (!LiquidBounce.moduleManager.getModule(AbortBreaking.class).getState()) {
+            } else if (!LiquidSense.moduleManager.getModule(AbortBreaking.class).getState()) {
                 this.playerController.resetBlockRemoving();
             }
 

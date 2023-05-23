@@ -13,8 +13,8 @@ import com.mojang.authlib.exceptions.AuthenticationException;
 import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.AltService;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.mc.TabUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.gui.elements.GuiButtonElement;
 import me.aquavit.liquidsense.ui.client.gui.elements.GuiButtonSlot;
 import me.aquavit.liquidsense.ui.client.gui.elements.GuiPasswordField;
@@ -71,7 +71,7 @@ public class GuiAltManager extends GuiScreen {
     public static void loadGenerators() {
         try {
             // Read versions json from cloud
-            final JsonElement jsonElement = new JsonParser().parse(HttpUtils.get(LiquidBounce.CLIENT_CLOUD + "/generators.json"));
+            final JsonElement jsonElement = new JsonParser().parse(HttpUtils.get(LiquidSense.CLIENT_CLOUD + "/generators.json"));
 
             // Check json is valid object
             if (jsonElement.isJsonObject()) {
@@ -108,7 +108,7 @@ public class GuiAltManager extends GuiScreen {
         if (result == LoginUtils.LoginResult.LOGGED) {
             String userName = Minecraft.getMinecraft().getSession().getUsername();
             minecraftAccount.setAccountName(userName);
-            LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.accountsConfig);
+            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.accountsConfig);
             loadcircle = false;
             return "§cYour name is now §f§l" + userName + "§c.";
         }
@@ -134,8 +134,8 @@ public class GuiAltManager extends GuiScreen {
 
         int index = -1;
 
-        for (int i = 0; i < LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size(); i++) {
-            MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(i);
+        for (int i = 0; i < LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size(); i++) {
+            MinecraftAccount minecraftAccount = LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(i);
 
             if (minecraftAccount != null && (
                     ((
@@ -205,8 +205,8 @@ public class GuiAltManager extends GuiScreen {
                 break;
             case 2:
                 if (altsList.getSelectedSlot() != -1 && altsList.getSelectedSlot() < altsList.getSize()) {
-                    LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.remove(altsList.getSelectedSlot());
-                    LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.accountsConfig);
+                    LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.remove(altsList.getSelectedSlot());
+                    LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.accountsConfig);
                     status = "§aThe account has been removed.";
                 } else
                     status = "§cSelect an account.";
@@ -231,7 +231,7 @@ public class GuiAltManager extends GuiScreen {
                     loginButton.enabled = randomButton.enabled = false;
 
                     final Thread thread = new Thread(() -> {
-                        final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot());
+                        final MinecraftAccount minecraftAccount = LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot());
                         status = "§aLogging in...";
                         loadcircle = true;
                         status = login(minecraftAccount);
@@ -245,12 +245,12 @@ public class GuiAltManager extends GuiScreen {
                 }
                 break;
             case 4:
-                if (LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size() <= 0) {
+                if (LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size() <= 0) {
                     status = "§cThe list is empty.";
                     return;
                 }
 
-                final int randomInteger = new Random().nextInt(LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size());
+                final int randomInteger = new Random().nextInt(LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size());
 
                 if (randomInteger < altsList.getSize())
                     altsList.selectedSlot = randomInteger;
@@ -258,7 +258,7 @@ public class GuiAltManager extends GuiScreen {
                 loginButton.enabled = randomButton.enabled = false;
 
                 final Thread thread = new Thread(() -> {
-                    final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(randomInteger);
+                    final MinecraftAccount minecraftAccount = LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(randomInteger);
                     status = "§aLogging in...";
                     loadcircle = true;
                     status = login(minecraftAccount);
@@ -282,7 +282,7 @@ public class GuiAltManager extends GuiScreen {
 
                     boolean alreadyAdded = false;
 
-                    for (final MinecraftAccount registeredMinecraftAccount : LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts) {
+                    for (final MinecraftAccount registeredMinecraftAccount : LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts) {
                         if (registeredMinecraftAccount.getName().equalsIgnoreCase(accountData[0])) {
                             alreadyAdded = true;
                             break;
@@ -291,20 +291,20 @@ public class GuiAltManager extends GuiScreen {
 
                     if (!alreadyAdded) {
                         if (accountData.length > 1)
-                            LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.add(new MinecraftAccount(accountData[0], accountData[1]));
+                            LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.add(new MinecraftAccount(accountData[0], accountData[1]));
                         else
-                            LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.add(new MinecraftAccount(accountData[0]));
+                            LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.add(new MinecraftAccount(accountData[0]));
                     }
                 }
 
                 fileReader.close();
                 bufferedReader.close();
-                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.accountsConfig);
+                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.accountsConfig);
                 status = "§aThe accounts were imported successfully.";
                 break;
             case 8:
                 if (altsList.getSelectedSlot() != -1 && altsList.getSelectedSlot() < altsList.getSize()) {
-                    final MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot());
+                    final MinecraftAccount minecraftAccount = LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot());
 
                     if (minecraftAccount == null)
                         break;
@@ -315,7 +315,7 @@ public class GuiAltManager extends GuiScreen {
                     status = "§cSelect an account.";
                 break;
             case 12:
-                if (LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.stream().anyMatch(account -> account.getName().equals(username.getText()))) {
+                if (LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.stream().anyMatch(account -> account.getName().equals(username.getText()))) {
                     status = "§cThe account has already been added.";
                     break;
                 }
@@ -415,7 +415,7 @@ public class GuiAltManager extends GuiScreen {
     }
 
     private void addAccount(final String name, final String passwordd) { //GuiAdd
-        if (LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.stream()
+        if (LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.stream()
                 .anyMatch(account -> account.getName().equals(name))) {
             status = "§cThe account has already been added.";
             return;
@@ -456,8 +456,8 @@ public class GuiAltManager extends GuiScreen {
             }
 
 
-            LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.add(account);
-            LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.accountsConfig);
+            LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.add(account);
+            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.accountsConfig);
 
             status = "§aThe account has been added.";
             addButton.enabled = clipboardButton.enabled = true;
@@ -486,7 +486,7 @@ public class GuiAltManager extends GuiScreen {
         }
 
         int getSelectedSlot() {
-            if (selectedSlot > LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size())
+            if (selectedSlot > LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size())
                 selectedSlot = -1;
             return selectedSlot;
         }
@@ -497,7 +497,7 @@ public class GuiAltManager extends GuiScreen {
 
         @Override
         protected int getSize() {
-            return LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.size();
+            return LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.size();
         }
 
         @Override
@@ -509,7 +509,7 @@ public class GuiAltManager extends GuiScreen {
                     loginButton.enabled = randomButton.enabled = false;
 
                     new Thread(() -> {
-                        MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot());
+                        MinecraftAccount minecraftAccount = LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot());
                         status = "§aLogging in...";
                         loadcircle = true;
                         status = "§c" + login(minecraftAccount);
@@ -526,8 +526,8 @@ public class GuiAltManager extends GuiScreen {
 
         @Override
         protected void drawSlot(int id, int x, int y, int var4, int var5, int var6) {
-            MinecraftAccount minecraftAccount = LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id);
-            if (loadcircle && minecraftAccount == LiquidBounce.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot())) {
+            MinecraftAccount minecraftAccount = LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id);
+            if (loadcircle && minecraftAccount == LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot())) {
                 int rot = (int) ((System.nanoTime() / 5000000) % 360);
                 RenderUtils.drawCircle((width / 2) + 100, y + 4, 3, rot - 180, rot);
             }

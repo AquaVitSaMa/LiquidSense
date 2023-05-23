@@ -1,10 +1,10 @@
 package me.aquavit.liquidsense.injection.forge.mixins.block;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.BlockRenderSideEvent;
 import me.aquavit.liquidsense.module.modules.blatant.Criticals;
 import me.aquavit.liquidsense.module.modules.exploit.GhostHand;
 import me.aquavit.liquidsense.module.modules.render.CaveFinder;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.BlockBBEvent;
 import me.aquavit.liquidsense.module.modules.player.NoFall;
 import me.aquavit.liquidsense.module.modules.render.XRay;
@@ -67,7 +67,7 @@ public abstract class MixinBlock {
     public void addCollisionBoxesToList(World worldIn, BlockPos pos, IBlockState state, AxisAlignedBB mask, List<AxisAlignedBB> list, Entity collidingEntity) {
         AxisAlignedBB axisalignedbb = this.getCollisionBoundingBox(worldIn, pos, state);
         BlockBBEvent blockBBEvent = new BlockBBEvent(pos, blockState.getBlock(), axisalignedbb);
-        LiquidBounce.eventManager.callEvent(blockBBEvent);
+        LiquidSense.eventManager.callEvent(blockBBEvent);
         axisalignedbb = blockBBEvent.getBoundingBox();
         if(axisalignedbb != null && mask.intersectsWith(axisalignedbb))
             list.add(axisalignedbb);
@@ -76,9 +76,9 @@ public abstract class MixinBlock {
 
     @Inject(method = "shouldSideBeRendered", at = @At("HEAD"), cancellable = true)
     private void shouldSideBeRendered(IBlockAccess worldIn, BlockPos pos, EnumFacing side, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        final XRay xray = (XRay) LiquidBounce.moduleManager.getModule(XRay.class);
-        final CaveFinder cavefinder = (CaveFinder) LiquidBounce.moduleManager.getModule(CaveFinder.class);
-        LiquidBounce.eventManager.callEvent(new BlockRenderSideEvent(worldIn, pos, side, maxX, minX, maxY, minY, maxZ, minZ));
+        final XRay xray = (XRay) LiquidSense.moduleManager.getModule(XRay.class);
+        final CaveFinder cavefinder = (CaveFinder) LiquidSense.moduleManager.getModule(CaveFinder.class);
+        LiquidSense.eventManager.callEvent(new BlockRenderSideEvent(worldIn, pos, side, maxX, minX, maxY, minY, maxZ, minZ));
 
         if (cavefinder.getState() && !CaveFinder.caveFinder.get()) {
             callbackInfoReturnable.setReturnValue(cavefinder.xrayBlocks.contains(this));
@@ -92,13 +92,13 @@ public abstract class MixinBlock {
 
     @Inject(method = "isCollidable", at = @At("HEAD"), cancellable = true)
     private void isCollidable(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        if (LiquidBounce.moduleManager.getModule(GhostHand.class).getState() && !(GhostHand.blockValue.get() == getIdFromBlock((Block) (Object) this)))
+        if (LiquidSense.moduleManager.getModule(GhostHand.class).getState() && !(GhostHand.blockValue.get() == getIdFromBlock((Block) (Object) this)))
             callbackInfoReturnable.setReturnValue(false);
     }
 
     @Inject(method = "getAmbientOcclusionLightValue", at = @At("HEAD"), cancellable = true)
     private void getAmbientOcclusionLightValue(final CallbackInfoReturnable<Float> floatCallbackInfoReturnable) {
-        if (LiquidBounce.moduleManager.getModule(XRay.class).getState())
+        if (LiquidSense.moduleManager.getModule(XRay.class).getState())
             floatCallbackInfoReturnable.setReturnValue(1F);
     }
 
@@ -108,8 +108,8 @@ public abstract class MixinBlock {
 
         // NoSlowBreak
         if (playerIn.onGround) { // NoGround
-            final NoFall noFall = (NoFall) LiquidBounce.moduleManager.getModule(NoFall.class);
-            final Criticals criticals = (Criticals) LiquidBounce.moduleManager.getModule(Criticals.class);
+            final NoFall noFall = (NoFall) LiquidSense.moduleManager.getModule(NoFall.class);
+            final Criticals criticals = (Criticals) LiquidSense.moduleManager.getModule(Criticals.class);
 
             if (noFall.getState() && noFall.modeValue.get().equals("NoGround") || criticals.getState() && criticals.mode.get().equals("NoGround")) {
                 f /= 5F;

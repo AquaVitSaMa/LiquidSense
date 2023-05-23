@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.RenderEntityEvent;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.client.renderer.entity.RenderManager;
@@ -37,7 +37,7 @@ public abstract class MixinRender<T extends Entity> {
 	 */
     @Overwrite
     public void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        LiquidBounce.eventManager.callEvent(new RenderEntityEvent(entity, x, y, z, entityYaw, partialTicks));
+        LiquidSense.eventManager.callEvent(new RenderEntityEvent(entity, x, y, z, entityYaw, partialTicks));
         this.renderName(entity, x, y, z);
     }
 }

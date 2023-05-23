@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.ui.client.hud.designer;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.hud.HUD;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
 import me.aquavit.liquidsense.ui.client.hud.element.ElementInfo;
@@ -116,7 +116,7 @@ public class EditorPanel extends MinecraftInstance {
 
         Fonts.font18.drawString("§lReset", x + 2, y + height, Color.WHITE.getRGB());
         if (Mouse.isButtonDown(0) && !mouseDown && mouseX >= x && mouseX <= x + width && mouseY >= y + height && mouseY <= y + height + 10)
-            LiquidBounce.hud = HUD.Companion.createDefault();
+            LiquidSense.hud = HUD.Companion.createDefault();
 
         height += 15;
         realHeight += 15;
@@ -125,7 +125,7 @@ public class EditorPanel extends MinecraftInstance {
         height += 10;
         realHeight += 10;
 
-        for (Element element : LiquidBounce.hud.elements) {
+        for (Element element : LiquidSense.hud.elements) {
             Fonts.font18.drawString(element.getName(), x + 2, y + height, Color.WHITE.getRGB());
 
             int stringWidth = Fonts.font18.getStringWidth(element.getName());
@@ -154,7 +154,7 @@ public class EditorPanel extends MinecraftInstance {
             if (info == null) continue;
 
 
-            if (info.single() && LiquidBounce.hud.elements.stream().anyMatch(it -> it.getClass() == element)) continue;
+            if (info.single() && LiquidSense.hud.elements.stream().anyMatch(it -> it.getClass() == element)) continue;
 
             String name = info.name();
             Fonts.font18.drawString(name, x + 2, y + height, Color.WHITE.getRGB());
@@ -169,7 +169,7 @@ public class EditorPanel extends MinecraftInstance {
                     Element newElement = element.newInstance();
 
                     if (newElement.createElement()) {
-                        LiquidBounce.hud.addElement(newElement);
+                        LiquidSense.hud.addElement(newElement);
                     }
 
                 } catch (InstantiationException | IllegalAccessException e) {
@@ -456,7 +456,7 @@ public class EditorPanel extends MinecraftInstance {
             Fonts.font18.drawString("§lDelete", deleteWidth, y + 3.5F, Color.WHITE.getRGB());
             if (Mouse.isButtonDown(0) && !mouseDown && mouseX >= deleteWidth && mouseX <= x + width && mouseY >= y
                     && mouseY <= y + 10)
-                LiquidBounce.hud.removeElement(element);
+                LiquidSense.hud.removeElement(element);
         }
     }
 

@@ -6,7 +6,7 @@ import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -104,7 +104,7 @@ public class ChestStealer extends Module {
                         new ItemStack(Item.itemRegistry.getObject(new ResourceLocation("minecraft:chest"))).getDisplayName())))
             return;
 
-	    InvClean inventoryCleaner = (InvClean) LiquidBounce.moduleManager.getModule(InvClean.class);
+	    InvClean inventoryCleaner = (InvClean) LiquidSense.moduleManager.getModule(InvClean.class);
 
         if (!isEmpty((GuiChest) screen) && !(closeOnFullValue.get() && fullInventory())) {
             autoCloseTimer.reset();
@@ -168,7 +168,7 @@ public class ChestStealer extends Module {
     }
 
     private boolean isEmpty(GuiChest chest) {
-	    InvClean inventoryCleaner = (InvClean) LiquidBounce.moduleManager.getModule(InvClean.class);
+	    InvClean inventoryCleaner = (InvClean) LiquidSense.moduleManager.getModule(InvClean.class);
 
         for (int i = 0; i < chest.inventoryRows * 9; ++i) {
             Slot slot = chest.inventorySlots.inventorySlots.get(i);

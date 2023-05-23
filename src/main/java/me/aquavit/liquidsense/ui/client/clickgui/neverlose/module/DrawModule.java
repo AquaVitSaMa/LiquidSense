@@ -1,8 +1,8 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose.module;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.Translate;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Impl;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Main;
@@ -31,7 +31,7 @@ public class DrawModule {
                 int positiony2 = 0;
 
                 //执行排除和排序
-                main.modules = LiquidBounce.moduleManager.getModules().stream()
+                main.modules = LiquidSense.moduleManager.getModules().stream()
                         .filter(module -> {
                             String search = Impl.Search.toLowerCase();
                             return (module.getName().toLowerCase().contains(search) && !search.isEmpty()) ||

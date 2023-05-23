@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.command.Command;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.player.EntityPlayer;
@@ -31,7 +31,7 @@ public class RemoteViewCommand extends Command {
             if (targetName == entity.getName()) {
                 mc.setRenderViewEntity(entity);
                 this.chat("Now viewing perspective of §8" + entity.getName() + "§3.");
-                this.chat("Execute §8" + LiquidBounce.commandManager.getPrefix() + "remoteview §3again to go back to yours.");
+                this.chat("Execute §8" + LiquidSense.commandManager.getPrefix() + "remoteview §3again to go back to yours.");
                 break;
             }
         }

@@ -1,6 +1,6 @@
 package me.aquavit;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +16,7 @@ public class Instruction {
         frame.setLayout(new BorderLayout());
         frame.setResizable(false);
         frame.setAlwaysOnTop(true);
-        InputStream inputStream = LiquidBounce.class.getResourceAsStream("/instructions.html");
+        InputStream inputStream = LiquidSense.class.getResourceAsStream("/instructions.html");
         StringBuilder msg = new StringBuilder();
         try {
             InputStreamReader inputStreamReader = new InputStreamReader(inputStream, StandardCharsets.UTF_8);

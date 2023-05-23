@@ -1,9 +1,9 @@
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
 import me.aquavit.liquidsense.module.modules.client.Rotations;
-import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.renderer.GlStateManager;
@@ -44,9 +44,9 @@ public abstract class MixinLayerArmorBase <T extends ModelBase> implements Layer
     @Inject(method = "renderLayer", at = @At(value = "INVOKE", target = "net/minecraft/client/renderer/GlStateManager.color(FF FF)V", shift = At.Shift.AFTER, ordinal = 1), cancellable = true)
     private void renderLayer(EntityLivingBase entitylivingbase, float p_renderLayer_2_, float p_renderLayer_3_, float partialTicks, float p_renderLayer_5_, float p_renderLayer_6_, float p_renderLayer_7_, float scale, int armorSlot, CallbackInfo callbackInfo) {
 
-        final RenderChanger renderChanger = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
-        final Rotations rotations = (Rotations) LiquidBounce.moduleManager.getModule(Rotations.class);
-        final Aura aura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+        final RenderChanger renderChanger = (RenderChanger) LiquidSense.moduleManager.getModule(RenderChanger.class);
+        final Rotations rotations = (Rotations) LiquidSense.moduleManager.getModule(Rotations.class);
+        final Aura aura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
 
         ItemStack itemstack = this.getCurrentArmor(entitylivingbase, armorSlot);
         if (itemstack != null && itemstack.getItem() instanceof ItemArmor) {
@@ -94,7 +94,7 @@ public abstract class MixinLayerArmorBase <T extends ModelBase> implements Layer
 
     @Redirect(method = "renderGlint", at = @At(value = "INVOKE", target = "L net/minecraft/client/renderer/GlStateManager;color(FF FF)V", ordinal = 1))
     private void renderGlintColor(float colorRed, float colorGreen, float colorBlue, float colorAlpha) {
-        if (LiquidBounce.moduleManager.getModule(RenderChanger.class).getState()) {
+        if (LiquidSense.moduleManager.getModule(RenderChanger.class).getState()) {
             GlStateManager.color(RenderChanger.armorRed.get() / 255f, RenderChanger.armorGreen.get() / 255f, RenderChanger.armorBlue.get() / 255f, 0.66666667F);
         } else {
             float f2 = 0.76F;

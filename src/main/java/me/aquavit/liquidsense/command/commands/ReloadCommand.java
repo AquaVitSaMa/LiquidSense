@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Main;
 import me.aquavit.liquidsense.ui.font.Fonts;
@@ -15,23 +15,23 @@ public class ReloadCommand extends Command
     public void execute(final String[] args) {
         this.chat("Reloading...");
         this.chat("§c§lReloading scripts...");
-        LiquidBounce.scriptManager.reloadScripts();
+        LiquidSense.scriptManager.reloadScripts();
         this.chat("§c§lReloading fonts...");
         Fonts.loadFonts();
         this.chat("§c§lReloading modules...");
-        LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.modulesConfig);
+        LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.modulesConfig);
         this.chat("§c§lReloading values...");
-        LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.valuesConfig);
+        LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.valuesConfig);
         this.chat("§c§lReloading accounts...");
-        LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.accountsConfig);
+        LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.accountsConfig);
         this.chat("§c§lReloading friends...");
-        LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.friendsConfig);
+        LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.friendsConfig);
         this.chat("§c§lReloading xray...");
-        LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.xrayConfig);
+        LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.xrayConfig);
         this.chat("§c§lReloading hud...");
-        LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.hudConfig);
+        LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.hudConfig);
         this.chat("§c§lReloading ClickGUI...");
-        LiquidBounce.neverlose= new Main();
+        LiquidSense.neverlose= new Main();
         this.chat("Reloaded.");
     }
 }

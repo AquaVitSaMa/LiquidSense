@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.module.modules.client;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.ClientShutdownEvent;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
@@ -41,7 +41,7 @@ public class Fullbright extends Module {
 
     @EventTarget(ignoreCondition = true)
     public void onUpdate(final UpdateEvent event) {
-        if (getState() || LiquidBounce.moduleManager.getModule(XRay.class).getState()) {
+        if (getState() || LiquidSense.moduleManager.getModule(XRay.class).getState()) {
             switch(modeValue.get().toLowerCase()) {
                 case "gamma":
                     if(mc.gameSettings.gammaSetting <= 100F)

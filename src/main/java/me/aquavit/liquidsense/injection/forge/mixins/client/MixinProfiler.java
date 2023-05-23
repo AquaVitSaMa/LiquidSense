@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.client;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
 import net.minecraft.profiler.Profiler;
@@ -20,6 +20,6 @@ public class MixinProfiler {
     @Inject(method = "startSection", at = @At("HEAD"))
     private void startSection(String name, CallbackInfo callbackInfo) {
         if(name.equals("bossHealth") && ClassUtils.hasClass("net.labymod.api.LabyModAPI"))
-            LiquidBounce.eventManager.callEvent(new Render2DEvent(0F));
+            LiquidSense.eventManager.callEvent(new Render2DEvent(0F));
     }
 }

@@ -5,8 +5,8 @@
  */
 package me.aquavit.liquidsense.module.modules.client;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
@@ -63,22 +63,22 @@ public class HUD extends Module {
         if (mc.currentScreen instanceof GuiHudDesigner)
             return;
 
-        LiquidBounce.hud.render(false);
+        LiquidSense.hud.render(false);
     }
 
     @EventTarget
     public void onUpdate(final UpdateEvent event) {
-        LiquidBounce.hud.update();
+        LiquidSense.hud.update();
     }
 
     @EventTarget
     public void onLivingUpdate(final LivingUpdateEvent event){
-        LiquidBounce.hud.livingupdate();
+        LiquidSense.hud.livingupdate();
     }
 
     @EventTarget
     public void onKey(final KeyEvent event) {
-        LiquidBounce.hud.handleKey('a', event.getKey());
+        LiquidSense.hud.handleKey('a', event.getKey());
     }
 
     @EventTarget(ignoreCondition = true)

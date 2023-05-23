@@ -1,11 +1,11 @@
 package me.aquavit.liquidsense.module.modules.blatant;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.AttackEvent;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -53,8 +53,8 @@ public class Criticals extends Module {
 
         if (e.getTargetEntity() instanceof EntityLivingBase) {
             final EntityLivingBase entity = (EntityLivingBase) e.getTargetEntity();
-            final Speed speed = (Speed) LiquidBounce.moduleManager.getModule(Speed.class);
-            final Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
+            final Speed speed = (Speed) LiquidSense.moduleManager.getModule(Speed.class);
+            final Fly fly = (Fly) LiquidSense.moduleManager.getModule(Fly.class);
 
             if (!mc.thePlayer.onGround || mc.thePlayer.isOnLadder() || mc.thePlayer.ridingEntity != null
                     || mc.thePlayer.isInWeb || mc.thePlayer.isInWater() || mc.thePlayer.isInLava()
@@ -112,9 +112,9 @@ public class Criticals extends Module {
     @EventTarget
     public void onPacket(PacketEvent e) {
         final Packet<?> packet = e.getPacket();
-        final Speed speed = (Speed) LiquidBounce.moduleManager.getModule(Speed.class);
-        final Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
-        final Aura aura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+        final Speed speed = (Speed) LiquidSense.moduleManager.getModule(Speed.class);
+        final Fly fly = (Fly) LiquidSense.moduleManager.getModule(Fly.class);
+        final Aura aura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
 
         if (packet instanceof C03PacketPlayer && mode.get().equals("NoGround")) {
             if (mc.thePlayer.isCollidedVertically && mc.thePlayer.onGround && !speed.getState() && !fly.getState()) {

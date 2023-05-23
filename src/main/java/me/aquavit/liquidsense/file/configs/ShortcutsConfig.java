@@ -1,8 +1,8 @@
 package me.aquavit.liquidsense.file.configs;
 
 import com.google.gson.*;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.data.Pair;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.command.shortcuts.Shortcut;
 import me.aquavit.liquidsense.file.FileConfig;
@@ -46,7 +46,7 @@ public class ShortcutsConfig extends FileConfig {
                 JsonArray arguments = ((JsonObject)scriptCommand).get("arguments").getAsJsonArray();
                 if (arguments == null) continue;
 
-                Command command = LiquidBounce.commandManager.getCommand(commandName);
+                Command command = LiquidSense.commandManager.getCommand(commandName);
                 if (command == null) continue;
 
                 List temp = new ArrayList<>();
@@ -56,7 +56,7 @@ public class ShortcutsConfig extends FileConfig {
 
                 script.add(new Pair(command, temp.toArray()));
             }
-            LiquidBounce.commandManager.registerCommand(new Shortcut(name, script));
+            LiquidSense.commandManager.registerCommand(new Shortcut(name, script));
         }
     }
 
@@ -64,7 +64,7 @@ public class ShortcutsConfig extends FileConfig {
     protected void saveConfig() throws IOException {
         JsonArray jsonArray = new JsonArray();
 
-        for (Command command : LiquidBounce.commandManager.getCommands()) {
+        for (Command command : LiquidSense.commandManager.getCommands()) {
             if (!(command instanceof Shortcut)) continue;
 
             JsonObject jsonCommand = new JsonObject();

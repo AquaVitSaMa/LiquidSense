@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.ui.client.hud.element.elements;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.Translate;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.ui.client.hud.element.Border;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
@@ -24,7 +24,7 @@ public class KeyBinds extends Element {
 	@Override
 	public Border drawElement() {
 		int index = 0;
-		for (Module module : LiquidBounce.moduleManager.getModules()) {
+		for (Module module : LiquidSense.moduleManager.getModules()) {
 			if (module.getKeyBind() == Keyboard.KEY_NONE)
 				continue;
 			index++;
@@ -45,7 +45,7 @@ public class KeyBinds extends Element {
 		}
 
 		int y = 1;
-		for (Module module : LiquidBounce.moduleManager.getModules()) {
+		for (Module module : LiquidSense.moduleManager.getModules()) {
 			if (module.getKeyBind() == Keyboard.KEY_NONE ) {
 				if(module.getKeytranslate().getY() > 0f)
 				module.getKeytranslate().translate(0f, 0f , 2.0);

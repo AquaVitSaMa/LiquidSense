@@ -10,7 +10,7 @@ import me.aquavit.liquidsense.utils.block.BlockUtils;
 import me.aquavit.liquidsense.utils.client.RotationUtils;
 import me.aquavit.liquidsense.utils.extensions.BlockExtensionUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -81,7 +81,7 @@ public class Fucker extends Module {
 
             if (nofuckpos != null) {
                 if (sendnotif) {
-                    LiquidBounce.hud.addNotification(new Notification("NoFucker",
+                    LiquidSense.hud.addNotification(new Notification("NoFucker",
                             "Block in " + nofuckpos.getX() + " " + nofuckpos.getY() + " " + nofuckpos.getZ() + ".",
                             ColorType.INFO, 1500, 500));
                     sendnotif = false;
@@ -96,7 +96,7 @@ public class Fucker extends Module {
         }
 
         if (noHitValue.get()) {
-            Aura aura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+            Aura aura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
 
             if (aura.getState() && aura.getTarget() != null) return;
         }
@@ -153,7 +153,7 @@ public class Fucker extends Module {
             RotationUtils.setTargetRotation(rotations.getRotation());
 
         if (actionValue.get().equalsIgnoreCase("Destroy") || surroundings || actionValue.get().equalsIgnoreCase("New")) {
-            AutoTool autoTool = (AutoTool) LiquidBounce.moduleManager.getModule(AutoTool.class);
+            AutoTool autoTool = (AutoTool) LiquidSense.moduleManager.getModule(AutoTool.class);
             if (autoTool.getState())
                 autoTool.switchSlot(currentPos);
 

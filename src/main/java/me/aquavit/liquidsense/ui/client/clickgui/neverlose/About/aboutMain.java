@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose.About;
 
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Impl;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Main;
 import me.aquavit.liquidsense.ui.font.Fonts;
@@ -96,10 +96,10 @@ public class aboutMain extends Main {
 
         Fonts.csgo40.drawString("G", Impl.coordinateX + 472, Impl.coordinateY + 74, new Color(11, 160, 255).getRGB(), false);
 
-        Fonts.font16.drawString(LiquidBounce.CLIENT_VERSION, Impl.coordinateX + 475 + Fonts.font16.getStringWidth("Version: "),
+        Fonts.font16.drawString(LiquidSense.CLIENT_VERSION, Impl.coordinateX + 475 + Fonts.font16.getStringWidth("Version: "),
                 Impl.coordinateY + 130, new Color(24, 179, 246).getRGB());
 
-        Fonts.font16.drawString((LiquidBounce.IN_DEV) ? "Dev" : "Release", Impl.coordinateX + 475 + Fonts.font16.getStringWidth("BuildType: "),
+        Fonts.font16.drawString((LiquidSense.IN_DEV) ? "Dev" : "Release", Impl.coordinateX + 475 + Fonts.font16.getStringWidth("BuildType: "),
                 Impl.coordinateY + 142, new Color(24, 179, 246).getRGB());
 
         Fonts.font16.drawString(new SimpleDateFormat("dd.MM.YY").format(System.currentTimeMillis()), Impl.coordinateX + 475 + Fonts.font16.getStringWidth("Date: "),

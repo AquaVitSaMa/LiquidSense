@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.ChatEvent;
 import me.aquavit.liquidsense.module.modules.client.HUD;
 import net.minecraft.client.Minecraft;
@@ -81,7 +81,7 @@ public abstract class MixinGuiNewChat extends Gui{
 	 */
     @Overwrite
     public void drawChat(int updateCounter) {
-        final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+        final HUD hud = (HUD) LiquidSense.moduleManager.getModule(HUD.class);
         final FontRenderer fontRenderer = hud.getState() ? hud.chatFont.get() : mc.fontRendererObj;
         if (configuring) return;
         if (prevMillis == -1) {
@@ -181,7 +181,7 @@ public abstract class MixinGuiNewChat extends Gui{
     @Overwrite
     public void printChatMessageWithOptionalDeletion(IChatComponent chatComponent, int chatLineId) {
         ChatEvent event = new ChatEvent(chatComponent, this.drawnChatLines);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidSense.eventManager.callEvent(event);
         if (event.isCancelled()) {
             return;
         }
@@ -196,7 +196,7 @@ public abstract class MixinGuiNewChat extends Gui{
 	 */
     @Overwrite
     private void setChatLine(IChatComponent chatComponent, int chatLineId, int updateCounter, boolean displayOnly) {
-        final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+        final HUD hud = (HUD) LiquidSense.moduleManager.getModule(HUD.class);
 
         final FontRenderer fontRenderer = hud.getState() ? hud.chatFont.get() : mc.fontRendererObj;
         if (chatLineId != 0) {
@@ -236,7 +236,7 @@ public abstract class MixinGuiNewChat extends Gui{
 	 */
     @Overwrite
     public IChatComponent getChatComponent(int p_getChatComponent_1_, int p_getChatComponent_2_) {
-        final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+        final HUD hud = (HUD) LiquidSense.moduleManager.getModule(HUD.class);
         final FontRenderer fontRenderer = hud.getState() ? hud.chatFont.get() : mc.fontRendererObj;
         if (!this.getChatOpen()) {
             return null;

@@ -5,8 +5,8 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.misc.ComponentOnHover;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.modules.client.HUD;
 import me.aquavit.liquidsense.ui.client.gui.GuiBackground;
 import me.aquavit.liquidsense.utils.render.ParticleUtils;
@@ -73,7 +73,7 @@ public abstract class MixinGuiScreen extends Gui {
 
     @Inject(method = "drawWorldBackground", at = @At("HEAD"))
     private void drawWorldBackground(final CallbackInfo callbackInfo) {
-        final HUD hud = (HUD) LiquidBounce.moduleManager.getModule(HUD.class);
+        final HUD hud = (HUD) LiquidSense.moduleManager.getModule(HUD.class);
 
         if(hud.inventoryParticle.get() && mc.thePlayer != null) {
             final ScaledResolution scaledResolution = new ScaledResolution(mc);
@@ -92,7 +92,7 @@ public abstract class MixinGuiScreen extends Gui {
         GlStateManager.disableFog();
 
         if(GuiBackground.Companion.getEnabled()) {
-            if (LiquidBounce.INSTANCE.getBackground() == null) {
+            if (LiquidSense.INSTANCE.getBackground() == null) {
                 BackgroundShader.BACKGROUND_SHADER.startShader();
 
                 final Tessellator instance = Tessellator.getInstance();
@@ -110,7 +110,7 @@ public abstract class MixinGuiScreen extends Gui {
                 final int width = scaledResolution.getScaledWidth();
                 final int height = scaledResolution.getScaledHeight();
 
-                mc.getTextureManager().bindTexture(LiquidBounce.INSTANCE.getBackground());
+                mc.getTextureManager().bindTexture(LiquidSense.INSTANCE.getBackground());
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, width, height, width, height, width, height);
             }
@@ -129,17 +129,17 @@ public abstract class MixinGuiScreen extends Gui {
 
     @Inject(method = "sendChatMessage(Ljava/lang/String;Z)V", at = @At("HEAD"), cancellable = true)
     private void messageSend(String msg, boolean addToChat, final CallbackInfo callbackInfo) {
-        if (msg.startsWith(String.valueOf(LiquidBounce.commandManager.getPrefix())) && addToChat) {
+        if (msg.startsWith(String.valueOf(LiquidSense.commandManager.getPrefix())) && addToChat) {
             this.mc.ingameGUI.getChatGUI().addToSentMessages(msg);
 
-            LiquidBounce.commandManager.executeCommands(msg);
+            LiquidSense.commandManager.executeCommands(msg);
             callbackInfo.cancel();
         }
     }
 
     @Inject(method = "handleComponentHover", at = @At("HEAD"))
     private void handleHoverOverComponent(IChatComponent component, int x, int y, final CallbackInfo callbackInfo) {
-        if (component == null || component.getChatStyle().getChatClickEvent() == null || !LiquidBounce.moduleManager.getModule(ComponentOnHover.class).getState())
+        if (component == null || component.getChatStyle().getChatClickEvent() == null || !LiquidSense.moduleManager.getModule(ComponentOnHover.class).getState())
             return;
 
         final ChatStyle chatStyle = component.getChatStyle();

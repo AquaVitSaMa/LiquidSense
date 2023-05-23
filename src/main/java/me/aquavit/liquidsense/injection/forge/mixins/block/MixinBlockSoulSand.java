@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.block;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.movement.NoSlow;
 import net.minecraft.block.BlockSoulSand;
 import net.minecraftforge.fml.relauncher.Side;
@@ -21,7 +21,7 @@ public class MixinBlockSoulSand {
 
     @Inject(method = "onEntityCollidedWithBlock", at = @At("HEAD"), cancellable = true)
     private void onEntityCollidedWithBlock(CallbackInfo callbackInfo) {
-        if(LiquidBounce.moduleManager.getModule(NoSlow.class).getState() && NoSlow.soulsandValue.get())
+        if(LiquidSense.moduleManager.getModule(NoSlow.class).getState() && NoSlow.soulsandValue.get())
             callbackInfo.cancel();
     }
 }

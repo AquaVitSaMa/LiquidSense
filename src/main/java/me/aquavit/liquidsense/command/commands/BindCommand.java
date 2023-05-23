@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.ColorType;
@@ -22,7 +22,7 @@ public class BindCommand extends Command {
             this.chatSyntax(new String[] { "<module> <key>", "<module> none" });
             return;
         }
-        final Module module = LiquidBounce.moduleManager.getModule(args[1]);
+        final Module module = LiquidSense.moduleManager.getModule(args[1]);
         if (module == null) {
             this.chat("Module §a§l" + args[1] + "§3 not found.");
             return;
@@ -30,7 +30,7 @@ public class BindCommand extends Command {
         final int key = Keyboard.getKeyIndex(args[2].toUpperCase());
         module.setKeyBind(key);
         this.chat("Bound module §a§l" + module.getName() + "§3 to key §a§l" + Keyboard.getKeyName(key) + "§3.");
-        LiquidBounce.hud.addNotification(new Notification("Bound " + module.getName() + " to " + Keyboard.getKeyName(key),"", ColorType.INFO,1500,500));
+        LiquidSense.hud.addNotification(new Notification("Bound " + module.getName() + " to " + Keyboard.getKeyName(key),"", ColorType.INFO,1500,500));
         playEdit();
     }
 
@@ -42,7 +42,7 @@ public class BindCommand extends Command {
 
         switch (args.length) {
             case 1:
-                return LiquidBounce.moduleManager.getModules().stream()
+                return LiquidSense.moduleManager.getModules().stream()
                         .map(Module::getName)
                         .filter(module -> module.startsWith(moduleName))
                         .collect(Collectors.toList());

@@ -1,12 +1,12 @@
 package me.aquavit.liquidsense.module.modules.render;
 
 import com.mojang.realmsclient.gui.ChatFormatting;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
 import me.aquavit.liquidsense.module.modules.misc.Teams;
 import me.aquavit.liquidsense.module.modules.world.EventLogger;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.utils.render.GLUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
@@ -66,7 +66,7 @@ public class NameTags extends Module {
     private final BoolValue shadow = new BoolValue("Shadow", false);
     public static final FontValue font = new FontValue("Font", Fonts.minecraftFont);
 
-    final RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+    final RenderChanger rc = (RenderChanger) LiquidSense.moduleManager.getModule(RenderChanger.class);
 
     @EventTarget
     public void onRender2D(Render2DEvent event) {
@@ -183,8 +183,8 @@ public class NameTags extends Module {
         double pZ = (entity.lastTickPosZ + (entity.posZ - entity.lastTickPosZ) * event.getPartialTicks()
                 - renderManager.renderPosZ);
         //pY += entity.isSneaking() ? 0.5 : 0.7;
-        String bot = AntiBot.isBot(entity) && LiquidBounce.moduleManager.getModule(AntiBot.class).getState() ? "§9[BOT]" : "";
-        String team = Teams.isInYourTeam(entity) && LiquidBounce.moduleManager.getModule(Teams.class).getState() ? "§b[TEAM]" : "";
+        String bot = AntiBot.isBot(entity) && LiquidSense.moduleManager.getModule(AntiBot.class).getState() ? "§9[BOT]" : "";
+        String team = Teams.isInYourTeam(entity) && LiquidSense.moduleManager.getModule(Teams.class).getState() ? "§b[TEAM]" : "";
         String hack = isHacker(entity) ? "§c[HACK]" : "";
         String lol = !bot.equals("") ? bot + name : (!team.equals("") ? team + name : (!hack.equals("") ? hack + name : "§a" + name));
         String hp = elements.getMultiBool("Health") ? "§7" + (int)entity.getHealth() + "hp" : "";
@@ -391,7 +391,7 @@ public class NameTags extends Module {
     }
 
     private boolean isHacker(EntityLivingBase entity) {
-        EventLogger eventLogger = (EventLogger) LiquidBounce.moduleManager.getModule(EventLogger.class);
+        EventLogger eventLogger = (EventLogger) LiquidSense.moduleManager.getModule(EventLogger.class);
         return (eventLogger.getState() && eventLogger.hackerDetect.get() && EventLogger.isHacker((EntityPlayer) entity));
     }
 }

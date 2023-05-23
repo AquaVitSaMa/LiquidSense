@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.module.modules.misc;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
 import me.aquavit.liquidsense.module.Module;
@@ -32,15 +32,15 @@ public class MidClick extends Module {
 
             if(entity instanceof EntityPlayer) {
                 final String playerName = ColorUtils.stripColor(entity.getName());
-                final FriendsConfig friendsConfig = LiquidBounce.fileManager.friendsConfig;
+                final FriendsConfig friendsConfig = LiquidSense.fileManager.friendsConfig;
 
                 if(!friendsConfig.isFriend(playerName)) {
                     friendsConfig.addFriend(playerName);
-                    LiquidBounce.fileManager.saveConfig(friendsConfig);
+                    LiquidSense.fileManager.saveConfig(friendsConfig);
                     ClientUtils.displayChatMessage("§a§l" + playerName + "§c was added to your friends.");
                 }else{
                     friendsConfig.removeFriend(playerName);
-                    LiquidBounce.fileManager.saveConfig(friendsConfig);
+                    LiquidSense.fileManager.saveConfig(friendsConfig);
                     ClientUtils.displayChatMessage("§a§l" + playerName + "§c was removed from your friends.");
                 }
             }else

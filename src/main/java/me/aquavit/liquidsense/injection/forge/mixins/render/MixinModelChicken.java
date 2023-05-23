@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelChicken;
 import net.minecraft.client.model.ModelRenderer;
@@ -67,7 +67,7 @@ public class MixinModelChicken extends ModelBase {
             this.leftWing.render(p_render_7_);
             GlStateManager.popMatrix();
         } else {
-            final RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+            final RenderChanger rc = (RenderChanger) LiquidSense.moduleManager.getModule(RenderChanger.class);
 
             if (rc.getState() && RenderChanger.bigHeadsValue.get()) {
                 GL11.glPushMatrix();

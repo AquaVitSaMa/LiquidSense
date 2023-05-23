@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.module.modules.misc;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.module.Module;
@@ -82,7 +82,7 @@ public class Disabler extends Module {
             all += count;
             if (!working) {
                 working = true;
-                mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" +LiquidBounce.CLIENT_NAME+ "§8] §3"+ "Watchdoge left the game!"));
+                mc.thePlayer.addChatMessage(new ChatComponentText("§8[§9§l" + LiquidSense.CLIENT_NAME+ "§8] §3"+ "Watchdoge left the game!"));
             }
             delay = MathHelper.getRandomIntegerInRange(random, c0fBaseDelay.get(), c0fBaseDelay.get() + c0fRandomDelay.get());
             timer.reset();

@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
@@ -19,15 +19,15 @@ public class PanicCommand extends Command {
     public void execute(String[] args) {
         if (args.length > 1 && !args[1].isEmpty()) {
             if (args[1].equalsIgnoreCase("all")){
-                LiquidBounce.moduleManager.getModules().stream().filter(Module::getState).forEach(module -> module.setState(false));
+                LiquidSense.moduleManager.getModules().stream().filter(Module::getState).forEach(module -> module.setState(false));
                 this.chat("Disabled all modules.");
             }else if (args[1].equalsIgnoreCase("nonrender")){
-                LiquidBounce.moduleManager.getModules().stream().filter(module -> module.getState() && module.getCategory() != ModuleCategory.RENDER).forEach(module -> module.setState(false));
+                LiquidSense.moduleManager.getModules().stream().filter(module -> module.getState() && module.getCategory() != ModuleCategory.RENDER).forEach(module -> module.setState(false));
                 this.chat("Disabled all non-render modules.");
             } else {
                 for (ModuleCategory categories : ModuleCategory.values()){
                     if (args[1].equalsIgnoreCase(categories.displayName.toLowerCase())){
-                        LiquidBounce.moduleManager.getModules().stream().filter
+                        LiquidSense.moduleManager.getModules().stream().filter
                                 (module -> module.getState() && module.getCategory() == categories).forEach(module -> module.setState(false));
                         this.chat("Disabled "+args[1].toLowerCase()+ " modules.");
                         return;

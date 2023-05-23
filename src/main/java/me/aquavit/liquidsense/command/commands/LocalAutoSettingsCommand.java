@@ -1,9 +1,9 @@
 package me.aquavit.liquidsense.command.commands;
 
 import com.google.gson.JsonParser;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
 import me.aquavit.liquidsense.utils.client.SettingsUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.file.FileManager;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
@@ -27,7 +27,7 @@ public class LocalAutoSettingsCommand extends Command {
         if (args.length > 1) {
             if (args[1].equals("load")){
                 if (args.length > 2) {
-                    File scriptFile = new File(LiquidBounce.fileManager.settingsDir, args[2]);
+                    File scriptFile = new File(LiquidSense.fileManager.settingsDir, args[2]);
                     if (scriptFile.exists()) {
                         try {
                             chat("§9Loading settings...");
@@ -36,7 +36,7 @@ public class LocalAutoSettingsCommand extends Command {
                             chat("§9Set settings...");
                             SettingsUtils.executeScript(StringUtils.toLines(settings));
                             chat("§6Settings applied successfully.");
-                            LiquidBounce.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", ColorType.INFO,1500,500));
+                            LiquidSense.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", ColorType.INFO,1500,500));
                             playEdit();
 
                         }
@@ -54,7 +54,7 @@ public class LocalAutoSettingsCommand extends Command {
             }
             if (args[1].equals("save")){
                 if (args.length > 2) {
-                    File scriptFile = new File(LiquidBounce.fileManager.settingsDir, args[2]);
+                    File scriptFile = new File(LiquidSense.fileManager.settingsDir, args[2]);
 
                     try {
                         if (scriptFile.exists())
@@ -89,7 +89,7 @@ public class LocalAutoSettingsCommand extends Command {
             }
             if (args[1].equals("delete")){
                 if (args.length > 2) {
-                    File scriptFile = new File(LiquidBounce.fileManager.settingsDir, args[2]);
+                    File scriptFile = new File(LiquidSense.fileManager.settingsDir, args[2]);
 
                     if (scriptFile.exists()) {
                         scriptFile.delete();
@@ -153,6 +153,6 @@ public class LocalAutoSettingsCommand extends Command {
     }
 
     private File[] getLocalSettings(){
-        return LiquidBounce.fileManager.settingsDir.listFiles();
+        return LiquidSense.fileManager.settingsDir.listFiles();
     }
 }

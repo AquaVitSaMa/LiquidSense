@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.module.modules.movement;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.MotionEvent;
 import me.aquavit.liquidsense.event.events.SlowDownEvent;
@@ -34,7 +34,7 @@ public class NoSlow extends Module {
     private final ListValue modeValue = new ListValue("Mode", new String[]{"Vanilla","Packet", "AAC", "OldAAC", "OldPacket"}, "Packet");
     public static final BoolValue soulsandValue = new BoolValue("Soulsand", true);
 
-    Aura aura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+    Aura aura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
     MSTimer timer = new MSTimer();
 
     @EventTarget

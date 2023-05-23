@@ -7,7 +7,7 @@ package me.aquavit.liquidsense.injection.forge.mixins.entity;
 
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.module.modules.ghost.HitBox;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.StrafeEvent;
 import me.aquavit.liquidsense.event.events.WallDamageEvent;
 import net.minecraft.block.Block;
@@ -185,10 +185,10 @@ public abstract class MixinEntity {
 
     @Inject(method = "getCollisionBorderSize", at = @At("HEAD"), cancellable = true)
     private void getCollisionBorderSize(final CallbackInfoReturnable<Float> callbackInfoReturnable) {
-        if (LiquidBounce.moduleManager.getModule(HitBox.class).getState())
+        if (LiquidSense.moduleManager.getModule(HitBox.class).getState())
             callbackInfoReturnable.setReturnValue(0.1F + HitBox.sizeValue.get());
 
-        Aura ka = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+        Aura ka = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
 
         if (ka.getTarget() != null || ka.getTarget() != Minecraft.getMinecraft().thePlayer) {
             callbackInfoReturnable.setReturnValue(0.1F + ka.getHitBoxValue().get());
@@ -201,7 +201,7 @@ public abstract class MixinEntity {
             return;
 
         final StrafeEvent strafeEvent = new StrafeEvent(strafe, forward, friction);
-        LiquidBounce.eventManager.callEvent(strafeEvent);
+        LiquidSense.eventManager.callEvent(strafeEvent);
 
         if (strafeEvent.isCancelled())
             callbackInfo.cancel();
@@ -215,7 +215,7 @@ public abstract class MixinEntity {
             return;
 
         final WallDamageEvent wallDamageEvent = new WallDamageEvent();
-        LiquidBounce.eventManager.callEvent(wallDamageEvent);
+        LiquidSense.eventManager.callEvent(wallDamageEvent);
         cir.setReturnValue(false);
     }
 }

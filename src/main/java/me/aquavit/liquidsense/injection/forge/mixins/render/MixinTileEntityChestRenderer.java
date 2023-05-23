@@ -5,8 +5,8 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.render.Chams;
-import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.renderer.tileentity.TileEntityChestRenderer;
 import org.lwjgl.opengl.GL11;
 import org.spongepowered.asm.mixin.Mixin;
@@ -19,7 +19,7 @@ public class MixinTileEntityChestRenderer {
 
     @Inject(method = "renderTileEntityAt", at = @At("HEAD"))
     private void injectChamsPre(CallbackInfo callbackInfo) {
-        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.chestsValue.get()) {
+        if (LiquidSense.moduleManager.getModule(Chams.class).getState() && Chams.chestsValue.get()) {
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
             GL11.glPolygonOffset(1.0F, -1000000F);
         }
@@ -27,7 +27,7 @@ public class MixinTileEntityChestRenderer {
 
     @Inject(method = "renderTileEntityAt", at = @At("RETURN"))
     private void injectChamsPost(CallbackInfo callbackInfo) {
-        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.chestsValue.get()) {
+        if (LiquidSense.moduleManager.getModule(Chams.class).getState() && Chams.chestsValue.get()) {
             GL11.glPolygonOffset(1.0F, 1000000F);
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         }

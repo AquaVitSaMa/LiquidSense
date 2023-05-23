@@ -4,9 +4,9 @@ import com.google.common.collect.Lists;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
 import me.aquavit.liquidsense.utils.client.SettingsUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.login.Callback;
@@ -47,7 +47,7 @@ public class AutoSettingsCommand extends Command {
             if (args[2].startsWith("http")) {
                 url = args[2];
             } else {
-                url = LiquidBounce.CLIENT_CLOUD + "/settings/" + args[2].toLowerCase();
+                url = LiquidSense.CLIENT_CLOUD + "/settings/" + args[2].toLowerCase();
             }
 
             chat("Loading settings...");
@@ -60,7 +60,7 @@ public class AutoSettingsCommand extends Command {
                     chat("Applying settings...");
                     SettingsUtils.executeScript(StringUtils.toLines(settings));
                     chat("§6Settings applied successfully");
-                    LiquidBounce.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", ColorType.INFO, 1500, 500));
+                    LiquidSense.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", ColorType.INFO, 1500, 500));
                     playEdit();
                 } catch (Exception exception) {
                     exception.printStackTrace();

@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.utils.mc;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.movement.Fly;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.util.AxisAlignedBB;
@@ -20,7 +20,7 @@ public class VoidCheck extends MinecraftInstance{
     }
 
     public static boolean isVoid(int X, int Z, EntityLivingBase entity){
-        Fly fly = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
+        Fly fly = (Fly) LiquidSense.moduleManager.getModule(Fly.class);
 
         if (fly.getState()) {
             return false;

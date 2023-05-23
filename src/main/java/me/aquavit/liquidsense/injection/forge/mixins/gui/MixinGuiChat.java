@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiChat;
@@ -50,10 +50,10 @@ public abstract class MixinGuiChat extends MixinGuiScreen {
 
     @Inject(method = "keyTyped", at = @At("RETURN"))
     private void updateLength(CallbackInfo callbackInfo) {
-        if (!inputField.getText().startsWith(String.valueOf(LiquidBounce.commandManager.getPrefix()))) return;
-        LiquidBounce.commandManager.autoComplete(inputField.getText());
+        if (!inputField.getText().startsWith(String.valueOf(LiquidSense.commandManager.getPrefix()))) return;
+        LiquidSense.commandManager.autoComplete(inputField.getText());
 
-        if (!inputField.getText().startsWith(LiquidBounce.commandManager.getPrefix() + "lc"))
+        if (!inputField.getText().startsWith(LiquidSense.commandManager.getPrefix() + "lc"))
             inputField.setMaxStringLength(10000);
         else
             inputField.setMaxStringLength(100);
@@ -75,7 +75,7 @@ public abstract class MixinGuiChat extends MixinGuiScreen {
     @Inject(method = "autocompletePlayerNames", at = @At("HEAD"))
     private void prioritizeClientFriends(final CallbackInfo callbackInfo) {
         foundPlayerNames.sort(
-                Comparator.comparing(s -> !LiquidBounce.fileManager.friendsConfig.isFriend(s)));
+                Comparator.comparing(s -> !LiquidSense.fileManager.friendsConfig.isFriend(s)));
     }
 
     /**
@@ -86,10 +86,10 @@ public abstract class MixinGuiChat extends MixinGuiScreen {
      */
     @Inject(method = "sendAutocompleteRequest", at = @At("HEAD"), cancellable = true)
     private void handleClientCommandCompletion(String full, final String ignored, CallbackInfo callbackInfo) {
-        if (LiquidBounce.commandManager.autoComplete(full)) {
+        if (LiquidSense.commandManager.autoComplete(full)) {
             waitingOnAutocomplete = true;
 
-            String[] latestAutoComplete = LiquidBounce.commandManager.getLatestAutoComplete();
+            String[] latestAutoComplete = LiquidSense.commandManager.getLatestAutoComplete();
 
             if (full.toLowerCase().endsWith(latestAutoComplete[latestAutoComplete.length - 1].toLowerCase()))
                 return;
@@ -109,8 +109,8 @@ public abstract class MixinGuiChat extends MixinGuiScreen {
         Gui.drawRect(2, this.height - (int) fade, this.width - 2, this.height, Integer.MIN_VALUE);
         this.inputField.drawTextBox();
 
-        if (LiquidBounce.commandManager.getLatestAutoComplete().length > 0 && !inputField.getText().isEmpty() && inputField.getText().startsWith(String.valueOf(LiquidBounce.commandManager.getPrefix()))) {
-            String[] latestAutoComplete = LiquidBounce.commandManager.getLatestAutoComplete();
+        if (LiquidSense.commandManager.getLatestAutoComplete().length > 0 && !inputField.getText().isEmpty() && inputField.getText().startsWith(String.valueOf(LiquidSense.commandManager.getPrefix()))) {
+            String[] latestAutoComplete = LiquidSense.commandManager.getLatestAutoComplete();
             String[] textArray = inputField.getText().split(" ");
             String trimmedString = latestAutoComplete[0].replaceFirst("(?i)" + textArray[textArray.length - 1], "");
 

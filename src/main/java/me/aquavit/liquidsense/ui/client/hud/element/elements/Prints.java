@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.ui.client.hud.element.elements;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.hud.designer.GuiHudDesigner;
 import me.aquavit.liquidsense.ui.client.hud.element.Border;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
@@ -32,35 +32,35 @@ public class Prints extends Element {
 
     @Override
     public Border drawElement() {
-        print = LiquidBounce.hud.getPrints().stream();
+        print = LiquidSense.hud.getPrints().stream();
         int index = 0;
         for(Print print : print.collect(Collectors.toList())) {
             if (!print.removeing) {
                 print.index = index;
-                print.translate.translate(0f, (LiquidBounce.hud.getPrints().size() * 11) - (index * 11), 1.5);
+                print.translate.translate(0f, (LiquidSense.hud.getPrints().size() * 11) - (index * 11), 1.5);
             }
             print.y = print.translate.getY();
             print.drawPrint();
             if(print.fadeState == FadeState.END) {
-                LiquidBounce.hud.removePrint(print);
+                LiquidSense.hud.removePrint(print);
                 index--;
             }
             index++;
         }
         if (mc.currentScreen instanceof GuiHudDesigner) {
-            if (!LiquidBounce.INSTANCE.getHud().getPrints().contains(exampleNotification)) {
-                LiquidBounce.hud.addPrint(exampleNotification);
+            if (!LiquidSense.INSTANCE.getHud().getPrints().contains(exampleNotification)) {
+                LiquidSense.hud.addPrint(exampleNotification);
             }
             exampleNotification.fadeState = FadeState.STAY;
             exampleNotification.x = ((float) this.exampleNotification.textLength + 8.0F);
-            return new Border(-exampleNotification.x + 12 + exampleNotification.textLength, 0, -exampleNotification.x - 35, 20 + 11F * LiquidBounce.INSTANCE.getHud().getNotifications().size());
+            return new Border(-exampleNotification.x + 12 + exampleNotification.textLength, 0, -exampleNotification.x - 35, 20 + 11F * LiquidSense.INSTANCE.getHud().getNotifications().size());
         }
         return new Border(0f , 0f , 0f , 0f);
     }
 
     @Override
     public void livingupdateElement(){
-        Aura a = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+        Aura a = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
         EntityLivingBase entity = a.getTarget();
         if (entity != null && entity != mc.thePlayer) {
             if (!this.healthMap.containsKey(entity)) {
@@ -72,7 +72,7 @@ public class Prints extends Element {
             if (floatValue != health) {
                 int remaining = floatValue - (floatValue - health) < 0 ? 0 : (int) Math.floor(floatValue - (floatValue - health));
                 String text = "Hurt " + name + " for " + roundToPlace(floatValue - health, 1) + " hp " + "(" + remaining + " remaining).";
-                LiquidBounce.hud.addPrint(new Print(text,3000, Type.success));
+                LiquidSense.hud.addPrint(new Print(text,3000, Type.success));
                 this.healthMap.remove(entity);
                 this.healthMap.put(entity, entity.getHealth());
             }

@@ -1,30 +1,19 @@
 package me.aquavit.liquidsense.module;
 
-import me.aquavit.liquidsense.module.modules.blatant.Aura;
+import me.aquavit.liquidsense.LiquidSense;
+import me.aquavit.liquidsense.module.modules.blatant.*;
+import me.aquavit.liquidsense.module.modules.client.*;
 import me.aquavit.liquidsense.module.modules.exploit.*;
-import me.aquavit.liquidsense.module.modules.misc.AntiBot;
-import me.aquavit.liquidsense.module.modules.misc.MidClick;
-import me.aquavit.liquidsense.module.modules.misc.NameProtect;
-import me.aquavit.liquidsense.module.modules.misc.Spammer;
+import me.aquavit.liquidsense.module.modules.fun.Derp;
+import me.aquavit.liquidsense.module.modules.fun.SkinDerp;
+import me.aquavit.liquidsense.module.modules.misc.*;
 import me.aquavit.liquidsense.module.modules.movement.*;
+import me.aquavit.liquidsense.module.modules.player.*;
 import me.aquavit.liquidsense.module.modules.render.ClickGUI;
-import me.aquavit.liquidsense.module.modules.client.Fullbright;
-import me.aquavit.liquidsense.module.modules.client.HUD;
 import me.aquavit.liquidsense.module.modules.ghost.AutoArmor;
-import me.aquavit.liquidsense.module.modules.blatant.AutoPot;
-import me.aquavit.liquidsense.module.modules.blatant.AutoSoup;
-import me.aquavit.liquidsense.module.modules.client.Target;
 import me.aquavit.liquidsense.module.modules.ghost.*;
-import me.aquavit.liquidsense.module.modules.player.Blink;
-import me.aquavit.liquidsense.module.modules.player.FastUse;
-import me.aquavit.liquidsense.module.modules.player.InvClean;
-import me.aquavit.liquidsense.module.modules.player.NoFall;
 import me.aquavit.liquidsense.module.modules.render.*;
-import me.aquavit.liquidsense.module.modules.world.ChestAura;
-import me.aquavit.liquidsense.module.modules.world.ChestStealer;
-import me.aquavit.liquidsense.module.modules.world.Scaffold;
-import me.aquavit.liquidsense.module.modules.world.Tower;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.module.modules.world.*;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.KeyEvent;
 import me.aquavit.liquidsense.event.Listenable;
@@ -38,8 +27,6 @@ import java.util.*;
 @SideOnly(Side.CLIENT)
 public final class ModuleManager implements Listenable {
 
-    //private static final List<Module> modules = TreeSet<Module> { module1, module2 -> module1.name.compareTo(module2.name) };
-
     private static final TreeSet<Module> modules = new TreeSet(new Comparator<Module>() {
         @Override
         public int compare(Module module1, Module module2) {
@@ -51,17 +38,18 @@ public final class ModuleManager implements Listenable {
         return modules;
     }
 
-    private final HashMap<Class<?>, Module> moduleClassMap;
-
+    private final HashMap<Class<?>, Module> moduleClassMap = new HashMap<>();
 
     public ModuleManager() {
-        this.moduleClassMap = new HashMap<>();
-        LiquidBounce.eventManager.registerListener(this);
+        LiquidSense.eventManager.registerListener(this);
     }
 
+    /**
+     * 注册所有功能
+     */
     public void registerModules() {
-        ClientUtils.getLogger().info("[ModuleManager] Loading modules...");
-        registerALLModule(
+        ClientUtils.getLogger().info("[" + LiquidSense.CLIENT_NAME + "]" + " Loading modules...");
+        registerModules(
                 Target.class,
                 Aimbot.class,
                 AutoArmor.class,
@@ -110,76 +98,162 @@ public final class ModuleManager implements Listenable {
                 BugUp.class,
                 HUD.class,
                 ChestAura.class,
-                AntiObsidian.class);
+                AntiObsidian.class,
 
-        ClientUtils.getLogger().info("[ModuleManager] Loaded " + modules.size() + " modules.");
+                WTap.class,
+                CaveFinder.class,
+                Step.class,
+                Criticals.class,
+                SuperKnockback.class,
+                Teams.class,
+                Projectiles.class,
+                AbortBreaking.class,
+                SwingAnimation.class,
+                FastPlace.class,
+                BowAimbot.class,
+                Compass.class,
+                Zoot.class,
+                RenderChanger.class,
+                Rotations.class,
+                Regen.class,
+                JumpCircle.class,
+                ConsoleSpammer.class,
+                Damage.class,
+                SkinDerp.class,
+                Derp.class,
+                EventLogger.class,
+                Velocity.class,
+                FastBow.class,
+                NameTags.class,
+                GameSpeed.class,
+                BlockOverlay.class,
+                Clip.class,
+                Ghost.class,
+                Tracers.class,
+                AutoBow.class,
+                GhostHand.class,
+                Kick.class,
+                HYTBypass.class,
+                Fucker.class,
+                AntiAFK.class,
+                Reach.class,
+                NoClip.class,
+                NoJumpDelay.class,
+                NoWeb.class,
+                SafeWalk.class,
+                NoRotateSet.class,
+                ComponentOnHover.class,
+                AutoWeapon.class,
+                AntiBlind.class,
+                NoBob.class,
+                NoFOV.class,
+                NoHurtCam.class,
+                NoSwing.class,
+                TrueSight.class,
+                Chams.class,
+                Particle.class,
+                EveryThingBlock.class,
+                FastBreak.class,
+                ItemPhysic.class,
+                Ambience.class,
+                EnchantEffect.class,
+                AutoFish.class,
+                AutoWalk.class,
+                Eagle.class,
+                AutoSpawn.class,
+                HitBox.class,
+                Freeze.class,
+                Strafe.class,
+                NoFriends.class,
+                Animations.class,
+                ItemRotate.class,
+                LagBack.class,
+                MemoryFixer.class,
+                PointerESP.class,
+                Disabler.class,
+                Skeltal.class,
+                TargetStrafe.class,
+                AutoADL.class,
+                CameraView.class,
+                KillESP.class,
+                Jesus.class,
+                Cape.class,
+                AutoApple.class,
+                AntiSpam.class,
+                AutoTool.class
+                );
+
+        ClientUtils.getLogger().info("[" + LiquidSense.CLIENT_NAME + "]" + " Loaded " + modules.size() + " modules.");
     }
 
+    /**
+     * 注册功能
+     */
     public void registerModule(final Module module) {
         modules.add(module);
-        (moduleClassMap).put(module.getClass(), module);
+        moduleClassMap.put(module.getClass(), module);
 
-        this.generateCommand(module);
-        LiquidBounce.eventManager.registerListener(module);
+        generateCommand(module);
+        LiquidSense.eventManager.registerListener(module);
     }
 
-
-    public void registerModule(Class<? extends Module> moduleClass) {
+    /**
+     * 注册功能的类
+     */
+    private void registerModule(Class<? extends Module> moduleClass) {
         try {
-            this.registerModule(moduleClass.newInstance());
-        }
-        catch (Throwable e) {
+            registerModule(moduleClass.newInstance());
+        } catch (Throwable e) {
             ClientUtils.getLogger().error("Failed to load module: " + moduleClass.getName() + " (" + e.getClass().getName() + ": " + e.getMessage() + ")");
         }
     }
 
     /**
-     * Register a list of modules
+     * 注册功能列表
      */
     @SafeVarargs
-    public final void registerALLModule(Class<? extends Module>... modules) {
-        List<Object> liquidSenseModules = LiquidBounce.liquidSense.getLiquidSenseModules();
-        for (Class<? extends Module> lbModule : modules) {
-            this.registerModule(lbModule);
-        }
-        for (Object lsModule : liquidSenseModules) {
-            this.registerModule(lsModule);
+    public final void registerModules(Class<? extends Module>... modules) {
+        for (Class<? extends Module> module : modules) {
+            registerModule(module);
         }
     }
 
-    private void registerModule(Object lsModule) {
-        try {
-            this.registerModule((Module)((Class<?>)lsModule).newInstance());
-        }
-        catch (Throwable e) {
-            ClientUtils.getLogger().error("Failed to load module: " + ((Class<?>)lsModule).getName() + " (" + e.getClass().getName() + ": " + e.getMessage() + ")");
-        }
-    }
-
+    /**
+     * 注销功能
+     */
     public void unregisterModule(final Module module) {
         modules.remove(module);
-        this.moduleClassMap.remove(module.getClass());
-        LiquidBounce.eventManager.unregisterListener(module);
+        moduleClassMap.remove(module.getClass());
+        LiquidSense.eventManager.unregisterListener(module);
     }
 
+    /**
+     * 为功能生成命令
+     */
     private void generateCommand(Module module) {
         List<Value<?>> values = module.getValues();
         if (values.isEmpty()) {
             return;
         }
-        LiquidBounce.commandManager.registerCommand(new ModuleCommand(module, values));
+        LiquidSense.commandManager.registerCommand(new ModuleCommand(module, values));
     }
 
-    public final Module getModule(Class<?> moduleClass) {
-        return this.moduleClassMap.get(moduleClass);
+    /**
+     * 通过功能的类获取模块
+     */
+    public Module getModule(Class<?> moduleClass) {
+        return moduleClassMap.get(moduleClass);
     }
 
-    public final Module get(Class<?> Clazz) {
-        return getModule(Clazz);
+    public Module get(Class<?> clazz) {
+        return getModule(clazz);
     }
 
-    public static Module getModule(final String moduleName) {
-        for (final Module module : modules) {
+    /**
+     * 通过功能名称获取模块
+     */
+    public Module getModule(String moduleName) {
+        for (Module module : modules) {
             if (module.getName().equalsIgnoreCase(moduleName)) {
                 return module;
             }
@@ -187,6 +261,9 @@ public final class ModuleManager implements Listenable {
         return null;
     }
 
+    /**
+     * 处理传入的按键
+     */
     @EventTarget
     private void onKey(final KeyEvent event) {
         modules.stream().filter(module -> module.getKeyBind() == event.getKey()).forEach(Module::toggle);

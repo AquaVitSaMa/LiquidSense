@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.ui.client.hud.element.elements;
 
 import me.aquavit.liquidsense.module.modules.misc.Teams;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.hud.element.Border;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
 import me.aquavit.liquidsense.ui.client.hud.element.ElementInfo;
@@ -207,7 +207,7 @@ public class Radar extends Element {
                     glPopMatrix();
                 }
 
-                Teams team = (Teams) LiquidBounce.moduleManager.getModule(Teams.class);
+                Teams team = (Teams) LiquidSense.moduleManager.getModule(Teams.class);
 
                 if (team.isInYourTeam((EntityLivingBase) entity) && entity != mc.thePlayer) {
                     worldRenderer.pos(((double) (positionRelativeToPlayer.x / viewDistance) * size),

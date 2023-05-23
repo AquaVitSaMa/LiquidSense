@@ -6,7 +6,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBiped;
@@ -57,7 +57,7 @@ public class MixinLayerHeldItem {
 
             final UUID uuid = entitylivingbaseIn.getUniqueID();
             final EntityPlayer entityplayer = Minecraft.getMinecraft().theWorld.getPlayerEntityByUUID(uuid);
-            final Aura killaura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+            final Aura killaura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
 
             if (entityplayer == Minecraft.getMinecraft().thePlayer && (entityplayer.isBlocking() || killaura.getBlockingStatus())) {
                 if(entitylivingbaseIn.isSneaking()) {

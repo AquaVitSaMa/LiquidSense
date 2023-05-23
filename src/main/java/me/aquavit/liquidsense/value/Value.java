@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.value;
 import com.google.gson.JsonElement;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.render.Translate;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 
 import java.util.function.BooleanSupplier;
 
@@ -81,7 +81,7 @@ public abstract class Value<T> {
             onChange(oldValue, newValue);
             changeValue(newValue);
             onChanged(oldValue, newValue);
-            LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
         } catch (Exception e) {
             ClientUtils.getLogger().error("[ValueSystem (" + name + ")]: " + e.getClass().getName() + " (" + e.getMessage() + ") [" + oldValue + " >> " + newValue + "]");
         }

@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.injection.forge.mixins.block;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.RenderBlockEvent;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.renderer.BlockRendererDispatcher;
@@ -21,7 +21,7 @@ public class MixinBlockRendererDispatcher {
     @Inject(method = "renderBlock", at = @At("HEAD"), cancellable = true)
     public void renderBlock(IBlockState state, BlockPos pos, IBlockAccess blockAccess, WorldRenderer worldRendererIn, final CallbackInfoReturnable<Boolean> info) {
         RenderBlockEvent event = new RenderBlockEvent(pos.getX(), pos.getY(), pos.getZ(), state.getBlock(), pos);
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidSense.eventManager.callEvent(event);
     }
 
 }

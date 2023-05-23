@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.ui.client.gui;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.gui.elements.GuiButtonElement;
 import me.aquavit.liquidsense.ui.font.Fonts;
 import net.minecraft.client.gui.GuiButton;
@@ -66,20 +66,20 @@ public class GuiBackground extends GuiScreen {
                     return;
                 }
                 try {
-                    Files.copy(file.toPath(), new FileOutputStream(LiquidBounce.INSTANCE.getFileManager().backgroundFile));
-                    BufferedImage image = ImageIO.read(new FileInputStream(LiquidBounce.INSTANCE.getFileManager().backgroundFile));
-                    LiquidBounce.INSTANCE.setBackground(new ResourceLocation(LiquidBounce.CLIENT_NAME.toLowerCase() + "/background.png"));
-                    mc.getTextureManager().loadTexture(LiquidBounce.INSTANCE.getBackground(), new DynamicTexture(image));
+                    Files.copy(file.toPath(), new FileOutputStream(LiquidSense.INSTANCE.getFileManager().backgroundFile));
+                    BufferedImage image = ImageIO.read(new FileInputStream(LiquidSense.INSTANCE.getFileManager().backgroundFile));
+                    LiquidSense.INSTANCE.setBackground(new ResourceLocation(LiquidSense.CLIENT_NAME.toLowerCase() + "/background.png"));
+                    mc.getTextureManager().loadTexture(LiquidSense.INSTANCE.getBackground(), new DynamicTexture(image));
                 } catch (Exception e) {
                     e.printStackTrace();
                     MiscUtils.showErrorPopup("Error", "Exception class: " + e.getClass().getName() + "\nMessage: " + e.getMessage());
-                    LiquidBounce.fileManager.backgroundFile.delete();
+                    LiquidSense.fileManager.backgroundFile.delete();
                 }
                 break;
             }
             case 4: {
-                LiquidBounce.INSTANCE.setBackground(null);
-                LiquidBounce.fileManager.backgroundFile.delete();
+                LiquidSense.INSTANCE.setBackground(null);
+                LiquidSense.fileManager.backgroundFile.delete();
                 break;
             }
             case 0: {

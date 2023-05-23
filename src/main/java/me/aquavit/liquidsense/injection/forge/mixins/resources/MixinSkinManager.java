@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.injection.forge.mixins.resources;
 
 import com.mojang.authlib.GameProfile;
 import com.mojang.authlib.minecraft.MinecraftProfileTexture;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.misc.NameProtect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.resources.SkinManager;
@@ -20,7 +20,7 @@ public class MixinSkinManager {
 
     @Inject(method = "loadSkinFromCache", cancellable = true, at = @At("HEAD"))
     private void injectSkinProtect(GameProfile gameProfile, CallbackInfoReturnable<Map<MinecraftProfileTexture.Type, MinecraftProfileTexture>> cir) {
-        NameProtect nameProtect = (NameProtect) LiquidBounce.moduleManager.getModule(NameProtect.class);
+        NameProtect nameProtect = (NameProtect) LiquidSense.moduleManager.getModule(NameProtect.class);
 
         if (nameProtect.getState() && nameProtect.skinProtectValue.get()) {
             if (nameProtect.allPlayersValue.get() || Objects.equals(gameProfile.getId(), Minecraft.getMinecraft().getSession().getProfile().getId())) {

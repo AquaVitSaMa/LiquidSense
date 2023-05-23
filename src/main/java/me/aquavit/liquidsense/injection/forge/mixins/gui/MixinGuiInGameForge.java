@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.HeadLogo;
 import net.minecraftforge.client.GuiIngameForge;
@@ -17,7 +17,7 @@ public class MixinGuiInGameForge extends MixinGuiInGame {
 
     @Inject(method = "renderHealth", at = @At("HEAD"), cancellable = true, remap = false)
     public void renderPlayerStats(CallbackInfo callbackInfo) {
-        for (Element e : LiquidBounce.hud.getElements()){
+        for (Element e : LiquidSense.hud.getElements()){
             if(e instanceof HeadLogo){
                 callbackInfo.cancel();
             }
@@ -27,7 +27,7 @@ public class MixinGuiInGameForge extends MixinGuiInGame {
 
     @Inject(method = "renderFood", at = @At("HEAD"), cancellable = true, remap = false)
     public void renderFood(CallbackInfo callbackInfo) {
-        for (Element e : LiquidBounce.hud.getElements()){
+        for (Element e : LiquidSense.hud.getElements()){
             if(e instanceof HeadLogo){
                 callbackInfo.cancel();
             }
@@ -36,7 +36,7 @@ public class MixinGuiInGameForge extends MixinGuiInGame {
 
     @Inject(method = "renderArmor", at = @At("HEAD"), cancellable = true, remap = false)
     public void renderArmor(CallbackInfo callbackInfo) {
-        for (Element e : LiquidBounce.hud.getElements()){
+        for (Element e : LiquidSense.hud.getElements()){
             if(e instanceof HeadLogo){
                 callbackInfo.cancel();
             }

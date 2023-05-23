@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.module.Module;
 
@@ -16,7 +16,7 @@ public class ToggleCommand extends Command {
     @Override
     public void execute(final String[] args) {
         if (args.length > 1) {
-            Module module = LiquidBounce.moduleManager.getModule(args[1]);
+            Module module = LiquidSense.moduleManager.getModule(args[1]);
 
             if (module == null) {
                 this.chat("Module '" + args[1] + "' not found.");
@@ -51,7 +51,7 @@ public class ToggleCommand extends Command {
 
         switch (args.length) {
             case 1:
-                return LiquidBounce.moduleManager.getModules().stream()
+                return LiquidSense.moduleManager.getModules().stream()
                         .map(Module::getName)
                         .filter(module -> module.toLowerCase().startsWith(moduleName.toLowerCase()))
                         .collect(Collectors.toList());

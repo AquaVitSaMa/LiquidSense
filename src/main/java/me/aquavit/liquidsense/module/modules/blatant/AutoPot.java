@@ -6,7 +6,7 @@ import me.aquavit.liquidsense.utils.client.RotationUtils;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.mc.VoidCheck;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -57,9 +57,9 @@ public class AutoPot extends Module {
 
     @EventTarget
     public void onUpdate(UpdateEvent event) {
-        if (LiquidBounce.moduleManager.getModule(Blink.class).getState() ||
-                LiquidBounce.moduleManager.getModule(Fly.class).getState() ||
-                LiquidBounce.moduleManager.getModule(Scaffold.class).getState() || VoidCheck.checkVoid(mc.thePlayer) || mc.thePlayer.isEating())
+        if (LiquidSense.moduleManager.getModule(Blink.class).getState() ||
+                LiquidSense.moduleManager.getModule(Fly.class).getState() ||
+                LiquidSense.moduleManager.getModule(Scaffold.class).getState() || VoidCheck.checkVoid(mc.thePlayer) || mc.thePlayer.isEating())
             return;
 
         slot = getSlot();
@@ -75,7 +75,7 @@ public class AutoPot extends Module {
                 mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(getRotations()[0], getRotations()[1], mc.thePlayer.onGround));
 
                 potting = true;
-                LiquidBounce.hud.addNotification(new Notification("AutoPot", "Spilled §d§oregen§r potion", ColorType.INFO, 750, 375));
+                LiquidSense.hud.addNotification(new Notification("AutoPot", "Spilled §d§oregen§r potion", ColorType.INFO, 750, 375));
                 timer.reset();
             }
 
@@ -88,7 +88,7 @@ public class AutoPot extends Module {
                 mc.thePlayer.sendQueue.addToSendQueue(new C03PacketPlayer.C05PacketPlayerLook(getRotations()[0], getRotations()[1], mc.thePlayer.onGround));
 
                 potting = true;
-                LiquidBounce.hud.addNotification(new Notification("AutoPot", "Spilled §b§ospeed§r potion", ColorType.INFO, 750, 375));
+                LiquidSense.hud.addNotification(new Notification("AutoPot", "Spilled §b§ospeed§r potion", ColorType.INFO, 750, 375));
                 timer.reset();
             }
         }

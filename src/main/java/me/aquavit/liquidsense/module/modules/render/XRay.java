@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.module.modules.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.command.Command;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -52,7 +52,7 @@ public class XRay extends Module {
     }};
 
     public XRay() {
-        LiquidBounce.commandManager.registerCommand(new Command("xray") {
+        LiquidSense.commandManager.registerCommand(new Command("xray") {
             @Override
             public void execute(String[] args) {
                 if (args.length > 1) {
@@ -68,7 +68,7 @@ public class XRay extends Module {
                                 }
 
                                 xrayBlocks.add(block);
-                                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.xrayConfig);
+                                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.xrayConfig);
                                 chat("§7Added block §8" + block.getLocalizedName() + "§7.");
                                 playEdit();
                             } catch (NumberFormatException exception) {
@@ -94,7 +94,7 @@ public class XRay extends Module {
                                 }
 
                                 xrayBlocks.remove(block);
-                                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.xrayConfig);
+                                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.xrayConfig);
                                 chat("§7Removed block §8" + block.getLocalizedName() + "§7.");
                                 playEdit();
                             } catch (NumberFormatException exception) {

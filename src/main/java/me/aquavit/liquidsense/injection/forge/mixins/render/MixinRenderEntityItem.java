@@ -5,9 +5,9 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.render.Chams;
 import me.aquavit.liquidsense.module.modules.render.ItemPhysic;
-import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.block.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.entity.RenderEntityItem;
@@ -49,7 +49,7 @@ public abstract class MixinRenderEntityItem extends MixinRender{
             int i = this.func_177078_a(itemstack);
             float f = 0.25F;
 
-            boolean flagNoHover = !LiquidBounce.moduleManager.getModule(ItemPhysic.class).getState() || !ItemPhysic.nohover.get();
+            boolean flagNoHover = !LiquidSense.moduleManager.getModule(ItemPhysic.class).getState() || !ItemPhysic.nohover.get();
             float f1;
 
             if (flagNoHover) {
@@ -73,7 +73,7 @@ public abstract class MixinRenderEntityItem extends MixinRender{
                 GlStateManager.rotate(f3, 0.0F, 1.0F, 0.0F);
             }
 
-            if (LiquidBounce.moduleManager.getModule(ItemPhysic.class).getState()) {
+            if (LiquidSense.moduleManager.getModule(ItemPhysic.class).getState()) {
 
                 if (!itemIn.onGround)
                     ItemToRotate += 4.0f;
@@ -107,7 +107,7 @@ public abstract class MixinRenderEntityItem extends MixinRender{
 
     @Inject(method = "doRender", at = @At("HEAD"))
     private void injectChamsPre(CallbackInfo callbackInfo) {
-        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.itemsValue.get()) {
+        if (LiquidSense.moduleManager.getModule(Chams.class).getState() && Chams.itemsValue.get()) {
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
             GL11.glPolygonOffset(1.0F, -1000000F);
         }
@@ -116,7 +116,7 @@ public abstract class MixinRenderEntityItem extends MixinRender{
 
     @Inject(method = "doRender", at = @At("RETURN"))
     private void injectChamsPost(CallbackInfo callbackInfo) {
-        if (LiquidBounce.moduleManager.getModule(Chams.class).getState() && Chams.itemsValue.get()) {
+        if (LiquidSense.moduleManager.getModule(Chams.class).getState() && Chams.itemsValue.get()) {
             GL11.glPolygonOffset(1.0F, 1000000F);
             GL11.glDisable(GL11.GL_POLYGON_OFFSET_FILL);
         }

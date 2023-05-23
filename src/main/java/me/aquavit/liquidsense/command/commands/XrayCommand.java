@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.command.commands;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.render.CaveFinder;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import net.minecraft.block.Block;
 
@@ -15,7 +15,7 @@ public class XrayCommand extends Command {
         super("xray");
     }
 
-    CaveFinder xRay = (CaveFinder) LiquidBounce.moduleManager.getModule(CaveFinder.class);
+    CaveFinder xRay = (CaveFinder) LiquidSense.moduleManager.getModule(CaveFinder.class);
 
     @Override
     public void execute(final String[] args) {
@@ -43,7 +43,7 @@ public class XrayCommand extends Command {
                         }
 
                         xRay.xrayBlocks.add(block);
-                        LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.xrayConfig);
+                        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.xrayConfig);
                         chat("§7Added block §8"+block.getLocalizedName()+"§7.");
                         playEdit();
                     } catch (NumberFormatException exception) {
@@ -79,7 +79,7 @@ public class XrayCommand extends Command {
                             return;
                         }
                         xRay.xrayBlocks.remove(block);
-                        LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.xrayConfig);
+                        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.xrayConfig);
                         chat("§7Removed block §8"+block.getLocalizedName()+"§7.");
                         playEdit();
                     } catch (NumberFormatException exception) {

@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
 import me.aquavit.liquidsense.module.modules.client.Rotations;
 import me.aquavit.liquidsense.module.modules.client.TrueSight;
@@ -11,7 +12,6 @@ import me.aquavit.liquidsense.utils.client.RotationUtils;
 import me.aquavit.liquidsense.utils.render.Colors;
 import me.aquavit.liquidsense.utils.render.OutlineUtils;
 import com.google.common.collect.Lists;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.PreUpdateEvent;
 import me.aquavit.liquidsense.module.modules.render.ESP;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
@@ -129,7 +129,7 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
 
     @Inject(method = "canRenderName", at = @At("HEAD"), cancellable = true)
     private <T extends EntityLivingBase> void canRenderName(T entity, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        if (!ESP.renderNameTags || (LiquidBounce.moduleManager.getModule(NameTags.class).getState() && EntityUtils.isSelected(entity, false, false)))
+        if (!ESP.renderNameTags || (LiquidSense.moduleManager.getModule(NameTags.class).getState() && EntityUtils.isSelected(entity, false, false)))
             callbackInfoReturnable.setReturnValue(false);
     }
 
@@ -153,7 +153,7 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
         } else {
             final String s = EnumChatFormatting.getTextWithoutFormattingCodes(p_rotateCorpse_1_.getName());
 
-            final RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+            final RenderChanger rc = (RenderChanger) LiquidSense.moduleManager.getModule(RenderChanger.class);
             final boolean flag = rc.getState() && RenderChanger.flipEntitiesValue.get();
 
             if (s != null && (s.equals("Dinnerbone") || s.equals("Grumm") || flag) && (!(p_rotateCorpse_1_ instanceof EntityPlayer)
@@ -170,8 +170,8 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
      */
     @Overwrite
     public <T extends EntityLivingBase> void doRender(T entity, double x, double y, double z, float entityYaw, float partialTicks) {
-        final Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
-        final RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+        final Chams chams = (Chams) LiquidSense.moduleManager.getModule(Chams.class);
+        final RenderChanger rc = (RenderChanger) LiquidSense.moduleManager.getModule(RenderChanger.class);
 
         if (chams.getState() && Chams.targetsValue.get() && EntityUtils.isSelected(entity, false,false)) {
             GL11.glEnable(GL11.GL_POLYGON_OFFSET_FILL);
@@ -215,7 +215,7 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
                 float f5 = entity.prevLimbSwingAmount + (entity.limbSwingAmount - entity.prevLimbSwingAmount) * partialTicks;
                 float f6 = entity.limbSwing - entity.limbSwingAmount * (1.0f - partialTicks);
 
-                boolean ok = (RotationUtils.targetRotation != null || LiquidBounce.moduleManager.getModule(Derp.class).getState());
+                boolean ok = (RotationUtils.targetRotation != null || LiquidSense.moduleManager.getModule(Derp.class).getState());
 
                 renderLivingAt(entity, x, y, z);
 
@@ -223,7 +223,7 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
                     GlStateManager.translate(0.0, RenderChanger.sleeperValue.get() ? 0.05 : -0.5, 0.0);
 
                 /* Ghost ---------------------------------------------------------------------------------------------- */
-                if (LiquidBounce.moduleManager.getModule(Rotations.class).getState() && Rotations.ghost.get() && ok && entity == mc.thePlayer) {
+                if (LiquidSense.moduleManager.getModule(Rotations.class).getState() && Rotations.ghost.get() && ok && entity == mc.thePlayer) {
 
                     if (RenderChanger.littleEntitiesValue.get()) {
                         GL11.glPushMatrix();
@@ -266,7 +266,7 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
                 }
                 /* ---------------------------------------------------------------------------------------------------- */
 
-                if (entity instanceof EntityPlayerSP && LiquidBounce.moduleManager.getModule(Rotations.class).getState() && ok){
+                if (entity instanceof EntityPlayerSP && LiquidSense.moduleManager.getModule(Rotations.class).getState() && ok){
                     float YAW = PreUpdateEvent.Companion.getYAW();
                     float PITCH = PreUpdateEvent.Companion.getPITCH();
                     float PREVYAW = PreUpdateEvent.Companion.getPrevYAW();
@@ -313,7 +313,7 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
                 } else {
                     flag = setDoRenderBrightness(entity, partialTicks);
 
-                    if (LiquidBounce.moduleManager.getModule(Rotations.class).getState() && Rotations.ghost.get() && ok && entity == mc.thePlayer) {
+                    if (LiquidSense.moduleManager.getModule(Rotations.class).getState() && Rotations.ghost.get() && ok && entity == mc.thePlayer) {
                         glPushMatrix();
                         glPushAttrib(GL11.GL_ALL_ATTRIB_BITS);
                         glDisable(GL11.GL_DEPTH_TEST);
@@ -385,11 +385,11 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
     @Overwrite
     protected <T extends EntityLivingBase> void renderModel(T entityLivingBaseIn, float x, float y, float z, float yaw, float pitch, float scaleFactor) {
         boolean visible = !entityLivingBaseIn.isInvisible();
-        final TrueSight trueSight = (TrueSight) LiquidBounce.moduleManager.getModule(TrueSight.class);
+        final TrueSight trueSight = (TrueSight) LiquidSense.moduleManager.getModule(TrueSight.class);
         boolean semiVisible = !visible && (!entityLivingBaseIn.isInvisibleToPlayer(mc.thePlayer) || (trueSight.getState() && TrueSight.entitiesValue.get()));
 
-        Chams chams = (Chams) LiquidBounce.moduleManager.getModule(Chams.class);
-        RenderChanger rc = (RenderChanger) LiquidBounce.moduleManager.getModule(RenderChanger.class);
+        Chams chams = (Chams) LiquidSense.moduleManager.getModule(Chams.class);
+        RenderChanger rc = (RenderChanger) LiquidSense.moduleManager.getModule(RenderChanger.class);
 
         if (entityLivingBaseIn == mc.thePlayer && rc.getState() && RenderChanger.riderValue.get()) {
             x += ((AbstractClientPlayer) entityLivingBaseIn).renderOffsetX;
@@ -416,7 +416,7 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
                 GL11.glPopMatrix();
             }
 
-            final ESP esp = (ESP) LiquidBounce.moduleManager.getModule(ESP.class);
+            final ESP esp = (ESP) LiquidSense.moduleManager.getModule(ESP.class);
             if (esp.getState() && EntityUtils.isSelected(entityLivingBaseIn, false, false)) {
                 boolean fancyGraphics = mc.gameSettings.fancyGraphics;
                 mc.gameSettings.fancyGraphics = false;

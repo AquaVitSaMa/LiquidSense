@@ -1,7 +1,6 @@
 package me.aquavit.liquidsense.script;
 
 import jdk.internal.dynalink.beans.StaticClass;
-import jdk.nashorn.api.scripting.NashornScriptEngine;
 import jdk.nashorn.api.scripting.NashornScriptEngineFactory;
 import jdk.nashorn.api.scripting.ScriptUtils;
 import me.aquavit.liquidsense.command.Command;
@@ -12,13 +11,11 @@ import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.*;
 import java.util.function.Function;
-import java.util.stream.Collectors;
 import javax.script.ScriptEngine;
-import javax.script.ScriptEngineManager;
 import javax.script.ScriptException;
 
 import jdk.nashorn.api.scripting.JSObject;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.script.api.ScriptCommand;
 import me.aquavit.liquidsense.script.api.ScriptTab;
@@ -27,7 +24,6 @@ import me.aquavit.liquidsense.script.api.global.Item;
 import me.aquavit.liquidsense.script.api.ScriptModule;
 import me.aquavit.liquidsense.script.api.global.Setting;
 import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.IOUtils;
 
 public class Script extends MinecraftInstance {
 
@@ -69,9 +65,9 @@ public class Script extends MinecraftInstance {
         // Global instances
         scriptEngine.put("mc", mc);
 
-        scriptEngine.put("moduleManager", LiquidBounce.moduleManager);
-        scriptEngine.put("commandManager", LiquidBounce.commandManager);
-        scriptEngine.put("scriptManager", LiquidBounce.scriptManager);
+        scriptEngine.put("moduleManager", LiquidSense.moduleManager);
+        scriptEngine.put("commandManager", LiquidSense.commandManager);
+        scriptEngine.put("scriptManager", LiquidSense.scriptManager);
 
         // Global functions
         scriptEngine.put("registerScript", new RegisterScript());
@@ -112,7 +108,7 @@ public class Script extends MinecraftInstance {
     @SuppressWarnings("unused")
     public void registerModule(JSObject moduleObject, JSObject callback) {
         ScriptModule module = new ScriptModule(moduleObject);
-        LiquidBounce.moduleManager.registerModule(module);
+        LiquidSense.moduleManager.registerModule(module);
         registeredModules.add(module);
         callback.call(moduleObject, module);
     }
@@ -126,7 +122,7 @@ public class Script extends MinecraftInstance {
     @SuppressWarnings("unused")
     public void registerCommand(JSObject commandObject, JSObject callback) {
         ScriptCommand command = new ScriptCommand(commandObject);
-        LiquidBounce.commandManager.registerCommand(command);
+        LiquidSense.commandManager.registerCommand(command);
         registeredCommands.add(command);
         callback.call(commandObject, command);
     }
@@ -169,7 +165,7 @@ public class Script extends MinecraftInstance {
     private void supportLegacyScripts() {
         if (!"2".equals(getMagicComment("api_version"))) {
             ClientUtils.getLogger().info("[ScriptAPI] Running script '" + scriptFile.getName() + "' with legacy support.");
-            try (BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(LiquidBounce.class.getResourceAsStream("/assets/minecraft/liquidbounce/scriptapi/legacy.js"))))) {
+            try (BufferedReader reader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(LiquidSense.class.getResourceAsStream("/assets/minecraft/liquidbounce/scriptapi/legacy.js"))))) {
                 StringBuilder scriptBuilder = new StringBuilder();
                 String line;
                 while ((line = reader.readLine()) != null) {
@@ -210,18 +206,18 @@ public class Script extends MinecraftInstance {
         if (!state) return;
 
         for (Module module : registeredModules) {
-            LiquidBounce.moduleManager.unregisterModule(module);
+            LiquidSense.moduleManager.unregisterModule(module);
         }
 
         for (Command command : registeredCommands) {
-            LiquidBounce.commandManager.unregisterCommand(command);
+            LiquidSense.commandManager.unregisterCommand(command);
         }
 
         callEvent("disable");
         state = false;
     }
     public void importScript(String scriptFile) {
-        File file = new File(LiquidBounce.scriptManager.getScriptsFolder(), scriptFile);
+        File file = new File(LiquidSense.scriptManager.getScriptsFolder(), scriptFile);
         if (!file.exists() || !file.isFile()) {
             System.err.println("Failed to load script file: " + file.getAbsolutePath());
             return;

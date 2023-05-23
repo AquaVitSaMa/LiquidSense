@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.gui.elements.AntiForge;
 import me.aquavit.liquidsense.utils.misc.ServerUtils;
 import me.aquavit.liquidsense.utils.login.LoginUtils;
@@ -45,7 +45,7 @@ public abstract class MixinGuiDisconnect extends MixinGuiScreen {
             case 2:
                 AntiForge.enabled = !AntiForge.enabled;
                 forgeBypassButton.displayString = "Bypass AntiForge: " + (AntiForge.enabled ? "On" : "Off");
-                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
                 break;
             case 4:
                 LoginUtils.loginCracked(RandomUtils.randomString(RandomUtils.nextInt(5, 16)));

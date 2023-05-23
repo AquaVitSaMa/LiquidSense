@@ -5,7 +5,7 @@ import me.aquavit.liquidsense.utils.misc.RandomUtils;
 import me.aquavit.liquidsense.utils.render.BlurBuffer;
 import me.aquavit.liquidsense.utils.render.TargetHudParticles;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.hud.element.Border;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
 import me.aquavit.liquidsense.ui.client.hud.element.ElementInfo;
@@ -66,7 +66,7 @@ public class Target extends Element {
             if (update.getAnimaitonA() >= 255) particlesString.remove(update);
         }
 
-        EntityLivingBase target = ((Aura) LiquidBounce.moduleManager.getModule(Aura.class)).getTarget();
+        EntityLivingBase target = ((Aura) LiquidSense.moduleManager.getModule(Aura.class)).getTarget();
         if (target != null) {
             if (target != lastTarget || easingHealth < 0 || easingHealth > target.getMaxHealth() || Math.abs(easingHealth - target.getHealth()) < 0.01)
                 easingHealth = target.getHealth();

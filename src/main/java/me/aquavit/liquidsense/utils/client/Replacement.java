@@ -1,10 +1,10 @@
 package me.aquavit.liquidsense.utils.client;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.misc.ServerUtils;
 import me.aquavit.liquidsense.utils.module.CPSCounter;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.Text;
 import net.minecraft.client.Minecraft;
 
@@ -45,11 +45,11 @@ public class Replacement extends MinecraftInstance {
             case "username":
                 return mc.getSession().getUsername();
             case "clientname":
-                return LiquidBounce.CLIENT_NAME;
+                return LiquidSense.CLIENT_NAME;
             case "clientversion":
-                return "b"+LiquidBounce.CLIENT_VERSION;
+                return "b"+ LiquidSense.CLIENT_VERSION;
             case "clientcreator":
-                return LiquidBounce.CLIENT_CREATOR;
+                return LiquidSense.CLIENT_CREATOR;
             case "fps":
                 return String.valueOf(Minecraft.getDebugFPS());
             case "date":

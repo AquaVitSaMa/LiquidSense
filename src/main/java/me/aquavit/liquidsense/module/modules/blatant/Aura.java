@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.module.modules.blatant;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventState;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.*;
@@ -16,7 +17,6 @@ import me.aquavit.liquidsense.utils.extensions.PlayerExtensionUtils;
 import me.aquavit.liquidsense.utils.misc.RandomUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
 import me.aquavit.liquidsense.utils.timer.TimeUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -434,7 +434,7 @@ public class Aura extends Module {
 
         if (hitable && distance < rangeValue.get()) {
             // Call attack event 调用攻击事件
-            LiquidBounce.eventManager.callEvent(new AttackEvent(entity));
+            LiquidSense.eventManager.callEvent(new AttackEvent(entity));
 
             // Attack target
             if (swingValue.get())
@@ -456,7 +456,7 @@ public class Aura extends Module {
             }
 
             // Extra critical effects
-            Criticals criticals = (Criticals) LiquidBounce.moduleManager.getModule(Criticals.class);
+            Criticals criticals = (Criticals) LiquidSense.moduleManager.getModule(Criticals.class);
 
             for (int i = 0; i <= 2; i++) {
                 // Critical Effect
@@ -545,7 +545,7 @@ public class Aura extends Module {
             );
 
             if (raycastValue.get() && raycastedEntity instanceof EntityLivingBase
-                    && (LiquidBounce.moduleManager.get(NoFriends.class).getState() || !EntityUtils.isFriend((EntityLivingBase) raycastedEntity))) {
+                    && (LiquidSense.moduleManager.get(NoFriends.class).getState() || !EntityUtils.isFriend((EntityLivingBase) raycastedEntity))) {
                 currentTarget = (EntityLivingBase) raycastedEntity;
             }
 
@@ -563,7 +563,7 @@ public class Aura extends Module {
                     );
 
                     if (raycastedEntity instanceof EntityLivingBase
-                            && (LiquidBounce.moduleManager.get(NoFriends.class).getState() || !EntityUtils.isFriend((EntityLivingBase) raycastedEntity))) {
+                            && (LiquidSense.moduleManager.get(NoFriends.class).getState() || !EntityUtils.isFriend((EntityLivingBase) raycastedEntity))) {
                         currentTarget = (EntityLivingBase) raycastedEntity;
                     }
 
@@ -762,10 +762,10 @@ public class Aura extends Module {
                 if (((EntityPlayer)entity).isSpectator() || AntiBot.isBot((EntityLivingBase) entity))
                     return false;
 
-                if (EntityUtils.isFriend(entity) && !LiquidBounce.moduleManager.get(NoFriends.class).getState())
+                if (EntityUtils.isFriend(entity) && !LiquidSense.moduleManager.get(NoFriends.class).getState())
                     return false;
 
-                Teams teams = (Teams) LiquidBounce.moduleManager.get(Teams.class);
+                Teams teams = (Teams) LiquidSense.moduleManager.get(Teams.class);
 
                 return !teams.getState() || !Teams.isInYourTeam((EntityLivingBase) entity);
             }
@@ -785,8 +785,8 @@ public class Aura extends Module {
      */
     private boolean getCancelRun() {
         return mc.thePlayer == null || mc.thePlayer.isSpectator() || !isAlive(mc.thePlayer)
-                || LiquidBounce.moduleManager.get(Blink.class).getState()
-                || LiquidBounce.moduleManager.get(FreeCam.class).getState();
+                || LiquidSense.moduleManager.get(Blink.class).getState()
+                || LiquidSense.moduleManager.get(FreeCam.class).getState();
     }
 
     /**

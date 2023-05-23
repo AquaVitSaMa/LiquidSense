@@ -1,8 +1,8 @@
 package me.aquavit.liquidsense.script.remapper;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
@@ -14,7 +14,7 @@ public class Remapper {
     public static final Remapper INSTANCE = new Remapper();
 
     private final String srgName = "stable_22";
-    private final File srgFile = new File(LiquidBounce.fileManager.dir, "mcp-" + srgName + ".srg");
+    private final File srgFile = new File(LiquidSense.fileManager.dir, "mcp-" + srgName + ".srg");
     private static HashMap<String, HashMap<String, String>> fields = new HashMap<>();
     private static HashMap<String, HashMap<String, String>> methods = new HashMap<>();
 
@@ -33,7 +33,7 @@ public class Remapper {
 
             ClientUtils.getLogger().info("[Remapper] Downloading " + srgName + " srg...");
             try {
-                HttpUtils.download(LiquidBounce.CLIENT_CLOUD + "/srgs/mcp-" + srgName + ".srg", srgFile);
+                HttpUtils.download(LiquidSense.CLIENT_CLOUD + "/srgs/mcp-" + srgName + ".srg", srgFile);
             } catch (IOException e) {
                 ClientUtils.getLogger().error("[Remapper] Download " + srgName + " failed.");
             }

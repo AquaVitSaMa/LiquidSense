@@ -5,12 +5,12 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.entity;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventState;
 import me.aquavit.liquidsense.event.events.PreUpdateEvent;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.module.modules.fun.Derp;
 import me.aquavit.liquidsense.module.modules.render.NoSwing;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.module.modules.movement.InvMove;
 import me.aquavit.liquidsense.module.modules.movement.NoSlow;
@@ -137,9 +137,9 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
     @Overwrite
     public void onUpdateWalkingPlayer() {
         try {
-            LiquidBounce.eventManager.callEvent(new MotionEvent(EventState.PRE));
+            LiquidSense.eventManager.callEvent(new MotionEvent(EventState.PRE));
 
-            final InvMove inventoryMove = (InvMove) LiquidBounce.moduleManager.getModule(InvMove.class);
+            final InvMove inventoryMove = (InvMove) LiquidSense.moduleManager.getModule(InvMove.class);
             final boolean fakeSprint = (inventoryMove.getState() && InvMove.aacAdditionProValue.get());
 
             boolean sprinting = this.isSprinting() && !fakeSprint;
@@ -159,7 +159,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
                 float lastReportedYaw = RotationUtils.serverRotation.getYaw();
                 float lastReportedPitch = RotationUtils.serverRotation.getPitch();
 
-                if (LiquidBounce.moduleManager.getModule(Derp.class).getState()) {
+                if (LiquidSense.moduleManager.getModule(Derp.class).getState()) {
                     float[] rot = Derp.getRotation();
                     yaw = rot[0];
                     pitch = rot[1];
@@ -207,11 +207,11 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
                     this.lastReportedPitch = this.rotationPitch;
                 }
                 PreUpdateEvent preUpdate = new PreUpdateEvent(this.posX, this.posY, this.posZ, yaw, pitch, this.isSneaking(), this.onGround);
-                LiquidBounce.eventManager.callEvent(preUpdate);
+                LiquidSense.eventManager.callEvent(preUpdate);
                 preUpdate.fire();
             }
 
-            LiquidBounce.eventManager.callEvent(new MotionEvent(EventState.POST));
+            LiquidSense.eventManager.callEvent(new MotionEvent(EventState.POST));
         } catch (final Exception e) {
             e.printStackTrace();
         }
@@ -219,7 +219,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
 
     @Inject(method = "swingItem", at = @At("HEAD"), cancellable = true)
     private void swingItem(CallbackInfo callbackInfo) {
-        if (LiquidBounce.moduleManager.getModule(NoSwing.class).getState()) {
+        if (LiquidSense.moduleManager.getModule(NoSwing.class).getState()) {
             callbackInfo.cancel();
 
             if (!NoSwing.serverSideValue.get())
@@ -231,7 +231,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
     private void onPushOutOfBlocks(CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
         PushOutEvent event = new PushOutEvent();
         if (this.noClip) event.cancelEvent();
-        LiquidBounce.eventManager.callEvent(event);
+        LiquidSense.eventManager.callEvent(event);
 
         if (event.isCancelled())
             callbackInfoReturnable.setReturnValue(false);
@@ -243,7 +243,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
 	 */
     @Overwrite
     public void onLivingUpdate() {
-        LiquidBounce.eventManager.callEvent(new UpdateEvent());
+        LiquidSense.eventManager.callEvent(new UpdateEvent());
 
         if (this.sprintingTicksLeft > 0) {
             --this.sprintingTicksLeft;
@@ -302,12 +302,12 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
         boolean flag2 = this.movementInput.moveForward >= f;
         this.movementInput.updatePlayerMoveState();
 
-        final NoSlow noSlow = (NoSlow) LiquidBounce.moduleManager.getModule(NoSlow.class);
-        final Aura killAura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+        final NoSlow noSlow = (NoSlow) LiquidSense.moduleManager.getModule(NoSlow.class);
+        final Aura killAura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
 
         if (getHeldItem() != null && (this.isUsingItem() || (getHeldItem().getItem() instanceof ItemSword && killAura.getBlockingStatus())) && !this.isRiding()) {
             final SlowDownEvent slowDownEvent = new SlowDownEvent(0.2F, 0.2F);
-            LiquidBounce.eventManager.callEvent(slowDownEvent);
+            LiquidSense.eventManager.callEvent(slowDownEvent);
             this.movementInput.moveStrafe *= slowDownEvent.getStrafe();
             this.movementInput.moveForward *= slowDownEvent.getForward();
             this.sprintToggleTimer = 0;
@@ -318,7 +318,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
         this.pushOutOfBlocks(this.posX + (double) this.width * 0.35D, this.getEntityBoundingBox().minY + 0.5D, this.posZ - (double) this.width * 0.35D);
         this.pushOutOfBlocks(this.posX + (double) this.width * 0.35D, this.getEntityBoundingBox().minY + 0.5D, this.posZ + (double) this.width * 0.35D);
 
-        final Sprint sprint = (Sprint) LiquidBounce.moduleManager.getModule(Sprint.class);
+        final Sprint sprint = (Sprint) LiquidSense.moduleManager.getModule(Sprint.class);
 
         boolean flag3 = !sprint.foodValue.get() || (float) this.getFoodStats().getFoodLevel() > 6.0F || this.capabilities.allowFlying;
 
@@ -334,7 +334,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
             this.setSprinting(true);
         }
 
-        final Scaffold scaffold = (Scaffold) LiquidBounce.moduleManager.getModule(Scaffold.class);
+        final Scaffold scaffold = (Scaffold) LiquidSense.moduleManager.getModule(Scaffold.class);
         if ((scaffold.getState() && !scaffold.sprintValue.get()) || (sprint.getState() && sprint.checkServerSide.get() && (onGround || !sprint.checkServerSideGround.get()) && !sprint.allDirectionsValue.get() && RotationUtils.targetRotation != null && RotationUtils.getRotationDifference(new Rotation(mc.thePlayer.rotationYaw, mc.thePlayer.rotationPitch)) > 30))
             this.setSprinting(false);
 
@@ -408,7 +408,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
     @Override
     public void moveEntity(double x, double y, double z) {
         MoveEvent moveEvent = new MoveEvent(x, y, z);
-        LiquidBounce.eventManager.callEvent(moveEvent);
+        LiquidSense.eventManager.callEvent(moveEvent);
 
         if (moveEvent.isCancelled())
             return;
@@ -511,7 +511,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
 
             if (this.stepHeight > 0.0F && flag1 && (d3 != x || d5 != z)) {
                 StepEvent stepEvent = new StepEvent(this.stepHeight);
-                LiquidBounce.eventManager.callEvent(stepEvent);
+                LiquidSense.eventManager.callEvent(stepEvent);
                 double d11 = x;
                 double d7 = y;
                 double d8 = z;
@@ -591,7 +591,7 @@ public abstract class MixinEntityPlayerSP extends MixinAbstractClientPlayer {
                     z = d8;
                     this.setEntityBoundingBox(axisalignedbb3);
                 } else {
-                    LiquidBounce.eventManager.callEvent(new StepConfirmEvent(this.stepHeight));
+                    LiquidSense.eventManager.callEvent(new StepConfirmEvent(this.stepHeight));
                 }
             }
 

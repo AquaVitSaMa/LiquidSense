@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.module.modules.world;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.MotionEvent;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
@@ -8,7 +9,6 @@ import me.aquavit.liquidsense.utils.client.RotationUtils;
 import me.aquavit.liquidsense.utils.client.VecRotation;
 import me.aquavit.liquidsense.utils.extensions.BlockExtensionUtils;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -44,9 +44,9 @@ public class ChestAura extends Module {
 
     @EventTarget
     public void onMotion(MotionEvent event) {
-        if (mc.thePlayer.isEating() || LiquidBounce.moduleManager.getModule(FreeCam.class).getState() ||
-                LiquidBounce.moduleManager.getModule(Blink.class).getState() || LiquidBounce.moduleManager.getModule(Scaffold.class).getState() ||
-                (((Aura)LiquidBounce.moduleManager.getModule(Aura.class)).getBlockingStatus()))
+        if (mc.thePlayer.isEating() || LiquidSense.moduleManager.getModule(FreeCam.class).getState() ||
+                LiquidSense.moduleManager.getModule(Blink.class).getState() || LiquidSense.moduleManager.getModule(Scaffold.class).getState() ||
+                (((Aura) LiquidSense.moduleManager.getModule(Aura.class)).getBlockingStatus()))
             return;
 
         switch (event.getEventState()) {

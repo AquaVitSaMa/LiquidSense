@@ -3,7 +3,7 @@ package me.aquavit.liquidsense.module.modules.misc;
 import com.google.common.collect.ComparisonChain;
 import com.google.common.collect.Ordering;
 import me.aquavit.liquidsense.event.EventTarget;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.AttackEvent;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
@@ -303,7 +303,7 @@ public class AntiBot extends Module {
         if (!(entity instanceof EntityPlayer))
             return false;
 
-        final AntiBot antiBot = (AntiBot) LiquidBounce.moduleManager.getModule(AntiBot.class);
+        final AntiBot antiBot = (AntiBot) LiquidSense.moduleManager.getModule(AntiBot.class);
 
 //        mc.ingameGUI.getChatGUI().addToSentMessages("tick: " + entity.ticksExisted);
 

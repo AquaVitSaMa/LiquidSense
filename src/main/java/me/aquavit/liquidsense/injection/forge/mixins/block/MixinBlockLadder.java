@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.block;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.movement.FastClimb;
 import net.minecraft.block.BlockLadder;
 import net.minecraft.block.properties.PropertyDirection;
@@ -36,7 +36,7 @@ public abstract class MixinBlockLadder extends MixinBlock {
         final IBlockState iblockstate = worldIn.getBlockState(pos);
 
         if(iblockstate.getBlock() instanceof BlockLadder) {
-            final FastClimb fastClimb = (FastClimb) LiquidBounce.moduleManager.getModule(FastClimb.class);
+            final FastClimb fastClimb = (FastClimb) LiquidSense.moduleManager.getModule(FastClimb.class);
             final float f = fastClimb.getState() && fastClimb.modeValue.get().equalsIgnoreCase("AAC") ? 0.99f : 0.125f;
 
             switch(iblockstate.getValue(FACING)) {

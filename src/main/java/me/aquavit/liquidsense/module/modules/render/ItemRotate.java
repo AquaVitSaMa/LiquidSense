@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.module.modules.render;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -26,7 +26,7 @@ public class ItemRotate extends Module {
 
     public static void ItemRenderRotate() {
         MSTimer rotationTimer = new MSTimer();
-        final ItemRotate ItemRotate = (ItemRotate) LiquidBounce.moduleManager.getModule(ItemRotate.class);
+        final ItemRotate ItemRotate = (ItemRotate) LiquidSense.moduleManager.getModule(ItemRotate.class);
         if(ItemRotate.getModeValue().get().equalsIgnoreCase("Straight")){
             GlStateManager.rotate(delay, 0.0F, 1.0F, 0.0F);
         }

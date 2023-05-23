@@ -10,7 +10,7 @@ import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.mc.VoidCheck;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.shader.shaders.RainbowShader;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -56,9 +56,9 @@ public class TargetStrafe extends Module {
     private final FloatValue smoothLineValue = new FloatValue("SmoothLine", 6f, 1f, 10f);
     private final IntegerValue shape = new IntegerValue("Shape", 12, 5, 32);
 
-    private final Aura killAura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
-    private final Speed speed = (Speed) LiquidBounce.moduleManager.getModule(Speed.class);
-    private final Fly flight = (Fly) LiquidBounce.moduleManager.getModule(Fly.class);
+    private final Aura killAura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
+    private final Speed speed = (Speed) LiquidSense.moduleManager.getModule(Speed.class);
+    private final Fly flight = (Fly) LiquidSense.moduleManager.getModule(Fly.class);
 
     private int consts = 1;
     private final int oldPer = mc.gameSettings.thirdPersonView;

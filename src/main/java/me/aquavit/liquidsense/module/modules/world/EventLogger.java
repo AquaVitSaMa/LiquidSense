@@ -1,9 +1,9 @@
 package me.aquavit.liquidsense.module.modules.world;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.block.PlaceInfo;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.entity.MovementUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
@@ -80,7 +80,7 @@ public class EventLogger extends Module {
                 return;
             }
 
-            AntiBot ab = (AntiBot) LiquidBounce.moduleManager.getModule(AntiBot.class);
+            AntiBot ab = (AntiBot) LiquidSense.moduleManager.getModule(AntiBot.class);
 
             for (EntityPlayer player : mc.theWorld.playerEntities) {
                 assert ab != null;
@@ -92,7 +92,7 @@ public class EventLogger extends Module {
                     noSlowVL += 1;
                     if (noSlowVL >= 30) {
                         ClientUtils.displayChatMessage("§7[§c§lHackerDetect§7] §c" + player.getName() + " §7has §c§linvalid SlowDown");
-                        LiquidBounce.hud.addNotification(new Notification("HackerDetect", "§c" + player.getName() + "§r may used NoSlowDown", ColorType.WARNING, 1000, 500));
+                        LiquidSense.hud.addNotification(new Notification("HackerDetect", "§c" + player.getName() + "§r may used NoSlowDown", ColorType.WARNING, 1000, 500));
                         noSlowVL = 0;
                         hackers.add(player);
                     }
@@ -101,7 +101,7 @@ public class EventLogger extends Module {
                 //OmniSprint
                 if (player.isSprinting() && (player.moveForward < 0 || (player.moveForward == 0 && player.moveStrafing != 0))) {
                     ClientUtils.displayChatMessage("§7[§c§lHackerDetect§7] §c" + player.getName() + " §7must be using §cOmni Sprint");
-                    LiquidBounce.hud.addNotification(new Notification("HackerDetect", "§c" + player.getName() + "§r may used OmniSprint", ColorType.WARNING, 1000, 500));
+                    LiquidSense.hud.addNotification(new Notification("HackerDetect", "§c" + player.getName() + "§r may used OmniSprint", ColorType.WARNING, 1000, 500));
                     hackers.add(player);
                 }
 
@@ -111,7 +111,7 @@ public class EventLogger extends Module {
 
                 if (yDiff > 0 && mc.thePlayer.onGround && player.motionY == -0.0784000015258789) {
                     ClientUtils.displayChatMessage("§7[§c§lHackerDetect§7] §c" + player.getName() + " §7may using §cStep §7(" + yDiff + " block)");
-                    LiquidBounce.hud.addNotification(new Notification("HackerDetect", "§c" + player.getName() + "§r may used Step", ColorType.WARNING, 1000, 500));
+                    LiquidSense.hud.addNotification(new Notification("HackerDetect", "§c" + player.getName() + "§r may used Step", ColorType.WARNING, 1000, 500));
                     hackers.add(player);
                 }
             }
@@ -157,14 +157,14 @@ public class EventLogger extends Module {
 
             if (blocked && !GameSettings.isKeyDown(mc.gameSettings.keyBindUseItem)) {
                 mc.gameSettings.keyBindUseItem.pressed = false;
-                LiquidBounce.hud.addNotification(new Notification("TNTBlock", "autoblock when TNT explodes", ColorType.INFO, 750, 500));
+                LiquidSense.hud.addNotification(new Notification("TNTBlock", "autoblock when TNT explodes", ColorType.INFO, 750, 500));
                 blocked = false;
             }
         }
 
         // AntiObbyTrap
         if (antiObbyTrap.get()) {
-            if (LiquidBounce.moduleManager.getModule(FreeCam.class).getState() || LiquidBounce.moduleManager.getModule(Phase.class).getState())
+            if (LiquidSense.moduleManager.getModule(FreeCam.class).getState() || LiquidSense.moduleManager.getModule(Phase.class).getState())
                 return;
 
             BlockPos sand = new BlockPos(new Vec3(mc.thePlayer.posX, mc.thePlayer.posY + 1.0D, mc.thePlayer.posZ));
@@ -176,15 +176,15 @@ public class EventLogger extends Module {
 
             if (obsidianblock == Block.getBlockById(49)) {
                 updateTool(new BlockPos(new Vec3(mc.thePlayer.posX, mc.thePlayer.posY - 1, mc.thePlayer.posZ)));
-                LiquidBounce.hud.addNotification(new Notification("AntiObbyTrap", "saving u from Obsidian", ColorType.INFO, 1250, 500));
+                LiquidSense.hud.addNotification(new Notification("AntiObbyTrap", "saving u from Obsidian", ColorType.INFO, 1250, 500));
             }
             if (furnaceblock == Block.getBlockById(61)) {
                 updateTool(new BlockPos(new Vec3(mc.thePlayer.posX, mc.thePlayer.posY - 1, mc.thePlayer.posZ)));
-                LiquidBounce.hud.addNotification(new Notification("AntiObbyTrap", "saving u from Furnace", ColorType.INFO, 1000, 500));
+                LiquidSense.hud.addNotification(new Notification("AntiObbyTrap", "saving u from Furnace", ColorType.INFO, 1000, 500));
             }
             if (sandBlock == Block.getBlockById(12) || sandBlock == Block.getBlockById(13)) {
                 updateTool(new BlockPos(new Vec3(mc.thePlayer.posX, mc.thePlayer.posY - 1, mc.thePlayer.posZ)));
-                LiquidBounce.hud.addNotification(new Notification("AntiObbyTrap", "saving u from Sand", ColorType.INFO, 750, 450));
+                LiquidSense.hud.addNotification(new Notification("AntiObbyTrap", "saving u from Sand", ColorType.INFO, 750, 450));
             }
         }
     }
@@ -192,7 +192,7 @@ public class EventLogger extends Module {
     @EventTarget
     public void onWallDamage(WallDamageEvent event) {
         if (antiObbyTrap.get()) {
-            if (LiquidBounce.moduleManager.getModule(FreeCam.class).getState() || LiquidBounce.moduleManager.getModule(Phase.class).getState())
+            if (LiquidSense.moduleManager.getModule(FreeCam.class).getState() || LiquidSense.moduleManager.getModule(Phase.class).getState())
                 return;
 
             inWall = true;

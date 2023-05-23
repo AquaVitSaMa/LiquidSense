@@ -1,11 +1,11 @@
 package me.aquavit.liquidsense.module.modules.blatant;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.JumpEvent;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.utils.timer.MSTimer;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -117,7 +117,7 @@ public class Velocity extends Module {
                         mc.thePlayer.onGround = true;
 
                     if (mc.thePlayer.hurtResistantTime > 0 && aacPushYReducerValue.get()
-                            && !LiquidBounce.moduleManager.getModule(Speed.class).getState())
+                            && !LiquidSense.moduleManager.getModule(Speed.class).getState())
                     mc.thePlayer.motionY -= 0.014999993;
                 }
 

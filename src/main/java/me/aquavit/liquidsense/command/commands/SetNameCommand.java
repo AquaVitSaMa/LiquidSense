@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -19,34 +19,34 @@ public class SetNameCommand extends Command {
     public void execute(final String[] args) {
         if (args.length > 1) {
             if (args[1].equalsIgnoreCase("load")) {
-                LiquidBounce.fileManager.loadConfig(LiquidBounce.fileManager.setnameConfig);
+                LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.setnameConfig);
                 return;
             }
             if (args[1].equalsIgnoreCase("list")) {
-                for (Module module : LiquidBounce.moduleManager.getModules()) {
+                for (Module module : LiquidSense.moduleManager.getModules()) {
                     if (module.getArrayListName().equals(module.getClass().getAnnotation(ModuleInfo.class).name())) continue;
                     this.chat("Module <" + module.getArrayListName() + "> is §7" + module.getClass().getAnnotation(ModuleInfo.class).name());
                 }
                 return;
             }
             if (args[1].equalsIgnoreCase("cleaner")) {
-                for (Module module : LiquidBounce.moduleManager.getModules()) {
+                for (Module module : LiquidSense.moduleManager.getModules()) {
                     if (args.length > 2) {
                         String newValue = this.getname(args, 2);
 
-                        Module oldmodule = LiquidBounce.moduleManager.getModule(newValue);
+                        Module oldmodule = LiquidSense.moduleManager.getModule(newValue);
                         if (oldmodule == null)return;
 
                         if (module.getName().equalsIgnoreCase(oldmodule.getName())) {
                             module.setArrayListName(module.getClass().getAnnotation(ModuleInfo.class).name());
 
-                            LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.setnameConfig);
+                            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.setnameConfig);
                             this.chat("reset Module <" + newValue + '>');
                             return;
                         }
                     }
                     module.setArrayListName(module.getClass().getAnnotation(ModuleInfo.class).name());
-                    LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.setnameConfig);
+                    LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.setnameConfig);
                 }
                 this.chat("reset Module name ");
                 return;
@@ -54,13 +54,13 @@ public class SetNameCommand extends Command {
             if (args.length > 2) {
                 String newValue = this.getname(args, 2);
                 String oldVaule = this.getname(args, 1);
-                Module module = LiquidBounce.moduleManager.getModule(oldVaule);
+                Module module = LiquidSense.moduleManager.getModule(oldVaule);
                 if (module == null) {
                     this.chat("Module §a§l" + args[1] + "§3 not found.");
                     return;
                 }
                 module.setNameCommad(newValue);
-                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.setnameConfig);
+                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.setnameConfig);
                 this.chat("Module §a§l" + args[1] + "§l§a to " + newValue);
                 return;
             }
@@ -76,7 +76,7 @@ public class SetNameCommand extends Command {
 
         switch (args.length) {
             case 1:
-                return LiquidBounce.moduleManager.getModules().stream()
+                return LiquidSense.moduleManager.getModules().stream()
                         .map(Module::getName)
                         .filter(module -> module.startsWith(moduleName))
                         .collect(Collectors.toList());

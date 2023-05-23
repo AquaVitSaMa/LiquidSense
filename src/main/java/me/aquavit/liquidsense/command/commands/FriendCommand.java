@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.command.commands;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.file.configs.FriendsConfig;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,7 +20,7 @@ public class FriendCommand extends Command {
     @Override
     public void execute(final String[] args) {
         if (args.length > 1) {
-            final FriendsConfig friendsConfig = LiquidBounce.fileManager.friendsConfig;
+            final FriendsConfig friendsConfig = LiquidSense.fileManager.friendsConfig;
             if (args[1].equalsIgnoreCase("add")) {
                 if (args.length > 2) {
                     final String name = args[2];
@@ -31,7 +31,7 @@ public class FriendCommand extends Command {
                     }
 
                     if (args.length > 3 ? friendsConfig.addFriend(name, StringUtils.toCompleteString(args, 3)) : friendsConfig.addFriend(name)) {
-                        LiquidBounce.fileManager.saveConfig(friendsConfig);
+                        LiquidSense.fileManager.saveConfig(friendsConfig);
                         this.chat("§a§l" + name + "§3 was added to your friend list.");
                         playEdit();
                     } else {
@@ -45,7 +45,7 @@ public class FriendCommand extends Command {
                 if (args.length > 2) {
                     final String name = args[2];
                     if (friendsConfig.removeFriend(name)) {
-                        LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.friendsConfig);
+                        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.friendsConfig);
                         this.chat("§a§l" + name + "§3 was removed from your friend list.");
                         playEdit();
                     } else {
@@ -57,9 +57,9 @@ public class FriendCommand extends Command {
                 return;
             } else {
                 if (args[1].equalsIgnoreCase("clear")) {
-                    final int friends = LiquidBounce.fileManager.friendsConfig.getFriends().size();
-                    LiquidBounce.fileManager.friendsConfig.clearFriends();
-                    LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.friendsConfig);
+                    final int friends = LiquidSense.fileManager.friendsConfig.getFriends().size();
+                    LiquidSense.fileManager.friendsConfig.clearFriends();
+                    LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.friendsConfig);
                     this.chat("Removed " + friends + " friend(s).");
                     return;
                 }
@@ -90,7 +90,7 @@ public class FriendCommand extends Command {
                     case "add":
                         return mc.theWorld.playerEntities.stream().map(EntityPlayer::getName).filter(it -> it.startsWith(args[1])).collect(Collectors.toList());
                     case "remove":
-                        return LiquidBounce.fileManager.friendsConfig.getFriends().stream().map(FriendsConfig.Friend::getPlayerName).filter(it -> it.startsWith(args[1])).collect(Collectors.toList());
+                        return LiquidSense.fileManager.friendsConfig.getFriends().stream().map(FriendsConfig.Friend::getPlayerName).filter(it -> it.startsWith(args[1])).collect(Collectors.toList());
                     default:
                         return new ArrayList<>();
                 }

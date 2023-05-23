@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.module.modules.player;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.PacketEvent;
 import me.aquavit.liquidsense.event.events.Render3DEvent;
@@ -107,7 +107,7 @@ public class Blink extends Module {
 
     @EventTarget
     public void onRender3D(Render3DEvent event) {
-        final Breadcrumbs breadcrumbs = (Breadcrumbs) LiquidBounce.moduleManager.getModule(Breadcrumbs.class);
+        final Breadcrumbs breadcrumbs = (Breadcrumbs) LiquidSense.moduleManager.getModule(Breadcrumbs.class);
         final Color color = breadcrumbs.colorRainbow.get() ? ColorUtils.rainbow() : new Color(breadcrumbs.colorRedValue.get(), breadcrumbs.colorGreenValue.get(), breadcrumbs.colorBlueValue.get());
 
         synchronized(positions) {

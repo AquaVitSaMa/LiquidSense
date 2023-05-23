@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.command;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import net.minecraft.client.audio.PositionedSoundRecord;
 import net.minecraft.util.ResourceLocation;
@@ -33,14 +33,14 @@ public abstract class Command extends MinecraftInstance {
     }
 
     protected final void chatSyntax(String syntax) {
-        ClientUtils.displayChatMessage("§8[§9§lLiquidSense§8] §3Syntax: §7" + LiquidBounce.commandManager.getPrefix() + syntax);
+        ClientUtils.displayChatMessage("§8[§9§lLiquidSense§8] §3Syntax: §7" + LiquidSense.commandManager.getPrefix() + syntax);
     }
 
     protected final void chatSyntax(String[] syntaxes) {
         ClientUtils.displayChatMessage("§8[§9§lLiquidSense§8] §3Syntax:");
 
         for (String syntax : syntaxes)
-            ClientUtils.displayChatMessage("§8> §7"+LiquidBounce.commandManager.getPrefix()+command+" "+syntax.toLowerCase());
+            ClientUtils.displayChatMessage("§8> §7"+ LiquidSense.commandManager.getPrefix()+command+" "+syntax.toLowerCase());
     }
 
     public final String getCommand() {

@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.module.modules.render;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -11,6 +11,6 @@ public class ClickGUI extends Module {
 
     @Override
     public void onEnable() {
-        mc.displayGuiScreen(LiquidBounce.neverlose);
+        mc.displayGuiScreen(LiquidSense.neverlose);
     }
 }

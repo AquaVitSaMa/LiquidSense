@@ -2,7 +2,7 @@ package me.aquavit.liquidsense.module.modules.movement.speeds.aquavit;
 
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.Listenable;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.JumpEvent;
 import me.aquavit.liquidsense.event.events.MotionEvent;
 import me.aquavit.liquidsense.event.events.MoveEvent;
@@ -15,7 +15,7 @@ import java.util.List;
 public class NewHypixelHop extends SpeedMode implements Listenable {
     public NewHypixelHop() {
         super("NewHypixelHop");
-        LiquidBounce.eventManager.registerListener(this);
+        LiquidSense.eventManager.registerListener(this);
     }
 
     @Override
@@ -61,7 +61,7 @@ public class NewHypixelHop extends SpeedMode implements Listenable {
     @EventTarget
     public void onMoveEvent(MoveEvent event) {
         boolean canTimerBoost = true;
-        Speed speedModule = (Speed) LiquidBounce.moduleManager.getModule(Speed.class);
+        Speed speedModule = (Speed) LiquidSense.moduleManager.getModule(Speed.class);
 
         if (speedModule.stopTicks > 0)
             return;
@@ -117,7 +117,7 @@ public class NewHypixelHop extends SpeedMode implements Listenable {
 
     @Override
     public boolean handleEvents() {
-        Speed speedModule = (Speed) LiquidBounce.moduleManager.getModule(Speed.class);
+        Speed speedModule = (Speed) LiquidSense.moduleManager.getModule(Speed.class);
         return speedModule.getState() && speedModule.modeValue.get().equals(modeName);
     }
 }

@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.render.CaveFinder;
-import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.block.Block;
 import net.minecraft.block.state.IBlockState;
 import net.minecraft.client.Minecraft;
@@ -39,7 +39,7 @@ public abstract class MixinBlockModelRenderer {
         {
             Block block = blockStateIn.getBlock();
 
-            if (LiquidBounce.moduleManager.getModule(CaveFinder.class).getState()) {
+            if (LiquidSense.moduleManager.getModule(CaveFinder.class).getState()) {
                 return this.renderModelAmbientOcclusion(blockAccessIn, modelIn, block, blockPosIn, worldRendererIn, checkSides);
             }else {
                 return flag ? this.renderModelAmbientOcclusion(blockAccessIn, modelIn, block, blockPosIn, worldRendererIn, checkSides) : this.renderModelStandard(blockAccessIn, modelIn, block, blockPosIn, worldRendererIn, checkSides);

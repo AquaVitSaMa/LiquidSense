@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose.config;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Impl;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Main;
 import me.aquavit.liquidsense.ui.font.Fonts;
@@ -12,7 +12,7 @@ import java.io.File;
 
 public class DrawConfig {
     public void flie(int mouseX, int mouseY, Main main) {
-        File[] file = LiquidBounce.fileManager.settingsDir.listFiles();
+        File[] file = LiquidSense.fileManager.settingsDir.listFiles();
         if (file == null) return;
 
         // Save background
@@ -22,7 +22,7 @@ public class DrawConfig {
         Fonts.font17.drawString("Save", Impl.coordinateX + 131f, Impl.coordinateY + 15f, new Color(200, 200, 200).getRGB());
 
         if (hoverSave && !main.mouseLDown && Mouse.isButtonDown(0)) {
-            LiquidBounce.commandManager.executeCommands(LiquidBounce.commandManager.getPrefix() + "localsetting save " + Impl.configname + " all");
+            LiquidSense.commandManager.executeCommands(LiquidSense.commandManager.getPrefix() + "localsetting save " + Impl.configname + " all");
         }
 
         // Config background
@@ -36,7 +36,7 @@ public class DrawConfig {
                 hoverLoad ? new Color(8, 15, 24).getRGB() : new Color(2, 5, 12).getRGB(), new Color(16, 19, 26).getRGB());
 
         if (hoverLoad && !main.mouseLDown && Mouse.isButtonDown(0)) {
-            LiquidBounce.commandManager.executeCommands(LiquidBounce.commandManager.getPrefix() + "localsetting load " + Impl.configname);
+            LiquidSense.commandManager.executeCommands(LiquidSense.commandManager.getPrefix() + "localsetting load " + Impl.configname);
         }
 
         Fonts.font17.drawString("Load", Impl.coordinateX + 257f, Impl.coordinateY + 15f, new Color(200, 200, 200).getRGB());

@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.module.modules.ghost;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.event.events.UpdateEvent;
 import me.aquavit.liquidsense.module.Module;
@@ -19,7 +19,7 @@ public class AutoBow extends Module {
     
     @EventTarget
     public void onUpdate(final UpdateEvent event) {
-        BowAimbot bowAimbot = (BowAimbot) LiquidBounce.moduleManager.getModule(BowAimbot.class);
+        BowAimbot bowAimbot = (BowAimbot) LiquidSense.moduleManager.getModule(BowAimbot.class);
         if (mc.thePlayer.getHeldItem() != null && mc.thePlayer.getHeldItem().getItem() == Items.bow &&
                 mc.thePlayer.isUsingItem() && mc.thePlayer.getItemInUseDuration() > 20 && (!waitForBowAimbot.get() || !bowAimbot.getState() || bowAimbot.hasTarget())) {
             mc.thePlayer.stopUsingItem();

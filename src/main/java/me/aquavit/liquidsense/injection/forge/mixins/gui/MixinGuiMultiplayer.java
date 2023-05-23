@@ -5,7 +5,7 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.gui;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.gui.elements.BungeeCordSpoof;
 import me.aquavit.liquidsense.ui.client.gui.GuiAntiForge;
 import net.minecraft.client.gui.GuiButton;
@@ -36,7 +36,7 @@ public abstract class MixinGuiMultiplayer extends MixinGuiScreen {
             case 998:
                 BungeeCordSpoof.enabled = !BungeeCordSpoof.enabled;
                 bungeeCordSpoofButton.displayString = "BungeeCord Spoof: " + (BungeeCordSpoof.enabled ? "On" : "Off");
-                LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
                 break;
         }
     }

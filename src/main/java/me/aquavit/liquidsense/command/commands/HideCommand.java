@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -21,27 +21,27 @@ public class HideCommand extends Command {
         if (args.length > 1) {
             if (args[1].equalsIgnoreCase("list")){
                 this.chat("§c§lHidden");
-                LiquidBounce.moduleManager.getModules().stream().filter(Module::getArray)
+                LiquidSense.moduleManager.getModules().stream().filter(Module::getArray)
                         .forEach(module ->
                                 ClientUtils.displayChatMessage("§6> §c" + module.getName()));
                 return;
             } else if (args[1].equalsIgnoreCase("clear")){
 
-                for (Module module : LiquidBounce.moduleManager.getModules())
+                for (Module module : LiquidSense.moduleManager.getModules())
                     module.setArray(true);
 
                 this.chat("Cleared hidden modules.");
                 return;
             } else if (args[1].equalsIgnoreCase("reset")) {
 
-                for (Module module : LiquidBounce.moduleManager.getModules())
+                for (Module module : LiquidSense.moduleManager.getModules())
                     module.setArray(module.getClass().getAnnotation(ModuleInfo.class).array());
 
                 this.chat("Reset hidden modules.");
                 return;
             } else {
                 // Get module by name
-                Module module = LiquidBounce.moduleManager.getModule(args[1]);
+                Module module = LiquidSense.moduleManager.getModule(args[1]);
 
                 if (module == null) {
                     this.chat("Module §a§l" + args[1] + "§3 not found.");
@@ -69,7 +69,7 @@ public class HideCommand extends Command {
 
         switch (args.length) {
             case 1:
-                return LiquidBounce.moduleManager.getModules().stream()
+                return LiquidSense.moduleManager.getModules().stream()
                         .map(Module::getName)
                         .filter(module -> module.startsWith(moduleName))
                         .collect(Collectors.toList());

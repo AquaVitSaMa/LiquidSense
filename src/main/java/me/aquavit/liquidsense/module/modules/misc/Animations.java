@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.module.modules.misc;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.module.ModuleInfo;
@@ -59,8 +59,8 @@ public class Animations extends Module {
 
     public static void renderblock(float f, float f1) {
         GlStateManager.translate(Animations.itemPosX.get(), Animations.itemPosY.get(), Animations.itemPosZ.get());
-        final Animations animations = (Animations) LiquidBounce.moduleManager.getModule(Animations.class);
-        Aura killAura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+        final Animations animations = (Animations) LiquidSense.moduleManager.getModule(Animations.class);
+        Aura killAura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
         Entity entity = killAura.getTarget();
         GlStateManager.translate(0.8F, -0.52F, -1.0F);
         GlStateManager.rotate((float) f3, 0.0F, -0.9F, 0.9F);

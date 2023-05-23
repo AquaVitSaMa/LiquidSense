@@ -5,6 +5,7 @@
  */
 package me.aquavit.liquidsense.module.modules.world;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventState;
 import me.aquavit.liquidsense.event.EventTarget;
 import me.aquavit.liquidsense.utils.client.InventoryUtils;
@@ -12,7 +13,6 @@ import me.aquavit.liquidsense.utils.entity.MovementUtils;
 import me.aquavit.liquidsense.utils.client.PlaceRotation;
 import me.aquavit.liquidsense.utils.client.Rotation;
 import me.aquavit.liquidsense.utils.client.RotationUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
@@ -236,12 +236,12 @@ public class Scaffold extends Module {
     public void onUpdate(final UpdateEvent event) {
         getBestBlocks();
         mc.timer.timerSpeed = timerValue.get();
-        if(towermode.get().equalsIgnoreCase("Tower") && Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !LiquidBounce.moduleManager.getModule(Speed.class).getState()){
+        if(towermode.get().equalsIgnoreCase("Tower") && Keyboard.isKeyDown(Keyboard.KEY_SPACE) && !LiquidSense.moduleManager.getModule(Speed.class).getState()){
             mc.thePlayer.onGround = false;
-            LiquidBounce.moduleManager.getModule(Tower.class).setState(true);
+            LiquidSense.moduleManager.getModule(Tower.class).setState(true);
             //System.out.println("1");
         }else{
-            LiquidBounce.moduleManager.getModule(Tower.class).setState(false);
+            LiquidSense.moduleManager.getModule(Tower.class).setState(false);
 
         }
 
@@ -628,7 +628,7 @@ public class Scaffold extends Module {
      */
     @Override
     public void onDisable() {
-        LiquidBounce.moduleManager.getModule(Tower.class).setState(false);
+        LiquidSense.moduleManager.getModule(Tower.class).setState(false);
         if (mc.thePlayer == null) return;
 
         if (!GameSettings.isKeyDown(mc.gameSettings.keyBindSneak)) {

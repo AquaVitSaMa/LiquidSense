@@ -5,10 +5,10 @@
  */
 package me.aquavit.liquidsense.injection.forge.mixins.render;
 
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
 import me.aquavit.liquidsense.module.modules.misc.Animations;
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
-import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelBiped;
@@ -78,7 +78,7 @@ public class MixinModelBiped extends ModelBase {
                 GlStateManager.translate(0.0F, 0.2F, 0.0F);
             }
 
-            RenderChanger rc = (RenderChanger)LiquidBounce.moduleManager.getModule(RenderChanger.class);
+            RenderChanger rc = (RenderChanger) LiquidSense.moduleManager.getModule(RenderChanger.class);
 
             if (rc.getState() && RenderChanger.bigHeadsValue.get()) {
                 GL11.glPushMatrix();
@@ -103,7 +103,7 @@ public class MixinModelBiped extends ModelBase {
 
     @Inject(method = "setRotationAngles", at = @At(value = "FIELD", target = "Lnet/minecraft/client/model/ModelBiped;swingProgress:F"))
     private void revertSwordAnimation(float p_setRotationAngles_1_, float p_setRotationAngles_2_, float p_setRotationAngles_3_, float p_setRotationAngles_4_, float p_setRotationAngles_5_, float p_setRotationAngles_6_, Entity p_setRotationAngles_7_, CallbackInfo callbackInfo) {
-        Aura killAura = (Aura) LiquidBounce.moduleManager.getModule(Aura.class);
+        Aura killAura = (Aura) LiquidSense.moduleManager.getModule(Aura.class);
         UUID uuid = p_setRotationAngles_7_.getUniqueID();
         EntityPlayer entityPlayer = Minecraft.getMinecraft().theWorld.getPlayerEntityByUUID(uuid);
 

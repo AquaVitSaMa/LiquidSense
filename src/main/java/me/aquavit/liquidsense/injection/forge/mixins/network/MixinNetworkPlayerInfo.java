@@ -1,7 +1,7 @@
 package me.aquavit.liquidsense.injection.forge.mixins.network;
 
 import com.mojang.authlib.GameProfile;
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.misc.NameProtect;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.network.NetworkPlayerInfo;
@@ -24,7 +24,7 @@ public class MixinNetworkPlayerInfo {
 
     @Inject(method = "getLocationSkin", cancellable = true, at = @At("HEAD"))
     private void injectSkinProtect(CallbackInfoReturnable<ResourceLocation> cir) {
-        NameProtect nameProtect = (NameProtect) LiquidBounce.moduleManager.getModule(NameProtect.class);
+        NameProtect nameProtect = (NameProtect) LiquidSense.moduleManager.getModule(NameProtect.class);
 
         if (nameProtect.getState() && nameProtect.skinProtectValue.get()) {
             if (nameProtect.allPlayersValue.get() || Objects.equals(gameProfile.getId(), Minecraft.getMinecraft().getSession().getProfile().getId())) {

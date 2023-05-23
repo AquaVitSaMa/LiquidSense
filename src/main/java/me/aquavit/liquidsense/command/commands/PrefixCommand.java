@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.command.commands;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.command.Command;
 
 public class PrefixCommand extends Command {
@@ -22,8 +22,8 @@ public class PrefixCommand extends Command {
             return;
         }
 
-        LiquidBounce.commandManager.setPrefix(prefix.charAt(0));
-        LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.valuesConfig);
+        LiquidSense.commandManager.setPrefix(prefix.charAt(0));
+        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
 
         this.chat("Successfully changed command prefix to '§8" +prefix+"§3'");
     }

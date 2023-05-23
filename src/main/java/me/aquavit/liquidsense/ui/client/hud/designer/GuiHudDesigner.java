@@ -1,6 +1,6 @@
 package me.aquavit.liquidsense.ui.client.hud.designer;
 
-import me.aquavit.liquidsense.LiquidBounce;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.hud.element.Element;
 import net.minecraft.client.gui.GuiScreen;
 import org.lwjgl.input.Keyboard;
@@ -31,10 +31,10 @@ public class GuiHudDesigner extends GuiScreen {
 
     @Override
     public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-        LiquidBounce.hud.render(true);
-        LiquidBounce.hud.handleMouseMove(mouseX, mouseY);
+        LiquidSense.hud.render(true);
+        LiquidSense.hud.handleMouseMove(mouseX, mouseY);
 
-        if (!LiquidBounce.hud.elements.contains(selectedElement))
+        if (!LiquidSense.hud.elements.contains(selectedElement))
             selectedElement = null;
 
         int wheel = Mouse.getDWheel();
@@ -42,7 +42,7 @@ public class GuiHudDesigner extends GuiScreen {
         editorPanel.drawPanel(mouseX, mouseY, wheel);
 
         if (wheel != 0) {
-            for (Element element : LiquidBounce.hud.elements) {
+            for (Element element : LiquidSense.hud.elements) {
                 if (element.isInBorder(mouseX / element.getScale() - element.getRenderX(),
                         mouseY / element.getScale() - element.getRenderY())) {
                     element.setScale(element.getScale() + (wheel > 0 ? 0.05f : -0.05f));
@@ -62,7 +62,7 @@ public class GuiHudDesigner extends GuiScreen {
             return;
         }
 
-        LiquidBounce.hud.handleMouseClick(mouseX, mouseY, mouseButton);
+        LiquidSense.hud.handleMouseClick(mouseX, mouseY, mouseButton);
 
         if (!(mouseX >= editorPanel.x && mouseX <= editorPanel.x + editorPanel.width && mouseY >= editorPanel.y &&
                 mouseY <= editorPanel.y + Math.min(editorPanel.realHeight, 200))) {
@@ -71,7 +71,7 @@ public class GuiHudDesigner extends GuiScreen {
         }
 
         if (mouseButton == 0) {
-            for (Element element : LiquidBounce.hud.elements) {
+            for (Element element : LiquidSense.hud.elements) {
                 if (element.isInBorder(mouseX / element.getScale() - element.getRenderX(), mouseY / element.getScale() - element.getRenderY())) {
                     this.selectedElement = element;
                     break;
@@ -83,13 +83,13 @@ public class GuiHudDesigner extends GuiScreen {
     @Override
     protected void mouseReleased(int mouseX, int mouseY, int state) {
         super.mouseReleased(mouseX, mouseY, state);
-        LiquidBounce.hud.handleMouseReleased();
+        LiquidSense.hud.handleMouseReleased();
     }
 
     @Override
     public void onGuiClosed() {
         Keyboard.enableRepeatEvents(false);
-        LiquidBounce.fileManager.saveConfig(LiquidBounce.fileManager.hudConfig);
+        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.hudConfig);
         super.onGuiClosed();
     }
 
@@ -98,7 +98,7 @@ public class GuiHudDesigner extends GuiScreen {
         switch (keyCode) {
             case Keyboard.KEY_DELETE:{
                 if (selectedElement != null) {
-                    LiquidBounce.hud.removeElement(selectedElement);
+                    LiquidSense.hud.removeElement(selectedElement);
                 }
                 break;
             }
@@ -108,7 +108,7 @@ public class GuiHudDesigner extends GuiScreen {
                 break;
             }
             default: {
-                LiquidBounce.hud.handleKey(typedChar, keyCode);
+                LiquidSense.hud.handleKey(typedChar, keyCode);
             }
         }
 

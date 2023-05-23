@@ -6,9 +6,9 @@
 package me.aquavit.liquidsense.ui.font;
 
 import com.google.gson.*;
+import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
-import me.aquavit.liquidsense.LiquidBounce;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.FontRenderer;
 import net.minecraftforge.fml.relauncher.Side;
@@ -22,7 +22,7 @@ import java.util.List;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-import static me.aquavit.liquidsense.LiquidBounce.CLIENT_RESOURCE;
+import static me.aquavit.liquidsense.LiquidSense.CLIENT_RESOURCE;
 
 @SideOnly(Side.CLIENT)
 public class Fonts {
@@ -138,7 +138,7 @@ public class Fonts {
         try {
             CUSTOM_FONT_RENDERERS.clear();
 
-            final File fontsFile = new File(LiquidBounce.fileManager.fontsDir, "fonts.json");
+            final File fontsFile = new File(LiquidSense.fileManager.fontsDir, "fonts.json");
 
             if (fontsFile.exists()) {
                 final JsonElement jsonElement = new JsonParser().parse(new BufferedReader(new FileReader(fontsFile)));
@@ -172,13 +172,13 @@ public class Fonts {
 
     private static void downloadFonts() {
         try {
-            final File outputFile = new File(LiquidBounce.fileManager.fontsDir, "font.zip");
+            final File outputFile = new File(LiquidSense.fileManager.fontsDir, "font.zip");
 
             if (!outputFile.exists()) {
                 ClientUtils.getLogger().info("Downloading fonts...");
                 HttpUtils.download(CLIENT_RESOURCE + "Font.zip", outputFile);
                 ClientUtils.getLogger().info("Extract fonts...");
-                extractZip(outputFile.getPath(), LiquidBounce.fileManager.fontsDir.getPath());
+                extractZip(outputFile.getPath(), LiquidSense.fileManager.fontsDir.getPath());
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -261,7 +261,7 @@ public class Fonts {
 
     private static Font getFont(final String fontName, final int size) {
         try {
-            final InputStream inputStream = new FileInputStream(new File(LiquidBounce.fileManager.fontsDir, fontName));
+            final InputStream inputStream = new FileInputStream(new File(LiquidSense.fileManager.fontsDir, fontName));
             Font awtClientFont = Font.createFont(Font.TRUETYPE_FONT, inputStream);
             awtClientFont = awtClientFont.deriveFont(Font.PLAIN, size);
             inputStream.close();
