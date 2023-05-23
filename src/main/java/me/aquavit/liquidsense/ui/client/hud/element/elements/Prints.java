@@ -48,12 +48,12 @@ public class Prints extends Element {
             index++;
         }
         if (mc.currentScreen instanceof GuiHudDesigner) {
-            if (!LiquidSense.INSTANCE.getHud().getPrints().contains(exampleNotification)) {
+            if (!LiquidSense.getHud().getPrints().contains(exampleNotification)) {
                 LiquidSense.hud.addPrint(exampleNotification);
             }
             exampleNotification.fadeState = FadeState.STAY;
             exampleNotification.x = ((float) this.exampleNotification.textLength + 8.0F);
-            return new Border(-exampleNotification.x + 12 + exampleNotification.textLength, 0, -exampleNotification.x - 35, 20 + 11F * LiquidSense.INSTANCE.getHud().getNotifications().size());
+            return new Border(-exampleNotification.x + 12 + exampleNotification.textLength, 0, -exampleNotification.x - 35, 20 + 11F * LiquidSense.getHud().getNotifications().size());
         }
         return new Border(0f , 0f , 0f , 0f);
     }

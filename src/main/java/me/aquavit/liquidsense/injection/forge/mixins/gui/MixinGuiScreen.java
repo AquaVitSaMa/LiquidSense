@@ -87,7 +87,7 @@ public abstract class MixinGuiScreen extends Gui {
         GlStateManager.disableFog();
 
         if(GuiBackground.Companion.getEnabled()) {
-            if (LiquidSense.INSTANCE.getBackground() == null) {
+            if (LiquidSense.getBackground() == null) {
                 BackgroundShader.BACKGROUND_SHADER.startShader();
 
                 final Tessellator instance = Tessellator.getInstance();
@@ -105,7 +105,7 @@ public abstract class MixinGuiScreen extends Gui {
                 final int width = scaledResolution.getScaledWidth();
                 final int height = scaledResolution.getScaledHeight();
 
-                mc.getTextureManager().bindTexture(LiquidSense.INSTANCE.getBackground());
+                mc.getTextureManager().bindTexture(LiquidSense.getBackground());
                 GlStateManager.color(1.0F, 1.0F, 1.0F, 1.0F);
                 Gui.drawScaledCustomSizeModalRect(0, 0, 0.0F, 0.0F, width, height, width, height, width, height);
             }

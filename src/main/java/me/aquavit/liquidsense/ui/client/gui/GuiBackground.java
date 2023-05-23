@@ -66,10 +66,10 @@ public class GuiBackground extends GuiScreen {
                     return;
                 }
                 try {
-                    Files.copy(file.toPath(), new FileOutputStream(LiquidSense.INSTANCE.getFileManager().backgroundFile));
-                    BufferedImage image = ImageIO.read(new FileInputStream(LiquidSense.INSTANCE.getFileManager().backgroundFile));
-                    LiquidSense.INSTANCE.setBackground(new ResourceLocation(LiquidSense.CLIENT_NAME.toLowerCase() + "/background.png"));
-                    mc.getTextureManager().loadTexture(LiquidSense.INSTANCE.getBackground(), new DynamicTexture(image));
+                    Files.copy(file.toPath(), Files.newOutputStream(LiquidSense.getFileManager().backgroundFile.toPath()));
+                    BufferedImage image = ImageIO.read(Files.newInputStream(LiquidSense.getFileManager().backgroundFile.toPath()));
+                    LiquidSense.setBackground(new ResourceLocation(LiquidSense.CLIENT_NAME.toLowerCase() + "/background.png"));
+                    mc.getTextureManager().loadTexture(LiquidSense.getBackground(), new DynamicTexture(image));
                 } catch (Exception e) {
                     e.printStackTrace();
                     MiscUtils.showErrorPopup("Error", "Exception class: " + e.getClass().getName() + "\nMessage: " + e.getMessage());
@@ -78,7 +78,7 @@ public class GuiBackground extends GuiScreen {
                 break;
             }
             case 4: {
-                LiquidSense.INSTANCE.setBackground(null);
+                LiquidSense.setBackground(null);
                 LiquidSense.fileManager.backgroundFile.delete();
                 break;
             }

@@ -81,7 +81,7 @@ public class Module extends MinecraftInstance implements Listenable {
             }
             this.onToggle(state);
 
-            if (!LiquidSense.INSTANCE.isStarting()) {
+            if (!LiquidSense.isStarting) {
                 LiquidSense.hud.addPrint(new Print(" " + name + (state ? " Enabled" : " Disabled"),3000f, Type.state));
                 LiquidSense.hud.addNotification(new Notification(" " + name + (state ? " Enabled" : " Disabled"), description, ColorType.INFO,1500,500));
                 mc.getSoundHandler().playSound(PositionedSoundRecord.create(new ResourceLocation("random.click"),

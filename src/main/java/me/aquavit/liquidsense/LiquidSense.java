@@ -31,9 +31,6 @@ import org.lwjgl.opengl.Display;
 
 @SideOnly(Side.CLIENT)
 public class LiquidSense {
-
-    public static final LiquidSense INSTANCE = new LiquidSense();
-
     public static final String CLIENT_NAME = "LiquidSense";
 
     public static final String CLIENT_WEB = "minger.club";
@@ -44,7 +41,7 @@ public class LiquidSense {
     public static final String CLIENT_CLOUD = "https://cloud.liquidbounce.net/LiquidBounce";
     public static final String CLIENT_RESOURCE = "https://cdn.jsdelivr.net/gh/BlogResourceRepositories/ClientResource@main/";
 
-    public boolean isStarting;
+    public static boolean isStarting;
 
     public static ModuleManager moduleManager;
     public static CommandManager commandManager;
@@ -55,12 +52,12 @@ public class LiquidSense {
     public static HUD hud;
     public static Main neverlose;
 
-    public int latestVersion;
+    public static int latestVersion;
 
-    public ResourceLocation background;
+    public static ResourceLocation background;
 
-    public void startClient() {
-        this.isStarting = true;
+    public static void startClient() {
+        isStarting = true;
 
         Display.setTitle(LiquidSense.CLIENT_NAME + " | " +  LiquidSense.CLIENT_VERSION + " | " + LiquidSense.MINECRAFT_VERSION  + " | " + "By " + CLIENT_CREATOR + " | Loading...");
         ClientUtils.getLogger().info("Starting "+CLIENT_NAME+" "+CLIENT_VERSION+", by "+CLIENT_CREATOR);
@@ -132,12 +129,12 @@ public class LiquidSense {
         isStarting = false;
     }
 
-    public final void stopClient() {
+    public static void stopClient() {
         LiquidSense.eventManager.callEvent(new ClientShutdownEvent());
         LiquidSense.fileManager.saveAllConfigs();
     }
 
-    public final void LoadAltManagerSkin(){
+    public static void LoadAltManagerSkin(){
 
         ClientUtils.getLogger().info("Loading AltManagerSkin.");
 
@@ -145,14 +142,6 @@ public class LiquidSense {
             if (!LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id).isCracked() && !GuiAltManager.skin.containsKey(id))
                 GuiAltManager.skin.put(id, UserUtils.getPlayerSkin(UserUtils.getUUID(LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id).getAccountName())));
         }
-    }
-
-    public final boolean isStarting() {
-        return isStarting;
-    }
-
-    public final void setStarting(boolean state) {
-        isStarting = state;
     }
 
     public final ModuleManager getModuleManager() {
@@ -179,7 +168,7 @@ public class LiquidSense {
         LiquidSense.eventManager = eventManager;
     }
 
-    public final FileManager getFileManager() {
+    public static FileManager getFileManager() {
         return LiquidSense.fileManager;
     }
 
@@ -195,11 +184,11 @@ public class LiquidSense {
         LiquidSense.scriptManager = scriptManager;
     }
 
-    public final HUD getHud() {
+    public static HUD getHud() {
         return hud;
     }
 
-    public final void setHud(HUD hud) {
+    public static void setHud(HUD hud) {
         hud = hud;
     }
 
@@ -219,11 +208,11 @@ public class LiquidSense {
         latestVersion = version;
     }
 
-    public final ResourceLocation getBackground() {
+    public static ResourceLocation getBackground() {
         return background;
     }
 
-    public final void setBackground(ResourceLocation resourceLocation) {
+    public static void setBackground(ResourceLocation resourceLocation) {
         background = resourceLocation;
     }
 }

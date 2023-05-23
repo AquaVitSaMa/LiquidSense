@@ -119,7 +119,7 @@ public abstract class MixinMinecraft {
 
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;checkGLError(Ljava/lang/String;)V", ordinal = 2, shift = At.Shift.AFTER))
     private void startGame(CallbackInfo callbackInfo) {
-        LiquidSense.INSTANCE.startClient();
+        LiquidSense.startClient();
     }
 
     @Inject(method = "startGame", at = @At(value = "INVOKE", target = "Lnet/minecraft/client/Minecraft;displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V", shift = At.Shift.AFTER))
@@ -195,7 +195,7 @@ public abstract class MixinMinecraft {
     @Inject(method = "shutdown", at = @At("HEAD"))
     private void shutdown(CallbackInfo callbackInfo) {
         try{
-            LiquidSense.INSTANCE.stopClient();
+            LiquidSense.stopClient();
         }catch (Exception e){
             System.exit(0);
         }
