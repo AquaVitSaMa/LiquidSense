@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose.implvalue;
 
+import me.aquavit.liquidsense.ui.client.clickgui.neverlose.hud.HUD;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Impl;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.module.CustomModule;
@@ -49,7 +50,7 @@ public class FloatValueDraw {
         value.floatVal = longValue * (value.get() - min) / (max - min);
 
         if (nModule.main.hovertoFloatL(nModule.positionX + 86f, nModule.positionY + 26.5f + nModule.valuePosY, nModule.positionX + 139f, nModule.positionY + 35.5f + nModule.valuePosY, nModule.mouseX,
-                nModule.mouseY, false) && Mouse.isButtonDown(0) && isClick) {
+                nModule.mouseY, false) && Mouse.isButtonDown(0) && isClick() && !HUD.isdrag) {
 
             float idk = min + valRel;
 
@@ -59,7 +60,7 @@ public class FloatValueDraw {
         }
 
         if (nModule.main.hovertoFloatL(nModule.positionX + 145f, nModule.positionY + 24.5f + nModule.valuePosY, nModule.positionX + 170f, nModule.positionY + 33.5f + nModule.valuePosY , nModule.mouseX,
-                nModule.mouseY, true)  && isClick) {
+                nModule.mouseY, true)  && isClick()) {
             Editbox.value = value;
             Editbox.modulename = nModule.module.getName();
             Editbox.newvalue = String.valueOf(value.get());

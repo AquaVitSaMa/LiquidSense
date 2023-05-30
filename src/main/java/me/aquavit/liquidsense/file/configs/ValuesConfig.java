@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.Module;
+import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.ui.client.gui.elements.AntiForge;
 import me.aquavit.liquidsense.ui.client.gui.elements.BungeeCordSpoof;
 import me.aquavit.liquidsense.file.FileConfig;
@@ -42,10 +43,7 @@ public class ValuesConfig extends FileConfig {
 
         final JsonObject jsonObject = (JsonObject) jsonElement;
 
-        final Iterator<Map.Entry<String, JsonElement>> iterator = jsonObject.entrySet().iterator();
-        while(iterator.hasNext()) {
-            final Map.Entry<String, JsonElement> entry = iterator.next();
-
+        for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
             if (entry.getKey().equalsIgnoreCase("CommandPrefix")) {
                 LiquidSense.commandManager.setPrefix(entry.getValue().getAsCharacter());
             } else if (entry.getKey().equalsIgnoreCase("features")) {
@@ -72,13 +70,13 @@ public class ValuesConfig extends FileConfig {
             } else {
                 final Module module = LiquidSense.moduleManager.getModule(entry.getKey());
 
-                if(module != null) {
+                if (module != null && module.getCategory() != ModuleCategory.HUD) {
                     final JsonObject jsonModule = (JsonObject) entry.getValue();
 
-                    for(final Value moduleValue : module.getValues()) {
+                    for (final Value moduleValue : module.getValues()) {
                         final JsonElement element = jsonModule.get(moduleValue.getName());
 
-                        if(element != null) moduleValue.fromJson(element);
+                        if (element != null) moduleValue.fromJson(element);
                     }
                 }
             }
@@ -109,7 +107,7 @@ public class ValuesConfig extends FileConfig {
         backgroundObject.addProperty("Particles", GuiBackground.Companion.getParticles());
         jsonObject.add("Background", backgroundObject);
 
-        LiquidSense.moduleManager.getModules().stream().filter(module -> !module.getValues().isEmpty()).forEach(module -> {
+        LiquidSense.moduleManager.getModules().stream().filter(module -> module.getCategory() != ModuleCategory.HUD && !module.getValues().isEmpty()).forEach(module -> {
             final JsonObject jsonModule = new JsonObject();
             module.getValues().forEach(value -> jsonModule.add(value.getName(), value.toJson()));
             jsonObject.add(module.getName(), jsonModule);

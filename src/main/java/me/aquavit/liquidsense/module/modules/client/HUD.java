@@ -17,7 +17,7 @@ import net.minecraftforge.fml.relauncher.SideOnly;
 
 import java.awt.*;
 
-@ModuleInfo(name = "HUD", description = "Toggles visibility of the HUD.", category = ModuleCategory.CLIENT,array = false)
+@ModuleInfo(name = "HUD", description = "Toggles visibility of the HUD.", category = ModuleCategory.CLIENT, array = false)
 @SideOnly(Side.CLIENT)
 public class HUD extends Module {
 
@@ -55,8 +55,7 @@ public class HUD extends Module {
 
     @EventTarget
     public void onRender2D(final Render2DEvent event) {
-        if (mc.currentScreen instanceof GuiHudDesigner)
-            return;
+        if (mc.currentScreen instanceof GuiHudDesigner) return;
 
         LiquidSense.hud.render(false);
     }

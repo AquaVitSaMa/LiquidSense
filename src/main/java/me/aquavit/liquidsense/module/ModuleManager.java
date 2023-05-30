@@ -4,8 +4,10 @@ import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.blatant.*;
 import me.aquavit.liquidsense.module.modules.client.*;
 import me.aquavit.liquidsense.module.modules.exploit.*;
-import me.aquavit.liquidsense.module.modules.fun.Derp;
-import me.aquavit.liquidsense.module.modules.fun.SkinDerp;
+import me.aquavit.liquidsense.module.modules.hud.Armor;
+import me.aquavit.liquidsense.module.modules.exploit.Derp;
+import me.aquavit.liquidsense.module.modules.exploit.SkinDerp;
+import me.aquavit.liquidsense.module.modules.hud.SpeedGraph;
 import me.aquavit.liquidsense.module.modules.misc.*;
 import me.aquavit.liquidsense.module.modules.movement.*;
 import me.aquavit.liquidsense.module.modules.player.*;
@@ -50,6 +52,9 @@ public final class ModuleManager implements Listenable {
     public void registerModules() {
         ClientUtils.getLogger().info("[" + LiquidSense.CLIENT_NAME + "]" + " Loading modules...");
         registerModules(
+                Armor.class,
+                SpeedGraph.class,
+
                 Target.class,
                 Aimbot.class,
                 AutoArmor.class,

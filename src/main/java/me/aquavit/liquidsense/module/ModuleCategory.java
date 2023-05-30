@@ -11,7 +11,7 @@ public enum ModuleCategory {
     MISC("Misc"),
     CLIENT("Client"),
     SCRIPTS("Scripts"),
-    FUN("Fun");
+    HUD("HUD");
 
     public final String displayName;
 

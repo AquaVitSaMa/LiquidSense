@@ -67,14 +67,12 @@ public class HideCommand extends Command {
 
         String moduleName = args[0];
 
-        switch (args.length) {
-            case 1:
-                return LiquidSense.moduleManager.getModules().stream()
-                        .map(Module::getName)
-                        .filter(module -> module.startsWith(moduleName))
-                        .collect(Collectors.toList());
-            default:
-                return new ArrayList<>();
+        if (args.length == 1) {
+            return LiquidSense.moduleManager.getModules().stream()
+                    .map(Module::getName)
+                    .filter(module -> module.toLowerCase().startsWith(moduleName.toLowerCase()))
+                    .collect(Collectors.toList());
         }
+        return new ArrayList<>();
     }
 }

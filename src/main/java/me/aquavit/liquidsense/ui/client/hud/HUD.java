@@ -20,7 +20,7 @@ import java.util.List;
 
 @SideOnly(Side.CLIENT)
 public class HUD extends MinecraftInstance {
-    public final List<Element> elements = new ArrayList<Element>();
+    public final List<Element> elements = new ArrayList<>();
     public final List<Notification> notifications = new ArrayList<Notification>();
     public final List<Print> prints = new ArrayList<Print>();
 
@@ -114,19 +114,19 @@ public class HUD extends MinecraftInstance {
         for (final Element element : elements) {
             element.handleMouseClick((mouseX / element.getScale()) - element.getRenderX(), (mouseY / element.getScale()) - element.getRenderY(), button);
         }
-	  if(button == 0) {
-		  for (final Element element : Lists.reverse(elements)) {
+        if(button == 0) {
+            for (final Element element : Lists.reverse(elements)) {
 
-			  if (!element.isInBorder((mouseX / element.getScale()) - element.getRenderX(),
-				  (mouseY / element.getScale()) - element.getRenderY()))
-				  continue;
+                if (!element.isInBorder((mouseX / element.getScale()) - element.getRenderX(),
+                        (mouseY / element.getScale()) - element.getRenderY()))
+                    continue;
 
-			  element.setDrag(true);
-			  this.elements.remove(element);
-			  this.elements.add(element);
-			  break;
-		  }
-	  }
+                element.setDrag(true);
+                this.elements.remove(element);
+                this.elements.add(element);
+                break;
+            }
+        }
     }
 
     public final void handleMouseReleased() {
@@ -149,15 +149,17 @@ public class HUD extends MinecraftInstance {
             element.setPrevMouseX(scaledX);
             element.setPrevMouseY(scaledY);
 
+
             if (element.getDrag()) {
                 float moveX = scaledX - prevMouseX;
                 float moveY = scaledY - prevMouseY;
+
 
                 if (moveX == 0F && moveY == 0F) continue;
 
                 Border border = element.getBorder();
 
-		    if (border == null) continue;
+                if (border == null) continue;
 
                 float minX = Math.min(border.x, border.x2) + 1;
                 float minY = Math.min(border.y, border.y2) + 1;
@@ -170,8 +172,10 @@ public class HUD extends MinecraftInstance {
 
                 if ((element.getRenderX() + minX + moveX >= 0.0 || moveX > 0) && (element.getRenderX() + maxX + moveX <= width || moveX < 0))
                     element.setRenderX(moveX);
+
                 if ((element.getRenderY() + minY + moveY >= 0.0 || moveY > 0) && (element.getRenderY() + maxY + moveY <= height || moveY < 0))
                     element.setRenderY(moveY);
+
             }
         }
     }

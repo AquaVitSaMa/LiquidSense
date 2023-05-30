@@ -47,7 +47,7 @@ public class aboutMain extends Main {
                 lineColor = new Color(5, 26, 38);
                 break;
         }
-        RenderUtils.drawNLRect(Impl.coordinateX + 470, Impl.coordinateY + 70, Impl.coordinateX + 630, Impl.coordinateY + 220, 2f, bgColor.getRGB());
+        RenderUtils.drawNLRect(Impl.coordinateX + 470, Impl.coordinateY + 70, Impl.coordinateX + 630, Impl.coordinateY + 220, 2f, bgColor.getRGB()); //背景
         RenderUtils.drawRect(Impl.coordinateX + 470, Impl.coordinateY + 84, Impl.coordinateX + 630, Impl.coordinateY + 85, lineColor.getRGB()); // 分割线
         RenderUtils.drawRect(Impl.coordinateX + 470, Impl.coordinateY + 179, Impl.coordinateX + 630, Impl.coordinateY + 180, lineColor.getRGB()); // 分割线
         RenderUtils.drawRect(Impl.coordinateX + 470, Impl.coordinateY + 124, Impl.coordinateX + 630, Impl.coordinateY + 125, lineColor.getRGB()); // 分割线

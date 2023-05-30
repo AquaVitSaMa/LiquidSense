@@ -31,12 +31,16 @@ public class FileManager extends MinecraftInstance {
     public final FriendsConfig friendsConfig = new FriendsConfig(new File(dir, "friends.json"));
     public final FileConfig xrayConfig = new XRayConfig(new File(dir, "xray-blocks.json"));
     public final FileConfig hudConfig = new HudConfig(new File(dir, "hud.json"));
+
+    public final FileConfig clickGuiConfig = new ClickGuiConfig(new File(dir, "clickgui.json"));
     public final FileConfig shortcutsConfig = new ShortcutsConfig(new File(dir, "shortcuts.json"));
     public final FileConfig setnameConfig = new SetNameConfig(new File(dir, "setname.json"));
 
     public final File backgroundFile = new File(dir, "userbackground.png");
 
     public boolean firstStart =  false;
+
+    public static boolean loadDefault = false;
 
     public static final Gson PRETTY_GSON = new GsonBuilder().setPrettyPrinting().create();
 
@@ -106,7 +110,9 @@ public class FileManager extends MinecraftInstance {
         if(!config.hasConfig()) {
             ClientUtils.getLogger().info("[FileManager] Skipped loading config: " + config.getFile().getName() + ".");
 
+            loadDefault = true;
             saveConfig(config, true);
+            loadDefault = false;
             return;
         }
 

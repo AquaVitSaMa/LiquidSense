@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose.implvalue;
 
+import me.aquavit.liquidsense.ui.client.clickgui.neverlose.hud.HUD;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.Impl;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.module.CustomModule;
@@ -48,7 +49,7 @@ public class IntegerValueDraw {
         value.intVal = (longValue * (value.get() - min) / (max - min));
 
         if (nModule.main.hovertoFloatL(nModule.positionX + 86f, nModule.positionY + 26.5f + nModule.valuePosY, nModule.positionX + 139f, nModule.positionY + 35.5f + nModule.valuePosY, nModule.mouseX,
-                nModule.mouseY, false) && Mouse.isButtonDown(0) && isClick()) {
+                nModule.mouseY, false) && Mouse.isButtonDown(0) && isClick() && !HUD.isdrag) {
 
             float idk = min + valRel;
 

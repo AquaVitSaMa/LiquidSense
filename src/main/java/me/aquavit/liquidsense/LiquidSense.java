@@ -50,6 +50,9 @@ public class LiquidSense {
     public static ScriptManager scriptManager;
 
     public static HUD hud;
+
+    public static me.aquavit.liquidsense.ui.client.clickgui.neverlose.hud.HUD newhud;
+
     public static Main neverlose;
 
     public static int latestVersion;
@@ -102,6 +105,7 @@ public class LiquidSense {
 
         hud = HUD.Companion.createDefault();
         fileManager.loadConfig(fileManager.hudConfig);
+        fileManager.loadConfig(fileManager.clickGuiConfig);
 
         ClientUtils.disableFastRender();
 

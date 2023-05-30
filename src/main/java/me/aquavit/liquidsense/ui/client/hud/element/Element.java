@@ -13,8 +13,8 @@ public abstract class Element extends MinecraftInstance {
 	private final ElementInfo info;
 	public float prevMouseX;
 	public float prevMouseY;
-	public double x;
-	public double y;
+	private double x;
+	private double y;
 	private float scale;
 	private Border border;
 	private boolean drag;
@@ -68,18 +68,6 @@ public abstract class Element extends MinecraftInstance {
 		return 0;
 	}
 
-	public final void setRenderX(double value) {
-		switch (side.getHorizontal()) {
-			case MIDDLE:
-			case RIGHT:
-				x -= value;
-				break;
-			case LEFT:
-				x += value;
-				break;
-		}
-	}
-
 	public final double getRenderY() {
 		switch (side.getVertical()) {
 			case UP:
@@ -89,6 +77,18 @@ public abstract class Element extends MinecraftInstance {
 			case DOWN:
 				return new ScaledResolution(mc).getScaledHeight() - y;
 			default:return 0;
+		}
+	}
+
+	public final void setRenderX(double value) {
+		switch (side.getHorizontal()) {
+			case MIDDLE:
+			case RIGHT:
+				x -= value;
+				break;
+			case LEFT:
+				x += value;
+				break;
 		}
 	}
 
@@ -176,7 +176,7 @@ public abstract class Element extends MinecraftInstance {
 		float minY = Math.min(border.y, border.y2);
 
 		float maxX = Math.max(border.x, border.x2);
-		float maxY = Math.max(border.x, border.y2);
+		float maxY = Math.max(border.y, border.y2);
 
 		return minX <= x && minY <= y && maxX >= x && maxY >= y;
 	}

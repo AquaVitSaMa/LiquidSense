@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.EventState;
 import me.aquavit.liquidsense.event.events.PreUpdateEvent;
 import me.aquavit.liquidsense.module.modules.blatant.Aura;
-import me.aquavit.liquidsense.module.modules.fun.Derp;
+import me.aquavit.liquidsense.module.modules.exploit.Derp;
 import me.aquavit.liquidsense.module.modules.render.NoSwing;
 import me.aquavit.liquidsense.event.events.*;
 import me.aquavit.liquidsense.module.modules.movement.InvMove;

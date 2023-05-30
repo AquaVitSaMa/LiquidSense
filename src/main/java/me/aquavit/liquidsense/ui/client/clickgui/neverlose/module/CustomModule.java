@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose.module;
 
+import me.aquavit.liquidsense.ui.client.clickgui.neverlose.hud.HUD;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
@@ -48,7 +49,7 @@ public class CustomModule extends MinecraftInstance {
         boolean isClick = main.hoverConfig(Impl.coordinateX + 103f, Impl.coordinateY + 60f, Impl.coordinateX + 455f, Impl.coordinateY + 335f, mouseX, mouseY, false);
 
         if (main.hoverConfig(positionX, positionY, positionX + 173f, positionY + 20f + (20 * (module.getValues().size() + module.getOutvalue())), mouseX, mouseY, false) && isClick) {
-            Fonts.font18.drawString(module.getDescription(), Impl.coordinateX + 105, Impl.coordinateY + 50, -1);
+            if (!HUD.isdrag) Fonts.font18.drawString(module.getDescription(), Impl.coordinateX + 105, Impl.coordinateY + 50, -1);
             if (Mouse.isButtonDown(2) && !main.midclick) {
                 Impl.openmidmanger = !Impl.openmidmanger;
                 Impl.midmangermodule = module;

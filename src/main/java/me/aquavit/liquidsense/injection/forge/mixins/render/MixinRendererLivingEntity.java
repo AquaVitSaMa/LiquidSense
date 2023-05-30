@@ -4,7 +4,7 @@ import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.client.RenderChanger;
 import me.aquavit.liquidsense.module.modules.client.Rotations;
 import me.aquavit.liquidsense.module.modules.client.TrueSight;
-import me.aquavit.liquidsense.module.modules.fun.Derp;
+import me.aquavit.liquidsense.module.modules.exploit.Derp;
 import me.aquavit.liquidsense.module.modules.render.*;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.entity.EntityUtils;

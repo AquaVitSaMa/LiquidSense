@@ -1,5 +1,8 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose;
 
+import me.aquavit.liquidsense.LiquidSense;
+import me.aquavit.liquidsense.ui.client.clickgui.neverlose.hud.HUD;
+import me.aquavit.liquidsense.ui.client.hud.designer.EditorPanel;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.Translate;
@@ -38,7 +41,7 @@ public class Main extends GuiScreen {
 
     private ArrayList<Category> rendercategory = new ArrayList<>();
 
-    private boolean hovermove = false;
+    public static boolean hovermove = false;
     private boolean ismove = false;
 
     private int lastmouseX = 0;
@@ -57,7 +60,7 @@ public class Main extends GuiScreen {
     public Main() {
         int posy = 0;
         for (int the = 0; the < ModuleCategory.values().length; the++) {
-            String[] categoryname = new String[]{"Ghost", "Misc", "Fun"};
+            String[] categoryname = new String[]{"Ghost", "Misc", "HUD"};
             String[] expandName = new String[]{"Combat", "Utility", "Miscellaneous"};
             String expand = "";
 
@@ -78,8 +81,16 @@ public class Main extends GuiScreen {
     }
 
     @Override
+    public void initGui() {
+        Keyboard.enableRepeatEvents(true);
+        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.clickGuiConfig);
+        super.initGui();
+    }
+
+    @Override
     public void drawScreen(int mouseX, int mouseY, float tick) {
-        drag(mouseX, mouseY);
+        clickGuiDrag(mouseX, mouseY);
+        hudDrag(mouseX, mouseY);
 
         RenderUtils.drawNLRect(coordinateX, coordinateY, coordinateX + 95f, coordinateY + 345f, 3f, LeftRectBackgroundColor()); //左侧矩形背景
         RenderUtils.drawNLRect(coordinateX + 95f, coordinateY, coordinateX + 460f, coordinateY + 345f, 3f, getRightColorOfLeftRectWithRightRectBackgroundColor()); //右侧矩形背景
@@ -428,11 +439,27 @@ public class Main extends GuiScreen {
         GL11.glPopMatrix();
     }
 
-    public void drag(int mouseX, int mouseY) {
+    @Override
+    protected void mouseReleased(int mouseX, int mouseY, int state) {
+        super.mouseReleased(mouseX, mouseY, state);
+        HUD.handleMouseReleased();
+        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.clickGuiConfig);
+    }
+
+    @Override
+    public void onGuiClosed() {
+        Keyboard.enableRepeatEvents(false);
+        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.clickGuiConfig);
+        HUD.canDrag(false);
+        HUD.isdrag = false;
+        super.onGuiClosed();
+    }
+
+    public void clickGuiDrag(int mouseX, int mouseY) {
         boolean mouseDown = Mouse.isButtonDown(0);
         boolean hoverSystem = hovertoFloatL(coordinateX, coordinateY, coordinateX + 95f, coordinateY + 35f, mouseX, mouseY, false);
 
-        if (hoverSystem && mouseDown) {
+        if (hoverSystem && mouseDown && !HUD.isdrag) {
             hovermove = true;
             if (!ismove) {
                 lastmouseX = mouseX;
@@ -453,6 +480,13 @@ public class Main extends GuiScreen {
         ScaledResolution scaledResolution = new ScaledResolution(mc);
         coordinateX = Math.max(0f, Math.min(coordinateX, scaledResolution.getScaledWidth() - 460f));
         coordinateY = Math.max(0f, Math.min(coordinateY, scaledResolution.getScaledHeight() - 345f));
+    }
+
+    public void hudDrag(int mouseX, int mouseY) {
+        boolean mouseClick = Mouse.isButtonDown(0);
+
+        if (mouseClick) HUD.handleMouseClick(mouseX, mouseY);
+        HUD.handleMouseMove(mouseX, mouseY);
     }
 
 

@@ -1,5 +1,6 @@
 package me.aquavit.liquidsense.ui.client.clickgui.neverlose;
 
+import me.aquavit.liquidsense.ui.client.clickgui.neverlose.hud.HUD;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.module.ModuleCategory;
 import me.aquavit.liquidsense.ui.font.Fonts;
@@ -126,7 +127,7 @@ public class Category {
             case "Scripts":
                 Fonts.csgo40.drawString("V", Impl.coordinateX + (int)x - 15, Impl.coordinateY + (int)y, iconColor);
                 break;
-            case "Fun":
+            case "HUD":
                 Fonts.csgo40.drawString("U", Impl.coordinateX + (int)x - 15, Impl.coordinateY + (int)y, iconColor);
                 break;
         }

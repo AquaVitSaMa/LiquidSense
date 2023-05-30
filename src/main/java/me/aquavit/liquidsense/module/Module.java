@@ -4,6 +4,7 @@ import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.ColorType;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Notification;
 import me.aquavit.liquidsense.utils.mc.MinecraftInstance;
+import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.Translate;
 import me.aquavit.liquidsense.event.Listenable;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Print;
@@ -11,10 +12,12 @@ import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Type;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.value.Value;
 import net.minecraft.client.audio.PositionedSoundRecord;
+import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+import java.awt.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
@@ -45,14 +48,24 @@ public class Module extends MinecraftInstance implements Listenable {
     private Translate translate;
     private Translate keytranslate;
 
+    private double defaultx;
+    private double defaulty;
+    private double prevMouseX;
+    private double prevMouseY;
+    private double renderx;
+    private double rendery;
+    private float borderX;
+    private float borderY;
+    private float borderWidth;
+    private float borderHeight;
+    private boolean drag;
+    private boolean useConfig;
 
-    public void setKeyBind(final int keyBind) {
-        this.keyBind = keyBind;
-        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.modulesConfig);
-    }
+    public boolean isLeft;
+    public boolean isUp;
 
     public Module() {
-	  this.finalname = this.getClass().getAnnotation(ModuleInfo.class).name();
+        this.finalname = this.getClass().getAnnotation(ModuleInfo.class).name();
         this.name = this.getClass().getAnnotation(ModuleInfo.class).name();
         this.arrayListName = name;
         this.description = this.getClass().getAnnotation(ModuleInfo.class).description();
@@ -60,7 +73,7 @@ public class Module extends MinecraftInstance implements Listenable {
         this.keyBind = this.getClass().getAnnotation(ModuleInfo.class).keyBind();
         this.canEnable = this.getClass().getAnnotation(ModuleInfo.class).canEnable();
         this.hue = (float) Math.random();
-        this.array = true;
+        this.array = this.getClass().getAnnotation(ModuleInfo.class).array();
         this.outvalue = 0;
         this.openValue = new Translate(0f , 0f);
         this.clickAnimation = new Translate(0f , 0f);
@@ -70,9 +83,14 @@ public class Module extends MinecraftInstance implements Listenable {
         this.openValueposy = 0f;
         this.suckDown = 0f;
         this.translate = new Translate(0f, 0f);
-	  this.keytranslate = new Translate(0f, 0f);
+        this.keytranslate = new Translate(0f, 0f);
+        this.useConfig = false;
     }
 
+    public void setKeyBind(final int keyBind) {
+        this.keyBind = keyBind;
+        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.modulesConfig);
+    }
 
     public void setState(final boolean state) {
         try {
@@ -237,6 +255,98 @@ public class Module extends MinecraftInstance implements Listenable {
 
     public final void setSlideStep(float slide) { this.slideStep = slide; }
 
+    public final double getPrevMouseX() {
+        return prevMouseX;
+    }
+
+    public final void setPrevMouseX(double x){
+        this.prevMouseX = x;
+    }
+
+    public double getDefaultx() {
+        return defaultx;
+    }
+
+    public double getDefaulty() {
+        return defaulty;
+    }
+
+    public void setDefaultx(double defaultx) {
+        this.defaultx = defaultx;
+    }
+
+    public void setDefaulty(double defaulty) {
+        this.defaulty = defaulty;
+    }
+
+    public double getHUDX(boolean left, boolean middle, boolean right) {
+        return left ? this.renderx :
+                (middle ? (float) new ScaledResolution(mc).getScaledWidth() / 2 - this.renderx :
+                        (right ? (float) new ScaledResolution(mc).getScaledWidth() - this.renderx : this.renderx));
+    }
+
+    public double getHUDY(boolean up, boolean middle, boolean down) {
+        return up ? this.rendery :
+                (middle ? (float) (new ScaledResolution(mc).getScaledHeight() / 2) - this.rendery :
+                        (down ? new ScaledResolution(mc).getScaledHeight() - this.rendery : this.rendery));
+    }
+
+    public void setHUDX(double renderx) {
+        this.renderx = renderx;
+    }
+
+    public void setHUDY(double rendery) {
+        this.rendery = rendery;
+    }
+
+    public double getRenderx() {
+        return renderx;
+    }
+
+    public double getRendery() {
+        return rendery;
+    }
+
+    public void setRenderx(double renderx) {
+        this.renderx = renderx;
+    }
+
+    public void setRendery(double rendery) {
+        this.rendery = rendery;
+    }
+
+    public double getBorderHeight() {
+        return borderHeight;
+    }
+
+    public double getBorderWidth() {
+        return borderWidth;
+    }
+
+    public final double getPrevMouseY() {
+        return prevMouseY;
+    }
+
+    public final void setPrevMouseY(double y){
+        this.prevMouseY = y;
+    }
+
+    public final boolean getDrag() {
+        return this.drag;
+    }
+
+    public final void setDrag(boolean state) {
+        this.drag = state;
+    }
+
+    public boolean getUseConfig() {
+        return useConfig;
+    }
+
+    public void setUseConfig(boolean useConfig) {
+        this.useConfig = useConfig;
+    }
+
     public final float getHue() {
         return this.hue;
     }
@@ -325,4 +435,30 @@ public class Module extends MinecraftInstance implements Listenable {
         this.suckDown = time;
     }
 
+    public float getBorderX() {
+        return borderX;
+    }
+
+    public double getBorderY() {
+        return borderY;
+    }
+
+    public void drawBorder(float x, float y, float width, float height) {
+        this.borderX = x;
+        this.borderY = y;
+        this.borderWidth = x+width;
+        this.borderHeight = y+height;
+        if (getDrag()) RenderUtils.drawRectBordered(borderX, borderY, borderWidth, borderHeight, 1.0F, new Color(15 , 15 , 15 , 40).getRGB(), Integer.MIN_VALUE);
+    }
+
+    public boolean isInBorder(double x, double y) {
+
+        float minX = Math.min(this.borderX, this.borderWidth);
+        float minY = Math.min(this.borderY, this.borderHeight);
+
+        float maxX = Math.max(this.borderX, this.borderWidth);
+        float maxY = Math.max(this.borderY, this.borderHeight);
+
+        return minX <= x && minY <= y && maxX >= x && maxY >= y;
+    }
 }
