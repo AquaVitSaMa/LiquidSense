@@ -35,23 +35,23 @@ public class Hotbar extends Element {
         RenderHelper.enableGUIStandardItemLighting();
 
         for(int i = 0; i < slot.size(); ++i) {
-            HotbarUtil now = slot.get(i);
+            HotbarUtil hotbarUtil = slot.get(i);
             float posY;
 
             if (i == mc.thePlayer.inventory.currentItem && mc.thePlayer.inventory.mainInventory[i] != null) {
-                now.size = 1.5f;
+                hotbarUtil.size = 1.5f;
                 posY = -3;
             } else {
-                now.size = 1.0f;
+                hotbarUtil.size = 1.0f;
                 posY = 0;
             }
 
-            now.translate.translate(now.size, posY);
-            float scale = now.translate.getX();
+            hotbarUtil.translate.translate(hotbarUtil.size, posY);
+            float scale = hotbarUtil.translate.getX();
             GlStateManager.pushMatrix();
             GlStateManager.scale(scale, scale, scale);
             float x = i * 25f / scale - scale * 2f;
-            now.renderXHotbarItem(i, x + scale,now.translate.getY() - scale / 2f - 2f / scale, mc.timer.renderPartialTicks);
+            hotbarUtil.renderXHotbarItem(i, x + scale,hotbarUtil.translate.getY() - scale / 2f - 2f / scale, mc.timer.renderPartialTicks);
             GlStateManager.popMatrix();
 
 		mc.getRenderItem().renderItemOverlays(scale == 1f ? Fonts.font15 : Fonts.font18, mc.thePlayer.inventory.mainInventory[i], (int) (i * 25f), -3);

@@ -4,15 +4,10 @@ import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.module.modules.blatant.*;
 import me.aquavit.liquidsense.module.modules.client.*;
 import me.aquavit.liquidsense.module.modules.exploit.*;
-import me.aquavit.liquidsense.module.modules.hud.Armor;
-import me.aquavit.liquidsense.module.modules.exploit.Derp;
-import me.aquavit.liquidsense.module.modules.exploit.SkinDerp;
-import me.aquavit.liquidsense.module.modules.hud.SpeedGraph;
+import me.aquavit.liquidsense.module.modules.hud.*;
 import me.aquavit.liquidsense.module.modules.misc.*;
 import me.aquavit.liquidsense.module.modules.movement.*;
 import me.aquavit.liquidsense.module.modules.player.*;
-import me.aquavit.liquidsense.module.modules.render.ClickGUI;
-import me.aquavit.liquidsense.module.modules.ghost.AutoArmor;
 import me.aquavit.liquidsense.module.modules.ghost.*;
 import me.aquavit.liquidsense.module.modules.render.*;
 import me.aquavit.liquidsense.module.modules.world.*;
@@ -53,6 +48,9 @@ public final class ModuleManager implements Listenable {
         ClientUtils.getLogger().info("[" + LiquidSense.CLIENT_NAME + "]" + " Loading modules...");
         registerModules(
                 Armor.class,
+                Effects.class,
+                HeadLogo.class,
+                Hotbar.class,
                 SpeedGraph.class,
 
                 Target.class,

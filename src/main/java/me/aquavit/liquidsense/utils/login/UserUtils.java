@@ -128,7 +128,6 @@ public final class UserUtils {
     public static void getWebImageResource(ResourceLocation rl, String url) {
         IImageBuffer iib = new IImageBuffer() {
             public BufferedImage parseUserSkin(BufferedImage img) {
-                //img = convertCircular(img, img.getWidth());
                 return img;
             }
 

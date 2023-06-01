@@ -6,8 +6,6 @@ import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.event.events.Render2DEvent;
 import me.aquavit.liquidsense.module.modules.client.HUD;
 import me.aquavit.liquidsense.utils.mc.ClassUtils;
-import me.aquavit.liquidsense.ui.client.hud.element.Element;
-import me.aquavit.liquidsense.ui.client.hud.element.elements.Hotbar;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Gui;
@@ -16,13 +14,12 @@ import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderHelper;
-import net.minecraft.client.renderer.entity.RenderItem;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
-import org.spongepowered.asm.mixin.Overwrite;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
@@ -33,39 +30,16 @@ import java.awt.*;
 @Mixin(GuiIngame.class)
 @SideOnly(Side.CLIENT)
 public abstract class MixinGuiInGame extends Gui {
-
     @Shadow
-    protected RenderItem itemRenderer;
+    protected abstract void renderHotbarItem(int index, int xPos, int yPos, float partialTicks, EntityPlayer player);
+
+    @Final
+    @Shadow
+    protected Minecraft mc;
 
     private double slot = 0.0D;
     double speed = 1.0D;
     int lastSlot = 0;
-
-	/**
-	 * @author CCBlueX
-	 * @reason CCBlueX
-	 */
-    @Overwrite
-    protected void renderHotbarItem(int index, int xPos, int yPos, float partialTicks, EntityPlayer player){
-        ItemStack itemStack = player.inventory.mainInventory[index];
-        if (itemStack != null) {
-            float lvt_7_1_ = (float)itemStack.animationsToGo - partialTicks;
-            if (lvt_7_1_ > 0.0F) {
-                GlStateManager.pushMatrix();
-                float lvt_8_1_ = 1.0F + lvt_7_1_ / 5.0F;
-                GlStateManager.translate((float)(xPos + 8), (float)(yPos + 12), 0.0F);
-                GlStateManager.scale(1.0F / lvt_8_1_, (lvt_8_1_ + 1.0F) / 2.0F, 1.0F);
-                GlStateManager.translate((float)(-(xPos + 8)), (float)(-(yPos + 12)), 0.0F);
-            }
-
-            this.itemRenderer.renderItemAndEffectIntoGUI(itemStack, xPos, yPos);
-            if (lvt_7_1_ > 0.0F) {
-                GlStateManager.popMatrix();
-            }
-
-            this.itemRenderer.renderItemOverlays(Minecraft.getMinecraft().fontRendererObj, itemStack, xPos, yPos);
-        }
-    }
 
     @Inject(method = "renderScoreboard", at = @At("HEAD"), cancellable = true)
     private void renderScoreboard(CallbackInfo callbackInfo) {
@@ -78,39 +52,32 @@ public abstract class MixinGuiInGame extends Gui {
         final HUD hud = (HUD) LiquidSense.moduleManager.getModule(HUD.class);
         int ScrollSpeed = hud.hotbarSpeed.get() - 1;
 
-        if (OpenGlHelper.shadersSupported && Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer)
+        if (OpenGlHelper.shadersSupported && mc.getRenderViewEntity() instanceof EntityPlayer)
            BlurBuffer.updateBlurBuffer(20f,true);
 
-        for (Element e : LiquidSense.hud.getElements()) {
-            if (e instanceof Hotbar) {
-                LiquidSense.eventManager.callEvent(new Render2DEvent(partialTicks));
-                return;
-            }
-        }
-
-        if(Minecraft.getMinecraft().getRenderViewEntity() instanceof EntityPlayer && hud.getState() && hud.blackHotbarValue.get()) {
-            EntityPlayer entityPlayer = (EntityPlayer) Minecraft.getMinecraft().getRenderViewEntity();
+        if(mc.getRenderViewEntity() instanceof EntityPlayer && hud.getState() && hud.blackHotbarValue.get()) {
+            EntityPlayer entityPlayer = (EntityPlayer) mc.getRenderViewEntity();
 
             double currentItem = entityPlayer.inventory.currentItem;
 
             if (hud.moreinventory.get()){
                 GlStateManager.pushMatrix();
-                GlStateManager.translate(width()/2-90,height()-25,0);
+                GlStateManager.translate((float) new ScaledResolution(mc).getScaledWidth() / 2 - 90,(float) new ScaledResolution(mc).getScaledHeight() - 25,0);
                 RenderUtils.drawBorderedRect(0,1,180,-58,1,new Color(0,0,0,255).getRGB(),new Color(0,0,0,130).getRGB());
                 RenderHelper.enableGUIStandardItemLighting();
                 //renderArmor();
                 int x2=1,x3=1,x4=1;
                 int i1,i3,i4;
                 for (i1 = 27; i1 < 36; ++i1){
-                    renderItem(i1, 1+x2, -16, Minecraft.getMinecraft().thePlayer);
+                    renderItem(i1, 1+x2, -16, mc.thePlayer);
                     x2+=20;
                 }
                 for (i3 = 18; i3 < 27; ++i3){
-                    renderItem(i3, 1+x3, -36, Minecraft.getMinecraft().thePlayer);
+                    renderItem(i3, 1+x3, -36, mc.thePlayer);
                     x3+=20;
                 }
                 for (i4 = 9; i4 < 18; ++i4){
-                    renderItem(i4, 1+x4, -56, Minecraft.getMinecraft().thePlayer);
+                    renderItem(i4, 1+x4, -56, mc.thePlayer);
                     x4+=20;
                 }
                 RenderHelper.disableStandardItemLighting();
@@ -179,19 +146,11 @@ public abstract class MixinGuiInGame extends Gui {
             callbackInfo.cancel();
     }
 
-    private int width() {
-        return new ScaledResolution(Minecraft.getMinecraft()).getScaledWidth();
-    }
-
-    private int height() {
-        return new ScaledResolution(Minecraft.getMinecraft()).getScaledHeight();
-    }
-
     private void renderItem(int i, int x, int y , EntityPlayer player) {
         ItemStack itemstack = player.inventory.mainInventory[i];
         if (itemstack != null) {
-            Minecraft.getMinecraft().getRenderItem().renderItemAndEffectIntoGUI(itemstack, x, y);
-            Minecraft.getMinecraft().getRenderItem().renderItemOverlays(Minecraft.getMinecraft().fontRendererObj, itemstack, x-1, y-1);
+            mc.getRenderItem().renderItemAndEffectIntoGUI(itemstack, x, y);
+            mc.getRenderItem().renderItemOverlays(mc.fontRendererObj, itemstack, x-1, y-1);
         }
     }
 }

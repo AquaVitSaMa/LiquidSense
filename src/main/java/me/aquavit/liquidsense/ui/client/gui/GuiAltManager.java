@@ -524,7 +524,7 @@ public class GuiAltManager extends GuiScreen {
             MinecraftAccount minecraftAccount = LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(id);
             if (loadcircle && minecraftAccount == LiquidSense.fileManager.accountsConfig.altManagerMinecraftAccounts.get(altsList.getSelectedSlot())) {
                 int rot = (int) ((System.nanoTime() / 5000000) % 360);
-                RenderUtils.drawCircle((width / 2) + 100, y + 4, 3, rot - 180, rot);
+                RenderUtils.drawCircle((float) (width / 2) + 100, y + 4, 3, rot - 180, rot);
             }
             if (!minecraftAccount.isCracked()) {
                 if (!skin.containsKey(id)){

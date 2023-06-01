@@ -27,7 +27,7 @@ public class HeadLogo extends Element {
             UserUtils.getWebImageResource(rl,"https://cdn.jsdelivr.net/gh/ImageHelper/image_repository@main/headlogo.png");
         }
 
-	  translate.translate((mc.thePlayer.getHealth() * 16.5f - 10) , 0f );
+        translate.translate((mc.thePlayer.getHealth() * 16.5f - 10) , 0f );
 
         int picture = 48;
         //头像
