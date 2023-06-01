@@ -1,6 +1,7 @@
 package me.aquavit.liquidsense.ui.font;
 
 import me.aquavit.liquidsense.module.modules.client.HUD;
+import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.client.renderer.texture.TextureUtil;
 import net.minecraftforge.fml.relauncher.Side;
@@ -82,30 +83,34 @@ public class AWTFontRenderer {
 
     public void drawString(String text, double x, double y, int color) {
         double scale = 0.5;
-        double reverse = 1.0 / scale;
+        double reverse = 1 / scale;
 
         GlStateManager.pushMatrix();
         GlStateManager.scale(scale, scale, scale);
         GL11.glTranslated(x * 2F, y * 2.0 - 2.0, 0.0);
         GlStateManager.bindTexture(textureID);
 
-        float red = (float)(color >> 16 & 0xFF) / 255.0f;
-        float green = (float)(color >> 8 & 0xFF) / 255.0f;
-        float blue = (float)(color & 0xFF) / 255.0f;
-        float alpha = (float)(color >> 24 & 0xFF) / 255.0f;
+        float red = (float) ((color >> 16) & 0xFF) / 255F;
+        float green = (float) ((color >> 8) & 0xFF) / 255F;
+        float blue = (float) (color & 0xFF) / 255F;
+        float alpha = (float) ((color >> 24) & 0xFF) / 255F;
 
         GlStateManager.color(red, green, blue, alpha);
 
         double currX = 0.0;
+
         CachedFont cached = cachedStrings.get(text);
 
         if (cached != null) {
-            GL11.glCallList((int)cached.getDisplayList());
+            GL11.glCallList(cached.getDisplayList());
+
             cached.setLastUsage(System.currentTimeMillis());
+
             GlStateManager.popMatrix();
+
             return;
         }
-        
+
         int list = -1;
 
         if (assumeNonVolatile) {
@@ -116,17 +121,35 @@ public class AWTFontRenderer {
 
         GL11.glBegin(GL11.GL_QUADS);
 
-        for (char c : text.toCharArray()) {
-            CharLocation fontChar = charLocations[(int)c];
-            if (fontChar == null) continue;
-            this.drawChar(fontChar, (float)currX, 0.0f);
-            currX += (float)fontChar.getWidth() - HUD.fontWidth.get();
+        for (char ch : text.toCharArray()) {
+            if (ch >= charLocations.length) {
+                GL11.glEnd();
+
+                // Ugly solution, because floating point numbers, but I think that shouldn't be that much of a problem
+                GlStateManager.scale(reverse, reverse, reverse);
+                Minecraft.getMinecraft().fontRendererObj.drawString(String.valueOf(ch), (float) (currX * scale + 1), 2f, color, false);
+                currX += Minecraft.getMinecraft().fontRendererObj.getStringWidth(String.valueOf(ch)) * reverse;
+
+                GlStateManager.scale(scale, scale, scale);
+                GlStateManager.bindTexture(textureID);
+                GlStateManager.color(red, green, blue, alpha);
+
+                GL11.glBegin(GL11.GL_QUADS);
+            } else {
+                CharLocation fontChar = charLocations[ch];
+
+                if (fontChar != null) {
+                    drawChar(fontChar, (float) currX, 0f);
+                    currX += (float) fontChar.getWidth() - HUD.fontWidth.get();
+                }
+            }
         }
+
 
         GL11.glEnd();
 
         if (assumeNonVolatile) {
-            ((Map)this.cachedStrings).put(text, new CachedFont(list, System.currentTimeMillis(), false));
+            cachedStrings.put(text, new CachedFont(list, System.currentTimeMillis(), false));
             GL11.glEndList();
         }
 
