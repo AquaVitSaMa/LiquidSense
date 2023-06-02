@@ -191,10 +191,9 @@ public class HUD extends MinecraftInstance {
         return this;
     }
 
-    public final HUD removeElement(Element element) {
+    public final void removeElement(Element element) {
         element.destroyElement();
         elements.remove(element);
-        return this;
     }
 
     public final void clearElements() {

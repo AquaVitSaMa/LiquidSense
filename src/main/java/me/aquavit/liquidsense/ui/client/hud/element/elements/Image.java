@@ -59,12 +59,12 @@ public class Image extends Element {
         }
 
         if (!file.exists()) {
-            MiscUtils.showErrorPopup((String)"Error", (String)"The file does not exist.");
+            MiscUtils.showErrorPopup("Error", "The file does not exist.");
             return false;
         }
 
         if (file.isDirectory()) {
-            MiscUtils.showErrorPopup((String)"Error", (String)"The file is a directory.");
+            MiscUtils.showErrorPopup("Error", "The file is a directory.");
             return false;
         }
 
@@ -72,7 +72,7 @@ public class Image extends Element {
         return true;
     }
 
-    private Image setImage(final String image) {
+    private void setImage(final String image) {
         try {
             this.image.changeValue(image);
             final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(Base64.getDecoder().decode(image));
@@ -85,16 +85,14 @@ public class Image extends Element {
         catch (Exception e) {
             e.printStackTrace();
         }
-        return this;
     }
 
-    public Image setImage(final File image) {
+    public void setImage(final File image) {
         try {
             this.setImage(Base64.getEncoder().encodeToString(Files.readAllBytes(image.toPath())));
         }
         catch (Exception e) {
             e.printStackTrace();
         }
-        return this;
     }
 }

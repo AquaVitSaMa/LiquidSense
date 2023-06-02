@@ -11,6 +11,7 @@ import me.aquavit.liquidsense.utils.login.UserUtils;
 import me.aquavit.liquidsense.utils.render.Colors;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.Translate;
+import me.aquavit.liquidsense.value.BoolValue;
 import me.aquavit.liquidsense.value.ListValue;
 import net.minecraft.client.gui.ScaledResolution;
 import net.minecraft.client.renderer.GlStateManager;
@@ -63,6 +64,10 @@ public class HeadLogo extends Module {
             }
         }
     };
+
+    public final BoolValue health = new BoolValue("CancelHealth", true);
+    public final BoolValue food = new BoolValue("CancelFood", true);
+    public final BoolValue armor = new BoolValue("CancelArmor", true);
     int x,y;
     private final Translate translate = new Translate(0f , 0f);
     private ResourceLocation rl;
@@ -105,7 +110,7 @@ public class HeadLogo extends Module {
         GlStateManager.resetColor();
 
         //小矩形
-        RenderUtils.drawGradientSideway(x+picture / 2f + 25.5f, y - picture / 2f + 45, x+picture / 2f + Fonts.font14.getStringWidth(mc.thePlayer.getFoodStats().getFoodLevel() + "   §6Food") * 2.8f, y+0 - picture / 2f + 60, new Color(45, 45, 45, 255).getRGB(), new Color(45, 45, 45, 0).getRGB());
+        RenderUtils.drawGradientSideway(x+picture / 2f + 25.5f, y - picture / 2f + 45, x+picture / 2f + Fonts.font14.getStringWidth(mc.thePlayer.getFoodStats().getFoodLevel() + "   §6Food") * 2.8f, y - picture / 2f + 60, new Color(45, 45, 45, 255).getRGB(), new Color(45, 45, 45, 0).getRGB());
         //血量值
         RenderUtils.drawLogoArc(x+picture / 2f, y+picture / 2f, 34, -10, (int) translate.getX(), Colors.getHealthColor(mc.thePlayer));
         //大矩形
