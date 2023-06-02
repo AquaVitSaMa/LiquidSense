@@ -84,6 +84,7 @@ public final class ModuleManager implements Listenable {
                 Spammer.class,
                 IceSpeed.class,
                 NoFall.class,
+                Breadcrumbs.class,
                 Blink.class,
                 NameProtect.class,
                 MidClick.class,
