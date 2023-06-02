@@ -1,4 +1,4 @@
-package me.aquavit.liquidsense.ui.client.clickgui.neverlose.About;
+package me.aquavit.liquidsense.ui.client.clickgui.neverlose.about;
 
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.LiquidSense;

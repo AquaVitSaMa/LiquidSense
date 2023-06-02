@@ -21,8 +21,8 @@ import java.util.List;
 @SideOnly(Side.CLIENT)
 public class HUD extends MinecraftInstance {
     public final List<Element> elements = new ArrayList<>();
-    public final List<Notification> notifications = new ArrayList<Notification>();
-    public final List<Print> prints = new ArrayList<Print>();
+    public final List<Notification> notifications = new ArrayList<>();
+    public final List<Print> prints = new ArrayList<>();
 
     public final List<Notification> getNotifications() {
         return this.notifications;

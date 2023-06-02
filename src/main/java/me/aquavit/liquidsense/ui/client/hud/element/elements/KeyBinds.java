@@ -58,7 +58,8 @@ public class KeyBinds extends Element {
 			GlStateManager.resetColor();
 			if ((int) module.getKeytranslate().getX() > -1 && (int) module.getKeytranslate().getX() < 256) {
 				Fonts.font20.drawString(module.getName(), -1.1F, y + 17, new Color(255 , 255 ,255 , (int) module.getKeytranslate().getX() ).getRGB());
-				Fonts.font20.drawString(module.getState() ? "on" : "off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F, y + 17, new Color(255 , 255 ,255 , (int) module.getKeytranslate().getX() ).getRGB());
+				Fonts.font20.drawString(module.getState() ? "on" : "off", Fonts.csgo40.getStringWidth("F") + Fonts.font20.getStringWidth("Binds") + 46F, y + 17, new Color(255 , 255 ,255 , (int) module.getKeytranslate().getX()).getRGB());
+
 			}
 			y += module.getKeytranslate().getY();
 		}

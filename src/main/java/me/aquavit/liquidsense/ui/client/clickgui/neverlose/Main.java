@@ -2,13 +2,12 @@ package me.aquavit.liquidsense.ui.client.clickgui.neverlose;
 
 import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.hud.HUD;
-import me.aquavit.liquidsense.ui.client.hud.designer.EditorPanel;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.Translate;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
-import me.aquavit.liquidsense.ui.client.clickgui.neverlose.About.aboutMain;
+import me.aquavit.liquidsense.ui.client.clickgui.neverlose.about.aboutMain;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.implvalue.Editbox;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.module.DrawModule;
 import me.aquavit.liquidsense.ui.client.hud.designer.GuiHudDesigner;

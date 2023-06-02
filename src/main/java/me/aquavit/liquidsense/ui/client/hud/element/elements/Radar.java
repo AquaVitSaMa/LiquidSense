@@ -207,20 +207,18 @@ public class Radar extends Element {
                     glPopMatrix();
                 }
 
-                Teams team = (Teams) LiquidSense.moduleManager.getModule(Teams.class);
-
-                if (team.isInYourTeam((EntityLivingBase) entity) && entity != mc.thePlayer) {
+                if (Teams.isInYourTeam((EntityLivingBase) entity) && entity != mc.thePlayer) {
                     worldRenderer.pos(((double) (positionRelativeToPlayer.x / viewDistance) * size),
                             ((double) (positionRelativeToPlayer.y / viewDistance) * size), 0.0)
-                            .color(0f / 255.0f, 255f / 255.0f, 0f / 255.0f, 1.0f).endVertex();
+                            .color(0f / 255.0f, 1.0f, 0f / 255.0f, 1.0f).endVertex();
                 }else if (entity == mc.thePlayer) {
                     worldRenderer.pos(((double) (positionRelativeToPlayer.x / viewDistance) * size),
                             ((double) (positionRelativeToPlayer.y / viewDistance) * size), 0.0)
-                            .color(255f / 255.0f, 255f / 255.0f, 255f / 255.0f, 1.0f).endVertex();
+                            .color(1.0f, 1.0f, 1.0f, 1.0f).endVertex();
                 }else{
                     worldRenderer.pos(((double) (positionRelativeToPlayer.x / viewDistance) * size),
                             ((double) (positionRelativeToPlayer.y / viewDistance) * size), 0.0)
-                            .color(255f / 255.0f, 0f / 255.0f, 0f / 255.0f, 1.0f).endVertex();
+                            .color(1.0f, 0f / 255.0f, 0f / 255.0f, 1.0f).endVertex();
                 }
 
                 if(playerSize > 0) {

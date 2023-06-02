@@ -51,6 +51,7 @@ public final class ModuleManager implements Listenable {
                 Effects.class,
                 HeadLogo.class,
                 Hotbar.class,
+                ScoreboardElement.class,
                 SpeedGraph.class,
 
                 Target.class,

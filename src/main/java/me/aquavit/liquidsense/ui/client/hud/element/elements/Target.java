@@ -109,7 +109,6 @@ public class Target extends Element {
                 RenderUtils.drawRect(1f, 0f, 142f, 52f, new Color(0, 0, 0, backGroundA.get()).getRGB());
             }
 
-            int index = 0;
             for (TargetHudParticles module : particles) {
                 if (module.getX() > 0)
                     module.setAnimaitonX(module.getAnimaitonX() + Math.abs((module.getX() - (module.getX() - Math.abs(module.getX() - module.getAnimaitonX()))) / (float) 150) * (float) RenderUtils.deltaTime);
@@ -141,7 +140,6 @@ public class Target extends Element {
                             module.getSize(), 0f, new Color(module.getRed(), module.getGreen(), module.getBlue(), 255 - (int) module.getAnimaitonA()));
 
                 }
-                index++;
             }
 
             GL11.glPushMatrix();
