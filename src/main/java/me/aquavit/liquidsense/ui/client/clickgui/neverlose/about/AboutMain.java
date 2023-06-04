@@ -10,9 +10,9 @@ import java.awt.*;
 import java.text.SimpleDateFormat;
 import java.time.Year;
 
-public class aboutMain extends Main {
+public class AboutMain extends Main {
 
-    public static void drawabout(int mouseX, int mouseY, Main main) {
+    public static void drawAbout(int mouseX, int mouseY, Main main) {
         if (main.hoverConfig(Impl.coordinateX + 410, Impl.coordinateY + 14, Impl.coordinateX + 420, Impl.coordinateY + 26, mouseX, mouseY, true)) {
             Impl.openAbout = !Impl.openAbout;
         }

@@ -150,7 +150,7 @@ public class ESP extends Module {
         } else if (mode.equalsIgnoreCase("newbox")) {
             GlStateManager.pushMatrix();
             GL11.glDisable(GL11.GL_DEPTH_TEST);
-            ScaledResolution sr = new ScaledResolution(this.mc);
+            ScaledResolution sr = new ScaledResolution(mc);
             double twoDscale = sr.getScaleFactor() / Math.pow(sr.getScaleFactor(), 2);
             GlStateManager.scale(twoDscale, twoDscale, twoDscale);
 
@@ -316,7 +316,7 @@ public class ESP extends Module {
         return colorRainbow.get() ? ColorUtils.rainbow() : new Color(colorRedValue.get(), colorGreenValue.get(), colorBlueValue.get());
     }
 
-    private void drawnew(Entity e, int left, int top, int right, int bottom) {
+    private void  drawnew(Entity e, int left, int top, int right, int bottom) {
         RenderUtils.drawnewrect(0, 0, 0, 0, 0);
 
         int line = 1;

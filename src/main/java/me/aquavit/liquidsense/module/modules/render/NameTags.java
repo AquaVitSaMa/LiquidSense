@@ -54,7 +54,7 @@ public class NameTags extends Module {
             () -> elements.getMultiBool("ClearNames"));
     private final IntegerValue blue = (IntegerValue) new IntegerValue("Blue", 255,0,255).displayable(
             () -> elements.getMultiBool("ClearNames"));
-    private final BoolValue showself = new BoolValue("ShowSelf", false);
+    public final BoolValue showself = new BoolValue("ShowSelf", false);
 
     private final ListValue bgMode = (ListValue) new ListValue("GroundMode", new String[] {"Both", "Name", "Armor", "None"}, "None").displayable(
             () -> modeValue.get().equalsIgnoreCase("2D"));
@@ -73,7 +73,7 @@ public class NameTags extends Module {
         if (modeValue.get().equalsIgnoreCase("3D")) return;
         mc.theWorld.loadedEntityList.stream().filter(entity ->
                 EntityUtils.isSelected(entity, false, showself.get()) && RenderUtils.isInViewFrustrum(entity)).forEach(entity -> {
-                    Tag2D(event, (EntityLivingBase) entity, elements.getMultiBool("ClearNames") ?
+                    Tag2D(event.getPartialTicks(), (EntityLivingBase) entity, elements.getMultiBool("ClearNames") ?
                             StringUtils.stripControlCodes(entity.getName()) : entity.getDisplayName().getUnformattedText());
 
         });
@@ -90,10 +90,10 @@ public class NameTags extends Module {
         });
     }
 
-    private void Tag2D(Render2DEvent event, EntityLivingBase entity, String name) {
-        double posX = RenderUtils.interpolate(entity.posX, entity.lastTickPosX, event.getPartialTicks());
-        double posY = RenderUtils.interpolate(entity.posY, entity.lastTickPosY, event.getPartialTicks());
-        double posZ = RenderUtils.interpolate(entity.posZ, entity.lastTickPosZ, event.getPartialTicks());
+    public void Tag2D(float partialTicks, EntityLivingBase entity, String name) {
+        double posX = RenderUtils.interpolate(entity.posX, entity.lastTickPosX, partialTicks);
+        double posY = RenderUtils.interpolate(entity.posY, entity.lastTickPosY, partialTicks);
+        double posZ = RenderUtils.interpolate(entity.posZ, entity.lastTickPosZ, partialTicks);
 
         double width = entity.width / 1.5;
         double height = (entity.height + (entity.isSneaking() ? -0.4 : 0.1) +
@@ -112,7 +112,7 @@ public class NameTags extends Module {
                 new Vector3d(aabb.maxX, aabb.minY, aabb.maxZ),
                 new Vector3d(aabb.maxX, aabb.maxY, aabb.maxZ)
         );
-        mc.entityRenderer.setupCameraTransform(event.getPartialTicks(), 0);
+        mc.entityRenderer.setupCameraTransform(partialTicks, 0);
         Vector4d position = null;
 
         for (Vector3d vector : vectors) {

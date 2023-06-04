@@ -2,12 +2,13 @@ package me.aquavit.liquidsense.ui.client.clickgui.neverlose;
 
 import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.hud.HUD;
+import me.aquavit.liquidsense.ui.client.clickgui.neverlose.model.ModelMain;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
 import me.aquavit.liquidsense.utils.render.Translate;
 import me.aquavit.liquidsense.module.Module;
 import me.aquavit.liquidsense.module.ModuleCategory;
-import me.aquavit.liquidsense.ui.client.clickgui.neverlose.about.aboutMain;
+import me.aquavit.liquidsense.ui.client.clickgui.neverlose.about.AboutMain;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.implvalue.Editbox;
 import me.aquavit.liquidsense.ui.client.clickgui.neverlose.module.DrawModule;
 import me.aquavit.liquidsense.ui.client.hud.designer.GuiHudDesigner;
@@ -155,7 +156,8 @@ public class Main extends GuiScreen {
         DrawModule.drawModule(mouseX, mouseY, this);
         Fonts.csgo40.drawString("G" , coordinateX + 410 , coordinateY + 14 , textColor);
         Fonts.csgo40.drawString("E", coordinateX + 395, coordinateY + 14, textColor);
-        if (!openSearch) aboutMain.drawabout(mouseX, mouseY, this);
+        if (!openSearch) AboutMain.drawAbout(mouseX, mouseY, this);
+        if (!openSearch) ModelMain.drawModel(mouseX, mouseY, this);
         if (hoverConfig(coordinateX + 395, coordinateY + 14, coordinateX + 405, coordinateY + 26, mouseX, mouseY, true)) openSearch = !openSearch;
 
         if (openSearch) {

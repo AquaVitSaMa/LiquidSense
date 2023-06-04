@@ -127,9 +127,12 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
 
  */
 
-    @Inject(method = "canRenderName", at = @At("HEAD"), cancellable = true)
+    @Inject(method = "canRenderName*", at = @At("HEAD"), cancellable = true)
     private <T extends EntityLivingBase> void canRenderName(T entity, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
-        if (!ESP.renderNameTags || (LiquidSense.moduleManager.getModule(NameTags.class).getState() && EntityUtils.isSelected(entity, false, false)))
+
+        final NameTags nameTags = (NameTags) LiquidSense.moduleManager.getModule(NameTags.class);
+
+        if (!ESP.renderNameTags || (nameTags.getState() && EntityUtils.isSelected(entity, false, false)))
             callbackInfoReturnable.setReturnValue(false);
     }
 

@@ -8,6 +8,8 @@ public class Impl {
     public static String Search = "";
     public static boolean openAbout = false;
 
+    public static boolean openModel = false;
+
     // middle key ManagerModule
     public static boolean openmidmanger = false;
     public static Module midmangermodule = null;
