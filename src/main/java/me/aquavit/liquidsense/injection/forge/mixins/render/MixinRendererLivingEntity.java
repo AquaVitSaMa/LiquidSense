@@ -120,12 +120,6 @@ public abstract class MixinRendererLivingEntity extends MixinRender {
         }
 
     }
-/*
-    @Shadow
-    public abstract <T extends EntityLivingBase> void renderLayers(T p_renderLayers_1_, float p_renderLayers_2_, float p_renderLayers_3_, float p_renderLayers_4_, float p_renderLayers_5_, float p_renderLayers_6_, float p_renderLayers_7_, float p_renderLayers_8_);
-
-
- */
 
     @Inject(method = "canRenderName*", at = @At("HEAD"), cancellable = true)
     private <T extends EntityLivingBase> void canRenderName(T entity, CallbackInfoReturnable<Boolean> callbackInfoReturnable) {
