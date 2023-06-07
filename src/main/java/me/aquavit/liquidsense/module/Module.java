@@ -47,7 +47,6 @@ public class Module extends MinecraftInstance implements Listenable {
     private float suckDown;
     private Translate translate;
     private Translate keytranslate;
-
     private double defaultx;
     private double defaulty;
     private double prevMouseX;
