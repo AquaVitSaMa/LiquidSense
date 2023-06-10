@@ -20,18 +20,18 @@ public class HelpCommand extends Command {
                 page = Integer.parseInt(args[1]);
             }
             catch (NumberFormatException e) {
-                this.chatSyntaxError();
+                chatSyntaxError();
             }
         }
         if (page <= 0) {
-            this.chat("The number you have entered is too low, it must be over 0");
+            chat("The number you have entered is too low, it must be over 0");
             return;
         }
         if (page > maxPage) {
-            this.chat("The number you have entered is too big, it must be under " + maxPage + ".");
+            chat("The number you have entered is too big, it must be under " + maxPage + ".");
             return;
         }
-        this.chat("§c§lHelp");
+        chat("§c§lHelp");
         ClientUtils.displayChatMessage("§7> Page: §8" + page + " / " + maxPage);
         for (int i = 8 * (page - 1); i < 8 * page && i < LiquidSense.commandManager.getCommands().size(); ++i) {
             final Command command = LiquidSense.commandManager.getCommands().get(i);

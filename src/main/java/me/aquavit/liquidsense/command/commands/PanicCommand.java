@@ -17,41 +17,63 @@ public class PanicCommand extends Command {
 
     @Override
     public void execute(String[] args) {
+        List<Module> modules = LiquidSense.moduleManager.getModules().stream()
+                .filter(Module::getState)
+                .collect(Collectors.toList());
+        String msg;
+
         if (args.length > 1 && !args[1].isEmpty()) {
-            if (args[1].equalsIgnoreCase("all")){
-                LiquidSense.moduleManager.getModules().stream().filter(Module::getState).forEach(module -> module.setState(false));
-                this.chat("Disabled all modules.");
-            }else if (args[1].equalsIgnoreCase("nonrender")){
-                LiquidSense.moduleManager.getModules().stream().filter(module -> module.getState() && module.getCategory() != ModuleCategory.RENDER).forEach(module -> module.setState(false));
-                this.chat("Disabled all non-render modules.");
-            } else {
-                for (ModuleCategory categories : ModuleCategory.values()){
-                    if (args[1].equalsIgnoreCase(categories.displayName.toLowerCase())){
-                        LiquidSense.moduleManager.getModules().stream().filter
-                                (module -> module.getState() && module.getCategory() == categories).forEach(module -> module.setState(false));
-                        this.chat("Disabled "+args[1].toLowerCase()+ " modules.");
+            switch (args[1].toLowerCase()) {
+                case "all":
+                    msg = "all";
+                    break;
+
+                case "nonrender":
+                    modules = modules.stream()
+                            .filter(module -> module.getCategory() != ModuleCategory.RENDER)
+                            .collect(Collectors.toList());
+                    msg = "all non-render";
+                    break;
+
+                default:
+                    List<ModuleCategory> categories = Arrays.stream(ModuleCategory.values())
+                            .filter(category -> category.getDisplayName().equalsIgnoreCase(args[1]))
+                            .collect(Collectors.toList());
+
+                    if (categories.isEmpty()) {
+                        chat("Category " + args[1] + " not found");
                         return;
                     }
-                }
-                this.chat("Category "+ args[1] + " not found");
+
+                    ModuleCategory category = categories.get(0);
+                    modules = modules.stream()
+                            .filter(module -> module.getCategory() == category)
+                            .collect(Collectors.toList());
+                    msg = "all " + category.getDisplayName();
+                    break;
             }
         } else {
-            this.chatSyntax("panic <all/nonrender/combat/player/movement/render/world/misc/exploit/fun>");
+            chatSyntax("panic <all/nonrender/blatant/client/exploit/ghost/hud/misc/movement/player/render/world>");
+            return;
         }
+
+        for (Module module : modules) {
+            module.setState(false);
+        }
+
+        chat("Disabled " + msg + " modules.");
     }
 
     @Override
     public List<String> tabComplete(String[] args) {
         if (args.length == 0) return new ArrayList<>();
 
-        switch (args.length) {
-            case 1:
-                return Arrays.stream(new String[]{"all", "nonrender", "combat", "player", "movement", "render", "world", "misc", "exploit", "fun"})
-                        .filter(it -> it.startsWith(args[0]))
-                        .collect(Collectors.toList());
-            default:
-                return new ArrayList<>();
+        if (args.length == 1) {
+            return Arrays.stream(new String[]{"all", "nonrender", "blatant", "client", "exploit", "ghost", "hud", "misc", "movement", "player", "render", "world"})
+                    .filter(it -> it.toLowerCase().startsWith(args[0].toLowerCase()))
+                    .collect(Collectors.toList());
         }
+        return new ArrayList<>();
     }
 
 }

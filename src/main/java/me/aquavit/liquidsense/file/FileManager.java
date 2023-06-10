@@ -34,7 +34,7 @@ public class FileManager extends MinecraftInstance {
 
     public final FileConfig clickGuiConfig = new ClickGuiConfig(new File(dir, "clickgui.json"));
     public final FileConfig shortcutsConfig = new ShortcutsConfig(new File(dir, "shortcuts.json"));
-    public final FileConfig setnameConfig = new SetNameConfig(new File(dir, "setname.json"));
+    public final FileConfig setNameConfig = new SetNameConfig(new File(dir, "setname.json"));
 
     public final File backgroundFile = new File(dir, "userbackground.png");
 

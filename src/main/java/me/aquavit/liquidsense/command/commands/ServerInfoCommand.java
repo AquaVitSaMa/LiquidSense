@@ -21,27 +21,27 @@ public class ServerInfoCommand extends Command implements Listenable {
     @Override
     public void execute(final String[] args) {
         if (mc.getCurrentServerData() == null) {
-            this.chat("This command only work on a server.");
+            chat("This command only work on a server.");
             return;
         }
         final ServerData data = mc.getCurrentServerData();
-        this.chat("Server infos:");
-        this.chat("§7Name: §8" + data.serverName);
-        this.chat("§7IP: §8" + this.ip + ':' + this.port);
-        this.chat("§7Players: §8" + data.populationInfo);
-        this.chat("§7MOTD: §8" + data.serverMOTD);
-        this.chat("§7ServerVersion: §8" + data.gameVersion);
-        this.chat("§7ProtocolVersion: §8" + data.version);
-        this.chat("§7Ping: §8" + data.pingToServer);
+        chat("Server infos:");
+        chat("§7Name: §8" + data.serverName);
+        chat("§7IP: §8" + this.ip + ':' + this.port);
+        chat("§7Players: §8" + data.populationInfo);
+        chat("§7MOTD: §8" + data.serverMOTD);
+        chat("§7ServerVersion: §8" + data.gameVersion);
+        chat("§7ProtocolVersion: §8" + data.version);
+        chat("§7Ping: §8" + data.pingToServer);
     }
 
     @EventTarget
     public void onPacket(final PacketEvent event) {
-        final Packet packet = event.getPacket();
+        final Packet<?> packet = event.getPacket();
         if (packet instanceof C00Handshake) {
             final C00Handshake handshake = (C00Handshake)packet;
-            this.ip = handshake.ip;
-            this.port = handshake.port;
+            ip = handshake.ip;
+            port = handshake.port;
         }
     }
 

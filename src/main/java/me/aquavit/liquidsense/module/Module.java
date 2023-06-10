@@ -86,10 +86,13 @@ public class Module extends MinecraftInstance implements Listenable {
         this.useConfig = false;
     }
 
-    public void setKeyBind(final int keyBind) {
+    public void setKeyBind(int keyBind) {
         this.keyBind = keyBind;
-        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.modulesConfig);
+
+        if (!LiquidSense.isStarting)
+            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.modulesConfig);
     }
+
 
     public void setState(final boolean state) {
         try {
@@ -166,7 +169,7 @@ public class Module extends MinecraftInstance implements Listenable {
         this.showSettings = !showSettings;
     }
 
-    public final void setNameCommad(String namecommand) {
+    public final void setNameCommand(String namecommand) {
         this.arrayListName = namecommand;
     }
 

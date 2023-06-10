@@ -11,20 +11,20 @@ public class PrefixCommand extends Command {
     @Override
     public void execute(final String[] args) {
         if (args.length <= 1) {
-            this.chatSyntax("prefix <character>");
+            chatSyntax("prefix <character>");
             return;
         }
 
         String prefix = args[1];
 
         if (prefix.length() > 1) {
-            this.chat("§cPrefix can only be one character long!");
+            chat("§cPrefix can only be one character long!");
             return;
         }
 
         LiquidSense.commandManager.setPrefix(prefix.charAt(0));
         LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.valuesConfig);
 
-        this.chat("Successfully changed command prefix to '§8" +prefix+"§3'");
+        chat("Successfully changed command prefix to '§8" +prefix+"§3'");
     }
 }

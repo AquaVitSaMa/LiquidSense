@@ -12,9 +12,9 @@ public class SayCommand extends Command {
     public void execute(final String[] args) {
         if (args.length > 1) {
             mc.thePlayer.sendChatMessage(StringUtils.toCompleteString(args, 1));
-            this.chat("Message was send to the chat.");
+            chat("Message was send to the chat.");
             return;
         }
-        this.chatSyntax(".say <message...>");
+        chatSyntax(".say <message...>");
     }
 }

@@ -14,24 +14,23 @@ public class RemoteViewCommand extends Command {
         super("remoteview", "rv");
     }
 
-    @Override
     public void execute(final String[] args) {
         if (args.length < 2) {
             if (mc.getRenderViewEntity() != mc.thePlayer) {
                 mc.setRenderViewEntity(mc.thePlayer);
                 return;
             }
-            this.chatSyntax("remoteview <username>");
+            chatSyntax("remoteview <username>");
             return;
         }
 
         String targetName = args[1];
 
         for (Entity entity : mc.theWorld.loadedEntityList) {
-            if (targetName == entity.getName()) {
+            if (targetName.equals(entity.getName())) {
                 mc.setRenderViewEntity(entity);
-                this.chat("Now viewing perspective of §8" + entity.getName() + "§3.");
-                this.chat("Execute §8" + LiquidSense.commandManager.getPrefix() + "remoteview §3again to go back to yours.");
+                chat("Now viewing perspective of §8" + entity.getName() + "§3.");
+                chat("Execute §8" + LiquidSense.commandManager.getPrefix() + "remoteview §3again to go back to yours.");
                 break;
             }
         }
@@ -41,14 +40,12 @@ public class RemoteViewCommand extends Command {
     public List<String> tabComplete(String[] args) {
         if (args.length == 0) return new ArrayList<>();
 
-        switch (args.length) {
-            case 1:
-                return mc.theWorld.playerEntities.stream()
-                        .map(EntityPlayer::getName)
-                        .filter(module -> module.startsWith(args[0]))
-                        .collect(Collectors.toList());
-            default:
-                return new ArrayList<>();
+        if (args.length == 1) {
+            return mc.theWorld.playerEntities.stream()
+                    .map(EntityPlayer::getName)
+                    .filter(module -> module.toLowerCase().startsWith(args[0].toLowerCase()))
+                    .collect(Collectors.toList());
         }
+        return new ArrayList<>();
     }
 }

@@ -19,28 +19,29 @@ public class ToggleCommand extends Command {
             Module module = LiquidSense.moduleManager.getModule(args[1]);
 
             if (module == null) {
-                this.chat("Module '" + args[1] + "' not found.");
+                chat("Module '" + args[1] + "' not found.");
                 return;
             }
 
             if (args.length > 2) {
                 String newState = args[2].toLowerCase();
 
-                if (newState == "on" || newState == "off") {
-                    module.setState(true);
+                if (newState.equals("on") || newState.equals("off")) {
+                    module.setState(newState.equals("on"));
                 } else {
-                    this.chatSyntax("toggle <module> [on/off]");
+                    chatSyntax("toggle <module> [on/off]");
                     return;
                 }
+
             } else {
                 module.toggle();
             }
 
-            this.chat((module.getState() ? "Enabled" : "Disabled") + " module §8" + module.getName() + "§3.");
+            chat((module.getState() ? "Enabled" : "Disabled") + " module §8" + module.getName() + "§3.");
             return;
         }
 
-        this.chatSyntax("toggle <module> [on/off]");
+        chatSyntax("toggle <module> [on/off]");
     }
 
     @Override

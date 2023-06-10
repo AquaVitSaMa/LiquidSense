@@ -5,16 +5,18 @@ import me.aquavit.liquidsense.command.Command;
 import java.awt.*;
 import java.awt.datatransfer.StringSelection;
 
-public class UsernameCommand extends Command
-{
+public class UsernameCommand extends Command {
     public UsernameCommand() {
-        super("username");
+        super("username", "ign");
     }
 
     @Override
-    public void execute(final String[] args) {
-        this.chat("Username: " + mc.thePlayer.getName());
-        final StringSelection stringSelection = new StringSelection(UsernameCommand.mc.thePlayer.getName());
+    public void execute(String[] args) {
+        String username = mc.thePlayer.getName();
+
+        chat("Username: " + username);
+
+        StringSelection stringSelection = new StringSelection(username);
         Toolkit.getDefaultToolkit().getSystemClipboard().setContents(stringSelection, stringSelection);
     }
 }

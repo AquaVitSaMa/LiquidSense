@@ -19,46 +19,37 @@ public class HideCommand extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length > 1) {
-            if (args[1].equalsIgnoreCase("list")){
-                this.chat("§c§lHidden");
-                LiquidSense.moduleManager.getModules().stream().filter(Module::getArray)
-                        .forEach(module ->
-                                ClientUtils.displayChatMessage("§6> §c" + module.getName()));
-                return;
-            } else if (args[1].equalsIgnoreCase("clear")){
+            String arg = args[1].toLowerCase();
+            switch (arg) {
+                case "list":
+                    LiquidSense.moduleManager.getModules().stream().filter(Module::getArray).forEach(module -> ClientUtils.displayChatMessage("§6> §c" + module.getName()));
+                    chat("§c§lHidden");
+                    break;
+                case "clear":
+                    for (Module module : LiquidSense.moduleManager.getModules()) module.setArray(true);
+                    chat("Cleared hidden modules.");
+                    break;
+                case "reset":
+                    for (Module module : LiquidSense.moduleManager.getModules()) module.setArray(module.getClass().getAnnotation(ModuleInfo.class).array());
+                    chat("Reset hidden modules.");
+                    break;
+                default:
+                    Module module = LiquidSense.moduleManager.getModule(args[1]);
 
-                for (Module module : LiquidSense.moduleManager.getModules())
-                    module.setArray(true);
+                    if (module == null) {
+                        chat("Module §a§l" + args[1] + "§3 not found.");
+                        return;
+                    }
 
-                this.chat("Cleared hidden modules.");
-                return;
-            } else if (args[1].equalsIgnoreCase("reset")) {
+                    module.setArray(!module.getArray());
 
-                for (Module module : LiquidSense.moduleManager.getModules())
-                    module.setArray(module.getClass().getAnnotation(ModuleInfo.class).array());
-
-                this.chat("Reset hidden modules.");
-                return;
-            } else {
-                // Get module by name
-                Module module = LiquidSense.moduleManager.getModule(args[1]);
-
-                if (module == null) {
-                    this.chat("Module §a§l" + args[1] + "§3 not found.");
-                    return;
-                }
-
-                // Find key by name and change
-                module.setArray(!module.getArray());
-
-                // Response to user
-                this.chat("Module §a§l" + module.getName() + "§3 is now §a§l" + (module.getArray() ? "visible" : "invisible") + "§3 on the array list.");
-                playEdit();
-                return;
+                    chat("Module §a§l" + module.getName() + "§3 is now §a§l" + (module.getArray() ? "visible" : "invisible") + "§3 on the array list.");
+                    playEdit();
+                    break;
             }
+            return;
         }
-
-        this.chatSyntax("hide <module/list/clear/reset>");
+        chatSyntax("hide <module/list/clear/reset>");
     }
 
     @Override

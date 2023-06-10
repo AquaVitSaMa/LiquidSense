@@ -125,7 +125,7 @@ public class LiquidSense {
 
         GuiAltManager.loadGenerators();
 
-        fileManager.loadConfigs(fileManager.setnameConfig);
+        fileManager.loadConfigs(fileManager.setNameConfig);
 
         Display.setTitle(LiquidSense.CLIENT_NAME + " | " + LiquidSense.CLIENT_VERSION + " | " + LiquidSense.MINECRAFT_VERSION +" | "+ "By AquaVit");
         ClientUtils.getLogger().info(LiquidSense.CLIENT_NAME + " | " + "By AquaVit" + " | " + "Loading completed");

@@ -13,25 +13,31 @@ public class ReloadCommand extends Command
 
     @Override
     public void execute(final String[] args) {
-        this.chat("Reloading...");
-        this.chat("§c§lReloading scripts...");
+        chat("Reloading...");
+        chat("§c§lReloading scripts...");
         LiquidSense.scriptManager.reloadScripts();
-        this.chat("§c§lReloading fonts...");
+        chat("§c§lReloading fonts...");
         Fonts.loadFonts();
-        this.chat("§c§lReloading modules...");
+        chat("§c§lReloading modules...");
         LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.modulesConfig);
-        this.chat("§c§lReloading values...");
+        chat("§c§lReloading values...");
         LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.valuesConfig);
-        this.chat("§c§lReloading accounts...");
+        chat("§c§lReloading accounts...");
         LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.accountsConfig);
-        this.chat("§c§lReloading friends...");
+        chat("§c§lReloading friends...");
         LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.friendsConfig);
-        this.chat("§c§lReloading xray...");
+        chat("§c§lReloading xray...");
         LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.xrayConfig);
-        this.chat("§c§lReloading hud...");
+        chat("§c§lReloading customHud...");
         LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.hudConfig);
-        this.chat("§c§lReloading ClickGUI...");
+        chat("§c§lReloading hud...");
+        LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.clickGuiConfig);
+        chat("§c§lReloading shortcuts...");
+        LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.shortcutsConfig);
+        chat("§c§lReloading setName...");
+        LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.setNameConfig);
+        chat("§c§lReloading clickGUI...");
         LiquidSense.neverlose= new Main();
-        this.chat("Reloaded.");
+        chat("Reloaded.");
     }
 }

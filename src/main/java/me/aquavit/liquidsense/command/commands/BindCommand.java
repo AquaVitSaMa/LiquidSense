@@ -19,17 +19,17 @@ public class BindCommand extends Command {
     @Override
     public void execute(final String[] args) {
         if (args.length <= 2) {
-            this.chatSyntax(new String[] { "<module> <key>", "<module> none" });
+            chatSyntax(new String[] { "<module> <key>", "<module> none" });
             return;
         }
         final Module module = LiquidSense.moduleManager.getModule(args[1]);
         if (module == null) {
-            this.chat("Module §a§l" + args[1] + "§3 not found.");
+            chat("Module §a§l" + args[1] + "§3 not found.");
             return;
         }
         final int key = Keyboard.getKeyIndex(args[2].toUpperCase());
         module.setKeyBind(key);
-        this.chat("Bound module §a§l" + module.getName() + "§3 to key §a§l" + Keyboard.getKeyName(key) + "§3.");
+        chat("Bound module §a§l" + module.getName() + "§3 to key §a§l" + Keyboard.getKeyName(key) + "§3.");
         LiquidSense.hud.addNotification(new Notification("Bound " + module.getName() + " to " + Keyboard.getKeyName(key),"", ColorType.INFO,1500,500));
         playEdit();
     }
@@ -40,14 +40,12 @@ public class BindCommand extends Command {
 
         String moduleName = args[0];
 
-        switch (args.length) {
-            case 1:
-                return LiquidSense.moduleManager.getModules().stream()
-                        .map(Module::getName)
-                        .filter(module -> module.startsWith(moduleName))
-                        .collect(Collectors.toList());
-            default:
-                return new ArrayList<>();
+        if (args.length == 1) {
+            return LiquidSense.moduleManager.getModules().stream()
+                    .map(Module::getName)
+                    .filter(module -> module.toLowerCase().startsWith(moduleName.toLowerCase()))
+                    .collect(Collectors.toList());
         }
+        return new ArrayList<>();
     }
 }

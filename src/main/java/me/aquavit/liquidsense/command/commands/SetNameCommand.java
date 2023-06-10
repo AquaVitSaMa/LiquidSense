@@ -18,54 +18,58 @@ public class SetNameCommand extends Command {
     @Override
     public void execute(final String[] args) {
         if (args.length > 1) {
-            if (args[1].equalsIgnoreCase("load")) {
-                LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.setnameConfig);
-                return;
-            }
-            if (args[1].equalsIgnoreCase("list")) {
-                for (Module module : LiquidSense.moduleManager.getModules()) {
-                    if (module.getArrayListName().equals(module.getClass().getAnnotation(ModuleInfo.class).name())) continue;
-                    this.chat("Module <" + module.getArrayListName() + "> is §7" + module.getClass().getAnnotation(ModuleInfo.class).name());
-                }
-                return;
-            }
-            if (args[1].equalsIgnoreCase("cleaner")) {
-                for (Module module : LiquidSense.moduleManager.getModules()) {
+            String arg = args[1].toLowerCase();
+
+            switch (arg) {
+                case "load":
+                    LiquidSense.fileManager.loadConfig(LiquidSense.fileManager.setNameConfig);
+                    break;
+                case "list":
+                    for (Module module : LiquidSense.moduleManager.getModules()) {
+                        if (module.getArrayListName().equals(module.getClass().getAnnotation(ModuleInfo.class).name())) continue;
+                        chat("Module <" + module.getArrayListName() + "> is §7" + module.getClass().getAnnotation(ModuleInfo.class).name());
+                    }
+                    break;
+                case "cleaner":
+                    for (Module module : LiquidSense.moduleManager.getModules()) {
+                        if (args.length > 2) {
+                            String newValue = getName(args, 2);
+
+                            Module oldModule = LiquidSense.moduleManager.getModule(newValue);
+                            if (oldModule == null) return;
+
+                            if (module.getName().equalsIgnoreCase(oldModule.getName())) {
+                                module.setArrayListName(module.getClass().getAnnotation(ModuleInfo.class).name());
+
+                                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.setNameConfig);
+                                chat("reset Module <" + newValue + '>');
+                                return;
+                            }
+                        }
+                        module.setArrayListName(module.getClass().getAnnotation(ModuleInfo.class).name());
+                        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.setNameConfig);
+                    }
+                    chat("reset Module name ");
+                    break;
+                default:
                     if (args.length > 2) {
-                        String newValue = this.getname(args, 2);
-
-                        Module oldmodule = LiquidSense.moduleManager.getModule(newValue);
-                        if (oldmodule == null)return;
-
-                        if (module.getName().equalsIgnoreCase(oldmodule.getName())) {
-                            module.setArrayListName(module.getClass().getAnnotation(ModuleInfo.class).name());
-
-                            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.setnameConfig);
-                            this.chat("reset Module <" + newValue + '>');
+                        String newValue = getName(args, 2);
+                        String oldVaule = getName(args, 1);
+                        Module module = LiquidSense.moduleManager.getModule(oldVaule);
+                        if (module == null) {
+                            chat("Module §a§l" + args[1] + "§3 not found.");
                             return;
                         }
+                        module.setNameCommand(newValue);
+                        LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.setNameConfig);
+                        chat("Module §a§l" + args[1] + "§l§a to " + newValue);
+                        return;
                     }
-                    module.setArrayListName(module.getClass().getAnnotation(ModuleInfo.class).name());
-                    LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.setnameConfig);
-                }
-                this.chat("reset Module name ");
-                return;
+                    break;
             }
-            if (args.length > 2) {
-                String newValue = this.getname(args, 2);
-                String oldVaule = this.getname(args, 1);
-                Module module = LiquidSense.moduleManager.getModule(oldVaule);
-                if (module == null) {
-                    this.chat("Module §a§l" + args[1] + "§3 not found.");
-                    return;
-                }
-                module.setNameCommad(newValue);
-                LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.setnameConfig);
-                this.chat("Module §a§l" + args[1] + "§l§a to " + newValue);
-                return;
-            }
+            return;
         }
-        this.chatSyntax(new String[]{"<module> <name>", "<cleaner/load/list> "});
+        chatSyntax(new String[]{"<module> <name>", "<cleaner/load/list>"});
     }
 
     @Override
@@ -74,31 +78,33 @@ public class SetNameCommand extends Command {
 
         String moduleName = args[0];
 
-        switch (args.length) {
-            case 1:
-                return LiquidSense.moduleManager.getModules().stream()
-                        .map(Module::getName)
-                        .filter(module -> module.startsWith(moduleName))
-                        .collect(Collectors.toList());
-            default:
-                return new ArrayList<>();
+        if (args.length == 1) {
+            return LiquidSense.moduleManager.getModules().stream()
+                    .map(Module::getName)
+                    .filter(module -> module.toLowerCase().startsWith(moduleName.toLowerCase()))
+                    .collect(Collectors.toList());
         }
+        return new ArrayList<>();
     }
 
-    public String getname(final String[] args,int size) {
-        String string;
-        if (args[size].contains("#")){
-            string = args[size].replace("#","");
-        } else if (args[size].contains("#l")){
-            string = args[size].replace("#l", EnumChatFormatting.BOLD.toString());
-        } else if (args[size].contains("#o")){
-            string = args[size].replace("#o", EnumChatFormatting.ITALIC.toString());
-        } else if (args[size].contains("#m")){
-            string = args[size].replace("#m", EnumChatFormatting.STRIKETHROUGH.toString());
-        } else if (args[size].contains("#n")){
-            string = args[size].replace("#n", EnumChatFormatting.UNDERLINE.toString());
-        } else {
-            string = args[size];
+    public String getName(final String[] args, int size) {
+        String string = args[size];
+        switch (string) {
+            case "#":
+                string = string.replace("#", "");
+                break;
+            case "#l":
+                string = string.replace("#l", EnumChatFormatting.BOLD.toString());
+                break;
+            case "#o":
+                string = string.replace("#o", EnumChatFormatting.ITALIC.toString());
+                break;
+            case "#m":
+                string = string.replace("#m", EnumChatFormatting.STRIKETHROUGH.toString());
+                break;
+            case "#n":
+                string = string.replace("#n", EnumChatFormatting.UNDERLINE.toString());
+                break;
         }
         return string;
     }
