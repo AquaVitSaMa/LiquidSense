@@ -5,7 +5,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParser;
 import me.aquavit.liquidsense.LiquidSense;
-import me.aquavit.liquidsense.utils.misc.StringUtils;
 import me.aquavit.liquidsense.utils.client.SettingsUtils;
 import me.aquavit.liquidsense.command.Command;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
@@ -19,69 +18,61 @@ import java.util.stream.Collectors;
 
 public class AutoSettingsCommand extends Command {
 
-    private Object loadingLock = new Object();
+    private final Object loadingLock = new Object();
     private List<String> autoSettingFiles = new ArrayList<>();
 
     public AutoSettingsCommand() {
         super("autosettings", "setting", "settings", "config", "autosetting");
     }
 
-    /**
-     * Execute commands with provided [args]
-     */
     public void execute(String[] args) {
         if (args.length <= 1) {
             chatSyntax("settings <load/list>");
-
             return;
         }
 
-        if (args[1].toLowerCase().equals("load")) {
-            if (args.length < 3) {
-                chatSyntax("settings load <name/url>");
-                return;
-            }
+        String arg = args[1].toLowerCase();
 
-            // Settings url
-            String url;
-            if (args[2].startsWith("http")) {
-                url = args[2];
-            } else {
-                url = LiquidSense.CLIENT_CLOUD + "/settings/" + args[2].toLowerCase();
-            }
-
-            chat("Loading settings...");
-
-            new Thread(() -> {
-                try {
-                    // Load settings and apply them
-                    String settings = HttpUtils.get(url);
-
-                    chat("Applying settings...");
-                    SettingsUtils.executeScript(StringUtils.toLines(settings));
-                    chat("§6Settings applied successfully");
-                    LiquidSense.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", ColorType.INFO, 1500, 500));
-                    playEdit();
-                } catch (Exception exception) {
-                    exception.printStackTrace();
-                    chat("Failed to fetch auto settings.");
+        switch (arg) {
+            case "load":
+                if (args.length < 3) {
+                    chatSyntax("settings load <name/url>");
+                    return;
                 }
-            }).start();
-        } else if (args[1].toLowerCase().equals("list")) {
-            chat("Loading settings...");
 
-            loadSettings(false, null, list -> {
-                for (String setting : list)
-                    chat("> " + setting);
-            });
+                String url = args[2].startsWith("http") ? args[2] : LiquidSense.CLIENT_CLOUD + "/settings/" + args[2].toLowerCase();
+
+                chat("Loading settings...");
+
+                new Thread(() -> {
+                    try {
+                        String settings = HttpUtils.get(url);
+
+                        chat("Applying settings...");
+                        new SettingsUtils().executeScript(settings);
+                        chat("§6Settings applied successfully");
+                        LiquidSense.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", ColorType.INFO, 1500, 500));
+                        playEdit();
+                    } catch (Exception exception) {
+                        exception.printStackTrace();
+                        chat("Failed to fetch auto settings.");
+                    }
+                }).start();
+                break;
+            case "list":
+                chat("Loading settings...");
+
+                loadSettings(false, null, settingList -> {
+                    for (String setting : settingList) {
+                        chat("> " + setting);
+                    }
+                });
+                break;
         }
     }
 
     private void loadSettings(boolean useCached, Long join, Callback<List<String>> callback) {
-
-
         Thread thread = new Thread(() -> {
-            // Prevent the settings from being loaded twice
             synchronized (loadingLock) {
                 if (useCached && autoSettingFiles != null) {
                     callback.done(autoSettingFiles);
@@ -89,10 +80,7 @@ public class AutoSettingsCommand extends Command {
                 }
 
                 try {
-                    JsonElement json = new JsonParser().parse(HttpUtils.get(
-                            // TODO: Add another way to get all settings
-                            "https://api.github.com/repos/CCBlueX/LiquidCloud/contents/LiquidBounce/settings"
-                    ));
+                    JsonElement json = new JsonParser().parse(HttpUtils.get("https://api.github.com/repos/CCBlueX/LiquidCloud/contents/LiquidBounce/settings"));
 
                     List<String> autoSettings = new ArrayList<>();
 

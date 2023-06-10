@@ -1,16 +1,15 @@
 package me.aquavit.liquidsense.command.commands;
 
-import com.google.gson.JsonParser;
 import me.aquavit.liquidsense.LiquidSense;
 import me.aquavit.liquidsense.utils.misc.StringUtils;
 import me.aquavit.liquidsense.utils.client.SettingsUtils;
 import me.aquavit.liquidsense.command.Command;
-import me.aquavit.liquidsense.file.FileManager;
 import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.ColorType;
 import me.aquavit.liquidsense.ui.client.hud.element.elements.extend.Notification;
 
 import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -25,99 +24,116 @@ public class LocalAutoSettingsCommand extends Command {
     @Override
     public void execute(String[] args) {
         if (args.length > 1) {
-            if (args[1].equals("load")){
-                if (args.length > 2) {
-                    File scriptFile = new File(LiquidSense.fileManager.settingsDir, args[2]);
-                    if (scriptFile.exists()) {
-                        try {
-                            chat("§9Loading settings...");
+            String arg = args[1].toLowerCase();
+            switch (arg) {
+                case "load":
+                    if (args.length > 2) {
+                        File scriptFile = new File(LiquidSense.fileManager.settingsDir, args[2]);
+                        if (scriptFile.exists()) {
+                            try {
+                                chat("§9Loading settings...");
+                                final String settings = new String(Files.readAllBytes(scriptFile.toPath()));
+                                chat("§9Set settings...");
+                                new SettingsUtils().executeScript(settings);
+                                chat("§6Settings applied successfully.");
+                                LiquidSense.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", ColorType.INFO,1500,500));
+                                playEdit();
 
-                            final String settings = new JsonParser().parse(new BufferedReader(new FileReader(scriptFile))).getAsString();
-                            chat("§9Set settings...");
-                            SettingsUtils.executeScript(StringUtils.toLines(settings));
-                            chat("§6Settings applied successfully.");
-                            LiquidSense.hud.addNotification(new Notification("Updated Settings", "Setting was updated.", ColorType.INFO,1500,500));
-                            playEdit();
-
-                        }
-                        catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                        return;
-                    }
-
-                    chat("§cSettings file does not exist!");
-                    return;
-                }
-                chatSyntax("localautosettings load <name>");
-                return;
-            }
-            if (args[1].equals("save")){
-                if (args.length > 2) {
-                    File scriptFile = new File(LiquidSense.fileManager.settingsDir, args[2]);
-
-                    try {
-                        if (scriptFile.exists())
-                            scriptFile.delete();
-                        scriptFile.createNewFile();
-
-                        String option = args.length > 3 ? StringUtils.toCompleteString(args, 3).toLowerCase() : "values";
-                        boolean values = option.contains("all") || option.contains("values");
-                        boolean binds = option.contains("all") || option.contains("binds");
-                        boolean states = option.contains("all") || option.contains("states");
-                        if (!values && !binds && !states) {
-                            chatSyntaxError();
+                            }
+                            catch (IOException e) {
+                                e.printStackTrace();
+                            }
                             return;
                         }
 
-                        chat("§9Creating settings...");
-                        String settingsScript = SettingsUtils.generateScript(values, binds, states);
-                        chat("§9Saving settings...");
-                        final PrintWriter printWriter = new PrintWriter(new FileWriter(scriptFile));
-                        printWriter.println(FileManager.PRETTY_GSON.toJson(settingsScript));
-                        printWriter.close();
-                        chat("§6Settings saved successfully.");
-                    } catch (Throwable throwable) {
-                        chat("§cFailed to create local config: §3"+throwable.getMessage());
-                        ClientUtils.getLogger().error("Failed to create local config.", throwable);
+                        chat("§cSettings file does not exist!");
+                        return;
                     }
-                    return;
-                }
+                    chatSyntax("localautosettings load <name>");
+                    break;
+                case "save":
+                    if (args.length > 2) {
+                        File scriptFile = new File(LiquidSense.fileManager.settingsDir, args[2]);
 
-                chatSyntax("localsettings save <name> [all/values/binds/states]...");
-                return;
-            }
-            if (args[1].equals("delete")){
-                if (args.length > 2) {
-                    File scriptFile = new File(LiquidSense.fileManager.settingsDir, args[2]);
+                        try {
+                            if (scriptFile.exists()) {
+                                if (scriptFile.delete()) {
+                                    System.out.println("Existing file deleted.");
+                                } else {
+                                    System.out.println("Failed to delete the existing file.");
+                                }
+                            }
 
-                    if (scriptFile.exists()) {
-                        scriptFile.delete();
-                        chat("§6Settings file deleted successfully.");
+                            if (scriptFile.createNewFile()) {
+                                System.out.println("File created successfully.");
+                            } else {
+                                System.out.println("Failed to create the file.");
+                            }
+
+                            String option = args.length > 3 ? StringUtils.toCompleteString(args, 3).toLowerCase() : "values";
+                            boolean values = option.contains("all") || option.contains("values");
+                            boolean binds = option.contains("all") || option.contains("binds");
+                            boolean states = option.contains("all") || option.contains("states");
+                            if (!values && !binds && !states) {
+                                chatSyntaxError();
+                                return;
+                            }
+
+                            chat("§9Creating settings...");
+                            String settingsScript = new SettingsUtils().generateScript(values, binds, states);
+                            chat("§9Saving settings...");
+                            try {
+                                FileWriter fileWriter = new FileWriter(scriptFile);
+                                fileWriter.write(settingsScript);
+                                fileWriter.close();
+                                chat("§6Settings saved successfully.");
+                            } catch (IOException e) {
+                                chat("§cFailed to save settings: " + e.getMessage());
+                                e.printStackTrace();
+                            }
+                        } catch (Throwable throwable) {
+                            chat("§cFailed to create local config: §3"+throwable.getMessage());
+                            ClientUtils.getLogger().error("Failed to create local config.", throwable);
+                        }
                         return;
                     }
 
-                    chat("§cSettings file does not exist!");
-                    return;
-                }
+                    chatSyntax("localsettings save <name> [all/values/binds/states]...");
+                    break;
+                case "delete":
+                    if (args.length > 2) {
+                        File scriptFile = new File(LiquidSense.fileManager.settingsDir, args[2]);
 
-                chatSyntax("localsettings delete <name>");
-                return;
+                        if (scriptFile.exists()) {
+                            if (scriptFile.delete()) {
+                                System.out.println("Existing file deleted.");
+                            } else {
+                                System.out.println("Failed to delete the existing file.");
+                            }
+                            chat("§6Settings file deleted successfully.");
+                            return;
+                        }
+
+                        chat("§cSettings file does not exist!");
+                        return;
+                    }
+
+                    chatSyntax("localsettings delete <name>");
+                    break;
+                case "list":
+                    chat("§cSettings:");
+
+                    File[] settings = this.getLocalSettings();
+
+                    if (settings == null) {
+                        return;
+                    }
+
+                    for (File file : settings)
+                        chat("> " + file.getName());
+                    break;
             }
-            if (args[1].equals("list")){
-                chat("§cSettings:");
-
-                File[] settings = this.getLocalSettings();
-
-                if (settings == null) {
-                    return;
-                }
-
-                for (File file : settings)
-                    chat("> " + file.getName());
-                return;
-            }
-
+            return;
         }
         chatSyntax("localsettings <load/save/list/delete>");
     }
@@ -129,7 +145,7 @@ public class LocalAutoSettingsCommand extends Command {
         switch (args.length) {
             case 1:
                 return Arrays.stream(new String[]{"delete", "list", "load", "save"})
-                        .filter(it -> it.startsWith(args[0]))
+                        .filter(it -> it.toLowerCase().startsWith(args[0].toLowerCase()))
                         .collect(Collectors.toList());
             case 2:{
                 switch (args[0].toLowerCase()){
@@ -141,7 +157,7 @@ public class LocalAutoSettingsCommand extends Command {
                             return new ArrayList<>();
                         }
 
-                        return Arrays.stream(settings).map(File::getName).filter(it -> it.startsWith(args[1])).collect(Collectors.toList());
+                        return Arrays.stream(settings).map(File::getName).filter(it -> it.toLowerCase().startsWith(args[1].toLowerCase())).collect(Collectors.toList());
                     }
                     default:
                         return new ArrayList<>();
