@@ -9,7 +9,6 @@ import com.mojang.authlib.yggdrasil.YggdrasilAuthenticationService;
 import com.mojang.authlib.yggdrasil.YggdrasilUserAuthentication;
 import com.thealtening.AltService;
 import me.aquavit.liquidsense.LiquidSense;
-import me.aquavit.liquidsense.utils.mc.TabUtils;
 import me.aquavit.liquidsense.ui.client.gui.elements.GuiButtonElement;
 import me.aquavit.liquidsense.ui.client.gui.elements.GuiButtonSlot;
 import me.aquavit.liquidsense.ui.client.gui.elements.GuiPasswordField;
@@ -19,11 +18,12 @@ import me.aquavit.liquidsense.utils.client.ClientUtils;
 import me.aquavit.liquidsense.utils.login.LoginUtils;
 import me.aquavit.liquidsense.utils.login.MinecraftAccount;
 import me.aquavit.liquidsense.utils.login.UserUtils;
+import me.aquavit.liquidsense.utils.login.oauth.OAuthService;
+import me.aquavit.liquidsense.utils.mc.TabUtils;
 import me.aquavit.liquidsense.utils.misc.HttpUtils;
 import me.aquavit.liquidsense.utils.misc.MiscUtils;
 import me.aquavit.liquidsense.utils.render.ColorUtils;
 import me.aquavit.liquidsense.utils.render.RenderUtils;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.util.ResourceLocation;
@@ -45,6 +45,9 @@ import java.util.Random;
 public class GuiAltManager extends GuiScreen {
 
     public static final AltService altService = new AltService();
+
+    public static final OAuthService oAuthService = new OAuthService();
+
     private static final Map<String, Boolean> GENERATORS = new HashMap<>();
     private final GuiScreen prevGui;
     public String status = "§7Idle...";
@@ -99,26 +102,27 @@ public class GuiAltManager extends GuiScreen {
             return "§cYour name is now §8" + minecraftAccount.getName() + "§c.";
         }
 
-        LoginUtils.LoginResult result = LoginUtils.login(minecraftAccount.getName(), minecraftAccount.getPassword());
-        if (result == LoginUtils.LoginResult.LOGGED) {
-            String userName = Minecraft.getMinecraft().getSession().getUsername();
-            minecraftAccount.setAccountName(userName);
-            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.accountsConfig);
-            loadcircle = false;
-            return "§cYour name is now §f§l" + userName + "§c.";
-        }
-
-        if (result == LoginUtils.LoginResult.WRONG_PASSWORD)
-            return "§cWrong password.";
-
-        if (result == LoginUtils.LoginResult.NO_CONTACT)
-            return "§cCannot contact authentication server.";
-
-        if (result == LoginUtils.LoginResult.INVALID_ACCOUNT_DATA)
-            return "§cInvaild username or password.";
-
-        if (result == LoginUtils.LoginResult.MIGRATED)
-            return "§cAccount migrated.";
+        //mojang auth已废弃
+//        LoginUtils.LoginResult result = LoginUtils.login(minecraftAccount.getName(), minecraftAccount.getPassword());
+//        if (result == LoginUtils.LoginResult.LOGGED) {
+//            String userName = Minecraft.getMinecraft().getSession().getUsername();
+//            minecraftAccount.setAccountName(userName);
+//            LiquidSense.fileManager.saveConfig(LiquidSense.fileManager.accountsConfig);
+//            loadcircle = false;
+//            return "§cYour name is now §f§l" + userName + "§c.";
+//        }
+//
+//        if (result == LoginUtils.LoginResult.WRONG_PASSWORD)
+//            return "§cWrong password.";
+//
+//        if (result == LoginUtils.LoginResult.NO_CONTACT)
+//            return "§cCannot contact authentication server.";
+//
+//        if (result == LoginUtils.LoginResult.INVALID_ACCOUNT_DATA)
+//            return "§cInvaild username or password.";
+//
+//        if (result == LoginUtils.LoginResult.MIGRATED)
+//            return "§cAccount migrated.";
 
         return "";
     }
@@ -156,13 +160,14 @@ public class GuiAltManager extends GuiScreen {
 
         //GuiAdd
         Keyboard.enableRepeatEvents(true);
-        buttonList.add(addButton = new GuiButtonElement(12, 290, 93, 50, 15,"Add"));
-        buttonList.add(loginButton = new GuiButtonElement(3, 360, 93, 50, 15, "Login"));
-        buttonList.add(clipboardButton = new GuiButtonElement(13, 290, 113, 50, 15,"Clip"));
-        buttonList.add(randomButton = new GuiButtonElement(4, 360, 113, 50, 15,"Random"));
+//        buttonList.add(addButton = new GuiButtonElement(12, 290, 93, 50, 15,"Add"));
+        buttonList.add(addButton = new GuiButtonElement(20, 290, 73, 120, 15,"Microsoft login"));
+        buttonList.add(loginButton = new GuiButtonElement(3, 290, 93, 120, 15, "Direct login"));
+//        buttonList.add(clipboardButton = new GuiButtonElement(13, 290, 113, 50, 15,"Clip"));
+//        buttonList.add(randomButton = new GuiButtonElement(4, 360, 113, 50, 15,"Random"));
 
         username = new GuiUsernameField(2, Fonts.font20, 290, 51, 120, 15);
-        username.setFocused(true);
+//        username.setFocused(true);
         username.setMaxStringLength(Integer.MAX_VALUE);
         password = new GuiPasswordField(3, Fonts.font20, 290, 71, 120, 15);
         password.setMaxStringLength(Integer.MAX_VALUE);
@@ -177,16 +182,16 @@ public class GuiAltManager extends GuiScreen {
         Fonts.font18.drawStringWithShadow("Status: " + status, 280, 158, Color.WHITE.getRGB());
 
         //Guiadd
-        drawRect(280, 43, 280 + 140, 138, new Color(1,1,1, 80).getRGB());
-        drawRect(280, 43, 282, 138, new Color(17, 211,255, 255).getRGB());
+        drawRect(280, 43, 280 + 140, 115, new Color(1,1,1, 80).getRGB());
+        drawRect(280, 43, 282, 115, new Color(17, 211,255, 255).getRGB());
         username.drawTextBox();
-        password.drawTextBox();
+//        password.drawTextBox();
 
         if(username.getText().isEmpty() && !username.isFocused())
-            drawCenteredString(Fonts.font20, "Username / E-Mail", 337, 55, Color.WHITE.getRGB());
+            drawCenteredString(Fonts.font20, "Username", 337, 55, Color.WHITE.getRGB());
 
-        if(password.getText().isEmpty() && !password.isFocused())
-            drawCenteredString(Fonts.font20, "Password", 317, 75, Color.WHITE.getRGB());
+//        if(password.getText().isEmpty() && !password.isFocused())
+//            drawCenteredString(Fonts.font20, "Password", 317, 75, Color.WHITE.getRGB());
         super.drawScreen(mouseX, mouseY, partialTicks);
     }
 
@@ -334,6 +339,13 @@ public class GuiAltManager extends GuiScreen {
                     ClientUtils.getLogger().error("Failed to read data from clipboard.", e);
                 }
                 break;
+            case 20:
+                new Thread(() -> {
+                    status = "§aLogging in...";
+
+                    oAuthService.authenticate(null);
+                }).start();
+                break;
         }
     }
 
@@ -391,14 +403,14 @@ public class GuiAltManager extends GuiScreen {
     @Override //GuiAdd
     protected void mouseClicked(int mouseX, int mouseY, int mouseButton) throws IOException {
         username.mouseClicked(mouseX, mouseY, mouseButton);
-        password.mouseClicked(mouseX, mouseY, mouseButton);
+//        password.mouseClicked(mouseX, mouseY, mouseButton);
         super.mouseClicked(mouseX, mouseY, mouseButton);
     }
 
     @Override //GuiAdd
     public void updateScreen() {
         username.updateCursorCounter();
-        password.updateCursorCounter();
+//        password.updateCursorCounter();
 
         super.updateScreen();
     }
